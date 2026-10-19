@@ -192,7 +192,10 @@ jobs:
           function Test-Sanitizer($name, $source, $flags, $expected) {
             $exe = "$name.exe"
             $build = (& clang++ -std=c++20 -g -O0 @flags $source -o $exe 2>&1) -join "`n"
-            if ($LASTEXITCODE -ne 0) { return "| $name | build failed | ``$($build.Split("`n")[0])`` |" }
+            if ($LASTEXITCODE -ne 0) {
+              Write-Host "--- $name (build failed)`n$build"
+              return "| $name | build failed | ``$($build.Split("`n")[0])`` |"
+            }
             $run = (& ".\$exe" 2>&1) -join "`n"
             $code = $LASTEXITCODE
             Write-Host "--- $name (exit $code)`n$run"
