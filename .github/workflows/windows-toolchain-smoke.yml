@@ -175,7 +175,8 @@ jobs:
         run: |
           $PSNativeCommandUseErrorActionPreference = $true
           foreach ($config in 'Debug', 'Release') {
-            cmake -S . -B "build-$config" -G Ninja -DCMAKE_BUILD_TYPE=$config -DCMAKE_CXX_COMPILER=clang++
+            # Quoted: PowerShell does not expand $variables in arguments that start with '-'.
+            cmake -S . -B "build-$config" -G Ninja "-DCMAKE_BUILD_TYPE=$config" -DCMAKE_CXX_COMPILER=clang++
             Select-String -Path "build-$config\CMakeCache.txt" -Pattern 'CMAKE_CXX_COMPILER:|CMAKE_CXX_COMPILER_FRONTEND_VARIANT|CMAKE_RC_COMPILER:|CMAKE_LINKER:'
             cmake --build "build-$config"
             ctest --test-dir "build-$config" --output-on-failure
