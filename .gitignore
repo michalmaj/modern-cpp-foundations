@@ -1,0 +1,33 @@
+# Private instructor/agent workspace — never commit
+/decisions/
+
+# Local IDE and CMake settings
+/.idea/
+/.vs/
+/.vscode/
+/CMakeUserPresets.json
+**/cmake-build-*/
+**/build/
+**/out/
+
+# Compiler and build outputs
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+Testing/
+*.obj
+*.o
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.exe
+*.pdb
+
+# OS/editor clutter
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
