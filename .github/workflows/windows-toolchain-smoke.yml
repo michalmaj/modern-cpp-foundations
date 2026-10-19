@@ -1,0 +1,221 @@
+name: Windows toolchain smoke test
+
+# Verifies that upstream LLVM clang++ installed with Chocolatey can compile,
+# link, run and test a small C++20 program from a plain PowerShell session
+# (no Visual Studio Developer shell, no vcvars).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows-clang:
+    name: Windows / clang++ ${{ matrix.llvm }}
+    runs-on: windows-2025
+    strategy:
+      fail-fast: false
+      matrix:
+        llvm: ["22.1.7"]
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Install LLVM ${{ matrix.llvm }} with Chocolatey
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          # The runner image ships an older LLVM; upgrade/downgrade to the pinned version.
+          choco upgrade llvm --version=${{ matrix.llvm }} --allow-downgrade -y --no-progress
+          "C:\Program Files\LLVM\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Verify tool versions
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          $version = (clang++ --version) -join "`n"
+          $version
+          "clang++ resolves to: $((Get-Command clang++).Source)"
+          if ($version -notmatch "clang version ${{ matrix.llvm }}") {
+            throw "Expected clang++ ${{ matrix.llvm }}, got:`n$version"
+          }
+          cmake --version
+          "ninja $(ninja --version)"
+          $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+          "Visual Studio installations on this runner:"
+          & $vswhere -products * -property installationPath
+
+          @"
+          ## Toolchain
+          ``````
+          $version
+          ``````
+          "@ | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
+
+      - name: Write test sources
+        run: |
+          @'
+          #include <compare>
+          #include <concepts>
+          #include <format>
+          #include <iostream>
+          #include <numeric>
+          #include <ranges>
+          #include <span>
+          #include <vector>
+
+          template <std::integral T>
+          T sum(std::span<const T> values) {
+              return std::accumulate(values.begin(), values.end(), T{0});
+          }
+
+          struct Version {
+              int major;
+              int minor;
+              auto operator<=>(const Version&) const = default;
+          };
+
+          int main() {
+              const std::vector<int> values{5, 3, 8, 1};
+              auto evens = values | std::views::filter([](int v) { return v % 2 == 0; });
+              const Version current{.major = 22, .minor = 1};
+              std::cout << std::format("sum={} evens={} cmp={}\n",
+                                       sum(std::span{values}),
+                                       std::ranges::distance(evens),
+                                       current > Version{.major = 20, .minor = 1});
+          #if defined(_LIBCPP_VERSION)
+              std::cout << "stdlib=libc++\n";
+          #elif defined(_MSVC_STL_VERSION)
+              std::cout << "stdlib=MSVC STL " << _MSVC_STL_VERSION << '\n';
+          #elif defined(__GLIBCXX__)
+              std::cout << "stdlib=libstdc++\n";
+          #endif
+              std::cout << "__cplusplus=" << __cplusplus << '\n';
+          }
+          '@ | Set-Content hello.cpp
+
+          @'
+          cmake_minimum_required(VERSION 3.28)
+          project(toolchain_smoke LANGUAGES CXX)
+
+          add_executable(hello hello.cpp)
+          target_compile_features(hello PRIVATE cxx_std_20)
+          set_target_properties(hello PROPERTIES CXX_EXTENSIONS OFF)
+
+          enable_testing()
+          add_test(NAME hello_output COMMAND hello)
+          set_tests_properties(hello_output PROPERTIES
+              PASS_REGULAR_EXPRESSION "sum=17 evens=1 cmp=true")
+          '@ | Set-Content CMakeLists.txt
+
+          @'
+          #include <vector>
+          int main() {
+              std::vector<int> v(3);
+              int* p = v.data();
+              return p[3]; // heap-buffer-overflow
+          }
+          '@ | Set-Content asan_bad.cpp
+
+          @'
+          #include <climits>
+          #include <cstdio>
+          int main(int argc, char**) {
+              int x = INT_MAX;
+              x += argc; // signed integer overflow
+              std::printf("%d\n", x);
+          }
+          '@ | Set-Content ubsan_bad.cpp
+
+      - name: Show what clang++ uses (headers, libraries, linker)
+        run: |
+          $driver = (clang++ -### -std=c++20 hello.cpp -o hello.exe 2>&1) -join "`n"
+          $driver
+          @"
+          <details><summary>clang++ -### (driver plan)</summary>
+
+          ``````
+          $driver
+          ``````
+          </details>
+
+          "@ | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
+
+      - name: Compile, link and run without CMake
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          clang++ -std=c++20 -Wall -Wextra -Wpedantic hello.cpp -o hello.exe
+          $out = (.\hello.exe) -join "`n"
+          $out
+          if ($out -notmatch "sum=17 evens=1 cmp=true") { throw "Unexpected output:`n$out" }
+          @"
+          ## Plain clang++ build
+          ``````
+          $out
+          ``````
+
+          "@ | Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
+
+      - name: Link with lld
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          clang++ -std=c++20 -fuse-ld=lld hello.cpp -o hello-lld.exe
+          .\hello-lld.exe
+
+      - name: Debug information (PDB)
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          clang++ -std=c++20 -g -O0 hello.cpp -o hello-dbg.exe
+          Get-ChildItem hello-dbg.*
+          if (-not (Test-Path hello-dbg.pdb)) { throw "No PDB produced for a -g build" }
+
+      - name: CMake + Ninja + CTest (Debug and Release)
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          foreach ($config in 'Debug', 'Release') {
+            # Quoted: PowerShell does not expand $variables in arguments that start with '-'.
+            cmake -S . -B "build-$config" -G Ninja "-DCMAKE_BUILD_TYPE=$config" -DCMAKE_CXX_COMPILER=clang++
+            Select-String -Path "build-$config\CMakeCache.txt" -Pattern 'CMAKE_CXX_COMPILER:|CMAKE_CXX_COMPILER_FRONTEND_VARIANT|CMAKE_RC_COMPILER:|CMAKE_LINKER:'
+            cmake --build "build-$config"
+            ctest --test-dir "build-$config" --output-on-failure
+          }
+
+      # Informational: records which sanitizers work, does not fail the job.
+      - name: Sanitizers (informational)
+        continue-on-error: true
+        run: |
+          $ErrorActionPreference = 'Continue'
+          $results = @()
+
+          function Test-Sanitizer($name, $source, $flags, $expected) {
+            $exe = "$name.exe"
+            $build = (& clang++ -std=c++20 -g -O0 @flags $source -o $exe 2>&1) -join "`n"
+            if ($LASTEXITCODE -ne 0) {
+              Write-Host "--- $name (build failed)`n$build"
+              return "| $name | build failed | ``$($build.Split("`n")[0])`` |"
+            }
+            $run = (& ".\$exe" 2>&1) -join "`n"
+            $code = $LASTEXITCODE
+            Write-Host "--- $name (exit $code)`n$run"
+            if ($code -eq -1073741515) { return "| $name | runtime DLL not found (0xC0000135) | |" }
+            if ($run -match $expected) { return "| $name | detected | exit $code |" }
+            return "| $name | NOT detected | exit $code |"
+          }
+
+          $results += Test-Sanitizer 'asan' 'asan_bad.cpp' @('-fsanitize=address') 'AddressSanitizer'
+
+          $runtime = Get-ChildItem 'C:\Program Files\LLVM\lib\clang' -Recurse -Filter 'clang_rt.asan_dynamic-x86_64.dll' |
+            Select-Object -First 1
+          if ($runtime) {
+            Write-Host "ASan runtime found at $($runtime.DirectoryName)"
+            $env:PATH = "$($runtime.DirectoryName);$env:PATH"
+            $results += Test-Sanitizer 'asan-with-runtime-on-path' 'asan_bad.cpp' @('-fsanitize=address') 'AddressSanitizer'
+          }
+
+          $results += Test-Sanitizer 'ubsan' 'ubsan_bad.cpp' @('-fsanitize=undefined') 'runtime error'
+          $results += Test-Sanitizer 'asan+ubsan' 'ubsan_bad.cpp' @('-fsanitize=address,undefined') 'runtime error'
+
+          (@('## Sanitizers', '', '| check | result | details |', '|---|---|---|') + $results + '') -join "`n" |
+            Out-File -FilePath $env:GITHUB_STEP_SUMMARY -Encoding utf8 -Append
