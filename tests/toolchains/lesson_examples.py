@@ -299,11 +299,17 @@ def self_test(args):
          lesson(*good), lesson(('example: hi', 'cpp', GOOD.replace('Hi', 'Hey')), ('output: hi', 'text', 'Hey!\n')),
          'differ between'),
         ('an unmarked cpp block is detected', lesson(*good) + '```cpp\nint main() {}\n```\n', None, 'without a marker'),
+        # A missing compiler breaks configuring: that must never pass as the expected compile error.
+        ('a broken environment is not taken for the expected error',
+         lesson((semicolon, 'cpp', NO_SEMICOLON)), None, 'configure failed (an environment problem'),
     ]
     project = PROJECT.resolve()
     home = os.getcwd()
     failures = 0
     for title, pl_text, en_text, expected_failure in cases:
+        case_args = argparse.Namespace(**vars(args))
+        if 'environment' in title:
+            case_args.cxx = str(pathlib.Path(tempfile.gettempdir()) / 'no-such-compiler' / 'clang++')
         with tempfile.TemporaryDirectory() as root:
             os.chdir(root)
             try:
@@ -314,7 +320,7 @@ def self_test(args):
                 (folder / 'lesson.md').write_text(pl_text, encoding='utf-8')
                 (folder / 'lesson.en.md').write_text(en_text or pl_text, encoding='utf-8')
                 print(f'\n##### self-test: {title}')
-                check_course(args)
+                check_course(case_args)
                 if expected_failure is None:
                     verdict = not errors
                 else:
