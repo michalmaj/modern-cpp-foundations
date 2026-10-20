@@ -23,6 +23,9 @@ try {
     "PowerShell $($PSVersionTable.PSVersion)"
 
     '=== Experiment A: compile and link in two steps'
+    $missing = (clang++ main.o -o hello.exe 2>&1) -join "`n"
+    Check ($LASTEXITCODE -ne 0) 'linking before compiling fails'
+    Check ($missing -match "no such file or directory: 'main\.o'") "linking before compiling: no such file or directory: 'main.o'"
     $compile = (clang++ -std=c++20 -c main.cpp 2>&1) -join "`n"
     Check ($LASTEXITCODE -eq 0) 'compile only: clang++ -std=c++20 -c main.cpp'
     Check ($compile -eq '') 'compiling prints nothing'
@@ -45,9 +48,11 @@ try {
     Check ($LASTEXITCODE -ne 0) 'mian: linking fails'
     '     linker output:'; Show $link
     Check ($link -match 'linker command failed') 'mian: clang++ reports "linker command failed"'
-    Check ($link -match 'undefined symbol: main\b') 'mian: the linker names the missing main'
+    # Linking by hand, lld-link chooses the kind of program (console) from main; without main it reports this.
+    # (Through CMake, which names the kind itself, the message is 'undefined symbol: main' instead.)
+    Check ($link -match 'lld-link: error: subsystem must be defined') 'mian: lld-link cannot choose the kind of program without main'
     Check ($link -notmatch 'main\.cpp:\d+:\d+') 'mian: no message points to a line of main.cpp'
-    if (Test-Path hello.exe) { '     note: the program hello.exe from experiment A is still there'; "     .\hello.exe still prints: $(.\hello.exe)" } else { '     note: no program hello.exe after the failed link' }
+    Check (-not (Test-Path hello.exe)) 'mian: the failed link removed hello.exe from experiment A'
     Write-Source main.cpp $mainProgram
     clang++ -std=c++20 -c main.cpp
     Check ($LASTEXITCODE -eq 0) 'fixed: compiling succeeds'
@@ -88,7 +93,8 @@ try {
     $broken = (cmake --build build-terminal 2>&1) -join "`n"
     Check ($LASTEXITCODE -ne 0) 'the build fails'
     '     build output:'; Show $broken
-    Check ($broken -match 'CMake Error at CMakeLists\.txt') 'CMake reports an error in CMakeLists.txt'
+    Check ($broken -match 'Re-running CMake') 'the build re-runs CMake first'
+    Check ($broken -match 'CMake Error at CMakeLists\.txt:4 \(add_executable\):') 'CMake reports an error in CMakeLists.txt line 4 (add_executable)'
     Check ($broken -match 'Cannot find source file') 'CMake cannot find the source file'
     Check ($broken -notmatch 'main\.cpp:\d+:\d+: error|linker command failed') 'neither the compiler nor the linker ran'
     $fresh = (cmake -S . -B build-fresh -G Ninja -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_CXX_COMPILER=C:\Program Files\LLVM\bin\clang++.exe" 2>&1) -join "`n"

@@ -413,7 +413,7 @@ Po tej lekcji możesz powiedzieć: **„Potrafię samodzielnie napisać mały pr
 
 ## Co dalej
 
-Za każdym razem klikasz **Build** i powstaje program. W lekcji 1.4 zobaczysz, co dzieje się po drodze: jak kod źródłowy staje się plikiem wykonywalnym i co opisuje `CMakeLists.txt`. **Lekcja 1.4 jest w przygotowaniu.**
+Za każdym razem klikasz **Build** i powstaje program. W [lekcji 1.4](lesson_04_from_source_code_to_an_executable.md) zobaczysz, co dzieje się po drodze: jak kod źródłowy staje się plikiem wykonywalnym i co opisuje `CMakeLists.txt`.
 
 ---
 
@@ -486,4 +486,4 @@ Zmieniły się teksty dwóch instrukcji, a dwie inne zamieniły się miejscami. 
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 1.2: Gdy kompilator protestuje](lesson_02_when_the_compiler_complains.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 1.2: Gdy kompilator protestuje](lesson_02_when_the_compiler_complains.md) · **Następna lekcja:** [Lekcja 1.4: Od kodu źródłowego do programu wykonywalnego](lesson_04_from_source_code_to_an_executable.md) · [Opis kursu](../../README.md)
