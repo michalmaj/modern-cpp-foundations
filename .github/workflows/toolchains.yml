@@ -4,6 +4,9 @@ name: Toolchains
 # toolchain (upstream LLVM/Clang via the clang++ driver, CMake, Ninja, CTest)
 # on Windows, Ubuntu 24.04 and macOS, in Debug and Release.
 #
+# It also builds the lesson 0.5 project and checks the behaviour the lesson
+# describes (an edit changes nothing until the program is rebuilt).
+#
 # This proves that the toolchain works on a GitHub-hosted runner. It does NOT
 # prove a clean installation on a student computer (runners come with many
 # preinstalled tools), and it says nothing about CLion.
@@ -12,11 +15,13 @@ on:
   pull_request:
     paths:
       - 'tests/toolchains/**'
+      - 'course/module_00_tooling/lesson_05_first_program/**'
       - '.github/workflows/toolchains.yml'
   push:
     branches: [main]
     paths:
       - 'tests/toolchains/**'
+      - 'course/module_00_tooling/lesson_05_first_program/**'
       - '.github/workflows/toolchains.yml'
   workflow_dispatch:
 
@@ -28,6 +33,8 @@ env:
   LLVM_VERSION: '22.1.8'
   LLVM_MAJOR: '22'
   SOURCE_DIR: tests/toolchains/cpp20_smoke
+  LESSON_05_DIR: course/module_00_tooling/lesson_05_first_program
+  LESSON_05_MESSAGE: 'Hello! My first C++20 program works.'
 
 jobs:
   windows:
@@ -79,6 +86,27 @@ jobs:
             ctest --test-dir $build --output-on-failure
             & "$build/cpp20_smoke.exe"
           }
+
+      - name: Lesson 0.5 project (build, run, edit without rebuilding, rebuild)
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          # Work on a copy, so the tracked lesson files are never modified.
+          $src = 'build/lesson-05-src'; $build = 'build/lesson-05'
+          Copy-Item -Recurse $env:LESSON_05_DIR $src
+          cmake -S $src -B $build -G Ninja -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_CXX_COMPILER=$((Get-Command clang++).Source)"
+          cmake --build $build
+          $exe = "$build/first_program.exe"
+          $out = & $exe; "program prints: $out"
+          if ($out -ne $env:LESSON_05_MESSAGE) { throw "unexpected output: $out" }
+          (Get-Content "$src/main.cpp") -replace [regex]::Escape($env:LESSON_05_MESSAGE), 'I changed this message!' | Set-Content "$src/main.cpp"
+          $old = & $exe; "after editing main.cpp, before building: $old"
+          if ($old -ne $env:LESSON_05_MESSAGE) { throw 'the executable changed without a rebuild' }
+          cmake --build $build
+          $new = & $exe; "after building: $new"
+          if ($new -ne 'I changed this message!') { throw "rebuilt program prints: $new" }
+          $again = (cmake --build $build) -join "`n"; "building again without changes: $again"
+          if ($again -notmatch 'no work to do') { throw 'a build without changes did work' }
+          'ok: lesson 0.5 behaves as described'
 
       - name: The project rejects other compilers
         run: |
@@ -146,6 +174,27 @@ jobs:
             ldd "$build/cpp20_smoke" | sed 's/^/  /'
           done
 
+      - name: Lesson 0.5 project (build, run, edit without rebuilding, rebuild)
+        run: |
+          set -euo pipefail
+          # Work on a copy, so the tracked lesson files are never modified.
+          src=build/lesson-05-src; build=build/lesson-05
+          cp -R "$LESSON_05_DIR" "$src"
+          compiler="/usr/bin/clang++-${LLVM_MAJOR}"
+          /usr/bin/cmake -S "$src" -B "$build" -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER="$compiler" -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja
+          /usr/bin/cmake --build "$build"
+          out=$("$build/first_program"); echo "program prints: $out"
+          [ "$out" = "$LESSON_05_MESSAGE" ] || { echo "FAIL: unexpected output"; exit 1; }
+          sed "s/Hello! My first C++20 program works\./I changed this message!/" "$src/main.cpp" > "$src/main.cpp.new" && mv "$src/main.cpp.new" "$src/main.cpp"
+          old=$("$build/first_program"); echo "after editing main.cpp, before building: $old"
+          [ "$old" = "$LESSON_05_MESSAGE" ] || { echo "FAIL: the executable changed without a rebuild"; exit 1; }
+          /usr/bin/cmake --build "$build"
+          new=$("$build/first_program"); echo "after building: $new"
+          [ "$new" = "I changed this message!" ] || { echo "FAIL: rebuilt program prints: $new"; exit 1; }
+          again=$(/usr/bin/cmake --build "$build"); echo "building again without changes: $again"
+          echo "$again" | grep -q 'no work to do' || { echo "FAIL: a build without changes did work"; exit 1; }
+          echo 'ok: lesson 0.5 behaves as described'
+
       - name: The project rejects other compilers
         run: |
           # expect_rejected COMPILER MESSAGE: configuration must stop with our check's message.
@@ -209,6 +258,27 @@ jobs:
             echo "shared libraries used by the program:"
             otool -L "$build/cpp20_smoke" | sed 's/^/  /'
           done
+
+      - name: Lesson 0.5 project (build, run, edit without rebuilding, rebuild)
+        run: |
+          set -euo pipefail
+          # Work on a copy, so the tracked lesson files are never modified.
+          src=build/lesson-05-src; build=build/lesson-05
+          cp -R "$LESSON_05_DIR" "$src"
+          compiler="$(brew --prefix "llvm@${LLVM_MAJOR}")/bin/clang++"
+          cmake -S "$src" -B "$build" -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER="$compiler"
+          cmake --build "$build"
+          out=$("$build/first_program"); echo "program prints: $out"
+          [ "$out" = "$LESSON_05_MESSAGE" ] || { echo "FAIL: unexpected output"; exit 1; }
+          sed "s/Hello! My first C++20 program works\./I changed this message!/" "$src/main.cpp" > "$src/main.cpp.new" && mv "$src/main.cpp.new" "$src/main.cpp"
+          old=$("$build/first_program"); echo "after editing main.cpp, before building: $old"
+          [ "$old" = "$LESSON_05_MESSAGE" ] || { echo "FAIL: the executable changed without a rebuild"; exit 1; }
+          cmake --build "$build"
+          new=$("$build/first_program"); echo "after building: $new"
+          [ "$new" = "I changed this message!" ] || { echo "FAIL: rebuilt program prints: $new"; exit 1; }
+          again=$(cmake --build "$build"); echo "building again without changes: $again"
+          echo "$again" | grep -q 'no work to do' || { echo "FAIL: a build without changes did work"; exit 1; }
+          echo 'ok: lesson 0.5 behaves as described'
 
       - name: The project rejects other compilers
         run: |
