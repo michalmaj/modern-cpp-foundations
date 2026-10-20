@@ -413,7 +413,7 @@ After this lesson you can say: **"I can write a small C++ program on my own, fix
 
 ## What's next
 
-Every time, you click **Build** and a program appears. In lesson 1.4 you'll see what happens along the way: how source code becomes an executable, and what `CMakeLists.txt` describes. **Lesson 1.4 is in preparation.**
+Every time, you click **Build** and a program appears. In [lesson 1.4](lesson_04_from_source_code_to_an_executable.en.md) you'll see what happens along the way: how source code becomes an executable, and what `CMakeLists.txt` describes.
 
 ---
 
@@ -486,4 +486,4 @@ The texts of two statements changed, and two others swapped places. The comment 
 
 </details>
 
-**Previous lesson:** [Lesson 1.2: When the compiler complains](lesson_02_when_the_compiler_complains.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 1.2: When the compiler complains](lesson_02_when_the_compiler_complains.en.md) · **Next lesson:** [Lesson 1.4: From source code to an executable](lesson_04_from_source_code_to_an_executable.en.md) · [Course overview](../../README.en.md)

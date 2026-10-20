@@ -13,6 +13,12 @@ Lessons mark their code blocks with HTML comments, which GitHub does not show:
                                         error in main.cpp must be at LINE (and COLUMN), with a message
                                         matching REGEX (a Python regular expression); with errors=N,
                                         main.cpp must get exactly N errors;
+    <!-- broken: NAME stage=link error=REGEX -->
+                                        the next ```cpp block compiles, but must FAIL TO LINK: main.cpp
+                                        compiles without errors (its object file is created), the link
+                                        step fails ("linker command failed", no executable), and the
+                                        build output matches REGEX somewhere (linker messages differ
+                                        per platform, so REGEX may list alternatives);
     <!-- fragment -->                   the next ```cpp block is deliberately incomplete: not built.
 
 Checks:
@@ -31,7 +37,8 @@ Checks:
   * an example must build, exit with 0 (or its exit=N), print nothing to stderr, and print exactly the expected
     output (Windows line ends ignored);
   * a broken program must fail to build because of compiler errors in main.cpp, as described
-    by its marker. Its whole build output is printed, to compare the messages across systems.
+    by its marker; with stage=link, it must compile and then fail in the linker, as above.
+    Its whole build output is printed, to compare the messages across systems.
 
 The lessons are never modified: everything is built in copies under build/lesson-examples.
 
@@ -52,7 +59,7 @@ import tempfile
 
 MARKER = re.compile(r'^<!-- (?:(example|output|broken): ([a-z0-9_]+)(.*?)|(fragment)) -->$')
 SOURCE = re.compile(r'^(?: source=(\S+))?(?: exit=(\d+))?$')
-BROKEN = re.compile(r'^ at=(\d+)(?::(\d+))?(?: errors=(\d+))? error=(.+)$')
+BROKEN = re.compile(r'^(?: stage=(link))?(?: at=(\d+)(?::(\d+))?)?(?: errors=(\d+))? error=(.+)$')
 FENCE = re.compile(r'^```(\S*)$')
 # A compiler error in main.cpp: GNU style (main.cpp:4:35: error: ...) or MSVC style (main.cpp(4,35): error: ...).
 ERROR = re.compile(r'main\.cpp(?::(\d+):(\d+):|\((\d+),(\d+)\):) error: (.*)')
@@ -82,7 +89,9 @@ def blocks(path):
             kind = match[1] or match[4]
             attributes = match[3] or ''
             pattern = BROKEN if kind == 'broken' else SOURCE if kind == 'example' else re.compile('^$')
-            if not pattern.match(attributes):
+            parsed = pattern.match(attributes)
+            # A compile-stage broken program needs at=; a link-stage one has no line in main.cpp to point to.
+            if not parsed or (kind == 'broken' and bool(parsed[1]) == bool(parsed[2] or parsed[4])):
                 fail(f'{path}:{i + 1}: cannot read the {kind} marker: {line}')
             marker = (kind, match[2], attributes, i + 1)
         elif fence:
@@ -203,17 +212,20 @@ def check_broken(lesson, name, code, expectation, args):
     built = build(lesson, name, code, args, flags='')
     if not built:
         return
-    _, result = built
+    build_dir, result = built
     output = result.stdout + result.stderr
     if result.returncode == 0:
         fail(f'{lesson}: broken program {name} builds, but the lesson says it must not')
         return
     found = [(int(m[1] or m[3]), int(m[2] or m[4]), m[5]) for m in ERROR.finditer(output)]
+    if expectation[1] == 'link':
+        check_link_failure(lesson, name, build_dir, output, found, expectation[5])
+        return
     if not found:
         fail(f'{lesson}: broken program {name}: the build failed, but not with a compiler error in main.cpp\n{output}')
         return
     line, column, message = found[0]
-    want_line, want_column, want_count, want_error = expectation.groups()
+    _, want_line, want_column, want_count, want_error = expectation.groups()
     problems = []
     if line != int(want_line) or (want_column and column != int(want_column)):
         problems.append(f'first error at {line}:{column}, expected {want_line}' + (f':{want_column}' if want_column else ''))
@@ -226,6 +238,31 @@ def check_broken(lesson, name, code, expectation, args):
         return
     print(f'ok   {lesson}: broken program {name} fails to compile as described: {len(found)} error(s), '
           f'the first at {line}:{column}: {message}')
+    print('     build output:')
+    for text in output.splitlines():
+        print(f'       | {text}')
+
+
+def check_link_failure(lesson, name, build_dir, output, compile_errors, want_error):
+    """The stage=link checks: compiled, then failed in the linker for the expected reason."""
+    target = re.search(r'add_executable\((\S+)', PROJECT.read_text(encoding='utf-8'))[1]
+    objects = [p for p in build_dir.rglob('main.cpp.o*') if p.suffix in ('.o', '.obj')]
+    exe = build_dir / (target + ('.exe' if sys.platform == 'win32' else ''))
+    problems = []
+    if compile_errors:
+        problems.append(f'main.cpp has compiler errors, so the build stopped before linking')
+    elif not objects:
+        problems.append('no object file for main.cpp, so compiling did not succeed')
+    if 'linker command failed' not in output:
+        problems.append('the build failed, but not in the linker ("linker command failed" is missing)')
+    if exe.exists():
+        problems.append(f'the program {exe.name} was created')
+    if not re.search(want_error, output, re.MULTILINE):
+        problems.append(f'the linker output has no match for {want_error!r}')
+    if problems:
+        fail(f'{lesson}: broken program {name} (stage=link): ' + '; '.join(problems) + f'\n{output}')
+        return
+    print(f'ok   {lesson}: broken program {name} compiles ({objects[0].name} created) and fails to link as described')
     print('     build output:')
     for text in output.splitlines():
         print(f'       | {text}')
@@ -274,6 +311,7 @@ def check_course(args):
 GOOD = '#include <iostream>\n\nint main() {\n    std::cout << "Hi!\\n";\n}\n'
 NO_SEMICOLON = GOOD.replace('\\n";', '\\n"')
 RETURN_3 = GOOD.replace('\n}\n', '\n    return 3;\n}\n')
+MIAN = GOOD.replace('int main()', 'int mian()').replace('\n}\n', '\n    return 0;\n}\n')
 
 
 def lesson(*parts):
@@ -285,6 +323,7 @@ def self_test(args):
     """Runs the checker on small fixture courses; each must give the expected verdict."""
     good = [('example: hi', 'cpp', GOOD), ('output: hi', 'text', 'Hi!\n')]
     semicolon = "broken: no_semicolon at=4 errors=1 error=expected ';'"
+    link = 'broken: mian stage=link error=undefined reference to .main\'|undefined symbol: main\\b|"_main", referenced from'
     cases = [
         ('correct examples pass', lesson(*good), None, None),
         ('a wrong expected output is detected',
@@ -293,6 +332,15 @@ def self_test(args):
          lesson(('example: hi exit=3', 'cpp', RETURN_3), ('output: hi', 'text', 'Hi!\n')), None, None),
         ('an unexpected exit code is detected',
          lesson(('example: hi', 'cpp', RETURN_3), ('output: hi', 'text', 'Hi!\n')), None, 'exit code 3, expected 0'),
+        ('a program that fails to link as described passes (stage=link)',
+         lesson(*good, (link, 'cpp', MIAN)), None, None),
+        ('a stage=link program that fails to compile is detected',
+         lesson(*good, (link, 'cpp', NO_SEMICOLON)), None, 'compiler errors, so the build stopped before linking'),
+        ('a stage=link program that builds is detected',
+         lesson(*good, (link, 'cpp', GOOD)), None, 'builds, but the lesson says it must not'),
+        ('a different linker message is detected (stage=link)',
+         lesson(*good, ('broken: mian stage=link error=undefined symbol: nothing_like_this', 'cpp', MIAN)),
+         None, 'the linker output has no match'),
         ('a broken program that fails as described passes',
          lesson(*good, (semicolon, 'cpp', NO_SEMICOLON)), None, None),
         ('a broken program that suddenly compiles is detected',
