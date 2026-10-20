@@ -212,7 +212,7 @@ Check by typing the same command as in step 1. You will see the **old** message.
 
 ## 8. The same work without CLion
 
-The same project can be built in an ordinary terminal, without CLion. You don't need to do this now: we will go through it carefully in the next lesson. For the curious: in the project folder, two commands are enough.
+The same project can be built in an ordinary terminal, without CLion. You don't need to do this now: we will go through it carefully in the [next lesson](lesson_06_same_program_without_clion.en.md). For the curious: in the project folder, two commands are enough.
 
 ```text
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=<path to clang++>
@@ -293,4 +293,4 @@ Because CLion may pick another compiler on its own, for example MinGW on Windows
 - **Building** creates the executable in `cmake-build-debug`. **Run** builds if needed, then runs the program.
 - Changing the code doesn't change the program until you build it.
 
-**Previous lesson:** [Lesson 0.4: Set up your workshop: installing the tools](lesson_04_installing_the_tools.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 0.4: Set up your workshop: installing the tools](lesson_04_installing_the_tools.en.md) · **Next lesson:** [Lesson 0.6: The same program without CLion](lesson_06_same_program_without_clion.en.md) · [Course overview](../../README.en.md)

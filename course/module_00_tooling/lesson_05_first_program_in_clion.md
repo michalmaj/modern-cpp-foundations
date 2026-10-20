@@ -212,7 +212,7 @@ Sprawdź, wpisując to samo polecenie co w kroku 1. Zobaczysz **stary** komunika
 
 ## 8. Ta sama praca bez CLiona
 
-Ten sam projekt da się zbudować w zwykłym terminalu, bez CLiona. Nie musisz tego teraz robić: dokładnie przejdziemy to w następnej lekcji. Dla ciekawych: w katalogu projektu wystarczą dwa polecenia.
+Ten sam projekt da się zbudować w zwykłym terminalu, bez CLiona. Nie musisz tego teraz robić: dokładnie przejdziemy to w [następnej lekcji](lesson_06_same_program_without_clion.md). Dla ciekawych: w katalogu projektu wystarczą dwa polecenia.
 
 ```text
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=<ścieżka do clang++>
@@ -293,4 +293,4 @@ Bo CLion może sam wybrać inny kompilator, na przykład MinGW na Windowsie albo
 - **Budowanie** tworzy plik wykonywalny w `cmake-build-debug`. **Run** buduje, jeśli trzeba, a potem uruchamia program.
 - Zmiana kodu nie zmienia programu, dopóki go nie zbudujesz.
 
-**Poprzednia lekcja:** [Lekcja 0.4: Przygotuj warsztat: instalacja narzędzi](lesson_04_installing_the_tools.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 0.4: Przygotuj warsztat: instalacja narzędzi](lesson_04_installing_the_tools.md) · **Następna lekcja:** [Lekcja 0.6: Ten sam program bez CLiona](lesson_06_same_program_without_clion.md) · [Opis kursu](../../README.md)

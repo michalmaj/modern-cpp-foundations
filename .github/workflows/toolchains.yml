@@ -5,7 +5,8 @@ name: Toolchains
 # on Windows, Ubuntu 24.04 and macOS, in Debug and Release.
 #
 # It also builds the lesson 0.5 project and checks the behaviour the lesson
-# describes (an edit changes nothing until the program is rebuilt).
+# describes (an edit changes nothing until the program is rebuilt), and runs
+# the exact terminal commands of lesson 0.6 (tests/toolchains/lesson_06.*).
 #
 # This proves that the toolchain works on a GitHub-hosted runner. It does NOT
 # prove a clean installation on a student computer (runners come with many
@@ -108,6 +109,12 @@ jobs:
           if ($again -notmatch 'no work to do') { throw 'a build without changes did work' }
           'ok: lesson 0.5 behaves as described'
 
+      - name: Lesson 0.6 commands (Windows PowerShell 5.1, the default shell in Windows Terminal)
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File tests\toolchains\lesson_06.ps1
+
+      - name: Lesson 0.6 commands (PowerShell 7)
+        run: pwsh -NoProfile -File tests\toolchains\lesson_06.ps1
+
       - name: The project rejects other compilers
         run: |
           # clang-cl is installed with LLVM but is not the course compiler; configuration must stop.
@@ -195,6 +202,11 @@ jobs:
           echo "$again" | grep -q 'no work to do' || { echo "FAIL: a build without changes did work"; exit 1; }
           echo 'ok: lesson 0.5 behaves as described'
 
+      - name: Lesson 0.6 commands (bash)
+        # The runner has a newer CMake in /usr/local/bin; put Ubuntu's own tools
+        # first, as on a learner's computer that followed lesson 0.4.
+        run: PATH="/usr/bin:$PATH" bash tests/toolchains/lesson_06.sh
+
       - name: The project rejects other compilers
         run: |
           # expect_rejected COMPILER MESSAGE: configuration must stop with our check's message.
@@ -279,6 +291,9 @@ jobs:
           again=$(cmake --build "$build"); echo "building again without changes: $again"
           echo "$again" | grep -q 'no work to do' || { echo "FAIL: a build without changes did work"; exit 1; }
           echo 'ok: lesson 0.5 behaves as described'
+
+      - name: Lesson 0.6 commands (zsh)
+        run: zsh tests/toolchains/lesson_06.sh
 
       - name: The project rejects other compilers
         run: |
