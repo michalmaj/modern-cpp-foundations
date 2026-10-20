@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). Module 1 is in development: its first four lessons are available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). Module 1 is in development: its first five lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -100,6 +100,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 1, lesson 2: [When the compiler complains](course/module_01_first_programs/lesson_02_when_the_compiler_complains.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
 | Module 1, lesson 3: [A program from a blank page](course/module_01_first_programs/lesson_03_a_program_from_a_blank_page.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
 | Module 1, lesson 4: [From source code to an executable](course/module_01_first_programs/lesson_04_from_source_code_to_an_executable.en.md) | Available (pilot version) |
+| Module 1, lesson 5: [Save the history of your work](course/module_01_first_programs/lesson_05_save_the_history_of_your_work.en.md) | Available (pilot version) |
 | Module 1: the remaining lessons (your first own programs in C++20) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -119,6 +120,7 @@ Work through the lessons in order, starting with the first:
 8. **[Lesson 1.2: When the compiler complains](course/module_01_first_programs/lesson_02_when_the_compiler_complains.en.md)**
 9. **[Lesson 1.3: A program from a blank page](course/module_01_first_programs/lesson_03_a_program_from_a_blank_page.en.md)**
 10. **[Lesson 1.4: From source code to an executable](course/module_01_first_programs/lesson_04_from_source_code_to_an_executable.en.md)**
+11. **[Lesson 1.5: Save the history of your work](course/module_01_first_programs/lesson_05_save_the_history_of_your_work.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 

@@ -25,6 +25,8 @@ tests/lessons/
     lesson_01.sh / .ps1     checks for lesson 0.1
     lesson_02.sh / .ps1     checks for lesson 0.2
     lesson_03.sh / .ps1     checks for lesson 0.3
+  module_01_first_programs/
+    lesson_05.sh / .ps1     checks for lesson 1.5 (Git)
 ```
 
 - **`.sh`** files cover the macOS and Linux instructions and run in both **bash** and **zsh**.
@@ -58,6 +60,7 @@ Each check prints `ok` or `FAIL` with the expected and actual values. The script
 
 - Everything happens in a new temporary folder named `lesson-check.*`, which is removed when the script exits, also on failure.
 - The home folder is replaced by a fake one inside that temporary folder. On macOS and Linux `HOME` is changed for the script's own process only. In PowerShell the FileSystem provider's home folder, which `~` uses, is changed and restored afterwards. `cd ~`, plain `cd` and `ls ~` therefore never reach your real home folder.
+- The Git checks (lesson 1.5) point Git's global configuration at an empty file inside the temporary folder (`GIT_CONFIG_GLOBAL`), so the runner's or your own Git settings are neither read nor changed. Git's system configuration is kept, because on Windows it holds settings a learner also has, such as `core.autocrlf`. No network access is needed.
 - The only thing outside the temporary folder is read-only navigation to the root folder (`cd ..` until it stops), which lesson 0.2 describes.
 - In CI, the workflow also checks that the runner's real home folder is unchanged and that no `lesson-check.*` folders are left behind.
 

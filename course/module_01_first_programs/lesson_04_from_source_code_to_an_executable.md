@@ -459,7 +459,7 @@ Bo zmiana nazwy w `add_executable` mówi narzędziom, co zbudować od teraz. Nie
 
 ## Co dalej
 
-Po czterech lekcjach Modułu 1 potrafisz napisać mały program, poprawić błędy i wiesz, jak powstaje plik wykonywalny. **Lekcja 1.5 jest w przygotowaniu.**
+Po czterech lekcjach Modułu 1 potrafisz napisać mały program, poprawić błędy i wiesz, jak powstaje plik wykonywalny. W [lekcji 1.5](lesson_05_save_the_history_of_your_work.md) zaczniesz zapisywać historię swojej pracy.
 
 ---
 
@@ -489,4 +489,4 @@ Build: OKRun: OK
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 1.3: Program od pustej kartki](lesson_03_a_program_from_a_blank_page.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 1.3: Program od pustej kartki](lesson_03_a_program_from_a_blank_page.md) · **Następna lekcja:** [Lekcja 1.5: Zapisz historię swojej pracy](lesson_05_save_the_history_of_your_work.md) · [Opis kursu](../../README.md)
