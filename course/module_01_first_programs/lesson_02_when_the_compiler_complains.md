@@ -491,4 +491,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 1.1: Pierwszy program od środka](lesson_01_first_program_inside.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 1.1: Pierwszy program od środka](lesson_01_first_program_inside.md) · **Następna lekcja:** [Lekcja 1.3: Program od pustej kartki](lesson_03_a_program_from_a_blank_page.md) · [Opis kursu](../../README.md)

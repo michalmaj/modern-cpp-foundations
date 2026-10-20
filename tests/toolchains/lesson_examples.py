@@ -5,6 +5,7 @@ Lessons mark their code blocks with HTML comments, which GitHub does not show:
 
     <!-- example: NAME -->              the next ```cpp block is a complete program;
     <!-- example: NAME source=PATH -->  ... and it must equal the file PATH (relative to the lesson);
+    <!-- example: NAME exit=N -->        ... and it must exit with code N instead of 0;
     <!-- output: NAME -->               the next ```text block is the exact output of example NAME;
     <!-- broken: NAME at=LINE[:COLUMN] [errors=N] error=REGEX -->
                                         the next ```cpp block is a complete program with deliberate
@@ -21,10 +22,13 @@ Checks:
   * marked blocks are ASCII only, and the Polish lesson (X.md) and the English one (X.en.md)
     contain the same marked blocks, with the same markers, in the same order;
   * each example and each broken program is built as main.cpp of the lesson 0.5 project (its
-    CMakeLists.txt) with CMake, Ninja and the given compiler, with warnings as errors.
+    CMakeLists.txt) with CMake, Ninja and the given compiler. Examples are built with warnings
+    as errors; broken programs with the project's own flags only, exactly as a learner builds
+    them, so that the checked messages are the ones the learner sees (some messages are
+    warnings on one system and errors on another).
     The configure step must succeed and report Clang 22 or newer, so that a broken environment
     is never mistaken for the expected compile error.
-  * an example must build, exit with 0, print nothing to stderr, and print exactly the expected
+  * an example must build, exit with 0 (or its exit=N), print nothing to stderr, and print exactly the expected
     output (Windows line ends ignored);
   * a broken program must fail to build because of compiler errors in main.cpp, as described
     by its marker. Its whole build output is printed, to compare the messages across systems.
@@ -47,7 +51,7 @@ import sys
 import tempfile
 
 MARKER = re.compile(r'^<!-- (?:(example|output|broken): ([a-z0-9_]+)(.*?)|(fragment)) -->$')
-SOURCE = re.compile(r'^(?: source=(\S+))?$')
+SOURCE = re.compile(r'^(?: source=(\S+))?(?: exit=(\d+))?$')
 BROKEN = re.compile(r'^ at=(\d+)(?::(\d+))?(?: errors=(\d+))? error=(.+)$')
 FENCE = re.compile(r'^```(\S*)$')
 # A compiler error in main.cpp: GNU style (main.cpp:4:35: error: ...) or MSVC style (main.cpp(4,35): error: ...).
@@ -114,8 +118,8 @@ def check_lesson(path, found):
             if name in examples or name in broken:
                 fail(f'{path}:{line}: program {name} defined twice')
         if kind == 'example':
-            examples[name] = text
             source = SOURCE.match(attributes)
+            examples[name] = (text, int(source[2]) if source and source[2] else 0)
             if source and source[1]:
                 original = (path.parent / source[1]).read_text(encoding='utf-8')
                 if text != original:
@@ -142,7 +146,7 @@ def run(command):
     return subprocess.run(command, capture_output=True, text=True, encoding='utf-8', errors='replace')
 
 
-def build(lesson, name, code, args):
+def build(lesson, name, code, args, flags=WARNINGS):
     """Configures and builds a copy of the project with CODE as main.cpp.
     Returns (build directory, build result), or None when configuring failed."""
     work = pathlib.Path('build/lesson-examples') / lesson / name
@@ -153,7 +157,7 @@ def build(lesson, name, code, args):
     # newline='\n': the same bytes on every system, as in the lesson.
     (src / 'main.cpp').write_text(code, encoding='ascii', newline='\n')
     configure = [args.cmake, '-S', str(src), '-B', str(work / 'build'), '-G', 'Ninja',
-                 '-DCMAKE_BUILD_TYPE=Debug', f'-DCMAKE_CXX_COMPILER={args.cxx}', f'-DCMAKE_CXX_FLAGS={WARNINGS}']
+                 '-DCMAKE_BUILD_TYPE=Debug', f'-DCMAKE_CXX_COMPILER={args.cxx}', f'-DCMAKE_CXX_FLAGS={flags}']
     if args.make_program:
         configure.append(f'-DCMAKE_MAKE_PROGRAM={args.make_program}')
     result = run(configure)
@@ -169,7 +173,7 @@ def build(lesson, name, code, args):
     return work / 'build', run([args.cmake, '--build', str(work / 'build')])
 
 
-def check_example(lesson, name, code, expected, args):
+def check_example(lesson, name, code, exit_code, expected, args):
     built = build(lesson, name, code, args)
     if not built:
         return
@@ -181,21 +185,22 @@ def check_example(lesson, name, code, expected, args):
     exe = build_dir / (target + ('.exe' if sys.platform == 'win32' else ''))
     result = subprocess.run([str(exe)], capture_output=True)
     out = result.stdout.decode('ascii', errors='replace').replace('\r\n', '\n')
-    if result.returncode != 0:
-        fail(f'{lesson}: example {name}: exit code {result.returncode}')
+    if result.returncode != exit_code:
+        fail(f'{lesson}: example {name}: exit code {result.returncode}, expected {exit_code}')
     if result.stderr:
         fail(f'{lesson}: example {name}: printed to stderr: {result.stderr!r}')
     for text in expected:
         if out != text:
             fail(f'{lesson}: example {name}: output {out!r}, expected {text!r}')
             return
-    print(f'ok   {lesson}: example {name} builds, runs and prints the expected {len(expected)} output block(s):')
+    print(f'ok   {lesson}: example {name} builds, runs, exits with {exit_code} '
+          f'and prints the expected {len(expected)} output block(s):')
     for line in out.splitlines():
         print(f'       | {line}')
 
 
 def check_broken(lesson, name, code, expectation, args):
-    built = build(lesson, name, code, args)
+    built = build(lesson, name, code, args, flags='')
     if not built:
         return
     _, result = built
@@ -256,8 +261,8 @@ def check_course(args):
         fragments = sum(1 for block in pl_blocks if block[0] == 'fragment')
         print(f'     {len(examples)} examples to build and run, {len(broken)} broken programs that must not compile, '
               f'{fragments} fragments (deliberately incomplete, not built)')
-        for name, code in examples.items():
-            check_example(pl.stem, name, code, outputs.get(name, []), args)
+        for name, (code, exit_code) in examples.items():
+            check_example(pl.stem, name, code, exit_code, outputs.get(name, []), args)
         for name, (code, expectation) in broken.items():
             check_broken(pl.stem, name, code, expectation, args)
     if checked == 0:
@@ -268,6 +273,7 @@ def check_course(args):
 
 GOOD = '#include <iostream>\n\nint main() {\n    std::cout << "Hi!\\n";\n}\n'
 NO_SEMICOLON = GOOD.replace('\\n";', '\\n"')
+RETURN_3 = GOOD.replace('\n}\n', '\n    return 3;\n}\n')
 
 
 def lesson(*parts):
@@ -283,6 +289,10 @@ def self_test(args):
         ('correct examples pass', lesson(*good), None, None),
         ('a wrong expected output is detected',
          lesson(('example: hi', 'cpp', GOOD), ('output: hi', 'text', 'Hello!\n')), None, 'example hi: output'),
+        ('an example with exit=3 that returns 3 passes',
+         lesson(('example: hi exit=3', 'cpp', RETURN_3), ('output: hi', 'text', 'Hi!\n')), None, None),
+        ('an unexpected exit code is detected',
+         lesson(('example: hi', 'cpp', RETURN_3), ('output: hi', 'text', 'Hi!\n')), None, 'exit code 3, expected 0'),
         ('a broken program that fails as described passes',
          lesson(*good, (semicolon, 'cpp', NO_SEMICOLON)), None, None),
         ('a broken program that suddenly compiles is detected',
