@@ -25,6 +25,8 @@ The same workflow also builds the learner project of lesson 0.5 (`course/module_
 
 `lesson_06.ps1` (Windows PowerShell 5.1 and PowerShell 7) and `lesson_06.sh` (bash on Ubuntu, zsh on macOS) run the **exact terminal commands of lesson 0.6** on a temporary copy of that project: CMake configure, build and run; a direct `clang++` compile; and the edit-and-rebuild experiment with three executables. They can be run locally from the repository root, for example `zsh tests/toolchains/lesson_06.sh` or `powershell -NoProfile -ExecutionPolicy Bypass -File tests\toolchains\lesson_06.ps1`.
 
+`lesson_examples.py` checks the **C++ examples published in the lessons** (from Module 1 on). Lessons mark their code blocks with invisible HTML comments: `<!-- example: NAME -->` before a complete program, `<!-- output: NAME -->` before its exact expected output, and `<!-- fragment -->` before code that is deliberately incomplete and is not built. The script builds every example as `main.cpp` of the lesson 0.5 project, with warnings as errors, runs it and compares its output with every output block of that name. It also checks that every `cpp` block is marked, that the marked blocks are ASCII and identical in the Polish and English lesson, and, for `source=PATH`, that the example equals the course file. The workflow runs it on all three systems, for example `python3 tests/toolchains/lesson_examples.py --cxx /usr/bin/clang++-22`, and checks once (on Ubuntu) that a wrong expected output makes it fail.
+
 ## Running it locally
 
 From the repository root, with the official toolchain installed. Use the full path to upstream `clang++`, so that CMake can't pick another compiler:

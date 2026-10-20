@@ -271,6 +271,6 @@ At the start of Module 0, the terminal may have been completely new to you. Now 
 
 ## What's next: Module 1
 
-In Module 1 you will start to really understand and write C++20 code. You will learn what the lines in `main.cpp` mean, and write your first programs of your own. **Module 1 is in preparation.**
+In Module 1 you will start to really understand and write C++20 code. You will learn what the lines in `main.cpp` mean, and write your first programs of your own. Start with [lesson 1.1: The first program, from the inside](../module_01_first_programs/lesson_01_first_program_inside.en.md). Module 1 is in development: further lessons are in preparation.
 
-**Previous lesson:** [Lesson 0.5: Your first working program in CLion](lesson_05_first_program_in_clion.en.md) · **Next module:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 0.5: Your first working program in CLion](lesson_05_first_program_in_clion.en.md) · **Next lesson:** [Lesson 1.1: The first program, from the inside](../module_01_first_programs/lesson_01_first_program_inside.en.md) · [Course overview](../../README.en.md)

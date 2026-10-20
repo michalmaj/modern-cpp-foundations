@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** The whole of Module 0 is available (six lessons, pilot version). Module 1 is in preparation. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). Module 1 is in development: its first lesson is available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -96,7 +96,8 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 0, lesson 4: [Set up your workshop: installing the tools](course/module_00_tooling/lesson_04_installing_the_tools.en.md) | Available (pilot version; the installation steps have not yet been checked on every system) |
 | Module 0, lesson 5: [Your first working program in CLion](course/module_00_tooling/lesson_05_first_program_in_clion.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
 | Module 0, lesson 6: [The same program without CLion](course/module_00_tooling/lesson_06_same_program_without_clion.en.md) | Available (pilot version) |
-| Module 1: your first own programs in C++20 | In preparation |
+| Module 1, lesson 1: [The first program, from the inside](course/module_01_first_programs/lesson_01_first_program_inside.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
+| Module 1: the remaining lessons (your first own programs in C++20) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
 | Courses B and C | Planned, repositories do not exist yet |
@@ -111,10 +112,11 @@ Work through the lessons in order, starting with the first:
 4. **[Lesson 0.4: Set up your workshop: installing the tools](course/module_00_tooling/lesson_04_installing_the_tools.en.md)**
 5. **[Lesson 0.5: Your first working program in CLion](course/module_00_tooling/lesson_05_first_program_in_clion.en.md)**
 6. **[Lesson 0.6: The same program without CLion](course/module_00_tooling/lesson_06_same_program_without_clion.en.md)**
+7. **[Lesson 1.1: The first program, from the inside](course/module_01_first_programs/lesson_01_first_program_inside.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
-After Module 0 comes Module 1, where you will start writing your own C++20 code. It is in preparation.
+Lesson 1.1 opens Module 1, where you will start reading and writing your own C++20 code. The further lessons of Module 1 are in preparation.
 
 ## What comes next
 
