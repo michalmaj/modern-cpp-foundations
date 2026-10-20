@@ -310,7 +310,7 @@ You can see the content of the prepared changes with `git diff --staged`. When t
 git commit -m "Add the cinema ticket and .gitignore"
 ```
 
-`-m` gives the **commit message**. A good message says briefly what this version brings. In this course, write messages without accented letters for now, for the same reason as program output: not every Windows console shows them correctly. The output:
+`-m` gives the **commit message**. A good message says briefly what this version brings. The example messages in this course are in English, like all its technical documentation. Git also accepts messages in other languages, with accented letters. Some older consoles may then display a few characters incorrectly, but that's the console, not Git. The output:
 
 ```text
 [master (root-commit) 6d29aa9] Add the cinema ticket and .gitignore
@@ -522,7 +522,7 @@ Saving a file overwrites its content on disk, and only the latest version remain
 
 ## What's next
 
-You now have a history of your work. **Lesson 1.6 is in preparation.**
+You now have a history of your work. In [lesson 1.6](lesson_06_from_idea_to_working_program.en.md) you will check everything Module 1 has taught you, in one independent task.
 
 ---
 
@@ -578,4 +578,4 @@ An explanation of the change, for example: "In the second version, the program p
 
 </details>
 
-**Previous lesson:** [Lesson 1.4: From source code to an executable](lesson_04_from_source_code_to_an_executable.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 1.4: From source code to an executable](lesson_04_from_source_code_to_an_executable.en.md) · **Next lesson:** [Lesson 1.6: From an idea to a working program, on your own](lesson_06_from_idea_to_working_program.en.md) · [Course overview](../../README.en.md)

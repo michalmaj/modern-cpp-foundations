@@ -110,7 +110,7 @@ int main() {
     Show 'git status after git add' (git status 2>&1)
     Assert-Equal 'three files are staged' 'A  .gitignore|A  cinema_ticket/CMakeLists.txt|A  cinema_ticket/main.cpp' ((Get-Status | Where-Object { $_ -notlike '`?`?*' }) -join '|')
     Assert-Match 'git diff --staged shows the staged files' 'Row 7, seat 12' ((git diff --staged) -join "`n")
-    Show 'git commit' (git commit -m 'Dodaj bilet do kina i plik .gitignore' 2>&1)
+    Show 'git commit' (git commit -m 'Add the cinema ticket and .gitignore' 2>&1)
     Assert-Equal 'the first commit succeeds' 0 $LASTEXITCODE
     Show 'git log' (git log 2>&1)
     Assert-Equal 'git log shows one commit' 1 @(git log --oneline).Count
@@ -127,7 +127,7 @@ int main() {
     Assert-Equal 'nothing staged yet' '' ((git diff --staged) -join "`n")
     Show 'git add of the changed file' (git add cinema_ticket/main.cpp 2>&1)
     Assert-Equal 'git diff --staged shows the change once it is staged' $diff ((git diff --staged) -join "`n")
-    git commit -q -m 'Nowe miejsce na bilecie'
+    git commit -q -m 'Change the seat on the ticket'
     Assert-Equal 'the second commit succeeds' 0 $LASTEXITCODE
     Assert-Equal 'git log shows two commits' 2 @(git log --oneline).Count
     Assert-Match 'git show HEAD~1:cinema_ticket/main.cpp shows the earlier version' 'Row 7, seat 12' ((git show HEAD~1:cinema_ticket/main.cpp) -join "`n")

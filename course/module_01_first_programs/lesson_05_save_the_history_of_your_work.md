@@ -307,13 +307,13 @@ Treść przygotowanych zmian zobaczysz poleceniem `git diff --staged`. Gdy wynik
 **Krok 3. Zapisz wersję:**
 
 ```text
-git commit -m "Dodaj bilet do kina i plik .gitignore"
+git commit -m "Add the cinema ticket and .gitignore"
 ```
 
-`-m` podaje **opis commita** (*commit message*). Dobry opis mówi krótko, co ta wersja wnosi. W tym kursie piszemy opisy bez polskich znaków, z tego samego powodu co komunikaty programów: nie każda konsola na Windowsie wyświetli je poprawnie. Wynik:
+`-m` podaje **opis commita** (*commit message*). Dobry opis mówi krótko, co ta wersja wnosi. Przykładowe opisy w kursie są po angielsku, tak jak cała dokumentacja techniczna kursu. Git przyjmie też opis po polsku, z polskimi literami. Niektóre starsze konsole mogą wtedy wyświetlać część znaków nieprawidłowo, ale to sprawa konsoli, a nie Gita. Wynik:
 
 ```text
-[master (root-commit) 6d29aa9] Dodaj bilet do kina i plik .gitignore
+[master (root-commit) 6d29aa9] Add the cinema ticket and .gitignore
  3 files changed, 25 insertions(+)
  create mode 100644 .gitignore
  create mode 100644 cinema_ticket/CMakeLists.txt
@@ -335,7 +335,7 @@ commit 6d29aa9f9b6ce4e27c45ff2258689f60a553dc0c
 Author: (tu Twoje imię i adres e-mail z punktu 4)
 Date:   Tue Oct 20 18:28:10 2026 +0000
 
-    Dodaj bilet do kina i plik .gitignore
+    Add the cinema ticket and .gitignore
 ```
 
 U Ciebie będą Twoje dane, Twoja data i Twój identyfikator. Jeśli wynik się nie mieści, <kbd>q</kbd> kończy przeglądanie.
@@ -385,8 +385,8 @@ Po `git add` zwykły `git diff` nic już nie pokazuje, bo plik zgadza się z prz
 `git log --oneline` po drugim commicie:
 
 ```text
-63f6aee Nowe miejsce na bilecie
-6d29aa9 Dodaj bilet do kina i plik .gitignore
+63f6aee Change the seat on the ticket
+6d29aa9 Add the cinema ticket and .gitignore
 ```
 
 **Zobacz poprzednią wersję.** To jest odpowiedź na problem z początku lekcji. Weź identyfikator **pierwszego** commita z `git log --oneline` i wpisz:
@@ -439,7 +439,7 @@ Gdy wiesz już, że `.gitignore` działa, możesz dodać całe katalogi projekt�
 git add lesson_1_1 lesson_1_2 lesson_1_3 lesson_1_4 shopping_list build_detective
 ```
 
-Wpisz tylko te katalogi, które naprawdę masz i których jeszcze nie zapisano. **Zanim zrobisz commit**, sprawdź `git status`: w `Changes to be committed` mają być tylko pliki `main.cpp` i `CMakeLists.txt`. Potem zapisz commit, na przykład `git commit -m "Dodaj pozostale projekty"`.
+Wpisz tylko te katalogi, które naprawdę masz i których jeszcze nie zapisano. **Zanim zrobisz commit**, sprawdź `git status`: w `Changes to be committed` mają być tylko pliki `main.cpp` i `CMakeLists.txt`. Potem zapisz commit, na przykład `git commit -m "Add the other projects"`.
 
 W tym kursie nie dodajesz wszystkiego naraz (`git add .`). Wybierasz pliki albo katalogi świadomie i sprawdzasz je przed zapisaniem.
 
@@ -522,7 +522,7 @@ Zapisanie pliku nadpisuje jego treść na dysku i zostaje tylko ostatnia wersja.
 
 ## Co dalej
 
-Masz już historię swojej pracy. **Lekcja 1.6 jest w przygotowaniu.**
+Masz już historię swojej pracy. W [lekcji 1.6](lesson_06_from_idea_to_working_program.md) sprawdzisz wszystko, czego nauczył Cię Moduł 1, w jednym samodzielnym zadaniu.
 
 ---
 
@@ -538,7 +538,7 @@ git status
 git diff
 git add cinema_ticket/main.cpp
 git diff --staged
-git commit -m "Nowe miejsce na bilecie"
+git commit -m "Change the seat on the ticket"
 git log --oneline
 ```
 
@@ -553,7 +553,7 @@ Po zmianie `git status` pokazuje `modified:   cinema_ticket/main.cpp` w części
 git status
 git add parcel_label/main.cpp parcel_label/CMakeLists.txt
 git status
-git commit -m "Dodaj etykiete paczki"
+git commit -m "Add the parcel label"
 ```
 
 Potem zmiana w `parcel_label/main.cpp`, budowanie i uruchomienie programu, a następnie:
@@ -562,7 +562,7 @@ Potem zmiana w `parcel_label/main.cpp`, budowanie i uruchomienie programu, a nas
 git diff
 git add parcel_label/main.cpp
 git diff --staged
-git commit -m "Dodaj adres nadawcy na etykiecie"
+git commit -m "Print the sender's address on the label"
 git log --oneline
 git ls-files parcel_label
 ```
@@ -578,4 +578,4 @@ Wyjaśnienie zmiany, na przykład: „W drugiej wersji program wypisuje dodatkow
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 1.4: Od kodu źródłowego do programu wykonywalnego](lesson_04_from_source_code_to_an_executable.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 1.4: Od kodu źródłowego do programu wykonywalnego](lesson_04_from_source_code_to_an_executable.md) · **Następna lekcja:** [Lekcja 1.6: Samodzielnie od pomysłu do działającego programu](lesson_06_from_idea_to_working_program.md) · [Opis kursu](../../README.md)
