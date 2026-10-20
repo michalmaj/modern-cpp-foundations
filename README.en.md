@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** The first three lessons are available, and more lessons are in preparation. See [Course status](#course-status) for details.
+> **Course status: in preparation.** The first four lessons are available, and more lessons are in preparation. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -77,11 +77,11 @@ At first we guide you step by step. Over time you make more of the decisions you
 | **Ninja** | Quickly carries out the build steps prepared by CMake. |
 | **CTest** | Runs tests that check whether a program works correctly. |
 
-You don't need to understand these names yet, or install anything. Every tool is explained in the course. Installation instructions for each system will be published only once they have been verified.
+You don't need to understand these names yet, or install anything. Every tool is explained in the course, and you will install them in [lesson 0.4](course/module_00_tooling/lesson_04_installing_the_tools.en.md). It is a pilot version: some installation steps have not yet been checked on every system.
 
 CLion is convenient but not required: every project in the course can also be built and run from the terminal.
 
-On Windows, the compiler also relies on Microsoft tools (Visual Studio Build Tools and the Windows SDK). The exact list of required components will be given in the installation instructions.
+On Windows, the compiler also relies on Microsoft tools (Visual Studio Build Tools, including the Windows SDK). Lesson 0.4 shows how to install them.
 
 ## Course status
 
@@ -93,6 +93,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 0, lesson 1: [Files, folders and your first look at the terminal](course/module_00_tooling/lesson_01_files_and_terminal.en.md) | Available (pilot version) |
 | Module 0, lesson 2: [Moving between folders](course/module_00_tooling/lesson_02_moving_between_folders.en.md) | Available (pilot version) |
 | Module 0, lesson 3: [What happens when you type a command?](course/module_00_tooling/lesson_03_commands_and_programs.en.md) | Available (pilot version) |
+| Module 0, lesson 4: [Set up your workshop: installing the tools](course/module_00_tooling/lesson_04_installing_the_tools.en.md) | Available (pilot version; the installation steps have not yet been checked on every system) |
 | Remaining Module 0 lessons: setting up your computer and first steps | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -105,10 +106,11 @@ Work through the lessons in order, starting with the first:
 1. **[Lesson 0.1: Files, folders and your first look at the terminal](course/module_00_tooling/lesson_01_files_and_terminal.en.md)**
 2. **[Lesson 0.2: Moving between folders](course/module_00_tooling/lesson_02_moving_between_folders.en.md)**
 3. **[Lesson 0.3: What happens when you type a command?](course/module_00_tooling/lesson_03_commands_and_programs.en.md)**
+4. **[Lesson 0.4: Set up your workshop: installing the tools](course/module_00_tooling/lesson_04_installing_the_tools.en.md)**
 
-All you need is a computer running Windows, macOS or Linux. You don't need to install anything.
+For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
-The next Module 0 lessons are in preparation. In them you will install the tools and check that everything works by running your first program.
+The next Module 0 lessons are in preparation. In them you will check that everything works by running your first program.
 
 ## What comes next
 

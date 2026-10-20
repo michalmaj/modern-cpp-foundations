@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Dostępne są trzy pierwsze lekcje, kolejne są w przygotowaniu. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Dostępne są cztery pierwsze lekcje, kolejne są w przygotowaniu. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -77,11 +77,11 @@ Na początku prowadzimy krok po kroku. Z czasem coraz więcej decyzji należy do
 | **Ninja** | Szybko wykonuje kroki budowania przygotowane przez CMake. |
 | **CTest** | Uruchamia testy, które sprawdzają, czy program działa poprawnie. |
 
-Nie musisz teraz rozumieć tych nazw ani niczego instalować. Każde narzędzie wyjaśnimy w kursie. Instrukcje instalacji dla każdego systemu opublikujemy dopiero wtedy, gdy zostaną sprawdzone.
+Nie musisz teraz rozumieć tych nazw ani niczego instalować. Każde narzędzie wyjaśnimy w kursie, a zainstalujesz je w [lekcji 0.4](course/module_00_tooling/lesson_04_installing_the_tools.md). To wersja pilotażowa: część kroków instalacji nie została jeszcze sprawdzona na każdym systemie.
 
 CLion jest wygodny, ale nie jest konieczny: każdy projekt z kursu da się zbudować i uruchomić także z terminala.
 
-Na Windowsie kompilator korzysta dodatkowo z narzędzi Microsoftu (Visual Studio Build Tools i Windows SDK). Dokładną listę potrzebnych składników podamy w instrukcji instalacji.
+Na Windowsie kompilator korzysta dodatkowo z narzędzi Microsoftu (Visual Studio Build Tools z Windows SDK). Lekcja 0.4 pokazuje, jak je zainstalować.
 
 ## Stan kursu
 
@@ -93,6 +93,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 0, lekcja 1: [Pliki, katalogi i pierwsze spotkanie z terminalem](course/module_00_tooling/lesson_01_files_and_terminal.md) | Dostępna (wersja pilotażowa) |
 | Moduł 0, lekcja 2: [Poruszanie się między katalogami](course/module_00_tooling/lesson_02_moving_between_folders.md) | Dostępna (wersja pilotażowa) |
 | Moduł 0, lekcja 3: [Co się dzieje, gdy wpisujesz polecenie?](course/module_00_tooling/lesson_03_commands_and_programs.md) | Dostępna (wersja pilotażowa) |
+| Moduł 0, lekcja 4: [Przygotuj warsztat: instalacja narzędzi](course/module_00_tooling/lesson_04_installing_the_tools.md) | Dostępna (wersja pilotażowa; instrukcje instalacji nie zostały jeszcze sprawdzone na każdym systemie) |
 | Pozostałe lekcje Modułu 0: przygotowanie komputera i pierwsze kroki | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
@@ -105,10 +106,11 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 1. **[Lekcja 0.1: Pliki, katalogi i pierwsze spotkanie z terminalem](course/module_00_tooling/lesson_01_files_and_terminal.md)**
 2. **[Lekcja 0.2: Poruszanie się między katalogami](course/module_00_tooling/lesson_02_moving_between_folders.md)**
 3. **[Lekcja 0.3: Co się dzieje, gdy wpisujesz polecenie?](course/module_00_tooling/lesson_03_commands_and_programs.md)**
+4. **[Lekcja 0.4: Przygotuj warsztat: instalacja narzędzi](course/module_00_tooling/lesson_04_installing_the_tools.md)**
 
-Potrzebujesz tylko komputera z Windows, macOS albo Linuksem. Nie musisz niczego instalować.
+Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
-Kolejne lekcje Modułu 0 są w przygotowaniu. Zainstalujesz w nich narzędzia i sprawdzisz, czy wszystko działa, uruchamiając swój pierwszy program.
+Kolejne lekcje Modułu 0 są w przygotowaniu. Sprawdzisz w nich, czy wszystko działa, uruchamiając swój pierwszy program.
 
 ## Co dalej po tym kursie
 

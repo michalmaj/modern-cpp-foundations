@@ -222,4 +222,4 @@ Nie. Kod źródłowy to tekst dla człowieka. Najpierw kompilator musi zamienić
 - Programy można uruchamiać po nazwie, bo powłoka szuka ich w katalogach z listy `PATH`.
 - **Kod źródłowy** to tekst napisany przez człowieka. **Kompilator** zamienia go w program.
 
-**Poprzednia lekcja:** [Lekcja 0.2: Poruszanie się między katalogami](lesson_02_moving_between_folders.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 0.2: Poruszanie się między katalogami](lesson_02_moving_between_folders.md) · **Następna lekcja:** [Lekcja 0.4: Przygotuj warsztat: instalacja narzędzi](lesson_04_installing_the_tools.md) · [Opis kursu](../../README.md)
