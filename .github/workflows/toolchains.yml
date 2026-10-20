@@ -80,6 +80,15 @@ jobs:
             & "$build/cpp20_smoke.exe"
           }
 
+      - name: The project rejects other compilers
+        run: |
+          # clang-cl is installed with LLVM but is not the course compiler; configuration must stop.
+          $out = (cmake -S $env:SOURCE_DIR -B build/toolchain-smoke/reject-clang-cl -G Ninja -DCMAKE_CXX_COMPILER=clang-cl 2>&1) -join "`n"
+          $out
+          if ($LASTEXITCODE -eq 0) { throw 'configuration with clang-cl unexpectedly succeeded' }
+          if ($out -notmatch 'Expected the clang\+\+ driver') { throw 'configuration failed, but not with the expected toolchain check' }
+          'ok: clang-cl rejected'
+
   ubuntu:
     name: Ubuntu 24.04 / clang++ from apt.llvm.org
     runs-on: ubuntu-24.04
@@ -135,6 +144,20 @@ jobs:
             ldd "$build/cpp20_smoke" | sed 's/^/  /'
           done
 
+      - name: The project rejects other compilers
+        run: |
+          # expect_rejected COMPILER MESSAGE: configuration must stop with our check's message.
+          expect_rejected() {
+            if out=$(/usr/bin/cmake -S "$SOURCE_DIR" -B "build/toolchain-smoke/reject-$(basename "$1")" -G Ninja \
+                -DCMAKE_CXX_COMPILER="$1" -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja 2>&1); then
+              echo "$out"; echo "FAIL: configuration with $1 unexpectedly succeeded"; return 1
+            fi
+            echo "$out" | grep -q "$2" || { echo "$out"; echo "FAIL: $1 rejected, but not by the toolchain check"; return 1; }
+            echo "ok: $1 rejected ($2)"
+          }
+          expect_rejected /usr/bin/g++ 'Expected upstream LLVM Clang'
+          expect_rejected /usr/bin/clang++-18 'Expected Clang 22 or newer'
+
   macos:
     name: macOS / clang++ from Homebrew llvm@22
     runs-on: macos-15
@@ -184,3 +207,13 @@ jobs:
             echo "shared libraries used by the program:"
             otool -L "$build/cpp20_smoke" | sed 's/^/  /'
           done
+
+      - name: The project rejects other compilers
+        run: |
+          # AppleClang is what /usr/bin/clang++ runs; configuration must stop.
+          if out=$(cmake -S "$SOURCE_DIR" -B build/toolchain-smoke/reject-appleclang -G Ninja \
+              -DCMAKE_CXX_COMPILER=/usr/bin/clang++ 2>&1); then
+            echo "$out"; echo 'FAIL: configuration with AppleClang unexpectedly succeeded'; exit 1
+          fi
+          echo "$out" | grep -q 'found AppleClang' || { echo "$out"; echo 'FAIL: rejected, but not by the toolchain check'; exit 1; }
+          echo 'ok: AppleClang rejected'
