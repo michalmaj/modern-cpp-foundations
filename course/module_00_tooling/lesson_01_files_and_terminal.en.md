@@ -38,7 +38,7 @@ ola                    ← folder
 
 `ola` is an example **home folder**: the folder the system gives each person who uses the computer. On your computer it has a different name, usually the same as your account name.
 
-A **path** is the address of a file or folder. It lists the folders one after another, from the start of the drive to the target, separated by a special character called the **separator**. The path to the ticket looks like this:
+A **path** is the address of a file or folder. It lists the folders one after another, from the very top of the tree to the target, separated by a special character called the **separator**. The path to the ticket looks like this:
 
 | System | Path to `ticket.pdf` |
 |---|---|
@@ -46,7 +46,7 @@ A **path** is the address of a file or folder. It lists the folders one after an
 | macOS | `/Users/ola/Documents/ticket.pdf` |
 | Linux | `/home/ola/Documents/ticket.pdf` |
 
-Read a path from left to right. On Windows: “on drive `C:`, in folder `Users`, in folder `ola`, in folder `Documents`, there is the file `ticket.pdf`”. On Windows the separator is `\`, and on macOS and Linux it is `/`. Paths on macOS and Linux start with a single `/`, which means the start of the drive.
+Read a path from left to right. On Windows: “on drive `C:`, in folder `Users`, in folder `ola`, in folder `Documents`, there is the file `ticket.pdf`”. On Windows the separator is `\`, and on macOS and Linux it is `/`. The folder at the very top of the tree is the **root folder**. macOS and Linux have just one, written as a single `/`, which is why their paths start with `/`. On Windows each drive has its own root folder, for example `C:\`.
 
 <details>
 <summary>Check yourself: what is the path to <code>holiday.jpg</code> on your system?</summary>
@@ -191,7 +191,7 @@ You are planning a trip. Inside `first-experiment` you need a folder for notes a
 |---|---|
 | `New-Item first-experiment\list.txt` | `touch first-experiment/list.txt` |
 
-Look at the path `first-experiment\list.txt`. You read it as: “in the folder `first-experiment`, the file `list.txt`”. It doesn't start with `C:\` or `/`, so the shell looks for `first-experiment` in the current folder. A path like this is a **relative path**: it counts from where you are. The paths that `pwd` prints start from the beginning of the drive. Those are **absolute paths**.
+Look at the path `first-experiment\list.txt`. You read it as: “in the folder `first-experiment`, the file `list.txt`”. It doesn't start with `C:\` or `/`, so the shell looks for `first-experiment` in the current folder. A path like this is a **relative path**: it counts from where you are. The paths that `pwd` prints start from the root folder (on Windows with a drive letter, for example `C:\`). Those are **absolute paths**.
 
 On Windows, `New-Item` immediately prints information about the new file. The value `0` in the `Length` column means the file is empty. On macOS and Linux, `touch` prints nothing if everything worked.
 
@@ -232,11 +232,13 @@ Write down the **absolute path** to `list.txt` on your computer. Take the output
 
 Then check that the path is correct:
 
-| Windows | macOS and Linux |
+| System | Example |
 |---|---|
-| `ls C:\Users\ola\first-experiment\list.txt` | `ls -F /Users/ola/first-experiment/list.txt` |
+| Windows | `ls C:\Users\ola\first-experiment\list.txt` |
+| macOS | `ls -F /Users/ola/first-experiment/list.txt` |
+| Linux (usually) | `ls -F /home/ola/first-experiment/list.txt` |
 
-These are examples for the home folder `ola`. Type your own path. On Linux it usually starts with `/home/`.
+These are only examples for the home folder `ola`. Your path starts the way your own `pwd` output does.
 
 - If the path is correct, you will see the file `list.txt`.
 - If not, the shell will report that it cannot find the path. Compare your path with the output of `pwd`, letter by letter.
@@ -277,7 +279,7 @@ Neither made a mistake. Both results are absolute paths to the current folder, u
 <details>
 <summary>Answer</summary>
 
-The shell would report that it can't find the path. `first-experiment` is a relative path, so the shell looks for it in the current folder, and `Downloads` has no such folder. An absolute path, for example `C:\Users\ola\first-experiment` or `/Users/ola/first-experiment`, works whatever the current folder is.
+The shell would report that it can't find the path. `first-experiment` is a relative path, so the shell looks for it in the current folder, and `Downloads` has no such folder. An absolute path, for example `C:\Users\ola\first-experiment` (Windows), `/Users/ola/first-experiment` (macOS) or `/home/ola/first-experiment` (usually on Linux), works whatever the current folder is.
 
 </details>
 
@@ -302,7 +304,7 @@ Because the command was given the path `first-experiment\list.txt` (or `first-ex
 ## Summary
 
 - A **file** stores data. A **folder** stores files and other folders.
-- A **path** is an address. An **absolute** path starts from the beginning of the drive, and a **relative** path starts from the current folder.
+- A **path** is an address. An **absolute** path starts from the root folder, and a **relative** path starts from the current folder.
 - A **terminal** is a window for typing commands, and a **shell** is the program that carries them out.
 - A shell always has a **current folder**.
 
@@ -315,4 +317,4 @@ Because the command was given the path `first-experiment\list.txt` (or `first-ex
 
 You can keep the `first-experiment` folder, or delete it in the file window. It will then go to the Trash (called the Recycle Bin on Windows). We deliberately don't delete anything from the terminal yet: deleting there removes things immediately, without the Trash.
 
-The next lesson is in preparation. Go back to the [course overview](../../README.en.md).
+**Next lesson:** [Lesson 0.2: Moving between folders](lesson_02_moving_between_folders.en.md) · [Course overview](../../README.en.md)

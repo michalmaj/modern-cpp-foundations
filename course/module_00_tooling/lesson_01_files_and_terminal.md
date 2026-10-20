@@ -38,7 +38,7 @@ ola                    ← katalog
 
 `ola` to tu przykładowy **katalog domowy**, czyli katalog, który system przydziela każdej osobie korzystającej z komputera. Na Twoim komputerze nazywa się on inaczej, zwykle tak jak Twoje konto.
 
-**Ścieżka** to adres pliku albo katalogu. Zapisuje się w niej kolejne katalogi, od początku dysku aż do celu, oddzielone specjalnym znakiem, czyli **separatorem**. Ścieżka do biletu wygląda tak:
+**Ścieżka** to adres pliku albo katalogu. Zapisuje się w niej kolejne katalogi, od samej góry drzewa aż do celu, oddzielone specjalnym znakiem, czyli **separatorem**. Ścieżka do biletu wygląda tak:
 
 | System | Ścieżka do `bilet.pdf` |
 |---|---|
@@ -46,7 +46,7 @@ ola                    ← katalog
 | macOS | `/Users/ola/Documents/bilet.pdf` |
 | Linux | `/home/ola/Documents/bilet.pdf` |
 
-Czytaj ścieżkę od lewej do prawej. Na Windowsie: „na dysku `C:`, w katalogu `Users`, w katalogu `ola`, w katalogu `Documents` jest plik `bilet.pdf`”. Na Windowsie separatorem jest `\`, a na macOS i Linuksie `/`. Ścieżki na macOS i Linuksie zaczynają się od samego `/`, czyli od początku dysku.
+Czytaj ścieżkę od lewej do prawej. Na Windowsie: „na dysku `C:`, w katalogu `Users`, w katalogu `ola`, w katalogu `Documents` jest plik `bilet.pdf`”. Na Windowsie separatorem jest `\`, a na macOS i Linuksie `/`. Katalog na samej górze drzewa to **katalog główny**. Na macOS i Linuksie jest tylko jeden i zapisuje się go samym znakiem `/`, dlatego tamtejsze ścieżki zaczynają się od `/`. Na Windowsie każdy dysk ma własny katalog główny, na przykład `C:\`.
 
 <details>
 <summary>Sprawdź się: jak wygląda ścieżka do <code>wakacje.jpg</code> w Twoim systemie?</summary>
@@ -191,7 +191,7 @@ Planujesz wyjazd. W katalogu `pierwszy-eksperyment` potrzebujesz katalogu na not
 |---|---|
 | `New-Item pierwszy-eksperyment\lista.txt` | `touch pierwszy-eksperyment/lista.txt` |
 
-Zwróć uwagę na ścieżkę `pierwszy-eksperyment\lista.txt`. Czytasz ją tak: „w katalogu `pierwszy-eksperyment` plik `lista.txt`”. Nie zaczyna się od `C:\` ani od `/`, więc powłoka szuka katalogu `pierwszy-eksperyment` w bieżącym katalogu. Taka ścieżka to **ścieżka względna**: liczy się od miejsca, w którym jesteś. Ścieżki, które wypisuje `pwd`, zaczynają się od początku dysku. To **ścieżki bezwzględne**.
+Zwróć uwagę na ścieżkę `pierwszy-eksperyment\lista.txt`. Czytasz ją tak: „w katalogu `pierwszy-eksperyment` plik `lista.txt`”. Nie zaczyna się od `C:\` ani od `/`, więc powłoka szuka katalogu `pierwszy-eksperyment` w bieżącym katalogu. Taka ścieżka to **ścieżka względna**: liczy się od miejsca, w którym jesteś. Ścieżki, które wypisuje `pwd`, zaczynają się od katalogu głównego (na Windowsie od litery dysku, na przykład `C:\`). To **ścieżki bezwzględne**.
 
 Na Windowsie `New-Item` od razu wypisze informację o nowym pliku. Wartość `0` w kolumnie `Length` oznacza, że plik jest pusty. Na macOS i Linuksie `touch` nic nie wypisuje, jeśli wszystko się udało.
 
@@ -232,11 +232,13 @@ Zapisz **ścieżkę bezwzględną** do pliku `lista.txt` na swoim komputerze. We
 
 Potem sprawdź, czy ścieżka jest poprawna:
 
-| Windows | macOS i Linux |
+| System | Przykład |
 |---|---|
-| `ls C:\Users\ola\pierwszy-eksperyment\lista.txt` | `ls -F /Users/ola/pierwszy-eksperyment/lista.txt` |
+| Windows | `ls C:\Users\ola\pierwszy-eksperyment\lista.txt` |
+| macOS | `ls -F /Users/ola/pierwszy-eksperyment/lista.txt` |
+| Linux (zwykle) | `ls -F /home/ola/pierwszy-eksperyment/lista.txt` |
 
-To przykłady dla katalogu domowego `ola`. Wpisz swoją ścieżkę. Na Linuksie zaczyna się ona zwykle od `/home/`.
+To tylko przykłady dla katalogu domowego `ola`. Twoja ścieżka zaczyna się tak, jak wynik Twojego `pwd`.
 
 - Jeśli ścieżka jest poprawna, zobaczysz plik `lista.txt`.
 - Jeśli nie, powłoka zgłosi, że nie może znaleźć takiej ścieżki. Porównaj wtedy swoją ścieżkę z wynikiem `pwd`, litera po literze.
@@ -277,7 +279,7 @@ Nikt nie popełnił błędu. Oba wyniki są ścieżkami bezwzględnymi do bież�
 <details>
 <summary>Odpowiedź</summary>
 
-Powłoka zgłosiłaby, że nie znalazła takiej ścieżki. `pierwszy-eksperyment` to ścieżka względna, więc powłoka szuka jej w bieżącym katalogu, a w `Downloads` takiego katalogu nie ma. Ścieżka bezwzględna, na przykład `C:\Users\ola\pierwszy-eksperyment` albo `/Users/ola/pierwszy-eksperyment`, działa bez względu na bieżący katalog.
+Powłoka zgłosiłaby, że nie znalazła takiej ścieżki. `pierwszy-eksperyment` to ścieżka względna, więc powłoka szuka jej w bieżącym katalogu, a w `Downloads` takiego katalogu nie ma. Ścieżka bezwzględna, na przykład `C:\Users\ola\pierwszy-eksperyment` (Windows), `/Users/ola/pierwszy-eksperyment` (macOS) albo `/home/ola/pierwszy-eksperyment` (zwykle na Linuksie), działa bez względu na bieżący katalog.
 
 </details>
 
@@ -302,7 +304,7 @@ Bo polecenie dostało ścieżkę `pierwszy-eksperyment\lista.txt` (albo `pierwsz
 ## Podsumowanie
 
 - **Plik** przechowuje dane. **Katalog** przechowuje pliki i inne katalogi.
-- **Ścieżka** to adres. Ścieżka **bezwzględna** zaczyna się od początku dysku, a **względna** od bieżącego katalogu.
+- **Ścieżka** to adres. Ścieżka **bezwzględna** zaczyna się od katalogu głównego, a **względna** od bieżącego katalogu.
 - **Terminal** to okno do wpisywania poleceń, a **powłoka** to program, który je wykonuje.
 - Powłoka zawsze ma **bieżący katalog**.
 
@@ -315,4 +317,4 @@ Bo polecenie dostało ścieżkę `pierwszy-eksperyment\lista.txt` (albo `pierwsz
 
 Katalog `pierwszy-eksperyment` możesz zostawić albo usunąć w oknie plików. Trafi wtedy do Kosza. Usuwania z terminala celowo jeszcze nie używamy: kasuje ono od razu, z pominięciem Kosza.
 
-Następna lekcja jest w przygotowaniu. Wróć do [opisu kursu](../../README.md).
+**Następna lekcja:** [Lekcja 0.2: Poruszanie się między katalogami](lesson_02_moving_between_folders.md) · [Opis kursu](../../README.md)
