@@ -3,6 +3,7 @@
 # (course/module_01_first_programs/lesson_05_save_the_history_of_your_work{.md,.en.md}).
 # Run with bash or zsh:  bash lesson_05.sh   or   zsh lesson_05.sh
 #
+# Note for zsh: never name a variable `path` (zsh ties it to PATH).
 # Everything happens in a fake home folder inside a temporary folder. Git's
 # global configuration is pointed at an empty file there (GIT_CONFIG_GLOBAL),
 # so the runner's own Git settings are neither read nor changed. Checks look
@@ -64,7 +65,8 @@ expect_fail 'git status before git init reports "not a git repository"' git stat
 git init 2>&1 | show 'git init'
 expect_ok 'git init created the repository' test -f .git/HEAD
 expect_ok 'git init created the hidden .git folder' test -d .git
-expect_eq 'the repository starts in cpp-workspace' "$ws" "$(cd "$(git rev-parse --show-toplevel)" && pwd)"
+# pwd -P: on macOS /var is a link to /private/var, and Git reports the real path.
+expect_eq 'the repository starts in cpp-workspace' "$(cd "$ws" && pwd -P)" "$(cd "$(git rev-parse --show-toplevel)" && pwd -P)"
 
 # Section 4: identity for this repository only.
 git config user.name 'Test Learner'
@@ -87,11 +89,11 @@ expect_eq '.gitignore has the eight rules' 8 "$(grep -c . .gitignore)"
 offered=$(git status --porcelain --untracked-files=all | sed 's/^?? //' | LC_ALL=C sort | tr '\n' ' ')
 expected=".gitignore build_detective/CMakeLists.txt build_detective/main.cpp cinema_ticket/CMakeLists.txt cinema_ticket/main.cpp lesson_1_1/CMakeLists.txt lesson_1_1/main.cpp lesson_1_2/CMakeLists.txt lesson_1_2/main.cpp lesson_1_3/CMakeLists.txt lesson_1_3/main.cpp lesson_1_4/CMakeLists.txt lesson_1_4/main.cpp parcel_label/CMakeLists.txt parcel_label/main.cpp shopping_list/CMakeLists.txt shopping_list/main.cpp "
 expect_eq 'after .gitignore: only sources (and .gitignore) are offered' "$expected" "$offered"
-for path in lesson_1_4/build-terminal/hello_cmake lesson_1_4/main.o lesson_1_4/hello cinema_ticket/.idea/workspace.xml cinema_ticket/cmake-build-debug/first_program .DS_Store; do
-    expect_ok "ignored: $path" git check-ignore -q "$path"
+for file in lesson_1_4/build-terminal/hello_cmake lesson_1_4/main.o lesson_1_4/hello cinema_ticket/.idea/workspace.xml cinema_ticket/cmake-build-debug/first_program .DS_Store; do
+    expect_ok "ignored: $file" git check-ignore -q "$file"
 done
-for path in cinema_ticket/main.cpp cinema_ticket/CMakeLists.txt lesson_1_4/main.cpp; do
-    expect_fail "not ignored: $path" git check-ignore -q "$path"
+for file in cinema_ticket/main.cpp cinema_ticket/CMakeLists.txt lesson_1_4/main.cpp; do
+    expect_fail "not ignored: $file" git check-ignore -q "$file"
 done
 
 git status --untracked-files=all 2>&1 | show 'git status --untracked-files=all after .gitignore'

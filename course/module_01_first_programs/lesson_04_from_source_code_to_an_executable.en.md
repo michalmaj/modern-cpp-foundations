@@ -459,7 +459,7 @@ Because changing the name in `add_executable` tells the tools what to build from
 
 ## What's next
 
-After four lessons of Module 1, you can write a small program, fix errors, and you know how an executable is made. **Lesson 1.5 is in preparation.**
+After four lessons of Module 1, you can write a small program, fix errors, and you know how an executable is made. In [lesson 1.5](lesson_05_save_the_history_of_your_work.en.md) you will start saving the history of your work.
 
 ---
 
@@ -489,4 +489,4 @@ Build: OKRun: OK
 
 </details>
 
-**Previous lesson:** [Lesson 1.3: A program from a blank page](lesson_03_a_program_from_a_blank_page.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 1.3: A program from a blank page](lesson_03_a_program_from_a_blank_page.en.md) · **Next lesson:** [Lesson 1.5: Save the history of your work](lesson_05_save_the_history_of_your_work.en.md) · [Course overview](../../README.en.md)
