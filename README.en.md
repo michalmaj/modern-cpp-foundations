@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). Module 1 is in development: its first lesson is available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). Module 1 is in development: its first two lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -97,6 +97,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 0, lesson 5: [Your first working program in CLion](course/module_00_tooling/lesson_05_first_program_in_clion.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
 | Module 0, lesson 6: [The same program without CLion](course/module_00_tooling/lesson_06_same_program_without_clion.en.md) | Available (pilot version) |
 | Module 1, lesson 1: [The first program, from the inside](course/module_01_first_programs/lesson_01_first_program_inside.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
+| Module 1, lesson 2: [When the compiler complains](course/module_01_first_programs/lesson_02_when_the_compiler_complains.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
 | Module 1: the remaining lessons (your first own programs in C++20) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -113,6 +114,7 @@ Work through the lessons in order, starting with the first:
 5. **[Lesson 0.5: Your first working program in CLion](course/module_00_tooling/lesson_05_first_program_in_clion.en.md)**
 6. **[Lesson 0.6: The same program without CLion](course/module_00_tooling/lesson_06_same_program_without_clion.en.md)**
 7. **[Lesson 1.1: The first program, from the inside](course/module_01_first_programs/lesson_01_first_program_inside.en.md)**
+8. **[Lesson 1.2: When the compiler complains](course/module_01_first_programs/lesson_02_when_the_compiler_complains.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
