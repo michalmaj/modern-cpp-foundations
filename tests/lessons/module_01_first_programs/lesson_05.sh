@@ -104,7 +104,7 @@ git status 2>&1 | show 'git status after git add'
 expect_eq 'three files are staged' 'A  .gitignore|A  cinema_ticket/CMakeLists.txt|A  cinema_ticket/main.cpp' \
     "$(git status --porcelain | grep -v '^??' | tr '\n' '|' | sed 's/|$//')"
 expect_ok 'git diff --staged shows the staged files' sh -c 'git diff --staged | grep -q "Row 7, seat 12"'
-git commit -m 'Dodaj bilet do kina i plik .gitignore' 2>&1 | show 'git commit'
+git commit -m 'Add the cinema ticket and .gitignore' 2>&1 | show 'git commit'
 expect_ok 'the first commit exists' git rev-parse -q --verify HEAD
 git status 2>&1 | show 'git status after the first commit'
 git log 2>&1 | show 'git log'
@@ -125,7 +125,7 @@ case "$diff" in *'-    std::cout << "Row 7, seat 12\n";'*'+    std::cout << "Row
 expect_eq 'nothing staged yet' '' "$(git diff --staged)"
 git add cinema_ticket/main.cpp
 expect_eq 'git diff --staged shows the change once it is staged' "$diff" "$(git diff --staged)"
-expect_ok 'the second commit succeeds' git commit -q -m 'Nowe miejsce na bilecie'
+expect_ok 'the second commit succeeds' git commit -q -m 'Change the seat on the ticket'
 expect_eq 'git log shows two commits' 2 "$(git log --oneline | wc -l | tr -d ' ')"
 git log --oneline 2>&1 | show 'git log --oneline'
 old=$(git show HEAD~1:cinema_ticket/main.cpp)

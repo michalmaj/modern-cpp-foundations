@@ -39,6 +39,8 @@ The script builds every example and every broken program as `main.cpp` of the le
 
 `lesson_14.ps1` (Windows PowerShell 5.1 and PowerShell 7) and `lesson_14.sh` (bash on Ubuntu, zsh on macOS) run the **terminal commands of lesson 1.4** on a temporary copy of the lesson 0.5 project: compiling with `clang++ -c` and linking by hand, the `mian` link error, renaming the program in `CMakeLists.txt` and the CMake error for a missing source file. They check files and key messages, never Ninja's step counters such as `[3/4]`.
 
+`lesson_16.ps1` and `lesson_16.sh` check the CMake part of the lesson 1.6 diagnosis task: a `CMakeLists.txt` in which the program was renamed in `add_executable` only must fail at configuration (two `CMake Error` messages, for lines 5 and 6), and the corrected file must build a program called `board_games`. The C++ programs of lesson 1.6 are checked by `lesson_examples.py`.
+
 ## Running it locally
 
 From the repository root, with the official toolchain installed. Use the full path to upstream `clang++`, so that CMake can't pick another compiler:
