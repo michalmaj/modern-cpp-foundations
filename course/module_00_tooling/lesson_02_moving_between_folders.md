@@ -297,4 +297,4 @@ Bo `..` oznacza katalog `krakow`, a `ls` pokazuje to, co jest **w środku** wska
 
 Katalog `plan-podrozy` możesz zostawić albo usunąć w oknie plików.
 
-**Poprzednia lekcja:** [Lekcja 0.1: Pliki, katalogi i pierwsze spotkanie z terminalem](lesson_01_files_and_terminal.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 0.1: Pliki, katalogi i pierwsze spotkanie z terminalem](lesson_01_files_and_terminal.md) · **Następna lekcja:** [Lekcja 0.3: Co się dzieje, gdy wpisujesz polecenie?](lesson_03_commands_and_programs.md) · [Opis kursu](../../README.md)

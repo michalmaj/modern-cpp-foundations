@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** The first two lessons are available, and more lessons are in preparation. See [Course status](#course-status) for details.
+> **Course status: in preparation.** The first three lessons are available, and more lessons are in preparation. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -92,6 +92,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Course overview (this file) | Ready |
 | Module 0, lesson 1: [Files, folders and your first look at the terminal](course/module_00_tooling/lesson_01_files_and_terminal.en.md) | Available (pilot version) |
 | Module 0, lesson 2: [Moving between folders](course/module_00_tooling/lesson_02_moving_between_folders.en.md) | Available (pilot version) |
+| Module 0, lesson 3: [What happens when you type a command?](course/module_00_tooling/lesson_03_commands_and_programs.en.md) | Available (pilot version) |
 | Remaining Module 0 lessons: setting up your computer and first steps | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -103,6 +104,7 @@ Work through the lessons in order, starting with the first:
 
 1. **[Lesson 0.1: Files, folders and your first look at the terminal](course/module_00_tooling/lesson_01_files_and_terminal.en.md)**
 2. **[Lesson 0.2: Moving between folders](course/module_00_tooling/lesson_02_moving_between_folders.en.md)**
+3. **[Lesson 0.3: What happens when you type a command?](course/module_00_tooling/lesson_03_commands_and_programs.en.md)**
 
 All you need is a computer running Windows, macOS or Linux. You don't need to install anything.
 

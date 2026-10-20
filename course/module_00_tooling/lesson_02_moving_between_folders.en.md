@@ -297,4 +297,4 @@ An absolute path starts from the root folder, so it describes a place in the who
 
 You can keep the `trip-plan` folder, or delete it in the file window.
 
-**Previous lesson:** [Lesson 0.1: Files, folders and your first look at the terminal](lesson_01_files_and_terminal.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 0.1: Files, folders and your first look at the terminal](lesson_01_files_and_terminal.en.md) · **Next lesson:** [Lesson 0.3: What happens when you type a command?](lesson_03_commands_and_programs.en.md) · [Course overview](../../README.en.md)
