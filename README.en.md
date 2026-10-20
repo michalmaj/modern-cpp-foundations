@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** The first four lessons are available, and more lessons are in preparation. See [Course status](#course-status) for details.
+> **Course status: in preparation.** The first five lessons are available, and more lessons are in preparation. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -94,7 +94,8 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 0, lesson 2: [Moving between folders](course/module_00_tooling/lesson_02_moving_between_folders.en.md) | Available (pilot version) |
 | Module 0, lesson 3: [What happens when you type a command?](course/module_00_tooling/lesson_03_commands_and_programs.en.md) | Available (pilot version) |
 | Module 0, lesson 4: [Set up your workshop: installing the tools](course/module_00_tooling/lesson_04_installing_the_tools.en.md) | Available (pilot version; the installation steps have not yet been checked on every system) |
-| Remaining Module 0 lessons: setting up your computer and first steps | In preparation |
+| Module 0, lesson 5: [Your first working program in CLion](course/module_00_tooling/lesson_05_first_program_in_clion.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
+| Further Module 0 lessons | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
 | Courses B and C | Planned, repositories do not exist yet |
@@ -107,10 +108,11 @@ Work through the lessons in order, starting with the first:
 2. **[Lesson 0.2: Moving between folders](course/module_00_tooling/lesson_02_moving_between_folders.en.md)**
 3. **[Lesson 0.3: What happens when you type a command?](course/module_00_tooling/lesson_03_commands_and_programs.en.md)**
 4. **[Lesson 0.4: Set up your workshop: installing the tools](course/module_00_tooling/lesson_04_installing_the_tools.en.md)**
+5. **[Lesson 0.5: Your first working program in CLion](course/module_00_tooling/lesson_05_first_program_in_clion.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
-The next Module 0 lessons are in preparation. In them you will check that everything works by running your first program.
+More lessons are in preparation. In them you will also build the same program without CLion, from the terminal.
 
 ## What comes next
 

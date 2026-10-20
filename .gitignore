@@ -2,7 +2,7 @@
 /decisions/
 
 # Local IDE and CMake settings
-/.idea/
+.idea/
 /.vs/
 /.vscode/
 /CMakeUserPresets.json

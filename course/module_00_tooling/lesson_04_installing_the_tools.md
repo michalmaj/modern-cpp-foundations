@@ -264,4 +264,4 @@ CMake opisze, jak zbudować projekt, a Ninja wykona kroki budowania. Razem zamie
 - Umiesz sprawdzić ich wersje i rozpoznać, czy używasz właściwego kompilatora.
 - Po instalacji otwieraj nowy terminal.
 
-**Poprzednia lekcja:** [Lekcja 0.3: Co się dzieje, gdy wpisujesz polecenie?](lesson_03_commands_and_programs.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 0.3: Co się dzieje, gdy wpisujesz polecenie?](lesson_03_commands_and_programs.md) · **Następna lekcja:** [Lekcja 0.5: Twój pierwszy działający program w CLionie](lesson_05_first_program_in_clion.md) · [Opis kursu](../../README.md)

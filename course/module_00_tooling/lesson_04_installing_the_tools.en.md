@@ -264,4 +264,4 @@ CMake will describe how to build the project, and Ninja will carry out the build
 - You can check their versions and tell whether you are using the right compiler.
 - After installing something, open a new terminal.
 
-**Previous lesson:** [Lesson 0.3: What happens when you type a command?](lesson_03_commands_and_programs.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 0.3: What happens when you type a command?](lesson_03_commands_and_programs.en.md) · **Next lesson:** [Lesson 0.5: Your first working program in CLion](lesson_05_first_program_in_clion.en.md) · [Course overview](../../README.en.md)

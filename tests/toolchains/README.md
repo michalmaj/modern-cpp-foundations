@@ -21,6 +21,8 @@ These are different things. A green run of this check proves only the first.
   - `program_output` checks the program's output, including whether assertions are compiled in. That proves whether Debug or Release was actually built.
 - **The program prints** the compiler version, the C++ standard library it was built against, and `__cplusplus`.
 
+The same workflow also builds the learner project of lesson 0.5 (`course/module_00_tooling/lesson_05_first_program`) in Debug, runs it, and checks the behaviour the lesson describes: after editing `main.cpp` without building, the existing executable still prints the old message; after building it prints the new one; a second build without changes does no work. It works on a copy in `build/`, so the tracked lesson files are never changed.
+
 ## Running it locally
 
 From the repository root, with the official toolchain installed. Use the full path to upstream `clang++`, so that CMake can't pick another compiler:
