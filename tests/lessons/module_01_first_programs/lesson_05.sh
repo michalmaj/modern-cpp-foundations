@@ -3,7 +3,8 @@
 # (course/module_01_first_programs/lesson_05_save_the_history_of_your_work{.md,.en.md}).
 # Run with bash or zsh:  bash lesson_05.sh   or   zsh lesson_05.sh
 #
-# Note for zsh: never name a variable `path` (zsh ties it to PATH).
+# Notes for zsh: never name a variable `path` (zsh ties it to PATH), and write
+# "${var}:x" rather than "$var:x" (zsh reads ":x" after a name as a modifier).
 # Everything happens in a fake home folder inside a temporary folder. Git's
 # global configuration is pointed at an empty file there (GIT_CONFIG_GLOBAL),
 # so the runner's own Git settings are neither read nor changed. Checks look
@@ -131,7 +132,7 @@ old=$(git show HEAD~1:cinema_ticket/main.cpp)
 case "$old" in *'Row 7, seat 12'*) pass 'git show HEAD~1:cinema_ticket/main.cpp shows the earlier version' ;;
     *) fail 'git show HEAD~1:cinema_ticket/main.cpp shows the earlier version' "$old" ;; esac
 first=$(git log --reverse --format=%h | head -1)
-case "$(git show "$first:cinema_ticket/main.cpp")" in *'Row 7, seat 12'*) pass 'git show <first commit>:cinema_ticket/main.cpp works with the short id' ;;
+case "$(git show "${first}:cinema_ticket/main.cpp")" in *'Row 7, seat 12'*) pass 'git show <first commit>:cinema_ticket/main.cpp works with the short id' ;;
     *) fail 'git show <first commit>:cinema_ticket/main.cpp works with the short id' ;; esac
 expect_ok 'the working file still has the new version' grep -q 'Row 9, seat 5' cinema_ticket/main.cpp
 
