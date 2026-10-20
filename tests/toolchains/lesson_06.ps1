@@ -1,6 +1,7 @@
-# Runs the Windows PowerShell commands of lesson 0.6, exactly as the lesson
-# shows them, in a copy of the lesson 0.5 project. Used by the Toolchains
-# workflow in both Windows PowerShell 5.1 and PowerShell 7.
+# Runs the Windows PowerShell commands of lesson 0.6 (also used in lesson 0.5,
+# section 8), exactly as the lessons show them, in a copy of the lesson 0.5
+# project. Used by the Toolchains workflow in both Windows PowerShell 5.1 and
+# PowerShell 7.
 # Run from the repository root:  powershell -NoProfile -ExecutionPolicy Bypass -File tests\toolchains\lesson_06.ps1
 # Continue: native tools may write to stderr; exit codes are checked explicitly.
 $ErrorActionPreference = 'Continue'
@@ -42,10 +43,6 @@ try {
     Check ((.\first_program_direct.exe) -eq $message) 'after cmake --build: direct program still prints the old message'
     clang++ -std=c++20 main.cpp -o first_program_direct.exe
     Check ((.\first_program_direct.exe) -eq 'Three programs, one source.') 'after compiling again: direct program prints the new message'
-
-    # Lesson 0.5, section 8 writes the compiler argument with quotes around the path only.
-    cmake -S . -B build-05-form -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER="C:\Program Files\LLVM\bin\clang++.exe" 2>&1 | Out-Null
-    Check ($LASTEXITCODE -eq 0) 'lesson 0.5 quoting form (-DCMAKE_CXX_COMPILER="C:\...") also works'
 
     # Lesson section 8: what a learner sees without the quotes (recorded, not compared in full).
     $unquoted = (cmake -S . -B build-unquoted -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=C:\Program Files\LLVM\bin\clang++.exe 2>&1) -join "`n"

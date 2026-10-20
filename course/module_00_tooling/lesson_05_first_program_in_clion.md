@@ -99,6 +99,8 @@ Zastąp oba pliki, a nie tylko `main.cpp`: plik `CMakeLists.txt` z kreatora moż
 
 CLion wczyta projekt. Postęp zobaczysz w oknie **CMake** na dole ekranu.
 
+Przy tym pierwszym wczytaniu CLion użyje swojego domyślnego toolchainu, więc w oknie CMake może pojawić się inny kompilator, na przykład `GNU` albo `AppleClang`. To normalne: właściwy kompilator wybierzesz w punkcie 4, a sprawdzisz go w punkcie 5.
+
 ## 4. Wskaż właściwy toolchain
 
 Otwórz ustawienia: na Windowsie i Ubuntu **File | Settings**, a na macOS **CLion | Settings**. Przejdź do **Build, Execution, Deployment | Toolchains** i kliknij **+**.
@@ -172,7 +174,7 @@ Sprawdź też konfigurację: na samej górze okna CMake jest polecenie, którym 
 [4/4] Linking CXX executable first_program
 ```
 
-Liczby w nawiasach mogą być inne, a wcześniejsze kroki przygotowują budowanie. Na Windowsie nazwy plików kończą się na `.obj` i `.exe`. W katalogu projektu pojawił się katalog `cmake-build-debug`, a w nim plik wykonywalny `first_program` (na Windowsie `first_program.exe`). To jest Twój program.
+Liczby w nawiasach mogą być inne, a wcześniejsze kroki przygotowują budowanie. Na Windowsie nazwy plików kończą się na `.obj` i `.exe`. W katalogu projektu pojawił się katalog budowania CLiona, zwykle `cmake-build-debug` (jeśli u Ciebie nazywa się trochę inaczej, w dalszych poleceniach wpisuj tę nazwę), a w nim plik wykonywalny `first_program` (na Windowsie `first_program.exe`). To jest Twój program.
 
 **Uruchamianie.** Na pasku narzędzi u góry wybrana jest konfiguracja uruchomienia `first_program`. Kliknij obok niej zielony przycisk **Run** (▶). W oknie **Run** pojawi się:
 
@@ -215,11 +217,11 @@ Sprawdź, wpisując to samo polecenie co w kroku 1. Zobaczysz **stary** komunika
 Ten sam projekt da się zbudować w zwykłym terminalu, bez CLiona. Nie musisz tego teraz robić: dokładnie przejdziemy to w [następnej lekcji](lesson_06_same_program_without_clion.md). Dla ciekawych: w katalogu projektu wystarczą dwa polecenia.
 
 ```text
-cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=<ścieżka do clang++>
-cmake --build build
+cmake -S . -B build-terminal -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=<ścieżka do clang++>
+cmake --build build-terminal
 ```
 
-Jako `<ścieżka do clang++>` wpisz tę samą ścieżkę co w toolchainie: na Windowsie `"C:\Program Files\LLVM\bin\clang++.exe"` (w cudzysłowie, bo zawiera spację), na macOS ścieżkę z Homebrew, na Ubuntu `/usr/bin/clang++-22`. Program pojawi się w katalogu `build`.
+Jako `<ścieżka do clang++>` wpisz tę samą ścieżkę co w toolchainie: na macOS ścieżkę z Homebrew, na Ubuntu `/usr/bin/clang++-22`. Na Windowsie ścieżka zawiera spację, więc weź w cudzysłów cały ostatni element: `"-DCMAKE_CXX_COMPILER=C:\Program Files\LLVM\bin\clang++.exe"`. Program pojawi się w katalogu `build-terminal`, tym samym, którego użyjesz w lekcji 0.6.
 
 ## 9. Misja: Twój komunikat
 
