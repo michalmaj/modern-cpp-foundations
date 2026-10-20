@@ -6,7 +6,8 @@ name: Toolchains
 #
 # It also builds the lesson 0.5 project and checks the behaviour the lesson
 # describes (an edit changes nothing until the program is rebuilt), and runs
-# the exact terminal commands of lesson 0.6 (tests/toolchains/lesson_06.*).
+# the exact terminal commands of lessons 0.6 and 1.4 (tests/toolchains/lesson_06.*,
+# tests/toolchains/lesson_14.*).
 #
 # From Module 1 on, it builds and runs the C++ examples published in the
 # lessons and compares their output with the lesson text, checks that the
@@ -121,6 +122,12 @@ jobs:
       - name: Lesson 0.6 commands (PowerShell 7)
         run: pwsh -NoProfile -File tests\toolchains\lesson_06.ps1
 
+      - name: Lesson 1.4 commands (Windows PowerShell 5.1)
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File tests\toolchains\lesson_14.ps1
+
+      - name: Lesson 1.4 commands (PowerShell 7)
+        run: pwsh -NoProfile -File tests\toolchains\lesson_14.ps1
+
       - name: Lesson code examples (build, run, compare with the lesson text)
         run: |
           $PSNativeCommandUseErrorActionPreference = $true
@@ -224,6 +231,9 @@ jobs:
         # first, as on a learner's computer that followed lesson 0.4.
         run: PATH="/usr/bin:$PATH" bash tests/toolchains/lesson_06.sh
 
+      - name: Lesson 1.4 commands (bash)
+        run: PATH="/usr/bin:$PATH" bash tests/toolchains/lesson_14.sh
+
       - name: Lesson code examples (build, run, compare with the lesson text)
         run: |
           python3 --version
@@ -319,6 +329,9 @@ jobs:
 
       - name: Lesson 0.6 commands (zsh)
         run: zsh tests/toolchains/lesson_06.sh
+
+      - name: Lesson 1.4 commands (zsh)
+        run: zsh tests/toolchains/lesson_14.sh
 
       - name: Lesson code examples (build, run, compare with the lesson text)
         run: |
