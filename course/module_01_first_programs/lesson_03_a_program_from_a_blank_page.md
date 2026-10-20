@@ -119,7 +119,7 @@ Press "1" to start.
 
 Pierwsza próba, która się nasuwa:
 
-<!-- broken: press_one_plain at=4:26 error=^expected ';' after expression$ -->
+<!-- broken: press_one_plain at=4:26 errors=2 error=^expected ';' after expression$ -->
 ```cpp
 #include <iostream>
 
@@ -138,6 +138,8 @@ Przejdź przez pętlę z lekcji 1.2. Komunikat mówi o brakującym średniku, a 
 Kompilator czyta napis od `"` do **następnego** `"`. Napis `"Press "` kończy się więc na drugim cudzysłowie. Zaraz za nim stoi `1`, a kompilator oczekiwał w tym miejscu końca instrukcji. Stąd `expected ';' after expression` na pozycji, gdzie zaczyna się `1`.
 
 Komunikat dobrze wskazuje **miejsce**, ale jego propozycja, czyli średnik, nie jest tu rozwiązaniem. Hipoteza musi wyjaśniać przyczynę: drugi cudzysłów zakończył napis za wcześnie.
+
+Ten sam problem daje drugi błąd tuż obok, na pozycji 27, i dwie linijki `warning:` (ostrzeżenie: kompilator zauważył coś podejrzanego, ale ostrzeżenie samo nie przerywa budowania). Wszystkie mają jedną przyczynę, jak w lekcji 1.2: popraw ją, a znikną razem.
 
 </details>
 

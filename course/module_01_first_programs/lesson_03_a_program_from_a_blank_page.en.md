@@ -119,7 +119,7 @@ Press "1" to start.
 
 The first attempt that comes to mind:
 
-<!-- broken: press_one_plain at=4:26 error=^expected ';' after expression$ -->
+<!-- broken: press_one_plain at=4:26 errors=2 error=^expected ';' after expression$ -->
 ```cpp
 #include <iostream>
 
@@ -138,6 +138,8 @@ Go through the loop from lesson 1.2. The message talks about a missing semicolon
 The compiler reads text from a `"` to the **next** `"`. So the text `"Press "` ends at the second quote. Right after it stands `1`, and the compiler expected the end of the statement there. Hence `expected ';' after expression` at the position where `1` begins.
 
 The message points to the right **place**, but its suggestion, a semicolon, is not the solution here. The hypothesis has to explain the cause: the second quote ended the text too early.
+
+The same problem gives a second error right next to it, at position 27, and two `warning:` lines (a warning: the compiler noticed something suspicious, but a warning alone doesn't stop the build). They all have one cause, as in lesson 1.2: fix it, and they disappear together.
 
 </details>
 
