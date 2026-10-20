@@ -24,6 +24,7 @@ tests/lessons/
   module_00_tooling/
     lesson_01.sh / .ps1     checks for lesson 0.1
     lesson_02.sh / .ps1     checks for lesson 0.2
+    lesson_03.sh / .ps1     checks for lesson 0.3
 ```
 
 - **`.sh`** files cover the macOS and Linux instructions and run in both **bash** and **zsh**.
