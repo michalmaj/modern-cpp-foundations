@@ -1,0 +1,221 @@
+name: Toolchains
+
+# Builds and tests tests/toolchains/cpp20_smoke with the official course
+# toolchain (upstream LLVM/Clang via the clang++ driver, CMake, Ninja, CTest)
+# on Windows, Ubuntu 24.04 and macOS, in Debug and Release.
+#
+# This proves that the toolchain works on a GitHub-hosted runner. It does NOT
+# prove a clean installation on a student computer (runners come with many
+# preinstalled tools), and it says nothing about CLion.
+
+on:
+  pull_request:
+    paths:
+      - 'tests/toolchains/**'
+      - '.github/workflows/toolchains.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'tests/toolchains/**'
+      - '.github/workflows/toolchains.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  # The LLVM version used in CI. Not the course pin, which is still undecided.
+  LLVM_VERSION: '22.1.8'
+  LLVM_MAJOR: '22'
+  SOURCE_DIR: tests/toolchains/cpp20_smoke
+
+jobs:
+  windows:
+    name: Windows / clang++ (MSVC ABI)
+    runs-on: windows-2025
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install LLVM with Chocolatey
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          # The image ships an older LLVM; install exactly the version under test.
+          choco upgrade llvm --version=$env:LLVM_VERSION --allow-downgrade -y --no-progress
+          'C:\Program Files\LLVM\bin' | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Identify the environment
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          "os: $([System.Runtime.InteropServices.RuntimeInformation]::OSDescription)"
+          "architecture: $([System.Runtime.InteropServices.RuntimeInformation]::OSArchitecture)"
+          "runner image: $env:ImageOS $env:ImageVersion"
+          foreach ($tool in 'clang++', 'cmake', 'ninja') { "${tool}: $((Get-Command $tool).Source)" }
+          clang++ --version
+          cmake --version
+          "ninja $(ninja --version)"
+          'Visual Studio installations:'
+          & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -products * -format text -property displayName
+          & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -products * -property installationPath
+          # What clang++ uses for headers, libraries and linking (plain PowerShell, no Developer shell).
+          'clang++ driver plan (include and library folders, linker):'
+          $plan = (clang++ -### -x c++ -std=c++20 NUL -o smoke.exe 2>&1) -join "`n"
+          [regex]::Matches($plan, '"(-internal-isystem|-libpath:)[^"]*"( "[^"]*")?|"[^"]*(lld-link|link)\.exe"') | ForEach-Object { "  $($_.Value)" }
+
+      - name: Build and test (Debug and Release)
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          $compiler = (Get-Command clang++).Source
+          foreach ($config in 'Debug', 'Release') {
+            $build = "build/toolchain-smoke/$config"
+            "=== $config"
+            cmake -S $env:SOURCE_DIR -B $build -G Ninja "-DCMAKE_BUILD_TYPE=$config" "-DCMAKE_CXX_COMPILER=$compiler"
+            Select-String -Path "$build/CMakeCache.txt" -Pattern '^CMAKE_(CXX_COMPILER|LINKER|AR|MAKE_PROGRAM|BUILD_TYPE|RC_COMPILER):' |
+              ForEach-Object { "  $($_.Line)" }
+            cmake --build $build --verbose
+            ctest --test-dir $build --output-on-failure
+            & "$build/cpp20_smoke.exe"
+          }
+
+      - name: The project rejects other compilers
+        run: |
+          # clang-cl is installed with LLVM but is not the course compiler; configuration must stop.
+          $out = (cmake -S $env:SOURCE_DIR -B build/toolchain-smoke/reject-clang-cl -G Ninja -DCMAKE_CXX_COMPILER=clang-cl 2>&1) -join "`n"
+          $out
+          if ($LASTEXITCODE -eq 0) { throw 'configuration with clang-cl unexpectedly succeeded' }
+          if ($out -notmatch 'Expected the clang\+\+ driver') { throw 'configuration failed, but not with the expected toolchain check' }
+          'ok: clang-cl rejected'
+          # The failed cmake call above sets $LASTEXITCODE, which the step would otherwise return.
+          exit 0
+
+  ubuntu:
+    name: Ubuntu 24.04 / clang++ from apt.llvm.org
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install LLVM from apt.llvm.org, CMake and Ninja from Ubuntu
+        run: |
+          set -euo pipefail
+          # The official apt.llvm.org repository for Ubuntu 24.04 (noble), LLVM ${LLVM_MAJOR} branch.
+          wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted.gpg.d/apt.llvm.org.asc >/dev/null
+          echo "deb https://apt.llvm.org/noble/ llvm-toolchain-noble-${LLVM_MAJOR} main" | sudo tee /etc/apt/sources.list.d/llvm-${LLVM_MAJOR}.list
+          sudo apt-get update -q
+          sudo apt-get install -y -q "clang-${LLVM_MAJOR}" cmake ninja-build
+
+      - name: Identify the environment
+        run: |
+          set -euo pipefail
+          echo "os: $(. /etc/os-release && echo "$PRETTY_NAME")"
+          echo "architecture: $(uname -m)"
+          echo "runner image: ${ImageOS:-?} ${ImageVersion:-?}"
+          # The runner also has other compilers and a newer CMake in /usr/local/bin;
+          # this job calls the tools under test by their full paths.
+          echo "clang++ under test: $(readlink -f /usr/bin/clang++-${LLVM_MAJOR})"
+          echo "default clang++ on PATH (not used): $(command -v clang++ || echo none) $(clang++ --version 2>/dev/null | head -1 || true)"
+          echo "default cmake on PATH (not used): $(command -v cmake)"
+          "/usr/bin/clang++-${LLVM_MAJOR}" --version
+          /usr/bin/cmake --version
+          echo "ninja $(/usr/bin/ninja --version)"
+          apt-cache policy "clang-${LLVM_MAJOR}" | sed -n '1,3p'
+          # Where clang++ finds the C++ standard library and which linker it runs.
+          echo 'GCC installation selected by clang++ (provides libstdc++):'
+          "/usr/bin/clang++-${LLVM_MAJOR}" -v -x c++ -E /dev/null -o /dev/null 2>&1 | grep -E 'Selected GCC|Found candidate GCC|^ /usr' | sed 's/^/  /'
+          echo "linker: $("/usr/bin/clang++-${LLVM_MAJOR}" -### -x c++ /dev/null -o a.out 2>&1 | grep -oE '"[^"]*/(ld|ld\.lld|ld\.bfd|ld\.gold)"' | head -1)"
+          ld --version | head -1
+
+      - name: Build and test (Debug and Release)
+        run: |
+          set -euo pipefail
+          for config in Debug Release; do
+            build="build/toolchain-smoke/$config"
+            echo "=== $config"
+            /usr/bin/cmake -S "$SOURCE_DIR" -B "$build" -G Ninja \
+              -DCMAKE_BUILD_TYPE="$config" \
+              -DCMAKE_CXX_COMPILER="/usr/bin/clang++-${LLVM_MAJOR}" \
+              -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja
+            grep -E '^CMAKE_(CXX_COMPILER|LINKER|AR|MAKE_PROGRAM|BUILD_TYPE):' "$build/CMakeCache.txt" | sed 's/^/  /'
+            /usr/bin/cmake --build "$build" --verbose
+            /usr/bin/ctest --test-dir "$build" --output-on-failure
+            "$build/cpp20_smoke"
+            echo "shared libraries used by the program:"
+            ldd "$build/cpp20_smoke" | sed 's/^/  /'
+          done
+
+      - name: The project rejects other compilers
+        run: |
+          # expect_rejected COMPILER MESSAGE: configuration must stop with our check's message.
+          expect_rejected() {
+            if out=$(/usr/bin/cmake -S "$SOURCE_DIR" -B "build/toolchain-smoke/reject-$(basename "$1")" -G Ninja \
+                -DCMAKE_CXX_COMPILER="$1" -DCMAKE_MAKE_PROGRAM=/usr/bin/ninja 2>&1); then
+              echo "$out"; echo "FAIL: configuration with $1 unexpectedly succeeded"; return 1
+            fi
+            echo "$out" | grep -q "$2" || { echo "$out"; echo "FAIL: $1 rejected, but not by the toolchain check"; return 1; }
+            echo "ok: $1 rejected ($2)"
+          }
+          expect_rejected /usr/bin/g++ 'Expected upstream LLVM Clang'
+          expect_rejected /usr/bin/clang++-18 'Expected Clang 22 or newer'
+
+  macos:
+    name: macOS / clang++ from Homebrew llvm@22
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install LLVM, CMake and Ninja with Homebrew
+        run: |
+          set -euo pipefail
+          # Homebrew's `llvm` formula is already LLVM 23; the 22 series is the versioned llvm@22.
+          brew install "llvm@${LLVM_MAJOR}" cmake ninja
+
+      - name: Identify the environment
+        run: |
+          set -euo pipefail
+          llvm_prefix=$(brew --prefix "llvm@${LLVM_MAJOR}")
+          echo "os: $(sw_vers -productName) $(sw_vers -productVersion) ($(sw_vers -buildVersion))"
+          echo "architecture: $(uname -m)"
+          echo "runner image: ${ImageOS:-?} ${ImageVersion:-?}"
+          echo "clang++ under test: $llvm_prefix/bin/clang++"
+          "$llvm_prefix/bin/clang++" --version
+          echo "AppleClang for contrast (not used): $(/usr/bin/clang++ --version | head -1)"
+          echo "cmake: $(command -v cmake)"; cmake --version | head -1
+          echo "ninja: $(command -v ninja) $(ninja --version)"
+          echo "Xcode / Command Line Tools: $(xcode-select -p)"
+          echo "SDK: $(xcrun --show-sdk-path) (version $(xcrun --show-sdk-version))"
+          echo "clang++ configuration files and include folders:"
+          "$llvm_prefix/bin/clang++" -v -x c++ -E /dev/null -o /dev/null 2>&1 | grep -E 'Configuration file|^ /' | sed 's/^/  /'
+          echo "linker: $("$llvm_prefix/bin/clang++" -### -x c++ /dev/null -o a.out 2>&1 | grep -oE '"[^"]*/ld[^"]*"' | head -1)"
+          ld -v 2>&1 | head -1
+
+      - name: Build and test (Debug and Release)
+        run: |
+          set -euo pipefail
+          llvm_prefix=$(brew --prefix "llvm@${LLVM_MAJOR}")
+          for config in Debug Release; do
+            build="build/toolchain-smoke/$config"
+            echo "=== $config"
+            cmake -S "$SOURCE_DIR" -B "$build" -G Ninja \
+              -DCMAKE_BUILD_TYPE="$config" \
+              -DCMAKE_CXX_COMPILER="$llvm_prefix/bin/clang++"
+            grep -E '^CMAKE_(CXX_COMPILER|LINKER|AR|MAKE_PROGRAM|BUILD_TYPE|OSX_SYSROOT):' "$build/CMakeCache.txt" | sed 's/^/  /'
+            cmake --build "$build" --verbose
+            ctest --test-dir "$build" --output-on-failure
+            "$build/cpp20_smoke"
+            echo "shared libraries used by the program:"
+            otool -L "$build/cpp20_smoke" | sed 's/^/  /'
+          done
+
+      - name: The project rejects other compilers
+        run: |
+          # AppleClang is what /usr/bin/clang++ runs; configuration must stop.
+          if out=$(cmake -S "$SOURCE_DIR" -B build/toolchain-smoke/reject-appleclang -G Ninja \
+              -DCMAKE_CXX_COMPILER=/usr/bin/clang++ 2>&1); then
+            echo "$out"; echo 'FAIL: configuration with AppleClang unexpectedly succeeded'; exit 1
+          fi
+          echo "$out" | grep -q 'found AppleClang' || { echo "$out"; echo 'FAIL: rejected, but not by the toolchain check'; exit 1; }
+          echo 'ok: AppleClang rejected'
