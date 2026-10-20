@@ -320,7 +320,7 @@ An example solution is in [Example solutions](#example-solutions). Look there on
 
 ## 7. When something goes differently
 
-When the build fails, CLion shows the compiler's messages in the **Build** window. **Read them from the top:** the first `error:` message usually points to the real cause. Reading these messages carefully is the topic of lesson 1.2.
+When the build fails, CLion shows the compiler's messages in the **Build** window. **Read them from the top** and find the first piece of information that points to a place in your code: the file `main.cpp` and a line number. Start looking for the cause there. [Lesson 1.2](lesson_02_when_the_compiler_complains.en.md) shows how to read these messages.
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -456,4 +456,4 @@ Three lines of output are three statements, in the same order. Each text ends wi
 
 </details>
 
-**Previous lesson:** [Lesson 0.6: The same program without CLion](../module_00_tooling/lesson_06_same_program_without_clion.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 0.6: The same program without CLion](../module_00_tooling/lesson_06_same_program_without_clion.en.md) · **Next lesson:** [Lesson 1.2: When the compiler complains](lesson_02_when_the_compiler_complains.en.md) · [Course overview](../../README.en.md)

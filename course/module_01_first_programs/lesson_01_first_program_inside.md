@@ -320,7 +320,7 @@ Przykładowe rozwiązanie jest w części [Przykładowe rozwiązania](#przykład
 
 ## 7. Gdy coś pójdzie inaczej
 
-Gdy budowanie się nie udaje, CLion pokazuje komunikaty kompilatora w oknie **Build**. **Czytaj je od początku:** pierwszy komunikat `error:` zwykle wskazuje prawdziwą przyczynę. Dokładne czytanie takich komunikatów to temat lekcji 1.2.
+Gdy budowanie się nie udaje, CLion pokazuje komunikaty kompilatora w oknie **Build**. **Czytaj je od początku** i znajdź pierwszą informację, która wskazuje miejsce w Twoim kodzie: plik `main.cpp` i numer linijki. Od tego miejsca zacznij szukać przyczyny. Jak czytać takie komunikaty, pokaże [lekcja 1.2](lesson_02_when_the_compiler_complains.md).
 
 | Co widzisz | Co to znaczy | Co zrobić |
 |---|---|---|
@@ -456,4 +456,4 @@ Trzy linijki wyniku to trzy instrukcje, w tej samej kolejności. Każdy napis ko
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 0.6: Ten sam program bez CLiona](../module_00_tooling/lesson_06_same_program_without_clion.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 0.6: Ten sam program bez CLiona](../module_00_tooling/lesson_06_same_program_without_clion.md) · **Następna lekcja:** [Lekcja 1.2: Gdy kompilator protestuje](lesson_02_when_the_compiler_complains.md) · [Opis kursu](../../README.md)
