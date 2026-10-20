@@ -22,7 +22,10 @@ Checks:
   * marked blocks are ASCII only, and the Polish lesson (X.md) and the English one (X.en.md)
     contain the same marked blocks, with the same markers, in the same order;
   * each example and each broken program is built as main.cpp of the lesson 0.5 project (its
-    CMakeLists.txt) with CMake, Ninja and the given compiler, with warnings as errors.
+    CMakeLists.txt) with CMake, Ninja and the given compiler. Examples are built with warnings
+    as errors; broken programs with the project's own flags only, exactly as a learner builds
+    them, so that the checked messages are the ones the learner sees (some messages are
+    warnings on one system and errors on another).
     The configure step must succeed and report Clang 22 or newer, so that a broken environment
     is never mistaken for the expected compile error.
   * an example must build, exit with 0 (or its exit=N), print nothing to stderr, and print exactly the expected
@@ -143,7 +146,7 @@ def run(command):
     return subprocess.run(command, capture_output=True, text=True, encoding='utf-8', errors='replace')
 
 
-def build(lesson, name, code, args):
+def build(lesson, name, code, args, flags=WARNINGS):
     """Configures and builds a copy of the project with CODE as main.cpp.
     Returns (build directory, build result), or None when configuring failed."""
     work = pathlib.Path('build/lesson-examples') / lesson / name
@@ -154,7 +157,7 @@ def build(lesson, name, code, args):
     # newline='\n': the same bytes on every system, as in the lesson.
     (src / 'main.cpp').write_text(code, encoding='ascii', newline='\n')
     configure = [args.cmake, '-S', str(src), '-B', str(work / 'build'), '-G', 'Ninja',
-                 '-DCMAKE_BUILD_TYPE=Debug', f'-DCMAKE_CXX_COMPILER={args.cxx}', f'-DCMAKE_CXX_FLAGS={WARNINGS}']
+                 '-DCMAKE_BUILD_TYPE=Debug', f'-DCMAKE_CXX_COMPILER={args.cxx}', f'-DCMAKE_CXX_FLAGS={flags}']
     if args.make_program:
         configure.append(f'-DCMAKE_MAKE_PROGRAM={args.make_program}')
     result = run(configure)
@@ -197,7 +200,7 @@ def check_example(lesson, name, code, exit_code, expected, args):
 
 
 def check_broken(lesson, name, code, expectation, args):
-    built = build(lesson, name, code, args)
+    built = build(lesson, name, code, args, flags='')
     if not built:
         return
     _, result = built
