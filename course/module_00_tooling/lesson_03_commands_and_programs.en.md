@@ -222,4 +222,4 @@ No. Source code is text for people. First a compiler has to turn it into an exec
 - Programs can be started by name because the shell looks for them in the folders on the `PATH` list.
 - **Source code** is text written by a person. A **compiler** turns it into a program.
 
-**Previous lesson:** [Lesson 0.2: Moving between folders](lesson_02_moving_between_folders.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 0.2: Moving between folders](lesson_02_moving_between_folders.en.md) · **Next lesson:** [Lesson 0.4: Set up your workshop: installing the tools](lesson_04_installing_the_tools.en.md) · [Course overview](../../README.en.md)
