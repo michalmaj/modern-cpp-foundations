@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** No lessons have been published yet. See [Course status](#course-status) for details.
+> **Course status: in preparation.** The first lesson is available, and more lessons are in preparation. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -90,16 +90,21 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Item | Status |
 |---|---|
 | Course overview (this file) | Ready |
-| Setting up your computer and first steps (Module 0) | In preparation |
+| Module 0, lesson 1: [Files, folders and your first look at the terminal](course/module_00_tooling/lesson_01_files_and_terminal.en.md) | Available (pilot version) |
+| Remaining Module 0 lessons: setting up your computer and first steps | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
 | Courses B and C | Planned, repositories do not exist yet |
 
 ## How to start
 
-There are no lessons yet. When the first part of the course is published, you will find a link to it right here.
+Start with the first lesson:
 
-You will start by setting up your computer. You will learn about files, folders and the terminal, install the tools, and check that everything works by running your first program.
+**[Lesson 0.1: Files, folders and your first look at the terminal](course/module_00_tooling/lesson_01_files_and_terminal.en.md)**
+
+All you need is a computer running Windows, macOS or Linux. You don't need to install anything.
+
+The next Module 0 lessons are in preparation. In them you will install the tools and check that everything works by running your first program.
 
 ## What comes next
 

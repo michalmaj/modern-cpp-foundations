@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Lekcje nie zostały jeszcze opublikowane. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Dostępna jest pierwsza lekcja, kolejne są w przygotowaniu. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -90,16 +90,21 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Element | Stan |
 |---|---|
 | Opis kursu (ten plik) | Gotowy |
-| Przygotowanie komputera i pierwsze kroki (Moduł 0) | W przygotowaniu |
+| Moduł 0, lekcja 1: [Pliki, katalogi i pierwsze spotkanie z terminalem](course/module_00_tooling/lesson_01_files_and_terminal.md) | Dostępna (wersja pilotażowa) |
+| Pozostałe lekcje Modułu 0: przygotowanie komputera i pierwsze kroki | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
 | Kursy B i C | Planowane, repozytoria jeszcze nie istnieją |
 
 ## Jak zacząć
 
-Lekcji jeszcze nie ma. Gdy pojawi się pierwsza część kursu, link do niej znajdziesz właśnie tutaj.
+Zacznij od pierwszej lekcji:
 
-Nauka zacznie się od przygotowania komputera. Poznasz pliki, foldery i terminal, zainstalujesz narzędzia i sprawdzisz, czy wszystko działa, uruchamiając swój pierwszy program.
+**[Lekcja 0.1: Pliki, katalogi i pierwsze spotkanie z terminalem](course/module_00_tooling/lesson_01_files_and_terminal.md)**
+
+Potrzebujesz tylko komputera z Windows, macOS albo Linuksem. Nie musisz niczego instalować.
+
+Kolejne lekcje Modułu 0 są w przygotowaniu. Zainstalujesz w nich narzędzia i sprawdzisz, czy wszystko działa, uruchamiając swój pierwszy program.
 
 ## Co dalej po tym kursie
 
