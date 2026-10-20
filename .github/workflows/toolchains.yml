@@ -224,7 +224,8 @@ jobs:
 
       - name: The example check detects a wrong expected output
         run: |
-          set -uo pipefail
+          # GitHub runs bash with -e; this step expects a failing command, so turn -e off.
+          set +e -uo pipefail
           # A copy of the course with one character removed from the mission's expected output
           # (in both languages): the check must fail, and say why.
           work=$(mktemp -d); cp -R course tests "$work"; cd "$work"
