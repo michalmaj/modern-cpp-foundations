@@ -88,6 +88,8 @@ jobs:
           if ($LASTEXITCODE -eq 0) { throw 'configuration with clang-cl unexpectedly succeeded' }
           if ($out -notmatch 'Expected the clang\+\+ driver') { throw 'configuration failed, but not with the expected toolchain check' }
           'ok: clang-cl rejected'
+          # The failed cmake call above sets $LASTEXITCODE, which the step would otherwise return.
+          exit 0
 
   ubuntu:
     name: Ubuntu 24.04 / clang++ from apt.llvm.org
