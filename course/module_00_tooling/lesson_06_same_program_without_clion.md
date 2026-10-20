@@ -271,6 +271,6 @@ Na początku Modułu 0 terminal mógł być czymś zupełnie nowym. Teraz potraf
 
 ## Co dalej: Moduł 1
 
-W Module 1 zaczniesz naprawdę rozumieć i pisać kod w C++20. Dowiesz się, co znaczą linijki w `main.cpp`, i napiszesz pierwsze własne programy. **Moduł 1 jest w przygotowaniu.**
+W Module 1 zaczniesz naprawdę rozumieć i pisać kod w C++20. Dowiesz się, co znaczą linijki w `main.cpp`, i napiszesz pierwsze własne programy. Zacznij od [lekcji 1.1: Pierwszy program od środka](../module_01_first_programs/lesson_01_first_program_inside.md). Moduł 1 jest rozwijany: kolejne lekcje są w przygotowaniu.
 
-**Poprzednia lekcja:** [Lekcja 0.5: Twój pierwszy działający program w CLionie](lesson_05_first_program_in_clion.md) · **Następny moduł:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 0.5: Twój pierwszy działający program w CLionie](lesson_05_first_program_in_clion.md) · **Następna lekcja:** [Lekcja 1.1: Pierwszy program od środka](../module_01_first_programs/lesson_01_first_program_inside.md) · [Opis kursu](../../README.md)

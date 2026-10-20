@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Dostępny jest cały Moduł 0 (sześć lekcji, wersja pilotażowa). Moduł 1 jest w przygotowaniu. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Moduł 1 jest rozwijany: dostępna jest jego pierwsza lekcja. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -96,7 +96,8 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 0, lekcja 4: [Przygotuj warsztat: instalacja narzędzi](course/module_00_tooling/lesson_04_installing_the_tools.md) | Dostępna (wersja pilotażowa; instrukcje instalacji nie zostały jeszcze sprawdzone na każdym systemie) |
 | Moduł 0, lekcja 5: [Twój pierwszy działający program w CLionie](course/module_00_tooling/lesson_05_first_program_in_clion.md) | Dostępna (wersja pilotażowa; kroki w CLionie nie zostały jeszcze sprawdzone na każdym systemie) |
 | Moduł 0, lekcja 6: [Ten sam program bez CLiona](course/module_00_tooling/lesson_06_same_program_without_clion.md) | Dostępna (wersja pilotażowa) |
-| Moduł 1: pierwsze własne programy w C++20 | W przygotowaniu |
+| Moduł 1, lekcja 1: [Pierwszy program od środka](course/module_01_first_programs/lesson_01_first_program_inside.md) | Dostępna (wersja pilotażowa; kroki w CLionie nie zostały jeszcze sprawdzone na każdym systemie) |
+| Moduł 1: pozostałe lekcje (pierwsze własne programy w C++20) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
 | Kursy B i C | Planowane, repozytoria jeszcze nie istnieją |
@@ -111,10 +112,11 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 4. **[Lekcja 0.4: Przygotuj warsztat: instalacja narzędzi](course/module_00_tooling/lesson_04_installing_the_tools.md)**
 5. **[Lekcja 0.5: Twój pierwszy działający program w CLionie](course/module_00_tooling/lesson_05_first_program_in_clion.md)**
 6. **[Lekcja 0.6: Ten sam program bez CLiona](course/module_00_tooling/lesson_06_same_program_without_clion.md)**
+7. **[Lekcja 1.1: Pierwszy program od środka](course/module_01_first_programs/lesson_01_first_program_inside.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
-Po Module 0 przyjdzie Moduł 1, w którym zaczniesz pisać własny kod w C++20. Jest w przygotowaniu.
+Lekcja 1.1 otwiera Moduł 1, w którym zaczniesz czytać i pisać własny kod w C++20. Kolejne lekcje Modułu 1 są w przygotowaniu.
 
 ## Co dalej po tym kursie
 

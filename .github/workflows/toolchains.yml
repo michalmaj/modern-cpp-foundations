@@ -8,6 +8,10 @@ name: Toolchains
 # describes (an edit changes nothing until the program is rebuilt), and runs
 # the exact terminal commands of lesson 0.6 (tests/toolchains/lesson_06.*).
 #
+# From Module 1 on, it builds and runs the C++ examples published in the
+# lessons and compares their output with the lesson text
+# (tests/toolchains/lesson_examples.py).
+#
 # This proves that the toolchain works on a GitHub-hosted runner. It does NOT
 # prove a clean installation on a student computer (runners come with many
 # preinstalled tools), and it says nothing about CLion.
@@ -16,13 +20,13 @@ on:
   pull_request:
     paths:
       - 'tests/toolchains/**'
-      - 'course/module_00_tooling/lesson_05_first_program/**'
+      - 'course/**'
       - '.github/workflows/toolchains.yml'
   push:
     branches: [main]
     paths:
       - 'tests/toolchains/**'
-      - 'course/module_00_tooling/lesson_05_first_program/**'
+      - 'course/**'
       - '.github/workflows/toolchains.yml'
   workflow_dispatch:
 
@@ -114,6 +118,12 @@ jobs:
 
       - name: Lesson 0.6 commands (PowerShell 7)
         run: pwsh -NoProfile -File tests\toolchains\lesson_06.ps1
+
+      - name: Lesson code examples (build, run, compare with the lesson text)
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          python --version
+          python tests/toolchains/lesson_examples.py --cxx "$((Get-Command clang++).Source)"
 
       - name: The project rejects other compilers
         run: |
@@ -207,6 +217,26 @@ jobs:
         # first, as on a learner's computer that followed lesson 0.4.
         run: PATH="/usr/bin:$PATH" bash tests/toolchains/lesson_06.sh
 
+      - name: Lesson code examples (build, run, compare with the lesson text)
+        run: |
+          python3 --version
+          python3 tests/toolchains/lesson_examples.py --cxx "/usr/bin/clang++-${LLVM_MAJOR}" --cmake /usr/bin/cmake --make-program /usr/bin/ninja
+
+      - name: The example check detects a wrong expected output
+        run: |
+          # GitHub runs bash with -e; this step expects a failing command, so turn -e off.
+          set +e -uo pipefail
+          # A copy of the course with one character removed from the mission's expected output
+          # (in both languages): the check must fail, and say why.
+          work=$(mktemp -d); cp -R course tests "$work"; cd "$work"
+          sed -i 's/^FRAGILE - HANDLE WITH CARE$/FRAGILE - HANDLE WITH CAR/' course/module_01_first_programs/lesson_01_first_program_inside*.md
+          out=$(python3 tests/toolchains/lesson_examples.py --cxx "/usr/bin/clang++-${LLVM_MAJOR}" --cmake /usr/bin/cmake --make-program /usr/bin/ninja 2>&1)
+          status=$?
+          echo "$out" | grep -E 'FAIL|PASSED|FAILED'
+          [ "$status" -ne 0 ] || { echo 'FAIL: the check passed with a wrong expected output'; exit 1; }
+          echo "$out" | grep -q 'example parcel_label: output' || { echo 'FAIL: the check failed, but not on the output'; exit 1; }
+          echo 'ok: a wrong expected output is detected'
+
       - name: The project rejects other compilers
         run: |
           # expect_rejected COMPILER MESSAGE: configuration must stop with our check's message.
@@ -294,6 +324,11 @@ jobs:
 
       - name: Lesson 0.6 commands (zsh)
         run: zsh tests/toolchains/lesson_06.sh
+
+      - name: Lesson code examples (build, run, compare with the lesson text)
+        run: |
+          python3 --version
+          python3 tests/toolchains/lesson_examples.py --cxx "$(brew --prefix "llvm@${LLVM_MAJOR}")/bin/clang++"
 
       - name: The project rejects other compilers
         run: |
