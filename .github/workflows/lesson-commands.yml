@@ -36,6 +36,9 @@ jobs:
       - name: Run lesson checks in ${{ matrix.shell }}
         shell: pwsh
         run: |
+          # Keep going when a lesson script fails or crashes, so every script runs
+          # and the safety checks below always happen.
+          $ErrorActionPreference = 'Continue'
           $homeBefore = (Get-ChildItem -Force -LiteralPath $HOME | ForEach-Object Name | Sort-Object) -join ','
           $failed = 0
           foreach ($script in Get-ChildItem tests/lessons -Recurse -Filter 'lesson_*.ps1' | Sort-Object FullName) {
@@ -49,6 +52,7 @@ jobs:
           if ($homeAfter -ne $homeBefore) { Write-Host 'FAIL the real home folder changed'; $failed++ }
           $leftovers = @(Get-ChildItem -LiteralPath ([IO.Path]::GetTempPath()) -Filter 'lesson-check.*' -ErrorAction SilentlyContinue)
           if ($leftovers.Count -gt 0) { Write-Host "FAIL temporary folders left behind: $($leftovers.Name -join ', ')"; $failed++ }
+          Write-Host "=== summary: $failed failure(s); real home folder unchanged: $($homeAfter -eq $homeBefore); leftovers: $($leftovers.Count)"
           exit $failed
 
   unix:
@@ -84,4 +88,5 @@ jobs:
           if ls -d "${tmp_base%/}"/lesson-check.* >/dev/null 2>&1; then
             echo 'FAIL temporary folders left behind:'; ls -d "${tmp_base%/}"/lesson-check.*; failed=$((failed + 1))
           fi
+          echo "=== summary: $failed failure(s)"
           exit "$failed"
