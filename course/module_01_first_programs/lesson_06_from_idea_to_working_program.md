@@ -89,7 +89,7 @@ W `cpp-workspace` utwórz katalog `diagnosis` i skopiuj do niego `main.cpp` i `C
 
 **Zgłoszenie 1.** Ktoś chciał wypisać `Saving to C:\games\list.txt` i napisał taki `main.cpp`:
 
-<!-- broken: diagnosis_backslash at=4:18 error=^expected expression$ -->
+<!-- broken: diagnosis_backslash at=4:18 errors=1 error=^expected expression$ -->
 ```cpp
 #include <iostream>
 
@@ -305,7 +305,15 @@ Saving to C:\games\list.txt
 <summary>Zadanie 3: zgłoszenie 2</summary>
 
 - **Etap:** konfiguracja. Błąd pojawia się już przy `cmake -S . -B build-terminal …`, a kompilator ani linker nie ruszyły. Jeśli `build-terminal` był skonfigurowany wcześniej, ten sam błąd pokaże `cmake --build`, bo najpierw ponownie uruchomi CMake.
-- **Pierwsza istotna informacja:** `CMake Error at CMakeLists.txt:5 (target_compile_features):` i `Cannot specify compile features for target "first_program" which is not built by this project.`. Drugi błąd, w linijce 6 (`set_target_properties`), ma tę samą przyczynę: jedna przyczyna, dwa komunikaty, jak w lekcji 1.2.
+- **Pierwsza istotna informacja:**
+
+```text
+CMake Error at CMakeLists.txt:5 (target_compile_features):
+  Cannot specify compile features for target "first_program" which is not
+  built by this project.
+```
+
+  Drugi błąd, w linijce 6 (`set_target_properties`), ma tę samą przyczynę: jedna przyczyna, dwa komunikaty, jak w lekcji 1.2.
 - **Hipoteza:** nazwę programu zmieniono tylko w `add_executable`. Dwie następne linijki nadal mówią o `first_program`, którego projekt już nie buduje (lekcja 1.4, eksperyment C).
 - **Poprawka:** w obu linijkach wpisać `board_games`. Po konfiguracji i budowaniu w `build-terminal` jest program `board_games`, na Windowsie `board_games.exe`.
 
