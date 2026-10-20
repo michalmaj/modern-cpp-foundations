@@ -1,0 +1,87 @@
+name: Lesson commands
+
+# Runs tests/lessons: small scripts that check that the terminal commands
+# taught in the lessons still behave as the lessons describe. This verifies
+# commands only; it says nothing about the teaching quality of a lesson.
+
+on:
+  pull_request:
+    paths:
+      - 'course/**'
+      - 'tests/lessons/**'
+      - '.github/workflows/lesson-commands.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'course/**'
+      - 'tests/lessons/**'
+      - '.github/workflows/lesson-commands.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  powershell:
+    name: Windows / ${{ matrix.shell }}
+    runs-on: windows-2025
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        shell: [powershell, pwsh]
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Run lesson checks in ${{ matrix.shell }}
+        shell: pwsh
+        run: |
+          $homeBefore = (Get-ChildItem -Force -LiteralPath $HOME | ForEach-Object Name | Sort-Object) -join ','
+          $failed = 0
+          foreach ($script in Get-ChildItem tests/lessons -Recurse -Filter 'lesson_*.ps1' | Sort-Object FullName) {
+            Write-Host "=== $($script.FullName.Substring($PWD.Path.Length + 1))"
+            & ${{ matrix.shell }} -NoProfile -ExecutionPolicy Bypass -File $script.FullName
+            if ($LASTEXITCODE -ne 0) { $failed++ }
+          }
+
+          # The checks must not touch the real home folder and must clean up after themselves.
+          $homeAfter = (Get-ChildItem -Force -LiteralPath $HOME | ForEach-Object Name | Sort-Object) -join ','
+          if ($homeAfter -ne $homeBefore) { Write-Host 'FAIL the real home folder changed'; $failed++ }
+          $leftovers = @(Get-ChildItem -LiteralPath ([IO.Path]::GetTempPath()) -Filter 'lesson-check.*' -ErrorAction SilentlyContinue)
+          if ($leftovers.Count -gt 0) { Write-Host "FAIL temporary folders left behind: $($leftovers.Name -join ', ')"; $failed++ }
+          exit $failed
+
+  unix:
+    name: ${{ matrix.os }} / ${{ matrix.shell }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            shell: bash
+          - os: macos-15
+            shell: zsh
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Run lesson checks in ${{ matrix.shell }}
+        shell: bash
+        run: |
+          home_before=$(ls -A "$HOME" | LC_ALL=C sort)
+          failed=0
+          for script in tests/lessons/*/lesson_*.sh; do
+            echo "=== $script"
+            ${{ matrix.shell }} "$script" || failed=$((failed + 1))
+          done
+
+          # The checks must not touch the real home folder and must clean up after themselves.
+          if [ "$(ls -A "$HOME" | LC_ALL=C sort)" != "$home_before" ]; then
+            echo 'FAIL the real home folder changed'; failed=$((failed + 1))
+          fi
+          tmp_base=${TMPDIR:-/tmp}
+          if ls -d "${tmp_base%/}"/lesson-check.* >/dev/null 2>&1; then
+            echo 'FAIL temporary folders left behind:'; ls -d "${tmp_base%/}"/lesson-check.*; failed=$((failed + 1))
+          fi
+          exit "$failed"
