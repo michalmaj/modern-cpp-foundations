@@ -165,14 +165,14 @@ Also check the configuration: at the very top of the CMake window is the command
 
 ## 6. Build and run the program
 
-**Building.** Choose **Build | Build Project** (<kbd>Ctrl</kbd> + <kbd>F9</kbd> on Windows and Ubuntu, <kbd>⌘ Cmd</kbd> + <kbd>F9</kbd> on macOS). The **Build** window shows the steps, for example:
+**Building.** Choose **Build | Build Project** (<kbd>Ctrl</kbd> + <kbd>F9</kbd> on Windows and Ubuntu, <kbd>⌘ Cmd</kbd> + <kbd>F9</kbd> on macOS). The **Build** window shows the steps. The last two look roughly like this:
 
 ```text
-[1/2] Building CXX object CMakeFiles/first_program.dir/main.cpp.o
-[2/2] Linking CXX executable first_program
+[3/4] Building CXX object CMakeFiles/first_program.dir/main.cpp.o
+[4/4] Linking CXX executable first_program
 ```
 
-On Windows the file names end in `.obj` and `.exe`. A `cmake-build-debug` folder has appeared in the project folder, and in it the executable file `first_program` (on Windows `first_program.exe`). That is your program.
+The numbers in brackets may differ, and the earlier steps prepare the build. On Windows the file names end in `.obj` and `.exe`. A `cmake-build-debug` folder has appeared in the project folder, and in it the executable file `first_program` (on Windows `first_program.exe`). That is your program.
 
 **Running.** In the toolbar at the top, the run configuration `first_program` is selected. Click the green **Run** button (▶) next to it. The **Run** window shows:
 

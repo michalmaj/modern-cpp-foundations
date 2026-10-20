@@ -165,14 +165,14 @@ Sprawdź też konfigurację: na samej górze okna CMake jest polecenie, którym 
 
 ## 6. Zbuduj i uruchom program
 
-**Budowanie.** Wybierz **Build | Build Project** (<kbd>Ctrl</kbd> + <kbd>F9</kbd> na Windowsie i Ubuntu, <kbd>⌘ Cmd</kbd> + <kbd>F9</kbd> na macOS). W oknie **Build** zobaczysz kolejne kroki, na przykład:
+**Budowanie.** Wybierz **Build | Build Project** (<kbd>Ctrl</kbd> + <kbd>F9</kbd> na Windowsie i Ubuntu, <kbd>⌘ Cmd</kbd> + <kbd>F9</kbd> na macOS). W oknie **Build** zobaczysz kolejne kroki. Ostatnie dwa wyglądają mniej więcej tak:
 
 ```text
-[1/2] Building CXX object CMakeFiles/first_program.dir/main.cpp.o
-[2/2] Linking CXX executable first_program
+[3/4] Building CXX object CMakeFiles/first_program.dir/main.cpp.o
+[4/4] Linking CXX executable first_program
 ```
 
-Na Windowsie nazwy plików kończą się na `.obj` i `.exe`. W katalogu projektu pojawił się katalog `cmake-build-debug`, a w nim plik wykonywalny `first_program` (na Windowsie `first_program.exe`). To jest Twój program.
+Liczby w nawiasach mogą być inne, a wcześniejsze kroki przygotowują budowanie. Na Windowsie nazwy plików kończą się na `.obj` i `.exe`. W katalogu projektu pojawił się katalog `cmake-build-debug`, a w nim plik wykonywalny `first_program` (na Windowsie `first_program.exe`). To jest Twój program.
 
 **Uruchamianie.** Na pasku narzędzi u góry wybrana jest konfiguracja uruchomienia `first_program`. Kliknij obok niej zielony przycisk **Run** (▶). W oknie **Run** pojawi się:
 
