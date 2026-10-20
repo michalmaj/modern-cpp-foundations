@@ -67,7 +67,11 @@ Nie instalujesz w ten sposób programu Visual Studio. Dostajesz tylko części, 
 
 **Krok 2. Chocolatey.**
 
-1. Otwórz terminal **jako administrator**: w menu Start wpisz `Terminal`, kliknij prawym przyciskiem myszy **Terminal** i wybierz **Uruchom jako administrator**.
+1. Otwórz terminal **jako administrator**:
+   - **Windows 11:** w menu Start wpisz `Terminal`, kliknij prawym przyciskiem myszy **Terminal** i wybierz **Uruchom jako administrator**.
+   - **Windows 10:** w menu Start wpisz `PowerShell`, kliknij prawym przyciskiem myszy **Windows PowerShell** i wybierz **Uruchom jako administrator**. To ta sama powłoka co w lekcji 0.1, tylko z uprawnieniami administratora.
+
+   System zapyta, czy pozwolić tej aplikacji na wprowadzanie zmian. Zgódź się.
 2. Wejdź na stronę [chocolatey.org/install](https://chocolatey.org/install), wybierz instalację **Individual** i skopiuj podane tam polecenie.
 3. Wklej polecenie do terminala i naciśnij <kbd>Enter</kbd>.
 4. Gdy instalacja się skończy, **zamknij terminal i otwórz nowy, znowu jako administrator**. Nowy terminal zna już nowe programy (pamiętasz `PATH` z lekcji 0.3).
@@ -157,7 +161,7 @@ Otwórz **nowy** zwykły terminal i wpisz polecenia dla swojego systemu.
 | macOS | `brew --prefix llvm@22`, a potem pełna ścieżka z wyniku i `/bin/clang++ --version`, na przykład `/opt/homebrew/opt/llvm@22/bin/clang++ --version` | `Homebrew clang version 22.1.8` |
 | Ubuntu | `clang++-22 --version` | `clang version 22.1.8`, na przykład `Ubuntu clang version 22.1.8 (++…)` |
 
-Liczy się **główny numer wersji: 22**. Ostatnie cyfry (`.8`) mogą być inne, jeśli lekcja tak poda.
+Liczy się **główny numer wersji: 22**. Ostatnie cyfry mogą być wyższe niż w tabeli, na przykład `22.1.9`: to w porządku.
 
 ### Czy to właściwy kompilator?
 
@@ -184,13 +188,15 @@ Na jednym komputerze może być kilka kompilatorów o podobnych nazwach. Z lekcj
 
 Wypełnij tabelę dla swojego komputera:
 
-| Narzędzie | Polecenie, którym sprawdzasz | Twoja wersja | Właściwe? (tak/nie) |
+| Narzędzie | Jak sprawdzasz (punkt 4) | Twój wynik | Właściwe? (tak/nie) |
 |---|---|---|---|
 | kompilator `clang++` (LLVM 22) | | | |
 | CMake | | | |
 | Ninja | | | |
 | narzędzia systemowe | | | |
 | CLion | uruchomienie programu | | |
+
+W kolumnie „Twój wynik” wpisz to, co pokazał sposób sprawdzenia z punktu 4. Dla kompilatora, CMake i Ninja będzie to numer wersji. Dla narzędzi systemowych: na Windowsie „Build Tools 2022 na liście”, na macOS ścieżka z `xcode-select -p`, na Ubuntu „instalują się razem z clang-22”. Dla CLiona: „uruchamia się”.
 
 Do każdego wiersza dopisz jednym zdaniem, **do czego** to narzędzie posłuży w następnej lekcji.
 

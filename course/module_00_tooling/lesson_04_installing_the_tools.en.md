@@ -67,7 +67,11 @@ This does not install the Visual Studio program. You only get the parts `clang++
 
 **Step 2. Chocolatey.**
 
-1. Open a terminal **as administrator**: in the Start menu, type `Terminal`, right-click **Terminal** and choose **Run as administrator**.
+1. Open a terminal **as administrator**:
+   - **Windows 11:** in the Start menu, type `Terminal`, right-click **Terminal** and choose **Run as administrator**.
+   - **Windows 10:** in the Start menu, type `PowerShell`, right-click **Windows PowerShell** and choose **Run as administrator**. It's the same shell as in lesson 0.1, just with administrator rights.
+
+   The system asks whether to allow this app to make changes. Agree.
 2. Go to [chocolatey.org/install](https://chocolatey.org/install), choose the **Individual** installation and copy the command shown there.
 3. Paste the command into the terminal and press <kbd>Enter</kbd>.
 4. When the installation finishes, **close the terminal and open a new one, again as administrator**. The new terminal knows about the new programs (remember `PATH` from lesson 0.3).
@@ -157,7 +161,7 @@ Open a **new** normal terminal and type the commands for your system.
 | macOS | `brew --prefix llvm@22`, then the full path from the output followed by `/bin/clang++ --version`, for example `/opt/homebrew/opt/llvm@22/bin/clang++ --version` | `Homebrew clang version 22.1.8` |
 | Ubuntu | `clang++-22 --version` | `clang version 22.1.8`, for example `Ubuntu clang version 22.1.8 (++…)` |
 
-What matters is the **major version number: 22**. The last digits (`.8`) may differ if the lesson says so.
+What matters is the **major version number: 22**. The last digits may be higher than in the table, for example `22.1.9`: that's fine.
 
 ### Is it the right compiler?
 
@@ -184,13 +188,15 @@ One computer can have several compilers with similar names. From lesson 0.3 you 
 
 Fill in the table for your computer:
 
-| Tool | Command you check it with | Your version | Right one? (yes/no) |
+| Tool | How you check it (section 4) | Your result | Right one? (yes/no) |
 |---|---|---|---|
 | `clang++` compiler (LLVM 22) | | | |
 | CMake | | | |
 | Ninja | | | |
 | system tools | | | |
 | CLion | starting the program | | |
+
+In the “Your result” column, write what the check from section 4 showed. For the compiler, CMake and Ninja, that is a version number. For the system tools: on Windows “Build Tools 2022 is in the list”, on macOS the path from `xcode-select -p`, on Ubuntu “installed together with clang-22”. For CLion: “it starts”.
 
 For each row, add one sentence saying **what** that tool will be used for in the next lesson.
 

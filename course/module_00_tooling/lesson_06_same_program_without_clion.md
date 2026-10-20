@@ -11,9 +11,9 @@ Ta lekcja zakłada, że po lekcjach 0.1–0.5:
 
 - umiesz otworzyć terminal, przejść do katalogu (`cd`) i sprawdzić, gdzie jesteś (`pwd`, `ls`);
 - uruchamiasz program z bieżącego katalogu, podając jego ścieżkę (`./…` albo `.\…`);
-- masz projekt `lesson_05_first_program` i zbudowano go już w CLionie.
+- masz projekt `lesson_05_first_program`.
 
-Jeśli nie masz projektu, pobierz go tak jak w [lekcji 0.5, punkt 2](lesson_05_first_program_in_clion.md#2-pobierz-projekt). W CLionie nie musisz go już otwierać.
+Jeśli nie masz projektu, pobierz go tak jak w [lekcji 0.5, punkt 2](lesson_05_first_program_in_clion.md#2-pobierz-projekt). Do tej lekcji wystarczą pliki projektu: nie musi istnieć program zbudowany wcześniej w CLionie.
 
 ## Sytuacja
 
@@ -34,7 +34,7 @@ Po tej lekcji będziesz:
 |---|---|
 | `main.cpp` | **Kod źródłowy**: tekst programu w C++. |
 | `CMakeLists.txt` | **Opis projektu** dla CMake: z czego powstaje program i że to C++20. |
-| `cmake-build-debug/first_program` (na Windowsie `.exe`) | **Plik wykonywalny**, który zbudował CLion w lekcji 0.5. |
+| program w katalogu budowania CLiona, zwykle `cmake-build-debug` | **Plik wykonywalny**, który zbudował CLion w lekcji 0.5 (jeśli zbudował). |
 | **budowanie** | Zamiana kodu źródłowego w plik wykonywalny. |
 
 W lekcji 0.5 CLion wywołał za Ciebie trzy narzędzia: **CMake**, który przygotował plan budowania, **Ninja**, który ten plan wykonał, i kompilator **`clang++`**, który zamienił kod w program. Teraz wywołasz je sam.
@@ -46,7 +46,7 @@ Otwórz **zwykły terminal**, nie ten w CLionie. Przejdź do katalogu `lesson_05
 Najprostszy sposób, żeby nie przepisywać długiej ścieżki: otwórz ten katalog w oknie plików i skopiuj jego ścieżkę.
 
 - **Windows:** kliknij katalog prawym przyciskiem myszy i wybierz **Kopiuj jako ścieżkę**.
-- **macOS:** zaznacz katalog w Finderze, przytrzymaj <kbd>⌥ Option</kbd>, kliknij prawym przyciskiem i wybierz **Kopiuj „lesson_05_first_program” jako ścieżkę**.
+- **macOS:** w Finderze przytrzymaj <kbd>⌥ Option</kbd> i kliknij katalog prawym przyciskiem myszy. W menu pojawi się polecenie kopiowania ścieżki tego katalogu.
 - **Ubuntu:** w oknie plików naciśnij <kbd>Ctrl</kbd> + <kbd>L</kbd> i skopiuj ścieżkę z paska adresu.
 
 Potem w terminalu wpisz `cd`, spację i wklej ścieżkę w cudzysłowie, na przykład:
@@ -62,13 +62,15 @@ pwd
 ls
 ```
 
-Na liście powinny być `main.cpp`, `CMakeLists.txt` i katalog `cmake-build-debug` z lekcji 0.5. Uruchom program, który zbudował wtedy CLion:
+Na liście muszą być `main.cpp` i `CMakeLists.txt`.
+
+Jeśli w lekcji 0.5 CLion zbudował program, zobaczysz też katalog budowania CLiona, zwykle `cmake-build-debug`; jego nazwa może być trochę inna. Możesz uruchomić ten program, wpisując nazwę katalogu, którą widzisz:
 
 | Windows | macOS i Ubuntu |
 |---|---|
 | `.\cmake-build-debug\first_program.exe` | `./cmake-build-debug/first_program` |
 
-Zobaczysz komunikat z lekcji 0.5, być może zmieniony w misji. Ten plik nadal działa, choć CLion jest zamknięty.
+Zobaczysz komunikat z lekcji 0.5, być może zmieniony w misji. Ten plik działa, choć CLion jest zamknięty. Jeśli takiego katalogu nie masz, pomiń ten krok: dalsza część lekcji go nie potrzebuje.
 
 ## 3. Zrozum: konfiguracja, budowanie, uruchamianie
 
@@ -85,7 +87,7 @@ Konfigurację robisz **raz**. Po każdej zmianie kodu wystarczy budowanie.
 Polecenie konfiguracji ma kilka części. Nie musisz ich zapamiętywać:
 
 - `-S .`: kod źródłowy jest tutaj, w bieżącym katalogu (`.` znasz z lekcji 0.2);
-- `-B build-terminal`: pliki budowania trafią do katalogu `build-terminal`, osobnego od `cmake-build-debug` CLiona;
+- `-B build-terminal`: pliki budowania trafią do katalogu `build-terminal`, osobnego od katalogu, którego używa CLion;
 - `-G Ninja`: budowanie wykona Ninja;
 - `-DCMAKE_BUILD_TYPE=Debug`: konfiguracja Debug, jak w CLionie;
 - `-DCMAKE_CXX_COMPILER=…`: pełna ścieżka do naszego kompilatora, żeby CMake nie wybrał innego.
@@ -148,53 +150,55 @@ Program wypisze ten sam komunikat.
 
 **Po co więc CMake?** Prawdziwe programy mają wiele plików i ustawień. CMake zapamiętuje je w `CMakeLists.txt`, a ten sam opis działa w CLionie i w terminalu, na każdym systemie. Dlatego **w kursie budujemy przez CMake**. Bezpośrednie wywołanie `clang++` było tylko eksperymentem, żeby zobaczyć, co robi sam kompilator.
 
-## 6. Eksperyment: jeden kod, trzy programy
+## 6. Eksperyment: jeden kod, kilka programów
 
-Masz teraz trzy pliki wykonywalne zbudowane z tego samego `main.cpp`:
+Masz teraz dwa albo trzy pliki wykonywalne zbudowane z tego samego `main.cpp`:
 
-- `cmake-build-debug/first_program` (zbudował CLion);
 - `build-terminal/first_program` (zbudował CMake w terminalu);
-- `first_program_direct` (zbudował bezpośrednio `clang++`).
+- `first_program_direct` (zbudował bezpośrednio `clang++`);
+- jeśli masz go z lekcji 0.5: program w katalogu budowania CLiona, na przykład `cmake-build-debug/first_program`.
 
-**Krok 1.** Otwórz `main.cpp` w dowolnym edytorze tekstu (może być CLion) i zmień tekst między cudzysłowami, na przykład na `Three programs, one source.` Na razie bez polskich liter. Zapisz plik.
+**Krok 1.** Zmień kod, używając CLiona tylko jako edytora. Otwórz w nim projekt tak jak w lekcji 0.5 (**Open** i katalog `lesson_05_first_program`), kliknij `main.cpp` i zmień tekst między cudzysłowami, na przykład na `Three programs, one source.` Na razie bez polskich liter. Zapisz plik (<kbd>Ctrl</kbd> + <kbd>S</kbd>, na macOS <kbd>⌘ Cmd</kbd> + <kbd>S</kbd>).
 
-**Krok 2. Przewidź:** co wypisze każdy z trzech programów, jeśli uruchomisz je teraz, przed jakimkolwiek budowaniem? Zapisz przewidywania w tabeli:
+**Nie klikaj Build ani Run.** Edytowanie i zapisanie pliku w CLionie niczego nie buduje: program zbudujesz w terminalu, swoimi poleceniami. Jeśli CLion pokaże przy tym komunikaty o projekcie, do samej edycji nie są potrzebne. Inne edytory tekstu potrafią niepostrzeżenie zmieniać znaki, na przykład cudzysłowy, dlatego na razie zostań przy CLionie.
+
+**Krok 2. Przewidź:** co wypisze każdy z programów, jeśli uruchomisz je teraz, przed jakimkolwiek budowaniem? Zapisz przewidywania w tabeli:
 
 | Program | Przewidywanie | Wynik |
 |---|---|---|
-| `cmake-build-debug/first_program` | | |
 | `build-terminal/first_program` | | |
 | `first_program_direct` | | |
+| program CLiona (jeśli go masz) | | |
 
-Uruchom wszystkie trzy, każdy po swojej ścieżce, i uzupełnij kolumnę „Wynik”.
+Uruchom każdy po jego ścieżce i uzupełnij kolumnę „Wynik”.
 
-**Krok 3.** Zbuduj tylko wersję terminalową: `cmake --build build-terminal`. Bez ponownej konfiguracji: plan już istnieje. Przewidź, który program teraz wypisze nowy komunikat, i sprawdź wszystkie trzy.
+**Krok 3.** Zbuduj tylko wersję terminalową: `cmake --build build-terminal`. Bez ponownej konfiguracji: plan już istnieje. Przewidź, który program teraz wypisze nowy komunikat, i sprawdź wszystkie.
 
 **Krok 4.** Skompiluj ponownie `first_program_direct` poleceniem z punktu 5 i uruchom go.
 
-**Co się stało?** Każdy plik wykonywalny jest osobnym plikiem. Zmienia się tylko ten program, który zbudujesz ponownie. Pozostałe nadal wypisują stary komunikat. CLion niczego nie budował, więc `cmake-build-debug/first_program` wciąż ma starą wersję.
+**Co się stało?** Każdy plik wykonywalny jest osobnym plikiem. Zmienia się tylko ten program, który zbudujesz ponownie. Pozostałe nadal wypisują stary komunikat. Jeśli masz program z CLiona, on też ma starą wersję: CLion niczego nie budował.
 
 ## 7. Misja końcowa Modułu 0
 
-Ta misja zbiera wszystko, czego nauczył Cię Moduł 0. Wykonaj ją w zwykłym terminalu, bez CLiona.
+Ta misja zbiera wszystko, czego nauczył Cię Moduł 0. Budowanie i uruchamianie wykonaj w zwykłym terminalu, bez CLiona. Zapisuj wyniki kolejnych kroków, na przykład w notatkach albo jako zrzuty ekranu.
 
-1. **Znajdź projekt:** przejdź do katalogu `lesson_05_first_program` i pokaż `pwd` oraz listę plików.
-2. **Sprawdź kompilator:** pokaż wersję kompilatora (polecenie z lekcji 0.4) i linijkę `The CXX compiler identification is Clang 22…` z konfiguracji.
+1. **Znajdź projekt:** przejdź do katalogu `lesson_05_first_program` i sprawdź `pwd` oraz listę plików.
+2. **Sprawdź kompilator:** sprawdź wersję kompilatora (polecenie z lekcji 0.4) i znajdź linijkę `The CXX compiler identification is Clang 22…` w wyniku konfiguracji.
 3. **Skonfiguruj i zbuduj:** użyj nowego katalogu budowania, na przykład `build-mission`.
 4. **Uruchom** zbudowany program.
-5. **Zmień komunikat** na własny, **zbuduj ponownie** (bez konfiguracji) i pokaż nowy wynik.
+5. **Zmień komunikat** na własny (w CLionie, tak jak w punkcie 6), **zbuduj ponownie** (bez konfiguracji) i sprawdź nowy wynik.
 6. **Wyjaśnij** własnymi słowami, w jednym zdaniu dla każdego, do czego służą: `main.cpp`, kompilator `clang++`, CMake, Ninja i plik wykonywalny.
 
 ### Kryterium sukcesu
 
 - Konfiguracja pokazuje `Clang 22` i ścieżkę do naszego kompilatora.
 - Program z `build-mission` wypisuje najpierw stary, a po zmianie i ponownym zbudowaniu Twój komunikat.
-- Wszystko wykonano w terminalu, bez CLiona.
+- Budowanie i uruchamianie wykonano w terminalu; CLion służył najwyżej jako edytor.
 - Wyjaśnienia odróżniają kod źródłowy od pliku wykonywalnego oraz rolę CMake (plan), Ninja (wykonanie planu) i kompilatora (zamiana kodu w program).
 
 ## 8. Gdy coś pójdzie inaczej
 
-Gdy polecenie zgłasza błąd, **przeczytaj pierwszą linijkę ze słowem `Error` albo `error`**. Zwykle mówi, czego brakuje albo co jest źle. Dalsze linijki to często skutki tego pierwszego problemu.
+Gdy coś się nie udaje, **czytaj komunikaty od początku** i znajdź pierwszą informację, która wyjaśnia przyczynę. Często jest to pierwszy komunikat `CMake Error` albo `error:`, ale bywa nią też wcześniejsze ostrzeżenie (`Warning`), linijka konfiguracji, na przykład z niewłaściwym kompilatorem, albo informacja o brakującym pliku. Dalsze linijki to zwykle skutki tego pierwszego problemu.
 
 | Co widzisz | Co to znaczy | Co zrobić |
 |---|---|---|
@@ -202,7 +206,7 @@ Gdy polecenie zgłasza błąd, **przeczytaj pierwszą linijkę ze słowem `Error
 | Windows: `Ignoring extra path from command line: "Files\LLVM\bin\clang++.exe"`, a dalej `The CXX compiler identification is unknown` | Brakuje cudzysłowu: PowerShell podzielił ścieżkę na spacji w `Program Files`. | Weź w cudzysłów cały element `"-DCMAKE_CXX_COMPILER=C:\Program Files\LLVM\bin\clang++.exe"`. |
 | Konfiguracja pokazuje inny kompilator niż `Clang 22` | Wpisano inną ścieżkę kompilatora. | Sprawdź ścieżkę z punktu 4. |
 | Komunikat o zmianie ustawień i usuwaniu cache (`You have changed variables that require your cache to be deleted`) | W tym katalogu budowania była już konfiguracja z innym kompilatorem. CMake zaczyna ją od nowa. | Sprawdź, czy teraz widać `Clang 22`. Jeśli coś dalej się nie zgadza, usuń katalog budowania w oknie plików (trafi do Kosza) i skonfiguruj ponownie. |
-| Budowanie kończy się błędem i programu nie ma | Plik wykonywalny nie powstał. | Znajdź pierwszą linijkę z `error` w wyniku budowania. Jeśli zmieniano kod, sprawdź, czy nie usunięto cudzysłowu albo innego znaku. |
+| Budowanie kończy się błędem i programu nie ma | Plik wykonywalny nie powstał. | Znajdź w wyniku budowania pierwszy komunikat, który wyjaśnia przyczynę. Jeśli zmieniano kod, sprawdź, czy nie usunięto cudzysłowu albo innego znaku. |
 | Program wypisuje stary komunikat | Uruchomiono program, którego nie zbudowano po zmianie kodu. | Zbuduj ten program ponownie albo sprawdź, czy wpisano ścieżkę do właściwego pliku. |
 | Program nie jest rozpoznawany, gdy wpisujesz samą nazwę | Programu z bieżącego katalogu nie ma na liście `PATH` (lekcja 0.3). | Dopisz ścieżkę: `./` na macOS i Ubuntu, `.\` na Windowsie. |
 | macOS: `clang++ -std=c++20 …` działa, ale to kompilator Apple | Samo `clang++` to na macOS kompilator Apple. | Użyj pełnej ścieżki z punktu 5. |
