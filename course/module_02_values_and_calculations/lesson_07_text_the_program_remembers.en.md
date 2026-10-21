@@ -466,7 +466,7 @@ Because after a number is read with `>>`, the line ending stays in the input, an
 
 ## What's next
 
-You now know all the tools of Module 2: whole and fractional numbers, text, calculations, constants, data from the user, and ways of finding errors in results. In lesson 2.8 you'll test them in an independent task. **Lesson 2.8 is in preparation.**
+You now know all the tools of Module 2: whole and fractional numbers, text, calculations, constants, data from the user, and ways of finding errors in results. In lesson 2.8 you'll test them in an independent task: [Lesson 2.8: From data to result (the Module 2 test)](lesson_08_from_data_to_result.en.md).
 
 ---
 
@@ -505,4 +505,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 2.6: A program that asks the user](lesson_06_a_program_that_asks_the_user.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 2.6: A program that asks the user](lesson_06_a_program_that_asks_the_user.en.md) · **Next lesson:** [Lesson 2.8: From data to result (the Module 2 test)](lesson_08_from_data_to_result.en.md) · [Course overview](../../README.en.md)

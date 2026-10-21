@@ -466,7 +466,7 @@ Bo po odczycie liczby przez `>>` w wejściu zostaje koniec linijki, a `std::getl
 
 ## Co dalej
 
-Znasz już wszystkie narzędzia Modułu 2: liczby całkowite i ułamkowe, tekst, obliczenia, stałe, dane od użytkownika i sposoby szukania błędów w wynikach. W lekcji 2.8 sprawdzisz je w samodzielnym zadaniu. **Lekcja 2.8 jest w przygotowaniu.**
+Znasz już wszystkie narzędzia Modułu 2: liczby całkowite i ułamkowe, tekst, obliczenia, stałe, dane od użytkownika i sposoby szukania błędów w wynikach. W lekcji 2.8 sprawdzisz je w samodzielnym zadaniu: [Lekcja 2.8: Od danych do wyniku (sprawdzian Modułu 2)](lesson_08_from_data_to_result.md).
 
 ---
 
@@ -505,4 +505,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 2.6: Program, który pyta użytkownika](lesson_06_a_program_that_asks_the_user.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 2.6: Program, który pyta użytkownika](lesson_06_a_program_that_asks_the_user.md) · **Następna lekcja:** [Lekcja 2.8: Od danych do wyniku (sprawdzian Modułu 2)](lesson_08_from_data_to_result.md) · [Opis kursu](../../README.md)

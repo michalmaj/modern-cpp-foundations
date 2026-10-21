@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Moduł 2 jest rozwijany: dostępne są jego pierwsze siedem lekcji. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -109,7 +109,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 2, lekcja 5: [Liczby z częścią ułamkową: `double` i `auto`](course/module_02_values_and_calculations/lesson_05_numbers_with_a_fractional_part.md) | Dostępna (wersja pilotażowa) |
 | Moduł 2, lekcja 6: [Program, który pyta użytkownika](course/module_02_values_and_calculations/lesson_06_a_program_that_asks_the_user.md) | Dostępna (wersja pilotażowa) |
 | Moduł 2, lekcja 7: [Tekst, który program pamięta (`std::string`)](course/module_02_values_and_calculations/lesson_07_text_the_program_remembers.md) | Dostępna (wersja pilotażowa) |
-| Moduł 2: pozostałe lekcje (wartości, typy, zmienne i obliczenia) | W przygotowaniu |
+| Moduł 2, lekcja 8: [Od danych do wyniku](course/module_02_values_and_calculations/lesson_08_from_data_to_result.md) (sprawdzian Modułu 2) | Dostępna (wersja pilotażowa) |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
 | Kursy B i C | Planowane, repozytoria jeszcze nie istnieją |
@@ -137,10 +137,11 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 17. **[Lekcja 2.5: Liczby z częścią ułamkową: `double` i `auto`](course/module_02_values_and_calculations/lesson_05_numbers_with_a_fractional_part.md)**
 18. **[Lekcja 2.6: Program, który pyta użytkownika](course/module_02_values_and_calculations/lesson_06_a_program_that_asks_the_user.md)**
 19. **[Lekcja 2.7: Tekst, który program pamięta (`std::string`)](course/module_02_values_and_calculations/lesson_07_text_the_program_remembers.md)**
+20. **[Lekcja 2.8: Od danych do wyniku (sprawdzian Modułu 2)](course/module_02_values_and_calculations/lesson_08_from_data_to_result.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
-W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. W Module 2, który zaczyna lekcja 2.1, programy zaczną pamiętać wartości i liczyć. Kolejne lekcje Modułu 2 są w przygotowaniu.
+W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. W Module 2 (lekcje 2.1–2.8) programy zaczną pamiętać wartości, liczyć, pobierać dane od użytkownika i przechowywać tekst. Kończy go sprawdzian w lekcji 2.8. Kolejne moduły są w przygotowaniu.
 
 ## Co dalej po tym kursie
 
