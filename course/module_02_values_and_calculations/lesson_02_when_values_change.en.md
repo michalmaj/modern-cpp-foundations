@@ -407,7 +407,7 @@ Add a `std::cout` below each assignment that prints the current values, and comp
 
 ## What's next
 
-You can now predict and check how values change step by step. **Lesson 2.3 is in preparation.**
+You can now predict and check how values change step by step. In lesson 2.3 you'll watch these changes in a running program, with the debugger, and find the statement that spoils the result: [Lesson 2.3: See what happens in the program](lesson_03_see_what_happens_in_the_program.en.md).
 
 ---
 
@@ -528,4 +528,4 @@ Only the number in the morning assignment changed. The program calculated the ne
 
 </details>
 
-**Previous lesson:** [Lesson 2.1: Values the program remembers](lesson_01_values_the_program_remembers.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 2.1: Values the program remembers](lesson_01_values_the_program_remembers.en.md) · **Next lesson:** [Lesson 2.3: See what happens in the program](lesson_03_see_what_happens_in_the_program.en.md) · [Course overview](../../README.en.md)

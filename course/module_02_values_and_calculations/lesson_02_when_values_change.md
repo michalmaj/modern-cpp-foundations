@@ -407,7 +407,7 @@ Dopisać pod każdym przypisaniem `std::cout`, które wypisze aktualne wartości
 
 ## Co dalej
 
-Umiesz już przewidywać i sprawdzać, jak wartości zmieniają się krok po kroku. **Lekcja 2.3 jest w przygotowaniu.**
+Umiesz już przewidywać i sprawdzać, jak wartości zmieniają się krok po kroku. W lekcji 2.3 zobaczysz te zmiany w działającym programie, za pomocą debuggera, i znajdziesz instrukcję, która psuje wynik: [Lekcja 2.3: Zobacz, co dzieje się w programie](lesson_03_see_what_happens_in_the_program.md).
 
 ---
 
@@ -528,4 +528,4 @@ Zmieniła się tylko liczba w porannym przypisaniu. Kolejne wartości program ob
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 2.1: Wartości, które program pamięta](lesson_01_values_the_program_remembers.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 2.1: Wartości, które program pamięta](lesson_01_values_the_program_remembers.md) · **Następna lekcja:** [Lekcja 2.3: Zobacz, co dzieje się w programie](lesson_03_see_what_happens_in_the_program.md) · [Opis kursu](../../README.md)
