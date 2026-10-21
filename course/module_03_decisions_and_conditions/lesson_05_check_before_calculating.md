@@ -680,7 +680,7 @@ Bo `&&` najpierw oblicza lewą stronę. Dla 0 dzieci `children > 0` jest fałszy
 
 ## Co dalej
 
-Znasz już wszystkie narzędzia Modułu 3: `if`, `else`, `else if`, porównania, `bool`, operatory logiczne i sprawdzanie danych przed obliczeniami. W lekcji 3.6 sprawdzisz je w samodzielnym zadaniu. **Lekcja 3.6 jest w przygotowaniu.**
+Znasz już wszystkie narzędzia Modułu 3: `if`, `else`, `else if`, porównania, `bool`, operatory logiczne i sprawdzanie danych przed obliczeniami. W lekcji 3.6 sprawdzisz je w samodzielnym zadaniu: [Lekcja 3.6: Program podejmuje decyzje (sprawdzian Modułu 3)](lesson_06_the_program_decides.md).
 
 ---
 
@@ -773,4 +773,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 3.4: Łączenie warunków (`&&`, `||`, `!`)](lesson_04_combining_conditions.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 3.4: Łączenie warunków (`&&`, `||`, `!`)](lesson_04_combining_conditions.md) · **Następna lekcja:** [Lekcja 3.6: Program podejmuje decyzje (sprawdzian Modułu 3)](lesson_06_the_program_decides.md) · [Opis kursu](../../README.md)

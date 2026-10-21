@@ -680,7 +680,7 @@ Because `&&` evaluates the left side first. For 0 children, `children > 0` is fa
 
 ## What's next
 
-You now know all the tools of Module 3: `if`, `else`, `else if`, comparisons, `bool`, logical operators, and checking data before calculating. In lesson 3.6 you'll test them in an independent task. **Lesson 3.6 is in preparation.**
+You now know all the tools of Module 3: `if`, `else`, `else if`, comparisons, `bool`, logical operators, and checking data before calculating. In lesson 3.6 you'll test them in an independent task: [Lesson 3.6: The program makes decisions (the Module 3 test)](lesson_06_the_program_decides.en.md).
 
 ---
 
@@ -773,4 +773,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 3.4: Combining conditions (`&&`, `||`, `!`)](lesson_04_combining_conditions.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 3.4: Combining conditions (`&&`, `||`, `!`)](lesson_04_combining_conditions.en.md) · **Next lesson:** [Lesson 3.6: The program makes decisions (the Module 3 test)](lesson_06_the_program_decides.en.md) · [Course overview](../../README.en.md)
