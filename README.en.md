@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). Module 3 is in development: its first lesson is available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). Module 3 is in development: its first two lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -111,6 +111,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 2, lesson 7: [Text the program remembers (`std::string`)](course/module_02_values_and_calculations/lesson_07_text_the_program_remembers.en.md) | Available (pilot version) |
 | Module 2, lesson 8: [From data to result](course/module_02_values_and_calculations/lesson_08_from_data_to_result.en.md) (the Module 2 test) | Available (pilot version) |
 | Module 3, lesson 1: [The program's first decision (`if`)](course/module_03_decisions_and_conditions/lesson_01_the_first_decision.en.md) | Available (pilot version) |
+| Module 3, lesson 2: [Two possibilities (`else`), equality and `bool`](course/module_03_decisions_and_conditions/lesson_02_two_ways.en.md) | Available (pilot version) |
 | Module 3: the remaining lessons (conditions and decisions) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -141,6 +142,7 @@ Work through the lessons in order, starting with the first:
 19. **[Lesson 2.7: Text the program remembers (`std::string`)](course/module_02_values_and_calculations/lesson_07_text_the_program_remembers.en.md)**
 20. **[Lesson 2.8: From data to result (the Module 2 test)](course/module_02_values_and_calculations/lesson_08_from_data_to_result.en.md)**
 21. **[Lesson 3.1: The program's first decision (`if`)](course/module_03_decisions_and_conditions/lesson_01_the_first_decision.en.md)**
+22. **[Lesson 3.2: Two possibilities (`else`), equality and `bool`](course/module_03_decisions_and_conditions/lesson_02_two_ways.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 

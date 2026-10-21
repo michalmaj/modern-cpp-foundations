@@ -413,7 +413,7 @@ Bo wymaganie mówi „przekracza 20 kg”, a 20 nie jest większe od 20. Warunek
 
 ## Co dalej
 
-Twój program potrafi już wykonać coś albo to pominąć. W lekcji 3.2 nauczy się wybierać **jedną z dwóch dróg** i sprawdzać, czy wartości są równe. Poznasz też nazwę odpowiedzi „tak” albo „nie”, którą daje porównanie. **Lekcja 3.2 jest w przygotowaniu.**
+Twój program potrafi już wykonać coś albo to pominąć. W lekcji 3.2 nauczy się wybierać **jedną z dwóch dróg** i sprawdzać, czy wartości są równe. Poznasz też nazwę odpowiedzi „tak” albo „nie”, którą daje porównanie: [Lekcja 3.2: Dwie możliwości (`else`), równość i `bool`](lesson_02_two_ways.md).
 
 ---
 
@@ -613,4 +613,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 2.8: Od danych do wyniku (sprawdzian Modułu 2)](../module_02_values_and_calculations/lesson_08_from_data_to_result.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 2.8: Od danych do wyniku (sprawdzian Modułu 2)](../module_02_values_and_calculations/lesson_08_from_data_to_result.md) · **Następna lekcja:** [Lekcja 3.2: Dwie możliwości (`else`), równość i `bool`](lesson_02_two_ways.md) · [Opis kursu](../../README.md)

@@ -413,7 +413,7 @@ Because the requirement says "exceeds 20 kg", and 20 isn't greater than 20. The 
 
 ## What's next
 
-Your program can now do something or skip it. In lesson 3.2 it will learn to choose **one of two ways**, and to check whether values are equal. You'll also learn the name of the "yes" or "no" answer that a comparison gives. **Lesson 3.2 is in preparation.**
+Your program can now do something or skip it. In lesson 3.2 it will learn to choose **one of two ways**, and to check whether values are equal. You'll also learn the name of the "yes" or "no" answer that a comparison gives: [Lesson 3.2: Two possibilities (`else`), equality and `bool`](lesson_02_two_ways.en.md).
 
 ---
 
@@ -613,4 +613,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 2.8: From data to result (the Module 2 test)](../module_02_values_and_calculations/lesson_08_from_data_to_result.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 2.8: From data to result (the Module 2 test)](../module_02_values_and_calculations/lesson_08_from_data_to_result.en.md) · **Next lesson:** [Lesson 3.2: Two possibilities (`else`), equality and `bool`](lesson_02_two_ways.en.md) · [Course overview](../../README.en.md)
