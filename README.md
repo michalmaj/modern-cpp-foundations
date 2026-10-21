@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Moduł 4 jest rozwijany: dostępna jest jego pierwsza lekcja. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -116,6 +116,8 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 3, lekcja 4: [Łączenie warunków (`&&`, `\|\|`, `!`)](course/module_03_decisions_and_conditions/lesson_04_combining_conditions.md) | Dostępna (wersja pilotażowa) |
 | Moduł 3, lekcja 5: [Sprawdzanie danych przed obliczeniami](course/module_03_decisions_and_conditions/lesson_05_check_before_calculating.md) | Dostępna (wersja pilotażowa) |
 | Moduł 3, lekcja 6: [Program podejmuje decyzje (sprawdzian Modułu 3)](course/module_03_decisions_and_conditions/lesson_06_the_program_decides.md) | Dostępna (wersja pilotażowa) |
+| Moduł 4, lekcja 1: [Pierwsza pętla (`while`)](course/module_04_repeating_actions/lesson_01_the_first_loop.md) | Dostępna (wersja pilotażowa) |
+| Moduł 4: pozostałe lekcje (powtarzanie działań) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
 | Kursy B i C | Planowane, repozytoria jeszcze nie istnieją |
@@ -150,10 +152,11 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 24. **[Lekcja 3.4: Łączenie warunków (`&&`, `||`, `!`)](course/module_03_decisions_and_conditions/lesson_04_combining_conditions.md)**
 25. **[Lekcja 3.5: Sprawdzanie danych przed obliczeniami](course/module_03_decisions_and_conditions/lesson_05_check_before_calculating.md)**
 26. **[Lekcja 3.6: Program podejmuje decyzje (sprawdzian Modułu 3)](course/module_03_decisions_and_conditions/lesson_06_the_program_decides.md)**
+27. **[Lekcja 4.1: Pierwsza pętla (`while`)](course/module_04_repeating_actions/lesson_01_the_first_loop.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
-W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. W Module 2 (lekcje 2.1–2.8) programy zaczną pamiętać wartości, liczyć, pobierać dane od użytkownika i przechowywać tekst. Kończy go sprawdzian w lekcji 2.8. W Module 3 (lekcje 3.1–3.6) programy zaczną podejmować decyzje. Kończy go sprawdzian w lekcji 3.6. Kolejne moduły są w przygotowaniu.
+W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. W Module 2 (lekcje 2.1–2.8) programy zaczną pamiętać wartości, liczyć, pobierać dane od użytkownika i przechowywać tekst. Kończy go sprawdzian w lekcji 2.8. W Module 3 (lekcje 3.1–3.6) programy zaczną podejmować decyzje. Kończy go sprawdzian w lekcji 3.6. W Module 4, który zaczyna lekcja 4.1, programy zaczną powtarzać działania. Kolejne lekcje Modułu 4 są w przygotowaniu.
 
 ## Co dalej po tym kursie
 
