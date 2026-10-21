@@ -562,7 +562,7 @@ The user types the numbers. `std::cin >>` stores them in the `int` and `double` 
 
 ## What's next
 
-Your programs now ask for numbers. In lesson 2.7 you'll meet text values, and a program will ask for a word. **Lesson 2.7 is in preparation.**
+Your programs now ask for numbers. In lesson 2.7 you'll meet text values, and a program will ask for text: [Lesson 2.7: Text the program remembers (`std::string`)](lesson_07_text_the_program_remembers.en.md).
 
 ---
 
@@ -598,4 +598,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 2.5: Numbers with a fractional part: `double` and `auto`](lesson_05_numbers_with_a_fractional_part.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 2.5: Numbers with a fractional part: `double` and `auto`](lesson_05_numbers_with_a_fractional_part.en.md) · **Next lesson:** [Lesson 2.7: Text the program remembers (`std::string`)](lesson_07_text_the_program_remembers.en.md) · [Course overview](../../README.en.md)
