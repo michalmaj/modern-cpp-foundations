@@ -156,7 +156,7 @@ Kliknij **Run**. Program wypisuje dwie linijki, tak jak w punkcie 1. Hipoteza si
 
 ## 4. Eksperyment B: kompilator nie zna nazwy
 
-Tym razem więcej pracy wykonasz sam.
+Tym razem więcej pracy wykonasz samodzielnie.
 
 **Zmiana.** Zacznij od poprawnego programu. Usuń dwie pierwsze linijki: `#include <iostream>` i pustą linijkę pod nią. Twój `main.cpp`:
 
@@ -170,7 +170,7 @@ int main() {
 
 **Przewidź:** czy program się zbuduje? Zbuduj go (**Build | Build Project**).
 
-**Przeczytaj diagnostykę sam.** Znajdź w oknie Build linijki z `main.cpp` i `error` i odpowiedz:
+**Przeczytaj diagnostykę samodzielnie.** Znajdź w oknie Build linijki z `main.cpp` i `error` i odpowiedz:
 
 1. Ile jest komunikatów `error`?
 2. Których linijek i pozycji dotyczą?

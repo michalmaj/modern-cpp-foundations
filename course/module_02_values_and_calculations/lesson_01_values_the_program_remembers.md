@@ -243,7 +243,7 @@ Spójrz, jak powstaje `total_cost` w punkcie 4: typ, nazwa, a w `{}` wyrażenie 
 
 Sala koncertowa ma 50 miejsc. Bilet kosztuje 40, a sprzedano 6 biletów. Kasjer chce programu, który wypisze krótkie podsumowanie.
 
-W `cpp-workspace` utwórz katalog `ticket_office`, skopiuj do niego `CMakeLists.txt` z oryginalnego `lesson_05_first_program`, utwórz pusty `main.cpp` i napisz program sam.
+W `cpp-workspace` utwórz katalog `ticket_office`, skopiuj do niego `CMakeLists.txt` z oryginalnego `lesson_05_first_program`, utwórz pusty `main.cpp` i napisz program samodzielnie.
 
 Program ma wypisać dokładnie:
 

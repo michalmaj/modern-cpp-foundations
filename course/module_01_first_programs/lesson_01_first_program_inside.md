@@ -292,7 +292,7 @@ FROM: Modern C++ Foundations
 FRAGILE - HANDLE WITH CARE
 ```
 
-Każdą linijkę wypisz osobną instrukcją. Kod piszesz sam: wszystko, czego potrzebujesz, już znasz.
+Każdą linijkę wypisz osobną instrukcją. Kod piszesz samodzielnie: wszystko, czego potrzebujesz, już znasz.
 
 ### Kryterium sukcesu
 
