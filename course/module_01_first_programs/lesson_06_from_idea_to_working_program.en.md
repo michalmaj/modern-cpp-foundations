@@ -375,6 +375,6 @@ After six lessons, you can:
 
 ## What's next: Module 2
 
-So far, your programs always print the same text. In Module 2 they will start to **remember and calculate**: you'll learn about values, types, variables, expressions and calculations, and how to read simple input from the user. **Module 2 is in preparation.**
+So far, your programs always print the same text. In Module 2 they will start to **remember and calculate**: you'll learn about values, types, variables, expressions and calculations, and how to read simple input from the user. Start with [lesson 2.1: Values the program remembers](../module_02_values_and_calculations/lesson_01_values_the_program_remembers.en.md). Module 2 is in development: further lessons are in preparation.
 
-**Previous lesson:** [Lesson 1.5: Save the history of your work](lesson_05_save_the_history_of_your_work.en.md) · **Next module:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 1.5: Save the history of your work](lesson_05_save_the_history_of_your_work.en.md) · **Next lesson:** [Lesson 2.1: Values the program remembers](../module_02_values_and_calculations/lesson_01_values_the_program_remembers.en.md) · [Course overview](../../README.en.md)

@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). Module 2 is in preparation. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). Module 2 is in development: its first lesson is available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -102,7 +102,8 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 1, lesson 4: [From source code to an executable](course/module_01_first_programs/lesson_04_from_source_code_to_an_executable.en.md) | Available (pilot version) |
 | Module 1, lesson 5: [Save the history of your work](course/module_01_first_programs/lesson_05_save_the_history_of_your_work.en.md) | Available (pilot version) |
 | Module 1, lesson 6: [From an idea to a working program, on your own](course/module_01_first_programs/lesson_06_from_idea_to_working_program.en.md) (the Module 1 test) | Available (pilot version) |
-| Module 2: values, types, variables and calculations | In preparation |
+| Module 2, lesson 1: [Values the program remembers](course/module_02_values_and_calculations/lesson_01_values_the_program_remembers.en.md) | Available (pilot version) |
+| Module 2: the remaining lessons (values, types, variables and calculations) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
 | Courses B and C | Planned, repositories do not exist yet |
@@ -123,10 +124,11 @@ Work through the lessons in order, starting with the first:
 10. **[Lesson 1.4: From source code to an executable](course/module_01_first_programs/lesson_04_from_source_code_to_an_executable.en.md)**
 11. **[Lesson 1.5: Save the history of your work](course/module_01_first_programs/lesson_05_save_the_history_of_your_work.en.md)**
 12. **[Lesson 1.6: From an idea to a working program, on your own](course/module_01_first_programs/lesson_06_from_idea_to_working_program.en.md)**
+13. **[Lesson 2.1: Values the program remembers](course/module_02_values_and_calculations/lesson_01_values_the_program_remembers.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
-In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. Module 2 comes next, where programs start to calculate and remember values. It is in preparation.
+In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2, which starts with lesson 2.1, programs start to remember values and calculate. The further lessons of Module 2 are in preparation.
 
 ## What comes next
 

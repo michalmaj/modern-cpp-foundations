@@ -375,6 +375,6 @@ Po sześciu lekcjach potrafisz:
 
 ## Co dalej: Moduł 2
 
-Twoje programy wypisują na razie zawsze ten sam tekst. W Module 2 zaczną **pamiętać i liczyć**: poznasz wartości, typy, zmienne, wyrażenia i obliczenia oraz nauczysz się wczytywać proste dane od użytkownika. **Moduł 2 jest w przygotowaniu.**
+Twoje programy wypisują na razie zawsze ten sam tekst. W Module 2 zaczną **pamiętać i liczyć**: poznasz wartości, typy, zmienne, wyrażenia i obliczenia oraz nauczysz się wczytywać proste dane od użytkownika. Zacznij od [lekcji 2.1: Wartości, które program pamięta](../module_02_values_and_calculations/lesson_01_values_the_program_remembers.md). Moduł 2 jest rozwijany: kolejne lekcje są w przygotowaniu.
 
-**Poprzednia lekcja:** [Lekcja 1.5: Zapisz historię swojej pracy](lesson_05_save_the_history_of_your_work.md) · **Następny moduł:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 1.5: Zapisz historię swojej pracy](lesson_05_save_the_history_of_your_work.md) · **Następna lekcja:** [Lekcja 2.1: Wartości, które program pamięta](../module_02_values_and_calculations/lesson_01_values_the_program_remembers.md) · [Opis kursu](../../README.md)

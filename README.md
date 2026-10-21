@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Moduł 2 jest w przygotowaniu. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Moduł 2 jest rozwijany: dostępna jest jego pierwsza lekcja. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -102,7 +102,8 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 1, lekcja 4: [Od kodu źródłowego do programu wykonywalnego](course/module_01_first_programs/lesson_04_from_source_code_to_an_executable.md) | Dostępna (wersja pilotażowa) |
 | Moduł 1, lekcja 5: [Zapisz historię swojej pracy](course/module_01_first_programs/lesson_05_save_the_history_of_your_work.md) | Dostępna (wersja pilotażowa) |
 | Moduł 1, lekcja 6: [Samodzielnie od pomysłu do działającego programu](course/module_01_first_programs/lesson_06_from_idea_to_working_program.md) (sprawdzian Modułu 1) | Dostępna (wersja pilotażowa) |
-| Moduł 2: wartości, typy, zmienne i obliczenia | W przygotowaniu |
+| Moduł 2, lekcja 1: [Wartości, które program pamięta](course/module_02_values_and_calculations/lesson_01_values_the_program_remembers.md) | Dostępna (wersja pilotażowa) |
+| Moduł 2: pozostałe lekcje (wartości, typy, zmienne i obliczenia) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
 | Kursy B i C | Planowane, repozytoria jeszcze nie istnieją |
@@ -123,10 +124,11 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 10. **[Lekcja 1.4: Od kodu źródłowego do programu wykonywalnego](course/module_01_first_programs/lesson_04_from_source_code_to_an_executable.md)**
 11. **[Lekcja 1.5: Zapisz historię swojej pracy](course/module_01_first_programs/lesson_05_save_the_history_of_your_work.md)**
 12. **[Lekcja 1.6: Samodzielnie od pomysłu do działającego programu](course/module_01_first_programs/lesson_06_from_idea_to_working_program.md)**
+13. **[Lekcja 2.1: Wartości, które program pamięta](course/module_02_values_and_calculations/lesson_01_values_the_program_remembers.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
-W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. Po nim przyjdzie Moduł 2, w którym programy zaczną liczyć i pamiętać wartości. Jest w przygotowaniu.
+W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. W Module 2, który zaczyna lekcja 2.1, programy zaczną pamiętać wartości i liczyć. Kolejne lekcje Modułu 2 są w przygotowaniu.
 
 ## Co dalej po tym kursie
 
