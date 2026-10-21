@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). Module 3 is in development: its first five lessons are available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -115,7 +115,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 3, lesson 3: [Choosing among many possibilities (`else if`)](course/module_03_decisions_and_conditions/lesson_03_many_possibilities.en.md) | Available (pilot version) |
 | Module 3, lesson 4: [Combining conditions (`&&`, `\|\|`, `!`)](course/module_03_decisions_and_conditions/lesson_04_combining_conditions.en.md) | Available (pilot version) |
 | Module 3, lesson 5: [Checking data before calculating](course/module_03_decisions_and_conditions/lesson_05_check_before_calculating.en.md) | Available (pilot version) |
-| Module 3: the remaining lessons (conditions and decisions) | In preparation |
+| Module 3, lesson 6: [The program makes decisions (the Module 3 test)](course/module_03_decisions_and_conditions/lesson_06_the_program_decides.en.md) | Available (pilot version) |
 | Further modules | Planned |
 | Full course plan | Not published yet |
 | Courses B and C | Planned, repositories do not exist yet |
@@ -149,10 +149,11 @@ Work through the lessons in order, starting with the first:
 23. **[Lesson 3.3: Choosing among many possibilities (`else if`)](course/module_03_decisions_and_conditions/lesson_03_many_possibilities.en.md)**
 24. **[Lesson 3.4: Combining conditions (`&&`, `||`, `!`)](course/module_03_decisions_and_conditions/lesson_04_combining_conditions.en.md)**
 25. **[Lesson 3.5: Checking data before calculating](course/module_03_decisions_and_conditions/lesson_05_check_before_calculating.en.md)**
+26. **[Lesson 3.6: The program makes decisions (the Module 3 test)](course/module_03_decisions_and_conditions/lesson_06_the_program_decides.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
-In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2 (lessons 2.1–2.8), programs start to remember values, calculate, take data from the user and store text. It ends with the test in lesson 2.8. In Module 3, which starts with lesson 3.1, programs start to make decisions. The further lessons of Module 3 are in preparation.
+In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2 (lessons 2.1–2.8), programs start to remember values, calculate, take data from the user and store text. It ends with the test in lesson 2.8. In Module 3 (lessons 3.1–3.6), programs start to make decisions. It ends with the test in lesson 3.6. Further modules are in preparation.
 
 ## What comes next
 
