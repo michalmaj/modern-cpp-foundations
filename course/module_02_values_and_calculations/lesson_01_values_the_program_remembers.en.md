@@ -367,7 +367,7 @@ It doesn't know in advance. It calculates it from two variables: the number of s
 
 ## What's next
 
-In this lesson, every variable got its value once, when it was created. In lesson 2.2, values will start to change while the program runs. **Lesson 2.2 is in preparation.**
+In this lesson, every variable got its value once, when it was created. In [lesson 2.2](lesson_02_when_values_change.en.md), values will start to change while the program runs.
 
 ---
 
@@ -467,4 +467,4 @@ Only one number changed: `tickets_sold{9}`. The program calculated both results 
 
 </details>
 
-**Previous lesson:** [Lesson 1.6: From an idea to a working program, on your own](../module_01_first_programs/lesson_06_from_idea_to_working_program.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 1.6: From an idea to a working program, on your own](../module_01_first_programs/lesson_06_from_idea_to_working_program.en.md) · **Next lesson:** [Lesson 2.2: When values change](lesson_02_when_values_change.en.md) · [Course overview](../../README.en.md)

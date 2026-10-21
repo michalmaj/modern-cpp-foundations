@@ -367,7 +367,7 @@ Nie wie tego z góry. Oblicza to z dwóch zmiennych: liczby miejsc w sali (50) m
 
 ## Co dalej
 
-W tej lekcji każda zmienna dostawała wartość raz, przy tworzeniu. W lekcji 2.2 wartości zaczną się zmieniać w trakcie działania programu. **Lekcja 2.2 jest w przygotowaniu.**
+W tej lekcji każda zmienna dostawała wartość raz, przy tworzeniu. W [lekcji 2.2](lesson_02_when_values_change.md) wartości zaczną się zmieniać w trakcie działania programu.
 
 ---
 
@@ -467,4 +467,4 @@ Zmieniła się tylko jedna liczba: `tickets_sold{9}`. Oba wyniki program obliczy
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 1.6: Samodzielnie od pomysłu do działającego programu](../module_01_first_programs/lesson_06_from_idea_to_working_program.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 1.6: Samodzielnie od pomysłu do działającego programu](../module_01_first_programs/lesson_06_from_idea_to_working_program.md) · **Następna lekcja:** [Lekcja 2.2: Gdy wartości się zmieniają](lesson_02_when_values_change.md) · [Opis kursu](../../README.md)
