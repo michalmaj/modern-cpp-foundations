@@ -262,7 +262,7 @@ Nazwa projektu i nazwa programu są tu takie same (`first_program`), ale to dwie
 
 **Przewidź:** co pojawi się w `build-terminal` po ponownym budowaniu? Czy zniknie `first_program`?
 
-4. Zbuduj ponownie: `cmake --build build-terminal`. Nie musisz sam konfigurować: Ninja zauważy zmianę w `CMakeLists.txt` i najpierw sam uruchomi CMake. Zobaczysz to jako `Re-running CMake...` na początku wyniku. Potem kompilacja i `Linking CXX executable hello_cmake`.
+4. Zbuduj ponownie: `cmake --build build-terminal`. Nie musisz ręcznie powtarzać konfiguracji: Ninja zauważy zmianę w `CMakeLists.txt` i najpierw sam uruchomi CMake. Zobaczysz to jako `Re-running CMake...` na początku wyniku. Potem kompilacja i `Linking CXX executable hello_cmake`.
 5. Sprawdź `ls build-terminal` (na macOS i Ubuntu `ls -F build-terminal`) i uruchom nowy program: `.\build-terminal\hello_cmake.exe` (macOS i Ubuntu: `./build-terminal/hello_cmake`).
 
 <details>

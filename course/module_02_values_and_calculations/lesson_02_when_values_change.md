@@ -282,7 +282,7 @@ Mały parking ma 20 miejsc i rano jest pusty. W ciągu dnia:
 - w południe przyjeżdżają jeszcze 4;
 - po południu wyjeżdża 6 samochodów.
 
-W `cpp-workspace` utwórz katalog `parking_day`, skopiuj do niego `CMakeLists.txt` z oryginalnego `lesson_05_first_program`, utwórz pusty `main.cpp` i napisz program sam. Program ma wypisać dokładnie:
+W `cpp-workspace` utwórz katalog `parking_day`, skopiuj do niego `CMakeLists.txt` z oryginalnego `lesson_05_first_program`, utwórz pusty `main.cpp` i napisz program samodzielnie. Program ma wypisać dokładnie:
 
 <!-- output: parking_day -->
 ```text

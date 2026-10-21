@@ -12,7 +12,7 @@ Ta lekcja zakłada, że:
 
 - masz w katalogu domowym katalog `cpp-workspace` z projektami z lekcji 1.1–1.4, na przykład `cinema_ticket` z misji lekcji 1.3;
 - umiesz w terminalu przejść do katalogu, wyświetlić jego zawartość i uruchomić program (Moduł 0);
-- wiesz, które pliki projektu piszesz sam, a które tworzą narzędzia (lekcja 1.4).
+- wiesz, które pliki projektu piszesz Ty, a które tworzą narzędzia (lekcja 1.4).
 
 ## Sytuacja
 

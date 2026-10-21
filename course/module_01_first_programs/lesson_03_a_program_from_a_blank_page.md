@@ -16,7 +16,7 @@ Ta lekcja zakłada, że po lekcjach 1.1 i 1.2:
 
 ## Sytuacja
 
-Do tej pory zawsze był gotowy program albo prawie gotowy kod. Dziś zaczniesz od **pustego pliku** `main.cpp` i napiszesz w nim cały program sam.
+Do tej pory zawsze był gotowy program albo prawie gotowy kod. Dziś zaczniesz od **pustego pliku** `main.cpp` i napiszesz w nim cały program samodzielnie.
 
 Poznasz też cztery nowe drobiazgi, bo bez nich wiele prostych programów nie da się napisać: jak wypisać cudzysłów `"`, jak wypisać ukośnik odwrotny `\`, jak dodać komentarz i co znaczy `return 0;` na końcu `main`.
 
@@ -31,7 +31,7 @@ Po tej lekcji będziesz:
 
 ## 1. Przygotuj pusty `main.cpp`
 
-„Od pustej kartki” znaczy tu: **sam piszesz `main.cpp`**. Plik `CMakeLists.txt` bierzesz gotowy, ten sam co zawsze.
+„Od pustej kartki” znaczy tu: **`main.cpp` piszesz samodzielnie**. Plik `CMakeLists.txt` bierzesz gotowy, ten sam co zawsze.
 
 1. W `cpp-workspace` utwórz katalog `lesson_1_3`.
 2. Skopiuj do niego `main.cpp` i `CMakeLists.txt` z oryginalnego katalogu kursu `lesson_05_first_program`, tak jak w lekcjach 1.1 i 1.2.

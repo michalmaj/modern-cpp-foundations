@@ -17,7 +17,7 @@ Jeśli nie masz projektu, pobierz go tak jak w [lekcji 0.5, punkt 2](lesson_05_f
 
 ## Sytuacja
 
-W lekcji 0.5 CLion zbudował i uruchomił program jednym kliknięciem. Czy to znaczy, że bez CLiona nie da się tego zrobić? Nie. CLion nie ma własnego, ukrytego kompilatora: wywołał te same narzędzia, które zainstalowano w lekcji 0.4. Dziś wywołasz je sam, w zwykłym terminalu.
+W lekcji 0.5 CLion zbudował i uruchomił program jednym kliknięciem. Czy to znaczy, że bez CLiona nie da się tego zrobić? Nie. CLion nie ma własnego, ukrytego kompilatora: wywołał te same narzędzia, które zainstalowano w lekcji 0.4. Dziś wywołasz je samodzielnie, w zwykłym terminalu.
 
 Po tej lekcji będziesz:
 
@@ -37,7 +37,7 @@ Po tej lekcji będziesz:
 | program w katalogu budowania CLiona, zwykle `cmake-build-debug` | **Plik wykonywalny**, który zbudował CLion w lekcji 0.5 (jeśli zbudował). |
 | **budowanie** | Zamiana kodu źródłowego w plik wykonywalny. |
 
-W lekcji 0.5 CLion wywołał za Ciebie trzy narzędzia: **CMake**, który przygotował plan budowania, **Ninja**, który ten plan wykonał, i kompilator **`clang++`**, który zamienił kod w program. Teraz wywołasz je sam.
+W lekcji 0.5 CLion wywołał za Ciebie trzy narzędzia: **CMake**, który przygotował plan budowania, **Ninja**, który ten plan wykonał, i kompilator **`clang++`**, który zamienił kod w program. Teraz wywołasz je bez jego pomocy.
 
 ## 2. Wypróbuj: wejdź do katalogu projektu
 
@@ -267,7 +267,7 @@ Spójrz, jaka droga jest już za Tobą:
 5. **Lekcja 0.5:** pierwszy program zbudowany i uruchomiony w CLionie.
 6. **Lekcja 0.6:** ten sam program zbudowany i uruchomiony samodzielnie, w terminalu.
 
-Na początku Modułu 0 terminal mógł być czymś zupełnie nowym. Teraz potrafisz sam zbudować i uruchomić program w C++.
+Na początku Modułu 0 terminal mógł być czymś zupełnie nowym. Teraz potrafisz samodzielnie zbudować i uruchomić program w C++.
 
 ## Co dalej: Moduł 1
 
