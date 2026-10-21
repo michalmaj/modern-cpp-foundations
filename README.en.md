@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). Module 2 is in development: its first two lessons are available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). Module 2 is in development: its first three lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -104,6 +104,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 1, lesson 6: [From an idea to a working program, on your own](course/module_01_first_programs/lesson_06_from_idea_to_working_program.en.md) (the Module 1 test) | Available (pilot version) |
 | Module 2, lesson 1: [Values the program remembers](course/module_02_values_and_calculations/lesson_01_values_the_program_remembers.en.md) | Available (pilot version) |
 | Module 2, lesson 2: [When values change](course/module_02_values_and_calculations/lesson_02_when_values_change.en.md) | Available (pilot version) |
+| Module 2, lesson 3: [See what happens in the program](course/module_02_values_and_calculations/lesson_03_see_what_happens_in_the_program.en.md) | Available (pilot version; the debugger steps in CLion have not yet been checked on every system) |
 | Module 2: the remaining lessons (values, types, variables and calculations) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -127,6 +128,7 @@ Work through the lessons in order, starting with the first:
 12. **[Lesson 1.6: From an idea to a working program, on your own](course/module_01_first_programs/lesson_06_from_idea_to_working_program.en.md)**
 13. **[Lesson 2.1: Values the program remembers](course/module_02_values_and_calculations/lesson_01_values_the_program_remembers.en.md)**
 14. **[Lesson 2.2: When values change](course/module_02_values_and_calculations/lesson_02_when_values_change.en.md)**
+15. **[Lesson 2.3: See what happens in the program](course/module_02_values_and_calculations/lesson_03_see_what_happens_in_the_program.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
