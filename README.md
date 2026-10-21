@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Moduł 2 jest rozwijany: dostępne są jego pierwsze pięć lekcji. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Moduł 2 jest rozwijany: dostępne są jego pierwsze sześć lekcji. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -107,6 +107,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 2, lekcja 3: [Zobacz, co dzieje się w programie](course/module_02_values_and_calculations/lesson_03_see_what_happens_in_the_program.md) | Dostępna (wersja pilotażowa; kroki debuggera w CLionie nie zostały jeszcze sprawdzone na każdym systemie) |
 | Moduł 2, lekcja 4: [Dzielenie, reszta i kolejność działań](course/module_02_values_and_calculations/lesson_04_division_remainder_and_order_of_operations.md) | Dostępna (wersja pilotażowa) |
 | Moduł 2, lekcja 5: [Liczby z częścią ułamkową: `double` i `auto`](course/module_02_values_and_calculations/lesson_05_numbers_with_a_fractional_part.md) | Dostępna (wersja pilotażowa) |
+| Moduł 2, lekcja 6: [Program, który pyta użytkownika](course/module_02_values_and_calculations/lesson_06_a_program_that_asks_the_user.md) | Dostępna (wersja pilotażowa) |
 | Moduł 2: pozostałe lekcje (wartości, typy, zmienne i obliczenia) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
@@ -133,6 +134,7 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 15. **[Lekcja 2.3: Zobacz, co dzieje się w programie](course/module_02_values_and_calculations/lesson_03_see_what_happens_in_the_program.md)**
 16. **[Lekcja 2.4: Dzielenie, reszta i kolejność działań](course/module_02_values_and_calculations/lesson_04_division_remainder_and_order_of_operations.md)**
 17. **[Lekcja 2.5: Liczby z częścią ułamkową: `double` i `auto`](course/module_02_values_and_calculations/lesson_05_numbers_with_a_fractional_part.md)**
+18. **[Lekcja 2.6: Program, który pyta użytkownika](course/module_02_values_and_calculations/lesson_06_a_program_that_asks_the_user.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
