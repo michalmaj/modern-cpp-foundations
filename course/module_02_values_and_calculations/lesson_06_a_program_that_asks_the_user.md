@@ -256,7 +256,7 @@ Zmienna, do której program wczytuje dane, ma wartość początkową jak każda 
 - `0` i `0.0` to tylko **wartości początkowe**. Udany odczyt zastępuje je danymi ze standardowego wejścia.
 - Taka zmienna **nie może być `const`**: odczyt zmienia jej wartość, a stałej zmienić nie można. Sprawdź, co powie kompilator, gdy spróbujesz:
 
-<!-- broken: read_into_const at=5 error=. -->
+<!-- broken: read_into_const at=5 errors=1 error=^(invalid operands to binary expression|use of overloaded operator '>>' is ambiguous) .*'const int'\)$ -->
 ```cpp
 #include <iostream>
 
@@ -267,7 +267,12 @@ int main() {
 }
 ```
 
-Program się nie zbuduje: kompilator zgłasza błąd w linijce z `std::cin >> count;`.
+Program się nie zbuduje. Kompilator zgłasza błąd w linijce 5, przy `>>`, ale jego treść zależy od systemu, bo pochodzi z biblioteki standardowej:
+
+- na Ubuntu i macOS: `invalid operands to binary expression ('istream' (aka 'basic_istream<char>') and 'const int')`;
+- na Windowsie: `use of overloaded operator '>>' is ambiguous (with operand types 'istream' (aka 'basic_istream<char, char_traits<char>>') and 'const int')`.
+
+Pod nim pojawia się wiele linijek `note:` o bibliotece standardowej, na niektórych systemach kilkadziesiąt. Nie musisz ich czytać. Jak w lekcji 1.2, liczy się pierwsza linijka z `error` w `main.cpp`. Obie wersje kończą się tak samo: `'const int'`. To jest przyczyna: `>>` nie może zapisać wartości w stałej. Przywróć poprawny kod: usuń `const`.
 
 - **Po** odczycie możesz użyć danych do utworzenia stałej, jeśli wynik obliczenia ma się już nie zmieniać. Tak zrobisz w następnym punkcie.
 - Wartość początkowa `0` **nie** zabezpiecza programu przed złymi danymi. To po prostu poprawnie zainicjalizowana zmienna (więcej w punkcie 11).
@@ -349,7 +354,7 @@ Total items: 56
 
 W lekcji 2.5 wszystkie dane były stałymi z wartościami wpisanymi w kodzie. Teraz wartości pojawiają się dopiero podczas działania programu, i to ma znaczenie dla `{}`. Ten program zapisuje liczbę miejsc w sali jako `double`:
 
-<!-- broken: seats_as_double at=8 error=. -->
+<!-- broken: seats_as_double at=8 errors=1 error=^non-constant-expression cannot be narrowed from type 'int' to 'double' in initializer list -->
 ```cpp
 #include <iostream>
 
@@ -363,21 +368,40 @@ int main() {
 }
 ```
 
-Program się nie zbuduje: kompilator zgłasza błąd w linijce z `const double seats`.
+Program się nie zbuduje. Kompilator zgłasza w linijce 8 `non-constant-expression cannot be narrowed from type 'int' to 'double' in initializer list`, czyli: wyrażenia, które nie jest stałe, nie można zawęzić z `int` do `double` w nawiasach klamrowych.
 
-<!-- broken: probe_division at=8 error=. -->
+- W lekcji 2.5 `const double first{7 / 2};` budowało się, bo `7 / 2` jest **stałym wyrażeniem**: kompilator zna jego wartość już podczas budowania i widzi, że da się ją zapisać w `double` bez zmiany.
+- Tutaj `rows * chairs_per_row` zależy od danych, których jeszcze nie ma. Wynik typu `int`, znany dopiero podczas działania programu, `{}` traktuje przy zamianie na `double` jako konwersję zawężającą i jej nie przyjmuje.
+- Linijkę `note:` z radą o jawnej zmianie typu (*explicit cast*) na razie pomiń, jak w lekcji 2.5.
+
+Właściwa poprawka to **typ dobrany do wyniku**. Liczba miejsc jest całkowita, a `int` razy `int` daje `int`, więc wynik powinien być typu `int`:
+
+<!-- example: seats_as_int -->
 ```cpp
 #include <iostream>
 
 int main() {
-    int points{0};
-    int games{0};
-    std::cin >> points;
-    std::cin >> games;
-    const double average{points / games};
-    std::cout << "Average: " << average << "\n";
+    int rows{0};
+    int chairs_per_row{0};
+    std::cin >> rows;
+    std::cin >> chairs_per_row;
+    const int seats{rows * chairs_per_row};
+    std::cout << "Seats: " << seats << "\n";
 }
 ```
+
+<!-- input: seats_as_int -->
+```text
+5
+8
+```
+
+<!-- output: seats_as_int -->
+```text
+Seats: 40
+```
+
+To samo zobaczysz przy dzieleniu: `const double average{points / games};` z dwiema zmiennymi `int` odczytanymi z wejścia też się nie zbuduje, z tym samym komunikatem. Nawet bez tego błędu wynik byłby zły, bo dzielenie dwóch `int` jest dzieleniem całkowitym (lekcja 2.4). Dlatego w zadaniach dobieraj typy według znaczenia danych: `int` dla liczb całkowitych, `double` dla wielkości z częścią ułamkową. Gdy w mnożeniu bierze udział `double`, wynik też jest `double` i pasuje do zmiennej `double`.
 
 ## 11. Zakładamy poprawne dane
 

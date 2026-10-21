@@ -256,7 +256,7 @@ A variable the program reads data into has a starting value like any other: `int
 - `0` and `0.0` are only **starting values**. A successful read replaces them with the data from standard input.
 - Such a variable **can't be `const`**: reading changes its value, and a constant can't be changed. Check what the compiler says if you try:
 
-<!-- broken: read_into_const at=5 error=. -->
+<!-- broken: read_into_const at=5 errors=1 error=^(invalid operands to binary expression|use of overloaded operator '>>' is ambiguous) .*'const int'\)$ -->
 ```cpp
 #include <iostream>
 
@@ -267,7 +267,12 @@ int main() {
 }
 ```
 
-The program won't build: the compiler reports an error on the line with `std::cin >> count;`.
+The program won't build. The compiler reports an error on line 5, at `>>`, but its wording depends on the system, because it comes from the standard library:
+
+- on Ubuntu and macOS: `invalid operands to binary expression ('istream' (aka 'basic_istream<char>') and 'const int')`;
+- on Windows: `use of overloaded operator '>>' is ambiguous (with operand types 'istream' (aka 'basic_istream<char, char_traits<char>>') and 'const int')`.
+
+Below it come many `note:` lines about the standard library, several dozen on some systems. You don't need to read them. As in lesson 1.2, what counts is the first line with `error` in `main.cpp`. Both versions end the same way: `'const int'`. That's the cause: `>>` can't store a value in a constant. Restore correct code: remove `const`.
 
 - **After** reading, you can use the data to create a constant, if the result of a calculation shouldn't change any more. You'll do that in the next section.
 - The starting value `0` does **not** protect the program against bad data. It's simply a correctly initialised variable (more in section 11).
@@ -349,7 +354,7 @@ Total items: 56
 
 In lesson 2.5, all the data were constants with values written in the code. Now the values appear only while the program runs, and that matters for `{}`. This program stores the number of seats in a room as a `double`:
 
-<!-- broken: seats_as_double at=8 error=. -->
+<!-- broken: seats_as_double at=8 errors=1 error=^non-constant-expression cannot be narrowed from type 'int' to 'double' in initializer list -->
 ```cpp
 #include <iostream>
 
@@ -363,21 +368,40 @@ int main() {
 }
 ```
 
-The program won't build: the compiler reports an error on the line with `const double seats`.
+The program won't build. On line 8, the compiler reports `non-constant-expression cannot be narrowed from type 'int' to 'double' in initializer list`.
 
-<!-- broken: probe_division at=8 error=. -->
+- In lesson 2.5, `const double first{7 / 2};` built, because `7 / 2` is a **constant expression**: the compiler knows its value while building, and sees that it can be stored in a `double` without changing.
+- Here, `rows * chairs_per_row` depends on data that doesn't exist yet. An `int` result known only while the program runs is treated by `{}` as a narrowing conversion when it is changed to `double`, and is not accepted.
+- Skip the `note:` line suggesting an explicit cast for now, as in lesson 2.5.
+
+The right fix is **a type that fits the result**. The number of seats is a whole number, and `int` times `int` gives `int`, so the result should be of type `int`:
+
+<!-- example: seats_as_int -->
 ```cpp
 #include <iostream>
 
 int main() {
-    int points{0};
-    int games{0};
-    std::cin >> points;
-    std::cin >> games;
-    const double average{points / games};
-    std::cout << "Average: " << average << "\n";
+    int rows{0};
+    int chairs_per_row{0};
+    std::cin >> rows;
+    std::cin >> chairs_per_row;
+    const int seats{rows * chairs_per_row};
+    std::cout << "Seats: " << seats << "\n";
 }
 ```
+
+<!-- input: seats_as_int -->
+```text
+5
+8
+```
+
+<!-- output: seats_as_int -->
+```text
+Seats: 40
+```
+
+You'll see the same with division: `const double average{points / games};` with two `int` variables read from input won't build either, with the same message. Even without that error the result would be wrong, because dividing two `int`s is an integer division (lesson 2.4). So in the exercises, choose types by the meaning of the data: `int` for whole numbers, `double` for quantities with a fractional part. When a `double` takes part in a multiplication, the result is a `double` too, and fits a `double` variable.
 
 ## 11. We assume correct data
 
