@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). Module 3 is in development: its first lesson is available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -110,6 +110,8 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 2, lesson 6: [A program that asks the user](course/module_02_values_and_calculations/lesson_06_a_program_that_asks_the_user.en.md) | Available (pilot version) |
 | Module 2, lesson 7: [Text the program remembers (`std::string`)](course/module_02_values_and_calculations/lesson_07_text_the_program_remembers.en.md) | Available (pilot version) |
 | Module 2, lesson 8: [From data to result](course/module_02_values_and_calculations/lesson_08_from_data_to_result.en.md) (the Module 2 test) | Available (pilot version) |
+| Module 3, lesson 1: [The program's first decision (`if`)](course/module_03_decisions_and_conditions/lesson_01_the_first_decision.en.md) | Available (pilot version) |
+| Module 3: the remaining lessons (conditions and decisions) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
 | Courses B and C | Planned, repositories do not exist yet |
@@ -138,10 +140,11 @@ Work through the lessons in order, starting with the first:
 18. **[Lesson 2.6: A program that asks the user](course/module_02_values_and_calculations/lesson_06_a_program_that_asks_the_user.en.md)**
 19. **[Lesson 2.7: Text the program remembers (`std::string`)](course/module_02_values_and_calculations/lesson_07_text_the_program_remembers.en.md)**
 20. **[Lesson 2.8: From data to result (the Module 2 test)](course/module_02_values_and_calculations/lesson_08_from_data_to_result.en.md)**
+21. **[Lesson 3.1: The program's first decision (`if`)](course/module_03_decisions_and_conditions/lesson_01_the_first_decision.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
-In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2 (lessons 2.1–2.8), programs start to remember values, calculate, take data from the user and store text. It ends with the test in lesson 2.8. Further modules are in preparation.
+In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2 (lessons 2.1–2.8), programs start to remember values, calculate, take data from the user and store text. It ends with the test in lesson 2.8. In Module 3, which starts with lesson 3.1, programs start to make decisions. The further lessons of Module 3 are in preparation.
 
 ## What comes next
 

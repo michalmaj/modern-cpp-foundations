@@ -505,6 +505,6 @@ O stanie materiałów: kod i obliczenia ze wszystkich lekcji Modułu 2 są spraw
 
 ## Co dalej: Moduł 3
 
-Twoje programy wykonują na razie zawsze te same instrukcje, od góry do dołu. W Module 3 zaczną **podejmować decyzje**: poznasz porównania i warunki, dzięki którym program wykona różne instrukcje w zależności od danych. Moduł 3 jest w przygotowaniu.
+Twoje programy wykonują na razie zawsze te same instrukcje, od góry do dołu. W Module 3 zaczną **podejmować decyzje**: poznasz porównania i warunki, dzięki którym program wykona różne instrukcje w zależności od danych. Zacznij od [lekcji 3.1: Pierwsza decyzja programu (`if`)](../module_03_decisions_and_conditions/lesson_01_the_first_decision.md). Moduł 3 jest rozwijany: kolejne lekcje są w przygotowaniu.
 
-**Poprzednia lekcja:** [Lekcja 2.7: Tekst, który program pamięta (`std::string`)](lesson_07_text_the_program_remembers.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 2.7: Tekst, który program pamięta (`std::string`)](lesson_07_text_the_program_remembers.md) · **Następna lekcja:** [Lekcja 3.1: Pierwsza decyzja programu (`if`)](../module_03_decisions_and_conditions/lesson_01_the_first_decision.md) · [Opis kursu](../../README.md)
