@@ -778,7 +778,7 @@ Because entry requires both parts to be met at once (`&&`): the age is in range,
 
 ## What's next
 
-Your programs now combine several conditions. In lesson 3.5 you'll use this skill to **check data before the program uses it**, for example so that it never divides by zero. **Lesson 3.5 is in preparation.**
+Your programs now combine several conditions. In lesson 3.5 you'll use this skill to **check data before the program uses it**, for example so that it never divides by zero: [Lesson 3.5: Checking data before calculating](lesson_05_check_before_calculating.en.md).
 
 ---
 
@@ -921,4 +921,4 @@ The second decision is separate, as in lesson 3.2: `!is_weekend` is true for eve
 
 </details>
 
-**Previous lesson:** [Lesson 3.3: Choosing among many possibilities (`else if`)](lesson_03_many_possibilities.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 3.3: Choosing among many possibilities (`else if`)](lesson_03_many_possibilities.en.md) · **Next lesson:** [Lesson 3.5: Checking data before calculating](lesson_05_check_before_calculating.en.md) · [Course overview](../../README.en.md)

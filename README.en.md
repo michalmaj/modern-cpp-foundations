@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). Module 3 is in development: its first four lessons are available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). Module 3 is in development: its first five lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -114,6 +114,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 3, lesson 2: [Two possibilities (`else`), equality and `bool`](course/module_03_decisions_and_conditions/lesson_02_two_ways.en.md) | Available (pilot version) |
 | Module 3, lesson 3: [Choosing among many possibilities (`else if`)](course/module_03_decisions_and_conditions/lesson_03_many_possibilities.en.md) | Available (pilot version) |
 | Module 3, lesson 4: [Combining conditions (`&&`, `\|\|`, `!`)](course/module_03_decisions_and_conditions/lesson_04_combining_conditions.en.md) | Available (pilot version) |
+| Module 3, lesson 5: [Checking data before calculating](course/module_03_decisions_and_conditions/lesson_05_check_before_calculating.en.md) | Available (pilot version) |
 | Module 3: the remaining lessons (conditions and decisions) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -147,6 +148,7 @@ Work through the lessons in order, starting with the first:
 22. **[Lesson 3.2: Two possibilities (`else`), equality and `bool`](course/module_03_decisions_and_conditions/lesson_02_two_ways.en.md)**
 23. **[Lesson 3.3: Choosing among many possibilities (`else if`)](course/module_03_decisions_and_conditions/lesson_03_many_possibilities.en.md)**
 24. **[Lesson 3.4: Combining conditions (`&&`, `||`, `!`)](course/module_03_decisions_and_conditions/lesson_04_combining_conditions.en.md)**
+25. **[Lesson 3.5: Checking data before calculating](course/module_03_decisions_and_conditions/lesson_05_check_before_calculating.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
