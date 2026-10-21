@@ -469,7 +469,7 @@ For example: printing requires changing the code, and the debugger doesn't. Prin
 
 ## What's next
 
-You can now compare your prediction with what the program really does, and find the first wrong statement. **Lesson 2.4 is in preparation.**
+You can now compare your prediction with what the program really does, and find the first wrong statement. In lesson 2.4 you'll learn integer division, the remainder of a division and the rules for the order of operations: [Lesson 2.4: Division, remainder and the order of operations](lesson_04_division_remainder_and_order_of_operations.en.md).
 
 ---
 
@@ -545,4 +545,4 @@ Its output is the one in the success criteria: `On the shelf: 15` and `Borrowed:
 
 </details>
 
-**Previous lesson:** [Lesson 2.2: When values change](lesson_02_when_values_change.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 2.2: When values change](lesson_02_when_values_change.en.md) · **Next lesson:** [Lesson 2.4: Division, remainder and the order of operations](lesson_04_division_remainder_and_order_of_operations.en.md) · [Course overview](../../README.en.md)
