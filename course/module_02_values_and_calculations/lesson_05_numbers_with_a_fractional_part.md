@@ -598,7 +598,7 @@ Bo okrążeń jest zawsze całkowita liczba. Część ułamkową mają czasy. Wy
 
 ## Co dalej
 
-Twoje programy liczą już na liczbach całkowitych i ułamkowych, ale wszystkie dane są wpisane w kodzie. W lekcji 2.6 program zacznie pobierać liczby od użytkownika. **Lekcja 2.6 jest w przygotowaniu.**
+Twoje programy liczą już na liczbach całkowitych i ułamkowych, ale wszystkie dane są wpisane w kodzie. W lekcji 2.6 program zacznie pobierać liczby od użytkownika: [Lekcja 2.6: Program, który pyta użytkownika](lesson_06_a_program_that_asks_the_user.md).
 
 ---
 
@@ -685,4 +685,4 @@ Zmieniła się tylko wartość początkowa `total_time_s`. Obliczenie zostało t
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 2.4: Dzielenie, reszta i kolejność działań](lesson_04_division_remainder_and_order_of_operations.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 2.4: Dzielenie, reszta i kolejność działań](lesson_04_division_remainder_and_order_of_operations.md) · **Następna lekcja:** [Lekcja 2.6: Program, który pyta użytkownika](lesson_06_a_program_that_asks_the_user.md) · [Opis kursu](../../README.md)

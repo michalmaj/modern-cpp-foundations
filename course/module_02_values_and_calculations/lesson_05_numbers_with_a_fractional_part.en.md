@@ -598,7 +598,7 @@ Because there is always a whole number of laps. The times are what have a fracti
 
 ## What's next
 
-Your programs now calculate with whole and fractional numbers, but all their data is written in the code. In lesson 2.6, a program will start taking numbers from the user. **Lesson 2.6 is in preparation.**
+Your programs now calculate with whole and fractional numbers, but all their data is written in the code. In lesson 2.6, a program will start taking numbers from the user: [Lesson 2.6: A program that asks the user](lesson_06_a_program_that_asks_the_user.en.md).
 
 ---
 
@@ -685,4 +685,4 @@ Only the starting value of `total_time_s` changed. The calculation stayed the sa
 
 </details>
 
-**Previous lesson:** [Lesson 2.4: Division, remainder and the order of operations](lesson_04_division_remainder_and_order_of_operations.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 2.4: Division, remainder and the order of operations](lesson_04_division_remainder_and_order_of_operations.en.md) · **Next lesson:** [Lesson 2.6: A program that asks the user](lesson_06_a_program_that_asks_the_user.en.md) · [Course overview](../../README.en.md)
