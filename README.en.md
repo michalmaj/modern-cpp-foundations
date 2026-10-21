@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). Module 2 is in development: its first six lessons are available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). Module 2 is in development: its first seven lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -108,6 +108,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 2, lesson 4: [Division, remainder and the order of operations](course/module_02_values_and_calculations/lesson_04_division_remainder_and_order_of_operations.en.md) | Available (pilot version) |
 | Module 2, lesson 5: [Numbers with a fractional part: `double` and `auto`](course/module_02_values_and_calculations/lesson_05_numbers_with_a_fractional_part.en.md) | Available (pilot version) |
 | Module 2, lesson 6: [A program that asks the user](course/module_02_values_and_calculations/lesson_06_a_program_that_asks_the_user.en.md) | Available (pilot version) |
+| Module 2, lesson 7: [Text the program remembers (`std::string`)](course/module_02_values_and_calculations/lesson_07_text_the_program_remembers.en.md) | Available (pilot version) |
 | Module 2: the remaining lessons (values, types, variables and calculations) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -135,6 +136,7 @@ Work through the lessons in order, starting with the first:
 16. **[Lesson 2.4: Division, remainder and the order of operations](course/module_02_values_and_calculations/lesson_04_division_remainder_and_order_of_operations.en.md)**
 17. **[Lesson 2.5: Numbers with a fractional part: `double` and `auto`](course/module_02_values_and_calculations/lesson_05_numbers_with_a_fractional_part.en.md)**
 18. **[Lesson 2.6: A program that asks the user](course/module_02_values_and_calculations/lesson_06_a_program_that_asks_the_user.en.md)**
+19. **[Lesson 2.7: Text the program remembers (`std::string`)](course/module_02_values_and_calculations/lesson_07_text_the_program_remembers.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 

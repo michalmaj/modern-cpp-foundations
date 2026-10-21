@@ -562,7 +562,7 @@ Użytkownik wpisuje liczby. `std::cin >>` zapisuje je w zmiennych `int` i `doubl
 
 ## Co dalej
 
-Twoje programy pytają już o liczby. W lekcji 2.7 poznasz wartości tekstowe i program zapyta o słowo. **Lekcja 2.7 jest w przygotowaniu.**
+Twoje programy pytają już o liczby. W lekcji 2.7 poznasz wartości tekstowe i program zapyta o tekst: [Lekcja 2.7: Tekst, który program pamięta (`std::string`)](lesson_07_text_the_program_remembers.md).
 
 ---
 
@@ -598,4 +598,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 2.5: Liczby z częścią ułamkową: `double` i `auto`](lesson_05_numbers_with_a_fractional_part.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 2.5: Liczby z częścią ułamkową: `double` i `auto`](lesson_05_numbers_with_a_fractional_part.md) · **Następna lekcja:** [Lekcja 2.7: Tekst, który program pamięta (`std::string`)](lesson_07_text_the_program_remembers.md) · [Opis kursu](../../README.md)
