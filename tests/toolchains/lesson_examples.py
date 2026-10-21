@@ -7,6 +7,11 @@ Lessons mark their code blocks with HTML comments, which GitHub does not show:
     <!-- example: NAME source=PATH -->  ... and it must equal the file PATH (relative to the lesson);
     <!-- example: NAME exit=N -->        ... and it must exit with code N instead of 0;
     <!-- output: NAME -->               the next ```text block is the exact output of example NAME;
+    <!-- input: NAME -->                the next ```text block is fed to example NAME on standard input, in
+                                        a separate run of the same built program; the output blocks that
+                                        follow it (up to the next input block of NAME) are the exact output
+                                        of that run. An example with input blocks needs an input block
+                                        before its first output block, and an output block after each input;
     <!-- broken: NAME at=LINE[:COLUMN] [errors=N] error=REGEX -->
                                         the next ```cpp block is a complete program with deliberate
                                         mistakes: it must FAIL TO COMPILE, and the first compiler
@@ -35,7 +40,9 @@ Checks:
     The configure step must succeed and report Clang 22 or newer, so that a broken environment
     is never mistaken for the expected compile error.
   * an example must build, exit with 0 (or its exit=N), print nothing to stderr, and print exactly the expected
-    output (Windows line ends ignored);
+    output (Windows line ends ignored). It is built once and run once per input block (or once with an
+    empty standard input when it has none), each run within --timeout seconds. Only the program's own
+    standard output is compared: typed input never appears in it, because nothing is typed;
   * a broken program must fail to build because of compiler errors in main.cpp, as described
     by its marker; with stage=link, it must compile and then fail in the linker, as above.
     Its whole build output is printed, to compare the messages across systems.
@@ -57,7 +64,7 @@ import subprocess
 import sys
 import tempfile
 
-MARKER = re.compile(r'^<!-- (?:(example|output|broken): ([a-z0-9_]+)(.*?)|(fragment)) -->$')
+MARKER = re.compile(r'^<!-- (?:(example|output|input|broken): ([a-z0-9_]+)(.*?)|(fragment)) -->$')
 SOURCE = re.compile(r'^(?: source=(\S+))?(?: exit=(\d+))?$')
 BROKEN = re.compile(r'^(?: stage=(link))?(?: at=(\d+)(?::(\d+))?)?(?: errors=(\d+))? error=(.+)$')
 FENCE = re.compile(r'^```(\S*)$')
@@ -103,7 +110,7 @@ def blocks(path):
             text = '\n'.join(body) + '\n'
             if marker:
                 kind, name, attributes = marker[:3]
-                expected = 'text' if kind == 'output' else 'cpp'
+                expected = 'text' if kind in ('output', 'input') else 'cpp'
                 if language != expected:
                     fail(f'{path}:{start}: {kind} marker on a ```{language} block, expected ```{expected}')
                 found.append((kind, name, attributes, language, text, start))
@@ -118,7 +125,8 @@ def blocks(path):
 
 
 def check_lesson(path, found):
-    """Checks one lesson's markers; returns its examples, outputs and broken programs."""
+    """Checks one lesson's markers; returns its examples, their runs and the broken programs.
+    A run is (standard input, or None for none, [expected outputs])."""
     examples, broken = {}, {}
     for kind, name, attributes, _, text, line in found:
         if not text.isascii():
@@ -139,16 +147,29 @@ def check_lesson(path, found):
             expectation = BROKEN.match(attributes)
             if expectation:
                 broken[name] = (text, expectation)
-    outputs = {}
+    runs = {}
     for kind, name, _, _, text, line in found:
-        if kind == 'output':
-            if name not in examples:
-                fail(f'{path}:{line}: output {name} has no example')
-            outputs.setdefault(name, []).append(text)
+        if kind not in ('output', 'input'):
+            continue
+        if name not in examples:
+            fail(f'{path}:{line}: {kind} {name} has no example')
+            continue
+        name_runs = runs.setdefault(name, [])
+        if kind == 'input':
+            name_runs.append((text, []))
+        else:
+            if not name_runs:
+                name_runs.append((None, []))
+            name_runs[-1][1].append(text)
     for name in examples:
-        if name not in outputs:
+        name_runs = runs.get(name, [])
+        if not any(outputs for _, outputs in name_runs):
             fail(f'{path}: example {name} has no output block')
-    return examples, outputs, broken
+        elif any(data is not None for data, _ in name_runs) and name_runs[0][0] is None:
+            fail(f'{path}: example {name}: an output block comes before its first input block')
+        elif any(not outputs for _, outputs in name_runs):
+            fail(f'{path}: example {name}: an input block has no output block after it')
+    return examples, runs, broken
 
 
 def run(command):
@@ -182,7 +203,7 @@ def build(lesson, name, code, args, flags=WARNINGS):
     return work / 'build', run([args.cmake, '--build', str(work / 'build')])
 
 
-def check_example(lesson, name, code, exit_code, expected, args):
+def check_example(lesson, name, code, exit_code, runs, args):
     built = build(lesson, name, code, args)
     if not built:
         return
@@ -192,20 +213,36 @@ def check_example(lesson, name, code, exit_code, expected, args):
         return
     target = re.search(r'add_executable\((\S+)', PROJECT.read_text(encoding='utf-8'))[1]
     exe = build_dir / (target + ('.exe' if sys.platform == 'win32' else ''))
-    result = subprocess.run([str(exe)], capture_output=True)
-    out = result.stdout.decode('ascii', errors='replace').replace('\r\n', '\n')
-    if result.returncode != exit_code:
-        fail(f'{lesson}: example {name}: exit code {result.returncode}, expected {exit_code}')
-    if result.stderr:
-        fail(f'{lesson}: example {name}: printed to stderr: {result.stderr!r}')
-    for text in expected:
-        if out != text:
-            fail(f'{lesson}: example {name}: output {out!r}, expected {text!r}')
-            return
-    print(f'ok   {lesson}: example {name} builds, runs, exits with {exit_code} '
-          f'and prints the expected {len(expected)} output block(s):')
-    for line in out.splitlines():
-        print(f'       | {line}')
+    # The same program for every run: built once above, never rebuilt between inputs.
+    for number, (data, expected) in enumerate(runs or [(None, [])], 1):
+        label = f'example {name}' if data is None else f'example {name} (input {number} of {len(runs)})'
+        try:
+            # A pipe, not a terminal: the input is never echoed, so stdout is the program's output alone.
+            # Without an input block the program gets an empty standard input, never the checker's own.
+            result = subprocess.run([str(exe)], capture_output=True, timeout=args.timeout,
+                                    **({'stdin': subprocess.DEVNULL} if data is None else {'input': data.encode('ascii')}))
+        except subprocess.TimeoutExpired:
+            fail(f'{lesson}: {label}: did not finish within {args.timeout} s')
+            continue
+        out = result.stdout.decode('ascii', errors='replace').replace('\r\n', '\n')
+        problems = []
+        if result.returncode != exit_code:
+            problems.append(f'exit code {result.returncode}, expected {exit_code}')
+        if result.stderr:
+            problems.append(f'printed to stderr: {result.stderr!r}')
+        mismatch = next((text for text in expected if out != text), None)
+        if mismatch is not None:
+            problems.append(f'output {out!r}, expected {mismatch!r}')
+        if problems:
+            for problem in problems:
+                fail(f'{lesson}: {label}: {problem}')
+            continue
+        print(f'ok   {lesson}: {label} builds, runs, exits with {exit_code} '
+              f'and prints the expected {len(expected)} output block(s):')
+        for line in (data or '').splitlines():
+            print(f'       < {line}')
+        for line in out.splitlines():
+            print(f'       | {line}')
 
 
 def check_broken(lesson, name, code, expectation, args):
@@ -292,14 +329,16 @@ def check_course(args):
             fail(f'{pl}: the marked code blocks differ between {pl.name} and {en.name}')
         else:
             print(f'ok   {len(pl_marked)} marked blocks are identical in {pl.name} and {en.name}')
-        examples, outputs, broken = check_lesson(pl, pl_blocks)
+        examples, runs, broken = check_lesson(pl, pl_blocks)
         if en.exists():
             check_lesson(en, en_blocks)
         fragments = sum(1 for block in pl_blocks if block[0] == 'fragment')
-        print(f'     {len(examples)} examples to build and run, {len(broken)} broken programs that must not compile, '
+        inputs = sum(1 for block in pl_blocks if block[0] == 'input')
+        print(f'     {len(examples)} examples to build and run ({inputs} runs with standard input), '
+              f'{len(broken)} broken programs that must not compile, '
               f'{fragments} fragments (deliberately incomplete, not built)')
         for name, (code, exit_code) in examples.items():
-            check_example(pl.stem, name, code, exit_code, outputs.get(name, []), args)
+            check_example(pl.stem, name, code, exit_code, runs.get(name, []), args)
         for name, (code, expectation) in broken.items():
             check_broken(pl.stem, name, code, expectation, args)
     if checked == 0:
@@ -312,6 +351,12 @@ GOOD = '#include <iostream>\n\nint main() {\n    std::cout << "Hi!\\n";\n}\n'
 NO_SEMICOLON = GOOD.replace('\\n";', '\\n"')
 RETURN_3 = GOOD.replace('\n}\n', '\n    return 3;\n}\n')
 MIAN = GOOD.replace('int main()', 'int mian()').replace('\n}\n', '\n    return 0;\n}\n')
+READ_INT = ('#include <iostream>\n\nint main() {\n    int count{0};\n    std::cin >> count;\n'
+            '    std::cout << "Count: " << count << "\\n";\n}\n')
+READ_TWO = ('#include <iostream>\n\nint main() {\n    int laps{0};\n    double lap_km{0.0};\n'
+            '    std::cin >> laps;\n    std::cin >> lap_km;\n    std::cout << "Total: " << laps * lap_km << "\\n";\n}\n')
+# Never finishes on its own (the volatile counter keeps the loop from being optimised away).
+ENDLESS = '#include <iostream>\n\nint main() {\n    volatile int steps{0};\n    for (;;) {\n        steps = steps + 1;\n    }\n}\n'
 
 
 def lesson(*parts):
@@ -360,6 +405,36 @@ def self_test(args):
         # A missing compiler breaks configuring: that must never pass as the expected compile error.
         ('a broken environment is not taken for the expected error',
          lesson((semicolon, 'cpp', NO_SEMICOLON)), None, 'configure failed (an environment problem'),
+        # Standard input (input: blocks).
+        ('an example with standard input passes',
+         lesson(('example: count', 'cpp', READ_INT), ('input: count', 'text', '5\n'),
+                ('output: count', 'text', 'Count: 5\n')), None, None),
+        ('two inputs run the same program separately, and both pass',
+         lesson(('example: count', 'cpp', READ_INT), ('input: count', 'text', '5\n'), ('output: count', 'text', 'Count: 5\n'),
+                ('input: count', 'text', '12\n'), ('output: count', 'text', 'Count: 12\n')), None, None),
+        ('input in several lines passes',
+         lesson(('example: total', 'cpp', READ_TWO), ('input: total', 'text', '4\n1.25\n'),
+                ('output: total', 'text', 'Total: 5\n')), None, None),
+        ('a wrong output for the second input is detected',
+         lesson(('example: count', 'cpp', READ_INT), ('input: count', 'text', '5\n'), ('output: count', 'text', 'Count: 5\n'),
+                ('input: count', 'text', '12\n'), ('output: count', 'text', 'Count: 13\n')),
+         None, 'example count (input 2 of 2): output'),
+        ('an output block before the first input block is detected',
+         lesson(('example: count', 'cpp', READ_INT), ('output: count', 'text', 'Count: 0\n'),
+                ('input: count', 'text', '5\n'), ('output: count', 'text', 'Count: 5\n')),
+         None, 'an output block comes before its first input block'),
+        ('an input block without an output block is detected',
+         lesson(('example: count', 'cpp', READ_INT), ('input: count', 'text', '5\n'), ('output: count', 'text', 'Count: 5\n'),
+                ('input: count', 'text', '12\n')),
+         None, 'an input block has no output block after it'),
+        ('an input block without an example is detected',
+         lesson(*good, ('input: other', 'text', '5\n')), None, 'input other has no example'),
+        ('different PL and EN input is detected',
+         lesson(('example: count', 'cpp', READ_INT), ('input: count', 'text', '5\n'), ('output: count', 'text', 'Count: 5\n')),
+         lesson(('example: count', 'cpp', READ_INT), ('input: count', 'text', '6\n'), ('output: count', 'text', 'Count: 5\n')),
+         'differ between'),
+        ('a program that never finishes is stopped and detected',
+         lesson(('example: endless', 'cpp', ENDLESS), ('output: endless', 'text', '')), None, 'did not finish within'),
     ]
     project = PROJECT.resolve()
     home = os.getcwd()
@@ -368,6 +443,8 @@ def self_test(args):
         case_args = argparse.Namespace(**vars(args))
         if 'environment' in title:
             case_args.cxx = str(pathlib.Path(tempfile.gettempdir()) / 'no-such-compiler' / 'clang++')
+        if 'never finishes' in title:
+            case_args.timeout = 3
         with tempfile.TemporaryDirectory() as root:
             os.chdir(root)
             try:
@@ -396,6 +473,7 @@ def main():
     parser.add_argument('--cxx', required=True, help='full path to the official clang++')
     parser.add_argument('--cmake', default='cmake')
     parser.add_argument('--make-program', help='Ninja to use, if not the one on PATH')
+    parser.add_argument('--timeout', type=float, default=10, help='seconds each run of an example may take')
     parser.add_argument('--self-test', action='store_true', help='check the checker on small fixture lessons')
     args = parser.parse_args()
     if args.self_test:
