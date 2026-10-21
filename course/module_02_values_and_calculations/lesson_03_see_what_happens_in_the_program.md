@@ -469,7 +469,7 @@ Na przykład: wypisywanie wymaga zmiany kodu, a debugger nie. Wypisywanie pokazu
 
 ## Co dalej
 
-Umiesz już porównać przewidywanie z tym, co program naprawdę robi, i znaleźć pierwszą złą instrukcję. **Lekcja 2.4 jest w przygotowaniu.**
+Umiesz już porównać przewidywanie z tym, co program naprawdę robi, i znaleźć pierwszą złą instrukcję. W lekcji 2.4 poznasz dzielenie liczb całkowitych, resztę z dzielenia i zasady kolejności działań: [Lekcja 2.4: Dzielenie, reszta i kolejność działań](lesson_04_division_remainder_and_order_of_operations.md).
 
 ---
 
@@ -545,4 +545,4 @@ Jego wynik to ten z kryterium sukcesu: `On the shelf: 15` i `Borrowed: 5`.
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 2.2: Gdy wartości się zmieniają](lesson_02_when_values_change.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 2.2: Gdy wartości się zmieniają](lesson_02_when_values_change.md) · **Następna lekcja:** [Lekcja 2.4: Dzielenie, reszta i kolejność działań](lesson_04_division_remainder_and_order_of_operations.md) · [Opis kursu](../../README.md)
