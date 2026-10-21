@@ -651,7 +651,7 @@ Separate `if`s are separate decisions: several blocks can run. In a chain, at mo
 
 ## What's next
 
-Your programs now choose one of many ways, and a well-ordered chain was enough for every category. Sometimes, though, you need to check **two conditions at once**, for example whether a value lies in the range from 1 to 10. In lesson 3.4 you'll learn to combine conditions. **Lesson 3.4 is in preparation.**
+Your programs now choose one of many ways, and a well-ordered chain was enough for every category. Sometimes, though, you need to check **two conditions at once**, for example whether a value lies in the range from 1 to 10. In lesson 3.4 you'll learn to combine conditions: [Lesson 3.4: Combining conditions (`&&`, `||`, `!`)](lesson_04_combining_conditions.en.md).
 
 ---
 
@@ -884,4 +884,4 @@ Only the threshold `senior_from_age` changed. The new limit is 60, so you check 
 
 </details>
 
-**Previous lesson:** [Lesson 3.2: Two possibilities (`else`), equality and `bool`](lesson_02_two_ways.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 3.2: Two possibilities (`else`), equality and `bool`](lesson_02_two_ways.en.md) · **Next lesson:** [Lesson 3.4: Combining conditions (`&&`, `||`, `!`)](lesson_04_combining_conditions.en.md) · [Course overview](../../README.en.md)

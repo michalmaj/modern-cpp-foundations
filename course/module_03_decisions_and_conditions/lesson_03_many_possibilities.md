@@ -651,7 +651,7 @@ Osobne `if` to osobne decyzje: może wykonać się kilka bloków. W łańcuchu w
 
 ## Co dalej
 
-Twoje programy wybierają już jedną z wielu dróg, a dobrze ułożony łańcuch wystarczył do wszystkich kategorii. Czasem jednak trzeba sprawdzić **dwa warunki naraz**, na przykład czy wartość mieści się w przedziale od 1 do 10. W lekcji 3.4 poznasz łączenie warunków. **Lekcja 3.4 jest w przygotowaniu.**
+Twoje programy wybierają już jedną z wielu dróg, a dobrze ułożony łańcuch wystarczył do wszystkich kategorii. Czasem jednak trzeba sprawdzić **dwa warunki naraz**, na przykład czy wartość mieści się w przedziale od 1 do 10. W lekcji 3.4 poznasz łączenie warunków: [Lekcja 3.4: Łączenie warunków (`&&`, `||`, `!`)](lesson_04_combining_conditions.md).
 
 ---
 
@@ -884,4 +884,4 @@ Zmienił się tylko próg `senior_from_age`. Nowa granica to 60, więc sprawdzas
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 3.2: Dwie możliwości (`else`), równość i `bool`](lesson_02_two_ways.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 3.2: Dwie możliwości (`else`), równość i `bool`](lesson_02_two_ways.md) · **Następna lekcja:** [Lekcja 3.4: Łączenie warunków (`&&`, `||`, `!`)](lesson_04_combining_conditions.md) · [Opis kursu](../../README.md)
