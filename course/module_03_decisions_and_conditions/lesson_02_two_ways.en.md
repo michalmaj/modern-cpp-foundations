@@ -503,7 +503,7 @@ In each `if`/`else` construct one branch runs, so the program prints **one** lin
 
 The program should store the result in a variable `result` and print it **after** the `if`/`else`. Someone declared `result` inside the branches:
 
-<!-- broken: result_in_block at=16 error=undeclared identifier 'result' -->
+<!-- broken: result_in_block at=16 errors=1 error=^use of undeclared identifier 'result'$ -->
 ```cpp
 #include <iostream>
 #include <string>
@@ -530,7 +530,7 @@ int main() {
 4. Fix the program.
 5. Explain why the fix works.
 
-The program won't build: the compiler reports an error on line 16, at `result`.
+The program won't build. On line 16 the compiler reports `use of undeclared identifier 'result'`: it doesn't know the name `result`. You know this message from lessons 1.2 and 2.1, where it meant a typo or a missing declaration. Here the name is spelt correctly, and is even declared twice, but **inside the blocks** of the `if` and the `else`. On line 16, after the closing brace, neither of those declarations applies any more.
 
 **The rule:** a variable declared inside a block `{ }` exists only in that block, from its declaration to the closing brace. Outside the block, its name is unknown.
 

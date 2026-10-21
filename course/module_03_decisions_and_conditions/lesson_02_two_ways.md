@@ -503,7 +503,7 @@ W każdej konstrukcji `if`/`else` wykonuje się jedna gałąź, więc program wy
 
 Program ma zapisać wynik w zmiennej `result` i wypisać go **po** `if`/`else`. Ktoś zadeklarował `result` wewnątrz gałęzi:
 
-<!-- broken: result_in_block at=16 error=undeclared identifier 'result' -->
+<!-- broken: result_in_block at=16 errors=1 error=^use of undeclared identifier 'result'$ -->
 ```cpp
 #include <iostream>
 #include <string>
@@ -530,7 +530,7 @@ int main() {
 4. Popraw program.
 5. Wyjaśnij, dlaczego poprawka działa.
 
-Program się nie zbuduje: kompilator zgłasza błąd w linijce 16, przy `result`.
+Program się nie zbuduje. Kompilator zgłasza w linijce 16 `use of undeclared identifier 'result'`: nie zna nazwy `result`. Ten komunikat znasz z lekcji 1.2 i 2.1, gdzie oznaczał literówkę albo brak deklaracji. Tutaj nazwa jest zapisana poprawnie i zadeklarowana nawet dwa razy, ale **w blokach** `if` i `else`. W linijce 16, po zamykającej klamrze, żadna z tych deklaracji już nie obowiązuje.
 
 **Reguła:** zmienna zadeklarowana wewnątrz bloku `{ }` istnieje tylko w tym bloku, od miejsca deklaracji do zamykającej klamry. Poza blokiem jej nazwa jest nieznana.
 
