@@ -477,7 +477,7 @@ Because integer division by zero and the remainder of a division by zero have un
 
 ## What's next
 
-Dividing whole numbers gives whole numbers. But what if you need the result 3.5, for example an average or a price per kilogram? You'll meet numbers with a fractional part in lesson 2.5. **Lesson 2.5 is in preparation.**
+Dividing whole numbers gives whole numbers. But what if you need the result 3.5, for example an average or a price per kilogram? You'll meet numbers with a fractional part in lesson 2.5: [Lesson 2.5: Numbers with a fractional part: `double` and `auto`](lesson_05_numbers_with_a_fractional_part.en.md).
 
 ---
 
@@ -575,4 +575,4 @@ The check: 5 · 6 + 0 = 30.
 
 </details>
 
-**Previous lesson:** [Lesson 2.3: See what happens in the program](lesson_03_see_what_happens_in_the_program.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 2.3: See what happens in the program](lesson_03_see_what_happens_in_the_program.en.md) · **Next lesson:** [Lesson 2.5: Numbers with a fractional part: `double` and `auto`](lesson_05_numbers_with_a_fractional_part.en.md) · [Course overview](../../README.en.md)
