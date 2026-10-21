@@ -778,7 +778,7 @@ Bo wejście wymaga spełnienia obu części naraz (`&&`): wiek jest w zakresie, 
 
 ## Co dalej
 
-Twoje programy łączą już kilka warunków. W lekcji 3.5 użyjesz tej umiejętności, żeby **sprawdzać dane, zanim program ich użyje**, na przykład żeby nigdy nie dzielić przez zero. **Lekcja 3.5 jest w przygotowaniu.**
+Twoje programy łączą już kilka warunków. W lekcji 3.5 użyjesz tej umiejętności, żeby **sprawdzać dane, zanim program ich użyje**, na przykład żeby nigdy nie dzielić przez zero: [Lekcja 3.5: Sprawdzanie danych przed obliczeniami](lesson_05_check_before_calculating.md).
 
 ---
 
@@ -921,4 +921,4 @@ Druga decyzja jest osobna, jak w lekcji 3.2: `!is_weekend` jest prawdziwe dla ka
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 3.3: Wybór spośród wielu możliwości (`else if`)](lesson_03_many_possibilities.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 3.3: Wybór spośród wielu możliwości (`else if`)](lesson_03_many_possibilities.md) · **Następna lekcja:** [Lekcja 3.5: Sprawdzanie danych przed obliczeniami](lesson_05_check_before_calculating.md) · [Opis kursu](../../README.md)
