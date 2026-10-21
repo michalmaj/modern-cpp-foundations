@@ -477,7 +477,7 @@ Bo dzielenie całkowite przez zero i reszta z dzielenia przez zero mają w C++ n
 
 ## Co dalej
 
-Dzielenie liczb całkowitych daje liczby całkowite. A co, jeśli potrzebujesz wyniku 3,5, na przykład średniej albo ceny za kilogram? Liczby z częścią ułamkową poznasz w lekcji 2.5. **Lekcja 2.5 jest w przygotowaniu.**
+Dzielenie liczb całkowitych daje liczby całkowite. A co, jeśli potrzebujesz wyniku 3,5, na przykład średniej albo ceny za kilogram? Liczby z częścią ułamkową poznasz w lekcji 2.5: [Lekcja 2.5: Liczby z częścią ułamkową: `double` i `auto`](lesson_05_numbers_with_a_fractional_part.md).
 
 ---
 
@@ -575,4 +575,4 @@ Sprawdzenie: 5 · 6 + 0 = 30.
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 2.3: Zobacz, co dzieje się w programie](lesson_03_see_what_happens_in_the_program.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 2.3: Zobacz, co dzieje się w programie](lesson_03_see_what_happens_in_the_program.md) · **Następna lekcja:** [Lekcja 2.5: Liczby z częścią ułamkową: `double` i `auto`](lesson_05_numbers_with_a_fractional_part.md) · [Opis kursu](../../README.md)
