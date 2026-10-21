@@ -505,6 +505,6 @@ About the state of the materials: the code and calculations in all Module 2 less
 
 ## What's next: Module 3
 
-So far your programs always execute the same statements, from top to bottom. In Module 3 they'll start **making decisions**: you'll learn comparisons and conditions, which let a program execute different statements depending on the data. Module 3 is in preparation.
+So far your programs always execute the same statements, from top to bottom. In Module 3 they'll start **making decisions**: you'll learn comparisons and conditions, which let a program execute different statements depending on the data. Start with [lesson 3.1: The program's first decision (`if`)](../module_03_decisions_and_conditions/lesson_01_the_first_decision.en.md). Module 3 is in development: the further lessons are in preparation.
 
-**Previous lesson:** [Lesson 2.7: Text the program remembers (`std::string`)](lesson_07_text_the_program_remembers.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 2.7: Text the program remembers (`std::string`)](lesson_07_text_the_program_remembers.en.md) · **Next lesson:** [Lesson 3.1: The program's first decision (`if`)](../module_03_decisions_and_conditions/lesson_01_the_first_decision.en.md) · [Course overview](../../README.en.md)
