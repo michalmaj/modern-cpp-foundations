@@ -282,7 +282,7 @@ W tym kursie przykłady korzystają na razie z wartości takich jak `0.5`, `0.25
 
 Wartość początkową zapisujesz w `{}`, tak jak dotąd: `int count{3};`, `double average{2.5};`. Ten zapis ma jeszcze jedną zaletę. Co się stanie, gdy w zmiennej `int` spróbujesz zapisać liczbę z częścią ułamkową? **Przewidź**, a potem zbuduj:
 
-<!-- broken: narrowing at=4 errors=1 error=cannot be narrowed -->
+<!-- broken: narrowing at=4 errors=1 error=^type 'double' cannot be narrowed to 'int' in initializer list -->
 ```cpp
 #include <iostream>
 
@@ -292,7 +292,7 @@ int main() {
 }
 ```
 
-Program się nie zbuduje. Kompilator zgłasza błąd, w którym pojawiają się słowa `cannot be narrowed` (nie można zawęzić). Liczba 2.5 nie zmieści się w `int` bez utraty części ułamkowej. Taką zmianę typu, która mogłaby zmienić wartość, nazywa się **konwersją zawężającą**. Inicjalizacja przez `{}` na nią nie pozwala: zamiast po cichu zapisać w `ticket_count` liczbę 2, kompilator zatrzymuje budowanie.
+Program się nie zbuduje. Kompilator zgłasza w linijce 4 `type 'double' cannot be narrowed to 'int' in initializer list`, czyli: typu `double` nie można zawęzić do `int` w nawiasach klamrowych. W tej samej linijce wypisuje też ostrzeżenie `implicit conversion from 'double' to 'int' changes value from 2.5 to 2`: po takiej zmianie 2.5 stałoby się 2. Liczba 2.5 nie zmieści się w `int` bez utraty części ułamkowej. Taką zmianę typu, która mogłaby zmienić wartość, nazywa się **konwersją zawężającą**. Inicjalizacja przez `{}` na nią nie pozwala: zamiast po cichu zapisać w `ticket_count` liczbę 2, kompilator zatrzymuje budowanie. Linijkę `note:` z radą o jawnej zmianie typu (*explicit cast*) na razie pomiń: tutaj właściwą poprawką jest dobranie typu.
 
 Przywróć poprawny kod. Liczba biletów jest całkowita, więc wpisz na przykład `{2}`. Gdyby wartość naprawdę miała mieć część ułamkową, zmienna musiałaby być typu `double`.
 

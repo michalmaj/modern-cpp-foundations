@@ -282,7 +282,7 @@ For now, the examples in this course use values such as `0.5`, `0.25`, `1.5`, `2
 
 You write the starting value in `{}`, as before: `int count{3};`, `double average{2.5};`. This notation has one more advantage. What happens if you try to store a number with a fractional part in an `int` variable? **Predict**, then build:
 
-<!-- broken: narrowing at=4 errors=1 error=cannot be narrowed -->
+<!-- broken: narrowing at=4 errors=1 error=^type 'double' cannot be narrowed to 'int' in initializer list -->
 ```cpp
 #include <iostream>
 
@@ -292,7 +292,7 @@ int main() {
 }
 ```
 
-The program won't build. The compiler reports an error containing the words `cannot be narrowed`. The number 2.5 can't fit into an `int` without losing its fractional part. A change of type like this, which could change the value, is called a **narrowing conversion**. Initialisation with `{}` doesn't allow it: instead of silently storing 2 in `ticket_count`, the compiler stops the build.
+The program won't build. On line 4, the compiler reports `type 'double' cannot be narrowed to 'int' in initializer list`. On the same line it also prints the warning `implicit conversion from 'double' to 'int' changes value from 2.5 to 2`: after such a change, 2.5 would become 2. The number 2.5 can't fit into an `int` without losing its fractional part. A change of type like this, which could change the value, is called a **narrowing conversion**. Initialisation with `{}` doesn't allow it: instead of silently storing 2 in `ticket_count`, the compiler stops the build. Skip the `note:` line suggesting an explicit cast for now: here the right fix is choosing the type.
 
 Restore correct code. The number of tickets is a whole number, so write, for example, `{2}`. If the value really had to have a fractional part, the variable would have to be of type `double`.
 
