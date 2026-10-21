@@ -783,7 +783,7 @@ Nie. `is_even` jest typu `bool`. `std::cout` domyślnie wypisuje `true` jako `1`
 
 ## Co dalej
 
-Twój program wybiera już jedną z dwóch dróg. Czasem jednak możliwości jest więcej: ocena może być A, B, C albo D. W lekcji 3.3 poznasz `else if` i nauczysz się sprawdzać wszystkie granice takich przedziałów. **Lekcja 3.3 jest w przygotowaniu.**
+Twój program wybiera już jedną z dwóch dróg. Czasem jednak możliwości jest więcej: ocena może być A, B, C albo D. W lekcji 3.3 poznasz `else if` i nauczysz się sprawdzać wszystkie granice takich przedziałów: [Lekcja 3.3: Wybór spośród wielu możliwości (`else if`)](lesson_03_many_possibilities.md).
 
 ---
 
@@ -850,4 +850,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 3.1: Pierwsza decyzja programu (`if`)](lesson_01_the_first_decision.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 3.1: Pierwsza decyzja programu (`if`)](lesson_01_the_first_decision.md) · **Następna lekcja:** [Lekcja 3.3: Wybór spośród wielu możliwości (`else if`)](lesson_03_many_possibilities.md) · [Opis kursu](../../README.md)

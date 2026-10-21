@@ -783,7 +783,7 @@ No. `is_even` is of type `bool`. By default, `std::cout` prints `true` as `1` an
 
 ## What's next
 
-Your program now chooses one of two ways. Sometimes, though, there are more possibilities: a grade can be A, B, C or D. In lesson 3.3 you'll meet `else if`, and learn to check every limit of such ranges. **Lesson 3.3 is in preparation.**
+Your program now chooses one of two ways. Sometimes, though, there are more possibilities: a grade can be A, B, C or D. In lesson 3.3 you'll meet `else if`, and learn to check every limit of such ranges: [Lesson 3.3: Choosing among many possibilities (`else if`)](lesson_03_many_possibilities.en.md).
 
 ---
 
@@ -850,4 +850,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 3.1: The program's first decision (`if`)](lesson_01_the_first_decision.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 3.1: The program's first decision (`if`)](lesson_01_the_first_decision.en.md) · **Next lesson:** [Lesson 3.3: Choosing among many possibilities (`else if`)](lesson_03_many_possibilities.en.md) · [Course overview](../../README.en.md)
