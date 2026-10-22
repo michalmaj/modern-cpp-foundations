@@ -42,7 +42,10 @@ Checks:
   * an example must build, exit with 0 (or its exit=N), print nothing to stderr, and print exactly the expected
     output (Windows line ends ignored). It is built once and run once per input block (or once with an
     empty standard input when it has none), each run within --timeout seconds. Only the program's own
-    standard output is compared: typed input never appears in it, because nothing is typed;
+    standard output is compared: typed input never appears in it, because nothing is typed.
+    Each run may print at most OUTPUT_LIMIT bytes to stdout, and separately to stderr, counted as the
+    program writes them (before Windows line ends are normalised). The checker keeps no more than
+    that while the program runs, and stops the program as soon as one stream goes over the limit;
   * a broken program must fail to build because of compiler errors in main.cpp, as described
     by its marker; with stage=link, it must compile and then fail in the linker, as above.
     Its whole build output is printed, to compare the messages across systems.
@@ -63,6 +66,8 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
+import time
 
 MARKER = re.compile(r'^<!-- (?:(example|output|input|broken): ([a-z0-9_]+)(.*?)|(fragment)) -->$')
 SOURCE = re.compile(r'^(?: source=(\S+))?(?: exit=(\d+))?$')
@@ -72,6 +77,10 @@ FENCE = re.compile(r'^```(\S*)$')
 ERROR = re.compile(r'main\.cpp(?::(\d+):(\d+):|\((\d+),(\d+)\):) error: (.*)')
 PROJECT = pathlib.Path('course/module_00_tooling/lesson_05_first_program/CMakeLists.txt')
 WARNINGS = '-Wall -Wextra -pedantic-errors -Werror'
+# The most one run of an example may print to stdout, and separately to stderr. Exactly this many bytes is allowed.
+OUTPUT_LIMIT = 65536
+# Messages and the log show at most this many characters of a program's output.
+SHOWN_LIMIT = 1000
 
 errors = []
 
@@ -203,6 +212,71 @@ def build(lesson, name, code, args, flags=WARNINGS):
     return work / 'build', run([args.cmake, '--build', str(work / 'build')])
 
 
+def executable(build_dir):
+    target = re.search(r'add_executable\((\S+)', PROJECT.read_text(encoding='utf-8'))[1]
+    return build_dir / (target + ('.exe' if sys.platform == 'win32' else ''))
+
+
+def run_program(exe, data, timeout):
+    """Runs EXE once, with DATA on standard input (None: an empty standard input).
+    Returns (exit code, stdout bytes, stderr bytes, whether it timed out, the streams that went over OUTPUT_LIMIT).
+
+    Each stream is read by its own thread while the program runs, so a program that fills one pipe never
+    waits for the checker to read the other (the way subprocess.communicate reads on Windows). A thread
+    keeps at most OUTPUT_LIMIT + 1 bytes: one byte more than allowed is proof enough, so it stops the
+    program at once instead of collecting everything it would print."""
+    # A pipe, not a terminal: the input is never echoed, so stdout is the program's output alone.
+    # Without an input block the program gets an empty standard input, never the checker's own.
+    with subprocess.Popen([str(exe)], stdin=subprocess.DEVNULL if data is None else subprocess.PIPE,
+                          stdout=subprocess.PIPE, stderr=subprocess.PIPE) as process:
+        kept = {'stdout': bytearray(), 'stderr': bytearray()}
+        over_limit = []
+
+        def collect(stream, pipe):
+            while chunk := pipe.read1(OUTPUT_LIMIT):
+                kept[stream] += chunk[:OUTPUT_LIMIT + 1 - len(kept[stream])]
+                if len(kept[stream]) > OUTPUT_LIMIT:
+                    over_limit.append(stream)
+                    process.kill()  # safe even if the program has just ended by itself
+                    return
+
+        def feed():
+            # Then closed, so the program sees the end of its input after the last line.
+            try:
+                process.stdin.write(data.encode('ascii'))
+                process.stdin.close()
+            except OSError:  # the program ended without reading all of its input
+                try:
+                    process.stdin.close()
+                except OSError:
+                    pass
+
+        threads = [threading.Thread(target=collect, args=('stdout', process.stdout)),
+                   threading.Thread(target=collect, args=('stderr', process.stderr))]
+        if data is not None:
+            threads.append(threading.Thread(target=feed))
+        for thread in threads:
+            thread.start()
+        timed_out = False
+        try:
+            process.wait(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            timed_out = True
+            process.kill()
+            process.wait()
+        # The program has ended, so its pipes are closed and every thread finishes.
+        for thread in threads:
+            thread.join()
+    return process.returncode, bytes(kept['stdout']), bytes(kept['stderr']), timed_out, over_limit
+
+
+def shown(text):
+    """TEXT for a message: its repr, cut after SHOWN_LIMIT characters."""
+    if len(text) <= SHOWN_LIMIT:
+        return repr(text)
+    return f'{text[:SHOWN_LIMIT]!r} and {len(text) - SHOWN_LIMIT} more characters, not shown'
+
+
 def check_example(lesson, name, code, exit_code, runs, args):
     built = build(lesson, name, code, args)
     if not built:
@@ -211,28 +285,28 @@ def check_example(lesson, name, code, exit_code, runs, args):
     if result.returncode != 0:
         fail(f'{lesson}: example {name}: build failed\n{result.stdout}{result.stderr}')
         return
-    target = re.search(r'add_executable\((\S+)', PROJECT.read_text(encoding='utf-8'))[1]
-    exe = build_dir / (target + ('.exe' if sys.platform == 'win32' else ''))
+    exe = executable(build_dir)
     # The same program for every run: built once above, never rebuilt between inputs.
     for number, (data, expected) in enumerate(runs or [(None, [])], 1):
         label = f'example {name}' if data is None else f'example {name} (input {number} of {len(runs)})'
-        try:
-            # A pipe, not a terminal: the input is never echoed, so stdout is the program's output alone.
-            # Without an input block the program gets an empty standard input, never the checker's own.
-            result = subprocess.run([str(exe)], capture_output=True, timeout=args.timeout,
-                                    **({'stdin': subprocess.DEVNULL} if data is None else {'input': data.encode('ascii')}))
-        except subprocess.TimeoutExpired:
+        returncode, stdout, stderr, timed_out, over_limit = run_program(exe, data, args.timeout)
+        if over_limit:
+            for stream in over_limit:
+                fail(f'{lesson}: {label}: {stream} exceeded the {OUTPUT_LIMIT}-byte limit, so the program was stopped')
+            continue
+        if timed_out:
             fail(f'{lesson}: {label}: did not finish within {args.timeout} s')
             continue
-        out = result.stdout.decode('ascii', errors='replace').replace('\r\n', '\n')
+        # Decoded and normalised only now, within the limit: the limit counts the bytes as printed.
+        out = stdout.decode('ascii', errors='replace').replace('\r\n', '\n')
         problems = []
-        if result.returncode != exit_code:
-            problems.append(f'exit code {result.returncode}, expected {exit_code}')
-        if result.stderr:
-            problems.append(f'printed to stderr: {result.stderr!r}')
+        if returncode != exit_code:
+            problems.append(f'exit code {returncode}, expected {exit_code}')
+        if stderr:
+            problems.append(f'printed to stderr: {shown(stderr.decode("ascii", errors="replace"))}')
         mismatch = next((text for text in expected if out != text), None)
         if mismatch is not None:
-            problems.append(f'output {out!r}, expected {mismatch!r}')
+            problems.append(f'output {shown(out)}, expected {shown(mismatch)}')
         if problems:
             for problem in problems:
                 fail(f'{lesson}: {label}: {problem}')
@@ -241,8 +315,10 @@ def check_example(lesson, name, code, exit_code, runs, args):
               f'and prints the expected {len(expected)} output block(s):')
         for line in (data or '').splitlines():
             print(f'       < {line}')
-        for line in out.splitlines():
+        for line in out[:SHOWN_LIMIT].splitlines():
             print(f'       | {line}')
+        if len(out) > SHOWN_LIMIT:
+            print(f'       ({len(out) - SHOWN_LIMIT} more characters, not shown)')
 
 
 def check_broken(lesson, name, code, expectation, args):
@@ -357,6 +433,17 @@ READ_TWO = ('#include <iostream>\n\nint main() {\n    int laps{0};\n    double l
             '    std::cin >> laps;\n    std::cin >> lap_km;\n    std::cout << "Total: " << laps * lap_km << "\\n";\n}\n')
 # Never finishes on its own (the volatile counter keeps the loop from being optimised away).
 ENDLESS = '#include <iostream>\n\nint main() {\n    volatile int steps{0};\n    for (;;) {\n        steps = steps + 1;\n    }\n}\n'
+# Prints COUNT letters x, with no line end (the same bytes on every system), to stdout or, given 1, to stderr.
+PRINT_X = ('#include <iostream>\n\nint main() {\n    int count{0};\n    int to_stderr{0};\n    std::cin >> count >> to_stderr;\n'
+           '    for (int i{0}; i < count; ++i) {\n        if (to_stderr == 1) {\n            std::cerr << \'x\';\n'
+           '        } else {\n            std::cout << \'x\';\n        }\n    }\n}\n')
+# Writes to stderr, then stdout, then stderr again; more than a Windows pipe holds, within the limit.
+BOTH_STREAMS = ('#include <iostream>\n\nint main() {\n    for (int round{0}; round < 3; ++round) {\n'
+                '        for (int i{0}; i < 30000; ++i) {\n            if (round == 1) {\n                std::cout << \'o\';\n'
+                '            } else {\n                std::cerr << \'e\';\n            }\n        }\n    }\n}\n')
+# Reads numbers until its input ends; it finishes only if the input is closed after the data.
+READ_ALL = ('#include <iostream>\n\nint main() {\n    int value{0};\n    int count{0};\n    while (std::cin >> value) {\n'
+            '        count = count + 1;\n    }\n    std::cout << "Values: " << count << "\\n";\n}\n')
 
 
 def lesson(*parts):
@@ -435,6 +522,21 @@ def self_test(args):
          'differ between'),
         ('a program that never finishes is stopped and detected',
          lesson(('example: endless', 'cpp', ENDLESS), ('output: endless', 'text', '')), None, 'did not finish within'),
+        ('the input is closed after the data, and each run reads only its own input',
+         lesson(('example: values', 'cpp', READ_ALL), ('input: values', 'text', '4\n5\n6\n'), ('output: values', 'text', 'Values: 3\n'),
+                ('input: values', 'text', '7\n'), ('output: values', 'text', 'Values: 1\n')), None, None),
+        # The output limit (the exact boundary is checked by self_test_limits, without line ends).
+        ('stdout over the limit is detected, in a short message',
+         lesson(('example: flood', 'cpp', PRINT_X), ('input: flood', 'text', '65537 0\n'), ('output: flood', 'text', 'x\n')),
+         None, 'stdout exceeded the 65536-byte limit'),
+        ('stderr over the limit is detected, in a short message',
+         lesson(('example: flood', 'cpp', PRINT_X), ('input: flood', 'text', '65537 1\n'), ('output: flood', 'text', 'x\n')),
+         None, 'stderr exceeded the 65536-byte limit'),
+        ('a program writing to stderr and stdout in turns runs to its end, in a short message',
+         lesson(('example: both', 'cpp', BOTH_STREAMS), ('output: both', 'text', 'o\n')), None, 'printed to stderr'),
+        ('a long wrong output is detected, in a short message',
+         lesson(('example: flood', 'cpp', PRINT_X), ('input: flood', 'text', '50000 0\n'), ('output: flood', 'text', 'x\n')),
+         None, 'more characters, not shown'),
     ]
     project = PROJECT.resolve()
     home = os.getcwd()
@@ -460,12 +562,57 @@ def self_test(args):
                     verdict = not errors
                 else:
                     verdict = len(errors) > 0 and any(expected_failure in e for e in errors)
+                if 'short message' in title:
+                    verdict = verdict and all(len(e) <= 4 * SHOWN_LIMIT for e in errors)
             finally:
                 os.chdir(home)
         print(f'##### {"ok  " if verdict else "FAIL"} self-test: {title}')
         failures += not verdict
-    print(f'\n{"PASSED" if not failures else "FAILED"}: self-test, {len(cases)} cases, {failures} failed')
+    limit_failures, limit_cases = self_test_limits(args)
+    failures += limit_failures
+    print(f'\n{"PASSED" if not failures else "FAILED"}: self-test, {len(cases) + limit_cases} cases, {failures} failed')
     return failures
+
+
+def self_test_limits(args):
+    """Runs PRINT_X directly, to check the output limit exactly at its boundary on every system.
+    Returns (failures, number of checks)."""
+    checks = [  # (title, input, stream, whether the stream must go over the limit)
+        ('exactly 65536 bytes on stdout are allowed', '65536 0\n', 'stdout', False),
+        ('65537 bytes on stdout are over the limit', '65537 0\n', 'stdout', True),
+        ('exactly 65536 bytes on stderr are allowed', '65536 1\n', 'stderr', False),
+        ('65537 bytes on stderr are over the limit', '65537 1\n', 'stderr', True),
+        ('a program printing 10 MB to stdout is stopped early, keeping 65537 bytes', '10000000 0\n', 'stdout', True),
+        ('a program printing 10 MB to stderr, and nothing to stdout, is stopped early', '10000000 1\n', 'stderr', True),
+    ]
+    project = PROJECT.resolve()
+    home = os.getcwd()
+    failures = 0
+    with tempfile.TemporaryDirectory() as root:
+        os.chdir(root)
+        try:
+            PROJECT.parent.mkdir(parents=True)
+            shutil.copy(project, PROJECT)
+            built = build('self_test', 'output_limit', PRINT_X, args)
+            if not built or built[1].returncode != 0:
+                print('##### FAIL self-test: the output-limit program did not build')
+                return len(checks), len(checks)
+            exe = executable(built[0])
+            for title, data, stream, over in checks:
+                start = time.monotonic()
+                returncode, stdout, stderr, timed_out, over_limit = run_program(exe, data, args.timeout)
+                seconds = time.monotonic() - start
+                kept = len(stdout if stream == 'stdout' else stderr)
+                expected_kept = OUTPUT_LIMIT + 1 if over else int(data.split()[0])
+                verdict = (over_limit == ([stream] if over else []) and kept == expected_kept and not timed_out
+                           and (over or returncode == 0))
+                print(f'\n##### self-test: {title}: kept {kept} bytes of {stream}, '
+                      f'over the limit: {", ".join(over_limit) or "none"}, timed out: {timed_out}, {seconds:.2f} s')
+                print(f'##### {"ok  " if verdict else "FAIL"} self-test: {title}')
+                failures += not verdict
+        finally:
+            os.chdir(home)
+    return failures, len(checks)
 
 
 def main():
