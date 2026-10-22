@@ -317,7 +317,7 @@ A counter declared in a `for` header, such as `int lap{1}`, exists only **in tha
 
 This program should print, after the loop, how many laps were done:
 
-<!-- broken: lap_after_for at=8 error=. -->
+<!-- broken: lap_after_for at=8 errors=1 error=^use of undeclared identifier 'lap'$ -->
 ```cpp
 #include <iostream>
 

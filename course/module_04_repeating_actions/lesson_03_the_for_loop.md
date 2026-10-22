@@ -317,7 +317,7 @@ Licznik zadeklarowany w nagłówku `for`, jak `int lap{1}`, istnieje tylko **w t
 
 Ten program ma po pętli wypisać, ile okrążeń wykonano:
 
-<!-- broken: lap_after_for at=8 error=. -->
+<!-- broken: lap_after_for at=8 errors=1 error=^use of undeclared identifier 'lap'$ -->
 ```cpp
 #include <iostream>
 
