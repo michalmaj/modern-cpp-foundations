@@ -608,7 +608,7 @@ When the condition gives `false`, the program skips the body and runs the statem
 
 ## What's next
 
-Your loop already counts iterations. In lesson 4.2 it will learn to **add** another value to a result in each iteration, for example to total the training minutes from several days. **Lesson 4.2 is in preparation.**
+Your loop already counts iterations. In lesson 4.2 it will learn to **add** another value to a result in each iteration, for example to total the training minutes from several days: [Lesson 4.2: Sums and accumulators](lesson_02_sums_and_accumulators.en.md).
 
 ---
 
@@ -732,4 +732,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 3.6: The program makes decisions (the Module 3 test)](../module_03_decisions_and_conditions/lesson_06_the_program_decides.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 3.6: The program makes decisions (the Module 3 test)](../module_03_decisions_and_conditions/lesson_06_the_program_decides.en.md) · **Next lesson:** [Lesson 4.2: Sums and accumulators](lesson_02_sums_and_accumulators.en.md) · [Course overview](../../README.en.md)

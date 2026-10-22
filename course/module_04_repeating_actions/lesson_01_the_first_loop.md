@@ -608,7 +608,7 @@ Gdy warunek daje `false`, program pomija ciało i wykonuje instrukcje stojące z
 
 ## Co dalej
 
-Twoja pętla liczy już przebiegi. W lekcji 4.2 nauczy się w każdym przebiegu **dodawać** kolejną wartość do wyniku, na przykład sumować minuty treningu z kolejnych dni. **Lekcja 4.2 jest w przygotowaniu.**
+Twoja pętla liczy już przebiegi. W lekcji 4.2 nauczy się w każdym przebiegu **dodawać** kolejną wartość do wyniku, na przykład sumować minuty treningu z kolejnych dni: [Lekcja 4.2: Sumowanie i akumulatory](lesson_02_sums_and_accumulators.md).
 
 ---
 
@@ -732,4 +732,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 3.6: Program podejmuje decyzje (sprawdzian Modułu 3)](../module_03_decisions_and_conditions/lesson_06_the_program_decides.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 3.6: Program podejmuje decyzje (sprawdzian Modułu 3)](../module_03_decisions_and_conditions/lesson_06_the_program_decides.md) · **Następna lekcja:** [Lekcja 4.2: Sumowanie i akumulatory](lesson_02_sums_and_accumulators.md) · [Opis kursu](../../README.md)
