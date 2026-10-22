@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). Module 4 is in development: its first two lessons are available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). Module 4 is in development: its first three lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -118,6 +118,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 3, lesson 6: [The program makes decisions (the Module 3 test)](course/module_03_decisions_and_conditions/lesson_06_the_program_decides.en.md) | Available (pilot version) |
 | Module 4, lesson 1: [The first loop (`while`)](course/module_04_repeating_actions/lesson_01_the_first_loop.en.md) | Available (pilot version) |
 | Module 4, lesson 2: [Sums and accumulators](course/module_04_repeating_actions/lesson_02_sums_and_accumulators.en.md) | Available (pilot version) |
+| Module 4, lesson 3: [The `for` loop: counter, condition and update in one place](course/module_04_repeating_actions/lesson_03_the_for_loop.en.md) | Available (pilot version) |
 | Module 4: the remaining lessons (repeating actions) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -155,6 +156,7 @@ Work through the lessons in order, starting with the first:
 26. **[Lesson 3.6: The program makes decisions (the Module 3 test)](course/module_03_decisions_and_conditions/lesson_06_the_program_decides.en.md)**
 27. **[Lesson 4.1: The first loop (`while`)](course/module_04_repeating_actions/lesson_01_the_first_loop.en.md)**
 28. **[Lesson 4.2: Sums and accumulators](course/module_04_repeating_actions/lesson_02_sums_and_accumulators.en.md)**
+29. **[Lesson 4.3: The `for` loop: counter, condition and update in one place](course/module_04_repeating_actions/lesson_03_the_for_loop.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
