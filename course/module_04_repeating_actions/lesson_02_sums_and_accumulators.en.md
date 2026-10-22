@@ -676,7 +676,7 @@ Because the weight read is in the loop body, and for zero parcels the condition 
 
 ## What's next
 
-The loops in this lesson and in lesson 4.1 always have the same parts: a counter with a start value, a condition, and the counter's change at the end of the body. In lesson 4.3 you'll meet the `for` loop, which gathers these three parts into one line. **Lesson 4.3 is in preparation.**
+The loops in this lesson and in lesson 4.1 always have the same parts: a counter with a start value, a condition, and the counter's change at the end of the body. In lesson 4.3 you'll meet the `for` loop, which gathers these three parts into one line: [Lesson 4.3: The `for` loop: counter, condition and update in one place](lesson_03_the_for_loop.en.md).
 
 ---
 
@@ -855,4 +855,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 4.1: The first loop (`while`)](lesson_01_the_first_loop.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 4.1: The first loop (`while`)](lesson_01_the_first_loop.en.md) · **Next lesson:** [Lesson 4.3: The `for` loop: counter, condition and update in one place](lesson_03_the_for_loop.en.md) · [Course overview](../../README.en.md)

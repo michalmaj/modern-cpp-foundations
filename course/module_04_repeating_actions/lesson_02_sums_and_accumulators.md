@@ -676,7 +676,7 @@ Bo odczyt wagi stoi w ciele pętli, a dla zera paczek warunek jest fałszywy ju�
 
 ## Co dalej
 
-Pętle z tej lekcji i z lekcji 4.1 mają zawsze te same części: licznik z wartością początkową, warunek i zmianę licznika na końcu ciała. W lekcji 4.3 poznasz pętlę `for`, która zbiera te trzy części w jednej linijce. **Lekcja 4.3 jest w przygotowaniu.**
+Pętle z tej lekcji i z lekcji 4.1 mają zawsze te same części: licznik z wartością początkową, warunek i zmianę licznika na końcu ciała. W lekcji 4.3 poznasz pętlę `for`, która zbiera te trzy części w jednej linijce: [Lekcja 4.3: Pętla `for`: licznik, warunek i aktualizacja w jednym miejscu](lesson_03_the_for_loop.md).
 
 ---
 
@@ -855,4 +855,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 4.1: Pierwsza pętla (`while`)](lesson_01_the_first_loop.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 4.1: Pierwsza pętla (`while`)](lesson_01_the_first_loop.md) · **Następna lekcja:** [Lekcja 4.3: Pętla `for`: licznik, warunek i aktualizacja w jednym miejscu](lesson_03_the_for_loop.md) · [Opis kursu](../../README.md)
