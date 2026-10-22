@@ -861,6 +861,6 @@ Your programs already react to wrong values, but they can't yet ask again or han
 
 ## What's next: Module 4
 
-Your programs can already **choose** an action. In Module 4, "Repeating actions", they'll learn to perform actions **many times**. Module 4 is in preparation.
+Your programs can already **choose** an action. In Module 4, "Repeating actions", they'll learn to perform actions **many times**. Start with the first loop: [Lesson 4.1: The first loop (`while`)](../module_04_repeating_actions/lesson_01_the_first_loop.en.md).
 
-**Previous lesson:** [Lesson 3.5: Checking data before calculating](lesson_05_check_before_calculating.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 3.5: Checking data before calculating](lesson_05_check_before_calculating.en.md) · **Next lesson:** [Lesson 4.1: The first loop (`while`)](../module_04_repeating_actions/lesson_01_the_first_loop.en.md) · [Course overview](../../README.en.md)

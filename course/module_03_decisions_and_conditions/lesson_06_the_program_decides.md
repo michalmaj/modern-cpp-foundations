@@ -861,6 +861,6 @@ Programy reagują już na złe wartości, ale nie potrafią jeszcze zapytać pon
 
 ## Co dalej: Moduł 4
 
-Twoje programy potrafią już **wybrać** działanie. W Module 4, „Powtarzanie działań”, nauczą się wykonywać działania **wielokrotnie**. Moduł 4 jest w przygotowaniu.
+Twoje programy potrafią już **wybrać** działanie. W Module 4, „Powtarzanie działań”, nauczą się wykonywać działania **wielokrotnie**. Zacznij od pierwszej pętli: [Lekcja 4.1: Pierwsza pętla (`while`)](../module_04_repeating_actions/lesson_01_the_first_loop.md).
 
-**Poprzednia lekcja:** [Lekcja 3.5: Sprawdzanie danych przed obliczeniami](lesson_05_check_before_calculating.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 3.5: Sprawdzanie danych przed obliczeniami](lesson_05_check_before_calculating.md) · **Następna lekcja:** [Lekcja 4.1: Pierwsza pętla (`while`)](../module_04_repeating_actions/lesson_01_the_first_loop.md) · [Opis kursu](../../README.md)
