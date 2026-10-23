@@ -778,7 +778,7 @@ Bo pierwszego dnia czyta się co najmniej 1 stronę, a każdego następnego dwa 
 
 ## Co dalej
 
-Jak dotąd złe dane kończyły program komunikatem. W lekcji 4.5 pętla będzie powtarzać pytanie, **dopóki użytkownik nie poda dopuszczalnej wartości**: celem będzie wtedy poprawna odpowiedź. **Lekcja 4.5 jest w przygotowaniu.**
+Jak dotąd złe dane kończyły program komunikatem. W lekcji 4.5 pętla będzie powtarzać pytanie, **dopóki użytkownik nie poda dopuszczalnej wartości**: celem będzie wtedy poprawna odpowiedź: [Lekcja 4.5: Ponawianie pytania o poprawną wartość](lesson_05_ask_again.md).
 
 ---
 
@@ -925,4 +925,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 4.3: Pętla `for`: licznik, warunek i aktualizacja w jednym miejscu](lesson_03_the_for_loop.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 4.3: Pętla `for`: licznik, warunek i aktualizacja w jednym miejscu](lesson_03_the_for_loop.md) · **Następna lekcja:** [Lekcja 4.5: Ponawianie pytania o poprawną wartość](lesson_05_ask_again.md) · [Opis kursu](../../README.md)
