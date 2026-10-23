@@ -748,7 +748,7 @@ The first round shows a number 2 greater than the one given, every following rou
 
 ## What's next
 
-In this lesson the number of iterations was known before the loop started. In lesson 4.4 the program will repeat an action **until it reaches a goal**, for example saving until it has the amount it needs, and you won't know the number of iterations in advance. **Lesson 4.4 is in preparation.**
+In this lesson the number of iterations was known before the loop started. In lesson 4.4 the program will repeat an action **until it reaches a goal**, for example saving until it has the amount it needs, and you won't know the number of iterations in advance: [Lesson 4.4: Repeating until the goal is reached](lesson_04_repeat_until_the_goal.en.md).
 
 ---
 
@@ -995,4 +995,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 4.2: Sums and accumulators](lesson_02_sums_and_accumulators.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 4.2: Sums and accumulators](lesson_02_sums_and_accumulators.en.md) · **Next lesson:** [Lesson 4.4: Repeating until the goal is reached](lesson_04_repeat_until_the_goal.en.md) · [Course overview](../../README.en.md)

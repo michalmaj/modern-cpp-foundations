@@ -748,7 +748,7 @@ Pierwsza runda pokaże liczbę o 2 większą od podanej, każda następna też b
 
 ## Co dalej
 
-W tej lekcji liczba przebiegów była znana, zanim pętla się zaczęła. W lekcji 4.4 program będzie powtarzał działanie, **dopóki nie osiągnie celu**, na przykład oszczędzał, aż uzbiera potrzebną kwotę, a liczby przebiegów nie poznasz z góry. **Lekcja 4.4 jest w przygotowaniu.**
+W tej lekcji liczba przebiegów była znana, zanim pętla się zaczęła. W lekcji 4.4 program będzie powtarzał działanie, **dopóki nie osiągnie celu**, na przykład oszczędzał, aż uzbiera potrzebną kwotę, a liczby przebiegów nie poznasz z góry: [Lekcja 4.4: Powtarzanie aż do osiągnięcia celu](lesson_04_repeat_until_the_goal.md).
 
 ---
 
@@ -995,4 +995,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 4.2: Sumowanie i akumulatory](lesson_02_sums_and_accumulators.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 4.2: Sumowanie i akumulatory](lesson_02_sums_and_accumulators.md) · **Następna lekcja:** [Lekcja 4.4: Powtarzanie aż do osiągnięcia celu](lesson_04_repeat_until_the_goal.md) · [Opis kursu](../../README.md)
