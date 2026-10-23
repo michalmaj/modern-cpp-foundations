@@ -778,7 +778,7 @@ Because on the first day you read at least 1 page, and on each following day twi
 
 ## What's next
 
-So far, bad data ended the program with a message. In lesson 4.5, the loop will repeat a question **until the user gives an acceptable value**: the goal will then be a valid answer. **Lesson 4.5 is in preparation.**
+So far, bad data ended the program with a message. In lesson 4.5, the loop will repeat a question **until the user gives an acceptable value**: the goal will then be a valid answer: [Lesson 4.5: Asking again for a valid value](lesson_05_ask_again.en.md).
 
 ---
 
@@ -925,4 +925,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 4.3: The `for` loop: counter, condition and update in one place](lesson_03_the_for_loop.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 4.3: The `for` loop: counter, condition and update in one place](lesson_03_the_for_loop.en.md) · **Next lesson:** [Lesson 4.5: Asking again for a valid value](lesson_05_ask_again.en.md) · [Course overview](../../README.en.md)

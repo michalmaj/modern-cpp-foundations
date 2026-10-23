@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Moduł 4 jest rozwijany: dostępne są jego pierwsze cztery lekcje. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Moduł 4 jest rozwijany: dostępne są jego pierwsze pięć lekcji. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -120,6 +120,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 4, lekcja 2: [Sumowanie i akumulatory](course/module_04_repeating_actions/lesson_02_sums_and_accumulators.md) | Dostępna (wersja pilotażowa) |
 | Moduł 4, lekcja 3: [Pętla `for`: licznik, warunek i aktualizacja w jednym miejscu](course/module_04_repeating_actions/lesson_03_the_for_loop.md) | Dostępna (wersja pilotażowa) |
 | Moduł 4, lekcja 4: [Powtarzanie aż do osiągnięcia celu](course/module_04_repeating_actions/lesson_04_repeat_until_the_goal.md) | Dostępna (wersja pilotażowa) |
+| Moduł 4, lekcja 5: [Ponawianie pytania o poprawną wartość](course/module_04_repeating_actions/lesson_05_ask_again.md) | Dostępna (wersja pilotażowa) |
 | Moduł 4: pozostałe lekcje (powtarzanie działań) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
@@ -159,6 +160,7 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 28. **[Lekcja 4.2: Sumowanie i akumulatory](course/module_04_repeating_actions/lesson_02_sums_and_accumulators.md)**
 29. **[Lekcja 4.3: Pętla `for`: licznik, warunek i aktualizacja w jednym miejscu](course/module_04_repeating_actions/lesson_03_the_for_loop.md)**
 30. **[Lekcja 4.4: Powtarzanie aż do osiągnięcia celu](course/module_04_repeating_actions/lesson_04_repeat_until_the_goal.md)**
+31. **[Lekcja 4.5: Ponawianie pytania o poprawną wartość](course/module_04_repeating_actions/lesson_05_ask_again.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
