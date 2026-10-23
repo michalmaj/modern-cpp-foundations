@@ -811,7 +811,7 @@ Jak przywrócić strumień do działania po nieudanym odczycie, żeby zapytać p
 
 ## Co dalej
 
-Program z tej lekcji kończy pracę po każdym nieudanym odczycie, także po zwykłej literówce. W lekcji 4.6 nauczysz się przywracać strumień do działania, odrzucać błędny wpis i pytać ponownie, a przy tym odróżniać błędny wpis od końca danych. **Lekcja 4.6 jest w przygotowaniu.**
+Program z tej lekcji kończy pracę po każdym nieudanym odczycie, także po zwykłej literówce. W lekcji 4.6 nauczysz się przywracać strumień do działania, odrzucać błędny wpis i pytać ponownie, a przy tym odróżniać błędny wpis od końca danych: [Lekcja 4.6: Błędny odczyt, odzyskiwanie strumienia i koniec danych](lesson_06_recover_and_end_of_input.md).
 
 ---
 
@@ -900,4 +900,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 4.4: Powtarzanie aż do osiągnięcia celu](lesson_04_repeat_until_the_goal.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 4.4: Powtarzanie aż do osiągnięcia celu](lesson_04_repeat_until_the_goal.md) · **Następna lekcja:** [Lekcja 4.6: Błędny odczyt, odzyskiwanie strumienia i koniec danych](lesson_06_recover_and_end_of_input.md) · [Opis kursu](../../README.md)
