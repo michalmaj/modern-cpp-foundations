@@ -811,7 +811,7 @@ How to bring the stream back into working order after a failed read, so the prog
 
 ## What's next
 
-The program in this lesson ends after every failed read, even after a simple typo. In lesson 4.6 you'll learn to bring the stream back into working order, discard the bad entry and ask again, while telling a bad entry from the end of the data. **Lesson 4.6 is in preparation.**
+The program in this lesson ends after every failed read, even after a simple typo. In lesson 4.6 you'll learn to bring the stream back into working order, discard the bad entry and ask again, while telling a bad entry from the end of the data: [Lesson 4.6: A failed read, recovering the stream and the end of the data](lesson_06_recover_and_end_of_input.en.md).
 
 ---
 
@@ -900,4 +900,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 4.4: Repeating until the goal is reached](lesson_04_repeat_until_the_goal.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 4.4: Repeating until the goal is reached](lesson_04_repeat_until_the_goal.en.md) · **Next lesson:** [Lesson 4.6: A failed read, recovering the stream and the end of the data](lesson_06_recover_and_end_of_input.en.md) · [Course overview](../../README.en.md)

@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). Module 4 is in development: its first five lessons are available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). Module 4 is in development: its first six lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -121,6 +121,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 4, lesson 3: [The `for` loop: counter, condition and update in one place](course/module_04_repeating_actions/lesson_03_the_for_loop.en.md) | Available (pilot version) |
 | Module 4, lesson 4: [Repeating until the goal is reached](course/module_04_repeating_actions/lesson_04_repeat_until_the_goal.en.md) | Available (pilot version) |
 | Module 4, lesson 5: [Asking again for a valid value](course/module_04_repeating_actions/lesson_05_ask_again.en.md) | Available (pilot version) |
+| Module 4, lesson 6: [A failed read, recovering the stream and the end of the data](course/module_04_repeating_actions/lesson_06_recover_and_end_of_input.en.md) | Available (pilot version) |
 | Module 4: the remaining lessons (repeating actions) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -161,6 +162,7 @@ Work through the lessons in order, starting with the first:
 29. **[Lesson 4.3: The `for` loop: counter, condition and update in one place](course/module_04_repeating_actions/lesson_03_the_for_loop.en.md)**
 30. **[Lesson 4.4: Repeating until the goal is reached](course/module_04_repeating_actions/lesson_04_repeat_until_the_goal.en.md)**
 31. **[Lesson 4.5: Asking again for a valid value](course/module_04_repeating_actions/lesson_05_ask_again.en.md)**
+32. **[Lesson 4.6: A failed read, recovering the stream and the end of the data](course/module_04_repeating_actions/lesson_06_recover_and_end_of_input.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
