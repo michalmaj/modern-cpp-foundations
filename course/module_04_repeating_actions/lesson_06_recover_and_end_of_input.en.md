@@ -918,7 +918,7 @@ Because the goal is the sum collected, not a single valid answer. The loop's con
 
 ## What's next
 
-This was the last lesson of Module 4 with new skills. In lesson 4.7 you'll test them in an independent test. **Lesson 4.7 is in preparation.**
+This was the last lesson of Module 4 with new skills. In lesson 4.7 you'll test them in an independent test: [Lesson 4.7: The program repeats actions (the Module 4 test)](lesson_07_the_program_repeats.en.md).
 
 ---
 
@@ -1011,4 +1011,4 @@ After the fourth attempt, `collected < target` gives `false`, so the loop ends a
 
 </details>
 
-**Previous lesson:** [Lesson 4.5: Asking again for a valid value](lesson_05_ask_again.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 4.5: Asking again for a valid value](lesson_05_ask_again.en.md) · **Next lesson:** [Lesson 4.7: The program repeats actions (the Module 4 test)](lesson_07_the_program_repeats.en.md) · [Course overview](../../README.en.md)

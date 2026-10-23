@@ -918,7 +918,7 @@ Bo celem jest zebrana suma, a nie pojedyncza poprawna odpowiedź. Warunek pętli
 
 ## Co dalej
 
-To była ostatnia lekcja Modułu 4 z nowymi umiejętnościami. W lekcji 4.7 sprawdzisz je w samodzielnym sprawdzianie. **Lekcja 4.7 jest w przygotowaniu.**
+To była ostatnia lekcja Modułu 4 z nowymi umiejętnościami. W lekcji 4.7 sprawdzisz je w samodzielnym sprawdzianie: [Lekcja 4.7: Program powtarza działania (sprawdzian Modułu 4)](lesson_07_the_program_repeats.md).
 
 ---
 
@@ -1011,4 +1011,4 @@ Po czwartej próbie `collected < target` daje `false`, więc pętla się kończy
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 4.5: Ponawianie pytania o poprawną wartość](lesson_05_ask_again.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 4.5: Ponawianie pytania o poprawną wartość](lesson_05_ask_again.md) · **Następna lekcja:** [Lekcja 4.7: Program powtarza działania (sprawdzian Modułu 4)](lesson_07_the_program_repeats.md) · [Opis kursu](../../README.md)
