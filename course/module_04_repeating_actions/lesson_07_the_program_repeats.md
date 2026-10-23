@@ -133,6 +133,8 @@ Input ended: 2 of 3 measurements recorded
 
 Przy każdym przypadku zapisz oczekiwane standardowe wyjście, łącznie z liczbą pytań. Dobierz temperatury tak, żeby średnią łatwo było policzyć w pamięci: liczby całkowite i połówki.
 
+Przypadków z końcem danych, także trzeciego przykładu, nie musisz uruchamiać, bo nie wymagamy kończenia danych z klawiatury. Zapisz w tabeli przebiegu, co program zrobi po każdej próbie, i porównaj to z pełną listą kontrolną w części B.
+
 Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5. Przed commitem sprawdź `git status`: do historii trafiają tylko `main.cpp` i `CMakeLists.txt`.
 
 ## Zadanie 2: Dwa zgłoszenia
@@ -271,7 +273,7 @@ Sprawdzian jest zaliczony, gdy spełniasz **wszystkie** kryteria. Możesz przy t
 - Po każdym odczycie program najpierw sprawdza, czy odczyt się udał, potem koniec danych, a dopiero na końcu odzyskuje wejście przez `std::cin.clear()` i `std::getline`. Uwzględnia też koniec danych podczas odrzucania linijki.
 - Licznik pomiarów, suma i licznik pomiarów poniżej zera zmieniają się tylko po przyjęciu poprawnej temperatury. Temperatura 0 nie jest poniżej zera.
 - Średnia jest obliczana tylko z pełnego zestawu, więc nie ma dzielenia przez zero.
-- Standardowe wyjście dla trzech przykładów i dla wszystkich Twoich przypadków jest zgodne z wymaganiami.
+- Standardowe wyjście dla przypadków, które da się wpisać, jest zgodne z wymaganiami, a przypadki z końcem danych, także trzeci przykład, zgadzają się z tabelą przebiegu.
 - Tabela przypadków powstała przed uruchomieniem programu i sprawdza granice z zadania 1.
 - Oba zgłoszenia z zadania 2 zdiagnozowano i poprawiono, a zero, jeden i trzy przebiegi sprawdzono ponownie.
 - Zadanie 3 przeanalizowano bez uruchamiania i wskazano brakującą przyczynę zakończenia.
@@ -289,6 +291,7 @@ Przejdź tutaj po wykonaniu części A albo wtedy, gdy świadomie zrezygnujesz z
 
 - **Standardowe wyjście:** uruchom program dla każdego przypadku z tabeli i porównaj linijki programu z oczekiwanymi, znak po znaku, łącznie z liczbą pytań. Pomiń wpisane dane widoczne dzięki echu.
 - **Ten sam program:** między uruchomieniami nie zmieniaj kodu.
+- **Koniec danych:** przypadki, w których dane się kończą, sprawdź tabelą przebiegu i porównaj z pełną listą kontrolną. Każdy z nich jest tam sprawdzony automatycznie.
 - **Pełne listy przypadków kontrolnych** poniżej porównaj ze swoją tabelą. Czy Twoja tabela obejmowała te same granice i te same sytuacje końca danych?
 - **Kolejność:** przejrzyj obie pętle. Czy po nieudanym odczycie najpierw sprawdzasz koniec danych? Czy suma i liczniki zmieniają się tylko w jednym miejscu?
 

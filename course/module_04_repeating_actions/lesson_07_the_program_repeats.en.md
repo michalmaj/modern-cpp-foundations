@@ -133,6 +133,8 @@ Input ended: 2 of 3 measurements recorded
 
 Write down the expected standard output for each case, including the number of questions. Choose temperatures whose average is easy to work out in your head: whole numbers and halves.
 
+You don't have to run the cases with the end of the data, including the third example, because ending the data from the keyboard isn't required. Write down in a trace table what the program does after each attempt, and compare it with the full list of control cases in part B.
+
 When the result matches, you can save the project in Git, as in lesson 1.5. Before committing, check `git status`: only `main.cpp` and `CMakeLists.txt` go into the history.
 
 ## Task 2: Two bug reports
@@ -271,7 +273,7 @@ You pass the test when you meet **all** the criteria. You may use part B along t
 - After each read, the program first checks whether the read succeeded, then the end of the data, and only last recovers the input with `std::cin.clear()` and `std::getline`. It also takes into account the end of the data while discarding a line.
 - The measurement counter, the sum and the counter of measurements below zero change only after a valid temperature is accepted. A temperature of 0 isn't below zero.
 - The average is computed only from a complete set, so there's no division by zero.
-- Standard output for the three examples and for all your cases matches the requirements.
+- Standard output for the cases that can be typed matches the requirements, and the cases with the end of the data, including the third example, agree with the trace table.
 - The table of cases was made before running the program and checks the boundaries from task 1.
 - Both reports from task 2 were diagnosed and fixed, and zero, one and three iterations were checked again.
 - Task 3 was analysed without running, and the missing reason to end was identified.
@@ -289,6 +291,7 @@ Come here after finishing part A, or when you knowingly decide to stop trying on
 
 - **Standard output:** run the program for every case in your table and compare the program's lines with the expected ones, character by character, including the number of questions. Skip the typed data that the echo shows.
 - **The same program:** don't change the code between runs.
+- **The end of the data:** check the cases in which the data runs out with a trace table, and compare them with the full list of control cases. Each of them is checked automatically there.
 - **Compare the full lists of control cases** below with your table. Did your table cover the same boundaries and the same end-of-data situations?
 - **Order:** look through both loops. After a failed read, do you check for the end of the data first? Do the sum and the counters change in only one place?
 
