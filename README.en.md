@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). Module 4 is in development: its first six lessons are available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -122,7 +122,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 4, lesson 4: [Repeating until the goal is reached](course/module_04_repeating_actions/lesson_04_repeat_until_the_goal.en.md) | Available (pilot version) |
 | Module 4, lesson 5: [Asking again for a valid value](course/module_04_repeating_actions/lesson_05_ask_again.en.md) | Available (pilot version) |
 | Module 4, lesson 6: [A failed read, recovering the stream and the end of the data](course/module_04_repeating_actions/lesson_06_recover_and_end_of_input.en.md) | Available (pilot version) |
-| Module 4: the remaining lessons (repeating actions) | In preparation |
+| Module 4, lesson 7: [The program repeats actions (the Module 4 test)](course/module_04_repeating_actions/lesson_07_the_program_repeats.en.md) | Available (pilot version) |
 | Further modules | Planned |
 | Full course plan | Not published yet |
 | Courses B and C | Planned, repositories do not exist yet |
@@ -163,10 +163,11 @@ Work through the lessons in order, starting with the first:
 30. **[Lesson 4.4: Repeating until the goal is reached](course/module_04_repeating_actions/lesson_04_repeat_until_the_goal.en.md)**
 31. **[Lesson 4.5: Asking again for a valid value](course/module_04_repeating_actions/lesson_05_ask_again.en.md)**
 32. **[Lesson 4.6: A failed read, recovering the stream and the end of the data](course/module_04_repeating_actions/lesson_06_recover_and_end_of_input.en.md)**
+33. **[Lesson 4.7: The program repeats actions (the Module 4 test)](course/module_04_repeating_actions/lesson_07_the_program_repeats.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
-In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2 (lessons 2.1–2.8), programs start to remember values, calculate, take data from the user and store text. It ends with the test in lesson 2.8. In Module 3 (lessons 3.1–3.6), programs start to make decisions. It ends with the test in lesson 3.6. In Module 4, which starts with lesson 4.1, programs start to repeat actions. The further lessons of Module 4 are in preparation.
+In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2 (lessons 2.1–2.8), programs start to remember values, calculate, take data from the user and store text. It ends with the test in lesson 2.8. In Module 3 (lessons 3.1–3.6), programs start to make decisions. It ends with the test in lesson 3.6. In Module 4 (lessons 4.1–4.7), programs start to repeat actions. It ends with the test in lesson 4.7. Further modules are in preparation.
 
 ## What comes next
 
