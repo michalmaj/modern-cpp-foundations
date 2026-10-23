@@ -106,9 +106,11 @@ def blocks(path):
             attributes = match[3] or ''
             pattern = BROKEN if kind == 'broken' else SOURCE if kind == 'example' else re.compile('^$')
             parsed = pattern.match(attributes)
-            # A compile-stage broken program needs at=; a link-stage one has no line in main.cpp to point to.
-            if not parsed or (kind == 'broken' and bool(parsed[1]) == bool(parsed[2] or parsed[4])):
+            # A compile-stage broken program needs at=; a link-stage one has no line in main.cpp to point to,
+            # and no compile errors to count, so it takes neither at= nor errors=.
+            if not parsed or (kind == 'broken' and (bool(parsed[1]) == bool(parsed[2]) or (parsed[1] and parsed[4]))):
                 fail(f'{path}:{i + 1}: cannot read the {kind} marker: {line}')
+                kind = 'unreadable'
             marker = (kind, match[2], attributes, i + 1)
         elif fence:
             start, language, body = i + 1, fence[1], []
@@ -117,7 +119,9 @@ def blocks(path):
                 body.append(lines[i])
                 i += 1
             text = '\n'.join(body) + '\n'
-            if marker:
+            if marker and marker[0] == 'unreadable':
+                pass  # already reported: its block is neither built nor compared
+            elif marker:
                 kind, name, attributes = marker[:3]
                 expected = 'text' if kind in ('output', 'input') else 'cpp'
                 if language != expected:
@@ -485,6 +489,15 @@ def self_test(args):
         ('a different number of errors is detected',
          lesson(*good, ("broken: no_semicolon at=4 errors=2 error=expected ';'", 'cpp', NO_SEMICOLON)),
          None, 'errors in main.cpp, expected 2'),
+        # A broken marker that can't be read is reported, and its program is never built.
+        ('a compile-stage broken marker with errors= but without at= is reported, and nothing is built',
+         lesson(("broken: no_semicolon errors=1 error=expected ';'", 'cpp', NO_SEMICOLON)), None, 'cannot read the broken marker'),
+        ('a compile-stage broken marker with neither at= nor errors= is reported, and nothing is built',
+         lesson(("broken: no_semicolon error=expected ';'", 'cpp', NO_SEMICOLON)), None, 'cannot read the broken marker'),
+        ('a stage=link marker with at= is reported, and nothing is built',
+         lesson(('broken: mian stage=link at=4 error=main', 'cpp', MIAN)), None, 'cannot read the broken marker'),
+        ('a stage=link marker with errors= is reported, and nothing is built',
+         lesson(('broken: mian stage=link errors=1 error=main', 'cpp', MIAN)), None, 'cannot read the broken marker'),
         ('different PL and EN code is detected',
          lesson(*good), lesson(('example: hi', 'cpp', GOOD.replace('Hi', 'Hey')), ('output: hi', 'text', 'Hey!\n')),
          'differ between'),
@@ -564,6 +577,8 @@ def self_test(args):
                     verdict = len(errors) > 0 and any(expected_failure in e for e in errors)
                 if 'short message' in title:
                     verdict = verdict and all(len(e) <= 4 * SHOWN_LIMIT for e in errors)
+                if 'nothing is built' in title:
+                    verdict = verdict and not pathlib.Path('build').exists()
             finally:
                 os.chdir(home)
         print(f'##### {"ok  " if verdict else "FAIL"} self-test: {title}')
