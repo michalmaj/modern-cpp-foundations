@@ -1164,6 +1164,6 @@ Your programs don't yet check whole lines of text, and don't store many values a
 
 ## What's next
 
-The next modules will let you organise larger programs and work with more complex data. Module 5 is in preparation.
+The next modules will let you organise larger programs and work with more complex data. In Module 5, "Your own functions", you'll learn to split a program into smaller, named parts. Start with your first function: [Lesson 5.1: Your first function (`void`)](../module_05_functions/lesson_01_the_first_function.en.md).
 
-**Previous lesson:** [Lesson 4.6: A failed read, recovering the stream and the end of the data](lesson_06_recover_and_end_of_input.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 4.6: A failed read, recovering the stream and the end of the data](lesson_06_recover_and_end_of_input.en.md) · **Next lesson:** [Lesson 5.1: Your first function (`void`)](../module_05_functions/lesson_01_the_first_function.en.md) · [Course overview](../../README.en.md)
