@@ -663,7 +663,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The functions in this lesson always work out their result with the same formula. In the next lesson a function will make a decision and pass back different results depending on the data. Lesson 5.4 is in preparation.
+The functions in this lesson always work out their result with the same formula. In the next lesson a function will make a decision and pass back different results depending on the data: [Lesson 5.4: Several ways to `return`](lesson_04_several_returns.en.md).
 
 ---
 
@@ -795,4 +795,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 5.2: Parameters, arguments and passing by value](lesson_02_parameters_and_arguments.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 5.2: Parameters, arguments and passing by value](lesson_02_parameters_and_arguments.en.md) · **Next lesson:** [Lesson 5.4: Several ways to `return`](lesson_04_several_returns.en.md) · [Course overview](../../README.en.md)
