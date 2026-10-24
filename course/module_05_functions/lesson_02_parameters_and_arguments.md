@@ -692,7 +692,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Funkcje z tej lekcji dostają dane, ale niczego nie oddają: wszystko, co wyliczą, mogą tylko wypisać. W kolejnej lekcji zobaczysz, jak funkcja może przekazać wynik z powrotem do miejsca wywołania. Lekcja 5.3 jest w przygotowaniu.
+Funkcje z tej lekcji dostają dane, ale niczego nie oddają: wszystko, co wyliczą, mogą tylko wypisać. W kolejnej lekcji zobaczysz, jak funkcja może przekazać wynik z powrotem do miejsca wywołania: [Lekcja 5.3: Funkcja zwraca wynik (`return`)](lesson_03_returning_a_result.md).
 
 ---
 
@@ -874,4 +874,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 5.1: Pierwsza własna funkcja (`void`)](lesson_01_the_first_function.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 5.1: Pierwsza własna funkcja (`void`)](lesson_01_the_first_function.md) · **Następna lekcja:** [Lekcja 5.3: Funkcja zwraca wynik (`return`)](lesson_03_returning_a_result.md) · [Opis kursu](../../README.md)

@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Moduł 5 jest rozwijany: dostępne są jego pierwsze dwie lekcje. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Moduł 5 jest rozwijany: dostępne są jego pierwsze trzy lekcje. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -125,6 +125,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 4, lekcja 7: [Program powtarza działania (sprawdzian Modułu 4)](course/module_04_repeating_actions/lesson_07_the_program_repeats.md) | Dostępna (wersja pilotażowa) |
 | Moduł 5, lekcja 1: [Pierwsza własna funkcja (`void`)](course/module_05_functions/lesson_01_the_first_function.md) | Dostępna (wersja pilotażowa) |
 | Moduł 5, lekcja 2: [Parametry, argumenty i przekazywanie przez wartość](course/module_05_functions/lesson_02_parameters_and_arguments.md) | Dostępna (wersja pilotażowa) |
+| Moduł 5, lekcja 3: [Funkcja zwraca wynik (`return`)](course/module_05_functions/lesson_03_returning_a_result.md) | Dostępna (wersja pilotażowa) |
 | Moduł 5: pozostałe lekcje (własne funkcje) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
@@ -169,6 +170,7 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 33. **[Lekcja 4.7: Program powtarza działania (sprawdzian Modułu 4)](course/module_04_repeating_actions/lesson_07_the_program_repeats.md)**
 34. **[Lekcja 5.1: Pierwsza własna funkcja (`void`)](course/module_05_functions/lesson_01_the_first_function.md)**
 35. **[Lekcja 5.2: Parametry, argumenty i przekazywanie przez wartość](course/module_05_functions/lesson_02_parameters_and_arguments.md)**
+36. **[Lekcja 5.3: Funkcja zwraca wynik (`return`)](course/module_05_functions/lesson_03_returning_a_result.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 

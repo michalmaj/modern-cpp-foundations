@@ -692,7 +692,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The functions in this lesson receive data, but give nothing back: anything they work out, they can only print. In the next lesson you'll see how a function can pass a result back to the place of the call. Lesson 5.3 is in preparation.
+The functions in this lesson receive data, but give nothing back: anything they work out, they can only print. In the next lesson you'll see how a function can pass a result back to the place of the call: [Lesson 5.3: A function returns a result (`return`)](lesson_03_returning_a_result.en.md).
 
 ---
 
@@ -874,4 +874,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 5.1: Your first function (`void`)](lesson_01_the_first_function.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 5.1: Your first function (`void`)](lesson_01_the_first_function.en.md) · **Next lesson:** [Lesson 5.3: A function returns a result (`return`)](lesson_03_returning_a_result.en.md) · [Course overview](../../README.en.md)
