@@ -266,6 +266,8 @@ Accepted sessions: 5
 
 Dane nie zawsze wpisuje człowiek, który poda kolejną liczbę. Mogą pochodzić z pliku albo z automatycznego testu, a wtedy po prostu **się kończą**. Tak sprawdzamy programy z tego kursu: dane są przekazywane programowi w całości, a po ostatniej linijce więcej już nie przychodzi.
 
+Takiego końca danych nie musisz wywoływać samodzielnie. Przypadki, w których dane się kończą, sprawdzasz w tej lekcji rozumowaniem: przeczytaj podane dane, przyjmij, że po ostatniej linijce wejście się kończy, i prześledź program próba po próbie. Zapisz, jakie komunikaty się pojawią i co zakończy program, a potem porównaj odpowiedź ze zwiniętym wynikiem. To ćwiczenie w przewidywaniu, a nie uruchomienie programu. Programy z tej lekcji są dla takich danych sprawdzane osobno, automatycznymi testami kursu na Windowsie, Ubuntu i macOS.
+
 Program dostaje tylko `0`. **Przewidź**: ile razy zapyta o liczbę, co wypisze i czy się zakończy?
 
 <!-- input: sessions -->
@@ -479,11 +481,12 @@ Input could not be read
 **Zanim napiszesz program**, przygotuj dwie rzeczy:
 
 - tabelę przebiegu dla danych `0`, `5`, `2`: próba, odczytana wartość, czy odczyt się udał, czy stanowisko jest dostępne, obie flagi i licznik odrzuceń po próbie;
-- tabelę przypadków testowych: wszystkie cztery granice obu zakresów, wartości tuż obok nich, liczba ujemna, kilka odrzuceń przed wyborem, nieudany odczyt po odrzuceniu i koniec danych po kilku odrzuceniach. Przy każdym przypadku zapisz oczekiwane standardowe wyjście.
+- tabelę przypadków testowych: wszystkie cztery granice obu zakresów, wartości tuż obok nich, liczba ujemna, kilka odrzuceń przed wyborem, nieudany odczyt po odrzuceniu i koniec danych po kilku odrzuceniach. Przy każdym przypadku zapisz oczekiwane standardowe wyjście. Przypadki z końcem danych przeanalizuj na papierze, jak w punkcie 7, zamiast je uruchamiać.
 
 ### Kryterium sukcesu
 
-- Program buduje się jako C++20, a jego standardowe wyjście dla czterech powyższych sytuacji jest dokładnie takie jak pokazano.
+- Program buduje się jako C++20. Dla pierwszej, drugiej i czwartej sytuacji, które możesz wpisać, jego standardowe wyjście jest dokładnie takie jak pokazano.
+- Trzecią sytuację, w której dane kończą się po `5`, sprawdzasz rozumowaniem: prześledzony próba po próbie program wypisuje te same linijki co w przykładzie.
 - Pętla `while` kończy się z dwóch nazwanych powodów zapisanych w zmiennych `bool`. Odczyt odbywa się raz na przebieg.
 - Powodzenie odczytu jest sprawdzane przez `std::cin.fail()` **przed** sprawdzeniem dostępności. Po nieudanym odczycie żadna decyzja nie opiera się na wartości numeru.
 - Warunek dostępności przyjmuje dokładnie stanowiska 1–3 i 7–9.
@@ -703,7 +706,7 @@ Przykładowe rozwiązanie jest w części [Przykładowe rozwiązania](#przykład
 | Licznik odrzuceń jest o jeden za duży | Licznik rośnie także po nieudanym odczycie albo po przyjęciu wartości. | Zwiększaj go tylko w gałęzi dla poprawnie odczytanej, niedostępnej wartości. |
 | Pytanie pojawia się dwa razy z rzędu bez odczytu | Pytanie albo odczyt stoi w złym miejscu, na przykład pytanie i przed pętlą, i w niej. | Jedno pytanie i jeden odczyt na przebieg, oba w ciele pętli. |
 | Stanowiska 4–6 są przyjmowane albo 1–3 odrzucane | Warunek dostępności łączy porównania niewłaściwymi operatorami. | Każdy zakres to dwa porównania z `&&`. Oba zakresy łączy `\|\|`. Dopisz nawiasy. |
-| Program nic nie robi i czeka | Czeka na kolejną liczbę, jak w lekcji 2.6. | Wpisz liczbę i naciśnij **Enter**. |
+| Program nic nie robi i czeka | Czeka na kolejną liczbę, jak w lekcji 2.6. | Wpisz liczbę i naciśnij **Enter**. Przypadku z końcem danych nie sprawdzaj w ten sposób: prześledź go, jak w punkcie 7. |
 
 ## 13. Wyjaśnij
 
