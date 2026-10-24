@@ -178,7 +178,7 @@ int main() {
 
 ## 8. Przewidź i sprawdź
 
-**Przewidź** dla każdego zestawu danych: ile razy padnie pytanie, jakie komunikaty się pojawią i jak program się zakończy? Zapisz odpowiedzi, a potem uruchom program.
+**Przewidź** dla każdego zestawu danych: ile razy padnie pytanie, jakie komunikaty się pojawią i jak program się zakończy? Zapisz odpowiedzi. Zestawy A–F uruchom, wpisując dane jak zwykle, i porównaj wyniki. W zestawach G, H i I dane kończą się wcześniej. Takiego końca danych nie musisz wywoływać samodzielnie: przyjmij, że po ostatniej podanej linijce wejście się kończy, prześledź program próba po próbie i porównaj odpowiedź ze zwiniętym wynikiem. To ćwiczenie w przewidywaniu, a nie uruchomienie programu. Ten program jest dla zestawów G, H i I sprawdzany osobno, automatycznymi testami kursu na Windowsie, Ubuntu i macOS.
 
 | Zestaw | Dane, linijka po linijce |
 |---|---|
@@ -615,11 +615,12 @@ Target reached: 10 items
 **Zanim napiszesz program**, przygotuj dwie rzeczy:
 
 - tabelę przebiegu dla danych `2`, `abc`, `4`, `4`: próba, co odczytano, `fail()` i `eof()`, działanie programu i zebrana liczba po próbie;
-- tabelę przypadków testowych: cel osiągnięty dokładnie i przekroczony, partie 0, ujemna i większa niż 4, błędny tekst raz i kilka razy, tekst i liczba spoza zakresu w jednej sekwencji, linijka z błędnym tekstem i dodatkowymi znakami, a także koniec danych przed pierwszą partią, po kilku poprawnych partiach i po kilku błędnych danych. Przy każdym przypadku zapisz oczekiwane standardowe wyjście.
+- tabelę przypadków testowych: cel osiągnięty dokładnie i przekroczony, partie 0, ujemna i większa niż 4, błędny tekst raz i kilka razy, tekst i liczba spoza zakresu w jednej sekwencji, linijka z błędnym tekstem i dodatkowymi znakami, a także koniec danych przed pierwszą partią, po kilku poprawnych partiach i po kilku błędnych danych. Przy każdym przypadku zapisz oczekiwane standardowe wyjście. Przypadki z końcem danych przeanalizuj na papierze, jak w punkcie 8, zamiast je uruchamiać.
 
 ### Kryterium sukcesu
 
-- Program buduje się jako C++20, a jego standardowe wyjście dla czterech powyższych przykładów jest dokładnie takie jak pokazano.
+- Program buduje się jako C++20. Dla pierwszego, drugiego i czwartego przykładu, które możesz wpisać, jego standardowe wyjście jest dokładnie takie jak pokazano.
+- Trzeci przykład, w którym dane kończą się po partiach `2` i `3`, sprawdzasz rozumowaniem: prześledzony próba po próbie program wypisuje te same linijki co w przykładzie.
 - Pętla `while` kończy się po zebraniu co najmniej 10 przedmiotów albo po końcu danych. Nie ma pytania po osiągnięciu celu.
 - Zebrana liczba rośnie tylko o poprawnie odczytane, dopuszczalne partie. Wartości spoza zakresu i błędny tekst jej nie zmieniają.
 - Po nieudanym odczycie program najpierw sprawdza koniec danych. Tylko gdy dane się nie skończyły, wywołuje `std::cin.clear()` i odrzuca resztę linijki przez `std::getline`.
@@ -819,7 +820,7 @@ Przykładowe rozwiązanie jest w części [Przykładowe rozwiązania](#przykład
 | Po `abc 2` program przyjmuje `2` | Odrzucany jest tylko błędny wyraz, a nie cała linijka. | Odrzucaj resztę linijki przez `std::getline`. |
 | `3abc` zostaje przyjęte jako 3 | Tak działa odczyt liczby przez `>>` (punkt 9). | To znane ograniczenie tej lekcji, a nie błąd w Twoim programie. |
 | Suma zmienia się po błędnych danych | Dodawanie stoi poza gałęzią udanego, dopuszczalnego odczytu. | Dodawaj partię tylko po udanym odczycie wartości z zakresu. |
-| Program nic nie robi i czeka | Czeka na kolejną linijkę danych, jak w lekcji 2.6. | Wpisz liczbę i naciśnij **Enter**. |
+| Program nic nie robi i czeka | Czeka na kolejną linijkę danych, jak w lekcji 2.6. | Wpisz liczbę i naciśnij **Enter**. Przypadku z końcem danych nie sprawdzaj w ten sposób: prześledź go, jak w punkcie 8. |
 
 ## 13. Wyjaśnij
 

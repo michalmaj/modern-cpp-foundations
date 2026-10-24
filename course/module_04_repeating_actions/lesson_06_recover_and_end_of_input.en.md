@@ -178,7 +178,7 @@ int main() {
 
 ## 8. Predict and check
 
-**Predict**, for each set of data: how many times will the question be asked, which messages will appear, and how will the program end? Write your answers down, then run the program.
+**Predict**, for each set of data: how many times will the question be asked, which messages will appear, and how will the program end? Write your answers down. Run sets A–F, typing the data as usual, and compare the results. In sets G, H and I the data runs out early. You don't need to cause such an end of the data yourself: assume that the input ends after the last given line, trace the program attempt by attempt, and compare your answer with the collapsed output. This is an exercise in prediction, not a run of the program. This program is checked separately for sets G, H and I, by the course's automatic tests on Windows, Ubuntu and macOS.
 
 | Set | Data, line by line |
 |---|---|
@@ -615,11 +615,12 @@ Target reached: 10 items
 **Before you write the program**, prepare two things:
 
 - a trace table for the data `2`, `abc`, `4`, `4`: the attempt, what was read, `fail()` and `eof()`, what the program does, and the number collected after the attempt;
-- a table of test cases: the goal reached exactly and passed, batches of 0, negative and over 4, bad text once and several times, text and an out-of-range number in one sequence, a line with bad text and extra characters, and the end of the data before the first batch, after several valid batches and after several bad entries. Write down the expected standard output for each case.
+- a table of test cases: the goal reached exactly and passed, batches of 0, negative and over 4, bad text once and several times, text and an out-of-range number in one sequence, a line with bad text and extra characters, and the end of the data before the first batch, after several valid batches and after several bad entries. Write down the expected standard output for each case. Analyse the cases where the data runs out on paper, as in section 8, instead of running them.
 
 ### Success criteria
 
-- The program builds as C++20, and its standard output for the four examples above is exactly as shown.
+- The program builds as C++20, and for the first, second and fourth examples, which you can type, its standard output is exactly as shown.
+- You check the third example, where the data runs out after the batches `2` and `3`, by reasoning: traced attempt by attempt, the program prints the same lines as in the example.
 - The `while` loop ends after collecting at least 10 items, or after the end of the data. There's no question after the goal is reached.
 - The number collected grows only by correctly read, acceptable batches. Values outside the range and bad text don't change it.
 - After a failed read, the program first checks for the end of the data. Only if the data hasn't run out does it call `std::cin.clear()` and discard the rest of the line with `std::getline`.
@@ -819,7 +820,7 @@ An example solution is in [Example solutions](#example-solutions).
 | After `abc 2` the program accepts `2` | Only the bad word is discarded, not the whole line. | Discard the rest of the line with `std::getline`. |
 | `3abc` is accepted as 3 | That's how reading a number with `>>` works (section 9). | It's a known limit of this lesson, not a bug in your program. |
 | The sum changes after bad data | The addition is outside the branch for a successful, acceptable read. | Add a batch only after a successful read of a value in the range. |
-| The program does nothing and waits | It's waiting for another line of data, as in lesson 2.6. | Type a number and press **Enter**. |
+| The program does nothing and waits | It's waiting for another line of data, as in lesson 2.6. | Type a number and press **Enter**. Don't check a case where the data runs out this way: trace it, as in section 8. |
 
 ## 13. Explain
 

@@ -56,7 +56,7 @@ Prosta stacja zapisuje temperatury. Najpierw użytkownik podaje, ile pomiarów t
 - Po końcu danych program nie próbuje czytać dalej. Kończy się normalnie.
 - Średnią wypisuje domyślnie, przez `std::cout`, bez dodatkowego formatowania.
 
-Program nie musi zapamiętywać wszystkich temperatur. Nie jest też odporny na dowolne dane: na przykład `12abc` zostanie odczytane jako 12, jak w lekcji 4.6.
+Program nie musi zapamiętywać wszystkich temperatur. Nie sprawdza też całych linijek: odzyskuje wejście po nieudanym odczycie, jak w lekcji 4.6, ale nie weryfikuje, czy cały wpis jest poprawnym zapisem liczby. W lekcji 4.6 odczyt `12abc` do zmiennej typu `int` dał liczbę 12. Temperatura jest jednak typu `double` i dla niej nie zakładaj tego samego wyniku: wpis taki jak `12abc` nie musi zostać odczytany jako 12. Biblioteki standardowe na różnych systemach mogą go potraktować różnie.
 
 **Pierwszy przykład:** liczba pomiarów 4, temperatury -2, 0, 1 i 5:
 

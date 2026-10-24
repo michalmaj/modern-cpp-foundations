@@ -266,6 +266,8 @@ Accepted sessions: 5
 
 Data isn't always typed by a person who will give another number. It may come from a file or an automatic test, and then it simply **runs out**. That's how the programs in this course are checked: the data is passed to the program all at once, and after the last line nothing more comes.
 
+You don't need to cause such an end of the data yourself. In this lesson you check the cases where the data runs out by reasoning: read the given data, assume that the input ends after its last line, and trace the program attempt by attempt. Write down which messages will appear and what will end the program, then compare your answer with the collapsed output. This is an exercise in prediction, not a run of the program. The programs in this lesson are checked separately for such data, by the course's automatic tests on Windows, Ubuntu and macOS.
+
 The program gets only `0`. **Predict**: how many times will it ask for a number, what will it print, and will it end?
 
 <!-- input: sessions -->
@@ -479,11 +481,12 @@ Input could not be read
 **Before you write the program**, prepare two things:
 
 - a trace table for the data `0`, `5`, `2`: the attempt, the value read, whether the read succeeded, whether the workstation is available, both flags, and the rejection counter after the attempt;
-- a table of test cases: all four boundaries of both ranges, the values right next to them, a negative number, several rejections before a choice, a failed read after a rejection, and the end of the data after several rejections. Write down the expected standard output for each case.
+- a table of test cases: all four boundaries of both ranges, the values right next to them, a negative number, several rejections before a choice, a failed read after a rejection, and the end of the data after several rejections. Write down the expected standard output for each case. Analyse the cases where the data runs out on paper, as in section 7, instead of running them.
 
 ### Success criteria
 
-- The program builds as C++20, and its standard output for the four situations above is exactly as shown.
+- The program builds as C++20, and for the first, second and fourth situations, which you can type, its standard output is exactly as shown.
+- You check the third situation, where the data runs out after `5`, by reasoning: traced attempt by attempt, the program prints the same lines as in the example.
 - The `while` loop ends for two named reasons stored in `bool` variables. The read happens once per iteration.
 - The read's success is checked with `std::cin.fail()` **before** availability is checked. After a failed read, no decision is based on the number's value.
 - The availability condition accepts exactly workstations 1–3 and 7–9.
@@ -703,7 +706,7 @@ An example solution is in [Example solutions](#example-solutions).
 | The rejection counter is one too high | The counter also grows after a failed read, or after accepting a value. | Increase it only in the branch for a correctly read, unavailable value. |
 | The question appears twice in a row without a read | The question or the read is in the wrong place, for example the question both before the loop and in it. | One question and one read per iteration, both in the loop body. |
 | Workstations 4–6 are accepted, or 1–3 rejected | The availability condition combines the comparisons with the wrong operators. | Each range is two comparisons with `&&`. The two ranges are joined with `\|\|`. Add parentheses. |
-| The program does nothing and waits | It's waiting for another number, as in lesson 2.6. | Type a number and press **Enter**. |
+| The program does nothing and waits | It's waiting for another number, as in lesson 2.6. | Type a number and press **Enter**. Don't check a case where the data runs out this way: trace it, as in section 7. |
 
 ## 13. Explain
 

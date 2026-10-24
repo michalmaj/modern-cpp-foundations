@@ -56,7 +56,7 @@ A simple station records temperatures. First the user gives how many measurement
 - After the end of the data, the program doesn't try to read further. It ends normally.
 - It prints the average the default way, with `std::cout`, without extra formatting.
 
-The program doesn't need to remember all the temperatures. Nor is it robust against arbitrary data: for example, `12abc` is read as 12, as in lesson 4.6.
+The program doesn't need to remember all the temperatures. Nor does it check whole lines: it recovers the input after a failed read, as in lesson 4.6, but it doesn't verify that the whole entry is a correctly written number. In lesson 4.6, reading `12abc` into an `int` variable gave the number 12. The temperature, however, is a `double`, and you shouldn't assume the same result for it: an entry such as `12abc` isn't necessarily read as 12. The standard libraries on different systems may treat it differently.
 
 **The first example:** a count of 4 measurements, temperatures -2, 0, 1 and 5:
 
