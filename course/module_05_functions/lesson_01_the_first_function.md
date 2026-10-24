@@ -637,7 +637,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Funkcje z tej lekcji robią za każdym razem dokładnie to samo. W kolejnej lekcji zobaczysz, jak przekazać funkcji dane, żeby jedna funkcja mogła działać na różnych wartościach. Lekcja 5.2 jest w przygotowaniu.
+Funkcje z tej lekcji robią za każdym razem dokładnie to samo. W kolejnej lekcji zobaczysz, jak przekazać funkcji dane, żeby jedna funkcja mogła działać na różnych wartościach: [Lekcja 5.2: Parametry, argumenty i przekazywanie przez wartość](lesson_02_parameters_and_arguments.md).
 
 ---
 
@@ -774,4 +774,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 4.7: Program powtarza działania (sprawdzian Modułu 4)](../module_04_repeating_actions/lesson_07_the_program_repeats.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 4.7: Program powtarza działania (sprawdzian Modułu 4)](../module_04_repeating_actions/lesson_07_the_program_repeats.md) · **Następna lekcja:** [Lekcja 5.2: Parametry, argumenty i przekazywanie przez wartość](lesson_02_parameters_and_arguments.md) · [Opis kursu](../../README.md)

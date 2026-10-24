@@ -637,7 +637,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The functions in this lesson do exactly the same thing every time. In the next lesson you'll see how to pass data to a function, so that one function can work with different values. Lesson 5.2 is in preparation.
+The functions in this lesson do exactly the same thing every time. In the next lesson you'll see how to pass data to a function, so that one function can work with different values: [Lesson 5.2: Parameters, arguments and passing by value](lesson_02_parameters_and_arguments.en.md).
 
 ---
 
@@ -774,4 +774,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 4.7: The program repeats actions (the Module 4 test)](../module_04_repeating_actions/lesson_07_the_program_repeats.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 4.7: The program repeats actions (the Module 4 test)](../module_04_repeating_actions/lesson_07_the_program_repeats.en.md) · **Next lesson:** [Lesson 5.2: Parameters, arguments and passing by value](lesson_02_parameters_and_arguments.en.md) · [Course overview](../../README.en.md)
