@@ -377,18 +377,6 @@ Program buduje się bez błędów i bez ostrzeżeń. Sprawdź go dla dwóch przy
 5. Popraw program.
 6. Sprawdź ponownie oba przypadki.
 
-<!-- input: pair_bug -->
-```text
-3
-3
-```
-
-<!-- input: pair_bug -->
-```text
-2
-5
-```
-
 Wyniki przed poprawką, wyjaśnienie i poprawiony program są w części [Przykładowe rozwiązania](#przykładowe-rozwiązania). Zajrzyj tam po własnej próbie.
 
 ## 10. Gdzie istnieje parametr?
@@ -420,7 +408,7 @@ int main() {
 
 Program się nie zbuduje. Kompilator zgłasza w linijce 13 `use of undeclared identifier 'length'`. `length` to parametr funkcji `print_line`, więc istnieje tylko w jej ciele. W `main` nie ma żadnej zmiennej o tej nazwie. Wywołanie `print_line(4)` przekazuje funkcji wartość 4, ale nie tworzy w `main` zmiennej `length`.
 
-Na macOS kompilator może dopisać do tego komunikatu podpowiedź `did you mean '__NSConstantString_tag::length'?` i zgłosić w tej samej linijce drugi błąd. To nazwa z wnętrza bibliotek systemu, niezwiązana z Twoim programem: kompilator szuka podobnej nazwy i trafia na nią przypadkiem. Liczy się pierwszy komunikat.
+Kompilator dopisuje do tego komunikatu podpowiedź `did you mean '__NSConstantString_tag::length'?` i zgłasza w tej samej linijce drugi błąd. `__NSConstantString_tag` to nazwa wbudowana w kompilator, niezwiązana z Twoim programem: kompilator szukał podobnej nazwy i trafił na tę. Podpowiedzi kompilatora bywają chybione. Liczy się pierwsza część komunikatu: w `main` nazwa `length` jest nieznana.
 
 </details>
 
@@ -717,6 +705,12 @@ Zajrzyj tutaj **po własnej próbie**. Twoje nazwy mogą się różnić, jeśli 
 
 Przed poprawką, przypadek A, dane `3`, `3`:
 
+<!-- input: pair_bug -->
+```text
+3
+3
+```
+
 <!-- output: pair_bug -->
 ```text
 Enter two values:
@@ -725,6 +719,12 @@ Second: 3
 ```
 
 Przypadek B, dane `2`, `5`:
+
+<!-- input: pair_bug -->
+```text
+2
+5
+```
 
 <!-- output: pair_bug -->
 ```text

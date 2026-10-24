@@ -377,18 +377,6 @@ The program builds with no errors and no warnings. Check it for two cases:
 5. Fix the program.
 6. Check both cases again.
 
-<!-- input: pair_bug -->
-```text
-3
-3
-```
-
-<!-- input: pair_bug -->
-```text
-2
-5
-```
-
 The results before the fix, the explanation and the fixed program are in [Example solutions](#example-solutions). Look there after your own attempt.
 
 ## 10. Where does a parameter exist?
@@ -420,7 +408,7 @@ int main() {
 
 The program won't build. The compiler reports `use of undeclared identifier 'length'` on line 13. `length` is a parameter of the function `print_line`, so it exists only in that function's body. There's no variable with that name in `main`. The call `print_line(4)` passes the value 4 to the function, but it doesn't create a variable `length` in `main`.
 
-On macOS the compiler may add the hint `did you mean '__NSConstantString_tag::length'?` to this message, and report a second error on the same line. That's a name from inside the system's libraries, unrelated to your program: the compiler looks for a similar name and finds it by chance. The first message is the one that counts.
+The compiler adds the hint `did you mean '__NSConstantString_tag::length'?` to this message, and reports a second error on the same line. `__NSConstantString_tag` is a name built into the compiler, unrelated to your program: the compiler looked for a similar name and came across this one. Compiler hints can miss the point. The first part of the message is what counts: in `main` the name `length` is unknown.
 
 </details>
 
@@ -717,6 +705,12 @@ Look here **after your own attempt**. Your names may differ, as long as the stan
 
 Before the fix, case A, data `3`, `3`:
 
+<!-- input: pair_bug -->
+```text
+3
+3
+```
+
 <!-- output: pair_bug -->
 ```text
 Enter two values:
@@ -725,6 +719,12 @@ Second: 3
 ```
 
 Case B, data `2`, `5`:
+
+<!-- input: pair_bug -->
+```text
+2
+5
+```
 
 <!-- output: pair_bug -->
 ```text
