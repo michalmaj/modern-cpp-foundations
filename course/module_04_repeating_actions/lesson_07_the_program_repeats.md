@@ -1164,6 +1164,6 @@ Twoje programy nie sprawdzają jeszcze całych linijek tekstu i nie przechowują
 
 ## Co dalej
 
-Kolejne moduły pozwolą organizować większe programy i pracować z bardziej złożonymi danymi. Moduł 5 jest w przygotowaniu.
+Kolejne moduły pozwolą organizować większe programy i pracować z bardziej złożonymi danymi. W Module 5, „Własne funkcje”, nauczysz się dzielić program na mniejsze, nazwane części. Zacznij od pierwszej własnej funkcji: [Lekcja 5.1: Pierwsza własna funkcja (`void`)](../module_05_functions/lesson_01_the_first_function.md).
 
-**Poprzednia lekcja:** [Lekcja 4.6: Błędny odczyt, odzyskiwanie strumienia i koniec danych](lesson_06_recover_and_end_of_input.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 4.6: Błędny odczyt, odzyskiwanie strumienia i koniec danych](lesson_06_recover_and_end_of_input.md) · **Następna lekcja:** [Lekcja 5.1: Pierwsza własna funkcja (`void`)](../module_05_functions/lesson_01_the_first_function.md) · [Opis kursu](../../README.md)
