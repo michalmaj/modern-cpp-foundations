@@ -726,7 +726,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-Your functions can now take data, make decisions and return results. In the next lesson you'll build a program from several cooperating functions, each with its own job. Lesson 5.5 is in preparation.
+Your functions can now take data, make decisions and return results. In the next lesson you'll build a program from several cooperating functions, each with its own job: [Lesson 5.5: Several functions, one program](lesson_05_several_functions.en.md).
 
 ---
 
@@ -877,4 +877,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 5.3: A function returns a result (`return`)](lesson_03_returning_a_result.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 5.3: A function returns a result (`return`)](lesson_03_returning_a_result.en.md) · **Next lesson:** [Lesson 5.5: Several functions, one program](lesson_05_several_functions.en.md) · [Course overview](../../README.en.md)
