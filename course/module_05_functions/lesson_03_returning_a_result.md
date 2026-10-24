@@ -663,7 +663,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Funkcje z tej lekcji obliczają wynik zawsze tym samym wzorem. W kolejnej lekcji funkcja podejmie decyzję i zależnie od danych przekaże różne wyniki. Lekcja 5.4 jest w przygotowaniu.
+Funkcje z tej lekcji obliczają wynik zawsze tym samym wzorem. W kolejnej lekcji funkcja podejmie decyzję i zależnie od danych przekaże różne wyniki: [Lekcja 5.4: Kilka dróg do `return`](lesson_04_several_returns.md).
 
 ---
 
@@ -795,4 +795,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 5.2: Parametry, argumenty i przekazywanie przez wartość](lesson_02_parameters_and_arguments.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 5.2: Parametry, argumenty i przekazywanie przez wartość](lesson_02_parameters_and_arguments.md) · **Następna lekcja:** [Lekcja 5.4: Kilka dróg do `return`](lesson_04_several_returns.md) · [Opis kursu](../../README.md)
