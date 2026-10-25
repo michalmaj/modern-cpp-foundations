@@ -224,7 +224,7 @@ Deklaracja wystarcza **kompilatorowi**: dzięki niej wie, że funkcja istnieje i
 
 W tym programie funkcja jest zadeklarowana i wywołana, ale nigdzie nie ma jej definicji:
 
-<!-- broken: score_missing_definition stage=link error=double_points -->
+<!-- broken: score_missing_definition stage=link error=undefined reference to .double_points\(int\)'|undefined symbol: int __cdecl double_points\(int\)|"double_points\(int\)", referenced from -->
 ```cpp
 #include <iostream>
 
@@ -244,7 +244,7 @@ int main() {
 2. **Linkowanie się nie udaje.** Linker szuka definicji `double_points`, bo `main` ją wywołuje, i nie znajduje jej nigdzie.
 3. Budowanie kończy się niepowodzeniem i program do uruchomienia nie powstaje.
 
-Komunikat pochodzi od linkera, nie od kompilatora, i na każdym systemie wygląda trochę inaczej. Na Ubuntu linker pisze `undefined reference to 'double_points(int)'`, na macOS `"double_points(int)", referenced from`, a na Windowsie `undefined symbol: int __cdecl double_points(int)`. Na końcu pojawia się też `linker command failed`. Nie musisz pamiętać tych komunikatów. Ważne, że wskazują nazwę funkcji, której definicji brakuje, i że błąd pojawia się **po** kompilacji.
+Komunikat pochodzi od linkera, nie od kompilatora, i na każdym systemie wygląda trochę inaczej. Na Ubuntu linker pisze ``undefined reference to `double_points(int)'``, na macOS `"double_points(int)", referenced from`, a na Windowsie `undefined symbol: int __cdecl double_points(int)`. Na końcu pojawia się też `linker command failed`. Nie musisz pamiętać tych komunikatów. Ważne, że wskazują nazwę funkcji, której definicji brakuje, i że błąd pojawia się **po** kompilacji.
 
 Sama deklaracja bez definicji nie zawsze jest błędem. Tutaj problem polega na tym, że funkcja jest **wywoływana**, więc program potrzebuje jej definicji.
 

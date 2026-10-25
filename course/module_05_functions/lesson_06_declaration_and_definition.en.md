@@ -224,7 +224,7 @@ A declaration is enough for **the compiler**: thanks to it, the compiler knows t
 
 In this program the function is declared and called, but there's no definition anywhere:
 
-<!-- broken: score_missing_definition stage=link error=double_points -->
+<!-- broken: score_missing_definition stage=link error=undefined reference to .double_points\(int\)'|undefined symbol: int __cdecl double_points\(int\)|"double_points\(int\)", referenced from -->
 ```cpp
 #include <iostream>
 
@@ -244,7 +244,7 @@ int main() {
 2. **Linking fails.** The linker looks for the definition of `double_points`, because `main` calls it, and doesn't find it anywhere.
 3. The build ends in failure, and no program to run is created.
 
-The message comes from the linker, not the compiler, and it looks a little different on each system. On Ubuntu the linker writes `undefined reference to 'double_points(int)'`, on macOS `"double_points(int)", referenced from`, and on Windows `undefined symbol: int __cdecl double_points(int)`. At the end there's also `linker command failed`. You don't need to remember these messages. What matters is that they name the function whose definition is missing, and that the error appears **after** compiling.
+The message comes from the linker, not the compiler, and it looks a little different on each system. On Ubuntu the linker writes ``undefined reference to `double_points(int)'``, on macOS `"double_points(int)", referenced from`, and on Windows `undefined symbol: int __cdecl double_points(int)`. At the end there's also `linker command failed`. You don't need to remember these messages. What matters is that they name the function whose definition is missing, and that the error appears **after** compiling.
 
 A declaration without a definition isn't always an error. Here the problem is that the function is **called**, so the program needs its definition.
 
