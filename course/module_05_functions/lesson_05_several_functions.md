@@ -783,7 +783,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Twoje programy składają się już z kilku funkcji, ułożonych w pliku tak, żeby każda była zapisana przed swoim wywołaniem. W kolejnej lekcji zobaczysz inny sposób uporządkowania funkcji. Lekcja 5.6 jest w przygotowaniu.
+Twoje programy składają się już z kilku funkcji, ułożonych w pliku tak, żeby każda była zapisana przed swoim wywołaniem. W kolejnej lekcji zobaczysz inny sposób uporządkowania funkcji: [Lekcja 5.6: Deklaracja, definicja i linkowanie](lesson_06_declaration_and_definition.md).
 
 ---
 
@@ -1017,4 +1017,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 5.4: Kilka dróg do `return`](lesson_04_several_returns.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 5.4: Kilka dróg do `return`](lesson_04_several_returns.md) · **Następna lekcja:** [Lekcja 5.6: Deklaracja, definicja i linkowanie](lesson_06_declaration_and_definition.md) · [Opis kursu](../../README.md)
