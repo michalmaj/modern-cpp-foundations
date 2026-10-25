@@ -783,7 +783,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-Your programs now consist of several functions, arranged in the file so that each is written before it's called. In the next lesson you'll see another way of arranging functions. Lesson 5.6 is in preparation.
+Your programs now consist of several functions, arranged in the file so that each is written before it's called. In the next lesson you'll see another way of arranging functions: [Lesson 5.6: Declaration, definition and linking](lesson_06_declaration_and_definition.en.md).
 
 ---
 
@@ -1017,4 +1017,4 @@ int main() {
 
 </details>
 
-**Previous lesson:** [Lesson 5.4: Several ways to `return`](lesson_04_several_returns.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 5.4: Several ways to `return`](lesson_04_several_returns.en.md) · **Next lesson:** [Lesson 5.6: Declaration, definition and linking](lesson_06_declaration_and_definition.en.md) · [Course overview](../../README.en.md)
