@@ -1193,6 +1193,6 @@ These are the basics. Functions in C++ have many more possibilities, which you'l
 
 ## What's next
 
-The next modules are in preparation.
+In Module 6, "Collections of data: `std::vector`", your programs will start to store many values of the same kind and process them with one loop. Start with your first vector: [Lesson 6.1: Your first `std::vector` and the range-based `for` loop](../module_06_collections/lesson_01_the_first_vector.en.md).
 
-**Previous lesson:** [Lesson 5.6: Declaration, definition and linking](lesson_06_declaration_and_definition.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 5.6: Declaration, definition and linking](lesson_06_declaration_and_definition.en.md) · **Next lesson:** [Lesson 6.1: Your first `std::vector` and the range-based `for` loop](../module_06_collections/lesson_01_the_first_vector.en.md) · [Course overview](../../README.en.md)
