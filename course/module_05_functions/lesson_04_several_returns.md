@@ -726,7 +726,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Twoje funkcje potrafią już przyjmować dane, podejmować decyzje i zwracać wyniki. W kolejnej lekcji zbudujesz program z kilku współpracujących funkcji, z których każda ma własne zadanie. Lekcja 5.5 jest w przygotowaniu.
+Twoje funkcje potrafią już przyjmować dane, podejmować decyzje i zwracać wyniki. W kolejnej lekcji zbudujesz program z kilku współpracujących funkcji, z których każda ma własne zadanie: [Lekcja 5.5: Kilka funkcji, jeden program](lesson_05_several_functions.md).
 
 ---
 
@@ -877,4 +877,4 @@ int main() {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 5.3: Funkcja zwraca wynik (`return`)](lesson_03_returning_a_result.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 5.3: Funkcja zwraca wynik (`return`)](lesson_03_returning_a_result.md) · **Następna lekcja:** [Lekcja 5.5: Kilka funkcji, jeden program](lesson_05_several_functions.md) · [Opis kursu](../../README.md)
