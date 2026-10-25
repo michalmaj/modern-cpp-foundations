@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Moduł 5 jest rozwijany: dostępnych jest jego pierwszych sześć lekcji. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -129,7 +129,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 5, lekcja 4: [Kilka dróg do `return`](course/module_05_functions/lesson_04_several_returns.md) | Dostępna (wersja pilotażowa) |
 | Moduł 5, lekcja 5: [Kilka funkcji, jeden program](course/module_05_functions/lesson_05_several_functions.md) | Dostępna (wersja pilotażowa) |
 | Moduł 5, lekcja 6: [Deklaracja, definicja i linkowanie](course/module_05_functions/lesson_06_declaration_and_definition.md) | Dostępna (wersja pilotażowa) |
-| Moduł 5: pozostałe lekcje (własne funkcje) | W przygotowaniu |
+| Moduł 5, lekcja 7: [Program z własnych funkcji (sprawdzian Modułu 5)](course/module_05_functions/lesson_07_a_program_of_functions.md) | Dostępna (wersja pilotażowa) |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
 | Kursy B i C | Planowane, repozytoria jeszcze nie istnieją |
@@ -177,10 +177,11 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 37. **[Lekcja 5.4: Kilka dróg do `return`](course/module_05_functions/lesson_04_several_returns.md)**
 38. **[Lekcja 5.5: Kilka funkcji, jeden program](course/module_05_functions/lesson_05_several_functions.md)**
 39. **[Lekcja 5.6: Deklaracja, definicja i linkowanie](course/module_05_functions/lesson_06_declaration_and_definition.md)**
+40. **[Lekcja 5.7: Program z własnych funkcji (sprawdzian Modułu 5)](course/module_05_functions/lesson_07_a_program_of_functions.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
-W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. W Module 2 (lekcje 2.1–2.8) programy zaczną pamiętać wartości, liczyć, pobierać dane od użytkownika i przechowywać tekst. Kończy go sprawdzian w lekcji 2.8. W Module 3 (lekcje 3.1–3.6) programy zaczną podejmować decyzje. Kończy go sprawdzian w lekcji 3.6. W Module 4 (lekcje 4.1–4.7) programy zaczną powtarzać działania. Kończy go sprawdzian w lekcji 4.7. W Module 5, który zaczyna lekcja 5.1, nauczysz się dzielić programy na mniejsze, nazwane części: własne funkcje. Kolejne lekcje Modułu 5 są w przygotowaniu.
+W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. W Module 2 (lekcje 2.1–2.8) programy zaczną pamiętać wartości, liczyć, pobierać dane od użytkownika i przechowywać tekst. Kończy go sprawdzian w lekcji 2.8. W Module 3 (lekcje 3.1–3.6) programy zaczną podejmować decyzje. Kończy go sprawdzian w lekcji 3.6. W Module 4 (lekcje 4.1–4.7) programy zaczną powtarzać działania. Kończy go sprawdzian w lekcji 4.7. W Module 5 (lekcje 5.1–5.7) nauczysz się dzielić programy na mniejsze, nazwane części: własne funkcje. Kończy go sprawdzian w lekcji 5.7. Kolejne moduły są w przygotowaniu.
 
 ## Co dalej po tym kursie
 

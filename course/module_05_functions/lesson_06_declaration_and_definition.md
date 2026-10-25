@@ -634,7 +634,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Znasz już podstawy własnych funkcji: definicję i wywołanie, parametry, wynik, kilka dróg do `return`, współpracę funkcji oraz deklaracje. Kolejna lekcja jest w przygotowaniu.
+Znasz już podstawy własnych funkcji: definicję i wywołanie, parametry, wynik, kilka dróg do `return`, współpracę funkcji oraz deklaracje. Teraz sprawdź się w zadaniu, które łączy cały moduł: [Lekcja 5.7: Program z własnych funkcji (sprawdzian Modułu 5)](lesson_07_a_program_of_functions.md).
 
 ---
 
@@ -727,4 +727,4 @@ int total_attendees(int first_group, int second_group) {
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 5.5: Kilka funkcji, jeden program](lesson_05_several_functions.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 5.5: Kilka funkcji, jeden program](lesson_05_several_functions.md) · **Następna lekcja:** [Lekcja 5.7: Program z własnych funkcji (sprawdzian Modułu 5)](lesson_07_a_program_of_functions.md) · [Opis kursu](../../README.md)

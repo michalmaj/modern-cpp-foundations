@@ -634,7 +634,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-You now know the basics of your own functions: definitions and calls, parameters, results, several ways to `return`, functions working together, and declarations. The next lesson is in preparation.
+You now know the basics of your own functions: definitions and calls, parameters, results, several ways to `return`, functions working together, and declarations. Now test yourself on a task that brings the whole module together: [Lesson 5.7: A program built from your own functions (the Module 5 test)](lesson_07_a_program_of_functions.en.md).
 
 ---
 
@@ -727,4 +727,4 @@ int total_attendees(int first_group, int second_group) {
 
 </details>
 
-**Previous lesson:** [Lesson 5.5: Several functions, one program](lesson_05_several_functions.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 5.5: Several functions, one program](lesson_05_several_functions.en.md) · **Next lesson:** [Lesson 5.7: A program built from your own functions (the Module 5 test)](lesson_07_a_program_of_functions.en.md) · [Course overview](../../README.en.md)
