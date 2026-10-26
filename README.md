@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Moduł 6 jest rozwijany: dostępne są jego cztery pierwsze lekcje. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Moduł 6 jest rozwijany: dostępne są jego pięć pierwszych lekcji. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -134,6 +134,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 6, lekcja 2: [Dodawanie danych do wektora: `push_back()` i `empty()`](course/module_06_collections/lesson_02_adding_to_a_vector.md) | Dostępna (wersja pilotażowa) |
 | Moduł 6, lekcja 3: [Pozycje elementów i sąsiednie wartości w `std::vector`](course/module_06_collections/lesson_03_positions_and_neighbours.md) | Dostępna (wersja pilotażowa) |
 | Moduł 6, lekcja 4: [Wektor jako parametr funkcji: `const&`](course/module_06_collections/lesson_04_a_vector_as_a_parameter.md) | Dostępna (wersja pilotażowa) |
+| Moduł 6, lekcja 5: [Funkcja tworzy i zwraca nowy wektor](course/module_06_collections/lesson_05_a_function_returns_a_vector.md) | Dostępna (wersja pilotażowa) |
 | Moduł 6: pozostałe lekcje (kolekcje danych: `std::vector`) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
@@ -187,6 +188,7 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 42. **[Lekcja 6.2: Dodawanie danych do wektora: `push_back()` i `empty()`](course/module_06_collections/lesson_02_adding_to_a_vector.md)**
 43. **[Lekcja 6.3: Pozycje elementów i sąsiednie wartości w `std::vector`](course/module_06_collections/lesson_03_positions_and_neighbours.md)**
 44. **[Lekcja 6.4: Wektor jako parametr funkcji: `const&`](course/module_06_collections/lesson_04_a_vector_as_a_parameter.md)**
+45. **[Lekcja 6.5: Funkcja tworzy i zwraca nowy wektor](course/module_06_collections/lesson_05_a_function_returns_a_vector.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
