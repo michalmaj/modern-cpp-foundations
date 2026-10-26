@@ -363,7 +363,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji tekst był wpisany w kodzie. W kolejnej lekcji program odczyta z wejścia kolejne linijki tekstu przez `std::getline` i przeanalizuje każdą z nich. Lekcja jest w przygotowaniu.
+W tej lekcji tekst był wpisany w kodzie. W kolejnej lekcji program odczyta z wejścia kolejne linie tekstu przez `std::getline` i przeanalizuje każdą z nich: [Lekcja 7.4: Przetwarzanie kolejnych linii przez `std::getline`](lesson_04_successive_lines.md).
 
 ---
 
@@ -753,4 +753,4 @@ Poprawiony program to program kontrolny z punktu 4: różni się od programu z b
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 7.2: Pozycje i sąsiednie znaki w `std::string`](lesson_02_positions_and_neighbours.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 7.2: Pozycje i sąsiednie znaki w `std::string`](lesson_02_positions_and_neighbours.md) · **Następna lekcja:** [Lekcja 7.4: Przetwarzanie kolejnych linii przez `std::getline`](lesson_04_successive_lines.md) · [Opis kursu](../../README.md)
