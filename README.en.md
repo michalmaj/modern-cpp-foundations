@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). Module 6 is in development: its first lesson is available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). Module 6 is in development: its first two lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -131,6 +131,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 5, lesson 6: [Declaration, definition and linking](course/module_05_functions/lesson_06_declaration_and_definition.en.md) | Available (pilot version) |
 | Module 5, lesson 7: [A program built from your own functions (the Module 5 test)](course/module_05_functions/lesson_07_a_program_of_functions.en.md) | Available (pilot version) |
 | Module 6, lesson 1: [Your first `std::vector` and the range-based `for` loop](course/module_06_collections/lesson_01_the_first_vector.en.md) | Available (pilot version) |
+| Module 6, lesson 2: [Adding data to a vector: `push_back()` and `empty()`](course/module_06_collections/lesson_02_adding_to_a_vector.en.md) | Available (pilot version) |
 | Module 6: the remaining lessons (collections of data: `std::vector`) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -181,6 +182,7 @@ Work through the lessons in order, starting with the first:
 39. **[Lesson 5.6: Declaration, definition and linking](course/module_05_functions/lesson_06_declaration_and_definition.en.md)**
 40. **[Lesson 5.7: A program built from your own functions (the Module 5 test)](course/module_05_functions/lesson_07_a_program_of_functions.en.md)**
 41. **[Lesson 6.1: Your first `std::vector` and the range-based `for` loop](course/module_06_collections/lesson_01_the_first_vector.en.md)**
+42. **[Lesson 6.2: Adding data to a vector: `push_back()` and `empty()`](course/module_06_collections/lesson_02_adding_to_a_vector.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 

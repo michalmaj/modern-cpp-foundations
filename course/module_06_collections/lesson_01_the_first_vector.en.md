@@ -552,7 +552,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson, all the elements were written in the code before the program started. In the next lesson, the vector will take new elements while the program runs, and the program will check whether it got any at all. That lesson is in preparation.
+In this lesson, all the elements were written in the code before the program started. In the next lesson, the vector will take new elements while the program runs, and the program will check whether it got any at all: [Lesson 6.2: Adding data to a vector: `push_back()` and `empty()`](lesson_02_adding_to_a_vector.en.md).
 
 ---
 
@@ -677,4 +677,4 @@ After the counter is reset, the second `if` counts the current day straight away
 
 </details>
 
-**Previous lesson:** [Lesson 5.7: A program built from your own functions (the Module 5 test)](../module_05_functions/lesson_07_a_program_of_functions.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 5.7: A program built from your own functions (the Module 5 test)](../module_05_functions/lesson_07_a_program_of_functions.en.md) · **Next lesson:** [Lesson 6.2: Adding data to a vector: `push_back()` and `empty()`](lesson_02_adding_to_a_vector.en.md) · [Course overview](../../README.en.md)

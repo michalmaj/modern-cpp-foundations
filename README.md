@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Moduł 6 jest rozwijany: dostępna jest jego pierwsza lekcja. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Moduł 6 jest rozwijany: dostępne są jego dwie pierwsze lekcje. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -131,6 +131,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 5, lekcja 6: [Deklaracja, definicja i linkowanie](course/module_05_functions/lesson_06_declaration_and_definition.md) | Dostępna (wersja pilotażowa) |
 | Moduł 5, lekcja 7: [Program z własnych funkcji (sprawdzian Modułu 5)](course/module_05_functions/lesson_07_a_program_of_functions.md) | Dostępna (wersja pilotażowa) |
 | Moduł 6, lekcja 1: [Pierwszy `std::vector` i pętla zakresowa `for`](course/module_06_collections/lesson_01_the_first_vector.md) | Dostępna (wersja pilotażowa) |
+| Moduł 6, lekcja 2: [Dodawanie danych do wektora: `push_back()` i `empty()`](course/module_06_collections/lesson_02_adding_to_a_vector.md) | Dostępna (wersja pilotażowa) |
 | Moduł 6: pozostałe lekcje (kolekcje danych: `std::vector`) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
@@ -181,6 +182,7 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 39. **[Lekcja 5.6: Deklaracja, definicja i linkowanie](course/module_05_functions/lesson_06_declaration_and_definition.md)**
 40. **[Lekcja 5.7: Program z własnych funkcji (sprawdzian Modułu 5)](course/module_05_functions/lesson_07_a_program_of_functions.md)**
 41. **[Lekcja 6.1: Pierwszy `std::vector` i pętla zakresowa `for`](course/module_06_collections/lesson_01_the_first_vector.md)**
+42. **[Lekcja 6.2: Dodawanie danych do wektora: `push_back()` i `empty()`](course/module_06_collections/lesson_02_adding_to_a_vector.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
