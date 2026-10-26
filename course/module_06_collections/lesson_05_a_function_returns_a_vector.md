@@ -476,7 +476,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Następna lekcja to sprawdzian Modułu 6, który połączy przechowywanie danych, pętle, indeksy i funkcje na wektorach. Lekcja jest w przygotowaniu.
+Następna lekcja to sprawdzian Modułu 6, który połączy przechowywanie danych, pętle, indeksy i funkcje na wektorach: [Lekcja 6.6: Dziennik treningów (sprawdzian Modułu 6)](lesson_06_training_log.md).
 
 ---
 
@@ -863,4 +863,4 @@ Poprawiony program to program kontrolny z punktu 6: różni się od programu z b
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 6.4: Wektor jako parametr funkcji: `const&`](lesson_04_a_vector_as_a_parameter.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 6.4: Wektor jako parametr funkcji: `const&`](lesson_04_a_vector_as_a_parameter.md) · **Następna lekcja:** [Lekcja 6.6: Dziennik treningów (sprawdzian Modułu 6)](lesson_06_training_log.md) · [Opis kursu](../../README.md)
