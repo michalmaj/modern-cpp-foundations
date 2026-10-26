@@ -363,7 +363,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson the text was written in the code. In the next lesson the program will read successive lines of text from the input with `std::getline` and analyse each of them. That lesson is in preparation.
+In this lesson the text was written in the code. In the next lesson the program will read successive lines of text from the input with `std::getline` and analyse each of them: [Lesson 7.4: Processing successive lines with `std::getline`](lesson_04_successive_lines.en.md).
 
 ---
 
@@ -753,4 +753,4 @@ The fixed program is the check program from section 4: it differs from the buggy
 
 </details>
 
-**Previous lesson:** [Lesson 7.2: Positions and neighbouring characters in a `std::string`](lesson_02_positions_and_neighbours.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 7.2: Positions and neighbouring characters in a `std::string`](lesson_02_positions_and_neighbours.en.md) · **Next lesson:** [Lesson 7.4: Processing successive lines with `std::getline`](lesson_04_successive_lines.en.md) · [Course overview](../../README.en.md)

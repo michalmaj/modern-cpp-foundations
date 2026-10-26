@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). Module 7 is in development: its first three lessons are available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). Module 7 is in development: its first four lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -139,6 +139,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 7, lesson 1: [First characters: `char` and going through a `std::string`](course/module_07_text/lesson_01_first_characters.en.md) | Available (pilot version) |
 | Module 7, lesson 2: [Positions and neighbouring characters in a `std::string`](course/module_07_text/lesson_02_positions_and_neighbours.en.md) | Available (pilot version) |
 | Module 7, lesson 3: [A function creates a new text](course/module_07_text/lesson_03_a_function_creates_a_new_text.en.md) | Available (pilot version) |
+| Module 7, lesson 4: [Processing successive lines with `std::getline`](course/module_07_text/lesson_04_successive_lines.en.md) | Available (pilot version) |
 | Module 7: the remaining lessons (text as a sequence of characters) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -197,6 +198,7 @@ Work through the lessons in order, starting with the first:
 47. **[Lesson 7.1: First characters: `char` and going through a `std::string`](course/module_07_text/lesson_01_first_characters.en.md)**
 48. **[Lesson 7.2: Positions and neighbouring characters in a `std::string`](course/module_07_text/lesson_02_positions_and_neighbours.en.md)**
 49. **[Lesson 7.3: A function creates a new text](course/module_07_text/lesson_03_a_function_creates_a_new_text.en.md)**
+50. **[Lesson 7.4: Processing successive lines with `std::getline`](course/module_07_text/lesson_04_successive_lines.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
