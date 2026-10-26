@@ -483,7 +483,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The functions in this lesson returned single numbers. In the next lesson a function will return a new vector, for example one built from chosen elements of another vector. That lesson is in preparation.
+The functions in this lesson returned single numbers. In the next lesson a function will return a new vector, for example one built from chosen elements of another vector: [Lesson 6.5: A function creates and returns a new vector](lesson_05_a_function_returns_a_vector.en.md).
 
 ---
 
@@ -868,4 +868,4 @@ The fixed program is the check program from section 7: it differs from the buggy
 
 </details>
 
-**Previous lesson:** [Lesson 6.3: Element positions and neighbouring values in a `std::vector`](lesson_03_positions_and_neighbours.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 6.3: Element positions and neighbouring values in a `std::vector`](lesson_03_positions_and_neighbours.en.md) · **Next lesson:** [Lesson 6.5: A function creates and returns a new vector](lesson_05_a_function_returns_a_vector.en.md) · [Course overview](../../README.en.md)

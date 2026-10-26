@@ -483,7 +483,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Funkcje z tej lekcji zwracały pojedyncze liczby. W kolejnej lekcji funkcja zwróci nowy wektor, na przykład zbudowany z wybranych elementów innego wektora. Lekcja jest w przygotowaniu.
+Funkcje z tej lekcji zwracały pojedyncze liczby. W kolejnej lekcji funkcja zwróci nowy wektor, na przykład zbudowany z wybranych elementów innego wektora: [Lekcja 6.5: Funkcja tworzy i zwraca nowy wektor](lesson_05_a_function_returns_a_vector.md).
 
 ---
 
@@ -868,4 +868,4 @@ Poprawiony program to program kontrolny z punktu 7: różni się od programu z b
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 6.3: Pozycje elementów i sąsiednie wartości w `std::vector`](lesson_03_positions_and_neighbours.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 6.3: Pozycje elementów i sąsiednie wartości w `std::vector`](lesson_03_positions_and_neighbours.md) · **Następna lekcja:** [Lekcja 6.5: Funkcja tworzy i zwraca nowy wektor](lesson_05_a_function_returns_a_vector.md) · [Opis kursu](../../README.md)
