@@ -552,7 +552,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji wszystkie elementy były wpisane w kod, zanim program się uruchomił. W kolejnej lekcji wektor będzie przyjmował nowe elementy w trakcie działania programu, a program sprawdzi, czy w ogóle jakieś dostał. Lekcja jest w przygotowaniu.
+W tej lekcji wszystkie elementy były wpisane w kod, zanim program się uruchomił. W kolejnej lekcji wektor będzie przyjmował nowe elementy w trakcie działania programu, a program sprawdzi, czy w ogóle jakieś dostał: [Lekcja 6.2: Dodawanie danych do wektora: `push_back()` i `empty()`](lesson_02_adding_to_a_vector.md).
 
 ---
 
@@ -677,4 +677,4 @@ Po wyzerowaniu licznika drugi `if` od razu liczy bieżący dzień, bo jego opad 
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 5.7: Program z własnych funkcji (sprawdzian Modułu 5)](../module_05_functions/lesson_07_a_program_of_functions.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 5.7: Program z własnych funkcji (sprawdzian Modułu 5)](../module_05_functions/lesson_07_a_program_of_functions.md) · **Następna lekcja:** [Lekcja 6.2: Dodawanie danych do wektora: `push_back()` i `empty()`](lesson_02_adding_to_a_vector.md) · [Opis kursu](../../README.md)
