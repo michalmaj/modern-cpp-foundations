@@ -485,7 +485,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji pętla przeglądała znaki po kolei. W kolejnej lekcji odczytasz znak o wybranej pozycji i porównasz sąsiednie znaki, tak jak elementy wektora w lekcji 6.3. Lekcja jest w przygotowaniu.
+W tej lekcji pętla przeglądała znaki po kolei. W kolejnej lekcji odczytasz znak o wybranej pozycji i porównasz sąsiednie znaki, tak jak elementy wektora w lekcji 6.3: [Lekcja 7.2: Pozycje i sąsiednie znaki w `std::string`](lesson_02_positions_and_neighbours.md).
 
 ---
 
@@ -748,4 +748,4 @@ Poprawiony program to program kontrolny z punktu 9: różni się od programu z b
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 6.6: Dziennik treningów (sprawdzian Modułu 6)](../module_06_collections/lesson_06_training_log.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 6.6: Dziennik treningów (sprawdzian Modułu 6)](../module_06_collections/lesson_06_training_log.md) · **Następna lekcja:** [Lekcja 7.2: Pozycje i sąsiednie znaki w `std::string`](lesson_02_positions_and_neighbours.md) · [Opis kursu](../../README.md)
