@@ -542,7 +542,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Do tej pory cały program z wektorem mieścił się w `main`. W kolejnej lekcji przekażesz wektor do własnej funkcji, która go tylko odczytuje. Lekcja jest w przygotowaniu.
+Do tej pory cały program z wektorem mieścił się w `main`. W kolejnej lekcji przekażesz wektor do własnej funkcji, która go tylko odczytuje: [Lekcja 6.4: Wektor jako parametr funkcji: `const&`](lesson_04_a_vector_as_a_parameter.md).
 
 ---
 
@@ -865,4 +865,4 @@ Poprawiony program to program kontrolny z punktu 8: różni się od programu z b
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 6.2: Dodawanie danych do wektora: `push_back()` i `empty()`](lesson_02_adding_to_a_vector.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 6.2: Dodawanie danych do wektora: `push_back()` i `empty()`](lesson_02_adding_to_a_vector.md) · **Następna lekcja:** [Lekcja 6.4: Wektor jako parametr funkcji: `const&`](lesson_04_a_vector_as_a_parameter.md) · [Opis kursu](../../README.md)
