@@ -902,7 +902,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson, a range-based loop went through the vector, always from the first element to the last. In the next lesson you'll meet the positions of elements: you'll read the first, the last or a chosen element, and compare neighbouring values. That lesson is in preparation.
+In this lesson, a range-based loop went through the vector, always from the first element to the last. In the next lesson you'll meet the positions of elements: you'll read the first, the last or a chosen element, and compare neighbouring values: [Lesson 6.3: Element positions and neighbouring values in a `std::vector`](lesson_03_positions_and_neighbours.en.md).
 
 ---
 
@@ -1096,4 +1096,4 @@ Stored scores: 2
 
 </details>
 
-**Previous lesson:** [Lesson 6.1: Your first `std::vector` and the range-based `for` loop](lesson_01_the_first_vector.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 6.1: Your first `std::vector` and the range-based `for` loop](lesson_01_the_first_vector.en.md) · **Next lesson:** [Lesson 6.3: Element positions and neighbouring values in a `std::vector`](lesson_03_positions_and_neighbours.en.md) · [Course overview](../../README.en.md)
