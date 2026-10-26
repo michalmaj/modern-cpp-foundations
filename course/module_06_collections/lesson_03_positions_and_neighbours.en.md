@@ -542,7 +542,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-So far, a whole program with a vector fitted in `main`. In the next lesson you'll pass a vector to your own function, which only reads it. That lesson is in preparation.
+So far, a whole program with a vector fitted in `main`. In the next lesson you'll pass a vector to your own function, which only reads it: [Lesson 6.4: A vector as a function parameter: `const&`](lesson_04_a_vector_as_a_parameter.en.md).
 
 ---
 
@@ -865,4 +865,4 @@ The fixed program is the check program from section 8: it differs from the buggy
 
 </details>
 
-**Previous lesson:** [Lesson 6.2: Adding data to a vector: `push_back()` and `empty()`](lesson_02_adding_to_a_vector.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 6.2: Adding data to a vector: `push_back()` and `empty()`](lesson_02_adding_to_a_vector.en.md) · **Next lesson:** [Lesson 6.4: A vector as a function parameter: `const&`](lesson_04_a_vector_as_a_parameter.en.md) · [Course overview](../../README.en.md)
