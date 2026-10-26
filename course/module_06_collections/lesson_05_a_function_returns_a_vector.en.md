@@ -476,7 +476,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The next lesson is the Module 6 test, which brings together storing data, loops, indices and functions on vectors. That lesson is in preparation.
+The next lesson is the Module 6 test, which brings together storing data, loops, indices and functions on vectors: [Lesson 6.6: A training log (the Module 6 test)](lesson_06_training_log.en.md).
 
 ---
 
@@ -863,4 +863,4 @@ The fixed program is the check program from section 6: it differs from the buggy
 
 </details>
 
-**Previous lesson:** [Lesson 6.4: A vector as a function parameter: `const&`](lesson_04_a_vector_as_a_parameter.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 6.4: A vector as a function parameter: `const&`](lesson_04_a_vector_as_a_parameter.en.md) · **Next lesson:** [Lesson 6.6: A training log (the Module 6 test)](lesson_06_training_log.en.md) · [Course overview](../../README.en.md)
