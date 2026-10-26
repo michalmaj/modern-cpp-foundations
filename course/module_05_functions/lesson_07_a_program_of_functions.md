@@ -1193,6 +1193,6 @@ To podstawy. Funkcje w C++ mają jeszcze wiele możliwości, które poznasz w da
 
 ## Co dalej
 
-Kolejne moduły są w przygotowaniu.
+W Module 6, „Kolekcje danych: `std::vector`”, programy zaczną przechowywać wiele wartości tego samego rodzaju i przetwarzać je jedną pętlą. Zacznij od pierwszego wektora: [Lekcja 6.1: Pierwszy `std::vector` i pętla zakresowa `for`](../module_06_collections/lesson_01_the_first_vector.md).
 
-**Poprzednia lekcja:** [Lekcja 5.6: Deklaracja, definicja i linkowanie](lesson_06_declaration_and_definition.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 5.6: Deklaracja, definicja i linkowanie](lesson_06_declaration_and_definition.md) · **Następna lekcja:** [Lekcja 6.1: Pierwszy `std::vector` i pętla zakresowa `for`](../module_06_collections/lesson_01_the_first_vector.md) · [Opis kursu](../../README.md)
