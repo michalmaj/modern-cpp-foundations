@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Moduł 7 jest rozwijany: dostępna jest jego pierwsza lekcja. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Moduł 7 jest rozwijany: dostępne są jego dwie pierwsze lekcje. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -137,6 +137,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 6, lekcja 5: [Funkcja tworzy i zwraca nowy wektor](course/module_06_collections/lesson_05_a_function_returns_a_vector.md) | Dostępna (wersja pilotażowa) |
 | Moduł 6, lekcja 6: [Dziennik treningów (sprawdzian Modułu 6)](course/module_06_collections/lesson_06_training_log.md) | Dostępna (wersja pilotażowa) |
 | Moduł 7, lekcja 1: [Pierwsze znaki: `char` i przeglądanie `std::string`](course/module_07_text/lesson_01_first_characters.md) | Dostępna (wersja pilotażowa) |
+| Moduł 7, lekcja 2: [Pozycje i sąsiednie znaki w `std::string`](course/module_07_text/lesson_02_positions_and_neighbours.md) | Dostępna (wersja pilotażowa) |
 | Moduł 7: pozostałe lekcje (tekst jako ciąg znaków) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
@@ -193,6 +194,7 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 45. **[Lekcja 6.5: Funkcja tworzy i zwraca nowy wektor](course/module_06_collections/lesson_05_a_function_returns_a_vector.md)**
 46. **[Lekcja 6.6: Dziennik treningów (sprawdzian Modułu 6)](course/module_06_collections/lesson_06_training_log.md)**
 47. **[Lekcja 7.1: Pierwsze znaki: `char` i przeglądanie `std::string`](course/module_07_text/lesson_01_first_characters.md)**
+48. **[Lekcja 7.2: Pozycje i sąsiednie znaki w `std::string`](course/module_07_text/lesson_02_positions_and_neighbours.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 

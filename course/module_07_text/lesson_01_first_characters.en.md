@@ -485,7 +485,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson the loop went through the characters in turn. In the next lesson you'll read the character at a chosen position and compare neighbouring characters, like the elements of a vector in lesson 6.3. That lesson is in preparation.
+In this lesson the loop went through the characters in turn. In the next lesson you'll read the character at a chosen position and compare neighbouring characters, like the elements of a vector in lesson 6.3: [Lesson 7.2: Positions and neighbouring characters in a `std::string`](lesson_02_positions_and_neighbours.en.md).
 
 ---
 
@@ -748,4 +748,4 @@ The fixed program is the check program from section 9: it differs from the buggy
 
 </details>
 
-**Previous lesson:** [Lesson 6.6: A training log (the Module 6 test)](../module_06_collections/lesson_06_training_log.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 6.6: A training log (the Module 6 test)](../module_06_collections/lesson_06_training_log.en.md) · **Next lesson:** [Lesson 7.2: Positions and neighbouring characters in a `std::string`](lesson_02_positions_and_neighbours.en.md) · [Course overview](../../README.en.md)
