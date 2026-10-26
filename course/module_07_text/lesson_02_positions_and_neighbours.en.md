@@ -415,7 +415,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson the text was only read. In the next lesson a function will get a text through `const std::string&` and build a new text from it. That lesson is in preparation.
+In this lesson the text was only read. In the next lesson a function will get a text through `const std::string&` and build a new text from it: [Lesson 7.3: A function creates a new text](lesson_03_a_function_creates_a_new_text.en.md).
 
 ---
 
@@ -735,4 +735,4 @@ The fixed program is the check program from section 6: it differs from the buggy
 
 </details>
 
-**Previous lesson:** [Lesson 7.1: First characters: `char` and going through a `std::string`](lesson_01_first_characters.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 7.1: First characters: `char` and going through a `std::string`](lesson_01_first_characters.en.md) · **Next lesson:** [Lesson 7.3: A function creates a new text](lesson_03_a_function_creates_a_new_text.en.md) · [Course overview](../../README.en.md)

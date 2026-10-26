@@ -415,7 +415,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji tekst był tylko odczytywany. W kolejnej lekcji funkcja dostanie tekst przez `const std::string&` i zbuduje z niego nowy tekst. Lekcja jest w przygotowaniu.
+W tej lekcji tekst był tylko odczytywany. W kolejnej lekcji funkcja dostanie tekst przez `const std::string&` i zbuduje z niego nowy tekst: [Lekcja 7.3: Funkcja tworzy nowy tekst](lesson_03_a_function_creates_a_new_text.md).
 
 ---
 
@@ -735,4 +735,4 @@ Poprawiony program to program kontrolny z punktu 6: różni się od programu z b
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 7.1: Pierwsze znaki: `char` i przeglądanie `std::string`](lesson_01_first_characters.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 7.1: Pierwsze znaki: `char` i przeglądanie `std::string`](lesson_01_first_characters.md) · **Następna lekcja:** [Lekcja 7.3: Funkcja tworzy nowy tekst](lesson_03_a_function_creates_a_new_text.md) · [Opis kursu](../../README.md)
