@@ -1149,6 +1149,6 @@ These are the basics of working with collections. Vectors have many more possibi
 
 ## What's next
 
-The next modules are in preparation.
+In Module 7, "Text as a sequence of characters: `std::string` and `char`", you'll go through a text character by character, like the elements of a vector. Start with the first characters: [Lesson 7.1: First characters: `char` and going through a `std::string`](../module_07_text/lesson_01_first_characters.en.md).
 
-**Previous lesson:** [Lesson 6.5: A function creates and returns a new vector](lesson_05_a_function_returns_a_vector.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 6.5: A function creates and returns a new vector](lesson_05_a_function_returns_a_vector.en.md) · **Next lesson:** [Lesson 7.1: First characters: `char` and going through a `std::string`](../module_07_text/lesson_01_first_characters.en.md) · [Course overview](../../README.en.md)

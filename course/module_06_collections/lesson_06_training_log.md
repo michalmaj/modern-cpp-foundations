@@ -1149,6 +1149,6 @@ To podstawy pracy z kolekcjami. Wektory mają jeszcze wiele możliwości, które
 
 ## Co dalej
 
-Kolejne moduły są w przygotowaniu.
+W Module 7, „Tekst jako ciąg znaków: `std::string` i `char`”, przejrzysz tekst znak po znaku, tak jak elementy wektora. Zacznij od pierwszych znaków: [Lekcja 7.1: Pierwsze znaki: `char` i przeglądanie `std::string`](../module_07_text/lesson_01_first_characters.md).
 
-**Poprzednia lekcja:** [Lekcja 6.5: Funkcja tworzy i zwraca nowy wektor](lesson_05_a_function_returns_a_vector.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 6.5: Funkcja tworzy i zwraca nowy wektor](lesson_05_a_function_returns_a_vector.md) · **Następna lekcja:** [Lekcja 7.1: Pierwsze znaki: `char` i przeglądanie `std::string`](../module_07_text/lesson_01_first_characters.md) · [Opis kursu](../../README.md)
