@@ -902,7 +902,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji wektor przeglądała pętla zakresowa, zawsze od pierwszego do ostatniego elementu. W kolejnej lekcji poznasz pozycje elementów: odczytasz pierwszy, ostatni albo wybrany element i porównasz sąsiednie wartości. Lekcja jest w przygotowaniu.
+W tej lekcji wektor przeglądała pętla zakresowa, zawsze od pierwszego do ostatniego elementu. W kolejnej lekcji poznasz pozycje elementów: odczytasz pierwszy, ostatni albo wybrany element i porównasz sąsiednie wartości: [Lekcja 6.3: Pozycje elementów i sąsiednie wartości w `std::vector`](lesson_03_positions_and_neighbours.md).
 
 ---
 
@@ -1096,4 +1096,4 @@ Stored scores: 2
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 6.1: Pierwszy `std::vector` i pętla zakresowa `for`](lesson_01_the_first_vector.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 6.1: Pierwszy `std::vector` i pętla zakresowa `for`](lesson_01_the_first_vector.md) · **Następna lekcja:** [Lekcja 6.3: Pozycje elementów i sąsiednie wartości w `std::vector`](lesson_03_positions_and_neighbours.md) · [Opis kursu](../../README.md)
