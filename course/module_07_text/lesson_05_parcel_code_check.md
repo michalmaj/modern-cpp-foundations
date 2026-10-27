@@ -861,6 +861,6 @@ Wszystko to dotyczy tekstu ASCII. Tekst ma jeszcze wiele możliwości, które po
 
 ## Co dalej
 
-To ostatnia lekcja Modułu 7. Kolejne moduły kursu są w przygotowaniu.
+W Module 8, „Własne typy danych: `struct` i rekordy”, zdefiniujesz własny typ, który łączy kilka informacji o jednym obiekcie. Zacznij od pierwszej struktury: [Lekcja 8.1: Pierwsza struktura: kilka danych opisujących jeden obiekt](../module_08_structs/lesson_01_first_struct.md).
 
-**Poprzednia lekcja:** [Lekcja 7.4: Przetwarzanie kolejnych linii przez `std::getline`](lesson_04_successive_lines.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 7.4: Przetwarzanie kolejnych linii przez `std::getline`](lesson_04_successive_lines.md) · **Następna lekcja:** [Lekcja 8.1: Pierwsza struktura: kilka danych opisujących jeden obiekt](../module_08_structs/lesson_01_first_struct.md) · [Opis kursu](../../README.md)

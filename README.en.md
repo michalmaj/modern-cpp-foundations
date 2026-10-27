@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). All lessons of Module 7 are available too (five lessons, pilot version). See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). All lessons of Module 7 are available too (five lessons, pilot version). Module 8 is in development: its first lesson is available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -141,6 +141,8 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 7, lesson 3: [A function creates a new text](course/module_07_text/lesson_03_a_function_creates_a_new_text.en.md) | Available (pilot version) |
 | Module 7, lesson 4: [Processing successive lines with `std::getline`](course/module_07_text/lesson_04_successive_lines.en.md) | Available (pilot version) |
 | Module 7, lesson 5: [Parcel code check (the Module 7 test)](course/module_07_text/lesson_05_parcel_code_check.en.md) | Available (pilot version) |
+| Module 8, lesson 1: [Your first struct: several pieces of data describing one object](course/module_08_structs/lesson_01_first_struct.en.md) | Available (pilot version) |
+| Module 8: the remaining lessons (your own data types: `struct` and records) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
 | Courses B and C | Planned, repositories do not exist yet |
@@ -200,10 +202,11 @@ Work through the lessons in order, starting with the first:
 49. **[Lesson 7.3: A function creates a new text](course/module_07_text/lesson_03_a_function_creates_a_new_text.en.md)**
 50. **[Lesson 7.4: Processing successive lines with `std::getline`](course/module_07_text/lesson_04_successive_lines.en.md)**
 51. **[Lesson 7.5: Parcel code check (the Module 7 test)](course/module_07_text/lesson_05_parcel_code_check.en.md)**
+52. **[Lesson 8.1: Your first struct: several pieces of data describing one object](course/module_08_structs/lesson_01_first_struct.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
-In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2 (lessons 2.1–2.8), programs start to remember values, calculate, take data from the user and store text. It ends with the test in lesson 2.8. In Module 3 (lessons 3.1–3.6), programs start to make decisions. It ends with the test in lesson 3.6. In Module 4 (lessons 4.1–4.7), programs start to repeat actions. It ends with the test in lesson 4.7. In Module 5 (lessons 5.1–5.7) you'll learn to split programs into smaller, named parts: your own functions. It ends with the test in lesson 5.7. In Module 6 (lessons 6.1–6.6), programs start to store many values of the same kind in one variable: `std::vector`. It ends with the test in lesson 6.6. In Module 7 (lessons 7.1–7.5), you'll go through text character by character: `char` and `std::string`. It ends with the test in lesson 7.5. Further modules are in preparation.
+In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2 (lessons 2.1–2.8), programs start to remember values, calculate, take data from the user and store text. It ends with the test in lesson 2.8. In Module 3 (lessons 3.1–3.6), programs start to make decisions. It ends with the test in lesson 3.6. In Module 4 (lessons 4.1–4.7), programs start to repeat actions. It ends with the test in lesson 4.7. In Module 5 (lessons 5.1–5.7) you'll learn to split programs into smaller, named parts: your own functions. It ends with the test in lesson 5.7. In Module 6 (lessons 6.1–6.6), programs start to store many values of the same kind in one variable: `std::vector`. It ends with the test in lesson 6.6. In Module 7 (lessons 7.1–7.5), you'll go through text character by character: `char` and `std::string`. It ends with the test in lesson 7.5. In Module 8, which starts with lesson 8.1, you'll define your own data types: structs that join several pieces of information about one object. The further lessons of Module 8 are in preparation.
 
 ## What comes next
 

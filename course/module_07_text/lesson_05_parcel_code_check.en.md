@@ -861,6 +861,6 @@ All of this is about ASCII text. Text has many more possibilities, which you'll 
 
 ## What's next
 
-This is the last lesson of Module 7. The next modules of the course are in preparation.
+In Module 8, "Your own data types: `struct` and records", you'll define your own type that joins several pieces of information about one object. Start with your first struct: [Lesson 8.1: Your first struct: several pieces of data describing one object](../module_08_structs/lesson_01_first_struct.en.md).
 
-**Previous lesson:** [Lesson 7.4: Processing successive lines with `std::getline`](lesson_04_successive_lines.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 7.4: Processing successive lines with `std::getline`](lesson_04_successive_lines.en.md) · **Next lesson:** [Lesson 8.1: Your first struct: several pieces of data describing one object](../module_08_structs/lesson_01_first_struct.en.md) · [Course overview](../../README.en.md)
