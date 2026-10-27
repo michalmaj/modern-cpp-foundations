@@ -407,7 +407,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson each function analysed one record. The next lesson of Module 8 is in preparation.
+In this lesson each function analysed one record. In the next lesson many records go into one vector, and functions analyse the whole collection: [Lesson 8.4: Many records in a `std::vector`](lesson_04_many_records_in_a_vector.en.md).
 
 ---
 
@@ -856,4 +856,4 @@ For the tripod's data, the fixed program prints the same as before the fix, beca
 
 </details>
 
-**Previous lesson:** [Lesson 8.2: Changing fields and an independent copy of a record](lesson_02_changing_fields_and_copies.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 8.2: Changing fields and an independent copy of a record](lesson_02_changing_fields_and_copies.en.md) · **Next lesson:** [Lesson 8.4: Many records in a `std::vector`](lesson_04_many_records_in_a_vector.en.md) · [Course overview](../../README.en.md)
