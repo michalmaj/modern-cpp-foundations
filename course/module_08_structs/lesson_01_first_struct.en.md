@@ -445,7 +445,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson each object got its values once, when it was created, and never changed afterwards. In the next part of Module 8 you'll see how an object can change, and what a copy of it is. It's in preparation.
+In this lesson each object got its values once, when it was created, and never changed afterwards. In the next lesson you'll change the fields of an existing object and keep its previous state in an independent copy: [Lesson 8.2: Changing fields and an independent copy of a record](lesson_02_changing_fields_and_copies.en.md).
 
 ---
 
@@ -760,4 +760,4 @@ For 30 and 30 the fixed program prints the same as before the fix: with equal va
 
 </details>
 
-**Previous lesson:** [Lesson 7.5: Parcel code check (the Module 7 test)](../module_07_text/lesson_05_parcel_code_check.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 7.5: Parcel code check (the Module 7 test)](../module_07_text/lesson_05_parcel_code_check.en.md) · **Next lesson:** [Lesson 8.2: Changing fields and an independent copy of a record](lesson_02_changing_fields_and_copies.en.md) · [Course overview](../../README.en.md)

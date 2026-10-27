@@ -445,7 +445,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji każdy obiekt dostawał wartości raz, przy utworzeniu, i potem się nie zmieniał. W kolejnej części Modułu 8 zobaczysz, jak obiekt może się zmieniać i czym jest jego kopia. Jest w przygotowaniu.
+W tej lekcji każdy obiekt dostawał wartości raz, przy utworzeniu, i potem się nie zmieniał. W kolejnej lekcji zmienisz pola istniejącego obiektu i zachowasz jego poprzedni stan w niezależnej kopii: [Lekcja 8.2: Zmiana pól i niezależna kopia rekordu](lesson_02_changing_fields_and_copies.md).
 
 ---
 
@@ -760,4 +760,4 @@ Dla 30 i 30 poprawiony program wypisuje to samo co przed poprawką: przy jednako
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 7.5: Kontrola kodów paczek (sprawdzian Modułu 7)](../module_07_text/lesson_05_parcel_code_check.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 7.5: Kontrola kodów paczek (sprawdzian Modułu 7)](../module_07_text/lesson_05_parcel_code_check.md) · **Następna lekcja:** [Lekcja 8.2: Zmiana pól i niezależna kopia rekordu](lesson_02_changing_fields_and_copies.md) · [Opis kursu](../../README.md)

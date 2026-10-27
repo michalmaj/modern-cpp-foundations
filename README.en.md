@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). All lessons of Module 7 are available too (five lessons, pilot version). Module 8 is in development: its first lesson is available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). All lessons of Module 7 are available too (five lessons, pilot version). Module 8 is in development: its first two lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -142,6 +142,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 7, lesson 4: [Processing successive lines with `std::getline`](course/module_07_text/lesson_04_successive_lines.en.md) | Available (pilot version) |
 | Module 7, lesson 5: [Parcel code check (the Module 7 test)](course/module_07_text/lesson_05_parcel_code_check.en.md) | Available (pilot version) |
 | Module 8, lesson 1: [Your first struct: several pieces of data describing one object](course/module_08_structs/lesson_01_first_struct.en.md) | Available (pilot version) |
+| Module 8, lesson 2: [Changing fields and an independent copy of a record](course/module_08_structs/lesson_02_changing_fields_and_copies.en.md) | Available (pilot version) |
 | Module 8: the remaining lessons (your own data types: `struct` and records) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -203,6 +204,7 @@ Work through the lessons in order, starting with the first:
 50. **[Lesson 7.4: Processing successive lines with `std::getline`](course/module_07_text/lesson_04_successive_lines.en.md)**
 51. **[Lesson 7.5: Parcel code check (the Module 7 test)](course/module_07_text/lesson_05_parcel_code_check.en.md)**
 52. **[Lesson 8.1: Your first struct: several pieces of data describing one object](course/module_08_structs/lesson_01_first_struct.en.md)**
+53. **[Lesson 8.2: Changing fields and an independent copy of a record](course/module_08_structs/lesson_02_changing_fields_and_copies.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 

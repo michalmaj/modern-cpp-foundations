@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 7 (pięć lekcji, wersja pilotażowa). Moduł 8 jest rozwijany: dostępna jest jego pierwsza lekcja. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 7 (pięć lekcji, wersja pilotażowa). Moduł 8 jest rozwijany: dostępne są jego dwie pierwsze lekcje. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -142,6 +142,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 7, lekcja 4: [Przetwarzanie kolejnych linii przez `std::getline`](course/module_07_text/lesson_04_successive_lines.md) | Dostępna (wersja pilotażowa) |
 | Moduł 7, lekcja 5: [Kontrola kodów paczek (sprawdzian Modułu 7)](course/module_07_text/lesson_05_parcel_code_check.md) | Dostępna (wersja pilotażowa) |
 | Moduł 8, lekcja 1: [Pierwsza struktura: kilka danych opisujących jeden obiekt](course/module_08_structs/lesson_01_first_struct.md) | Dostępna (wersja pilotażowa) |
+| Moduł 8, lekcja 2: [Zmiana pól i niezależna kopia rekordu](course/module_08_structs/lesson_02_changing_fields_and_copies.md) | Dostępna (wersja pilotażowa) |
 | Moduł 8: pozostałe lekcje (własne typy danych: `struct` i rekordy) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
@@ -203,6 +204,7 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 50. **[Lekcja 7.4: Przetwarzanie kolejnych linii przez `std::getline`](course/module_07_text/lesson_04_successive_lines.md)**
 51. **[Lekcja 7.5: Kontrola kodów paczek (sprawdzian Modułu 7)](course/module_07_text/lesson_05_parcel_code_check.md)**
 52. **[Lekcja 8.1: Pierwsza struktura: kilka danych opisujących jeden obiekt](course/module_08_structs/lesson_01_first_struct.md)**
+53. **[Lekcja 8.2: Zmiana pól i niezależna kopia rekordu](course/module_08_structs/lesson_02_changing_fields_and_copies.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
