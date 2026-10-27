@@ -361,8 +361,8 @@ Wyniki, przykładowe dane i poprawiony program są w części [Przykładowe rozw
 | `use of undeclared identifier` w funkcji | Funkcja używa nazwy, której tu nie zna: samego pola (`stock`), obiektu z `main` (`tea`) albo funkcji zdefiniowanej niżej. | Pola odczytuj przez parametr: `product.stock`, a nie według podpowiedzi z `Product::`. Wywoływaną funkcję zdefiniuj wyżej. |
 | Ostrzeżenie `address of function ... will always evaluate to 'true'`, a program zawsze wypisuje `yes` | W warunku stoi sama nazwa funkcji, bez wywołania. | Wywołaj funkcję z argumentem, na przykład `needs_restock(tea)`. |
 | Program działa, choć parametr nie ma `const&` | Parametr przez wartość to poprawny C++, ale funkcja dostaje kopię rekordu (punkt 5). | W misji przekaż rekord przez `const&`: funkcja go tylko czyta. |
-| `Overdue days` jest ujemne | Pola stoją w odejmowaniu w odwrotnej kolejności (punkt 7). | Od liczby dni korzystania odejmij dozwoloną liczbę dni. |
-| Opóźnienie wychodzi także dla liczby dni równej limitowi | Warunek używa `>=` zamiast `>`. | Opóźnienie jest tylko wtedy, gdy liczba dni **przekracza** limit. |
+| `Overdue days` jest ujemne | Funkcja odejmuje pola w odwrotnej kolejności (punkt 7) albo odejmuje także wtedy, gdy limit nie jest przekroczony. | Odejmuj tylko przy przekroczonym limicie: od liczby dni korzystania odejmij dozwoloną liczbę dni. W przeciwnym razie zwróć 0. |
+| `Contact needed: yes`, choć opóźnienia nie ma, na przykład dla liczby dni równej limitowi | Warunek kontaktu dopuszcza równość: `>=` zamiast `>` przy porównaniu dni z limitem albo wyniku pierwszej funkcji z zerem. | Kontakt wymaga opóźnienia: liczby dni **większej** od limitu, czyli dodatniego wyniku pierwszej funkcji. |
 | `Contact needed: yes` dla zwróconego urządzenia | Druga funkcja sprawdza tylko opóźnienie. | Kontakt wymaga też, żeby urządzenie nie zostało zwrócone. |
 
 ## 9. Wyjaśnij

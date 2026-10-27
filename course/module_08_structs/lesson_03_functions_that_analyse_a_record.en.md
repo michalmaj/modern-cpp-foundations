@@ -361,8 +361,8 @@ The results, example data and the fixed program are in [Example solutions](#exam
 | `use of undeclared identifier` in a function | The function uses a name it doesn't know there: a field alone (`stock`), an object from `main` (`tea`), or a function defined further down. | Read fields through the parameter: `product.stock`, not as the hint with `Product::` suggests. Define the called function higher up. |
 | The warning `address of function ... will always evaluate to 'true'`, and the program always prints `yes` | The condition holds only the function's name, without a call. | Call the function with an argument, for example `needs_restock(tea)`. |
 | The program works, although the parameter has no `const&` | A by-value parameter is valid C++, but the function gets a copy of the record (section 5). | In the mission, pass the record by `const&`: the function only reads it. |
-| `Overdue days` is negative | The fields stand in the subtraction in the reverse order (section 7). | Subtract the number of days allowed from the number of days used. |
-| A delay shows up even for a number of days equal to the limit | The condition uses `>=` instead of `>`. | There's a delay only when the number of days **exceeds** the limit. |
+| `Overdue days` is negative | The function subtracts the fields in the reverse order (section 7), or subtracts even when the limit isn't exceeded. | Subtract only when the limit is exceeded: subtract the number of days allowed from the number of days used. Otherwise return 0. |
+| `Contact needed: yes` although there's no delay, for example for a number of days equal to the limit | The contact condition allows equality: `>=` instead of `>` when comparing the days with the limit, or the first function's result with zero. | Contact requires a delay: a number of days **greater** than the limit, that is, a positive result of the first function. |
 | `Contact needed: yes` for a returned device | The second function checks only the delay. | Contact also requires that the device hasn't been returned. |
 
 ## 9. Explain
