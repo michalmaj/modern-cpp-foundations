@@ -411,7 +411,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji wszystkie działania na rekordach stały w `main`. W kolejnej części Modułu 8 rekord trafi do funkcji, która go odczyta. Jest w przygotowaniu.
+W tej lekcji wszystkie działania na rekordach stały w `main`. W kolejnej lekcji rekord trafi do funkcji, która go odczyta i obliczy wynik z jego pól: [Lekcja 8.3: Funkcje, które analizują rekord](lesson_03_functions_that_analyse_a_record.md).
 
 ---
 
@@ -787,4 +787,4 @@ Gdyby kopia była potrzebna do zapamiętania stanu sprzed zmiany, jak `before` w
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 8.1: Pierwsza struktura: kilka danych opisujących jeden obiekt](lesson_01_first_struct.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 8.1: Pierwsza struktura: kilka danych opisujących jeden obiekt](lesson_01_first_struct.md) · **Następna lekcja:** [Lekcja 8.3: Funkcje, które analizują rekord](lesson_03_functions_that_analyse_a_record.md) · [Opis kursu](../../README.md)

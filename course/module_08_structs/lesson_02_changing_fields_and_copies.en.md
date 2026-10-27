@@ -411,7 +411,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson all the work on records happened in `main`. In the next part of Module 8 a record will go to a function that reads it. It's in preparation.
+In this lesson all the work on records happened in `main`. In the next lesson a record goes to a function that reads it and calculates a result from its fields: [Lesson 8.3: Functions that analyse a record](lesson_03_functions_that_analyse_a_record.en.md).
 
 ---
 
@@ -787,4 +787,4 @@ If the copy were needed to keep the state from before the change, like `before` 
 
 </details>
 
-**Previous lesson:** [Lesson 8.1: Your first struct: several pieces of data describing one object](lesson_01_first_struct.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 8.1: Your first struct: several pieces of data describing one object](lesson_01_first_struct.en.md) · **Next lesson:** [Lesson 8.3: Functions that analyse a record](lesson_03_functions_that_analyse_a_record.en.md) · [Course overview](../../README.en.md)
