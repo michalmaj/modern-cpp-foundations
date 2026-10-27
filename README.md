@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Moduł 7 jest rozwijany: dostępne są jego cztery pierwsze lekcje. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 7 (pięć lekcji, wersja pilotażowa). Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -140,7 +140,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 7, lekcja 2: [Pozycje i sąsiednie znaki w `std::string`](course/module_07_text/lesson_02_positions_and_neighbours.md) | Dostępna (wersja pilotażowa) |
 | Moduł 7, lekcja 3: [Funkcja tworzy nowy tekst](course/module_07_text/lesson_03_a_function_creates_a_new_text.md) | Dostępna (wersja pilotażowa) |
 | Moduł 7, lekcja 4: [Przetwarzanie kolejnych linii przez `std::getline`](course/module_07_text/lesson_04_successive_lines.md) | Dostępna (wersja pilotażowa) |
-| Moduł 7: pozostałe lekcje (tekst jako ciąg znaków) | W przygotowaniu |
+| Moduł 7, lekcja 5: [Kontrola kodów paczek (sprawdzian Modułu 7)](course/module_07_text/lesson_05_parcel_code_check.md) | Dostępna (wersja pilotażowa) |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
 | Kursy B i C | Planowane, repozytoria jeszcze nie istnieją |
@@ -199,10 +199,11 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 48. **[Lekcja 7.2: Pozycje i sąsiednie znaki w `std::string`](course/module_07_text/lesson_02_positions_and_neighbours.md)**
 49. **[Lekcja 7.3: Funkcja tworzy nowy tekst](course/module_07_text/lesson_03_a_function_creates_a_new_text.md)**
 50. **[Lekcja 7.4: Przetwarzanie kolejnych linii przez `std::getline`](course/module_07_text/lesson_04_successive_lines.md)**
+51. **[Lekcja 7.5: Kontrola kodów paczek (sprawdzian Modułu 7)](course/module_07_text/lesson_05_parcel_code_check.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
-W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. W Module 2 (lekcje 2.1–2.8) programy zaczną pamiętać wartości, liczyć, pobierać dane od użytkownika i przechowywać tekst. Kończy go sprawdzian w lekcji 2.8. W Module 3 (lekcje 3.1–3.6) programy zaczną podejmować decyzje. Kończy go sprawdzian w lekcji 3.6. W Module 4 (lekcje 4.1–4.7) programy zaczną powtarzać działania. Kończy go sprawdzian w lekcji 4.7. W Module 5 (lekcje 5.1–5.7) nauczysz się dzielić programy na mniejsze, nazwane części: własne funkcje. Kończy go sprawdzian w lekcji 5.7. W Module 6 (lekcje 6.1–6.6) programy zaczną przechowywać wiele wartości tego samego rodzaju w jednej zmiennej: `std::vector`. Kończy go sprawdzian w lekcji 6.6. W Module 7, który zaczyna lekcja 7.1, przejrzysz tekst znak po znaku: `char` i `std::string`. Kolejne lekcje Modułu 7 są w przygotowaniu.
+W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. W Module 2 (lekcje 2.1–2.8) programy zaczną pamiętać wartości, liczyć, pobierać dane od użytkownika i przechowywać tekst. Kończy go sprawdzian w lekcji 2.8. W Module 3 (lekcje 3.1–3.6) programy zaczną podejmować decyzje. Kończy go sprawdzian w lekcji 3.6. W Module 4 (lekcje 4.1–4.7) programy zaczną powtarzać działania. Kończy go sprawdzian w lekcji 4.7. W Module 5 (lekcje 5.1–5.7) nauczysz się dzielić programy na mniejsze, nazwane części: własne funkcje. Kończy go sprawdzian w lekcji 5.7. W Module 6 (lekcje 6.1–6.6) programy zaczną przechowywać wiele wartości tego samego rodzaju w jednej zmiennej: `std::vector`. Kończy go sprawdzian w lekcji 6.6. W Module 7 (lekcje 7.1–7.5) przejrzysz tekst znak po znaku: `char` i `std::string`. Kończy go sprawdzian w lekcji 7.5. Kolejne moduły są w przygotowaniu.
 
 ## Co dalej po tym kursie
 

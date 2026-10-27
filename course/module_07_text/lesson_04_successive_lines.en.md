@@ -540,7 +540,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In the next part of Module 7 you'll use the skills from the whole module: analysing characters and their positions, building a new text, and reading many lines. It's in preparation.
+In the Module 7 test you'll use the skills from the whole module: analysing characters and their positions, building a new text, and reading many lines: [Lesson 7.5: Parcel code check (the Module 7 test)](lesson_05_parcel_code_check.en.md).
 
 ---
 
@@ -852,4 +852,4 @@ The fixed program is the reference solution from section 7. For an empty first l
 
 </details>
 
-**Previous lesson:** [Lesson 7.3: A function creates a new text](lesson_03_a_function_creates_a_new_text.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 7.3: A function creates a new text](lesson_03_a_function_creates_a_new_text.en.md) · **Next lesson:** [Lesson 7.5: Parcel code check (the Module 7 test)](lesson_05_parcel_code_check.en.md) · [Course overview](../../README.en.md)

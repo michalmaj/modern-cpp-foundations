@@ -540,7 +540,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W kolejnej części Modułu 7 wykorzystasz umiejętności z całego modułu: analizę znaków i ich pozycji, budowanie nowego tekstu i odczyt wielu linii. Jest w przygotowaniu.
+W sprawdzianie Modułu 7 wykorzystasz umiejętności z całego modułu: analizę znaków i ich pozycji, budowanie nowego tekstu i odczyt wielu linii: [Lekcja 7.5: Kontrola kodów paczek (sprawdzian Modułu 7)](lesson_05_parcel_code_check.md).
 
 ---
 
@@ -852,4 +852,4 @@ Poprawiony program to rozwiązanie referencyjne z punktu 7. Dla pustej linii jak
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 7.3: Funkcja tworzy nowy tekst](lesson_03_a_function_creates_a_new_text.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 7.3: Funkcja tworzy nowy tekst](lesson_03_a_function_creates_a_new_text.md) · **Następna lekcja:** [Lekcja 7.5: Kontrola kodów paczek (sprawdzian Modułu 7)](lesson_05_parcel_code_check.md) · [Opis kursu](../../README.md)
