@@ -407,7 +407,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji każda funkcja analizowała jeden rekord. Kolejna lekcja Modułu 8 jest w przygotowaniu.
+W tej lekcji każda funkcja analizowała jeden rekord. W kolejnej lekcji wiele rekordów trafi do jednego wektora, a funkcje przeanalizują całą kolekcję: [Lekcja 8.4: Wiele rekordów w `std::vector`](lesson_04_many_records_in_a_vector.md).
 
 ---
 
@@ -856,4 +856,4 @@ Dla danych statywu poprawiony program wypisuje to samo co przed poprawką, bo dl
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 8.2: Zmiana pól i niezależna kopia rekordu](lesson_02_changing_fields_and_copies.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 8.2: Zmiana pól i niezależna kopia rekordu](lesson_02_changing_fields_and_copies.md) · **Następna lekcja:** [Lekcja 8.4: Wiele rekordów w `std::vector`](lesson_04_many_records_in_a_vector.md) · [Opis kursu](../../README.md)
