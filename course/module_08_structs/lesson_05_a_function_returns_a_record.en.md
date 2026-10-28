@@ -414,7 +414,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson one function returned several results at once. The next lesson of Module 8 is in preparation.
+In this lesson one function returned several results at once. In the Module 8 test you'll use the skills from the whole module: your own data types, a vector of records, and functions that analyse records and return results: [Lesson 8.6: Race results (the Module 8 test)](lesson_06_race_results.en.md).
 
 ---
 
@@ -948,4 +948,4 @@ For an empty vector the fixed program prints the same as the check program in ca
 
 </details>
 
-**Previous lesson:** [Lesson 8.4: Many records in a `std::vector`](lesson_04_many_records_in_a_vector.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 8.4: Many records in a `std::vector`](lesson_04_many_records_in_a_vector.en.md) · **Next lesson:** [Lesson 8.6: Race results (the Module 8 test)](lesson_06_race_results.en.md) · [Course overview](../../README.en.md)

@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). All lessons of Module 7 are available too (five lessons, pilot version). Module 8 is in development: its first five lessons are available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). All lessons of Module 7 are available too (five lessons, pilot version). All lessons of Module 8 are available too (six lessons, pilot version). See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -146,7 +146,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 8, lesson 3: [Functions that analyse a record](course/module_08_structs/lesson_03_functions_that_analyse_a_record.en.md) | Available (pilot version) |
 | Module 8, lesson 4: [Many records in a `std::vector`](course/module_08_structs/lesson_04_many_records_in_a_vector.en.md) | Available (pilot version) |
 | Module 8, lesson 5: [A function returns a record with several results](course/module_08_structs/lesson_05_a_function_returns_a_record.en.md) | Available (pilot version) |
-| Module 8: the remaining lessons (your own data types: `struct` and records) | In preparation |
+| Module 8, lesson 6: [Race results (the Module 8 test)](course/module_08_structs/lesson_06_race_results.en.md) | Available (pilot version) |
 | Further modules | Planned |
 | Full course plan | Not published yet |
 | Courses B and C | Planned, repositories do not exist yet |
@@ -211,10 +211,11 @@ Work through the lessons in order, starting with the first:
 54. **[Lesson 8.3: Functions that analyse a record](course/module_08_structs/lesson_03_functions_that_analyse_a_record.en.md)**
 55. **[Lesson 8.4: Many records in a `std::vector`](course/module_08_structs/lesson_04_many_records_in_a_vector.en.md)**
 56. **[Lesson 8.5: A function returns a record with several results](course/module_08_structs/lesson_05_a_function_returns_a_record.en.md)**
+57. **[Lesson 8.6: Race results (the Module 8 test)](course/module_08_structs/lesson_06_race_results.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
-In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2 (lessons 2.1–2.8), programs start to remember values, calculate, take data from the user and store text. It ends with the test in lesson 2.8. In Module 3 (lessons 3.1–3.6), programs start to make decisions. It ends with the test in lesson 3.6. In Module 4 (lessons 4.1–4.7), programs start to repeat actions. It ends with the test in lesson 4.7. In Module 5 (lessons 5.1–5.7) you'll learn to split programs into smaller, named parts: your own functions. It ends with the test in lesson 5.7. In Module 6 (lessons 6.1–6.6), programs start to store many values of the same kind in one variable: `std::vector`. It ends with the test in lesson 6.6. In Module 7 (lessons 7.1–7.5), you'll go through text character by character: `char` and `std::string`. It ends with the test in lesson 7.5. In Module 8, which starts with lesson 8.1, you'll define your own data types: structs that join several pieces of information about one object. The further lessons of Module 8 are in preparation.
+In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2 (lessons 2.1–2.8), programs start to remember values, calculate, take data from the user and store text. It ends with the test in lesson 2.8. In Module 3 (lessons 3.1–3.6), programs start to make decisions. It ends with the test in lesson 3.6. In Module 4 (lessons 4.1–4.7), programs start to repeat actions. It ends with the test in lesson 4.7. In Module 5 (lessons 5.1–5.7) you'll learn to split programs into smaller, named parts: your own functions. It ends with the test in lesson 5.7. In Module 6 (lessons 6.1–6.6), programs start to store many values of the same kind in one variable: `std::vector`. It ends with the test in lesson 6.6. In Module 7 (lessons 7.1–7.5), you'll go through text character by character: `char` and `std::string`. It ends with the test in lesson 7.5. In Module 8 (lessons 8.1–8.6), you'll define your own data types: structs that join several pieces of information about one object. It ends with the test in lesson 8.6. Further modules are in preparation.
 
 ## What comes next
 
