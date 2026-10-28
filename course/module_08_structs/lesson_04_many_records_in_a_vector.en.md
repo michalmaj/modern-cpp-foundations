@@ -517,7 +517,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson the functions analysed a collection of records and returned one number. The next lesson of Module 8 is in preparation.
+In this lesson the functions analysed a collection of records and returned one number. In the next lesson one function returns several results at once, in a record of your own type: [Lesson 8.5: A function returns a record with several results](lesson_05_a_function_returns_a_record.en.md).
 
 ---
 
@@ -991,4 +991,4 @@ For the original two releases the fixed program prints the same as before the fi
 
 </details>
 
-**Previous lesson:** [Lesson 8.3: Functions that analyse a record](lesson_03_functions_that_analyse_a_record.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 8.3: Functions that analyse a record](lesson_03_functions_that_analyse_a_record.en.md) · **Next lesson:** [Lesson 8.5: A function returns a record with several results](lesson_05_a_function_returns_a_record.en.md) · [Course overview](../../README.en.md)

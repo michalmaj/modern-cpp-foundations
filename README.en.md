@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). All lessons of Module 7 are available too (five lessons, pilot version). Module 8 is in development: its first four lessons are available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). All lessons of Module 7 are available too (five lessons, pilot version). Module 8 is in development: its first five lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -145,6 +145,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 8, lesson 2: [Changing fields and an independent copy of a record](course/module_08_structs/lesson_02_changing_fields_and_copies.en.md) | Available (pilot version) |
 | Module 8, lesson 3: [Functions that analyse a record](course/module_08_structs/lesson_03_functions_that_analyse_a_record.en.md) | Available (pilot version) |
 | Module 8, lesson 4: [Many records in a `std::vector`](course/module_08_structs/lesson_04_many_records_in_a_vector.en.md) | Available (pilot version) |
+| Module 8, lesson 5: [A function returns a record with several results](course/module_08_structs/lesson_05_a_function_returns_a_record.en.md) | Available (pilot version) |
 | Module 8: the remaining lessons (your own data types: `struct` and records) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -209,6 +210,7 @@ Work through the lessons in order, starting with the first:
 53. **[Lesson 8.2: Changing fields and an independent copy of a record](course/module_08_structs/lesson_02_changing_fields_and_copies.en.md)**
 54. **[Lesson 8.3: Functions that analyse a record](course/module_08_structs/lesson_03_functions_that_analyse_a_record.en.md)**
 55. **[Lesson 8.4: Many records in a `std::vector`](course/module_08_structs/lesson_04_many_records_in_a_vector.en.md)**
+56. **[Lesson 8.5: A function returns a record with several results](course/module_08_structs/lesson_05_a_function_returns_a_record.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
