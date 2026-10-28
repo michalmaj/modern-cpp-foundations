@@ -517,7 +517,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji funkcje analizowały kolekcję rekordów i zwracały jedną liczbę. Kolejna lekcja Modułu 8 jest w przygotowaniu.
+W tej lekcji funkcje analizowały kolekcję rekordów i zwracały jedną liczbę. W kolejnej lekcji jedna funkcja zwróci kilka wyników naraz, w rekordzie własnego typu: [Lekcja 8.5: Funkcja zwraca rekord z kilkoma wynikami](lesson_05_a_function_returns_a_record.md).
 
 ---
 
@@ -991,4 +991,4 @@ Dla pierwotnych dwóch wydań poprawiony program wypisuje to samo co przed popra
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 8.3: Funkcje, które analizują rekord](lesson_03_functions_that_analyse_a_record.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 8.3: Funkcje, które analizują rekord](lesson_03_functions_that_analyse_a_record.md) · **Następna lekcja:** [Lekcja 8.5: Funkcja zwraca rekord z kilkoma wynikami](lesson_05_a_function_returns_a_record.md) · [Opis kursu](../../README.md)

@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 7 (pięć lekcji, wersja pilotażowa). Moduł 8 jest rozwijany: dostępne są jego cztery pierwsze lekcje. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 7 (pięć lekcji, wersja pilotażowa). Moduł 8 jest rozwijany: dostępnych jest pięć pierwszych lekcji. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -145,6 +145,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 8, lekcja 2: [Zmiana pól i niezależna kopia rekordu](course/module_08_structs/lesson_02_changing_fields_and_copies.md) | Dostępna (wersja pilotażowa) |
 | Moduł 8, lekcja 3: [Funkcje, które analizują rekord](course/module_08_structs/lesson_03_functions_that_analyse_a_record.md) | Dostępna (wersja pilotażowa) |
 | Moduł 8, lekcja 4: [Wiele rekordów w `std::vector`](course/module_08_structs/lesson_04_many_records_in_a_vector.md) | Dostępna (wersja pilotażowa) |
+| Moduł 8, lekcja 5: [Funkcja zwraca rekord z kilkoma wynikami](course/module_08_structs/lesson_05_a_function_returns_a_record.md) | Dostępna (wersja pilotażowa) |
 | Moduł 8: pozostałe lekcje (własne typy danych: `struct` i rekordy) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
@@ -209,6 +210,7 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 53. **[Lekcja 8.2: Zmiana pól i niezależna kopia rekordu](course/module_08_structs/lesson_02_changing_fields_and_copies.md)**
 54. **[Lekcja 8.3: Funkcje, które analizują rekord](course/module_08_structs/lesson_03_functions_that_analyse_a_record.md)**
 55. **[Lekcja 8.4: Wiele rekordów w `std::vector`](course/module_08_structs/lesson_04_many_records_in_a_vector.md)**
+56. **[Lekcja 8.5: Funkcja zwraca rekord z kilkoma wynikami](course/module_08_structs/lesson_05_a_function_returns_a_record.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
