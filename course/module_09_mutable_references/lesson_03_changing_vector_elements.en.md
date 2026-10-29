@@ -476,7 +476,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson a function went through all the records and changed the ones that needed a change. In the next lesson a function will find one record in a vector by the value of a field and change only that one. It's in preparation.
+In this lesson a function went through all the records and changed the ones that needed a change. In the next lesson a function will find one record in a vector by the value of a field and change only that one: [Lesson 9.4: Find a record and change the right object](lesson_04_find_a_record_and_change_it.en.md).
 
 ---
 
@@ -1121,4 +1121,4 @@ For a fleet without pending rides the fixed program prints the same as before th
 
 </details>
 
-**Previous lesson:** [Lesson 9.2: A change only when the conditions are met](lesson_02_a_change_only_when_allowed.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 9.2: A change only when the conditions are met](lesson_02_a_change_only_when_allowed.en.md) · **Next lesson:** [Lesson 9.4: Find a record and change the right object](lesson_04_find_a_record_and_change_it.en.md) · [Course overview](../../README.en.md)

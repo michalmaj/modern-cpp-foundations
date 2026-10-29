@@ -476,7 +476,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji funkcja przeglądała wszystkie rekordy i zmieniała te, które wymagały zmiany. W kolejnej lekcji funkcja znajdzie w wektorze jeden rekord po wartości pola i zmieni tylko jego. Jest w przygotowaniu.
+W tej lekcji funkcja przeglądała wszystkie rekordy i zmieniała te, które wymagały zmiany. W kolejnej lekcji funkcja znajdzie w wektorze jeden rekord po wartości pola i zmieni tylko jego: [Lekcja 9.4: Znajdź rekord i zmień właściwy obiekt](lesson_04_find_a_record_and_change_it.md).
 
 ---
 
@@ -1121,4 +1121,4 @@ Dla floty bez oczekujących przejazdów poprawiony program wypisuje to samo co p
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 9.2: Zmiana tylko po spełnieniu warunków](lesson_02_a_change_only_when_allowed.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 9.2: Zmiana tylko po spełnieniu warunków](lesson_02_a_change_only_when_allowed.md) · **Następna lekcja:** [Lekcja 9.4: Znajdź rekord i zmień właściwy obiekt](lesson_04_find_a_record_and_change_it.md) · [Opis kursu](../../README.md)
