@@ -475,7 +475,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson a function changed one record. In the next lesson you'll change many records stored in a vector, through a reference. It's in preparation.
+In this lesson a function changed one record. In the next lesson you'll change many records stored in a vector, through a reference: [Lesson 9.3: Changing the elements of a vector through a reference](lesson_03_changing_vector_elements.en.md).
 
 ---
 
@@ -928,4 +928,4 @@ For a fare of 7 the fixed program prints the same as before the fix: `Fare 7: ac
 
 </details>
 
-**Previous lesson:** [Lesson 9.1: A function changes an existing record](lesson_01_a_function_changes_a_record.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 9.1: A function changes an existing record](lesson_01_a_function_changes_a_record.en.md) · **Next lesson:** [Lesson 9.3: Changing the elements of a vector through a reference](lesson_03_changing_vector_elements.en.md) · [Course overview](../../README.en.md)
