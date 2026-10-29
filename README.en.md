@@ -4,7 +4,7 @@
 
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). All lessons of Module 7 are available too (five lessons, pilot version). All lessons of Module 8 are available too (six lessons, pilot version). Module 9 is in development: its first lesson is available. See [Course status](#course-status) for details.
+> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). All lessons of Module 7 are available too (five lessons, pilot version). All lessons of Module 8 are available too (six lessons, pilot version). Module 9 is in development: its first two lessons are available. See [Course status](#course-status) for details.
 
 ## The C++ learning path
 
@@ -148,6 +148,7 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Module 8, lesson 5: [A function returns a record with several results](course/module_08_structs/lesson_05_a_function_returns_a_record.en.md) | Available (pilot version) |
 | Module 8, lesson 6: [Race results (the Module 8 test)](course/module_08_structs/lesson_06_race_results.en.md) | Available (pilot version) |
 | Module 9, lesson 1: [A function changes an existing record](course/module_09_mutable_references/lesson_01_a_function_changes_a_record.en.md) | Available (pilot version) |
+| Module 9, lesson 2: [A change only when the conditions are met](course/module_09_mutable_references/lesson_02_a_change_only_when_allowed.en.md) | Available (pilot version) |
 | Module 9: the remaining lessons (controlled changes of data: modifiable references) | In preparation |
 | Further modules | Planned |
 | Full course plan | Not published yet |
@@ -215,6 +216,7 @@ Work through the lessons in order, starting with the first:
 56. **[Lesson 8.5: A function returns a record with several results](course/module_08_structs/lesson_05_a_function_returns_a_record.en.md)**
 57. **[Lesson 8.6: Race results (the Module 8 test)](course/module_08_structs/lesson_06_race_results.en.md)**
 58. **[Lesson 9.1: A function changes an existing record](course/module_09_mutable_references/lesson_01_a_function_changes_a_record.en.md)**
+59. **[Lesson 9.2: A change only when the conditions are met](course/module_09_mutable_references/lesson_02_a_change_only_when_allowed.en.md)**
 
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 

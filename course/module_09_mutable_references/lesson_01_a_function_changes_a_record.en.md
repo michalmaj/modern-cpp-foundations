@@ -383,7 +383,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson the function always changed the record, with no conditions. In the next lesson a function will first check whether a change is allowed, leave the record unchanged if it refuses, and return information about success. It's in preparation.
+In this lesson the function always changed the record, with no conditions. In the next lesson a function will first check whether a change is allowed, leave the record unchanged if it refuses, and return information about success: [Lesson 9.2: A change only when the conditions are met](lesson_02_a_change_only_when_allowed.en.md).
 
 ---
 
@@ -741,4 +741,4 @@ For 0 the fixed program prints the same as before the fix: `After: 3`. That's wh
 
 </details>
 
-**Previous lesson:** [Lesson 8.6: Race results (the Module 8 test)](../module_08_structs/lesson_06_race_results.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 8.6: Race results (the Module 8 test)](../module_08_structs/lesson_06_race_results.en.md) · **Next lesson:** [Lesson 9.2: A change only when the conditions are met](lesson_02_a_change_only_when_allowed.en.md) · [Course overview](../../README.en.md)
