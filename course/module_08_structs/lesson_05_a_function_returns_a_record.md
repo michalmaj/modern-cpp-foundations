@@ -414,7 +414,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji jedna funkcja zwróciła kilka wyników naraz. Kolejna lekcja Modułu 8 jest w przygotowaniu.
+W tej lekcji jedna funkcja zwróciła kilka wyników naraz. W sprawdzianie Modułu 8 wykorzystasz umiejętności z całego modułu: własne typy danych, wektor rekordów i funkcje, które analizują rekordy i zwracają wyniki: [Lekcja 8.6: Wyniki biegu (sprawdzian Modułu 8)](lesson_06_race_results.md).
 
 ---
 
@@ -948,4 +948,4 @@ Dla pustego wektora poprawiony program wypisze to samo co program kontrolny w pr
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 8.4: Wiele rekordów w `std::vector`](lesson_04_many_records_in_a_vector.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 8.4: Wiele rekordów w `std::vector`](lesson_04_many_records_in_a_vector.md) · **Następna lekcja:** [Lekcja 8.6: Wyniki biegu (sprawdzian Modułu 8)](lesson_06_race_results.md) · [Opis kursu](../../README.md)
