@@ -475,7 +475,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji funkcja zmieniała jeden rekord. W kolejnej lekcji zmienisz przez referencję wiele rekordów zapisanych w wektorze. Jest w przygotowaniu.
+W tej lekcji funkcja zmieniała jeden rekord. W kolejnej lekcji zmienisz przez referencję wiele rekordów zapisanych w wektorze: [Lekcja 9.3: Modyfikowanie elementów wektora przez referencję](lesson_03_changing_vector_elements.md).
 
 ---
 
@@ -928,4 +928,4 @@ Dla ceny 7 poprawiony program wypisuje to samo co przed poprawką: `Fare 7: acce
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 9.1: Funkcja zmienia istniejący rekord](lesson_01_a_function_changes_a_record.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 9.1: Funkcja zmienia istniejący rekord](lesson_01_a_function_changes_a_record.md) · **Następna lekcja:** [Lekcja 9.3: Modyfikowanie elementów wektora przez referencję](lesson_03_changing_vector_elements.md) · [Opis kursu](../../README.md)
