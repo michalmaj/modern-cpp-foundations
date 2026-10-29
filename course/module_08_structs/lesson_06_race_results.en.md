@@ -1066,6 +1066,6 @@ Structs have many more possibilities, which you'll meet in later modules.
 
 ## What's next
 
-This is the last lesson of Module 8. The next modules of the course are in preparation.
+In Module 9, "Controlled changes of data: modifiable references", functions will change existing records on purpose. Start with the first lesson: [Lesson 9.1: A function changes an existing record](../module_09_mutable_references/lesson_01_a_function_changes_a_record.en.md).
 
-**Previous lesson:** [Lesson 8.5: A function returns a record with several results](lesson_05_a_function_returns_a_record.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 8.5: A function returns a record with several results](lesson_05_a_function_returns_a_record.en.md) · **Next lesson:** [Lesson 9.1: A function changes an existing record](../module_09_mutable_references/lesson_01_a_function_changes_a_record.en.md) · [Course overview](../../README.en.md)
