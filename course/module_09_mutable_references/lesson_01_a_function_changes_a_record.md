@@ -383,7 +383,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji funkcja zmieniała rekord zawsze, bez żadnych warunków. W kolejnej lekcji funkcja najpierw sprawdzi, czy zmiana jest dozwolona, w razie odmowy zostawi rekord bez zmian i zwróci informację o powodzeniu. Jest w przygotowaniu.
+W tej lekcji funkcja zmieniała rekord zawsze, bez żadnych warunków. W kolejnej lekcji funkcja najpierw sprawdzi, czy zmiana jest dozwolona, w razie odmowy zostawi rekord bez zmian i zwróci informację o powodzeniu: [Lekcja 9.2: Zmiana tylko po spełnieniu warunków](lesson_02_a_change_only_when_allowed.md).
 
 ---
 
@@ -741,4 +741,4 @@ Dla 0 poprawiony program wypisuje to samo co przed poprawką: `After: 3`. Dlateg
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 8.6: Wyniki biegu (sprawdzian Modułu 8)](../module_08_structs/lesson_06_race_results.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 8.6: Wyniki biegu (sprawdzian Modułu 8)](../module_08_structs/lesson_06_race_results.md) · **Następna lekcja:** [Lekcja 9.2: Zmiana tylko po spełnieniu warunków](lesson_02_a_change_only_when_allowed.md) · [Opis kursu](../../README.md)
