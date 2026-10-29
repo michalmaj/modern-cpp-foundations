@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 7 (pięć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 8 (sześć lekcji, wersja pilotażowa). Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 7 (pięć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 8 (sześć lekcji, wersja pilotażowa). Moduł 9 jest rozwijany: dostępna jest jego pierwsza lekcja. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -147,6 +147,8 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 8, lekcja 4: [Wiele rekordów w `std::vector`](course/module_08_structs/lesson_04_many_records_in_a_vector.md) | Dostępna (wersja pilotażowa) |
 | Moduł 8, lekcja 5: [Funkcja zwraca rekord z kilkoma wynikami](course/module_08_structs/lesson_05_a_function_returns_a_record.md) | Dostępna (wersja pilotażowa) |
 | Moduł 8, lekcja 6: [Wyniki biegu (sprawdzian Modułu 8)](course/module_08_structs/lesson_06_race_results.md) | Dostępna (wersja pilotażowa) |
+| Moduł 9, lekcja 1: [Funkcja zmienia istniejący rekord](course/module_09_mutable_references/lesson_01_a_function_changes_a_record.md) | Dostępna (wersja pilotażowa) |
+| Moduł 9: pozostałe lekcje (kontrolowana zmiana danych: referencje modyfikowalne) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
 | Kursy B i C | Planowane, repozytoria jeszcze nie istnieją |
@@ -212,10 +214,11 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 55. **[Lekcja 8.4: Wiele rekordów w `std::vector`](course/module_08_structs/lesson_04_many_records_in_a_vector.md)**
 56. **[Lekcja 8.5: Funkcja zwraca rekord z kilkoma wynikami](course/module_08_structs/lesson_05_a_function_returns_a_record.md)**
 57. **[Lekcja 8.6: Wyniki biegu (sprawdzian Modułu 8)](course/module_08_structs/lesson_06_race_results.md)**
+58. **[Lekcja 9.1: Funkcja zmienia istniejący rekord](course/module_09_mutable_references/lesson_01_a_function_changes_a_record.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
-W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. W Module 2 (lekcje 2.1–2.8) programy zaczną pamiętać wartości, liczyć, pobierać dane od użytkownika i przechowywać tekst. Kończy go sprawdzian w lekcji 2.8. W Module 3 (lekcje 3.1–3.6) programy zaczną podejmować decyzje. Kończy go sprawdzian w lekcji 3.6. W Module 4 (lekcje 4.1–4.7) programy zaczną powtarzać działania. Kończy go sprawdzian w lekcji 4.7. W Module 5 (lekcje 5.1–5.7) nauczysz się dzielić programy na mniejsze, nazwane części: własne funkcje. Kończy go sprawdzian w lekcji 5.7. W Module 6 (lekcje 6.1–6.6) programy zaczną przechowywać wiele wartości tego samego rodzaju w jednej zmiennej: `std::vector`. Kończy go sprawdzian w lekcji 6.6. W Module 7 (lekcje 7.1–7.5) przejrzysz tekst znak po znaku: `char` i `std::string`. Kończy go sprawdzian w lekcji 7.5. W Module 8 (lekcje 8.1–8.6) zdefiniujesz własne typy danych: struktury, które łączą kilka informacji o jednym obiekcie. Kończy go sprawdzian w lekcji 8.6. Kolejne moduły są w przygotowaniu.
+W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. W Module 2 (lekcje 2.1–2.8) programy zaczną pamiętać wartości, liczyć, pobierać dane od użytkownika i przechowywać tekst. Kończy go sprawdzian w lekcji 2.8. W Module 3 (lekcje 3.1–3.6) programy zaczną podejmować decyzje. Kończy go sprawdzian w lekcji 3.6. W Module 4 (lekcje 4.1–4.7) programy zaczną powtarzać działania. Kończy go sprawdzian w lekcji 4.7. W Module 5 (lekcje 5.1–5.7) nauczysz się dzielić programy na mniejsze, nazwane części: własne funkcje. Kończy go sprawdzian w lekcji 5.7. W Module 6 (lekcje 6.1–6.6) programy zaczną przechowywać wiele wartości tego samego rodzaju w jednej zmiennej: `std::vector`. Kończy go sprawdzian w lekcji 6.6. W Module 7 (lekcje 7.1–7.5) przejrzysz tekst znak po znaku: `char` i `std::string`. Kończy go sprawdzian w lekcji 7.5. W Module 8 (lekcje 8.1–8.6) zdefiniujesz własne typy danych: struktury, które łączą kilka informacji o jednym obiekcie. Kończy go sprawdzian w lekcji 8.6. W Module 9, który zaczyna lekcja 9.1, funkcje zaczną świadomie zmieniać istniejące dane: rekordy przekazane przez modyfikowalną referencję. Kolejne lekcje Modułu 9 są w przygotowaniu.
 
 ## Co dalej po tym kursie
 

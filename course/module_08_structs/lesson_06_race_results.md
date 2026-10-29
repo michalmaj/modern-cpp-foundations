@@ -1066,6 +1066,6 @@ Struktury mają jeszcze wiele możliwości, które poznasz w dalszych modułach.
 
 ## Co dalej
 
-To ostatnia lekcja Modułu 8. Kolejne moduły kursu są w przygotowaniu.
+W Module 9, „Kontrolowana zmiana danych: referencje modyfikowalne”, funkcje zaczną świadomie zmieniać istniejące rekordy. Zacznij od pierwszej lekcji: [Lekcja 9.1: Funkcja zmienia istniejący rekord](../module_09_mutable_references/lesson_01_a_function_changes_a_record.md).
 
-**Poprzednia lekcja:** [Lekcja 8.5: Funkcja zwraca rekord z kilkoma wynikami](lesson_05_a_function_returns_a_record.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 8.5: Funkcja zwraca rekord z kilkoma wynikami](lesson_05_a_function_returns_a_record.md) · **Następna lekcja:** [Lekcja 9.1: Funkcja zmienia istniejący rekord](../module_09_mutable_references/lesson_01_a_function_changes_a_record.md) · [Opis kursu](../../README.md)
