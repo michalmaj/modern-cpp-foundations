@@ -354,7 +354,7 @@ int main() {
 4. Uruchom go dla `AAAA`.
 5. Wskaż instrukcję, która pomija porównanie.
 6. Popraw program.
-7. Sprawdź ponownie wszystkie trzy teksty.
+7. Uruchom poprawiony program dla `AAA` i `AAAA`, czyli tekstów, które ujawniły błąd. Wynik dla `AABB` jest sprawdzony automatycznie.
 
 </details>
 
@@ -364,7 +364,7 @@ Wyniki programu przed poprawką i poprawiony program są w części [Przykładow
 
 | Co widzisz | Co to znaczy | Co zrobić |
 |---|---|---|
-| `comparison of integers of different signs` | Indeks typu `int` jest porównywany z `size()`. | Zadeklaruj indeks jako `std::size_t` (lekcja 6.3). |
+| `comparison of integers of different signs` | Indeks typu `int` jest porównywany z `size()`. To ostrzeżenie pojawia się tylko przy włączonych dodatkowych ostrzeżeniach (lekcja 6.3). | Zadeklaruj indeks jako `std::size_t` (lekcja 6.3). |
 | Pozycje w raporcie są o jeden za małe, na przykład `Pair 2-3` zamiast `Pair 3-4` | Program wypisuje indeksy zamiast pozycji. | Para przy indeksie `index` to pozycje `index` i `index + 1`. |
 | `"AAA"` daje jedną parę zamiast dwóch | Program pomija porównanie po znalezieniu pary (punkt 7). | Każdy indeks od 1 do końca musi zostać porównany. |
 | Para `'A'` i `'a'` jest liczona | Program porównuje znaki bez rozróżniania wielkości liter, na przykład przez zakresy liter. | Porównuj dokładnie: `text[index] == text[index - 1]`. |
@@ -393,7 +393,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 2. Znak tekstu o podanym indeksie. Wynik jest typu `char`.
 3. `index < text.size()`. Dla `std::string` odczyt `text[text.size()]` jest dozwolony, ale daje specjalny znak zerowy, który nie należy do treści tekstu.
 4. Bo pusty tekst nie ma ostatniego znaku, a `size() - 1` dla rozmiaru 0 nie daje −1, tylko ogromną liczbę, bo wynik `size()` nie ma znaku.
-5. Bo taki jest typ wyniku `size()`. Nie mieszamy go z `int`: porównanie `int` z `size()` przy flagach kursu zatrzymuje budowanie, a zapis `size()` w `int` z `{}` to konwersja zawężająca (lekcja 6.3).
+5. Bo taki jest typ wyniku `size()`. Nie mieszamy go z `int`. Zapis `size()` w `int` z `{}` to konwersja zawężająca, której kompilator nie przyjmie. Porównanie `int` z `size()` to poprawny C++, ale przed porównaniem `int` zamienia się na typ bez znaku, więc liczba ujemna dałaby błędny wynik. Kompilator ostrzega o tym tylko przy włączonych dodatkowych ostrzeżeniach (lekcja 6.3).
 6. Pętlę zakresową, gdy potrzebujesz tylko kolejnych znaków, jak w lekcji 7.1. Indeksową, gdy potrzebujesz pozycji albo sąsiada.
 7. Bo znak o indeksie 0 nie ma poprzednika. Tekst trzyznakowy ma dwie pary: indeksy 0–1 i 1–2.
 8. Bo środkowe `A` należy do dwóch par: z pierwszym i z ostatnim znakiem. Każde porównanie sąsiadów liczy się osobno.

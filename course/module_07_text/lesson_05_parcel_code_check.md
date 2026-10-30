@@ -678,7 +678,7 @@ int main() {
 
 1. **Najpierw powodzenie odczytu.** `std::cin.fail()` jest sprawdzane jako pierwsze, bo po nieudanym odczycie nie wolno polegać na zawartości `line` (lekcja 7.4).
 2. **Koniec odczytu zależy od oryginalnej linii.** `line.empty()` stoi przed wywołaniem `without_spaces`. Pusta linia to umówiony sygnał końca, a ten sygnał dotyczy linii wpisanej przez użytkownika, a nie tekstu po przekształceniu.
-3. **Same spacje to zgłoszenie.** Linia `"   "` ma trzy znaki, więc `empty()` daje `false` i program sprawdza ją jako kod. Gdyby o końcu decydował tekst bez spacji, ta linia zakończyłaby odczyt. Przypadki C, F i L to sprawdzają.
+3. **Same spacje to zgłoszenie.** Linia `"   "` ma trzy znaki, więc `empty()` daje `false` i program sprawdza ją jako kod. Gdyby o końcu decydował tekst bez spacji, ta linia zakończyłaby odczyt. Przypadki A, C, F i L to sprawdzają.
 4. **Nowy tekst.** Kod bez spacji to inny tekst niż linia: ma inne znaki i inną długość. `without_spaces` buduje go w lokalnym `result` przez `push_back`, jak w lekcji 7.3, i zwraca przez wartość.
 5. **Oryginał bez zmian.** Funkcja dostaje linię przez `const std::string&`, więc może ją tylko czytać: program, który próbowałby zmienić parametr, nie zbudowałby się. Wejście i tekst do sprawdzenia to dwa osobne obiekty: `line` i `code`.
 6. **Najpierw usuwanie spacji, potem format.** Reguła formatu dotyczy kodu bez spacji. `A B - 1 2 3 4` ma 13 znaków i dopiero po usunięciu spacji ma 7 znaków zgodnych z formatem.
@@ -856,6 +856,16 @@ Po pięciu lekcjach potrafisz:
 - pisać funkcje, które dostają tekst przez `const std::string&` i zwracają nowy `std::string`;
 - odczytywać kolejne linie przez `std::getline` i odróżniać pustą linię od nieudanego odczytu;
 - projektować programy, które odczytują kolejne teksty, przekształcają je, sprawdzają ich format i budują raport z wyników współpracujących funkcji.
+
+Ten moduł pokazał trzy rodzaje pracy z tekstem. Nie wykluczają się: jeden program często łączy kilka z nich.
+
+| Rodzaj pracy | Pytanie | Przykład z modułu | Typowy wynik |
+|---|---|---|---|
+| analizowanie istniejącego tekstu | co jest w tekście? | rodzaje znaków (7.1), sąsiednie znaki (7.2) | liczby albo raport |
+| tworzenie nowego tekstu | jaki nowy tekst zbudować z danego? | inicjały (7.3), tekst bez spacji (7.5) | nowy `std::string` |
+| sprawdzanie poprawności tekstu | czy tekst spełnia reguły? | kod paczki (7.5) | `true` albo `false` |
+
+Lekcja 7.4 nie dodaje czwartego rodzaju: organizuje przetwarzanie wielu linii, a każdą z nich można analizować, przekształcać albo sprawdzać. Sprawdzian łączy wszystko w jednym programie: dla każdej linii buduje tekst bez spacji, sprawdza jego format i zlicza wyniki.
 
 Wszystko to dotyczy tekstu ASCII. Tekst ma jeszcze wiele możliwości, które poznasz w dalszych modułach.
 

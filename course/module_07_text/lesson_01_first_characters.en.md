@@ -230,7 +230,7 @@ Empty `{}` create a text with no elements. `size()` gives 0, `empty()` gives `tr
 
 ## 7. The boundary: ASCII text
 
-In this lesson we analyse **ASCII** text: English letters, digits, the space and basic punctuation. For such text, one `char` element is one visible character. A `std::string` can also store text with Polish letters, but it doesn't recognise them by itself. In the common UTF-8 encoding, a letter such as `ż` takes **several** `char` elements. For such text, `size()` gives the number of `char` elements, not the number of letters a person sees, the range-based loop reads one letter as several elements, and the comparisons in this lesson don't recognise Polish letters. That's a deliberate limit of this lesson, not a mistake. That's why all the data in the tasks is ASCII.
+In this lesson we analyse **ASCII** text: English letters, digits, the space and basic punctuation. For such text, one `char` element is one character. A `std::string` can also store text with Polish letters, but it doesn't recognise them by itself. In the common UTF-8 encoding, a letter such as `ż` takes **several** `char` elements. For such text, `size()` gives the number of `char` elements, not the number of letters a person sees, the range-based loop reads one letter as several elements, and the comparisons in this lesson don't recognise Polish letters. That's a deliberate limit of this lesson, not a mistake. That's why all the data in the tasks is ASCII.
 
 ## 8. Recognising digits
 
@@ -423,7 +423,7 @@ int main() {
 4. The sum of letters, digits and others still equals the number of all the elements. Why doesn't this check reveal the bug?
 5. Find the missing range of characters.
 6. Fix the condition.
-7. Check both texts again.
+7. Run the fixed program for `AbC`, the text that revealed the bug. The result for `ABC` is checked automatically.
 
 </details>
 
