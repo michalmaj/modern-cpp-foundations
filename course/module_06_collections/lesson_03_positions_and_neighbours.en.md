@@ -169,7 +169,7 @@ const std::size_t count{readings.size()};
 - `std::size_t` is an **unsigned** whole-number type: it holds only non-negative numbers.
 - It's meant for sizes and indices, so it matches the result of `size()`. Exactly how many numbers it holds depends on the system.
 - The header `<cstddef>` makes it available. Always include it when you write `std::size_t`, as you include `<vector>` for a vector.
-- **Don't mix `std::size_t` with `int`.** Comparing an `int` variable with `size()` also stops the build with the course flags: the compiler reports `comparison of integers of different signs`.
+- **Don't mix `std::size_t` with `int`.** Comparing an `int` variable with `size()` is valid C++, and in your project it builds without a compiler message. Before the comparison, though, the `int` is converted to an unsigned type, so a negative number would behave like a very large one, and the result would be wrong. With additional warnings turned on, the compiler reports `comparison of integers of different signs`, and if warnings are treated as errors, that stops the build.
 
 ## 6. A loop over positions
 
@@ -356,13 +356,13 @@ Examples B and C, like all the check cases, are checked automatically in the ful
 **Then work in this order:**
 
 1. Write the program and run it for the data from the requirements.
-2. Change the values in the braces to each case in your table in turn. Predict the result before each run.
+2. Change the values in the braces to 4–6 cases of your choice from the table. Predict the result before each run. The other cases are checked automatically.
 3. For each mismatch, check whether the mistake is in the program or in the table.
 
 ### Success criteria
 
 - The program builds as C++20 and, for the data from the requirements, prints exactly the three lines of example A.
-- For every case in the table the result matches the requirements, after changing only the values in the braces.
+- For 4–6 cases of your choice from the table the result matches the requirements, after changing only the values in the braces.
 - With a tie, the program points to the first occurrence of the largest drop.
 - No index in the program goes out of range, also for an empty vector and for one day.
 - The indices are of type `std::size_t`, and the day numbers shown to the user start at 1.
@@ -472,6 +472,8 @@ int main() {
 }
 ```
 
+The program prints no questions: type the numbers in order, each on its own line.
+
 1. **Predict** the result for data A, `6`, `8`, `5`, `7`, `1`, `0`, `3`, with a single largest drop.
 2. Run the program with that data and check that the result looks correct.
 3. Analyse the data `4`, `7`, `1`, `7`, `1`, with two equal largest drops. Which drop should the program point to?
@@ -489,7 +491,7 @@ The program's output before the fix, and the fixed program, are in [Example solu
 | What you see | What it means | What to do |
 |---|---|---|
 | `cannot be narrowed from type ... to 'int'` | The result of `size()` goes into an `int` variable with `{}` (section 5). | Use `std::size_t`. |
-| `comparison of integers of different signs` | An `int` index is compared with `size()`. | Declare the index as `std::size_t`. |
+| `comparison of integers of different signs` | An `int` index is compared with `size()` (section 5). This warning appears only with additional warnings turned on, and only a setting that treats warnings as errors stops the build. | Declare the index as `std::size_t`. |
 | A compile error at `std::size_t` | `#include <cstddef>` is missing, or the name has a typo. On some systems the program builds without `<cstddef>` too, but on others it doesn't. | Add `#include <cstddef>`. |
 | The day numbers are one too small, for example `From day 2 to day 3` instead of `From day 3 to day 4` | The program prints indices instead of day numbers. | A day number is the index + 1. Check which index you remember: the current one or the previous one. |
 | The drop comes out negative, or appears where there was a rise | The subtraction is the wrong way round. | A drop is the earlier day's temperature minus the next day's. |

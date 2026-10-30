@@ -443,12 +443,12 @@ Program, który wypisze tu średnią 5, liczy ją dzieleniem całkowitym.
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków testowych: zero zgłoszeń, jeden czas 0, jeden czas 20, średnią z częścią ułamkową, same zera, czas równy średniej, czasy pominięte przed poprawnym, między poprawnymi i po nich, same pominięte czasy, liczby zgłoszeń -1 i 7, tekst zamiast liczby zgłoszeń i zamiast czasu oraz dane, które kończą się po liczbie zgłoszeń albo po kilku czasach. Przy każdym przypadku zapisz oczekiwane standardowe wyjście.
 
-Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, zamiast je uruchamiać, i porównaj z pełną listą kontrolną.
+Uruchom program dla przykładów A, B i C oraz dla 4–6 wybranych przypadków z tabeli. Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, zamiast je uruchamiać, i porównaj z pełną listą kontrolną. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
 
 ### Kryterium sukcesu
 
 - Program buduje się jako C++20, a jego standardowe wyjście dla przykładów A, B i C jest dokładnie takie jak powyżej.
-- Dla każdego przypadku z tabeli, który da się wpisać, standardowe wyjście zgadza się z wymaganiami. Przypadki z danymi, które kończą się wcześniej, zgadzają się z tabelą przebiegu.
+- Dla 4–6 wybranych przypadków z tabeli, które da się wpisać, standardowe wyjście zgadza się z wymaganiami. Przypadki z danymi, które kończą się wcześniej, zgadzają się z tabelą przebiegu.
 - Wektor zawiera tylko dopuszczalne czasy, w kolejności zgłoszeń. Pominięty czas nigdy do niego nie trafia.
 - Program nie liczy średniej, gdy wektor jest pusty, i nie liczy jej dzieleniem całkowitym.
 - Po nieudanym odczycie program nie pyta o kolejne zgłoszenia i nie wypisuje podsumowania.

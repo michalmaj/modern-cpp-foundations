@@ -136,7 +136,7 @@ The standard output is identical to section 2. What changed is how it's written:
 
 - **`show_workshop_rules();`** is a **function call**: the name, empty parentheses and a semicolon. A call says: "run this function's statements now".
 - **`main` is a function too** (lesson 1.3), but it has a special role: the program starts running from it. The program doesn't start with `show_workshop_rules`, even though that function stands higher up in the file. You've known the word `int` before `main` since the start of the course. It's also a special part of `main`, which we'll come back to when you meet functions that pass back a result.
-- You call your own function the same way as the `std::getline(…)` you already know: by its name and parentheses. In `std::getline`'s parentheses stood the data to read. The parentheses of `show_workshop_rules()` are empty.
+- You call your own function the same way as the `std::getline(…)` you already know: by its name and parentheses. In `std::getline`'s parentheses stood `std::cin` and the variable that receives the text. The parentheses of `show_workshop_rules()` are empty.
 
 ## 5. The order of execution
 

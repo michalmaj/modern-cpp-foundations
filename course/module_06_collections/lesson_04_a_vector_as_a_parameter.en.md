@@ -414,6 +414,8 @@ int main() {
 }
 ```
 
+The program prints no questions: type the numbers in order, each on its own line.
+
 1. Read the mission's requirement and **predict** the report for two identical weeks `{12, 0, 8, 15, 9}`, the data `5`, `12`, `0`, `8`, `15`, `9`, `5`, `12`, `0`, `8`, `15`, `9`.
 2. Run the program with that data. Is the report correct?
 3. Run it with the data of example A: `5`, `12`, `0`, `8`, `15`, `9`, `4`, `5`, `18`, `11`, `16`.

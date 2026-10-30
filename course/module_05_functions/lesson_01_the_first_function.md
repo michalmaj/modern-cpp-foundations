@@ -136,7 +136,7 @@ Standardowe wyjście jest identyczne jak w punkcie 2. Zmienił się sposób zapi
 
 - **`show_workshop_rules();`** to **wywołanie funkcji**: nazwa, puste nawiasy i średnik. Wywołanie mówi: „wykonaj teraz instrukcje tej funkcji”.
 - **`main` też jest funkcją** (lekcja 1.3), ale ma szczególną rolę: od niej zaczyna się wykonywanie programu. Program nie zaczyna się od `show_workshop_rules`, choć ta funkcja stoi w pliku wyżej. Słowo `int` przed `main` znasz od początku kursu. To też szczególny element `main`, do którego wrócimy, gdy poznasz funkcje przekazujące wynik.
-- Własną funkcję wywołuje się tak samo jak znane Ci już `std::getline(…)`: nazwą i nawiasami. W nawiasach `std::getline` stały dane do odczytu. Nawiasy `show_workshop_rules()` są puste.
+- Własną funkcję wywołuje się tak samo jak znane Ci już `std::getline(…)`: nazwą i nawiasami. W nawiasach `std::getline` stały `std::cin` i zmienna na odczytany tekst. Nawiasy `show_workshop_rules()` są puste.
 
 ## 5. Kolejność wykonania
 
