@@ -230,7 +230,7 @@ Puste `{}` tworzą tekst bez elementów. `size()` daje 0, `empty()` daje `true`,
 
 ## 7. Granica: tekst ASCII
 
-W tej lekcji analizujemy tekst **ASCII**: angielskie litery, cyfry, spację i podstawową interpunkcję. Dla takiego tekstu jeden element `char` to jeden widoczny znak. `std::string` może przechowywać też tekst z polskimi literami, ale sam ich nie rozpoznaje. W popularnym kodowaniu UTF-8 litera taka jak `ż` zajmuje **kilka** elementów `char`. Dla takiego tekstu `size()` podaje liczbę elementów `char`, a nie liczbę liter widocznych dla człowieka, pętla zakresowa odczytuje jedną literę jako kilka elementów, a porównania z tej lekcji nie rozpoznają polskich liter. To świadome ograniczenie tej lekcji, a nie błąd. Dlatego wszystkie dane w zadaniach są w ASCII.
+W tej lekcji analizujemy tekst **ASCII**: angielskie litery, cyfry, spację i podstawową interpunkcję. Dla takiego tekstu jeden element `char` to jeden znak. `std::string` może przechowywać też tekst z polskimi literami, ale sam ich nie rozpoznaje. W popularnym kodowaniu UTF-8 litera taka jak `ż` zajmuje **kilka** elementów `char`. Dla takiego tekstu `size()` podaje liczbę elementów `char`, a nie liczbę liter widocznych dla człowieka, pętla zakresowa odczytuje jedną literę jako kilka elementów, a porównania z tej lekcji nie rozpoznają polskich liter. To świadome ograniczenie tej lekcji, a nie błąd. Dlatego wszystkie dane w zadaniach są w ASCII.
 
 ## 8. Rozpoznawanie cyfr
 
@@ -423,7 +423,7 @@ int main() {
 4. Suma liter, cyfr i innych nadal jest równa liczbie wszystkich elementów. Dlaczego ta kontrola nie wykrywa błędu?
 5. Znajdź brakujący zakres znaków.
 6. Popraw warunek.
-7. Sprawdź oba teksty ponownie.
+7. Uruchom poprawiony program dla `AbC`, tekstu, który ujawnił błąd. Wynik dla `ABC` jest sprawdzony automatycznie.
 
 </details>
 

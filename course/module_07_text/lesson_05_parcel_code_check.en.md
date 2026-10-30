@@ -678,7 +678,7 @@ int main() {
 
 1. **The read's success first.** `std::cin.fail()` is checked first, because after a failed read you can't rely on what `line` holds (lesson 7.4).
 2. **The end of the reading depends on the original line.** `line.empty()` comes before the call to `without_spaces`. An empty line is the agreed end signal, and that signal is about the line the user typed, not about the text after it was transformed.
-3. **Spaces only are a submitted code.** The line `"   "` has three characters, so `empty()` gives `false` and the program checks it as a code. If the text without spaces decided whether the reading ends, this line would end it. Cases C, F and L check this.
+3. **Spaces only are a submitted code.** The line `"   "` has three characters, so `empty()` gives `false` and the program checks it as a code. If the text without spaces decided whether the reading ends, this line would end it. Cases A, C, F and L check this.
 4. **A new text.** The code without spaces is a different text from the line: it has other characters and another length. `without_spaces` builds it in the local `result` with `push_back`, as in lesson 7.3, and returns it by value.
 5. **The original stays unchanged.** The function gets the line through `const std::string&`, so it can only read it: a program that tried to change the parameter wouldn't build. The input and the text to check are two separate objects: `line` and `code`.
 6. **Removing spaces first, then the format.** The format rule is about the code without spaces. `A B - 1 2 3 4` has 13 characters, and only once its spaces are removed does it have 7 characters that match the format.
@@ -856,6 +856,16 @@ After five lessons, you can:
 - write functions that get a text through `const std::string&` and return a new `std::string`;
 - read successive lines with `std::getline` and tell an empty line from a failed read;
 - design programs that read successive texts, transform them, check their format and build a report from the results of cooperating functions.
+
+This module showed three kinds of work with text. They don't exclude each other: one program often combines several of them.
+
+| Kind of work | Question | Example from the module | Typical result |
+|---|---|---|---|
+| analysing an existing text | what is in the text? | kinds of characters (7.1), neighbouring characters (7.2) | numbers or a report |
+| building a new text | what new text to build from the given one? | initials (7.3), a text without spaces (7.5) | a new `std::string` |
+| checking that a text is valid | does the text meet the rules? | a parcel code (7.5) | `true` or `false` |
+
+Lesson 7.4 doesn't add a fourth kind: it organises the processing of many lines, and each of them can be analysed, transformed or checked. The test combines everything in one program: for each line it builds a text without spaces, checks its format and counts the results.
 
 All of this is about ASCII text. Text has many more possibilities, which you'll meet in later modules.
 

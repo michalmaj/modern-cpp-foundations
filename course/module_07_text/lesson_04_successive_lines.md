@@ -2,7 +2,7 @@
 
 **Polski** · [English](lesson_04_successive_lines.en.md) · [Opis kursu](../../README.md)
 
-> **Moduł 7, lekcja 4** · około 70–85 minut
+> **Moduł 7, lekcja 4** · około 65–80 minut
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`, jak dotąd. Przyda się też Twój projekt `initials` z lekcji 7.3. Debugger nie jest w tej lekcji potrzebny.
 > **Wersja pilotażowa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, także z podanymi danymi wejściowymi. Wpisywanie danych w oknie **Run** CLiona opisujemy bez ręcznego sprawdzenia na każdym systemie.
 
@@ -32,7 +32,7 @@ A co, jeśli teksty podaje użytkownik podczas działania programu i nie wiadomo
 3. jeśli nie, przeanalizuj linię i wypisz wynik;
 4. wróć do odczytu następnej linii.
 
-Wcześniejszych linii nie trzeba przechowywać: wynik każdej linii jest gotowy zaraz po jej odczycie, a do podsumowania wystarczą dwa liczniki. Wszystkie potrzebne operacje już znasz. Nowe jest ich połączenie.
+Wcześniejszych linii nie trzeba przechowywać: do podsumowania wystarczą dwa liczniki. Wszystkie potrzebne operacje już znasz, nowe jest ich połączenie.
 
 Po tej lekcji będziesz:
 
@@ -94,7 +94,7 @@ Characters: 12
 
 ## 3. Pusta linia a nieudany odczyt
 
-Uruchom program z punktu 2 jeszcze raz i od razu naciśnij **Enter**, nie wpisując żadnego znaku. **Przewidź:** czy odczyt się uda?
+**Przewidź**, co się stanie w programie z punktu 2, gdy od razu naciśniesz **Enter**, nie wpisując żadnego znaku: czy odczyt się uda? Porównaj z wynikiem poniżej. Uruchomienie jest nieobowiązkowe.
 
 <!-- input: one_line -->
 ```text
@@ -117,7 +117,7 @@ To najważniejsze rozróżnienie tej lekcji:
 - **Pusta linia to udany odczyt.** W wejściu był sam znak końca linii. Tekst jest pusty: `line.size()` daje 0, a `line.empty()` daje `true`. Program nie wybrał gałęzi `fail()`.
 - **Nieudany odczyt** oznacza, że `getline` nie dostarczyło żadnej linii, bo w wejściu nie było już ani znaków, ani znaku końca linii. Zwykle to koniec danych. `std::cin.fail()` daje wtedy `true`.
 
-Odczyt może się nie udać także z rzadszych powodów, na przykład przy błędzie wejścia. `fail()` nie mówi, która przyczyna wystąpiła (lekcja 4.5), a tutaj nie musimy ich rozróżniać: każdy nieudany odczyt kończy przetwarzanie.
+Rzadziej odczyt nie udaje się z innych powodów, na przykład przy błędzie wejścia, ale tutaj nie trzeba ich rozróżniać: każdy nieudany odczyt kończy przetwarzanie.
 
 | Sytuacja | Co czeka w wejściu | `std::cin.fail()` | `line` po odczycie | Decyzja programu |
 |---|---|---|---|---|
@@ -194,7 +194,7 @@ Characters: 6
 - **`line` powstaje w każdym przebiegu od nowa**, więc nie zostaje w niej nic z poprzedniej linii.
 - **Liczniki rosną tylko w ostatniej gałęzi**, czyli dla linii, która naprawdę trafiła do analizy. Do `character_count` trafia `line.size()`: liczą się spacje, ale nie znaki końca linii. Oba liczniki mają typ `std::size_t`, jak rozmiary w lekcji 6.3.
 
-**Dlaczego jedna flaga?** W lekcji 4.5 pętla miała dwie flagi, bo po pętli program musiał wiedzieć, co ją zakończyło. Tutaj podsumowanie jest takie samo dla obu przyczyn, więc wystarczy flaga, która mówi tylko, czy czytać dalej.
+**Dlaczego jedna flaga?** Podsumowanie jest takie samo dla obu przyczyn zakończenia, więc, inaczej niż w lekcji 4.5, program nie musi wiedzieć, co zakończyło pętlę.
 
 | Próba | Odczytana linia | `fail()` | `empty()` | Decyzja | `reading` po próbie | `line_count` | `character_count` |
 |---|---|---|---|---|---|---|---|
@@ -247,7 +247,7 @@ W próbie 2 strumień doszedł do końca danych, a mimo to odczyt **się udał**
 
 **Tylko linia o długości zero kończy odczyt.** Linia z jednej albo kilku spacji nie jest pusta: ma znaki, tylko żaden z nich nie jest literą. Program nie usuwa z niej spacji i nie traktuje jej jak pustej.
 
-Uruchom program z punktu 4, wpisz trzy spacje i naciśnij **Enter**, a potem naciśnij **Enter** jeszcze raz:
+Dane dla programu z punktu 4: trzy spacje i **Enter**, a potem jeszcze raz **Enter**:
 
 <!-- input: line_counter -->
 ```text
@@ -255,7 +255,7 @@ Uruchom program z punktu 4, wpisz trzy spacje i naciśnij **Enter**, a potem nac
 
 ```
 
-**Przewidź** wynik.
+**Przewidź** wynik i porównaj go z wynikiem poniżej. Uruchomienie jest nieobowiązkowe.
 
 <details>
 <summary>Standardowe wyjście</summary>
@@ -344,7 +344,7 @@ Lines processed: 1
 Characters processed: 3
 ```
 
-**Funkcja inicjałów nie jest tu nowym zadaniem:** powstała w lekcji 7.3. Nowe jest sterowanie odczytem i połączenie wszystkiego w jeden program. Musisz samodzielnie zdecydować:
+**Funkcja inicjałów nie jest tu nowym zadaniem:** pochodzi z lekcji 7.3. Nowe jest sterowanie odczytem. Musisz samodzielnie zdecydować:
 
 1. gdzie utworzyć zmienną z bieżącą linią;
 2. kiedy sprawdzić `std::cin.fail()`, a kiedy `line.empty()`;
@@ -355,9 +355,9 @@ Characters processed: 3
 7. jak oddzielić raport linii od podsumowania;
 8. dlaczego funkcja inicjałów nie powinna sama wywoływać `getline`.
 
-**Zanim napiszesz program**, przygotuj tabelę przypadków z oczekiwanym standardowym wyjściem, między innymi: pusta linia jako pierwsza, jedna linia, dane zakończone bez pustej linii, same spacje, spacje na początku i na końcu, pusta linia między dwoma tekstami i różna wielkość liter.
+**Zanim napiszesz program**, przygotuj tabelę przypadków: pusta linia jako pierwsza, jedna linia, dane zakończone bez pustej linii, same spacje, spacje na początku i na końcu, pusta linia między dwoma tekstami i różna wielkość liter. Przy każdym zapisz inicjały oraz liczby linii i znaków z podsumowania.
 
-**Potem** uruchom program dla danych z przykładu, bez `Ignored line`, i dla 2–3 przypadków z tabeli, na przykład `Ada`, trzy spacje albo `  Ada  `, każdy zakończony pustą linią. W terminalu wpisywane linie mieszają się z raportem, bo program odpowiada zaraz po każdej linii. Przypadki zakończone końcem danych prześledź na papierze. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+**Potem** uruchom program dla danych z przykładu, bez `Ignored line`, i dla jednego przypadku z tabeli, najlepiej linii z samych spacji, zakończonej pustą linią. W terminalu wpisywane linie mieszają się z raportem, bo program odpowiada zaraz po każdej linii. Przypadki zakończone końcem danych prześledź na papierze. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, więc pozostałych nie musisz uruchamiać.
 
 ### Kryterium sukcesu
 
@@ -476,12 +476,11 @@ int main() {
 ```
 
 1. **Przewidź** wynik dla dwóch zestawów: (a) `Ada Lovelace` i `Mary ann SMITH`, po których kończą się dane; (b) `Ada` i pusta linia.
-2. Zestaw (a) kończy się końcem danych, więc prześledź go na papierze i porównaj z wynikiem w części Przykładowe rozwiązania. Czy podsumowanie jest poprawne?
+2. Zestaw (a) kończy się końcem danych, więc prześledź go na papierze i porównaj z wynikiem w części Przykładowe rozwiązania. Czy podsumowanie jest poprawne? Czy poprawka z kroku 5 coś tu zmieni?
 3. Uruchom program dla zestawu (b). Ile linii podaje podsumowanie, a ile raportów `Line N` wypisał program?
 4. Wskaż miejsce, w którym program zwiększa licznik. Dla których odczytów to się dzieje?
 5. Popraw kolejność: licznik ma rosnąć dopiero wtedy, gdy wiadomo, że linia nie jest pusta.
-6. Uruchom poprawiony program dla zestawu (b) i dla pustej linii jako pierwszej.
-7. Prześledź poprawiony program dla zestawu (a), czyli dla zakończenia przez koniec danych. Czy wynik się zmienił?
+6. Uruchom poprawiony program dla zestawu (b). Pustą linię jako pierwszą możesz sprawdzić dodatkowo.
 
 </details>
 
@@ -506,26 +505,22 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 1. Czym różni się odczyt jednej linii od odczytu kolejnych linii?
 2. Czy `getline` zachowuje spacje? Czy dopisuje do tekstu znak końca linii?
-3. Czy pustą linię można odczytać poprawnie? Co wtedy daje `line.empty()`?
-4. Czy tekst `"   "` jest pusty?
-5. Dlaczego najpierw sprawdzamy powodzenie odczytu, a dopiero potem `empty()`?
-6. Czy koniec danych oznacza zawsze, że ostatnio odczytana linia jest niepoprawna?
-7. Czy pusta linia kończąca zwiększa licznik przetworzonych linii?
-8. Dlaczego program nie przechowuje wszystkich linii w wektorze?
-9. Dlaczego funkcja wyznaczająca inicjały nie powinna sama odczytywać wejścia?
+3. Czy pustą linię można odczytać poprawnie? Co wtedy daje `line.empty()`? Czy tekst `"   "` jest pusty?
+4. Dlaczego najpierw sprawdzamy powodzenie odczytu, a dopiero potem `empty()`?
+5. Czy koniec danych oznacza zawsze, że ostatnio odczytana linia jest niepoprawna?
+6. Dlaczego program nie przechowuje wszystkich linii w wektorze?
+7. Dlaczego funkcja wyznaczająca inicjały nie powinna sama odczytywać wejścia?
 
 <details>
 <summary>Przykładowe odpowiedzi</summary>
 
 1. Jeden odczyt daje jeden tekst. Gdy linii jest wiele, a ich liczba nie jest znana z góry, odczyt stoi w pętli: jedna próba na przebieg, aż pusta linia albo nieudany odczyt zakończą pracę.
 2. Zachowuje wszystkie spacje, także z początku i z końca linii. Znaku końca linii nie dopisuje: zabiera go z wejścia, ale ten znak tylko kończy odczyt. Dlatego nie ma go w `size()`.
-3. Tak. Pusta linia to udany odczyt: `fail()` daje `false`, a odczytany tekst nie ma żadnych znaków, więc `line.empty()` daje `true`. W tej lekcji to sygnał od użytkownika, że to już wszystkie teksty.
-4. Nie. Ma trzy znaki, spacje, więc `size()` daje 3, a `empty()` daje `false`. To zwykła linia danych z pustymi inicjałami.
-5. Bo po nieudanym odczycie nie wolno polegać na zawartości `line`. Najpierw trzeba wiedzieć, czy linia w ogóle została odczytana. Dopiero wtedy jej treść, także to, czy jest pusta, coś znaczy.
-6. Nie. Ostatnia linia może zostać odczytana poprawnie, nawet jeśli zaraz po niej kończą się dane. O jej przetworzeniu decyduje `fail()`, a pętlę kończy dopiero następna, nieudana próba.
-7. Nie. To udany odczyt, ale nie rekord do analizy. Licznik rośnie tylko w gałęzi, która przetwarza linię.
-8. Bo do wyniku każdej linii wystarcza ona sama, a do podsumowania dwa liczniki. Żadna późniejsza decyzja nie wymaga wcześniejszych linii. Wektor byłby potrzebny, gdyby program po odczycie musiał wrócić do wszystkich linii, na przykład wypisać je w innej kolejności.
-9. Bo jej zadaniem jest tylko wyznaczyć inicjały danego tekstu. Funkcja, która nie czyta wejścia, działa dla każdego tekstu: wpisanego w kodzie, jak w lekcji 7.3, i odczytanego z wejścia, jak tutaj. O odczycie, końcu pracy i wypisywaniu decyduje `main`, jak w podziale odpowiedzialności z lekcji 5.5.
+3. Tak. Pusta linia to udany odczyt: `fail()` daje `false`, a odczytany tekst nie ma żadnych znaków, więc `line.empty()` daje `true`. W tej lekcji to sygnał od użytkownika, że to już wszystkie teksty. Tekst `"   "` nie jest pusty: ma trzy znaki, spacje, więc `size()` daje 3, a `empty()` daje `false`. To zwykła linia danych z pustymi inicjałami.
+4. Bo po nieudanym odczycie nie wolno polegać na zawartości `line`. Najpierw trzeba wiedzieć, czy linia w ogóle została odczytana. Dopiero wtedy jej treść, także to, czy jest pusta, coś znaczy.
+5. Nie. Ostatnia linia może zostać odczytana poprawnie, nawet jeśli zaraz po niej kończą się dane. O jej przetworzeniu decyduje `fail()`, a pętlę kończy dopiero następna, nieudana próba.
+6. Bo do wyniku każdej linii wystarcza ona sama, a do podsumowania dwa liczniki. Żadna późniejsza decyzja nie wymaga wcześniejszych linii. Wektor byłby potrzebny, gdyby program po odczycie musiał wrócić do wszystkich linii, na przykład wypisać je w innej kolejności.
+7. Bo jej zadaniem jest tylko wyznaczyć inicjały danego tekstu. Funkcja, która nie czyta wejścia, działa dla każdego tekstu: wpisanego w kodzie, jak w lekcji 7.3, i odczytanego z wejścia, jak tutaj. O odczycie, końcu pracy i wypisywaniu decyduje `main`, jak w podziale odpowiedzialności z lekcji 5.5.
 
 </details>
 
@@ -844,7 +839,7 @@ Lines processed: 1
 Characters processed: 0
 ```
 
-- **Przyczyna:** program zwiększa licznik po każdym udanym odczycie, zanim sprawdzi, czy linia jest pusta. Pusta linia kończąca to udany odczyt, więc też zostaje policzona, choć nie jest rekordem. Raporty `Line N` są poprawne, bo dla pustej linii program niczego nie wypisuje. Błędne jest tylko podsumowanie.
+- **Przyczyna:** program zwiększa licznik po każdym udanym odczycie, zanim sprawdzi, czy linia jest pusta. Pusta linia kończąca to udany odczyt, więc też zostaje policzona, choć nie jest rekordem. Raporty `Line N` są poprawne, bo dla pustej linii program niczego nie wypisuje. Błędne jest tylko podsumowanie. Ustawienie flagi na `false` kończy pętlę, ale nie cofa już wykonanego `++lines_processed;`.
 - **Dlaczego zestaw (a) nie ujawnia błędu:** dane kończą się bez pustej linii. Ostatnia próba się nie udaje, a po nieudanym odczycie licznik nie rośnie, więc podsumowanie jest poprawne.
 - **Poprawka:** przenieś `++lines_processed;` do gałęzi dla niepustej linii, przed `characters_processed += line.size();`. W gałęzi `else` zostaje wtedy sam `if`, który można zapisać jako `else if`.
 

@@ -354,7 +354,7 @@ int main() {
 4. Run it for `AAAA`.
 5. Point to the statement that skips a comparison.
 6. Fix the program.
-7. Check all three texts again.
+7. Run the fixed program for `AAA` and `AAAA`, the texts that revealed the bug. The result for `AABB` is checked automatically.
 
 </details>
 
@@ -364,7 +364,7 @@ The program's output before the fix, and the fixed program, are in [Example solu
 
 | What you see | What it means | What to do |
 |---|---|---|
-| `comparison of integers of different signs` | An `int` index is compared with `size()`. | Declare the index as `std::size_t` (lesson 6.3). |
+| `comparison of integers of different signs` | An `int` index is compared with `size()`. This warning appears only with additional warnings turned on (lesson 6.3). | Declare the index as `std::size_t` (lesson 6.3). |
 | The positions in the report are one too small, for example `Pair 2-3` instead of `Pair 3-4` | The program prints indices instead of positions. | The pair at index `index` is positions `index` and `index + 1`. |
 | `"AAA"` gives one pair instead of two | The program skips a comparison after finding a pair (section 7). | Every index from 1 to the end must be compared. |
 | A pair of `'A'` and `'a'` is counted | The program compares the characters without telling letter case apart, for example through letter ranges. | Compare exactly: `text[index] == text[index - 1]`. |
@@ -393,7 +393,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 2. The character of the text at the given index. The result is of type `char`.
 3. `index < text.size()`. For a `std::string`, reading `text[text.size()]` is allowed, but it gives a special null character that isn't part of the text's contents.
 4. Because an empty text has no last character, and `size() - 1` for a size of 0 doesn't give −1, but a huge number, because the result of `size()` is unsigned.
-5. Because that's the type of the result of `size()`. We don't mix it with `int`: comparing an `int` with `size()` stops the build with the course flags, and storing `size()` in an `int` with `{}` is a narrowing conversion (lesson 6.3).
+5. Because that's the type of the result of `size()`. We don't mix it with `int`. Storing `size()` in an `int` with `{}` is a narrowing conversion, which the compiler rejects. Comparing an `int` with `size()` is valid C++, but before the comparison the `int` is converted to an unsigned type, so a negative number would give a wrong result. The compiler warns about it only with additional warnings turned on (lesson 6.3).
 6. A range-based loop when you need only the successive characters, as in lesson 7.1. An index loop when you need the position or a neighbour.
 7. Because the character at index 0 has no predecessor. A three-character text has two pairs: indices 0–1 and 1–2.
 8. Because the middle `A` belongs to two pairs: with the first and with the last character. Each comparison of neighbours counts separately.

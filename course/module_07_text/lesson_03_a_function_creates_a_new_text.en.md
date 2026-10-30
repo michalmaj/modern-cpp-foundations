@@ -179,7 +179,7 @@ Name: [  Ada   Lovelace  ]
 Initials: [AL]
 ```
 
-**This isn't the function from section 2 with a different condition.** There, the only thing that decided about a character was whether it's a space. Here, a character's place also matters: a letter goes into the result only when it **starts a word**. It isn't enough to remove the spaces, to keep every letter, or to take the character after every space, because there can be several spaces between words. You have to decide on your own:
+**This isn't the function from section 2 with a different condition.** There, the only thing that decided whether a character was kept was whether it's a space. Here, a character's place also matters: a letter goes into the result only when it **starts a word**. It isn't enough to remove the spaces, to keep every letter, or to take the character after every space, because there can be several spaces between words. You have to decide on your own:
 
 1. what to call the function and how to write its header;
 2. whether you go through the text with a range-based loop or an index loop;
@@ -301,7 +301,7 @@ int main() {
 4. Trace the characters from index 3 to 5: at which character does a space go into the result?
 5. Point to the missing check.
 6. Fix the function.
-7. Check both cases again, and also `  Ada`, three spaces, `Ada` and `A  B   C`.
+7. Run the fixed program for `Ada  Lovelace`, the case that revealed the bug. The other cases, including `  Ada`, three spaces, `Ada` and `A  B   C`, are checked automatically.
 
 </details>
 

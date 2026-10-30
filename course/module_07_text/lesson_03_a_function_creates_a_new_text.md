@@ -301,7 +301,7 @@ int main() {
 4. Prześledź znaki od indeksu 3 do 5: przy którym znaku do wyniku trafia spacja?
 5. Wskaż sprawdzenie, którego brakuje.
 6. Popraw funkcję.
-7. Sprawdź ponownie oba przypadki, a także `  Ada`, trzy spacje, `Ada` i `A  B   C`.
+7. Uruchom poprawiony program dla `Ada  Lovelace`, przypadku, który ujawnił błąd. Pozostałe przypadki, także `  Ada`, trzy spacje, `Ada` i `A  B   C`, są sprawdzone automatycznie.
 
 </details>
 
