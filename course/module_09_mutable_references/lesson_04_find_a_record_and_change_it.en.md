@@ -491,7 +491,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The next lesson is the Module 9 test. In it you'll use the skills of the whole module: a controlled change of one record, changing the elements of a vector, and searching for a record to change. It's in preparation.
+The next lesson is the Module 9 test. In it you'll use the skills of the whole module: a controlled change of one record, changing the elements of a vector, and searching for a record to change: [Lesson 9.5: A delivery drone fleet (the Module 9 test)](lesson_05_drone_fleet.en.md).
 
 ---
 
@@ -1258,4 +1258,4 @@ TAB-03: available no, loans 1
 
 </details>
 
-**Previous lesson:** [Lesson 9.3: Changing the elements of a vector through a reference](lesson_03_changing_vector_elements.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 9.3: Changing the elements of a vector through a reference](lesson_03_changing_vector_elements.en.md) · **Next lesson:** [Lesson 9.5: A delivery drone fleet (the Module 9 test)](lesson_05_drone_fleet.en.md) · [Course overview](../../README.en.md)

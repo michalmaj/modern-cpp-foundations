@@ -491,7 +491,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Kolejna lekcja to sprawdzian Modułu 9. Wykorzystasz w nim umiejętności z całego modułu: kontrolowaną zmianę jednego rekordu, zmianę elementów wektora i wyszukiwanie rekordu do zmiany. Jest w przygotowaniu.
+Kolejna lekcja to sprawdzian Modułu 9. Wykorzystasz w nim umiejętności z całego modułu: kontrolowaną zmianę jednego rekordu, zmianę elementów wektora i wyszukiwanie rekordu do zmiany: [Lekcja 9.5: Flota dronów dostawczych (sprawdzian Modułu 9)](lesson_05_drone_fleet.md).
 
 ---
 
@@ -1258,4 +1258,4 @@ TAB-03: available no, loans 1
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 9.3: Modyfikowanie elementów wektora przez referencję](lesson_03_changing_vector_elements.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 9.3: Modyfikowanie elementów wektora przez referencję](lesson_03_changing_vector_elements.md) · **Następna lekcja:** [Lekcja 9.5: Flota dronów dostawczych (sprawdzian Modułu 9)](lesson_05_drone_fleet.md) · [Opis kursu](../../README.md)
