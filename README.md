@@ -4,7 +4,7 @@
 
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
-> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 7 (pięć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 8 (sześć lekcji, wersja pilotażowa). Moduł 9 jest rozwijany: dostępne są jego trzy pierwsze lekcje. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+> **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 7 (pięć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 8 (sześć lekcji, wersja pilotażowa). Moduł 9 jest rozwijany: dostępne są jego cztery pierwsze lekcje. Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
 
 ## Ścieżka nauki C++
 
@@ -150,6 +150,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 9, lekcja 1: [Funkcja zmienia istniejący rekord](course/module_09_mutable_references/lesson_01_a_function_changes_a_record.md) | Dostępna (wersja pilotażowa) |
 | Moduł 9, lekcja 2: [Zmiana tylko po spełnieniu warunków](course/module_09_mutable_references/lesson_02_a_change_only_when_allowed.md) | Dostępna (wersja pilotażowa) |
 | Moduł 9, lekcja 3: [Modyfikowanie elementów wektora przez referencję](course/module_09_mutable_references/lesson_03_changing_vector_elements.md) | Dostępna (wersja pilotażowa) |
+| Moduł 9, lekcja 4: [Znajdź rekord i zmień właściwy obiekt](course/module_09_mutable_references/lesson_04_find_a_record_and_change_it.md) | Dostępna (wersja pilotażowa) |
 | Moduł 9: pozostałe lekcje (kontrolowana zmiana danych: referencje modyfikowalne) | W przygotowaniu |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
@@ -219,6 +220,7 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 58. **[Lekcja 9.1: Funkcja zmienia istniejący rekord](course/module_09_mutable_references/lesson_01_a_function_changes_a_record.md)**
 59. **[Lekcja 9.2: Zmiana tylko po spełnieniu warunków](course/module_09_mutable_references/lesson_02_a_change_only_when_allowed.md)**
 60. **[Lekcja 9.3: Modyfikowanie elementów wektora przez referencję](course/module_09_mutable_references/lesson_03_changing_vector_elements.md)**
+61. **[Lekcja 9.4: Znajdź rekord i zmień właściwy obiekt](course/module_09_mutable_references/lesson_04_find_a_record_and_change_it.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
