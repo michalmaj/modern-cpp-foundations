@@ -1334,6 +1334,6 @@ After five lessons, you can:
 
 ## What's next
 
-This is the last lesson of Module 9. The next modules of the course are in preparation.
+In Module 10, "Records from input", programs will build records from data read from the input. Start with the first lesson: [Lesson 10.1: One record from input](../module_10_input_records/lesson_01_one_record_from_input.en.md).
 
-**Previous lesson:** [Lesson 9.4: Find a record and change the right object](lesson_04_find_a_record_and_change_it.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 9.4: Find a record and change the right object](lesson_04_find_a_record_and_change_it.en.md) · **Next lesson:** [Lesson 10.1: One record from input](../module_10_input_records/lesson_01_one_record_from_input.en.md) · [Course overview](../../README.en.md)
