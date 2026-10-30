@@ -123,6 +123,14 @@ The name `selected` appears in both functions, but they're two different local v
 
 The function does three different things: it **reads** an existing vector through a reference, **builds** a new collection, and **returns** it by value. The new vector isn't a second name for the original, but a separate result.
 
+This lesson completes the three ways of working with a vector in this module:
+
+| Job | Example | Parameter | Local variable | Result |
+|---|---|---|---|---|
+| reading an existing vector | `count_cold_days` (lesson 6.4) | `const std::vector<int>&` | a counter | a number |
+| building your own vector | `measurements` in `main` (lesson 6.2) | none: the vector is created in `main` | a vector without `const`, empty at first, filled with `push_back` | none: the vector stays in `main` |
+| building and returning a new vector | `keep_negative` (this lesson) | `const std::vector<int>&` | the vector `selected`, empty at first | a new vector, returned by value |
+
 Is returning a whole vector expensive? Modern C++ can return collections by value efficiently. You'll learn later exactly how it does that. For now this model is enough: **the function creates a result collection and returns it as a value, and the caller gets its own result.**
 
 ## 4. An empty result
@@ -407,6 +415,8 @@ int main() {
     }
 }
 ```
+
+The program prints no questions: type the numbers in order, each on its own line.
 
 1. Read the requirement and **predict** the contents of the new vector for the data `{30, 45}`, which is `2`, `30`, `45`, and for `{30, 60}`, which is `2`, `30`, `60`.
 2. Run the program for `{30, 45}`. Is the result correct?

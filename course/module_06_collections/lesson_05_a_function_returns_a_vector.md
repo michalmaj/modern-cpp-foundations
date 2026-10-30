@@ -123,6 +123,14 @@ Nazwa `selected` występuje w obu funkcjach, ale to dwie różne zmienne lokalne
 
 Funkcja robi trzy różne rzeczy: **odczytuje** istniejący wektor przez referencję, **buduje** nową kolekcję i **zwraca** ją przez wartość. Nowy wektor nie jest drugą nazwą oryginału, tylko osobnym wynikiem.
 
+Ta lekcja dopełnia trzy sposoby pracy z wektorem z tego modułu:
+
+| Zadanie | Przykład | Parametr | Zmienna lokalna | Wynik |
+|---|---|---|---|---|
+| odczytanie istniejącego wektora | `count_cold_days` (lekcja 6.4) | `const std::vector<int>&` | licznik | liczba |
+| zbudowanie własnego wektora | `measurements` w `main` (lekcja 6.2) | brak: wektor powstaje w `main` | wektor bez `const`, na początku pusty, uzupełniany przez `push_back` | brak: wektor zostaje w `main` |
+| zbudowanie i zwrócenie nowego wektora | `keep_negative` (ta lekcja) | `const std::vector<int>&` | wektor `selected`, na początku pusty | nowy wektor, zwracany przez wartość |
+
 Czy zwracanie całego wektora jest kosztowne? Współczesny C++ potrafi efektywnie zwracać kolekcje przez wartość. Jak dokładnie to robi, poznasz później. Na razie wystarczy model: **funkcja tworzy kolekcję wynikową i zwraca ją jako wartość, a wywołujący dostaje własny wynik.**
 
 ## 4. Pusty wynik
@@ -407,6 +415,8 @@ int main() {
     }
 }
 ```
+
+Program nie wypisuje pytań: wpisz liczby po kolei, każdą w osobnej linijce.
 
 1. Przeczytaj wymaganie i **przewidź** zawartość nowego wektora dla danych `{30, 45}`, czyli `2`, `30`, `45`, oraz dla `{30, 60}`, czyli `2`, `30`, `60`.
 2. Uruchom program dla `{30, 45}`. Czy wynik jest poprawny?

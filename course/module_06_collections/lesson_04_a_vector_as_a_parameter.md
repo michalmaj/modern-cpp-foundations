@@ -414,6 +414,8 @@ int main() {
 }
 ```
 
+Program nie wypisuje pytań: wpisz liczby po kolei, każdą w osobnej linijce.
+
 1. Przeczytaj wymaganie misji i **przewidź** raport dla dwóch identycznych tygodni `{12, 0, 8, 15, 9}`, czyli dla danych `5`, `12`, `0`, `8`, `15`, `9`, `5`, `12`, `0`, `8`, `15`, `9`.
 2. Uruchom program z tymi danymi. Czy raport jest poprawny?
 3. Uruchom go z danymi przykładu A: `5`, `12`, `0`, `8`, `15`, `9`, `4`, `5`, `18`, `11`, `16`.

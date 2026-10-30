@@ -169,7 +169,7 @@ const std::size_t count{readings.size()};
 - `std::size_t` to typ całkowity **bez znaku**: przechowuje tylko liczby nieujemne.
 - Jest przeznaczony do rozmiarów i indeksów, więc pasuje do wyniku `size()`. Ile dokładnie liczb mieści, zależy od systemu.
 - Udostępnia go nagłówek `<cstddef>`. Dołączaj go zawsze, gdy piszesz `std::size_t`, jak `<vector>` przy wektorze.
-- **Nie mieszaj `std::size_t` z `int`.** Porównanie zmiennej `int` z `size()` przy flagach kursu też zatrzymuje budowanie: kompilator zgłasza `comparison of integers of different signs`.
+- **Nie mieszaj `std::size_t` z `int`.** Porównanie zmiennej `int` z `size()` to poprawny C++ i w Twoim projekcie zbuduje się bez komunikatu kompilatora. Przed porównaniem `int` zamienia się jednak na typ bez znaku, więc liczba ujemna zachowałaby się jak bardzo duża i wynik byłby błędny. Przy włączonych dodatkowych ostrzeżeniach kompilator zgłasza `comparison of integers of different signs`, a jeśli ostrzeżenia są traktowane jak błędy, to zatrzymuje budowanie.
 
 ## 6. Pętla po pozycjach
 
@@ -356,13 +356,13 @@ Przykłady B i C, jak wszystkie przypadki kontrolne, są sprawdzone automatyczni
 **Potem pracuj w tej kolejności:**
 
 1. Napisz program i uruchom go dla danych z wymagań.
-2. Zmieniaj kolejno wartości w nawiasach klamrowych na przypadki z tabeli. Przed każdym uruchomieniem przewidź wynik.
+2. Zmieniaj wartości w nawiasach klamrowych na 4–6 wybranych przypadków z tabeli. Przed każdym uruchomieniem przewidź wynik. Pozostałe przypadki są sprawdzone automatycznie.
 3. Przy każdej niezgodności sprawdź, czy błąd jest w programie, czy w tabeli.
 
 ### Kryterium sukcesu
 
 - Program buduje się jako C++20, a dla danych z wymagań wypisuje dokładnie trzy linijki przykładu A.
-- Dla każdego przypadku z tabeli wynik zgadza się z wymaganiami, po zmianie samych wartości w nawiasach klamrowych.
+- Dla 4–6 wybranych przypadków z tabeli wynik zgadza się z wymaganiami, po zmianie samych wartości w nawiasach klamrowych.
 - Przy remisie program wskazuje pierwsze wystąpienie największego spadku.
 - Żaden indeks w programie nie wychodzi poza zakres, także dla pustego wektora i jednego dnia.
 - Indeksy są typu `std::size_t`, a numery dni wypisywane użytkownikowi zaczynają się od 1.
@@ -472,6 +472,8 @@ int main() {
 }
 ```
 
+Program nie wypisuje pytań: wpisz liczby po kolei, każdą w osobnej linijce.
+
 1. **Przewidź** wynik dla danych A, `6`, `8`, `5`, `7`, `1`, `0`, `3`, z jednym największym spadkiem.
 2. Uruchom program z tymi danymi i sprawdź, że wynik wygląda poprawnie.
 3. Przeanalizuj dane `4`, `7`, `1`, `7`, `1`, z dwoma równymi największymi spadkami. Który spadek powinien wskazać program?
@@ -489,7 +491,7 @@ Wyniki programu przed poprawką i poprawiony program są w części [Przykładow
 | Co widzisz | Co to znaczy | Co zrobić |
 |---|---|---|
 | `cannot be narrowed from type ... to 'int'` | Wynik `size()` trafia do zmiennej `int` z `{}` (punkt 5). | Użyj `std::size_t`. |
-| `comparison of integers of different signs` | Indeks `int` jest porównywany z `size()`. | Zadeklaruj indeks jako `std::size_t`. |
+| `comparison of integers of different signs` | Indeks `int` jest porównywany z `size()` (punkt 5). To ostrzeżenie pojawia się tylko przy włączonych dodatkowych ostrzeżeniach, a budowanie zatrzymuje dopiero ustawienie, które traktuje ostrzeżenia jak błędy. | Zadeklaruj indeks jako `std::size_t`. |
 | Błąd kompilacji przy `std::size_t` | Brakuje `#include <cstddef>` albo w nazwie jest literówka. Na niektórych systemach program zbuduje się i bez `<cstddef>`, ale na innych nie. | Dopisz `#include <cstddef>`. |
 | Numery dni są o jeden za małe, na przykład `From day 2 to day 3` zamiast `From day 3 to day 4` | Program wypisuje indeksy zamiast numerów dni. | Numer dnia to indeks + 1. Sprawdź, który indeks zapamiętujesz: bieżący czy poprzedni. |
 | Spadek wychodzi ujemny albo w miejscu wzrostu | Odejmowanie w odwrotnej kolejności. | Spadek to temperatura wcześniejszego dnia minus temperatura następnego. |

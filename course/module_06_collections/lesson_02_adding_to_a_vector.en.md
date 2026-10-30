@@ -443,12 +443,12 @@ A program that prints an average of 5 here computes it with integer division.
 
 **Before you write the program**, prepare a table of test cases: zero reports, one time of 0, one time of 20, an average with a fractional part, all zeros, a time equal to the average, times skipped before a valid one, between valid ones and after them, only skipped times, report counts of -1 and 7, text instead of the report count and instead of a time, and data that ends after the report count or after a few times. For each case, write down the expected standard output.
 
-Analyse the cases where the data ends early on paper, instead of running them, and compare them with the full list of check cases.
+Run the program for examples A, B and C and for 4–6 cases of your choice from the table. Analyse the cases where the data ends early on paper, instead of running them, and compare them with the full list of check cases. All the cases of the full check list are checked automatically.
 
 ### Success criteria
 
 - The program builds as C++20, and its standard output for examples A, B and C is exactly as above.
-- For every case in the table that can be typed, the standard output matches the requirements. The cases where the data ends early match your trace table.
+- For 4–6 cases of your choice from the table that can be typed, the standard output matches the requirements. The cases where the data ends early match your trace table.
 - The vector holds only allowed times, in the order of the reports. A skipped time never goes into it.
 - The program doesn't compute an average when the vector is empty, and doesn't compute it with integer division.
 - After a failed read, the program doesn't ask about further reports and doesn't print a summary.
