@@ -508,7 +508,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji tekst w rekordzie był jednym słowem. W kolejnej lekcji rekord będzie zawierał tekst ze spacjami obok liczb, więc program połączy `>>` z `std::getline`. Lekcja 10.2 jest w przygotowaniu.
+W tej lekcji tekst w rekordzie był jednym słowem. W kolejnej lekcji rekord będzie zawierał tekst ze spacjami obok liczb, więc program połączy `>>` z `std::getline`. Przejdź do lekcji [10.2: Nazwy ze spacjami: `>>` i `std::getline`](lesson_02_names_with_spaces.md).
 
 ---
 
@@ -844,4 +844,4 @@ Input error
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 9.5: Flota dronów dostawczych (sprawdzian Modułu 9)](../module_09_mutable_references/lesson_05_drone_fleet.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 9.5: Flota dronów dostawczych (sprawdzian Modułu 9)](../module_09_mutable_references/lesson_05_drone_fleet.md) · **Następna lekcja:** [Lekcja 10.2: Nazwy ze spacjami: `>>` i `std::getline`](lesson_02_names_with_spaces.md) · [Opis kursu](../../README.md)

@@ -508,7 +508,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson the text in the record was a single word. In the next lesson a record will contain text with spaces next to numbers, so the program will combine `>>` with `std::getline`. Lesson 10.2 is in preparation.
+In this lesson the text in the record was a single word. In the next lesson a record will contain text with spaces next to numbers, so the program will combine `>>` with `std::getline`. Go on to lesson [10.2: Names with spaces: `>>` and `std::getline`](lesson_02_names_with_spaces.en.md).
 
 ---
 
@@ -844,4 +844,4 @@ Input error
 
 </details>
 
-**Previous lesson:** [Lesson 9.5: A delivery drone fleet (the Module 9 test)](../module_09_mutable_references/lesson_05_drone_fleet.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 9.5: A delivery drone fleet (the Module 9 test)](../module_09_mutable_references/lesson_05_drone_fleet.en.md) · **Next lesson:** [Lesson 10.2: Names with spaces: `>>` and `std::getline`](lesson_02_names_with_spaces.en.md) · [Course overview](../../README.en.md)
