@@ -1334,6 +1334,6 @@ Po pięciu lekcjach potrafisz:
 
 ## Co dalej
 
-To ostatnia lekcja Modułu 9. Kolejne moduły kursu są w przygotowaniu.
+W Module 10, „Rekordy z danych wejściowych”, programy zaczną budować rekordy z danych odczytanych z wejścia. Zacznij od pierwszej lekcji: [Lekcja 10.1: Jeden rekord z danych wejściowych](../module_10_input_records/lesson_01_one_record_from_input.md).
 
-**Poprzednia lekcja:** [Lekcja 9.4: Znajdź rekord i zmień właściwy obiekt](lesson_04_find_a_record_and_change_it.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 9.4: Znajdź rekord i zmień właściwy obiekt](lesson_04_find_a_record_and_change_it.md) · **Następna lekcja:** [Lekcja 10.1: Jeden rekord z danych wejściowych](../module_10_input_records/lesson_01_one_record_from_input.md) · [Opis kursu](../../README.md)
