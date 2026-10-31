@@ -611,7 +611,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji program odczytywał dokładnie dwa rekordy, każdy do osobnych zmiennych. W kolejnej lekcji rekordy odczytane z wejścia trafią do wektora przez `push_back`. Lekcja 10.3 jest w przygotowaniu.
+W tej lekcji program odczytywał dokładnie dwa rekordy, każdy do osobnych zmiennych. W kolejnej lekcji rekordy odczytane z wejścia trafią do wektora przez `push_back`. Przejdź do lekcji [10.3: Budowanie wektora rekordów z danych wejściowych](lesson_03_building_a_vector_of_records.md).
 
 ---
 
@@ -1054,4 +1054,4 @@ Total boxes: 11
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 10.1: Jeden rekord z danych wejściowych](lesson_01_one_record_from_input.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 10.1: Jeden rekord z danych wejściowych](lesson_01_one_record_from_input.md) · **Następna lekcja:** [Lekcja 10.3: Budowanie wektora rekordów z danych wejściowych](lesson_03_building_a_vector_of_records.md) · [Opis kursu](../../README.md)
