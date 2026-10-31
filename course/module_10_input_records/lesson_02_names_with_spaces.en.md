@@ -611,7 +611,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson the program read exactly two records, each into its own variables. In the next lesson the records read from the input will go into a vector with `push_back`. Lesson 10.3 is in preparation.
+In this lesson the program read exactly two records, each into its own variables. In the next lesson the records read from the input will go into a vector with `push_back`. Go on to lesson [10.3: Building a vector of records from input](lesson_03_building_a_vector_of_records.en.md).
 
 ---
 
@@ -1054,4 +1054,4 @@ Total boxes: 11
 
 </details>
 
-**Previous lesson:** [Lesson 10.1: One record from input](lesson_01_one_record_from_input.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 10.1: One record from input](lesson_01_one_record_from_input.en.md) · **Next lesson:** [Lesson 10.3: Building a vector of records from input](lesson_03_building_a_vector_of_records.en.md) · [Course overview](../../README.en.md)
