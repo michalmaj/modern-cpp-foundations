@@ -712,7 +712,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji liczba rekordów była znana z pierwszej linii danych, a cały odczyt był w `main`. W kolejnej lekcji odczyt jednego rekordu trafi do osobnej funkcji, a program będzie czytać rekordy do końca danych. Lekcja 10.4 jest w przygotowaniu.
+W tej lekcji liczba rekordów była znana z pierwszej linii danych, a cały odczyt był w `main`. W kolejnej lekcji odczyt jednego rekordu trafi do osobnej funkcji, a program będzie czytać rekordy do końca danych. Przejdź do lekcji [10.4: Funkcja odczytująca rekord i zakończenie danych](lesson_04_reading_function_and_end_of_data.md).
 
 ---
 
@@ -1134,4 +1134,4 @@ Total boxes: 0
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 10.2: Nazwy ze spacjami: `>>` i `std::getline`](lesson_02_names_with_spaces.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 10.2: Nazwy ze spacjami: `>>` i `std::getline`](lesson_02_names_with_spaces.md) · **Następna lekcja:** [Lekcja 10.4: Funkcja odczytująca rekord i zakończenie danych](lesson_04_reading_function_and_end_of_data.md) · [Opis kursu](../../README.md)
