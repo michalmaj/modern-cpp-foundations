@@ -712,7 +712,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson the number of records was known from the first line of the data, and all the reading was in `main`. In the next lesson the reading of one record moves into its own function, and the program reads records until the end of the data. Lesson 10.4 is in preparation.
+In this lesson the number of records was known from the first line of the data, and all the reading was in `main`. In the next lesson the reading of one record moves into its own function, and the program reads records until the end of the data. Go on to lesson [10.4: A record-reading function and the ending of the data](lesson_04_reading_function_and_end_of_data.en.md).
 
 ---
 
@@ -1134,4 +1134,4 @@ Total boxes: 0
 
 </details>
 
-**Previous lesson:** [Lesson 10.2: Names with spaces: `>>` and `std::getline`](lesson_02_names_with_spaces.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 10.2: Names with spaces: `>>` and `std::getline`](lesson_02_names_with_spaces.en.md) · **Next lesson:** [Lesson 10.4: A record-reading function and the ending of the data](lesson_04_reading_function_and_end_of_data.en.md) · [Course overview](../../README.en.md)
