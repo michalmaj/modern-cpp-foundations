@@ -149,7 +149,7 @@ Come here **only after doing Part A**, or when you consciously decide to stop tr
 ## How to check your work
 
 - **Standard output:** compare the program's lines with the expected ones, character by character, including the costs in brackets and the order of the drones.
-- **The state after a refusal:** for each refused flight, check that all four fields of the drone are the same as before it. The full list of check cases shows the state of the fleet after each operation.
+- **The state after a refusal:** for each refused flight, check that all four fields of the drone are the same as before it, right after the refusal: a later charge can hide a changed battery, so the `Before` and `After` report alone doesn't prove it. Compare the states in your table of cases with the results of the check program next to the reference solution: it prints the state of the fleet after each operation.
 - **Functions:** does each one have a job that can be described in one sentence? Does the reserve or charging condition also stand in `main`?
 - **The result and the effect:** `accepted` says that the function reported a flight. Whether the real record changed is shown only by `After`.
 

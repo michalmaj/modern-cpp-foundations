@@ -230,7 +230,7 @@ The requests, in this order: `TAB-03`, `MIC-02`, `BAD-99`, `TAB-03` again, and `
 - There's one vector of these records in `main`, initialised in the code in the order of the table. No separate variable for each item, and no `push_back`.
 - **The function for one item** gets an existing record, issues it according to the rules, and returns `bool`: `true` when it issued it, `false` when the item was unavailable.
 - **The function for the collection** gets the existing vector and the code searched for, finds the item with that code, calls the function for one item for it, and returns that function's result. When the code isn't there, it returns `false`. It doesn't repeat the issuing rule.
-- Neither of these functions prints anything or reads anything from the input. You choose their names and parameters.
+- Neither of these functions prints anything or reads anything from the input. You choose their names and parameters. You may add a function that only prints the state of all the items, as long as it gets the vector through `const&`, but it isn't required.
 - `main` prints the number of items (from `size()`) and the state before the requests, then performs each request **exactly once, on the same vector**, prints its result (`accepted` for `true`, `refused` for `false`), and at the end the state after all the requests, exactly as in the example below.
 - The program reads nothing from the input.
 
@@ -469,7 +469,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 <summary>Example answers</summary>
 
 1. Because a request points to one particular record, and the code field identifies it. If two records had the same code, the function would change only the first of them, and the request would be ambiguous. That's why the codes in the data are unique.
-2. `==` checks whether two texts are the same, as in lesson 3.4. The code is only read, so `const std::string&` is enough: the function gets the text for reading, without copying and without the right to change it.
+2. `==` checks whether two texts are the same, as in lesson 3.4. The code is only read, so `const std::string&` is enough: the function gets the text for reading, without the right to change it. It doesn't copy an existing `std::string`, and when the call passes a literal, such as `"TAB-03"`, a `std::string` is created from it for the duration of the call (section 2).
 3. Because the change must concern the item in the vector from `main`. The `&` parameter gives access to that vector, and the `&` loop variable to its elements, as in lesson 9.3. Without either of them, a copy would change.
 4. It ends the whole function call and passes on the result, not just one pass of the loop. The further elements are no longer checked.
 5. Because the current record not matching tells only that the one searched for is elsewhere or missing. Only after checking all the records is it known that the code isn't there.
