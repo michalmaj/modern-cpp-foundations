@@ -230,7 +230,7 @@ Szkolna wypożyczalnia przechowuje egzemplarze sprzętu w jednym wektorze. Każd
 - W `main` jest jeden wektor tych rekordów, zainicjalizowany w kodzie w kolejności z tabeli. Bez osobnych zmiennych na każdy egzemplarz i bez `push_back`.
 - **Funkcja dla jednego egzemplarza** dostaje istniejący rekord, wydaje go według reguł i zwraca `bool`: `true`, gdy go wydała, `false`, gdy egzemplarz był niedostępny.
 - **Funkcja dla kolekcji** dostaje istniejący wektor i szukany kod, znajduje egzemplarz o tym kodzie, wywołuje dla niego funkcję dla jednego egzemplarza i zwraca jej wynik. Gdy kodu nie ma, zwraca `false`. Nie powtarza reguły wydania.
-- Żadna z tych funkcji niczego nie wypisuje ani nie odczytuje z wejścia. Ich nazwy i parametry wybierasz samodzielnie.
+- Żadna z tych funkcji niczego nie wypisuje ani nie odczytuje z wejścia. Ich nazwy i parametry wybierasz samodzielnie. Możesz dodać funkcję, która tylko wypisuje stan wszystkich egzemplarzy, jeśli dostaje wektor przez `const&`, ale nie jest ona wymagana.
 - `main` wypisuje liczbę egzemplarzy (z `size()`) i stan przed żądaniami, potem wykonuje każde żądanie **dokładnie raz, na tym samym wektorze**, wypisuje jego wynik (`accepted` dla `true`, `refused` dla `false`), a na końcu stan po wszystkich żądaniach, dokładnie jak w przykładzie niżej.
 - Program nie odczytuje niczego z wejścia.
 
@@ -469,7 +469,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 <summary>Przykładowe odpowiedzi</summary>
 
 1. Bo żądanie wskazuje jeden konkretny rekord, a pole kodu go identyfikuje. Gdyby dwa rekordy miały ten sam kod, funkcja zmieniłaby tylko pierwszy z nich, a żądanie byłoby niejednoznaczne. Dlatego w danych kody są unikalne.
-2. `==` sprawdza, czy dwa teksty są takie same, jak w lekcji 3.4. Kod jest tylko czytany, więc wystarcza `const std::string&`: funkcja dostaje tekst do odczytu, bez kopiowania i bez prawa do zmiany.
+2. `==` sprawdza, czy dwa teksty są takie same, jak w lekcji 3.4. Kod jest tylko czytany, więc wystarcza `const std::string&`: funkcja dostaje tekst do odczytu, bez prawa do zmiany. Istniejącego `std::string` nie kopiuje, a gdy w wywołaniu stoi literał, jak `"TAB-03"`, na czas wywołania powstaje z niego `std::string` (punkt 2).
 3. Bo zmiana musi dotyczyć egzemplarza w wektorze z `main`. Parametr `&` daje dostęp do tego wektora, a zmienna pętli `&` do jego elementów, jak w lekcji 9.3. Bez któregokolwiek z nich zmieniałaby się kopia.
 4. Kończy całe wywołanie funkcji i przekazuje wynik, a nie tylko jeden przebieg pętli. Dalsze elementy nie są już przeglądane.
 5. Bo niepasujący bieżący rekord mówi tylko tyle, że szukany jest gdzie indziej albo go nie ma. Dopiero po przejrzeniu wszystkich rekordów wiadomo, że kodu nie ma.

@@ -149,7 +149,7 @@ Przejdź tutaj **dopiero po wykonaniu części A** albo wtedy, gdy świadomie zr
 ## Jak sprawdzić swoją pracę
 
 - **Standardowe wyjście:** porównaj linijki programu z oczekiwanymi, znak po znaku, także koszty w nawiasach i kolejność dronów.
-- **Stan po odmowie:** dla każdego odrzuconego lotu sprawdź, że wszystkie cztery pola drona są takie same jak przed nim. Pełna lista kontrolna pokazuje stan floty po każdej operacji.
+- **Stan po odmowie:** dla każdego odrzuconego lotu sprawdź, że wszystkie cztery pola drona są takie same jak przed nim, i to od razu po odmowie: późniejsze ładowanie może ukryć zmienioną baterię, więc sam raport `Before` i `After` tego nie dowodzi. Stany zapisane w tabeli przypadków porównaj z wynikami programu kontrolnego przy rozwiązaniu referencyjnym: wypisuje on stan floty po każdej operacji.
 - **Funkcje:** czy każda ma zadanie, które da się opisać jednym zdaniem? Czy warunek rezerwy albo ładowania stoi też w `main`?
 - **Wynik a skutek:** `accepted` mówi, że funkcja zgłosiła lot. Czy zmienił się prawdziwy rekord, pokazuje dopiero `After`.
 
@@ -197,7 +197,7 @@ Każdy dron jest zapisany jako identyfikator, bateria, liczba lotów i uziemieni
 | J | P-01 80 0 no, P-02 80 0 no, P-03 80 0 no | lot P-03 10, P-02 20, P-01 30 | accepted, accepted, accepted | dopasowanie na ostatniej, środkowej i pierwszej pozycji |
 | K | R-01 60 0 no | lot R-01 30, R-01 20, ładowanie, R-01 20 | accepted, refused, 1, accepted | dwa loty jednego drona; odmowa, potem przyjęcie po ładowaniu |
 | L | F-01 100 0 no, F-02 100 3 yes | ładowanie, ładowanie | 0, 0 | wszystkie baterie pełne |
-| M | L-01 10 0 no, L-02 99 1 yes, L-03 0 2 no | ładowanie, ładowanie | 3, 0 | żadna bateria niepełna; ponowne ładowanie |
+| M | L-01 10 0 no, L-02 99 1 yes, L-03 0 2 no | ładowanie, ładowanie | 3, 0 | przed pierwszym ładowaniem wszystkie trzy baterie są niepełne; ponowne ładowanie |
 
 We wszystkich przypadkach identyfikatory, liczba dronów i ich kolejność się nie zmieniają. Odrzucony lot nie zmienia żadnego pola, a ładowanie zmienia tylko baterię.
 
