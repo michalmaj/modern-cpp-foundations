@@ -2,7 +2,7 @@
 
 [Polski](lesson_03_functions_that_analyse_a_record.md) · **English** · [Course overview](../../README.en.md)
 
-> **Module 8, lesson 3** · about 65–80 minutes
+> **Module 8, lesson 3** · about 70–85 minutes
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project, as before. You won't need the debugger in this lesson.
 > **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS. None of them asks for data: every value is written in the code. Only the check program in the solutions part reads data from the input.
 

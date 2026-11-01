@@ -2,7 +2,7 @@
 
 **Polski** · [English](lesson_06_race_results.en.md) · [Opis kursu](../../README.md)
 
-> **Moduł 8, lekcja 6: sprawdzian** · około 100–115 minut, w dwóch podejściach
+> **Moduł 8, lekcja 6: sprawdzian** · około 105–125 minut, w dwóch podejściach
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`.
 > **Wersja pilotażowa.** Rozwiązania referencyjne z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS. Twojej pracy nic nie ocenia automatycznie: sprawdzasz ją samodzielnie, według kryteriów. Twój program nie pyta o dane: wszystkie wartości są zapisane w kodzie. Dane z wejścia odczytuje tylko program kontrolny z części B.
 
@@ -188,7 +188,7 @@ Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5. Przed
 Wykonaj to zadanie **po zadaniu 1**: oba problemy dotyczą funkcji podobnych do Twoich.
 
 <details>
-<summary>Diagnostyka A: najlepszy czas zaczyna się od zera</summary>
+<summary>Diagnostyka A: najlepszy czas zaczyna się od zera (otwórz dopiero po zadaniu 1)</summary>
 
 W `cpp-workspace` utwórz katalog `diagnosis_8`, skopiuj do niego `main.cpp` i `CMakeLists.txt` z oryginalnego `lesson_05_first_program` i umieść w `main.cpp` program poniżej: możesz go przepisać albo skopiować. Wymagania są takie same jak w zadaniu 1.
 
@@ -281,7 +281,7 @@ int main() {
 </details>
 
 <details>
-<summary>Diagnostyka B: zmiana rekordu przez <code>const&amp;</code></summary>
+<summary>Diagnostyka B: zmiana rekordu przez <code>const&amp;</code> (otwórz dopiero po zadaniu 1)</summary>
 
 Ten fragment **tylko analizujesz na papierze**: nie uruchamiaj go. Ta wersja funkcji kwalifikującej miała sprawić, żeby osoba bez ukończonego biegu nigdy nie mieściła się w limicie. Dopisano do niej zmianę czasu:
 

@@ -2,7 +2,7 @@
 
 **Polski** · [English](lesson_01_first_struct.en.md) · [Opis kursu](../../README.md)
 
-> **Moduł 8, lekcja 1** · około 60–75 minut
+> **Moduł 8, lekcja 1** · około 65–80 minut
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`, jak dotąd. Debugger nie jest w tej lekcji potrzebny.
 > **Wersja pilotażowa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS. Żaden z nich nie pyta o dane: wszystkie wartości są zapisane w kodzie. Dane z wejścia odczytuje tylko program kontrolny w części z rozwiązaniami.
 
@@ -194,7 +194,7 @@ Pages to read: 180
 - **Nazwa przed kropką wybiera obiekt.** `first.pages` to liczba stron pierwszej książki, a `second.pages` drugiej.
 - Do sumy trafiają tylko strony książki, której własne pole `finished` daje `false` (`!` z lekcji 3.4, `+=` z lekcji 4.2). Każdy warunek sprawdza pole tego samego obiektu, z którego program bierze strony.
 
-**Zmień:** w klamrach obiektu `second` zamień `true` na `false` i przewidź nowy wynik, zanim uruchomisz program. Zmieniasz dane tylko drugiej książki: pierwsza zostaje taka sama.
+**Przewidź:** jaki będzie wynik, gdy w klamrach obiektu `second` zamienisz `true` na `false`? Zmieniasz wtedy dane tylko drugiej książki: pierwsza zostaje taka sama. Jeśli chcesz, sprawdź przewidywanie, uruchamiając program.
 
 ## 6. Typ, obiekt i pole
 
@@ -205,7 +205,9 @@ Pages to read: 180
 | `pages` | nazwa pola zadeklarowanego w typie | `int pages;` |
 | `first.pages` | pole konkretnego obiektu | `180` |
 
-Samo `pages`, bez obiektu, nic nie znaczy: każda książka ma własne `pages`, więc zawsze trzeba wskazać, której książki dotyczy. Konkretny obiekt danego typu bywa też nazywany **instancją** tego typu. W tym kursie mówimy po prostu „obiekt”.
+Samo `pages`, bez obiektu, nic nie znaczy: każda książka ma własne `pages`, więc zawsze trzeba wskazać, której książki dotyczy. Konkretny obiekt danego typu bywa też nazywany **instancją** tego typu. Zamiast „instancja” mówimy „obiekt”.
+
+W tym kursie **rekord** to obiekt, który przechowuje kilka powiązanych informacji, na przykład tytuł, liczbę stron i stan przeczytania jednej książki. Typ takiego obiektu możemy zdefiniować przez `struct`. „Rekord” nie jest słowem kluczowym C++. Definicja `struct Book` opisuje, z czego składa się każda książka, ale nie tworzy żadnego rekordu. Rekordem jest konkretny obiekt, na przykład `book` utworzony przez `const Book book{"C++ Basics", 180, false};`, a `book.pages` to jedno z jego pól.
 
 ## 7. Znajdź błąd: brakujący średnik
 
@@ -287,7 +289,7 @@ int main() {
 4. Dlaczego kompilator nie zgłasza żadnego błędu?
 5. Zmień wartości `available_seats` i `registered_people` tak, żeby pomyłka stała się widoczna w wyniku. Najpierw zapisz, jaki wynik byłby poprawny dla Twoich danych, a potem uruchom program.
 6. Popraw kolejność wartości przy tworzeniu obiektu.
-7. Uruchom poprawiony program dla swoich danych i dla 30 i 30.
+7. Uruchom poprawiony program dla swoich danych. Przewidź, co wypisze dla 30 i 30.
 
 Wyniki, przykładowe dane i poprawiony program są w części [Przykładowe rozwiązania](#przykładowe-rozwiązania).
 
