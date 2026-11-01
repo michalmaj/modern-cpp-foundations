@@ -696,7 +696,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W lekcji 10.5, sprawdzianie Modułu 10, samodzielnie połączysz to, czego nauczył Cię ten moduł. Lekcja 10.5 jest w przygotowaniu.
+W lekcji 10.5, sprawdzianie Modułu 10, samodzielnie połączysz to, czego nauczył Cię ten moduł. Przejdź do lekcji [10.5: Zapisy na warsztaty (sprawdzian Modułu 10)](lesson_05_workshop_registrations.md).
 
 ---
 
@@ -1172,4 +1172,4 @@ Result: Old Place, 9
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 10.3: Budowanie wektora rekordów z danych wejściowych](lesson_03_building_a_vector_of_records.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 10.3: Budowanie wektora rekordów z danych wejściowych](lesson_03_building_a_vector_of_records.md) · **Następna lekcja:** [Lekcja 10.5: Zapisy na warsztaty (sprawdzian Modułu 10)](lesson_05_workshop_registrations.md) · [Opis kursu](../../README.md)

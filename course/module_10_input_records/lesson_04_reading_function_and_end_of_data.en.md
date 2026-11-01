@@ -696,7 +696,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In lesson 10.5, the Module 10 test, you'll bring together on your own what this module has taught you. Lesson 10.5 is in preparation.
+In lesson 10.5, the Module 10 test, you'll bring together on your own what this module has taught you. Go on to lesson [10.5: Workshop registrations (the Module 10 test)](lesson_05_workshop_registrations.en.md).
 
 ---
 
@@ -1172,4 +1172,4 @@ Result: Old Place, 9
 
 </details>
 
-**Previous lesson:** [Lesson 10.3: Building a vector of records from input](lesson_03_building_a_vector_of_records.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 10.3: Building a vector of records from input](lesson_03_building_a_vector_of_records.en.md) · **Next lesson:** [Lesson 10.5: Workshop registrations (the Module 10 test)](lesson_05_workshop_registrations.en.md) · [Course overview](../../README.en.md)
