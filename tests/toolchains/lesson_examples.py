@@ -26,6 +26,20 @@ Lessons mark their code blocks with HTML comments, which GitHub does not show:
                                         per platform, so REGEX may list alternatives);
     <!-- fragment -->                   the next ```cpp block is deliberately incomplete: not built.
 
+A program in several files has, besides its example or broken block (its main.cpp), at least one file block and
+exactly one cmake block with the same NAME, anywhere in the lesson:
+
+    <!-- file: NAME PATH -->            the next ```cpp block is the file PATH of program NAME: a lowercase name
+                                        of at most 24 characters ending in .cpp or .hpp, with no folders;
+    <!-- cmake: NAME -->                the next ```cmake block is the CMakeLists.txt of program NAME: the lesson 0.5
+                                        file with only the sources of add_executable(first_program ...) changed,
+                                        on one line, main.cpp included; an example lists all of its .cpp files.
+                                        Its quoted #include lines must name its .hpp files exactly (comments are
+                                        skipped), and #if, #ifdef and #ifndef aren't allowed. It is built one job at
+                                        a time. A broken program in several files can only be stage=link: then every
+                                        listed source must compile, only the link step of first_program may fail,
+                                        and REGEX must match that step's output.
+
 Checks:
   * every ```cpp block in a lesson is marked (Module 0 lessons predate the markers and are
     skipped unless marked; their project is checked by the other steps of the workflow);
@@ -69,10 +83,22 @@ import tempfile
 import threading
 import time
 
-MARKER = re.compile(r'^<!-- (?:(example|output|input|broken): ([a-z0-9_]+)(.*?)|(fragment)) -->$')
+MARKER = re.compile(r'^<!-- (?:(example|output|input|broken|file|cmake): ([a-z0-9_]+)(.*?)|(fragment)) -->$')
 SOURCE = re.compile(r'^(?: source=(\S+))?(?: exit=(\d+))?$')
 BROKEN = re.compile(r'^(?: stage=(link))?(?: at=(\d+)(?::(\d+))?)?(?: errors=(\d+))? error=(.+)$')
+FILE = re.compile(r'^ (\S+)$')
 FENCE = re.compile(r'^```(\S*)$')
+# The file name of a file block: lowercase, a letter first, .cpp or .hpp, at most 24 characters, no folders.
+FILE_NAME = re.compile(r'^[a-z][a-z0-9_]{0,19}\.(?:cpp|hpp)$')
+# Device names that Windows reserves, even with an extension.
+WINDOWS_DEVICES = {'con', 'prn', 'aux', 'nul', *(f'com{n}' for n in range(1, 10)), *(f'lpt{n}' for n in range(1, 10))}
+ADD_EXECUTABLE = re.compile(r'^add_executable\(first_program((?: [^ ()]+)+)\)$')
+DIRECTIVE = re.compile(r'^\s*#\s*([a-z_]+)')
+INCLUDE = re.compile(r'^#include (?:<[^<>]+>|"([^"]*)")$')
+CONDITIONALS = {'if', 'ifdef', 'ifndef', 'elif', 'elifdef', 'elifndef', 'else', 'endif'}
+# A failed Ninja step: "FAILED: [code=1] OUTPUT ..." (Ninja 1.12 and newer) or "FAILED: OUTPUT ..." (older).
+FAILED_STEP = re.compile(r'^FAILED: (?:\[code=\d+\] )?(\S+)')
+STEP_START = re.compile(r'^(?:\[\d+/\d+\] |FAILED: |ninja: )')
 # A compiler error in main.cpp: GNU style (main.cpp:4:35: error: ...) or MSVC style (main.cpp(4,35): error: ...).
 ERROR = re.compile(r'main\.cpp(?::(\d+):(\d+):|\((\d+),(\d+)\):) error: (.*)')
 PROJECT = pathlib.Path('course/module_00_tooling/lesson_05_first_program/CMakeLists.txt')
@@ -104,12 +130,12 @@ def blocks(path):
                 fail(f'{path}:{marker[3]}: marker not followed by a code block')
             kind = match[1] or match[4]
             attributes = match[3] or ''
-            pattern = BROKEN if kind == 'broken' else SOURCE if kind == 'example' else re.compile('^$')
+            pattern = BROKEN if kind == 'broken' else SOURCE if kind == 'example' else FILE if kind == 'file' else re.compile('^$')
             parsed = pattern.match(attributes)
             # A compile-stage broken program needs at=; a link-stage one has no line in main.cpp to point to,
             # and no compile errors to count, so it takes neither at= nor errors=.
             if not parsed or (kind == 'broken' and (bool(parsed[1]) == bool(parsed[2]) or (parsed[1] and parsed[4]))):
-                fail(f'{path}:{i + 1}: cannot read the {kind} marker: {line}')
+                fail(f'{path}:{i + 1}: cannot read the {kind} marker{unsupported(kind, attributes)}: {line}')
                 kind = 'unreadable'
             marker = (kind, match[2], attributes, i + 1)
         elif fence:
@@ -123,7 +149,7 @@ def blocks(path):
                 pass  # already reported: its block is neither built nor compared
             elif marker:
                 kind, name, attributes = marker[:3]
-                expected = 'text' if kind in ('output', 'input') else 'cpp'
+                expected = 'text' if kind in ('output', 'input') else 'cmake' if kind == 'cmake' else 'cpp'
                 if language != expected:
                     fail(f'{path}:{start}: {kind} marker on a ```{language} block, expected ```{expected}')
                 found.append((kind, name, attributes, language, text, start))
@@ -135,6 +161,20 @@ def blocks(path):
             marker = None
         i += 1
     return found, unmarked
+
+
+def unsupported(kind, attributes):
+    """Why a broken marker that can't be read asks for something this check doesn't support, or ''.
+    Only the part before error= counts: the regular expression after it may contain anything."""
+    if kind != 'broken':
+        return ''
+    head = attributes.split(' error=', 1)[0]
+    if re.search(r'(?:^| )in=', head):
+        return ' (in= is not supported yet: a compile error located in another file of a program is not checked)'
+    stage = re.search(r'(?:^| )stage=(\S+)', head)
+    if stage and stage[1] != 'link':
+        return f' (stage={stage[1]} is not supported: a broken program can only fail to compile or, with stage=link, to link)'
+    return ''
 
 
 def check_lesson(path, found):
@@ -185,18 +225,245 @@ def check_lesson(path, found):
     return examples, runs, broken
 
 
+def check_projects(path, found, examples, broken):
+    """Checks the file and cmake blocks of the programs in several files, before anything is built.
+    Returns {NAME: (its other files {file name: text}, its CMakeLists.txt)} for the programs that may be built,
+    and the set of names that must not be built. A program without file and cmake blocks is in neither."""
+    files, cmakes, refused = {}, {}, set()
+    for kind, name, attributes, language, text, line in found:
+        if kind not in ('file', 'cmake'):
+            continue
+        label = f'file {attributes.strip()} of {name}' if kind == 'file' else f'cmake block of {name}'
+        if name not in examples and name not in broken:
+            fail(f'{path}:{line}: {label} has no program: no example or broken block {name} in this lesson')
+            continue
+        if language != ('cmake' if kind == 'cmake' else 'cpp'):
+            refused.add(name)  # the fence is already reported
+        if kind == 'cmake':
+            if name in cmakes:
+                fail(f'{path}:{line}: {label} defined twice')
+                refused.add(name)
+            cmakes.setdefault(name, text)
+            continue
+        file_name = attributes.strip()
+        problem = file_name_problem(file_name)
+        if problem:
+            fail(f'{path}:{line}: {label}: {problem}')
+            refused.add(name)
+        elif file_name in files.setdefault(name, {}):
+            fail(f'{path}:{line}: {label} defined twice')
+            refused.add(name)
+        else:
+            files[name][file_name] = text
+    projects = {}
+    for name in sorted(set(files) | set(cmakes)):
+        program_files = files.get(name, {})
+        problems = []
+        if name not in cmakes:
+            problems.append('it has file blocks but no cmake block (a program in several files has exactly one)')
+        else:
+            problems += cmake_problems(cmakes[name], program_files, name in examples)
+        if not program_files:
+            problems.append('it has a cmake block but no file blocks '
+                            '(show the CMakeLists.txt of a one-file program as an unmarked block)')
+        if name in broken and broken[name][1][1] != 'link':
+            problems.append('a compile error in a program of several files is not supported yet: '
+                            'a broken program in several files can only be stage=link')
+        code = examples[name][0] if name in examples else broken[name][0]
+        problems += include_problems(code, program_files)
+        for problem in problems:
+            fail(f'{path}: program {name}: {problem}')
+        if problems or name in refused:
+            refused.add(name)
+        else:
+            projects[name] = (program_files, cmakes[name])
+    return projects, refused
+
+
+def file_name_problem(file_name):
+    """What is wrong with the file name of a file block, or None."""
+    if file_name == 'main.cpp':
+        return "main.cpp is the program's own block (its example or broken block), not a file block"
+    if not FILE_NAME.match(file_name):
+        return ('not a valid file name: lowercase letters, digits and _, starting with a letter, '
+                'ending in .cpp or .hpp, at most 24 characters, no folders')
+    if file_name.split('.')[0] in WINDOWS_DEVICES:
+        return 'a reserved name on Windows'
+    return None
+
+
+def cmake_problems(text, files, is_example):
+    """What is wrong with the CMakeLists.txt of a program in several files: it must be the lesson 0.5 file with only
+    the sources of add_executable(first_program ...) changed. No CMake code is interpreted."""
+    template = PROJECT.read_text(encoding='utf-8').splitlines()
+    at = next(i for i, line in enumerate(template) if line.startswith('add_executable('))
+    lines = text.splitlines()
+    if any(line.startswith('add_executable(') and not line.endswith(')') for line in lines):
+        return ['add_executable must list its sources on one line']
+    if len(lines) != len(template) or any(line != model for i, (line, model) in enumerate(zip(lines, template)) if i != at):
+        return ['the cmake block differs from the lesson 0.5 CMakeLists.txt outside add_executable']
+    command = ADD_EXECUTABLE.match(lines[at])
+    if not command:
+        return ['the cmake block must have add_executable(first_program SOURCES) on one line, '
+                'with the sources separated by single spaces']
+    sources = command[1].split()
+    names = {name.lower(): name for name in ['main.cpp', *files]}
+    problems = []
+    for number, source in enumerate(sources):
+        if source in sources[:number]:
+            problems.append(f'add_executable lists {source} twice')
+        elif source.endswith('.hpp'):
+            problems.append(f'add_executable lists the header {source}: headers are not listed in add_executable')
+        elif source == 'main.cpp' or (source in files and source.endswith('.cpp')):
+            continue
+        elif source.lower() in names:
+            problems.append(f'add_executable lists {source}, which differs in case from {names[source.lower()]}')
+        else:
+            problems.append(f'add_executable lists {source}, which is not a .cpp file of the program '
+                            '(CMake would stop at configuration, and stage=configure is not supported)')
+    if 'main.cpp' not in sources:
+        problems.append('add_executable must list main.cpp')
+    if is_example:
+        for name in files:
+            if name.endswith('.cpp') and name not in sources:
+                problems.append(f'{name} is not in add_executable (an example lists all of its .cpp files; '
+                                'leaving one out is allowed only in a broken stage=link program)')
+    return problems
+
+
+def include_problems(code, files):
+    """What is wrong with the preprocessor directives of a program in several files. Comments are skipped.
+    Conditional directives are refused rather than interpreted, so every #include found is a real one."""
+    names = {name.lower(): name for name in ['main.cpp', *files]}
+    problems = []
+    for file_name, text in [('main.cpp', code), *files.items()]:
+        for number, line in enumerate(active_lines(text), 1):
+            directive = DIRECTIVE.match(line)
+            if not directive:
+                continue
+            where = f'{file_name}:{number}'
+            if directive[1] in CONDITIONALS:
+                problems.append(f'{where}: #{directive[1]}: conditional preprocessor directives are not supported '
+                                'in programs of several files (a header uses #pragma once)')
+            elif directive[1] == 'include':
+                problem = include_problem(line, files, names)
+                if problem:
+                    problems.append(f'{where}: {problem}')
+    return problems
+
+
+def include_problem(line, files, names):
+    """What is wrong with one #include LINE of a program in several files, or None. NAMES maps the lowercase name
+    of every file of the program to its real name."""
+    unsupported_form = (f'unsupported #include form: {line.strip()} '
+                        '(use #include <...>, or #include "name.hpp" for a header of the program)')
+    form = INCLUDE.match(line.rstrip())
+    if not form:
+        return unsupported_form
+    header = form[1]
+    if header is None or (header in files and header.endswith('.hpp')):
+        return None
+    real = names.get(header.lower())
+    if real and real != header and real.endswith('.hpp'):
+        return f'#include "{header}" differs in case from {real}'
+    if not (FILE_NAME.match(header) and header.endswith('.hpp')):
+        return unsupported_form
+    return f'#include "{header}" is not a file of the program (a missing header can\'t be checked yet)'
+
+
+def active_lines(code):
+    """CODE's lines without comments: // to the end of the line, and /* ... */ across lines. String and character
+    literals are kept whole, so that a // or /* inside them starts nothing. Not a C++ preprocessor: just enough
+    to find the directives outside comments."""
+    lines, current, i, in_comment = [], [], 0, False
+    while i < len(code):
+        pair, char = code[i:i + 2], code[i]
+        if in_comment:
+            if pair == '*/':
+                in_comment, i = False, i + 2
+                continue
+            if char == '\n':
+                lines.append(''.join(current))
+                current = []
+            i += 1
+        elif pair == '//':
+            end = code.find('\n', i)
+            i = len(code) if end < 0 else end
+        elif pair == '/*':
+            current.append(' ')
+            in_comment, i = True, i + 2
+        elif char == '"' or (char == "'" and not ''.join(current)[-1:].isalnum()):
+            end = i + 1
+            while end < len(code) and code[end] not in (char, '\n'):
+                end += 2 if code[end] == '\\' else 1
+            current.append(code[i:end + 1])
+            i = end + 1
+        elif char == '\n':
+            lines.append(''.join(current))
+            current = []
+            i += 1
+        else:
+            current.append(char)
+            i += 1
+    lines.append(''.join(current))
+    return lines
+
+
+def failed_steps(output):
+    """Ninja's failed steps in a build OUTPUT, as (kind, what, the step's own output). The kind is 'scan' or 'compile'
+    of a source (what is its file name), 'link' of the program, or 'other' (what is the step's output file)."""
+    target = re.search(r'add_executable\((\S+)', PROJECT.read_text(encoding='utf-8'))[1]
+    steps, lines = [], None
+    for line in output.splitlines():
+        failed = FAILED_STEP.match(line)
+        if failed:
+            name = failed[1].replace('\\', '/').rsplit('/', 1)[-1]
+            source = re.match(r'^(.+\.cpp)\.(?:o|obj)(\.ddi)?$', name)
+            if source:
+                kind, what = ('scan' if source[2] else 'compile'), source[1]
+            elif name in (target, target + '.exe'):
+                kind, what = 'link', name
+            else:
+                kind, what = 'other', failed[1]
+            lines = []
+            steps.append((kind, what, lines))
+        elif lines is not None and STEP_START.match(line):
+            lines = None
+        elif lines is not None:
+            lines.append(line)
+    return [(kind, what, '\n'.join(text)) for kind, what, text in steps]
+
+
+def step_failure(kind, what):
+    """A failed step in words."""
+    return {'scan': f'{what} failed dependency scanning', 'compile': f'{what} failed to compile',
+            'link': 'the program failed to link'}.get(kind, f'the build step {what} failed')
+
+
 def run(command):
     return subprocess.run(command, capture_output=True, text=True, encoding='utf-8', errors='replace')
 
 
-def build(lesson, name, code, args, flags=WARNINGS):
+def build(lesson, name, code, args, flags=WARNINGS, project=None):
     """Configures and builds a copy of the project with CODE as main.cpp.
+    PROJECT is None for a one-file program (the lesson 0.5 CMakeLists.txt), or, for a program in several files,
+    (its other files {file name: text}, its CMakeLists.txt); such a program is built one job at a time.
     Returns (build directory, build result), or None when configuring failed."""
     work = pathlib.Path('build/lesson-examples') / lesson / name
     shutil.rmtree(work, ignore_errors=True)
     src = work / 'src'
     src.mkdir(parents=True)
-    shutil.copy(PROJECT, src / 'CMakeLists.txt')
+    if project is None:
+        shutil.copy(PROJECT, src / 'CMakeLists.txt')
+    else:
+        files, cmake = project
+        for file_name, text in [*files.items(), ('CMakeLists.txt', cmake)]:
+            target = src / file_name
+            # The names were checked before; this makes sure that nothing is ever written outside src.
+            if target.resolve().parent != src.resolve():
+                fail(f'{lesson}: {name}: {file_name} would be written outside {src}')
+                return None
+            target.write_text(text, encoding='ascii', newline='\n')
     # newline='\n': the same bytes on every system, as in the lesson.
     (src / 'main.cpp').write_text(code, encoding='ascii', newline='\n')
     configure = [args.cmake, '-S', str(src), '-B', str(work / 'build'), '-G', 'Ninja',
@@ -213,7 +480,11 @@ def build(lesson, name, code, args, flags=WARNINGS):
     if not version or int(version[1]) < 22:
         fail(f'{lesson}: {name}: configured with {compiler[1] if compiler else "an unknown compiler"}')
         return None
-    return work / 'build', run([args.cmake, '--build', str(work / 'build')])
+    command = [args.cmake, '--build', str(work / 'build')]
+    if project is not None:
+        # One job at a time: the steps run, and a failed build stops, in the same order on every system.
+        command += ['-j', '1']
+    return work / 'build', run(command)
 
 
 def executable(build_dir):
@@ -281,13 +552,16 @@ def shown(text):
     return f'{text[:SHOWN_LIMIT]!r} and {len(text) - SHOWN_LIMIT} more characters, not shown'
 
 
-def check_example(lesson, name, code, exit_code, runs, args):
-    built = build(lesson, name, code, args)
+def check_example(lesson, name, code, exit_code, runs, args, project=None):
+    built = build(lesson, name, code, args, project=project)
     if not built:
         return
     build_dir, result = built
     if result.returncode != 0:
-        fail(f'{lesson}: example {name}: build failed\n{result.stdout}{result.stderr}')
+        # A program in several files names its first failed step: a source that didn't compile, or the link.
+        steps = failed_steps(result.stdout + result.stderr) if project else []
+        reason = f': {step_failure(*steps[0][:2])}' if steps else ''
+        fail(f'{lesson}: example {name}: build failed{reason}\n{result.stdout}{result.stderr}')
         return
     exe = executable(build_dir)
     # The same program for every run: built once above, never rebuilt between inputs.
@@ -385,6 +659,49 @@ def check_link_failure(lesson, name, build_dir, output, compile_errors, want_err
         print(f'       | {text}')
 
 
+def check_project_link(lesson, name, code, expectation, project, args):
+    """A broken program in several files (only stage=link): every source in add_executable compiled, and then only
+    the link of the program failed, for the expected reason. A failure of any earlier step is rejected."""
+    built = build(lesson, name, code, args, flags='', project=project)
+    if not built:
+        return
+    build_dir, result = built
+    output = result.stdout + result.stderr
+    if result.returncode == 0:
+        fail(f'{lesson}: broken program {name} builds, but the lesson says it must not')
+        return
+    steps = failed_steps(output)
+    sources = ADD_EXECUTABLE.match(next(line for line in project[1].splitlines() if line.startswith('add_executable(')))[1].split()
+    target = re.search(r'add_executable\((\S+)', PROJECT.read_text(encoding='utf-8'))[1]
+    objects = build_dir / 'CMakeFiles' / f'{target}.dir'
+    exe = executable(build_dir)
+    problems = []
+    early = [(kind, what) for kind, what, _ in steps if kind != 'link']
+    if early:
+        problems.append(f'{step_failure(*early[0])}, so the build stopped before linking')
+    elif [kind for kind, _, _ in steps] != ['link']:
+        problems.append('the build failed, but no link step of the program failed')
+    else:
+        link_output = steps[0][2]
+        missing = [source for source in sources
+                   if not (objects / f'{source}.o').exists() and not (objects / f'{source}.obj').exists()]
+        if missing:
+            problems.append(f'no object file for {", ".join(missing)}, so compiling did not succeed')
+        if 'linker command failed' not in link_output:
+            problems.append('the link step failed, but not in the linker ("linker command failed" is missing)')
+        if exe.exists():
+            problems.append(f'the program {exe.name} was created')
+        if not re.search(expectation[5], link_output, re.MULTILINE):
+            problems.append(f"the link step's output has no match for {expectation[5]!r}")
+    if problems:
+        fail(f'{lesson}: broken program {name} (stage=link, several files): ' + '; '.join(problems) + f'\n{output}')
+        return
+    print(f'ok   {lesson}: broken program {name} compiles {", ".join(sources)} and fails to link as described')
+    print('     build output:')
+    for text in output.splitlines():
+        print(f'       | {text}')
+
+
 def check_course(args):
     """Checks every lesson under course/ in the current folder; returns the number of problems."""
     errors.clear()
@@ -410,17 +727,27 @@ def check_course(args):
         else:
             print(f'ok   {len(pl_marked)} marked blocks are identical in {pl.name} and {en.name}')
         examples, runs, broken = check_lesson(pl, pl_blocks)
+        projects, refused = check_projects(pl, pl_blocks, examples, broken)
         if en.exists():
-            check_lesson(en, en_blocks)
+            en_examples, _, en_broken = check_lesson(en, en_blocks)
+            check_projects(en, en_blocks, en_examples, en_broken)
         fragments = sum(1 for block in pl_blocks if block[0] == 'fragment')
         inputs = sum(1 for block in pl_blocks if block[0] == 'input')
         print(f'     {len(examples)} examples to build and run ({inputs} runs with standard input), '
               f'{len(broken)} broken programs that must not compile, '
               f'{fragments} fragments (deliberately incomplete, not built)')
+        if projects or refused:
+            print(f'     {len(projects)} of these programs in several files (file and cmake blocks), '
+                  f'{len(refused)} not built because of the problems above')
+        # Programs without file and cmake blocks take the same path as before.
         for name, (code, exit_code) in examples.items():
-            check_example(pl.stem, name, code, exit_code, runs.get(name, []), args)
+            if name not in refused:
+                check_example(pl.stem, name, code, exit_code, runs.get(name, []), args, projects.get(name))
         for name, (code, expectation) in broken.items():
-            check_broken(pl.stem, name, code, expectation, args)
+            if name in projects:
+                check_project_link(pl.stem, name, code, expectation, projects[name], args)
+            elif name not in refused:
+                check_broken(pl.stem, name, code, expectation, args)
     if checked == 0:
         fail('no lesson contains marked examples')
     print(f'{"PASSED" if not errors else "FAILED"}: {checked} lesson(s), {len(errors)} problem(s)')
@@ -448,6 +775,14 @@ BOTH_STREAMS = ('#include <iostream>\n\nint main() {\n    for (int round{0}; rou
 # Reads numbers until its input ends; it finishes only if the input is closed after the data.
 READ_ALL = ('#include <iostream>\n\nint main() {\n    int value{0};\n    int count{0};\n    while (std::cin >> value) {\n'
             '        count = count + 1;\n    }\n    std::cout << "Values: " << count << "\\n";\n}\n')
+# A program in several files: main.cpp calls twice(), declared in tools.hpp and defined in tools.cpp.
+TWICE_MAIN = ('#include <iostream>\n\n#include "tools.hpp"\n\nint main() {\n    int value{0};\n\n    std::cin >> value;\n'
+              '    std::cout << "Twice: " << twice(value) << "\\n";\n}\n')
+TOOLS_HPP = '#pragma once\n\nint twice(int value);\n'
+TOOLS_CPP = '#include "tools.hpp"\n\nint twice(int value) {\n    return value * 2;\n}\n'
+# twice(int) missing at link time, in the wording of GNU ld, lld-link and Apple's ld (as in lesson 5.6).
+TWICE_LINK = ('broken: twice stage=link error=undefined reference to .twice\\(int\\)\'|undefined symbol: int __cdecl twice\\(int\\)'
+              '|"twice\\(int\\)", referenced from')
 
 
 def lesson(*parts):
@@ -460,6 +795,21 @@ def self_test(args):
     good = [('example: hi', 'cpp', GOOD), ('output: hi', 'text', 'Hi!\n')]
     semicolon = "broken: no_semicolon at=4 errors=1 error=expected ';'"
     link = 'broken: mian stage=link error=undefined reference to .main\'|undefined symbol: main\\b|"_main", referenced from'
+    # Programs in several files: the lesson 0.5 CMakeLists.txt, with tools.cpp added or (template) left out.
+    template = PROJECT.read_text(encoding='utf-8')
+    cmake_two = template.replace('add_executable(first_program main.cpp)', 'add_executable(first_program main.cpp tools.cpp)')
+
+    def program(owner='example: twice', main=TWICE_MAIN, cpp=TOOLS_CPP, cmake=cmake_two, hpp=TOOLS_HPP):
+        """The parts of program twice, with some of them replaced."""
+        return [(owner, 'cpp', main), ('file: twice tools.hpp', 'cpp', hpp), ('file: twice tools.cpp', 'cpp', cpp),
+                ('cmake: twice', 'cmake', cmake)]
+
+    def with_sources(sources):
+        return cmake_two.replace('main.cpp tools.cpp)', f'{sources})')
+
+    twice_runs = [('input: twice', 'text', '4\n'), ('output: twice', 'text', 'Twice: 8\n'),
+                  ('input: twice', 'text', '-3\n'), ('output: twice', 'text', 'Twice: -6\n')]
+    twice = program() + twice_runs
     cases = [
         ('correct examples pass', lesson(*good), None, None),
         ('a wrong expected output is detected',
@@ -550,6 +900,124 @@ def self_test(args):
         ('a long wrong output is detected, in a short message',
          lesson(('example: flood', 'cpp', PRINT_X), ('input: flood', 'text', '50000 0\n'), ('output: flood', 'text', 'x\n')),
          None, 'more characters, not shown'),
+        # Programs in several files, checked before anything is built (no CMake, no compiler).
+        ('a file marker without a file name is reported, and nothing is built',
+         lesson(*program()[:1], ('file: twice', 'cpp', TOOLS_HPP), *program()[2:], *twice_runs), None,
+         'cannot read the file marker'),
+        ('a cmake marker with an attribute is reported, and nothing is built',
+         lesson(*program()[:3], ('cmake: twice extra', 'cmake', cmake_two), *twice_runs), None, 'cannot read the cmake marker'),
+        ('a cmake marker on a text block is reported, and nothing is built',
+         lesson(*program()[:3], ('cmake: twice', 'text', cmake_two), *twice_runs), None,
+         'cmake marker on a ```text block, expected ```cmake'),
+        ('a file block without a program of its name is reported, and nothing is built',
+         lesson(('file: other tools.cpp', 'cpp', TOOLS_CPP)), None, 'file tools.cpp of other has no program'),
+        ('a commented-out #include "missing.hpp" is not a dependency, while an active #include is checked; nothing is built',
+         lesson(*program(main=TWICE_MAIN.replace('#include "tools.hpp"\n', '// #include "missing.hpp"\n/* #include "missing.hpp"\n'
+                                                 '   #include "missing.hpp" */\n#include "Tools.hpp" // twice()\n')), *twice_runs),
+         None, '#include "Tools.hpp" differs in case from tools.hpp'),
+        ('a file block repeated in one program is reported, and nothing is built',
+         lesson(*twice, ('file: twice tools.cpp', 'cpp', TOOLS_CPP)), None, 'file tools.cpp of twice defined twice'),
+        ('a cmake block repeated in one program is reported, and nothing is built',
+         lesson(*twice, ('cmake: twice', 'cmake', cmake_two)), None, 'cmake block of twice defined twice'),
+        ('a file name with ../ is reported, and nothing is built',
+         lesson(*program()[:2], ('file: twice ../tools.cpp', 'cpp', TOOLS_CPP), *program()[3:], *twice_runs), None,
+         'file ../tools.cpp of twice: not a valid file name'),
+        ('a file name with a capital letter is reported, and nothing is built',
+         lesson(*program()[:1], ('file: twice Tools.hpp', 'cpp', TOOLS_HPP), *program()[2:], *twice_runs), None,
+         'file Tools.hpp of twice: not a valid file name'),
+        ('a file name reserved on Windows is reported, and nothing is built',
+         lesson(*program()[:1], ('file: twice con.hpp', 'cpp', TOOLS_HPP), *program()[2:], *twice_runs), None,
+         'file con.hpp of twice: a reserved name on Windows'),
+        ('a file block named main.cpp is reported, and nothing is built',
+         lesson(*twice, ('file: twice main.cpp', 'cpp', TWICE_MAIN)), None, "main.cpp is the program's own block"),
+        ('a file name longer than 24 characters is reported, and nothing is built',
+         lesson(*twice, ('file: twice abcdefghijklmnopqrstu.cpp', 'cpp', TOOLS_CPP)), None,
+         'file abcdefghijklmnopqrstu.cpp of twice: not a valid file name'),
+        ('file blocks without a cmake block are reported, and nothing is built',
+         lesson(*program()[:3], *twice_runs), None, 'it has file blocks but no cmake block'),
+        ('a cmake block without file blocks is reported, and nothing is built',
+         lesson(*good, ('cmake: hi', 'cmake', template)), None, 'it has a cmake block but no file blocks'),
+        ('a cmake block with a changed setting is reported, and nothing is built',
+         lesson(*program(cmake=cmake_two.replace('CXX_EXTENSIONS OFF', 'CXX_EXTENSIONS ON')), *twice_runs), None,
+         'differs from the lesson 0.5 CMakeLists.txt outside add_executable'),
+        ('a cmake block with an added command is reported, and nothing is built',
+         lesson(*program(cmake=cmake_two + 'target_compile_options(first_program PRIVATE -w)\n'), *twice_runs), None,
+         'differs from the lesson 0.5 CMakeLists.txt outside add_executable'),
+        ('sources of add_executable on several lines are reported, and nothing is built',
+         lesson(*program(cmake=with_sources('\n    main.cpp\n    tools.cpp\n')), *twice_runs), None,
+         'add_executable must list its sources on one line'),
+        ('a source in add_executable that is not a file of the program is reported, and nothing is built',
+         lesson(*program(cmake=with_sources('main.cpp tools.cpp tool.cpp')), *twice_runs), None,
+         'add_executable lists tool.cpp, which is not a .cpp file of the program'),
+        ('a source in add_executable with another case is reported, and nothing is built',
+         lesson(*program(cmake=with_sources('main.cpp Tools.cpp')), *twice_runs), None,
+         'add_executable lists Tools.cpp, which differs in case from tools.cpp'),
+        ('a source listed twice in add_executable is reported, and nothing is built',
+         lesson(*program(cmake=with_sources('main.cpp tools.cpp tools.cpp')), *twice_runs), None,
+         'add_executable lists tools.cpp twice'),
+        ('add_executable without main.cpp is reported, and nothing is built',
+         lesson(*program(cmake=with_sources('tools.cpp')), *twice_runs), None, 'add_executable must list main.cpp'),
+        ('a header in add_executable is reported, and nothing is built',
+         lesson(*program(cmake=with_sources('main.cpp tools.cpp tools.hpp')), *twice_runs), None,
+         'headers are not listed in add_executable'),
+        ('an example that leaves a source out of add_executable is reported, and nothing is built',
+         lesson(*program(cmake=template), *twice_runs), None, 'tools.cpp is not in add_executable'),
+        ('an #include with another case is reported in an example, and nothing is built',
+         lesson(*program(main=TWICE_MAIN.replace('"tools.hpp"', '"Tools.hpp"')), *twice_runs), None,
+         '#include "Tools.hpp" differs in case from tools.hpp'),
+        ('an #include with another case is reported in a stage=link program, and nothing is built',
+         lesson(*program(owner=TWICE_LINK, main=TWICE_MAIN.replace('"tools.hpp"', '"Tools.hpp"'), cmake=template)), None,
+         '#include "Tools.hpp" differs in case from tools.hpp'),
+        ('an #include of a header that is not a file of the program is reported, and nothing is built',
+         lesson(*program(main=TWICE_MAIN.replace('"tools.hpp"', '"tool.hpp"')), *twice_runs), None,
+         '#include "tool.hpp" is not a file of the program'),
+        ('an #include with a folder is reported, and nothing is built',
+         lesson(*program(main=TWICE_MAIN.replace('"tools.hpp"', '"lib/tools.hpp"')), *twice_runs), None,
+         'unsupported #include form'),
+        ('a compile-stage broken program in several files is refused as not supported, and nothing is built',
+         lesson(*program(owner="broken: twice at=4 errors=1 error=expected ';'")), None,
+         'a compile error in a program of several files is not supported yet'),
+        ('#ifndef in a program in several files is reported, and nothing is built',
+         lesson(*program(hpp='#ifndef TOOLS_HPP\n#define TOOLS_HPP\n\nint twice(int value);\n\n#endif\n'), *twice_runs), None,
+         'conditional preprocessor directives are not supported'),
+        ('a broken marker with in= is refused as not supported, and nothing is built',
+         lesson(("broken: no_semicolon in=main.cpp at=4 errors=1 error=expected ';'", 'cpp', NO_SEMICOLON)), None,
+         'in= is not supported yet'),
+        ('a broken marker with stage=configure is refused as not supported, and nothing is built',
+         lesson(('broken: mian stage=configure error=main', 'cpp', MIAN)), None, 'stage=configure is not supported'),
+        # Programs in several files, really built with CMake and Ninja (and run where they build).
+        ('a program in several files (two .cpp files, a local .hpp) builds, links and passes two runs',
+         lesson(*twice), None, None),
+        ('a wrong output of the second run of a program in several files is detected',
+         lesson(*twice[:-1], ('output: twice', 'text', 'Twice: -5\n')), None, 'example twice (input 2 of 2): output'),
+        ('a one-file example and a program in several files in one lesson both pass, and the one-file example is built as before',
+         lesson(*good, *twice), None, None),
+        ('a source left out of add_executable fails to link as described (stage=link, several files)',
+         lesson(*program(owner=TWICE_LINK, cmake=template)), None, None),
+        ('a stage=link program in several files whose source fails to compile is detected',
+         lesson(*program(owner=TWICE_LINK, cpp=TOOLS_CPP.replace('* 2;', '* 2'))), None,
+         'tools.cpp failed to compile, so the build stopped before linking'),
+        ('a stage=link program in several files that builds is detected',
+         lesson(*program(owner=TWICE_LINK)), None, 'builds, but the lesson says it must not'),
+        # The build output says "Building CXX object" before the link step: only the link step's own output counts.
+        ('a message found only outside the link step is detected (stage=link, several files)',
+         lesson(*program(owner='broken: twice stage=link error=Building CXX object', cmake=template)), None,
+         "the link step's output has no match"),
+        ('a stage=link program in several files that fails at dependency scanning is detected',
+         lesson(*program(owner=TWICE_LINK, cpp='#include <no_such_header>\n' + TOOLS_CPP)), None,
+         'tools.cpp failed dependency scanning, so the build stopped before linking'),
+        ('an example in several files whose second source fails to compile is reported with its file',
+         lesson(*program(cpp=TOOLS_CPP.replace('* 2;', '* 2')), *twice_runs), None, 'build failed: tools.cpp failed to compile'),
+        ('an example in several files that fails to link is reported as a link failure',
+         lesson(*program(cpp=TOOLS_CPP.replace('int twice(int value) {', 'int twice_value(int value) {')), *twice_runs), None,
+         'build failed: the program failed to link'),
+        ('an unexpected exit code of a program in several files is detected',
+         lesson(*program(main=TWICE_MAIN.replace('<< "\\n";\n}\n', '<< "\\n";\n    return 3;\n}\n')), *twice_runs[:2]), None,
+         'exit code 3, expected 0'),
+        ('different PL and EN files of a program in several files are detected',
+         lesson(*twice), lesson(*program(cpp=TOOLS_CPP.replace('* 2', '* 3')), *twice_runs), 'differ between'),
+        ('a broken environment is not taken for the result of a program in several files',
+         lesson(*twice), None, 'configure failed (an environment problem'),
     ]
     project = PROJECT.resolve()
     home = os.getcwd()
@@ -579,6 +1047,15 @@ def self_test(args):
                     verdict = verdict and all(len(e) <= 4 * SHOWN_LIMIT for e in errors)
                 if 'nothing is built' in title:
                     verdict = verdict and not pathlib.Path('build').exists()
+                if 'is not a dependency' in title:
+                    verdict = verdict and not any('missing.hpp' in e for e in errors)
+                if 'built as before' in title:
+                    # The one-file example got the lesson 0.5 project as it is; the other one its own four files.
+                    old = pathlib.Path('build/lesson-examples/lesson/hi/src')
+                    new = pathlib.Path('build/lesson-examples/lesson/twice/src')
+                    verdict = (verdict and sorted(p.name for p in old.iterdir()) == ['CMakeLists.txt', 'main.cpp']
+                               and (old / 'CMakeLists.txt').read_bytes() == PROJECT.read_bytes()
+                               and sorted(p.name for p in new.iterdir()) == ['CMakeLists.txt', 'main.cpp', 'tools.cpp', 'tools.hpp'])
             finally:
                 os.chdir(home)
         print(f'##### {"ok  " if verdict else "FAIL"} self-test: {title}')
