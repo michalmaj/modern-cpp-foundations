@@ -2,7 +2,7 @@
 
 **Polski** · [English](lesson_02_changing_fields_and_copies.en.md) · [Opis kursu](../../README.md)
 
-> **Moduł 8, lekcja 2** · około 65–80 minut
+> **Moduł 8, lekcja 2** · około 70–85 minut
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`, jak dotąd. Debugger nie jest w tej lekcji potrzebny.
 > **Wersja pilotażowa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS. Żaden z nich nie pyta o dane: wszystkie wartości są zapisane w kodzie. Dane z wejścia odczytuje tylko program kontrolny w części z rozwiązaniami.
 
@@ -353,7 +353,7 @@ int main() {
 5. Zmień wartość `requested` tak, żeby błąd stał się widoczny. Najpierw zapisz poprawny wynik dla swojej wartości, a potem uruchom program.
 6. Wyjaśnij przyczynę błędu.
 7. Popraw aktualizację: zmień właściwe pole właściwego obiektu.
-8. Uruchom poprawiony program dla swojej wartości i dla 0.
+8. Uruchom poprawiony program dla swojej wartości. Przewidź, co wypisze dla 0.
 
 </details>
 

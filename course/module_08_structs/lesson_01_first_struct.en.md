@@ -2,7 +2,7 @@
 
 [Polski](lesson_01_first_struct.md) · **English** · [Course overview](../../README.en.md)
 
-> **Module 8, lesson 1** · about 60–75 minutes
+> **Module 8, lesson 1** · about 65–80 minutes
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project, as before. You won't need the debugger in this lesson.
 > **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS. None of them asks for data: every value is written in the code. Only the check program in the solutions part reads data from the input.
 
@@ -194,7 +194,7 @@ Pages to read: 180
 - **The name before the dot chooses the object.** `first.pages` is the first book's number of pages, and `second.pages` the second book's.
 - Only the pages of a book whose own `finished` field gives `false` go into the sum (`!` from lesson 3.4, `+=` from lesson 4.2). Each condition checks a field of the same object the program takes the pages from.
 
-**Change:** in the braces of the object `second`, replace `true` with `false`, and predict the new output before you run the program. You change only the second book's data: the first stays the same.
+**Predict:** what will the output be when you replace `true` with `false` in the braces of the object `second`? You then change only the second book's data: the first stays the same. If you like, check your prediction by running the program.
 
 ## 6. Type, object and field
 
@@ -205,7 +205,9 @@ Pages to read: 180
 | `pages` | the name of a field declared in the type | `int pages;` |
 | `first.pages` | a field of a specific object | `180` |
 
-`pages` on its own, with no object, means nothing: every book has its own `pages`, so you always have to say which book you mean. A specific object of a type is also called an **instance** of that type. In this course we simply say "object".
+`pages` on its own, with no object, means nothing: every book has its own `pages`, so you always have to say which book you mean. A specific object of a type is also called an **instance** of that type. We say "object" instead of "instance".
+
+In this course, a **record** is an object that stores several related pieces of information, for example the title, the number of pages and the reading status of one book. We can define the type of such an object with `struct`. "Record" isn't a C++ keyword. The definition `struct Book` describes what every book consists of, but it doesn't create any record. A record is one concrete object, for example `book`, created by `const Book book{"C++ Basics", 180, false};`, and `book.pages` is one of its fields.
 
 ## 7. Find the bug: the missing semicolon
 
@@ -287,7 +289,7 @@ int main() {
 4. Why doesn't the compiler report any error?
 5. Change the values of `available_seats` and `registered_people` so that the mistake becomes visible in the output. First write down what the correct output would be for your data, then run the program.
 6. Fix the order of the values where the object is created.
-7. Run the fixed program for your data and for 30 and 30.
+7. Run the fixed program for your data. Predict what it prints for 30 and 30.
 
 The results, example data and the fixed program are in [Example solutions](#example-solutions).
 

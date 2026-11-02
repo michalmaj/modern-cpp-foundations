@@ -365,7 +365,7 @@ Wyniki, przykładowe dane i poprawiony program są w części [Przykładowe rozw
 
 | Co widzisz | Co to znaczy | Co zrobić |
 |---|---|---|
-| Ostrzeżenie `non-void function does not return a value` | Funkcja nie zwraca wyniku: brakuje `return`. Wynik takiego wywołania nie jest określony (lekcja 5.3). | Na końcu funkcji zwróć cały rekord: `return result;`. |
+| Ostrzeżenie `non-void function does not return a value` | Funkcja nie zwraca wyniku: brakuje `return`. Taki program ma niezdefiniowane zachowanie (lekcja 5.3). | Na końcu funkcji zwróć cały rekord: `return result;`. |
 | `no viable conversion from 'ProductReport' to ...` | Wynik funkcji, cały rekord, trafia do zmiennej innego typu, na przykład `int`. | Odbierz cały rekord, a liczbę odczytaj z jego pola, na przykład `report.stock_value`. |
 | `invalid operands to binary expression` przy `std::cout << report` | `std::cout` nie wypisze całego rekordu naraz. | Wypisuj kolejne pola, na przykład `report.stock_value`. |
 | `cannot assign to variable ... with const-qualified type` | Funkcja zmienia rekord wejściowy przez `const&` albo `main` zmienia wynik odebrany jako `const`. | Zmieniaj tylko lokalny wynik w funkcji. Dane wejściowe tylko czytaj. |

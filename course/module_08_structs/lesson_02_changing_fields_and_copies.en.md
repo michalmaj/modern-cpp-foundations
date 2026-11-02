@@ -2,7 +2,7 @@
 
 [Polski](lesson_02_changing_fields_and_copies.md) · **English** · [Course overview](../../README.en.md)
 
-> **Module 8, lesson 2** · about 65–80 minutes
+> **Module 8, lesson 2** · about 70–85 minutes
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project, as before. You won't need the debugger in this lesson.
 > **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS. None of them asks for data: every value is written in the code. Only the check program in the solutions part reads data from the input.
 
@@ -353,7 +353,7 @@ int main() {
 5. Change the value of `requested` so that the bug becomes visible. First write down the correct output for your value, then run the program.
 6. Explain the cause of the bug.
 7. Fix the update: change the right field of the right object.
-8. Run the fixed program for your value and for 0.
+8. Run the fixed program for your value. Predict what it prints for 0.
 
 </details>
 

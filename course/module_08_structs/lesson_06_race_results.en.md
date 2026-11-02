@@ -2,7 +2,7 @@
 
 [Polski](lesson_06_race_results.md) · **English** · [Course overview](../../README.en.md)
 
-> **Module 8, lesson 6: the test** · about 100–115 minutes, in two sessions
+> **Module 8, lesson 6: the test** · about 105–125 minutes, in two sessions
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project.
 > **Pilot version.** The reference solutions in this lesson are checked automatically on Windows, Ubuntu and macOS. Nothing grades your own work automatically: you check it yourself, against the criteria. Your program asks for no data: all the values are written in the code. Only the check program in Part B reads data from the input.
 
@@ -188,7 +188,7 @@ When the result matches, you can save the project in Git, as in lesson 1.5. Befo
 Do this task **after task 1**: both problems are about functions similar to yours.
 
 <details>
-<summary>Diagnostic A: the best time starts at zero</summary>
+<summary>Diagnostic A: the best time starts at zero (open only after task 1)</summary>
 
 In `cpp-workspace`, create a folder `diagnosis_8`, copy `main.cpp` and `CMakeLists.txt` from the original `lesson_05_first_program` into it, and put the program below into `main.cpp`: you may type it or copy it. The requirements are the same as in task 1.
 
@@ -281,7 +281,7 @@ int main() {
 </details>
 
 <details>
-<summary>Diagnostic B: changing a record through <code>const&amp;</code></summary>
+<summary>Diagnostic B: changing a record through <code>const&amp;</code> (open only after task 1)</summary>
 
 You **only analyse this fragment on paper**: don't run it. This version of the qualifying function was meant to make sure that a runner without a finished race never fits within the limit. A change of the time was added to it:
 
