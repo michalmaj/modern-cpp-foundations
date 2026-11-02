@@ -243,8 +243,8 @@ Sprawdzian jest zaliczony, gdy spełniasz **wszystkie** kryteria. Możesz przy t
 
 - `workshop_registrations/main.cpp` napisano od pustego pliku, w poprawnym C++20. Program buduje się bez błędów.
 - Jest jeden typ zgłoszenia z trzema polami wymaganych typów, a zgłoszenia trafiają do jednego wektora, w kolejności z danych.
-- Funkcja odczytująca czyta z tego samego strumienia co `main`, dostaje imię i nazwisko bez kopiowania i bez możliwości zmiany i wypełnia rekord przygotowany przez `main`. Przy odmowie nie zmienia żadnego jego pola, także gdy jedną liczbę udało się odczytać.
-- Funkcja licząca dostaje kolekcję bez kopiowania i bez możliwości zmiany, przegląda wszystkie elementy i zwraca liczbę zgłoszeń wybranej grupy.
+- Funkcja odczytująca czyta z tego samego strumienia co `main`, dostaje imię i nazwisko bez kopiowania i bez możliwości zmiany i wypełnia rekord przygotowany przez `main`. Przy odmowie nie zmienia żadnego jego pola, także gdy jedną liczbę udało się odczytać. Obowiązkowo sprawdza powodzenie odczytu obu liczb, zanim sprawdzi zasady grupy i liczby zajęć, nawet jeśli bez tego sprawdzenia program wypisywałby te same wyniki.
+- Funkcja licząca dostaje kolekcję bez kopiowania i bez możliwości zmiany, przegląda wszystkie elementy i zwraca liczbę zgłoszeń wybranej grupy. Także przez zmienną pętli odczytuje każdy element bez kopiowania i bez możliwości zmiany: pętla kopiująca elementy byłaby poprawnym C++ i dałaby ten sam wynik, ale to zadanie wymaga odczytu bez kopii.
 - Żadna z dwóch funkcji niczego nie wypisuje. Zasady grupy i liczby zajęć stoją w programie w jednym miejscu.
 - `main` kończy odczyt po pustej linii i po końcu danych w miejscu imienia i nazwiska, a przy rozpoczętym, niekompletnym zgłoszeniu wypisuje `Input error`. `push_back` wykonuje się tylko po `true`, a przy błędzie nie ma żadnej części raportu.
 - Raport pochodzi z elementów wektora: liczba zgłoszeń z `size()`, liczby uczestników grup z funkcji liczącej, a suma zajęć oraz imiona i nazwiska z elementów.

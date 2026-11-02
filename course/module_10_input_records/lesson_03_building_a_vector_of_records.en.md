@@ -560,6 +560,7 @@ Successive lines of the data are separated by `/`. For valid data, the "Result" 
 | P | `2` / `North Library` / `twelve 5` / `City Archive` / `8 8` | `Input error` | a word instead of the first number |
 | Q | `2` / `North Library` / `12 5`, then the end of the data | `Input error` | an announced order is missing: reading its name fails |
 | R | `2` / `North Library` / `12 5` / `City Archive` / `8`, then the end of the data | `Input error` | a missing last number |
+| S | `2` / `North Library` / `12 5` / `City Archive` / `0 done` | `Input error` | zero planned units, then a word instead of the second number, after a valid order: a failed read takes precedence over a value that isn't allowed |
 
 **The automatic tests and your runs.** All the cases are checked automatically: the reference solution is run for each of them, and its whole standard output is compared with the expected one. The solution and its results are in [Example solutions](#example-solutions).
 
@@ -988,6 +989,20 @@ North Library
 12 5
 City Archive
 8
+```
+
+<!-- output: orders -->
+```text
+Input error
+```
+
+<!-- input: orders -->
+```text
+2
+North Library
+12 5
+City Archive
+0 done
 ```
 
 <!-- output: orders -->

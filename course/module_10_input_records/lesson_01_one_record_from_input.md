@@ -181,7 +181,7 @@ Input error
 
 Identyfikator się odczytał, ale wagi nie ma: odczyt liczby się nie udaje, bo dane się skończyły (lekcja 4.6). To nie jest kompletny rekord, więc program go nie tworzy. Nie rozróżnia przy tym, czy zawiódł tekst zamiast liczby, czy koniec danych: w obu przypadkach wypisuje `Input error`.
 
-**Tego przypadku nie wywołasz, wpisując dane ręcznie.** Gdy wpiszesz `BX-7` i naciśniesz **Enter**, program po prostu czeka na wagę, jak w lekcji 2.6. Koniec danych zdarza się, gdy dane przychodzą w całości, na przykład w testach automatycznych kursu. Ten przypadek przewiduj na papierze, jak w lekcji 4.5.
+**Tego przypadku nie musisz wywoływać samodzielnie.** Gdy wpiszesz `BX-7` i naciśniesz **Enter**, program po prostu czeka na wagę, jak w lekcji 2.6. W testach automatycznych kursu dane przychodzą w całości i kończą się zaraz po linii `BX-7`. Ten przypadek przewiduj na papierze, jak w lekcji 4.5: testy sprawdzają go automatycznie.
 
 **`>>` to nie `getline`.** `>>` pomija białe znaki przed wartością, także puste linie. Samo **Enter** niczego więc nie kończy: program czeka dalej. W lekcji 7.4 `std::getline` traktowało pustą linię inaczej, jako udany odczyt pustego tekstu.
 
@@ -333,7 +333,7 @@ Dla jednego uruchomienia program wypisuje tylko jeden z tych trzech wyników.
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: poprawna sala, sala pusta i pełna, pojemność 1, zerowa i ujemna pojemność, ujemna liczba zajętych miejsc, więcej zajętych miejsc niż wszystkich, słowo zamiast pierwszej albo drugiej liczby, brak ostatniej wartości. Przy każdym zapisz oczekiwany wynik: cztery linie sali, `Input error` albo `Invalid room`.
 
-**Potem** uruchom program dla trzech danych pokazanych wyżej. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, więc pozostałych nie musisz uruchamiać. Przypadki, w których brakuje wartości, przeanalizuj na papierze: wpisując dane ręcznie, nie wywołasz końca danych (punkt 4).
+**Potem** uruchom program dla trzech danych pokazanych wyżej. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, więc pozostałych nie musisz uruchamiać. Przypadki, w których brakuje wartości, przeanalizuj na papierze: końca danych nie musisz wywoływać samodzielnie, a samo **Enter** go nie wywoła, bo program czeka dalej (punkt 4).
 
 ### Kryterium sukcesu
 
@@ -392,6 +392,7 @@ Przy poprawnej sali kolumna „Wynik” podaje liczbę wolnych miejsc. Program w
 | O | `LAB-2`, `30` i `25`, każde w osobnej linii | 5 | wartości w osobnych liniach |
 | P | `Aula-3   20   5` | 15 | kilka spacji między wartościami, inny kod |
 | Q | `R-14 6 2 extra` | 4 | dodatkowy tekst po trzeciej wartości: poza sprawdzaniem tej lekcji |
+| R | `R-12 0 eight` | `Input error` | zerowa pojemność, a potem słowo zamiast drugiej liczby: nieudany odczyt ma pierwszeństwo przed niedozwoloną pojemnością |
 
 **Testy automatyczne i Twoje próby.** Wszystkie przypadki są sprawdzone automatycznie: rozwiązanie referencyjne jest uruchamiane dla każdego z nich, a jego pełne standardowe wyjście porównywane z oczekiwanym. Rozwiązanie i jego wyniki są w części [Przykładowe rozwiązania](#przykładowe-rozwiązania).
 
@@ -573,7 +574,7 @@ int main() {
 
 **Inne poprawne rozwiązania:** każdą zasadę można sprawdzać w osobnym `else if`, z tym samym komunikatem. Pola mogą mieć inne nazwy i inną kolejność, jeśli wartości w `{}` stoją w tej samej kolejności co pola. Liczbę wolnych miejsc można zapisać w zmiennej `const int`, obliczonej z pól rekordu.
 
-Każdy przypadek z listy kontrolnej to osobne uruchomienie tego programu. Pierwsze trzy uruchomienia to dane z treści misji, w tym przypadek A. Dalej są przypadki od B do Q, w kolejności z listy kontrolnej.
+Każdy przypadek z listy kontrolnej to osobne uruchomienie tego programu. Pierwsze trzy uruchomienia to dane z treści misji, w tym przypadek A. Dalej są przypadki od B do R, w kolejności z listy kontrolnej.
 
 <!-- input: room -->
 ```text
@@ -757,6 +758,16 @@ Room: R-14
 Capacity: 6
 Occupied: 2
 Available: 4
+```
+
+<!-- input: room -->
+```text
+R-12 0 eight
+```
+
+<!-- output: room -->
+```text
+Input error
 ```
 
 </details>

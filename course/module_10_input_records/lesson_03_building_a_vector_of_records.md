@@ -560,6 +560,7 @@ Kolejne linie danych oddziela `/`. Przy poprawnych danych kolumna „Wynik” po
 | P | `2` / `North Library` / `twelve 5` / `City Archive` / `8 8` | `Input error` | słowo zamiast pierwszej liczby |
 | Q | `2` / `North Library` / `12 5`, potem koniec danych | `Input error` | brak zapowiedzianego zlecenia: odczyt jego nazwy się nie udaje |
 | R | `2` / `North Library` / `12 5` / `City Archive` / `8`, potem koniec danych | `Input error` | brak ostatniej liczby |
+| S | `2` / `North Library` / `12 5` / `City Archive` / `0 done` | `Input error` | zero zaplanowanych jednostek, a potem słowo zamiast drugiej liczby, po poprawnym zleceniu: nieudany odczyt ma pierwszeństwo przed niedozwoloną wartością |
 
 **Testy automatyczne i Twoje próby.** Wszystkie przypadki są sprawdzone automatycznie: rozwiązanie referencyjne jest uruchamiane dla każdego z nich, a jego pełne standardowe wyjście porównywane z oczekiwanym. Rozwiązanie i jego wyniki są w części [Przykładowe rozwiązania](#przykładowe-rozwiązania).
 
@@ -988,6 +989,20 @@ North Library
 12 5
 City Archive
 8
+```
+
+<!-- output: orders -->
+```text
+Input error
+```
+
+<!-- input: orders -->
+```text
+2
+North Library
+12 5
+City Archive
+0 done
 ```
 
 <!-- output: orders -->
