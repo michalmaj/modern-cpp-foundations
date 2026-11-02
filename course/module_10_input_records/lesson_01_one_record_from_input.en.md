@@ -181,7 +181,7 @@ Input error
 
 The identifier was read, but there's no weight: reading the number fails, because the data have ended (lesson 4.6). This isn't a complete record, so the program doesn't create it. It doesn't tell whether the cause was text instead of a number or the end of the data: in both cases it prints `Input error`.
 
-**You can't cause this case by typing the data yourself.** When you type `BX-7` and press **Enter**, the program simply waits for the weight, as in lesson 2.6. The end of the data happens when the data arrive in one piece, for example in the course's automatic tests. Predict this case on paper, as in lesson 4.5.
+**You don't need to cause this case yourself.** When you type `BX-7` and press **Enter**, the program simply waits for the weight, as in lesson 2.6. In the course's automatic tests the data arrive in one piece and end right after the line `BX-7`. Predict this case on paper, as in lesson 4.5: the tests check it automatically.
 
 **`>>` isn't `getline`.** `>>` skips whitespace before a value, including empty lines. So pressing **Enter** alone ends nothing: the program keeps waiting. In lesson 7.4, `std::getline` treated an empty line differently, as a successful read of an empty text.
 
@@ -333,7 +333,7 @@ In one run, the program prints only one of these three results.
 
 **Before you write the program**, prepare a table of cases: a valid room, an empty and a full room, a capacity of 1, a zero and a negative capacity, a negative number of occupied seats, more occupied seats than seats in total, a word instead of the first or the second number, a missing last value. For each, write down the expected result: the room's four lines, `Input error` or `Invalid room`.
 
-**Then** run the program for the three data shown above. Every case in the full list of check cases is checked automatically, so you don't need to run the others. Analyse the cases with a missing value on paper: typing the data yourself, you can't cause the end of the data (section 4).
+**Then** run the program for the three data shown above. Every case in the full list of check cases is checked automatically, so you don't need to run the others. Analyse the cases with a missing value on paper: you don't need to cause the end of the data yourself, and **Enter** alone doesn't cause it, because the program keeps waiting (section 4).
 
 ### Success criterion
 
@@ -392,6 +392,7 @@ For a valid room, the "Result" column gives the number of free seats. The progra
 | O | `LAB-2`, `30` and `25`, each on its own line | 5 | values on separate lines |
 | P | `Aula-3   20   5` | 15 | several spaces between the values, another code |
 | Q | `R-14 6 2 extra` | 4 | extra text after the third value: outside this lesson's checks |
+| R | `R-12 0 eight` | `Input error` | a zero capacity, then a word instead of the second number: a failed read takes precedence over a capacity that isn't allowed |
 
 **Automatic tests and your own runs.** Every case is checked automatically: the reference solution is run for each of them, and its whole standard output is compared with the expected one. The solution and its results are in [Example solutions](#example-solutions).
 
@@ -573,7 +574,7 @@ int main() {
 
 **Other valid solutions:** each rule can be checked in its own `else if`, with the same message. The fields can have other names and another order, as long as the values in `{}` stand in the same order as the fields. The number of free seats can be stored in a `const int` variable, calculated from the record's fields.
 
-Each case in the list of check cases is a separate run of this program. The first three runs are the data in the mission, including case A. Then come cases B to Q, in the order of the list of check cases.
+Each case in the list of check cases is a separate run of this program. The first three runs are the data in the mission, including case A. Then come cases B to R, in the order of the list of check cases.
 
 <!-- input: room -->
 ```text
@@ -757,6 +758,16 @@ Room: R-14
 Capacity: 6
 Occupied: 2
 Available: 4
+```
+
+<!-- input: room -->
+```text
+R-12 0 eight
+```
+
+<!-- output: room -->
+```text
+Input error
 ```
 
 </details>

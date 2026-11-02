@@ -563,6 +563,7 @@ The lines of the data are separated by `/`. For valid data, the "Result" column 
 | L | `Maple Owls`, then the end of the data | `Input error` | no numbers after a non-empty name |
 | M | `Maple Owls` / `6`, then the end of the data | `Input error` | the last number missing |
 | N | `Maple Owls` / `6 4` / `River Foxes`, then the end of the data | `Input error` | the end of the data after the name of the second team: an incomplete record isn't the ending of the data |
+| O | `Maple Owls` / `6 4` / `River Foxes` / `-1 won` | `Input error` | a negative number played, then a word instead of the second number, after a valid team: a failed read takes precedence over a value that isn't allowed |
 
 **The automatic tests and your runs.** All the cases are checked automatically: the reference solution is run for each of them, and its whole standard output is compared with the expected one. The solution and its results are in [Example solutions](#example-solutions).
 
@@ -912,6 +913,19 @@ Input error
 Maple Owls
 6 4
 River Foxes
+```
+
+<!-- output: teams -->
+```text
+Input error
+```
+
+<!-- input: teams -->
+```text
+Maple Owls
+6 4
+River Foxes
+-1 won
 ```
 
 <!-- output: teams -->

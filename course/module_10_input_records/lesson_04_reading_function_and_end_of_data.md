@@ -563,6 +563,7 @@ Kolejne linie danych oddziela `/`. Przy poprawnych danych kolumna „Wynik” po
 | L | `Maple Owls`, potem koniec danych | `Input error` | brak liczb po niepustej nazwie |
 | M | `Maple Owls` / `6`, potem koniec danych | `Input error` | brak ostatniej liczby |
 | N | `Maple Owls` / `6 4` / `River Foxes`, potem koniec danych | `Input error` | koniec danych po nazwie drugiej drużyny: niekompletny rekord to nie zakończenie danych |
+| O | `Maple Owls` / `6 4` / `River Foxes` / `-1 won` | `Input error` | ujemna liczba rozegranych, a potem słowo zamiast drugiej liczby, po poprawnej drużynie: nieudany odczyt ma pierwszeństwo przed niedozwoloną wartością |
 
 **Testy automatyczne i Twoje próby.** Wszystkie przypadki są sprawdzone automatycznie: rozwiązanie referencyjne jest uruchamiane dla każdego z nich, a jego pełne standardowe wyjście porównywane z oczekiwanym. Rozwiązanie i jego wyniki są w części [Przykładowe rozwiązania](#przykładowe-rozwiązania).
 
@@ -912,6 +913,19 @@ Input error
 Maple Owls
 6 4
 River Foxes
+```
+
+<!-- output: teams -->
+```text
+Input error
+```
+
+<!-- input: teams -->
+```text
+Maple Owls
+6 4
+River Foxes
+-1 won
 ```
 
 <!-- output: teams -->

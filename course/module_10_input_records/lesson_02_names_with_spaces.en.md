@@ -191,7 +191,7 @@ Invalid shipment
 
 The empty line was read correctly, so the program checks the rules and rejects the empty name.
 
-**Predict** the result too when the data end right after `4`. You can't cause this case by hand: **Enter** instead of the second name gives an empty name. Follow it on paper.
+**Predict** the result too when the data end right after `4`. You don't need to cause this case yourself: follow it on paper, and the tests check it automatically. **Enter** instead of the second name doesn't end the data: it gives an empty name, as in the example above.
 
 <!-- input: shipments -->
 ```text
@@ -481,6 +481,7 @@ Successive lines of the data are separated by `/`. For valid data, the "Result" 
 | S | `Ocean Atlas` / `120 50` / `Quiet Garden` / `80`, then the end of the data | `Input error` | a missing last number |
 | T | `Ocean Atlas` / `120 50 pages` / `Quiet Garden` / `80 80` | 70 | text after the first book's numbers: `rest` takes it, but the program doesn't check it |
 | U | `Ocean Atlas` / `120 50` / `Quiet Garden` / `80 80 done` | 70 | text after the last number: it stays unread, outside the checks |
+| V | `Ocean Atlas` / `120 50` / `Quiet Garden` / `0 half` | `Input error` | zero pages in the second book, then a word instead of the pages read: a failed read takes precedence over a number of pages that isn't allowed |
 
 **Automatic tests and your own runs.** Every case is checked automatically: the reference solution is run for each of them, and its whole standard output is compared with the expected one. The solution and its results are in [Example solutions](#example-solutions).
 
@@ -960,6 +961,19 @@ Book 2: Quiet Garden
 Pages: 80
 Read: 80
 Unread total: 70
+```
+
+<!-- input: books -->
+```text
+Ocean Atlas
+120 50
+Quiet Garden
+0 half
+```
+
+<!-- output: books -->
+```text
+Input error
 ```
 
 </details>

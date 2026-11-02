@@ -191,7 +191,7 @@ Invalid shipment
 
 Pusta linia odczytała się poprawnie, więc program sprawdza zasady i odrzuca pustą nazwę.
 
-**Przewidź** też wynik, gdy dane kończą się zaraz po `4`. Tego przypadku nie wywołasz ręcznie: **Enter** zamiast drugiej nazwy daje pustą nazwę. Prześledź go na papierze.
+**Przewidź** też wynik, gdy dane kończą się zaraz po `4`. Tego przypadku nie musisz wywoływać samodzielnie: prześledź go na papierze, a testy sprawdzają go automatycznie. **Enter** zamiast drugiej nazwy nie kończy danych, tylko daje pustą nazwę, jak w przykładzie wyżej.
 
 <!-- input: shipments -->
 ```text
@@ -481,6 +481,7 @@ Kolejne linie danych oddziela `/`. Przy poprawnych danych kolumna „Wynik” po
 | S | `Ocean Atlas` / `120 50` / `Quiet Garden` / `80`, potem koniec danych | `Input error` | brak ostatniej liczby |
 | T | `Ocean Atlas` / `120 50 pages` / `Quiet Garden` / `80 80` | 70 | tekst po liczbach pierwszej książki: `rest` go zabiera, ale program go nie sprawdza |
 | U | `Ocean Atlas` / `120 50` / `Quiet Garden` / `80 80 done` | 70 | tekst po ostatniej liczbie: zostaje nieodczytany, poza sprawdzaniem |
+| V | `Ocean Atlas` / `120 50` / `Quiet Garden` / `0 half` | `Input error` | zerowa liczba stron drugiej książki, a potem słowo zamiast liczby przeczytanych stron: nieudany odczyt ma pierwszeństwo przed niedozwoloną liczbą stron |
 
 **Testy automatyczne i Twoje próby.** Wszystkie przypadki są sprawdzone automatycznie: rozwiązanie referencyjne jest uruchamiane dla każdego z nich, a jego pełne standardowe wyjście porównywane z oczekiwanym. Rozwiązanie i jego wyniki są w części [Przykładowe rozwiązania](#przykładowe-rozwiązania).
 
@@ -960,6 +961,19 @@ Book 2: Quiet Garden
 Pages: 80
 Read: 80
 Unread total: 70
+```
+
+<!-- input: books -->
+```text
+Ocean Atlas
+120 50
+Quiet Garden
+0 half
+```
+
+<!-- output: books -->
+```text
+Input error
 ```
 
 </details>
