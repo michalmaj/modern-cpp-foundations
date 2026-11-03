@@ -384,13 +384,34 @@ Failure messages and the log of passing runs show at most **1,000 characters** o
   - **really built:** an error in a second `.cpp` file; an error in a header included by two sources; `Record` defined twice in one translation unit, located in `record.hpp`, and the same header with `#pragma once`, which builds and runs; a header that uses a type without including its header; and the wrong expectations: another file (also the `#include` line in `main.cpp` just before an error in the header), another line, column, message or number of errors, a build that succeeds, a scan error, a link error, a broken environment and a PL/EN difference in `in=`.
 
   Static checks can't show that building works: only the second kind can.
-- **Size:** the self-test has 107 cases in the current repository; the number grows with the checker and isn't a requirement.
+- **Parts (`--shard`)** have their own fixtures, mostly lessons with only a fragment, so that nothing is built:
+  - invalid values;
+  - parts that are disjoint and cover every lesson (1–5 lessons, 1–3 parts);
+  - an odd number of lessons;
+  - the unchanged summary without `--shard`;
+  - a problem found before building, reported by a part that doesn't build that lesson;
+  - a program in several files built whole by its own part;
+  - a part without lessons;
+  - a failing program that fails only its own part.
+- **Size:** the self-test has 115 cases in the current repository; the number grows with the checker and isn't a requirement.
 - **Workflow:** `.github/workflows/toolchains.yml` runs both modes on Windows (MSVC ABI), Ubuntu 24.04 and macOS. Locally, from the repository root, with the official compiler:
 
 ```sh
 python3 tests/toolchains/lesson_examples.py --cxx /usr/bin/clang++-22 [--make-program /usr/bin/ninja]
 python3 tests/toolchains/lesson_examples.py --self-test --cxx /usr/bin/clang++-22
 ```
+
+### Parts of the course (`--shard K/N`)
+
+Building and running every example takes most of the Windows job's time, so on Windows that work is split between two jobs. `--shard K/N` (1 ≤ K ≤ N, for example `--shard 1/2`) does it without listing any lesson:
+
+- **Every lesson is still read and checked before building,** in every part: the English version, unmarked blocks, PL/EN, markers, names, inputs and outputs, and the files and `CMakeLists.txt` of programs in several files. A problem in any lesson fails every part.
+- **Only the building and running is split, by whole lessons.** The checked lessons, in sorted order and numbered from 0, go to part (number % N) + 1: in two parts, the 1st, 3rd, 5th… lesson to part 1 and the 2nd, 4th… to part 2. All programs of a lesson, with all their runs and files, are built by the same part. A new lesson needs no configuration, and the parts don't depend on the system or on timing.
+- **The log says which part builds each lesson** (`part 2 of 2: built and run by that part, not by this one (1 of 2)`), prints the size of every part, and ends with its own summary, which never claims the whole course: `PASSED: part 1 of 2: 70 lesson file(s) read, 64 lesson(s) checked before building, 32 of them built and run in this part (197 example(s), 11 broken program(s), 566 run(s)), 0 problem(s)`.
+- **A part without lessons fails** (use fewer parts).
+- **Without `--shard`, nothing changes:** every lesson is built, and the log, including its last line, is as before. Ubuntu and macOS run the whole course in one job.
+
+The workflow's two Windows jobs run `--shard 1/2` (with the self-test and the other checks) and `--shard 2/2`, and the workflow fails if either fails. Each job installs the same LLVM; nothing is shared between them.
 
 ### What the check doesn't verify
 
