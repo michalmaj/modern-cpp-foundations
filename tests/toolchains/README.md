@@ -67,6 +67,7 @@ Code blocks are marked with an HTML comment, which GitHub doesn't show. The mark
 | `<!-- output: NAME -->` | ` ```text ` | The exact expected standard output of one run of NAME. |
 | `<!-- input: NAME -->` | ` ```text ` | The standard input of one run of NAME (see [Runs](#runs-standard-input-and-expected-output)). |
 | `<!-- broken: NAME at=LINE[:COLUMN] [errors=N] error=REGEX -->` | ` ```cpp ` | A program that must **fail to compile**, with its first error in `main.cpp` at LINE (and COLUMN) and a message matching REGEX; with `errors=N`, `main.cpp` must get exactly N errors. |
+| `<!-- broken: NAME in=PATH at=LINE[:COLUMN] [errors=N] error=REGEX -->` | ` ```cpp ` | Only for a program in several files: it must **fail to compile**, with the first error located in its file PATH, a `.cpp` source or a `.hpp` header (see [Compile errors in several files](#compile-errors-in-several-files)). Without `in=`, PATH is `main.cpp`. |
 | `<!-- broken: NAME stage=link error=REGEX -->` | ` ```cpp ` | A program that must **compile and then fail to link**, with REGEX matching the build output. |
 | `<!-- fragment -->` | ` ```cpp ` | Deliberately incomplete code: never built or run. |
 | `<!-- file: NAME PATH -->` | ` ```cpp ` | One more file of program NAME, a `.cpp` source or a `.hpp` header, saved as PATH (see [Programs in several files](#programs-in-several-files)). |
@@ -80,7 +81,7 @@ Code blocks are marked with an HTML comment, which GitHub doesn't show. The mark
 Which marker to use:
 - a complete program the learner runs, with its exact output: `example` with `output` (and `input`);
 - a line, a header or a sketch to read, or code that must not run, such as an endless loop: `fragment`;
-- a compile error the learner should see: `broken` with `at=`;
+- a compile error the learner should see: `broken` with `at=`, and in a program in several files `in=` for a file other than `main.cpp`;
 - a link error: `broken` with `stage=link`;
 - a program in several files: its `example` or `broken` block for `main.cpp`, a `file` block for each other file, and one `cmake` block.
 
@@ -99,6 +100,8 @@ Each `example` and each `broken` program is built as `main.cpp` of the lesson 0.
   - the first of them must be at LINE (and COLUMN, if given);
   - REGEX, a Python regular expression, must be found in the message after `error: `;
   - `errors=N` also fixes the number of errors in `main.cpp`.
+
+  In a program in several files, the error may be located in another of its files, named by `in=` ([Compile errors in several files](#compile-errors-in-several-files)).
 - **Link stage (`stage=link`):**
   - `main.cpp` must compile without errors (its object file exists);
   - the build must then fail in the linker (`linker command failed`, no executable);
@@ -189,7 +192,7 @@ More `input`/`output` pairs give more runs of the same program, as for any examp
   - only `.cpp` files of the program, with exactly their names, each once; headers are not listed;
   - no other change or command.
 
-  An `example` lists all of its `.cpp` files. A `broken` program with `stage=link` may leave some out: that is how a source missing from the build is shown. A source that isn't a file of the program is reported before CMake runs: CMake would stop at configuration, which a lesson can't use as an expected result.
+  An `example`, and a `broken` program with a compile error, list all of their `.cpp` files, so a source left out can't hide where an error is. Only a `broken` program with `stage=link` may leave some out: that is how a source missing from the build is shown. A source that isn't a file of the program is reported before CMake runs: CMake would stop at configuration, which a lesson can't use as an expected result.
 - **Preprocessor directives** in `main.cpp` and the `file` blocks:
   - comments (`//` and `/* ... */`) are skipped, so a commented-out `#include` is not checked;
   - every other `#include` is either `#include <...>` or `#include "name.hpp"` naming a header of the program **with the same case**. A different case would work on Windows and macOS but not on Linux, so it is reported on every system, in examples and broken programs alike;
@@ -203,7 +206,7 @@ More `input`/`output` pairs give more runs of the same program, as for any examp
 
 An example that fails to build is reported with its first failed step, for example `build failed: tools.cpp failed to compile` or `build failed: the program failed to link`.
 
-**Broken programs in several files** can only be `stage=link`. They pass only if:
+**Broken programs in several files with `stage=link`** pass only if:
 1. configuring succeeded;
 2. the build failed;
 3. no earlier step failed: no dependency scanning, no compiling, nothing else;
@@ -213,13 +216,41 @@ An example that fails to build is reported with its first failed step, for examp
 7. no program was created;
 8. REGEX matches that step's output.
 
-A source that fails to compile, or a missing header found at the dependency scan, is reported as the reason the build stopped before linking, never as the expected link error.
+A source that fails to compile, or a missing header found at the dependency scan, is reported as the reason the build stopped before linking, never as the expected link error. `in=` is not allowed with `stage=link`: a link error has no file and line to point to.
 
-**Not supported yet** (reported, not built):
-- a compile error in a program of several files (`broken` with `at=`);
-- `in=`;
-- a missing header as the expected error;
-- `stage=configure`;
+#### Compile errors in several files
+
+A `broken` program in several files may instead be expected to **fail to compile**:
+
+```text
+<!-- broken: NAME in=PATH at=LINE[:COLUMN] [errors=N] error=REGEX -->
+```
+
+- **The attributes** come in exactly this order; `in=` is optional, and `at=` is required.
+- **`in=PATH`** names the file in which the compiler locates the error:
+  - `main.cpp` (the default, so a marker without `in=` means `main.cpp`, as before) or the PATH of one of the program's own `file` blocks, a `.cpp` source or a `.hpp` header;
+  - written exactly as that file's name, with the same case;
+  - never a folder, another extension, a file of another program or a file the lesson doesn't show.
+
+  A one-file program can't use `in=`: all of its errors are in `main.cpp`.
+- **`at=LINE[:COLUMN]`** is the line (and column) of the first error **in that file**, not of the `#include` line that brought a header in.
+- **`errors=N`** counts the errors located in PATH in the checked compile step (below). Errors in other files of the same step aren't counted, and nothing is added up over several sources.
+- **`error=REGEX`**, a Python regular expression, must be found in the first error's message after `error: `.
+
+Such a program lists **all** of its `.cpp` files in `add_executable`. Building stops at the first failed step (one job at a time), and that step is the one checked. The program passes only if:
+1. configuring succeeded and reported Clang 22 or newer;
+2. the build failed;
+3. the first failed step **compiles one of its sources**. A failed dependency scan (for example a missing `#include <...>` header) or a failed link is reported as such, never taken for the expected compile error;
+4. the first compiler error in that step's own output (`file:line:column: error: ...`) is located in PATH, at LINE (and COLUMN), and its message matches REGEX. Notes, `fatal error` lines and the `In file included from main.cpp:4:` lines before an error in a header are not errors;
+5. with `errors=N`, exactly N errors of that step are located in PATH.
+
+**A `.cpp` file or a header.** An error in a `.cpp` file, for example `tools.cpp` with a missing `;`, is reported by the step that compiles `tools.cpp`: `in=tools.cpp`. A header isn't compiled by itself. Its errors are reported by a source that includes it, located in the header itself: `record.hpp:1:8: error: redefinition of 'Record'` when `main.cpp` includes `record.hpp` twice without `#pragma once`, so `in=record.hpp at=1:8`. When several sources include a broken header, whichever of them is compiled first fails, with the same location, so the expectation doesn't depend on the order of the sources.
+
+**What is not checked.** Building stops at the first failed step, so a source compiled later isn't compiled at all: an error in it is not seen. Lessons keep one deliberate mistake per broken program, and show the corrected program as an `example`, which builds all of its sources.
+
+**Not supported** (reported, not built):
+- a missing header as the expected error: a local `#include "x.hpp"` must name a file of the program, in every program;
+- `stage=scan` and `stage=configure`: a dependency scan or a CMake configuration can't be an expected result;
 - folders in file names;
 - files shared between programs;
 - any other `CMakeLists.txt`.
@@ -348,9 +379,12 @@ Failure messages and the log of passing runs show at most **1,000 characters** o
 - **Programs in several files** have two kinds of fixtures:
   - **checked before anything is built:** markers, missing and repeated blocks, file names, `CMakeLists.txt`, `#include` lines (also one commented out), conditional directives, and the refusal of what isn't supported. Each of these must be reported with nothing built;
   - **really built with CMake and Ninja on every system:** a program with two `.cpp` files and a header and two runs, a wrong output and an exit code, a one-file example next to it built as before, a link error from a source left out of `add_executable`, a compile error, a scan error and a build that succeeds where a link error was expected, a different linker message, an example that fails to compile or to link, a PL/EN difference, and a broken environment.
+- **Compile errors in several files (`in=`)** have both kinds too:
+  - **checked before anything is built:** `in=` with `stage=link`, without `at=` or in another order, a PATH that isn't a file of the program (another program's file, a folder, another extension, another case), `in=` in a one-file program, a source left out of `add_executable`, and a missing header, still refused;
+  - **really built:** an error in a second `.cpp` file; an error in a header included by two sources; `Record` defined twice in one translation unit, located in `record.hpp`, and the same header with `#pragma once`, which builds and runs; a header that uses a type without including its header; and the wrong expectations: another file (also the `#include` line in `main.cpp` just before an error in the header), another line, column, message or number of errors, a build that succeeds, a scan error, a link error, a broken environment and a PL/EN difference in `in=`.
 
   Static checks can't show that building works: only the second kind can.
-- **Size:** the self-test has 84 cases in the current repository; the number grows with the checker and isn't a requirement.
+- **Size:** the self-test has 107 cases in the current repository; the number grows with the checker and isn't a requirement.
 - **Workflow:** `.github/workflows/toolchains.yml` runs both modes on Windows (MSVC ABI), Ubuntu 24.04 and macOS. Locally, from the repository root, with the official compiler:
 
 ```sh
@@ -368,7 +402,7 @@ It checks the reference programs and the published data. It does **not** check:
 - one exit code per run (only per example), or a run whose input doesn't end with a line end;
 - processes started by an example: lesson programs start none, and the check doesn't manage them;
 - the CMake configure and build output, which isn't limited like a program's output;
-- in a program in several files: a compile error or a missing header as the expected result, a CMake error at configuration, folders, or a `CMakeLists.txt` other than the lesson 0.5 one with its sources (see [Programs in several files](#programs-in-several-files)).
+- in a program in several files: a missing header, a dependency-scan error or a CMake error at configuration as the expected result, an error in a source compiled after the one that failed, folders, or a `CMakeLists.txt` other than the lesson 0.5 one with its sources (see [Programs in several files](#programs-in-several-files)).
 
 Two authoring traps:
 - **Markers and code fences must start at the beginning of the line.** An indented block, for example inside a list item, isn't recognised: an indented ` ```cpp ` block is neither checked nor reported as unmarked.

@@ -36,9 +36,18 @@ exactly one cmake block with the same NAME, anywhere in the lesson:
                                         on one line, main.cpp included; an example lists all of its .cpp files.
                                         Its quoted #include lines must name its .hpp files exactly (comments are
                                         skipped), and #if, #ifdef and #ifndef aren't allowed. It is built one job at
-                                        a time. A broken program in several files can only be stage=link: then every
-                                        listed source must compile, only the link step of first_program may fail,
-                                        and REGEX must match that step's output.
+                                        a time. A broken stage=link program in several files passes only if every
+                                        listed source compiles, only the link step of first_program fails, and
+                                        REGEX matches that step's output;
+    <!-- broken: NAME [in=PATH] at=LINE[:COLUMN] [errors=N] error=REGEX -->
+                                        for a broken program in several files: it must FAIL TO COMPILE. PATH is
+                                        main.cpp (the default) or one of its file blocks, a .cpp or a .hpp, and the
+                                        program lists all of its .cpp files in add_executable. The first failed step
+                                        of the build must compile one of its sources (not scan dependencies, not
+                                        link), and the first compiler error of that step must be located in PATH, at
+                                        LINE (and COLUMN), with a message matching REGEX; with errors=N, that step
+                                        must report exactly N errors located in PATH. An error in a header is
+                                        reported by the source that includes it, so in=PATH may name a header.
 
 Checks:
   * every ```cpp block in a lesson is marked (Module 0 lessons predate the markers and are
@@ -60,9 +69,9 @@ Checks:
     Each run may print at most OUTPUT_LIMIT bytes to stdout, and separately to stderr, counted as the
     program writes them (before Windows line ends are normalised). The checker keeps no more than
     that while the program runs, and stops the program as soon as one stream goes over the limit;
-  * a broken program must fail to build because of compiler errors in main.cpp, as described
-    by its marker; with stage=link, it must compile and then fail in the linker, as above.
-    Its whole build output is printed, to compare the messages across systems.
+  * a broken program must fail to build because of compiler errors in main.cpp (in a program in several files,
+    in its file PATH), as described by its marker; with stage=link, it must compile and then fail in the linker,
+    as above. Its whole build output is printed, to compare the messages across systems.
 
 The lessons are never modified: everything is built in copies under build/lesson-examples.
 
@@ -85,7 +94,7 @@ import time
 
 MARKER = re.compile(r'^<!-- (?:(example|output|input|broken|file|cmake): ([a-z0-9_]+)(.*?)|(fragment)) -->$')
 SOURCE = re.compile(r'^(?: source=(\S+))?(?: exit=(\d+))?$')
-BROKEN = re.compile(r'^(?: stage=(link))?(?: at=(\d+)(?::(\d+))?)?(?: errors=(\d+))? error=(.+)$')
+BROKEN = re.compile(r'^(?: stage=(link))?(?: in=(\S+))?(?: at=(\d+)(?::(\d+))?)?(?: errors=(\d+))? error=(.+)$')
 FILE = re.compile(r'^ (\S+)$')
 FENCE = re.compile(r'^```(\S*)$')
 # The file name of a file block: lowercase, a letter first, .cpp or .hpp, at most 24 characters, no folders.
@@ -101,6 +110,9 @@ FAILED_STEP = re.compile(r'^FAILED: (?:\[code=\d+\] )?(\S+)')
 STEP_START = re.compile(r'^(?:\[\d+/\d+\] |FAILED: |ninja: )')
 # A compiler error in main.cpp: GNU style (main.cpp:4:35: error: ...) or MSVC style (main.cpp(4,35): error: ...).
 ERROR = re.compile(r'main\.cpp(?::(\d+):(\d+):|\((\d+),(\d+)\):) error: (.*)')
+# A compiler error in any file, in the same two styles: the file's name (after the last / or \), its line, column and
+# message. Notes, "fatal error" and the "In file included from main.cpp:3:" lines before an error in a header don't match.
+DIAGNOSTIC = re.compile(r'(?:^|[/\\])([^/\\\s:()]+)(?::(\d+):(\d+):|\((\d+),(\d+)\):) error: (.*)', re.MULTILINE)
 PROJECT = pathlib.Path('course/module_00_tooling/lesson_05_first_program/CMakeLists.txt')
 WARNINGS = '-Wall -Wextra -pedantic-errors -Werror'
 # The most one run of an example may print to stdout, and separately to stderr. Exactly this many bytes is allowed.
@@ -132,9 +144,9 @@ def blocks(path):
             attributes = match[3] or ''
             pattern = BROKEN if kind == 'broken' else SOURCE if kind == 'example' else FILE if kind == 'file' else re.compile('^$')
             parsed = pattern.match(attributes)
-            # A compile-stage broken program needs at=; a link-stage one has no line in main.cpp to point to,
-            # and no compile errors to count, so it takes neither at= nor errors=.
-            if not parsed or (kind == 'broken' and (bool(parsed[1]) == bool(parsed[2]) or (parsed[1] and parsed[4]))):
+            # A compile-stage broken program needs at=; a link-stage one has no file and line to point to,
+            # and no compile errors to count, so it takes neither in=, at= nor errors=.
+            if not parsed or (kind == 'broken' and (bool(parsed[1]) == bool(parsed[3]) or (parsed[1] and (parsed[2] or parsed[5])))):
                 fail(f'{path}:{i + 1}: cannot read the {kind} marker{unsupported(kind, attributes)}: {line}')
                 kind = 'unreadable'
             marker = (kind, match[2], attributes, i + 1)
@@ -169,11 +181,15 @@ def unsupported(kind, attributes):
     if kind != 'broken':
         return ''
     head = attributes.split(' error=', 1)[0]
-    if re.search(r'(?:^| )in=', head):
-        return ' (in= is not supported yet: a compile error located in another file of a program is not checked)'
     stage = re.search(r'(?:^| )stage=(\S+)', head)
     if stage and stage[1] != 'link':
         return f' (stage={stage[1]} is not supported: a broken program can only fail to compile or, with stage=link, to link)'
+    if re.search(r'(?:^| )in=', head):
+        if stage:
+            return ' (in= is not allowed with stage=link: a link error has no file and line to point to)'
+        if not re.search(r'(?:^| )at=', head):
+            return ' (in= needs at=: in= names the file of an expected compile error, at= its line)'
+        return ' (expected in=PATH at=LINE[:COLUMN] [errors=N] error=REGEX, in this order)'
     return ''
 
 
@@ -258,17 +274,22 @@ def check_projects(path, found, examples, broken):
     projects = {}
     for name in sorted(set(files) | set(cmakes)):
         program_files = files.get(name, {})
+        # A broken program with a compile error is built from all of its sources, as an example is, so that a source
+        # left out can't hide where the error is. Only a stage=link program may leave one out.
+        compile_error = name in broken and broken[name][1][1] != 'link'
         problems = []
         if name not in cmakes:
             problems.append('it has file blocks but no cmake block (a program in several files has exactly one)')
         else:
-            problems += cmake_problems(cmakes[name], program_files, name in examples)
+            lists_all = 'an example' if name in examples else 'a broken program with a compile error' if compile_error else None
+            problems += cmake_problems(cmakes[name], program_files, lists_all)
         if not program_files:
             problems.append('it has a cmake block but no file blocks '
                             '(show the CMakeLists.txt of a one-file program as an unmarked block)')
-        if name in broken and broken[name][1][1] != 'link':
-            problems.append('a compile error in a program of several files is not supported yet: '
-                            'a broken program in several files can only be stage=link')
+        if compile_error and broken[name][1][2]:
+            problem = in_problem(broken[name][1][2], program_files)
+            if problem:
+                problems.append(problem)
         code = examples[name][0] if name in examples else broken[name][0]
         problems += include_problems(code, program_files)
         for problem in problems:
@@ -277,7 +298,25 @@ def check_projects(path, found, examples, broken):
             refused.add(name)
         else:
             projects[name] = (program_files, cmakes[name])
+    for name, (_, expectation) in broken.items():
+        if expectation[2] and name not in files and name not in cmakes:
+            fail(f'{path}: program {name}: in= is only for a program in several files '
+                 '(the errors of a one-file program are always in main.cpp)')
+            refused.add(name)
     return projects, refused
+
+
+def in_problem(file_name, files):
+    """What is wrong with in=FILE_NAME of a broken program in several files whose other files are FILES, or None."""
+    if file_name == 'main.cpp' or file_name in files:
+        return None
+    real = {name.lower(): name for name in ['main.cpp', *files]}.get(file_name.lower())
+    if real:
+        return f'in={file_name} differs in case from {real}'
+    if not FILE_NAME.match(file_name):
+        return (f'in={file_name} is not a valid file name: main.cpp or the name of a file block of the program, '
+                'ending in .cpp or .hpp, with no folders')
+    return f'in={file_name} is not a file of the program'
 
 
 def file_name_problem(file_name):
@@ -292,9 +331,10 @@ def file_name_problem(file_name):
     return None
 
 
-def cmake_problems(text, files, is_example):
+def cmake_problems(text, files, lists_all):
     """What is wrong with the CMakeLists.txt of a program in several files: it must be the lesson 0.5 file with only
-    the sources of add_executable(first_program ...) changed. No CMake code is interpreted."""
+    the sources of add_executable(first_program ...) changed. No CMake code is interpreted. LISTS_ALL names the kind of
+    program that must list all of its .cpp files, or is None for a broken stage=link program, which may leave some out."""
     template = PROJECT.read_text(encoding='utf-8').splitlines()
     at = next(i for i, line in enumerate(template) if line.startswith('add_executable('))
     lines = text.splitlines()
@@ -323,10 +363,10 @@ def cmake_problems(text, files, is_example):
                             '(CMake would stop at configuration, and stage=configure is not supported)')
     if 'main.cpp' not in sources:
         problems.append('add_executable must list main.cpp')
-    if is_example:
+    if lists_all:
         for name in files:
             if name.endswith('.cpp') and name not in sources:
-                problems.append(f'{name} is not in add_executable (an example lists all of its .cpp files; '
+                problems.append(f'{name} is not in add_executable ({lists_all} lists all of its .cpp files; '
                                 'leaving one out is allowed only in a broken stage=link program)')
     return problems
 
@@ -610,13 +650,13 @@ def check_broken(lesson, name, code, expectation, args):
         return
     found = [(int(m[1] or m[3]), int(m[2] or m[4]), m[5]) for m in ERROR.finditer(output)]
     if expectation[1] == 'link':
-        check_link_failure(lesson, name, build_dir, output, found, expectation[5])
+        check_link_failure(lesson, name, build_dir, output, found, expectation[6])
         return
     if not found:
         fail(f'{lesson}: broken program {name}: the build failed, but not with a compiler error in main.cpp\n{output}')
         return
     line, column, message = found[0]
-    _, want_line, want_column, want_count, want_error = expectation.groups()
+    _, _, want_line, want_column, want_count, want_error = expectation.groups()
     problems = []
     if line != int(want_line) or (want_column and column != int(want_column)):
         problems.append(f'first error at {line}:{column}, expected {want_line}' + (f':{want_column}' if want_column else ''))
@@ -660,7 +700,7 @@ def check_link_failure(lesson, name, build_dir, output, compile_errors, want_err
 
 
 def check_project_link(lesson, name, code, expectation, project, args):
-    """A broken program in several files (only stage=link): every source in add_executable compiled, and then only
+    """A broken stage=link program in several files: every source in add_executable compiled, and then only
     the link of the program failed, for the expected reason. A failure of any earlier step is rejected."""
     built = build(lesson, name, code, args, flags='', project=project)
     if not built:
@@ -691,12 +731,68 @@ def check_project_link(lesson, name, code, expectation, project, args):
             problems.append('the link step failed, but not in the linker ("linker command failed" is missing)')
         if exe.exists():
             problems.append(f'the program {exe.name} was created')
-        if not re.search(expectation[5], link_output, re.MULTILINE):
-            problems.append(f"the link step's output has no match for {expectation[5]!r}")
+        if not re.search(expectation[6], link_output, re.MULTILINE):
+            problems.append(f"the link step's output has no match for {expectation[6]!r}")
     if problems:
         fail(f'{lesson}: broken program {name} (stage=link, several files): ' + '; '.join(problems) + f'\n{output}')
         return
     print(f'ok   {lesson}: broken program {name} compiles {", ".join(sources)} and fails to link as described')
+    print('     build output:')
+    for text in output.splitlines():
+        print(f'       | {text}')
+
+
+def check_project_compile(lesson, name, code, expectation, project, args):
+    """A broken program in several files with a compile error: the first failed step of the build compiles one of its
+    sources, and that step's first compiler error is located in the file in=PATH (main.cpp by default), as described.
+    The build runs one job at a time and stops at that step, so only its own diagnostics are read: an error in a
+    header is reported by the first source that includes it, never added up over several sources. A failed
+    configuration, dependency scan or link is never taken for the expected compile error."""
+    built = build(lesson, name, code, args, flags='', project=project)
+    if not built:
+        return
+    build_dir, result = built
+    output = result.stdout + result.stderr
+    if result.returncode == 0:
+        fail(f'{lesson}: broken program {name} builds, but the lesson says it must not')
+        return
+    steps = failed_steps(output)
+    want_path = expectation[2] or 'main.cpp'
+    _, _, want_line, want_column, want_count, want_error = expectation.groups()
+    problems = []
+    if not steps:
+        problems.append('the build failed, but no failed step was found in its output')
+    elif steps[0][0] == 'scan':
+        problems.append(f'{steps[0][1]} failed dependency scanning, before compiling (a scan error is not a compile error)')
+    elif steps[0][0] == 'link':
+        problems.append('the program failed to link, so every source compiled without errors')
+    elif steps[0][0] != 'compile':
+        problems.append(f'{step_failure(*steps[0][:2])}, not a compile step')
+    if problems:
+        fail(f'{lesson}: broken program {name} (in={want_path}): ' + '; '.join(problems) + f'\n{output}')
+        return
+    source, step_output = steps[0][1], steps[0][2]
+    found = [(m[1], int(m[2] or m[4]), int(m[3] or m[5]), m[6]) for m in DIAGNOSTIC.finditer(step_output)]
+    if not found:
+        fail(f'{lesson}: broken program {name} (in={want_path}): {source} failed to compile, '
+             f'but with no compiler error that names a file and a line\n{output}')
+        return
+    file_name, line, column, message = found[0]
+    in_path = [error for error in found if error[0] == want_path]
+    if file_name != want_path:
+        problems.append(f'the first error when compiling {source} is in {file_name} at {line}:{column}, expected in {want_path}')
+    else:
+        if line != int(want_line) or (want_column and column != int(want_column)):
+            problems.append(f'first error at {line}:{column}, expected {want_line}' + (f':{want_column}' if want_column else ''))
+        if not re.search(want_error, message):
+            problems.append(f'first error says {message!r}, expected a match for {want_error!r}')
+    if want_count and len(in_path) != int(want_count):
+        problems.append(f'{len(in_path)} errors in {want_path} when compiling {source}, expected {want_count}')
+    if problems:
+        fail(f'{lesson}: broken program {name} (in={want_path}): ' + '; '.join(problems) + f'\n{output}')
+        return
+    print(f'ok   {lesson}: broken program {name} fails to compile {source} as described: {len(in_path)} error(s) '
+          f'in {want_path}, the first at {line}:{column}: {message}')
     print('     build output:')
     for text in output.splitlines():
         print(f'       | {text}')
@@ -744,8 +840,10 @@ def check_course(args):
             if name not in refused:
                 check_example(pl.stem, name, code, exit_code, runs.get(name, []), args, projects.get(name))
         for name, (code, expectation) in broken.items():
-            if name in projects:
+            if name in projects and expectation[1] == 'link':
                 check_project_link(pl.stem, name, code, expectation, projects[name], args)
+            elif name in projects:
+                check_project_compile(pl.stem, name, code, expectation, projects[name], args)
             elif name not in refused:
                 check_broken(pl.stem, name, code, expectation, args)
     if checked == 0:
@@ -783,6 +881,19 @@ TOOLS_CPP = '#include "tools.hpp"\n\nint twice(int value) {\n    return value * 
 # twice(int) missing at link time, in the wording of GNU ld, lld-link and Apple's ld (as in lesson 5.6).
 TWICE_LINK = ('broken: twice stage=link error=undefined reference to .twice\\(int\\)\'|undefined symbol: int __cdecl twice\\(int\\)'
               '|"twice\\(int\\)", referenced from')
+# The compile error of tools.cpp without the semicolon after "value * 2": line 4, column 21.
+TOOLS_ERROR = "broken: twice in=tools.cpp at=4:21 errors=1 error=^expected ';' after return statement$"
+# A type in a header without #pragma once, and a main.cpp that includes it twice: Record is defined twice in one
+# translation unit, and the error is located in record.hpp, though only main.cpp is compiled.
+RECORD_HPP = 'struct Record {\n    int id{0};\n    int points{0};\n};\n'
+RECORD_MAIN = ('#include <iostream>\n\n#include "record.hpp"\n#include "record.hpp"\n\nint main() {\n    Record record{7, 12};\n\n'
+               '    std::cout << "Record " << record.id << ": " << record.points << "\\n";\n}\n')
+# A header that uses Record without including record.hpp: main.cpp includes record.hpp first and compiles, but
+# report.cpp, which includes only report.hpp, fails, with the first error located in report.hpp.
+REPORT_HPP = '#pragma once\n\nint doubled_points(Record record);\n'
+REPORT_CPP = '#include "report.hpp"\n\nint doubled_points(Record record) {\n    return record.points * 2;\n}\n'
+REPORT_MAIN = ('#include <iostream>\n\n#include "record.hpp"\n#include "report.hpp"\n\nint main() {\n    Record record{7, 12};\n\n'
+               '    std::cout << "Doubled: " << doubled_points(record) << "\\n";\n}\n')
 
 
 def lesson(*parts):
@@ -806,6 +917,19 @@ def self_test(args):
 
     def with_sources(sources):
         return cmake_two.replace('main.cpp tools.cpp)', f'{sources})')
+
+    def record(owner, hpp=RECORD_HPP):
+        """The parts of program record: main.cpp and record.hpp, with the lesson 0.5 add_executable."""
+        return [(owner, 'cpp', RECORD_MAIN), ('file: record record.hpp', 'cpp', hpp), ('cmake: record', 'cmake', template)]
+
+    no_semicolon = TOOLS_CPP.replace('* 2;', '* 2')
+    report = [("broken: report in=report.hpp at=3:20 errors=1 error=^unknown type name 'Record'$", 'cpp', REPORT_MAIN),
+              ('file: report record.hpp', 'cpp', '#pragma once\n\n' + RECORD_HPP), ('file: report report.hpp', 'cpp', REPORT_HPP),
+              ('file: report report.cpp', 'cpp', REPORT_CPP),
+              ('cmake: report', 'cmake', template.replace('main.cpp)', 'main.cpp report.cpp)'))]
+    wrong_details = ("broken: twice in=tools.cpp at=4:20 errors=2 error=^expected '\\)'",
+                     "first error at 4:21, expected 4:20; first error says \"expected ';' after return statement\", "
+                     "expected a match for \"^expected '\\\\)'\"; 1 errors in tools.cpp when compiling tools.cpp, expected 2")
 
     twice_runs = [('input: twice', 'text', '4\n'), ('output: twice', 'text', 'Twice: 8\n'),
                   ('input: twice', 'text', '-3\n'), ('output: twice', 'text', 'Twice: -6\n')]
@@ -974,15 +1098,49 @@ def self_test(args):
         ('an #include with a folder is reported, and nothing is built',
          lesson(*program(main=TWICE_MAIN.replace('"tools.hpp"', '"lib/tools.hpp"')), *twice_runs), None,
          'unsupported #include form'),
-        ('a compile-stage broken program in several files is refused as not supported, and nothing is built',
+        # This program used to be refused as not supported; now it is built, and its build must fail.
+        ('a compile-stage broken program in several files that builds is detected',
          lesson(*program(owner="broken: twice at=4 errors=1 error=expected ';'")), None,
-         'a compile error in a program of several files is not supported yet'),
+         'builds, but the lesson says it must not'),
         ('#ifndef in a program in several files is reported, and nothing is built',
          lesson(*program(hpp='#ifndef TOOLS_HPP\n#define TOOLS_HPP\n\nint twice(int value);\n\n#endif\n'), *twice_runs), None,
          'conditional preprocessor directives are not supported'),
-        ('a broken marker with in= is refused as not supported, and nothing is built',
+        ('a broken marker with in= in a one-file program is refused, and nothing is built',
          lesson(("broken: no_semicolon in=main.cpp at=4 errors=1 error=expected ';'", 'cpp', NO_SEMICOLON)), None,
-         'in= is not supported yet'),
+         'in= is only for a program in several files'),
+        # in= of a broken program in several files, checked before anything is built.
+        ('a broken marker with in= and stage=link is reported, and nothing is built',
+         lesson(*program(owner='broken: twice stage=link in=tools.cpp error=twice')), None,
+         'in= is not allowed with stage=link'),
+        ('a broken marker with in= but without at= is reported, and nothing is built',
+         lesson(*program(owner="broken: twice in=tools.cpp errors=1 error=expected ';'", cpp=no_semicolon)), None,
+         'in= needs at='),
+        ('a broken marker with in= and an unreadable at= is reported, and nothing is built',
+         lesson(*program(owner="broken: twice in=tools.cpp at=4: error=expected ';'", cpp=no_semicolon)), None,
+         'expected in=PATH at=LINE[:COLUMN] [errors=N] error=REGEX, in this order'),
+        ('a broken marker with in= after at= is reported, and nothing is built',
+         lesson(*program(owner="broken: twice at=4 in=tools.cpp error=expected ';'", cpp=no_semicolon)), None,
+         'expected in=PATH at=LINE[:COLUMN] [errors=N] error=REGEX, in this order'),
+        # The other program has no cmake block, so it is refused too, and nothing at all is built.
+        ('in= naming a file of another program is reported, and nothing is built',
+         lesson(*program(owner="broken: twice in=other.hpp at=3 error=expected", cpp=no_semicolon),
+                ('example: other', 'cpp', GOOD), ('output: other', 'text', 'Hi!\n'), ('file: other other.hpp', 'cpp', TOOLS_HPP)),
+         None, 'in=other.hpp is not a file of the program'),
+        ('in= with a folder is reported, and nothing is built',
+         lesson(*program(owner="broken: twice in=src/tools.cpp at=4 error=expected", cpp=no_semicolon)), None,
+         'in=src/tools.cpp is not a valid file name'),
+        ('in= with an extension other than .cpp and .hpp is reported, and nothing is built',
+         lesson(*program(owner="broken: twice in=tools.h at=4 error=expected", cpp=no_semicolon)), None,
+         'in=tools.h is not a valid file name'),
+        ('in= with another case is reported, and nothing is built',
+         lesson(*program(owner="broken: twice in=Tools.cpp at=4 error=expected", cpp=no_semicolon)), None,
+         'in=Tools.cpp differs in case from tools.cpp'),
+        ('a broken program with a compile error that leaves a source out of add_executable is reported, and nothing is built',
+         lesson(*program(owner=TOOLS_ERROR, cpp=no_semicolon, cmake=template)), None,
+         'tools.cpp is not in add_executable (a broken program with a compile error lists all of its .cpp files'),
+        ('a missing header is still refused in a broken program with a compile error, and nothing is built',
+         lesson(*program(owner="broken: twice at=3 error=file not found", main=TWICE_MAIN.replace('"tools.hpp"', '"tool.hpp"'))),
+         None, '#include "tool.hpp" is not a file of the program'),
         ('a broken marker with stage=configure is refused as not supported, and nothing is built',
          lesson(('broken: mian stage=configure error=main', 'cpp', MIAN)), None, 'stage=configure is not supported'),
         # Programs in several files, really built with CMake and Ninja (and run where they build).
@@ -1018,6 +1176,44 @@ def self_test(args):
          lesson(*twice), lesson(*program(cpp=TOOLS_CPP.replace('* 2', '* 3')), *twice_runs), 'differ between'),
         ('a broken environment is not taken for the result of a program in several files',
          lesson(*twice), None, 'configure failed (an environment problem'),
+        # Compile errors in a program in several files (in=), really built.
+        ('a compile error in a second .cpp file fails as described (in=tools.cpp)',
+         lesson(*program(owner=TOOLS_ERROR, cpp=no_semicolon)), None, None),
+        ('a compile error in a second .cpp file expected in main.cpp is detected',
+         lesson(*program(owner="broken: twice in=main.cpp at=4 error=expected ';'", cpp=no_semicolon)), None,
+         'the first error when compiling tools.cpp is in tools.cpp at 4:21, expected in main.cpp'),
+        ('a different column, message and number of errors in a second .cpp file are detected',
+         lesson(*program(owner=wrong_details[0], cpp=no_semicolon)), None, wrong_details[1]),
+        # Both sources include the broken header; tools.cpp is listed first, so it is compiled, and fails, first.
+        ('an error in a header included by two sources fails as described, reported by the first source compiled (in=tools.hpp)',
+         lesson(*program(owner="broken: twice in=tools.hpp at=3:21 errors=1 error=^expected ';' after top level declarator$",
+                         hpp=TOOLS_HPP.replace('value);', 'value)'), cmake=with_sources('tools.cpp main.cpp'))), None, None),
+        ('a type defined twice in one translation unit fails as described (in=record.hpp)',
+         lesson(*record("broken: record in=record.hpp at=1:8 errors=1 error=^redefinition of 'Record'$")), None, None),
+        # "In file included from .../main.cpp:4:" stands just before the error, but the error is located in record.hpp.
+        ('an error in a header is not taken for an error at its #include line (in=main.cpp)',
+         lesson(*record("broken: record in=main.cpp at=4 error=redefinition")), None,
+         'the first error when compiling main.cpp is in record.hpp at 1:8, expected in main.cpp'),
+        ('an error on another line of a header is detected',
+         lesson(*record("broken: record in=record.hpp at=2 error=redefinition")), None, 'first error at 1:8, expected 2'),
+        ('a header included twice with #pragma once builds and runs',
+         lesson(*record('example: record', hpp='#pragma once\n\n' + RECORD_HPP), ('output: record', 'text', 'Record 7: 12\n')),
+         None, None),
+        ('a header that uses a type without including its header fails as described (in=report.hpp)',
+         lesson(*report), None, None),
+        ('an expected compile error that is really a dependency-scanning error is detected',
+         lesson(*program(owner='broken: twice in=tools.cpp at=1:10 error=file not found',
+                         cpp='#include <no_such_header>\n' + TOOLS_CPP)), None,
+         'tools.cpp failed dependency scanning, before compiling'),
+        ('an expected compile error that is really a link error is detected',
+         lesson(*program(owner='broken: twice in=tools.cpp at=3 error=twice',
+                         cpp=TOOLS_CPP.replace('int twice(int value) {', 'int twice_value(int value) {'))), None,
+         'the program failed to link, so every source compiled without errors'),
+        ('a broken environment is not taken for the expected compile error of a program in several files',
+         lesson(*program(owner=TOOLS_ERROR, cpp=no_semicolon)), None, 'configure failed (an environment problem'),
+        ('a different in= in PL and EN is detected',
+         lesson(*program(owner=TOOLS_ERROR, cpp=no_semicolon)),
+         lesson(*program(owner=TOOLS_ERROR.replace('in=tools.cpp', 'in=main.cpp'), cpp=no_semicolon)), 'differ between'),
     ]
     project = PROJECT.resolve()
     home = os.getcwd()
