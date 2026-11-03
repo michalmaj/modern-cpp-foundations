@@ -520,7 +520,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji deklaracja `calculate_points` stała w `main.cpp`. Co jednak, jeśli z tej samej funkcji mają korzystać różne pliki? Każdy potrzebowałby wtedy własnej kopii deklaracji, a przy każdej zmianie funkcji trzeba by poprawić wszystkie kopie. W następnej lekcji Modułu 11 deklaracja trafi do jednego wspólnego miejsca: własnego pliku nagłówkowego. Ta lekcja jest w przygotowaniu.
+W tej lekcji deklaracja `calculate_points` stała w `main.cpp`. Co jednak, jeśli z tej samej funkcji mają korzystać różne pliki? Każdy potrzebowałby wtedy własnej kopii deklaracji, a przy każdej zmianie funkcji trzeba by poprawić wszystkie kopie. W następnej lekcji Modułu 11 deklaracja trafi do jednego wspólnego miejsca: własnego pliku nagłówkowego. Przejdź do [lekcji 11.2: Własny plik nagłówkowy](lesson_02_own_header_file.md).
 
 ---
 
@@ -650,4 +650,4 @@ Kompilacja i linkowanie udają się: `points.cpp` jest teraz na liście plików 
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 10.5: Zapisy na warsztaty (sprawdzian Modułu 10)](../module_10_input_records/lesson_05_workshop_registrations.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 10.5: Zapisy na warsztaty (sprawdzian Modułu 10)](../module_10_input_records/lesson_05_workshop_registrations.md) · **Następna lekcja:** [Lekcja 11.2: Własny plik nagłówkowy](lesson_02_own_header_file.md) · [Opis kursu](../../README.md)

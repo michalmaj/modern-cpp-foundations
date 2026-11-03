@@ -520,7 +520,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson, the declaration of `calculate_points` stood in `main.cpp`. But what if different files are to use the same function? Each would then need its own copy of the declaration, and every change to the function would mean fixing all the copies. In the next lesson of Module 11, the declaration will go into one shared place: your own header file. That lesson is in preparation.
+In this lesson, the declaration of `calculate_points` stood in `main.cpp`. But what if different files are to use the same function? Each would then need its own copy of the declaration, and every change to the function would mean fixing all the copies. In the next lesson of Module 11, the declaration will go into one shared place: your own header file. Go on to [lesson 11.2: Your own header file](lesson_02_own_header_file.en.md).
 
 ---
 
@@ -650,4 +650,4 @@ Compiling and linking succeed: `points.cpp` is now on the list of files to build
 
 </details>
 
-**Previous lesson:** [Lesson 10.5: Workshop registrations (the Module 10 test)](../module_10_input_records/lesson_05_workshop_registrations.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 10.5: Workshop registrations (the Module 10 test)](../module_10_input_records/lesson_05_workshop_registrations.en.md) · **Next lesson:** [Lesson 11.2: Your own header file](lesson_02_own_header_file.en.md) · [Course overview](../../README.en.md)
