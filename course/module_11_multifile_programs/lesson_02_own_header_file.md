@@ -441,7 +441,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Nagłówek z tej lekcji zawiera tylko deklarację funkcji. Programy z Modułów 8–10 miały też własne typy, z których korzystało kilka funkcji. W następnej lekcji Modułu 11 definicja takiego typu trafi do wspólnego nagłówka. Ta lekcja jest w przygotowaniu.
+Nagłówek z tej lekcji zawiera tylko deklarację funkcji. Programy z Modułów 8–10 miały też własne typy, z których korzystało kilka funkcji. W [lekcji 11.3: Wspólny typ w nagłówku](lesson_03_shared_type_in_header.md) definicja takiego typu trafi do wspólnego nagłówka.
 
 ---
 
@@ -593,4 +593,4 @@ Points: 14
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 11.1: Drugi plik źródłowy](lesson_01_second_source_file.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 11.1: Drugi plik źródłowy](lesson_01_second_source_file.md) · **Następna lekcja:** [Lekcja 11.3: Wspólny typ w nagłówku](lesson_03_shared_type_in_header.md) · [Opis kursu](../../README.md)

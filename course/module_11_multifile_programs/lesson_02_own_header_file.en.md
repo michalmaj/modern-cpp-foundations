@@ -441,7 +441,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The header in this lesson contains only a function's declaration. The programs of Modules 8–10 also had their own types, used by several functions. In the next lesson of Module 11, the definition of such a type will go into a shared header. That lesson is in preparation.
+The header in this lesson contains only a function's declaration. The programs of Modules 8–10 also had their own types, used by several functions. In [lesson 11.3: A shared type in a header](lesson_03_shared_type_in_header.en.md), the definition of such a type goes into a shared header.
 
 ---
 
@@ -593,4 +593,4 @@ Points: 14
 
 </details>
 
-**Previous lesson:** [Lesson 11.1: A second source file](lesson_01_second_source_file.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 11.1: A second source file](lesson_01_second_source_file.en.md) · **Next lesson:** [Lesson 11.3: A shared type in a header](lesson_03_shared_type_in_header.en.md) · [Course overview](../../README.en.md)
