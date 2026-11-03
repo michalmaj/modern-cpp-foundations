@@ -69,8 +69,10 @@ Code blocks are marked with an HTML comment, which GitHub doesn't show. The mark
 | `<!-- broken: NAME at=LINE[:COLUMN] [errors=N] error=REGEX -->` | ` ```cpp ` | A program that must **fail to compile**, with its first error in `main.cpp` at LINE (and COLUMN) and a message matching REGEX; with `errors=N`, `main.cpp` must get exactly N errors. |
 | `<!-- broken: NAME stage=link error=REGEX -->` | ` ```cpp ` | A program that must **compile and then fail to link**, with REGEX matching the build output. |
 | `<!-- fragment -->` | ` ```cpp ` | Deliberately incomplete code: never built or run. |
+| `<!-- file: NAME PATH -->` | ` ```cpp ` | One more file of program NAME, a `.cpp` source or a `.hpp` header, saved as PATH (see [Programs in several files](#programs-in-several-files)). |
+| `<!-- cmake: NAME -->` | ` ```cmake ` | The `CMakeLists.txt` of program NAME, for a program in several files. |
 
-- **NAME** uses lowercase letters, digits and `_`. Within one lesson, every `example` and `broken` program has its own name; a buggy program and its fixed version get different names.
+- **NAME** uses lowercase letters, digits and `_`. Within one lesson, every `example` and `broken` program has its own name; a buggy program and its fixed version get different names. `file` and `cmake` blocks use the NAME of the program they belong to.
 - **Attributes** are exactly the ones above, in that order. Anything else makes the marker unreadable and is reported. There is no `warning=` attribute.
 - **Every ` ```cpp ` block must have a marker**; an unmarked one is reported. ` ```text ` blocks without a marker are ordinary text.
 - **Every `example` needs at least one `output` block.** Every `input` and `output` block needs an `example` of the same name in the same lesson.
@@ -79,11 +81,12 @@ Which marker to use:
 - a complete program the learner runs, with its exact output: `example` with `output` (and `input`);
 - a line, a header or a sketch to read, or code that must not run, such as an endless loop: `fragment`;
 - a compile error the learner should see: `broken` with `at=`;
-- a link error: `broken` with `stage=link`.
+- a link error: `broken` with `stage=link`;
+- a program in several files: its `example` or `broken` block for `main.cpp`, a `file` block for each other file, and one `cmake` block.
 
 ### Building
 
-Each `example` and each `broken` program is built as `main.cpp` of the lesson 0.5 project (its `CMakeLists.txt`), with CMake, Ninja and the given compiler, in Debug. This happens in a copy under `build/lesson-examples/<lesson>/<name>`; the lessons are never modified.
+Each `example` and each `broken` program is built as `main.cpp` of the lesson 0.5 project (its `CMakeLists.txt`), with CMake, Ninja and the given compiler, in Debug. This happens in a copy under `build/lesson-examples/<lesson>/<name>`; the lessons are never modified. A program in several files brings its own files and `CMakeLists.txt` ([Programs in several files](#programs-in-several-files)); everything else below applies to it too.
 
 - **Examples** are built with `-Wall -Wextra -pedantic-errors -Werror`, so any warning fails the build.
 - **Broken programs** are built with the project's own flags only, exactly as a learner builds them, because some messages are warnings on one system and errors on another.
@@ -103,7 +106,123 @@ Each `example` and each `broken` program is built as `main.cpp` of the lesson 0.
 
   Linker messages differ per platform, so REGEX lists the minimal alternatives (GNU `ld`, Apple `ld`, `lld-link`).
 
+  This is for one-file programs; a program in several files has stricter rules ([Programs in several files](#programs-in-several-files)).
+
 The whole build output of every broken program is printed, so the messages on the three systems can be compared. Before pinning a message, check it on all three systems and pin its stable part. For example, lesson 4.3 pins `at=8 errors=1 error=^use of undeclared identifier 'lap'$` after a first run with a permissive `error=.` on the lesson's branch.
+
+### Programs in several files
+
+A program may consist of `main.cpp`, more `.cpp` files and `.hpp` headers, built from its own `CMakeLists.txt`. Its blocks are tied together by NAME, so they may stand anywhere in the lesson, before or after the program's own block:
+
+- the `example` or `broken` block is always `main.cpp`;
+- each other file has a `file` block: `<!-- file: NAME PATH -->` above a ` ```cpp ` block, for a source and for a header alike;
+- exactly one `cmake` block: `<!-- cmake: NAME -->` above a ` ```cmake ` block.
+
+A program without `file` and `cmake` blocks is a one-file program and is checked exactly as before. A program with any of them needs its own block, at least one `file` block and exactly one `cmake` block.
+
+````markdown
+<!-- example: twice -->
+```cpp
+#include <iostream>
+
+#include "tools.hpp"
+
+int main() {
+    int value{0};
+
+    std::cin >> value;
+    std::cout << "Twice: " << twice(value) << "\n";
+}
+```
+
+<!-- file: twice tools.hpp -->
+```cpp
+#pragma once
+
+int twice(int value);
+```
+
+<!-- file: twice tools.cpp -->
+```cpp
+#include "tools.hpp"
+
+int twice(int value) {
+    return value * 2;
+}
+```
+
+<!-- cmake: twice -->
+```cmake
+cmake_minimum_required(VERSION 3.28)
+project(first_program LANGUAGES CXX)
+
+add_executable(first_program main.cpp tools.cpp)
+target_compile_features(first_program PRIVATE cxx_std_20)
+set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
+```
+
+<!-- input: twice -->
+```text
+4
+```
+
+<!-- output: twice -->
+```text
+Twice: 8
+```
+````
+
+More `input`/`output` pairs give more runs of the same program, as for any example. The markers are invisible on GitHub, so tell the learner the name of each file in the text above its block.
+
+**Before anything is built**, the lesson is checked against these rules. A program that breaks one is reported and not built.
+
+- **File names:**
+  - lowercase letters, digits and `_`, starting with a letter, ending in `.cpp` or `.hpp`, at most 24 characters;
+  - no folders, `..` or separators;
+  - not `main.cpp`;
+  - not a name Windows reserves for a device (`con`, `prn`, `aux`, `nul`, `com1`–`com9`, `lpt1`–`lpt9`, with any extension);
+  - each name once per program.
+- **Every block needs its program:** a `file` or `cmake` block whose NAME has no `example` or `broken` block is reported. So are `file` blocks without a `cmake` block, a `cmake` block without `file` blocks, and a second `cmake` block.
+- **`CMakeLists.txt`** must be the lesson 0.5 file, line for line, except the sources of `add_executable(first_program ...)`:
+  - one line, the sources separated by single spaces, in any order;
+  - `main.cpp` included;
+  - only `.cpp` files of the program, with exactly their names, each once; headers are not listed;
+  - no other change or command.
+
+  An `example` lists all of its `.cpp` files. A `broken` program with `stage=link` may leave some out: that is how a source missing from the build is shown. A source that isn't a file of the program is reported before CMake runs: CMake would stop at configuration, which a lesson can't use as an expected result.
+- **Preprocessor directives** in `main.cpp` and the `file` blocks:
+  - comments (`//` and `/* ... */`) are skipped, so a commented-out `#include` is not checked;
+  - every other `#include` is either `#include <...>` or `#include "name.hpp"` naming a header of the program **with the same case**. A different case would work on Windows and macOS but not on Linux, so it is reported on every system, in examples and broken programs alike;
+  - a header that no file includes is allowed;
+  - `#if`, `#ifdef`, `#ifndef` and the other conditional directives are not allowed, because the check doesn't interpret them; headers use `#pragma once`.
+
+**Building:**
+- the files are written next to `main.cpp` in `build/lesson-examples/<lesson>/<name>/src`, with the program's `CMakeLists.txt` instead of the lesson 0.5 one;
+- configuring is the same as for every program (Debug, Ninja, the compiler, Clang 22 or newer, the same flags);
+- building uses one job at a time (`cmake --build DIR -j 1`), so the steps run, and a failed build stops, in the same order on every system.
+
+An example that fails to build is reported with its first failed step, for example `build failed: tools.cpp failed to compile` or `build failed: the program failed to link`.
+
+**Broken programs in several files** can only be `stage=link`. They pass only if:
+1. configuring succeeded;
+2. the build failed;
+3. no earlier step failed: no dependency scanning, no compiling, nothing else;
+4. the only failed step is the link of `first_program` (`first_program.exe` on Windows), found in Ninja's `FAILED:` lines;
+5. every source in `add_executable` has its object file;
+6. that step's output contains `linker command failed`;
+7. no program was created;
+8. REGEX matches that step's output.
+
+A source that fails to compile, or a missing header found at the dependency scan, is reported as the reason the build stopped before linking, never as the expected link error.
+
+**Not supported yet** (reported, not built):
+- a compile error in a program of several files (`broken` with `at=`);
+- `in=`;
+- a missing header as the expected error;
+- `stage=configure`;
+- folders in file names;
+- files shared between programs;
+- any other `CMakeLists.txt`.
 
 ### Runs, standard input and expected output
 
@@ -209,7 +328,7 @@ Failure messages and the log of passing runs show at most **1,000 characters** o
 ### Polish and English lessons
 
 - For every `X.md` there must be an `X.en.md`.
-- **The marked blocks of the two files must be the same list:** the same markers (kind, name, attributes) with byte-identical code, input and expected output, in the same order. Fragments and broken programs are included.
+- **The marked blocks of the two files must be the same list:** the same markers (kind, name, attributes) with byte-identical code, input and expected output, in the same order. Fragments, broken programs, `file` and `cmake` blocks are included.
 - **Marked blocks must be ASCII,** so code, input and output contain no Polish characters.
 - **Nothing else is compared:** prose, headings, tables and unmarked blocks aren't checked. The check says nothing about whether the two lessons explain the same things equally well; that remains a review task.
 
@@ -226,7 +345,12 @@ Failure messages and the log of passing runs show at most **1,000 characters** o
   - wrongly paired `input`/`output` blocks;
   - a program that never ends;
   - since PR #35, the output limit: exactly 65,536 and 65,537 bytes on each stream (written without line ends, so the byte counts are the same on Windows), programs that flood stdout or stderr, writing to both streams in turns, and short failure messages.
-- **Size:** the self-test has 36 cases in the current repository; the number grows with the checker and isn't a requirement.
+- **Programs in several files** have two kinds of fixtures:
+  - **checked before anything is built:** markers, missing and repeated blocks, file names, `CMakeLists.txt`, `#include` lines (also one commented out), conditional directives, and the refusal of what isn't supported. Each of these must be reported with nothing built;
+  - **really built with CMake and Ninja on every system:** a program with two `.cpp` files and a header and two runs, a wrong output and an exit code, a one-file example next to it built as before, a link error from a source left out of `add_executable`, a compile error, a scan error and a build that succeeds where a link error was expected, a different linker message, an example that fails to compile or to link, a PL/EN difference, and a broken environment.
+
+  Static checks can't show that building works: only the second kind can.
+- **Size:** the self-test has 84 cases in the current repository; the number grows with the checker and isn't a requirement.
 - **Workflow:** `.github/workflows/toolchains.yml` runs both modes on Windows (MSVC ABI), Ubuntu 24.04 and macOS. Locally, from the repository root, with the official compiler:
 
 ```sh
@@ -243,7 +367,8 @@ It checks the reference programs and the published data. It does **not** check:
 - compiler warnings as an expected result: examples must have none, and a `broken` program can only expect errors;
 - one exit code per run (only per example), or a run whose input doesn't end with a line end;
 - processes started by an example: lesson programs start none, and the check doesn't manage them;
-- the CMake configure and build output, which isn't limited like a program's output.
+- the CMake configure and build output, which isn't limited like a program's output;
+- in a program in several files: a compile error or a missing header as the expected result, a CMake error at configuration, folders, or a `CMakeLists.txt` other than the lesson 0.5 one with its sources (see [Programs in several files](#programs-in-several-files)).
 
 Two authoring traps:
 - **Markers and code fences must start at the beginning of the line.** An indented block, for example inside a list item, isn't recognised: an indented ` ```cpp ` block is neither checked nor reported as unmarked.
