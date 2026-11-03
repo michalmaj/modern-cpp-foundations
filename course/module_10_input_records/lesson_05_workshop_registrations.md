@@ -1087,6 +1087,6 @@ Po pięciu lekcjach potrafisz:
 
 ## Co dalej
 
-Kolejny moduł kursu jest w przygotowaniu.
+W Module 11, „Programy w kilku plikach”, jeden program będzie się składać z kilku plików źródłowych. Zacznij od pierwszej lekcji: [Lekcja 11.1: Drugi plik źródłowy](../module_11_multifile_programs/lesson_01_second_source_file.md).
 
-**Poprzednia lekcja:** [Lekcja 10.4: Funkcja odczytująca rekord i zakończenie danych](lesson_04_reading_function_and_end_of_data.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 10.4: Funkcja odczytująca rekord i zakończenie danych](lesson_04_reading_function_and_end_of_data.md) · **Następna lekcja:** [Lekcja 11.1: Drugi plik źródłowy](../module_11_multifile_programs/lesson_01_second_source_file.md) · [Opis kursu](../../README.md)

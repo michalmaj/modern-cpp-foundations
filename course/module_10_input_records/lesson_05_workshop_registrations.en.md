@@ -1087,6 +1087,6 @@ After five lessons, you can:
 
 ## What's next
 
-The next module of the course is in preparation.
+In Module 11, "Programs in several files", one program will consist of several source files. Start with the first lesson: [Lesson 11.1: A second source file](../module_11_multifile_programs/lesson_01_second_source_file.en.md).
 
-**Previous lesson:** [Lesson 10.4: A record-reading function and the ending of the data](lesson_04_reading_function_and_end_of_data.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 10.4: A record-reading function and the ending of the data](lesson_04_reading_function_and_end_of_data.en.md) · **Next lesson:** [Lesson 11.1: A second source file](../module_11_multifile_programs/lesson_01_second_source_file.en.md) · [Course overview](../../README.en.md)
