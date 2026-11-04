@@ -568,7 +568,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The program in this lesson has one type and one function. The larger programs of Modules 8–10 had several functions that read data, analysed it and printed results. The next lesson of Module 11 is in preparation.
+The program in this lesson has one type and one function. The larger programs of Modules 8–10 had several functions that read data, analysed it and printed results. In [lesson 11.4: Splitting a program by responsibility](lesson_04_splitting_responsibilities.en.md), such a program goes into several files, each with its own role.
 
 ---
 
@@ -816,4 +816,4 @@ Points: 14
 
 </details>
 
-**Previous lesson:** [Lesson 11.2: Your own header file](lesson_02_own_header_file.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 11.2: Your own header file](lesson_02_own_header_file.en.md) · **Next lesson:** [Lesson 11.4: Splitting a program by responsibility](lesson_04_splitting_responsibilities.en.md) · [Course overview](../../README.en.md)
