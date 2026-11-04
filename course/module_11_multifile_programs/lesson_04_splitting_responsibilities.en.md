@@ -780,7 +780,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In lessons 11.1–11.4 the program went from one file to several `.cpp` files with a shared header, each with its own role. The next lesson of Module 11 is in preparation.
+In lessons 11.1–11.4 the program went from one file to several `.cpp` files with a shared header, each with its own role. In [lesson 11.5: Checkpoint — Building a Multi-File Program](lesson_05_multifile_checkpoint.en.md), you'll design such a program on your own, from the plan to the diagnostics.
 
 ---
 
@@ -1163,4 +1163,4 @@ After the second definition of `total_boxes` is removed from `shipments_report.c
 
 </details>
 
-**Previous lesson:** [Lesson 11.3: A shared type in a header](lesson_03_shared_type_in_header.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 11.3: A shared type in a header](lesson_03_shared_type_in_header.en.md) · **Next lesson:** [Lesson 11.5: Checkpoint — Building a Multi-File Program](lesson_05_multifile_checkpoint.en.md) · [Course overview](../../README.en.md)
