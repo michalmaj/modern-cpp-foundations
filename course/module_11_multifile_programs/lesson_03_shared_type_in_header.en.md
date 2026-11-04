@@ -54,6 +54,8 @@ int calculate_points(const TaskResult& result);
 
 Why does the header contain the type's full **definition**, not just a declaration as for the function? A file that creates a record or reads its fields must know which fields the record consists of. A call to a function from another file is joined by the linker (lesson 11.1), but no linker adds a type's fields: the compiler needs them in every `.cpp` file that uses them. That's why a type's definition may stand in a header included by several `.cpp` files. **An ordinary function's definition still stays in the `.cpp` file** (lesson 11.2, section 2).
 
+**A self-contained header** itself includes the headers that its declarations and type definitions need, instead of counting on a `.cpp` file to have included them earlier. `points.hpp` uses only `int`, so it needs no standard header. If it used `std::string` or `std::vector`, it would itself include `<string>` or `<vector>`. The same goes for your own headers (section 9).
+
 ## 3. `main.cpp` and `points.cpp` use the type
 
 `main.cpp` creates a record, puts the numbers it reads into its fields and passes it to the function:
@@ -563,7 +565,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 - We define the type in one place, not in copies in every `.cpp` file. An ordinary function's definition still stays in the `.cpp` file.
 - Within one translation unit, a type may be defined only once. `#pragma once` protects against processing a header again in the same `.cpp` file. Including a header in different `.cpp` files is correct.
 - `redefinition` is a compile error, and the message points to a place in the header. The line `In file included from` says where the header came from.
-- A header should itself include the headers it needs, instead of depending on the order of the `#include` lines in the `.cpp` files.
+- A header should itself include the headers it needs, instead of depending on the order of the `#include` lines in the `.cpp` files. Such a header is called self-contained.
 - Changing how the files and the function's interface are organised doesn't change the program's results.
 
 ## What's next

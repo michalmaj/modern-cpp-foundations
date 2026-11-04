@@ -27,7 +27,11 @@ Po tej lekcji będziesz:
 
 ## 1. Przygotuj projekt
 
-W `cpp-workspace` utwórz katalog `lesson_11_4` i skopiuj do niego `CMakeLists.txt` z oryginalnego `lesson_05_first_program`. Programem wyjściowym jest lista przesyłek z [lekcji 10.3, punkt 2](../module_10_input_records/lesson_03_building_a_vector_of_records.md#2-lista-przesyłek). Jeśli Twój `main.cpp` w `lesson_10_3` zawiera już inny program, skopiuj kod z tamtego punktu. W tej lekcji nie zmieniasz jego działania, tylko rozkładasz go na cztery pliki.
+W `cpp-workspace` utwórz katalog `lesson_11_4`, skopiuj do niego `CMakeLists.txt` z oryginalnego `lesson_05_first_program` i utwórz w nim `main.cpp` z programem listy przesyłek z [lekcji 10.3, punkt 2](../module_10_input_records/lesson_03_building_a_vector_of_records.md#2-lista-przesyłek). Jeśli Twój `main.cpp` w `lesson_10_3` zawiera już inny program, skopiuj kod z tamtego punktu. W tej lekcji nie zmieniasz jego działania, tylko rozkładasz go na cztery pliki, wszystkie w katalogu `lesson_11_4`:
+
+1. **W punktach 3–5** utwórz obok `main.cpp` trzy nowe pliki: `shipments.hpp`, `shipments_analysis.cpp` i `shipments_report.cpp`, jak w lekcjach 11.1 i 11.2, i wpisz do nich pokazany kod.
+2. **W punkcie 6** zmień `main.cpp`: typ, sumowanie i raport są już w nowych plikach, więc w `main.cpp` zostają odczyt i sterowanie.
+3. **W punkcie 7** dopisz oba nowe pliki `.cpp` do `add_executable`, obok `main.cpp`: wszystkie trzy należą do tego samego programu `first_program`. Dopiero wtedy zbuduj i uruchom program.
 
 ## 2. Najpierw plan podziału
 
@@ -194,7 +198,7 @@ int main() {
 
 ## 7. Zbuduj i porównaj wyniki
 
-`add_executable` wymienia teraz trzy pliki `.cpp`, w jednej linijce, bez nagłówka:
+Zmień linijkę `add_executable` tak, żeby wymieniała trzy pliki `.cpp`, w jednej linijce, bez nagłówka. Jeśli pliki dopisał CLion, porównaj ją z pokazaną niżej:
 
 <!-- cmake: shipments -->
 ```cmake
@@ -780,7 +784,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W lekcjach 11.1–11.4 program przeszedł od jednego pliku do kilku plików `.cpp` ze wspólnym nagłówkiem, a każdy z nich ma swoją rolę. W [lekcji 11.5: Sprawdzian — samodzielny program wieloplikowy](lesson_05_multifile_checkpoint.md) zaprojektujesz taki program samodzielnie, od planu po diagnostykę.
+W lekcjach 11.1–11.4 program przeszedł od jednego pliku do kilku plików `.cpp` ze wspólnym nagłówkiem, a każdy z nich ma swoją rolę. W [lekcji 11.5: Samodzielny program wieloplikowy (sprawdzian Modułu 11)](lesson_05_multifile_checkpoint.md) zaprojektujesz taki program samodzielnie, od planu po diagnostykę.
 
 ---
 
@@ -1163,4 +1167,4 @@ Po usunięciu drugiej definicji `total_boxes` z `shipments_report.cpp` wszystkie
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 11.3: Wspólny typ w nagłówku](lesson_03_shared_type_in_header.md) · **Następna lekcja:** [Lekcja 11.5: Sprawdzian — samodzielny program wieloplikowy](lesson_05_multifile_checkpoint.md) · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 11.3: Wspólny typ w nagłówku](lesson_03_shared_type_in_header.md) · **Następna lekcja:** [Lekcja 11.5: Samodzielny program wieloplikowy (sprawdzian Modułu 11)](lesson_05_multifile_checkpoint.md) · [Opis kursu](../../README.md)

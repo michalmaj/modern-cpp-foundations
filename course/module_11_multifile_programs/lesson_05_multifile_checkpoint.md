@@ -1,4 +1,4 @@
-# Lekcja 11.5: Sprawdzian — samodzielny program wieloplikowy
+# Lekcja 11.5: Samodzielny program wieloplikowy (sprawdzian Modułu 11)
 
 **Polski** · [English](lesson_05_multifile_checkpoint.en.md) · [Opis kursu](../../README.md)
 
@@ -312,6 +312,8 @@ Odpowiedz własnymi słowami, odnosząc się do swojego projektu:
 
 ## Lista kontrolna przed oddaniem
 
+Sprawdzian jest zaliczony, gdy spełniasz **wszystkie** punkty tej listy. Twój podział na funkcje i pliki może być inny niż w rozwiązaniu referencyjnym, jeśli spełnia specyfikację.
+
 - [ ] Plan z części A powstał przed kodem i zgadza się z programem.
 - [ ] Typ sali jest zdefiniowany raz, we wspólnym nagłówku z `#pragma once`, który sam dołącza potrzebne nagłówki standardowe.
 - [ ] Nagłówek zawiera definicję typu i deklaracje, bez definicji funkcji.
@@ -322,11 +324,11 @@ Odpowiedz własnymi słowami, odnosząc się do swojego projektu:
 - [ ] `main.cpp` sprawdza odczyt obu liczb przed zasadami, a przy błędzie kończy pracę bez części raportu.
 - [ ] `add_executable` wymienia wszystkie pliki `.cpp`, bez nagłówka, a żaden plik nie dołącza pliku `.cpp`.
 - [ ] Dla A, B oraz C albo D wynik zgadza się co do znaku, a pozostałe przypadki z tabeli zgadzają się z pełną listą.
-- [ ] Część C jest wykonana.
+- [ ] Część C jest wykonana: błąd z diagnostyki jest poprawiony i sprawdzony, a odpowiedzi z uzasadnienia odnoszą się do Twojego projektu.
 
 ## Kryteria oceny
 
-Rubryka służy do samooceny albo do oceny przez prowadzącego. Kurs nie ma skali ocen ani progu punktowego: punkty pokazują, które obszary są opanowane, a które wymagają powtórki.
+Rubryka służy do samooceny albo do oceny przez prowadzącego. Kurs nie ma skali ocen ani progu punktowego: punkty pokazują, które obszary są opanowane, a które wymagają powtórki. O zaliczeniu decyduje lista kontrolna powyżej, a nie liczba punktów.
 
 | Obszar | Punkty | Pełne punkty, gdy |
 |---|---:|---|

@@ -161,7 +161,7 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Moduł 11, lekcja 2: [Własny plik nagłówkowy](course/module_11_multifile_programs/lesson_02_own_header_file.md) | Dostępna (wersja pilotażowa; kroki w CLionie nie zostały jeszcze sprawdzone na każdym systemie) |
 | Moduł 11, lekcja 3: [Wspólny typ w nagłówku](course/module_11_multifile_programs/lesson_03_shared_type_in_header.md) | Dostępna (wersja pilotażowa; kroki w CLionie nie zostały jeszcze sprawdzone na każdym systemie) |
 | Moduł 11, lekcja 4: [Podział programu według odpowiedzialności](course/module_11_multifile_programs/lesson_04_splitting_responsibilities.md) | Dostępna (wersja pilotażowa; kroki w CLionie nie zostały jeszcze sprawdzone na każdym systemie) |
-| Moduł 11, lekcja 5: [Sprawdzian — samodzielny program wieloplikowy](course/module_11_multifile_programs/lesson_05_multifile_checkpoint.md) | Dostępna (wersja pilotażowa; kroki w CLionie nie zostały jeszcze sprawdzone na każdym systemie) |
+| Moduł 11, lekcja 5: [Samodzielny program wieloplikowy (sprawdzian Modułu 11)](course/module_11_multifile_programs/lesson_05_multifile_checkpoint.md) | Dostępna (wersja pilotażowa; kroki w CLionie nie zostały jeszcze sprawdzone na każdym systemie) |
 | Kolejne moduły | Planowane |
 | Plan całego kursu | Jeszcze nieopublikowany |
 | Kursy B i C | Planowane, repozytoria jeszcze nie istnieją |
@@ -241,7 +241,7 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 69. **[Lekcja 11.2: Własny plik nagłówkowy](course/module_11_multifile_programs/lesson_02_own_header_file.md)**
 70. **[Lekcja 11.3: Wspólny typ w nagłówku](course/module_11_multifile_programs/lesson_03_shared_type_in_header.md)**
 71. **[Lekcja 11.4: Podział programu według odpowiedzialności](course/module_11_multifile_programs/lesson_04_splitting_responsibilities.md)**
-72. **[Lekcja 11.5: Sprawdzian — samodzielny program wieloplikowy](course/module_11_multifile_programs/lesson_05_multifile_checkpoint.md)**
+72. **[Lekcja 11.5: Samodzielny program wieloplikowy (sprawdzian Modułu 11)](course/module_11_multifile_programs/lesson_05_multifile_checkpoint.md)**
 
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
