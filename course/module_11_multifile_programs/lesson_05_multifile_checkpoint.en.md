@@ -1,16 +1,16 @@
-# Lesson 11.5: Checkpoint — Building a Multi-File Program
+# Lesson 11.5: Building a multi-file program (the Module 11 test)
 
 [Polski](lesson_05_multifile_checkpoint.md) · **English** · [Course overview](../../README.en.md)
 
-> **Module 11, lesson 5: the checkpoint** · about 100–120 minutes, in two sessions
+> **Module 11, lesson 5: the test** · about 100–120 minutes, in two sessions
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project.
 > **Pilot version.** The reference solution and the diagnostic project are checked automatically on Windows, Ubuntu and macOS, with the given input data. Nothing grades your own project automatically: you check it yourself, against the criteria. The steps in CLion are the same as in lessons 11.1–11.4, and haven't been checked by hand on every system.
 
-## How this checkpoint works
+## How this test works
 
 This lesson introduces nothing new. You check whether you can **design, build and check a small program in several files on your own**, with no ready split and no ready functions. In it you combine lessons 11.1–11.4 with reading a list of records from lesson 10.3.
 
-The checkpoint has three parts and a discussion:
+The test has three parts and a discussion:
 
 - **Part A: the design.** A plan of how to split the program into files, before you write code.
 - **Part B: implementation and testing.** The program according to the specification, checked with the check cases. This is the largest part of the work.
@@ -111,7 +111,7 @@ Also answer briefly:
 4. Which files does CMake compile?
 5. How does the result of the calculations reach the report?
 
-The plan is a required part of the checkpoint, and it is assessed together with the program.
+The plan is a required part of the test, and it is assessed together with the program.
 
 ---
 
@@ -312,6 +312,8 @@ Answer in your own words, referring to your project:
 
 ## Checklist before you hand it in
 
+The test is passed when **every** item of this list holds. Your split into functions and files may differ from the reference solution's, as long as it meets the specification.
+
 - [ ] The plan of Part A was made before the code, and it matches the program.
 - [ ] The room type is defined once, in a shared header with `#pragma once`, which itself includes the standard headers it needs.
 - [ ] The header contains the type's definition and declarations, with no function definitions.
@@ -322,11 +324,11 @@ Answer in your own words, referring to your project:
 - [ ] `main.cpp` checks reading both numbers before the rules, and on an error ends with no part of the report.
 - [ ] `add_executable` lists all the `.cpp` files, without the header, and no file includes a `.cpp` file.
 - [ ] For A, B and C or D, the result matches character by character, and the other cases in your table match the full list.
-- [ ] Part C is done.
+- [ ] Part C is done: the diagnostic's error is fixed and checked, and your justification answers refer to your project.
 
 ## Assessment criteria
 
-The rubric is for self-assessment, or for assessment by a teacher. The course has no grading scale and no points threshold: the points show which areas are mastered and which need revision.
+The rubric is for self-assessment, or for assessment by a teacher. The course has no grading scale and no points threshold: the points show which areas are mastered and which need revision. Whether the test is passed depends on the checklist above, not on the number of points.
 
 | Area | Points | Full points when |
 |---|---:|---|

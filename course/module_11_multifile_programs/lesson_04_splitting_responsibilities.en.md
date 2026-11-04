@@ -27,7 +27,11 @@ After this lesson you will:
 
 ## 1. Prepare the project
 
-In `cpp-workspace`, create a folder `lesson_11_4` and copy `CMakeLists.txt` into it from the original `lesson_05_first_program`. The starting program is the shipment list of [lesson 10.3, section 2](../module_10_input_records/lesson_03_building_a_vector_of_records.en.md#2-a-list-of-shipments). If your `main.cpp` in `lesson_10_3` already contains another program, copy the code from that section. In this lesson you don't change how it works; you only spread it over four files.
+In `cpp-workspace`, create a folder `lesson_11_4`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, and create in it a `main.cpp` with the shipment-list program of [lesson 10.3, section 2](../module_10_input_records/lesson_03_building_a_vector_of_records.en.md#2-a-list-of-shipments). If your `main.cpp` in `lesson_10_3` already contains another program, copy the code from that section. In this lesson you don't change how it works; you only spread it over four files, all in the folder `lesson_11_4`:
+
+1. **In sections 3–5**, create three new files next to `main.cpp`: `shipments.hpp`, `shipments_analysis.cpp` and `shipments_report.cpp`, as in lessons 11.1 and 11.2, and type the code shown into them.
+2. **In section 6**, change `main.cpp`: the type, the sum and the report are in the new files by then, so reading and control stay in `main.cpp`.
+3. **In section 7**, add both new `.cpp` files to `add_executable`, next to `main.cpp`: all three belong to the same program, `first_program`. Only then build and run the program.
 
 ## 2. A plan first
 
@@ -194,7 +198,7 @@ int main() {
 
 ## 7. Build and compare the results
 
-`add_executable` now lists three `.cpp` files, on one line, without the header:
+Change the `add_executable` line so that it lists three `.cpp` files, on one line, without the header. If CLion added the files, compare it with the one below:
 
 <!-- cmake: shipments -->
 ```cmake
@@ -780,7 +784,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In lessons 11.1–11.4 the program went from one file to several `.cpp` files with a shared header, each with its own role. In [lesson 11.5: Checkpoint — Building a Multi-File Program](lesson_05_multifile_checkpoint.en.md), you'll design such a program on your own, from the plan to the diagnostics.
+In lessons 11.1–11.4 the program went from one file to several `.cpp` files with a shared header, each with its own role. In [lesson 11.5: Building a multi-file program (the Module 11 test)](lesson_05_multifile_checkpoint.en.md), you'll design such a program on your own, from the plan to the diagnostics.
 
 ---
 
@@ -1163,4 +1167,4 @@ After the second definition of `total_boxes` is removed from `shipments_report.c
 
 </details>
 
-**Previous lesson:** [Lesson 11.3: A shared type in a header](lesson_03_shared_type_in_header.en.md) · **Next lesson:** [Lesson 11.5: Checkpoint — Building a Multi-File Program](lesson_05_multifile_checkpoint.en.md) · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 11.3: A shared type in a header](lesson_03_shared_type_in_header.en.md) · **Next lesson:** [Lesson 11.5: Building a multi-file program (the Module 11 test)](lesson_05_multifile_checkpoint.en.md) · [Course overview](../../README.en.md)

@@ -54,6 +54,8 @@ int calculate_points(const TaskResult& result);
 
 Dlaczego w nagłówku jest pełna **definicja** typu, a nie sama deklaracja, jak przy funkcji? Plik, który tworzy rekord albo odczytuje jego pola, musi wiedzieć, z jakich pól rekord się składa. Wywołanie funkcji z innego pliku łączy linker (lekcja 11.1), ale pól typu żaden linker nie dopisze: kompilator potrzebuje ich w każdym pliku `.cpp`, który z nich korzysta. Dlatego definicja typu może stać w nagłówku dołączanym przez kilka plików `.cpp`. **Definicja zwykłej funkcji nadal zostaje w pliku `.cpp`** (lekcja 11.2, punkt 2).
 
+**Nagłówek samowystarczalny** sam dołącza nagłówki, których potrzebują jego deklaracje i definicje typów, zamiast liczyć na to, że plik `.cpp` dołączył je wcześniej. `points.hpp` korzysta tylko z `int`, więc nie potrzebuje żadnego nagłówka standardowego. Gdyby korzystał z `std::string` albo `std::vector`, sam dołączałby `<string>` albo `<vector>`. To samo dotyczy własnych nagłówków (punkt 9).
+
 ## 3. `main.cpp` i `points.cpp` korzystają z typu
 
 `main.cpp` tworzy rekord, wpisuje do jego pól odczytane liczby i przekazuje go funkcji:
@@ -563,7 +565,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 - Typ definiujemy w jednym miejscu, a nie w kopiach w każdym pliku `.cpp`. Definicja zwykłej funkcji nadal zostaje w pliku `.cpp`.
 - W jednej jednostce translacji typ może być zdefiniowany tylko raz. `#pragma once` chroni przed ponownym przetworzeniem nagłówka w tym samym pliku `.cpp`. Dołączanie nagłówka przez różne pliki `.cpp` jest poprawne.
 - `redefinition` to błąd kompilacji, a komunikat wskazuje miejsce w nagłówku. Linijka `In file included from` mówi, skąd nagłówek przyszedł.
-- Nagłówek powinien sam dołączać nagłówki, których potrzebuje, zamiast zależeć od kolejności `#include` w plikach `.cpp`.
+- Nagłówek powinien sam dołączać nagłówki, których potrzebuje, zamiast zależeć od kolejności `#include` w plikach `.cpp`. Taki nagłówek nazywamy samowystarczalnym.
 - Zmiana organizacji plików i interfejsu funkcji nie zmienia wyników programu.
 
 ## Co dalej
