@@ -780,7 +780,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W lekcjach 11.1–11.4 program przeszedł od jednego pliku do kilku plików `.cpp` ze wspólnym nagłówkiem, a każdy z nich ma swoją rolę. Następna lekcja Modułu 11 jest w przygotowaniu.
+W lekcjach 11.1–11.4 program przeszedł od jednego pliku do kilku plików `.cpp` ze wspólnym nagłówkiem, a każdy z nich ma swoją rolę. W [lekcji 11.5: Sprawdzian — samodzielny program wieloplikowy](lesson_05_multifile_checkpoint.md) zaprojektujesz taki program samodzielnie, od planu po diagnostykę.
 
 ---
 
@@ -1163,4 +1163,4 @@ Po usunięciu drugiej definicji `total_boxes` z `shipments_report.cpp` wszystkie
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 11.3: Wspólny typ w nagłówku](lesson_03_shared_type_in_header.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 11.3: Wspólny typ w nagłówku](lesson_03_shared_type_in_header.md) · **Następna lekcja:** [Lekcja 11.5: Sprawdzian — samodzielny program wieloplikowy](lesson_05_multifile_checkpoint.md) · [Opis kursu](../../README.md)
