@@ -77,11 +77,16 @@ The lessons are never modified: everything is built in copies under build/lesson
 
 Run from the repository root, with the official compiler:
     python3 tests/toolchains/lesson_examples.py --cxx /usr/bin/clang++-22 [--make-program /usr/bin/ninja]
+Only part K of N of the lessons, for example to split the work between two CI jobs (every lesson is still read and
+checked before building; part K builds and runs its own lessons only):
+    python3 tests/toolchains/lesson_examples.py --cxx /usr/bin/clang++-22 --shard 1/2
 Check that the checker itself detects mistakes (in a temporary folder):
     python3 tests/toolchains/lesson_examples.py --self-test --cxx /usr/bin/clang++-22
 """
 
 import argparse
+import contextlib
+import io
 import os
 import pathlib
 import re
@@ -593,16 +598,17 @@ def shown(text):
 
 
 def check_example(lesson, name, code, exit_code, runs, args, project=None):
+    """Builds example NAME and runs it once per run; returns the number of runs it started (0 if it didn't build)."""
     built = build(lesson, name, code, args, project=project)
     if not built:
-        return
+        return 0
     build_dir, result = built
     if result.returncode != 0:
         # A program in several files names its first failed step: a source that didn't compile, or the link.
         steps = failed_steps(result.stdout + result.stderr) if project else []
         reason = f': {step_failure(*steps[0][:2])}' if steps else ''
         fail(f'{lesson}: example {name}: build failed{reason}\n{result.stdout}{result.stderr}')
-        return
+        return 0
     exe = executable(build_dir)
     # The same program for every run: built once above, never rebuilt between inputs.
     for number, (data, expected) in enumerate(runs or [(None, [])], 1):
@@ -637,6 +643,7 @@ def check_example(lesson, name, code, exit_code, runs, args, project=None):
             print(f'       | {line}')
         if len(out) > SHOWN_LIMIT:
             print(f'       ({len(out) - SHOWN_LIMIT} more characters, not shown)')
+    return len(runs or [(None, [])])
 
 
 def check_broken(lesson, name, code, expectation, args):
@@ -799,9 +806,16 @@ def check_project_compile(lesson, name, code, expectation, project, args):
 
 
 def check_course(args):
-    """Checks every lesson under course/ in the current folder; returns the number of problems."""
+    """Checks every lesson under course/ in the current folder; returns the number of problems.
+    With args.shard = (K, N), every lesson is still read and checked before building (PL/EN, markers, names, files),
+    but only the lessons of part K of N are built and run: the checked lessons in sorted order, numbered from 0, go
+    to part (number % N) + 1. So every lesson is in exactly one part, and a new lesson needs no configuration."""
     errors.clear()
     lessons = sorted(p for p in pathlib.Path('course').rglob('*.md') if not p.name.endswith('.en.md'))
+    shard = getattr(args, 'shard', None)
+    # For each part: [lessons, examples, broken programs, runs] it builds and runs, counted before building.
+    parts = [[0, 0, 0, 0] for _ in range(shard[1])] if shard else []
+    built_examples = built_broken = started_runs = 0
     checked = 0
     for pl in lessons:
         en = pl.with_name(pl.stem + '.en.md')
@@ -835,11 +849,25 @@ def check_course(args):
         if projects or refused:
             print(f'     {len(projects)} of these programs in several files (file and cmake blocks), '
                   f'{len(refused)} not built because of the problems above')
+        if shard:
+            part = (checked - 1) % shard[1] + 1
+            counts = parts[part - 1]
+            counts[0] += 1
+            counts[1] += sum(1 for name in examples if name not in refused)
+            counts[2] += sum(1 for name in broken if name not in refused)
+            counts[3] += sum(len(runs.get(name) or [None]) for name in examples if name not in refused)
+            if part != shard[0]:
+                print(f'     part {part} of {shard[1]}: built and run by that part, not by this one ({shard[0]} of {shard[1]})')
+                continue
+            print(f'     part {part} of {shard[1]}: built and run here')
         # Programs without file and cmake blocks take the same path as before.
         for name, (code, exit_code) in examples.items():
             if name not in refused:
-                check_example(pl.stem, name, code, exit_code, runs.get(name, []), args, projects.get(name))
+                built_examples += 1
+                started_runs += check_example(pl.stem, name, code, exit_code, runs.get(name, []), args, projects.get(name))
         for name, (code, expectation) in broken.items():
+            if name not in refused:
+                built_broken += 1
             if name in projects and expectation[1] == 'link':
                 check_project_link(pl.stem, name, code, expectation, projects[name], args)
             elif name in projects:
@@ -848,7 +876,17 @@ def check_course(args):
                 check_broken(pl.stem, name, code, expectation, args)
     if checked == 0:
         fail('no lesson contains marked examples')
-    print(f'{"PASSED" if not errors else "FAILED"}: {checked} lesson(s), {len(errors)} problem(s)')
+    if not shard:
+        print(f'{"PASSED" if not errors else "FAILED"}: {checked} lesson(s), {len(errors)} problem(s)')
+        return len(errors)
+    for number, (count, examples_count, broken_count, runs_count) in enumerate(parts, 1):
+        print(f'part {number} of {shard[1]}: {count} lesson(s), {examples_count} example(s), '
+              f'{broken_count} broken program(s), {runs_count} run(s)')
+    if parts[shard[0] - 1][0] == 0:
+        fail(f'part {shard[0]} of {shard[1]} has no lessons to build: use fewer parts')
+    print(f'{"PASSED" if not errors else "FAILED"}: part {shard[0]} of {shard[1]}: {len(lessons)} lesson file(s) read, '
+          f'{checked} lesson(s) checked before building, {parts[shard[0] - 1][0]} of them built and run in this part '
+          f'({built_examples} example(s), {built_broken} broken program(s), {started_runs} run(s)), {len(errors)} problem(s)')
     return len(errors)
 
 
@@ -1258,7 +1296,9 @@ def self_test(args):
         failures += not verdict
     limit_failures, limit_cases = self_test_limits(args)
     failures += limit_failures
-    print(f'\n{"PASSED" if not failures else "FAILED"}: self-test, {len(cases) + limit_cases} cases, {failures} failed')
+    shard_failures, shard_cases = self_test_shards(args)
+    failures += shard_failures
+    print(f'\n{"PASSED" if not failures else "FAILED"}: self-test, {len(cases) + limit_cases + shard_cases} cases, {failures} failed')
     return failures
 
 
@@ -1303,6 +1343,140 @@ def self_test_limits(args):
     return failures, len(checks)
 
 
+def self_test_shards(args):
+    """Checks --shard on small fixture courses of several lessons: which lessons each part builds, and that every
+    lesson is still checked before building. Most lessons have only a fragment, so nothing is built; two cases build
+    one program each. Returns (failures, number of cases)."""
+    project = PROJECT.resolve()
+    home = os.getcwd()
+    fragment = lesson(('fragment', 'cpp', 'int twice(int value);\n'))
+    template = PROJECT.read_text(encoding='utf-8')
+    twice = lesson(('example: twice', 'cpp', TWICE_MAIN), ('file: twice tools.hpp', 'cpp', TOOLS_HPP),
+                   ('file: twice tools.cpp', 'cpp', TOOLS_CPP),
+                   ('cmake: twice', 'cmake', template.replace('main.cpp)', 'main.cpp tools.cpp)')),
+                   ('input: twice', 'text', '4\n'), ('output: twice', 'text', 'Twice: 8\n'),
+                   ('input: twice', 'text', '-3\n'), ('output: twice', 'text', 'Twice: -6\n'))
+
+    def run_course(lessons, shard):
+        """Checks a fixture course of LESSONS ({file stem: PL text, or (PL text, EN text)}) with --shard SHARD (None:
+        without). Returns (problems, output, the lessons built and run here, the lessons with a build folder)."""
+        case_args = argparse.Namespace(**vars(args))
+        case_args.shard = shard
+        with tempfile.TemporaryDirectory() as root:
+            os.chdir(root)
+            try:
+                PROJECT.parent.mkdir(parents=True)
+                shutil.copy(project, PROJECT)
+                folder = pathlib.Path('course/module_99_self_test')
+                folder.mkdir(parents=True)
+                # Written in reverse order: the parts must follow the sorted names, not the order of creation.
+                for stem in sorted(lessons, reverse=True):
+                    pl_text, en_text = lessons[stem] if isinstance(lessons[stem], tuple) else (lessons[stem],) * 2
+                    (folder / f'{stem}.md').write_text(pl_text, encoding='utf-8')
+                    (folder / f'{stem}.en.md').write_text(en_text, encoding='utf-8')
+                output = io.StringIO()
+                with contextlib.redirect_stdout(output):
+                    check_course(case_args)
+                built_folders = sorted(p.name for p in pathlib.Path('build/lesson-examples').glob('*'))
+            finally:
+                os.chdir(home)
+        text = output.getvalue()
+        print(text, end='')
+        # The lessons whose header line is followed, before the next lesson, by "built and run here" (any separator).
+        here = re.findall(r'^=== course[/\\]module_99_self_test[/\\](\w+)\.md .*\n(?:(?!===).*\n)*?     part \d+ of \d+: built and run here$',
+                          text, re.M)
+        return list(errors), text, here, built_folders
+
+    def bad_values_refused():
+        bad = ['0/2', '3/2', '1/0', '2', '1/2/3', 'a/b', '01/2', ' 1/2', '-1/2', '1/-2', '']
+        refused = []
+        for value in bad:
+            try:
+                shard_arg(value)
+            except argparse.ArgumentTypeError:
+                refused.append(value)
+        good = {'1/1': (1, 1), '1/2': (1, 2), '2/2': (2, 2), '3/3': (3, 3), '10/12': (10, 12)}
+        return refused == bad and all(shard_arg(value) == parsed for value, parsed in good.items())
+
+    def parts_cover_every_lesson():
+        for count in range(1, 6):
+            stems = [f'lesson_{chr(ord("a") + i)}' for i in range(count)]
+            for parts in range(1, 4):
+                seen = []
+                for part in range(1, parts + 1):
+                    problems, _, here, _ = run_course({stem: fragment for stem in stems}, (part, parts))
+                    expected = [stem for i, stem in enumerate(stems) if i % parts + 1 == part]
+                    # A part without lessons must fail; any other part must pass and build exactly its lessons.
+                    if here != expected or bool(problems) != (not expected):
+                        return False
+                    seen += here
+                if sorted(seen) != stems:
+                    return False
+        return True
+
+    def odd_count_split():
+        lessons = {'lesson_a': fragment, 'lesson_b': fragment, 'lesson_c': fragment}
+        first, second = run_course(lessons, (1, 2)), run_course(lessons, (2, 2))
+        return (first[2] == ['lesson_a', 'lesson_c'] and second[2] == ['lesson_b'] and not first[0] and not second[0]
+                and '3 lesson(s) checked before building, 2 of them built and run in this part' in first[1]
+                and '3 lesson(s) checked before building, 1 of them built and run in this part' in second[1])
+
+    def without_shard_as_before():
+        problems, text, _, _ = run_course({'lesson_a': fragment, 'lesson_b': fragment, 'lesson_c': fragment}, None)
+        return not problems and text.rstrip('\n').endswith('\nPASSED: 3 lesson(s), 0 problem(s)') and ' part ' not in text
+
+    def static_problem_of_other_part():
+        lessons = {'lesson_a': fragment, 'lesson_b': fragment + '```cpp\nint main() {}\n```\n'}
+        problems, _, here, _ = run_course(lessons, (1, 2))
+        return here == ['lesson_a'] and any('lesson_b.md' in e and 'without a marker' in e for e in problems)
+
+    def program_in_several_files_built_whole():
+        lessons = {'lesson_a': fragment, 'lesson_b': twice}
+        first, second = run_course(lessons, (1, 2)), run_course(lessons, (2, 2))
+        return (not first[0] and first[3] == [] and not second[0] and second[3] == ['lesson_b']
+                and '(1 example(s), 0 broken program(s), 2 run(s))' in second[1]
+                and 'part 2 of 2: 1 lesson(s), 1 example(s), 0 broken program(s), 2 run(s)' in first[1])
+
+    def part_without_lessons():
+        problems, _, _, _ = run_course({'lesson_a': fragment, 'lesson_b': fragment, 'lesson_c': fragment}, (4, 4))
+        return any('part 4 of 4 has no lessons' in e for e in problems)
+
+    def failure_stays_in_its_part():
+        wrong = lesson(('example: hi', 'cpp', GOOD), ('output: hi', 'text', 'Hello!\n'))
+        lessons = {'lesson_a': fragment, 'lesson_b': wrong}
+        first, second = run_course(lessons, (1, 2)), run_course(lessons, (2, 2))
+        return (not first[0] and '(0 example(s), 0 broken program(s), 0 run(s))' in first[1]
+                and any('example hi: output' in e for e in second[0]))
+
+    checks = [
+        ('invalid --shard values are refused, and valid ones are read', bad_values_refused),
+        ('the parts are disjoint, cover every lesson and follow the sorted names (1 to 5 lessons, 1 to 3 parts)',
+         parts_cover_every_lesson),
+        ('three lessons in two parts: the first and the third in part 1, the second in part 2', odd_count_split),
+        ('without --shard every lesson is built, and the summary is as before', without_shard_as_before),
+        ('a problem found before building is reported by a part that does not build that lesson', static_problem_of_other_part),
+        ('a program in several files is built whole, by its own part only', program_in_several_files_built_whole),
+        ('a part without lessons fails', part_without_lessons),
+        ('a failing program fails its own part, and the other part neither builds nor passes it', failure_stays_in_its_part),
+    ]
+    failures = 0
+    for title, check in checks:
+        print(f'\n##### self-test: {title}')
+        verdict = check()
+        print(f'##### {"ok  " if verdict else "FAIL"} self-test: {title}')
+        failures += not verdict
+    errors.clear()
+    return failures, len(checks)
+
+
+def shard_arg(text):
+    """K/N for --shard: part K of N, with 1 <= K <= N, written without leading zeros or spaces."""
+    match = re.fullmatch(r'([1-9][0-9]*)/([1-9][0-9]*)', text)
+    if not match or int(match[1]) > int(match[2]):
+        raise argparse.ArgumentTypeError(f'expected K/N with 1 <= K <= N, for example 1/2, not {text!r}')
+    return int(match[1]), int(match[2])
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument('--cxx', required=True, help='full path to the official clang++')
@@ -1310,7 +1484,11 @@ def main():
     parser.add_argument('--make-program', help='Ninja to use, if not the one on PATH')
     parser.add_argument('--timeout', type=float, default=10, help='seconds each run of an example may take')
     parser.add_argument('--self-test', action='store_true', help='check the checker on small fixture lessons')
+    parser.add_argument('--shard', type=shard_arg, metavar='K/N',
+                        help='check every lesson before building, but build and run only part K of N of the lessons')
     args = parser.parse_args()
+    if args.self_test and args.shard:
+        parser.error('--shard checks a part of the course; --self-test always runs all of its cases')
     if args.self_test:
         return 1 if self_test(args) else 0
     return 1 if check_course(args) else 0

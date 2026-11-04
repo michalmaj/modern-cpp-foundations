@@ -13,7 +13,9 @@ name: Toolchains
 # lessons and compares their output with the lesson text, checks that the
 # deliberately broken programs fail to compile with the described error, and
 # checks that this checker detects its own failures
-# (tests/toolchains/lesson_examples.py).
+# (tests/toolchains/lesson_examples.py). On Windows, building the lesson examples
+# is split between two jobs: each job checks every lesson before building, and
+# builds and runs one half of the lessons (--shard 1/2 and --shard 2/2).
 #
 # This proves that the toolchain works on a GitHub-hosted runner. It does NOT
 # prove a clean installation on a student computer (runners come with many
@@ -134,11 +136,12 @@ jobs:
       - name: Lesson 1.6 commands (PowerShell 7)
         run: pwsh -NoProfile -File tests\toolchains\lesson_16.ps1
 
-      - name: Lesson code examples (build, run, compare with the lesson text)
+      - name: Lesson code examples, part 1 of 2 (build, run, compare with the lesson text)
         run: |
           $PSNativeCommandUseErrorActionPreference = $true
           python --version
-          python tests/toolchains/lesson_examples.py --cxx "$((Get-Command clang++).Source)"
+          # Every lesson is checked before building; this job builds and runs part 1, the job below part 2.
+          python tests/toolchains/lesson_examples.py --cxx "$((Get-Command clang++).Source)" --shard 1/2
 
       - name: The example check detects its own failures (self-test)
         run: |
@@ -155,6 +158,39 @@ jobs:
           'ok: clang-cl rejected'
           # The failed cmake call above sets $LASTEXITCODE, which the step would otherwise return.
           exit 0
+
+  windows_examples_2:
+    name: Windows / clang++ (MSVC ABI), lesson examples 2 of 2
+    runs-on: windows-2025
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install LLVM with Chocolatey
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          # The same toolchain as the job above, installed the same way.
+          choco upgrade llvm --version=$env:LLVM_VERSION --allow-downgrade -y --no-progress
+          'C:\Program Files\LLVM\bin' | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      - name: Identify the environment
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          "runner image: $env:ImageOS $env:ImageVersion"
+          foreach ($tool in 'clang++', 'cmake', 'ninja', 'python') { "${tool}: $((Get-Command $tool).Source)" }
+          clang++ --version
+          cmake --version
+          "ninja $(ninja --version)"
+
+      - name: Lesson code examples, part 2 of 2 (build, run, compare with the lesson text)
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $true
+          python --version
+          # Every lesson is checked before building; this job builds and runs part 2, the job above part 1.
+          python tests/toolchains/lesson_examples.py --cxx "$((Get-Command clang++).Source)" --shard 2/2
 
   ubuntu:
     name: Ubuntu 24.04 / clang++ from apt.llvm.org
