@@ -568,7 +568,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Program z tej lekcji ma jeden typ i jedną funkcję. Większe programy z Modułów 8–10 miały kilka funkcji, które czytały dane, analizowały je i wypisywały wyniki. Następna lekcja Modułu 11 jest w przygotowaniu.
+Program z tej lekcji ma jeden typ i jedną funkcję. Większe programy z Modułów 8–10 miały kilka funkcji, które czytały dane, analizowały je i wypisywały wyniki. W [lekcji 11.4: Podział programu według odpowiedzialności](lesson_04_splitting_responsibilities.md) taki program trafi do kilku plików, każdy z własną rolą.
 
 ---
 
@@ -816,4 +816,4 @@ Points: 14
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 11.2: Własny plik nagłówkowy](lesson_02_own_header_file.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 11.2: Własny plik nagłówkowy](lesson_02_own_header_file.md) · **Następna lekcja:** [Lekcja 11.4: Podział programu według odpowiedzialności](lesson_04_splitting_responsibilities.md) · [Opis kursu](../../README.md)
