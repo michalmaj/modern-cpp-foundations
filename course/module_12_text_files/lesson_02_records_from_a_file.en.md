@@ -758,7 +758,7 @@ int main() {
    main.cpp:11:40: note: passing argument to parameter 'input' here
    ```
 
-   On Windows, Ubuntu and macOS the paths and the notes look different, and the first line of the error has the same text.
+   On Windows, Ubuntu and macOS the paths and the note from inside the library look different. The error points to the same place and starts the same way; on Windows only the part in brackets differs: `(aka 'basic_istream<char, char_traits<char>>')`.
 2. **The error points to the call, and its cause is in the header.** Line 41 is the call `read_shipment_values(input, destination, shipment)` in `main`, and column 50 is the argument `input`. The `note:` points to the parameter `input` on line 11: that's where the `&` is missing.
 3. **What the message says.** A parameter without `&` is a new object, created in the call as a copy of the argument (lesson 9.1). A *constructor* is the operation in C++ that creates a new object of a type, and *deleted* means that the standard library has deliberately forbidden it. So the message says: to call this function, a new `std::istream` would have to be created as a copy of `input`, and an input stream may not be copied.
 4. **Why a stream isn't copied.** A stream isn't an ordinary value like a number: it's tied to one data source and remembers how far it has read. The function must read from the same stream as `main`, from where `main` stopped, and leave it where it stopped itself. That needs a reference.

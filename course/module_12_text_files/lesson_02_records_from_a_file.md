@@ -758,7 +758,7 @@ int main() {
    main.cpp:11:40: note: passing argument to parameter 'input' here
    ```
 
-   Na Windowsie, Ubuntu i macOS ścieżki i notatki wyglądają inaczej, a pierwsza linijka błędu ma tę samą treść.
+   Na Windowsie, Ubuntu i macOS ścieżki i notatka z wnętrza biblioteki wyglądają inaczej. Błąd wskazuje to samo miejsce i zaczyna się tak samo, a na Windowsie inny jest tylko dopisek w nawiasie: `(aka 'basic_istream<char, char_traits<char>>')`.
 2. **Błąd wskazuje wywołanie, a przyczyna jest w nagłówku.** Linijka 41 to wywołanie `read_shipment_values(input, destination, shipment)` w `main`, a kolumna 50 to argument `input`. Notatka `note:` wskazuje parametr `input` w linijce 11: tam brakuje `&`.
 3. **Co mówi komunikat.** Parametr bez `&` to nowy obiekt, tworzony przy wywołaniu jako kopia argumentu (lekcja 9.1). *Constructor* (konstruktor) to w C++ operacja, która tworzy nowy obiekt danego typu, a *deleted* (usunięty) znaczy, że biblioteka standardowa celowo jej zabroniła. Komunikat mówi więc: żeby wywołać tę funkcję, trzeba by utworzyć nowy `std::istream` jako kopię `input`, a strumienia wejścia nie wolno kopiować.
 4. **Dlaczego strumienia się nie kopiuje.** Strumień to nie zwykła wartość, jak liczba: jest związany z jednym źródłem danych i pamięta, dokąd już doczytał. Funkcja ma czytać z tego samego strumienia co `main`, od miejsca, w którym `main` skończył, i zostawić go tam, gdzie sama skończyła. Do tego potrzebna jest referencja.
