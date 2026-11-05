@@ -49,12 +49,34 @@ exactly one cmake block with the same NAME, anywhere in the lesson:
                                         must report exactly N errors located in PATH. An error in a header is
                                         reported by the source that includes it, so in=PATH may name a header.
 
+An example that reads a data file declares each of its runs with a run marker, anywhere in the lesson:
+
+    <!-- run: NAME -->                  a line of its own, with no code block: it starts the next run of example NAME
+                                        (runs are numbered from 1 in the order of their markers). The input,
+                                        datafile and output blocks of NAME after it, up to NAME's next run marker,
+                                        belong to that run, whatever blocks of other programs stand in between: at
+                                        most one input block (without it, the run gets an empty standard input), at
+                                        most one datafile block (without it, the run's folder is empty, so the file
+                                        is missing), and exactly one output block;
+    <!-- datafile: NAME PATH [noeol] --> the next ```text block is the file PATH that this run of NAME finds in its
+                                        working directory: a lowercase name of at most 24 characters ending in .txt,
+                                        with no folders. Each line of the block is written followed by one line end
+                                        (LF), with no BOM and no other change: an empty block is an empty file, and a
+                                        block of one empty line a file of one line end. noeol leaves out the final
+                                        line end; it isn't allowed on an empty block or after an empty last line.
+    Each run of such an example gets a new, empty folder (build/lesson-examples/<lesson>/<NAME>/run_N) as its working
+    directory, holding only its own data file, and the folder is removed after the run, whatever its result. Such an
+    example has all of its input and output blocks in its runs. An example without run markers runs exactly as above,
+    in the checker's working directory, and can't have data files.
+
 Checks:
   * every ```cpp block in a lesson is marked (Module 0 lessons predate the markers and are
-    skipped unless marked; their project is checked by the other steps of the workflow);
+    skipped unless marked; their project is checked by the other steps of the workflow), and a line that looks like a
+    marker (a kind and a colon, however spaced or indented) is one exactly; other HTML comments are ordinary text;
   * every example has at least one output block, and every output block has an example;
   * marked blocks are ASCII only, and the Polish lesson (X.md) and the English one (X.en.md)
-    contain the same marked blocks, with the same markers, in the same order;
+    contain the same marked blocks, with the same markers, in the same order, and the same run markers among them;
+    data files are compared byte for byte;
   * each example and each broken program is built as main.cpp of the lesson 0.5 project (its
     CMakeLists.txt) with CMake, Ninja and the given compiler. Examples are built with warnings
     as errors; broken programs with the project's own flags only, exactly as a learner builds
@@ -97,13 +119,22 @@ import tempfile
 import threading
 import time
 
-MARKER = re.compile(r'^<!-- (?:(example|output|input|broken|file|cmake): ([a-z0-9_]+)(.*?)|(fragment)) -->$')
+MARKER = re.compile(r'^<!-- (?:(example|output|input|broken|file|cmake|run|datafile): ([a-z0-9_]+)(.*?)|(fragment)) -->$')
 SOURCE = re.compile(r'^(?: source=(\S+))?(?: exit=(\d+))?$')
 BROKEN = re.compile(r'^(?: stage=(link))?(?: in=(\S+))?(?: at=(\d+)(?::(\d+))?)?(?: errors=(\d+))? error=(.+)$')
 FILE = re.compile(r'^ (\S+)$')
+DATAFILE = re.compile(r'^ (\S+)(?: (noeol))?$')
+# A line that means to be a marker: the name of a kind (or its plural) followed by a colon, or "fragment" followed by a
+# colon or by the end of the comment, however spaced or indented. Such a line must be a marker exactly. Other HTML
+# comments are ordinary text.
+MARKER_LIKE = re.compile(r'^\s*<!--\s*(?:(?:example|output|input|broken|file|cmake|run|datafile)s?\s*:|fragment\s*(?::|-->))')
+# Characters that end a line for str.splitlines() but not in a data file: they would split one line of data into two.
+SPLITTING = re.compile('[\x0b\x0c\x1c\x1d\x1e\x85\u2028\u2029]')
 FENCE = re.compile(r'^```(\S*)$')
 # The file name of a file block: lowercase, a letter first, .cpp or .hpp, at most 24 characters, no folders.
 FILE_NAME = re.compile(r'^[a-z][a-z0-9_]{0,19}\.(?:cpp|hpp)$')
+# The file name of a data file: the same rule, with .txt.
+DATA_FILE_NAME = re.compile(r'^[a-z][a-z0-9_]{0,19}\.txt$')
 # Device names that Windows reserves, even with an extension.
 WINDOWS_DEVICES = {'con', 'prn', 'aux', 'nul', *(f'com{n}' for n in range(1, 10)), *(f'lpt{n}' for n in range(1, 10))}
 ADD_EXECUTABLE = re.compile(r'^add_executable\(first_program((?: [^ ()]+)+)\)$')
@@ -135,26 +166,52 @@ def fail(message):
 
 def blocks(path):
     """Returns the marked code blocks of a lesson as (kind, name, attributes, language, text, line),
-    and the line numbers of unmarked ```cpp blocks."""
-    lines = path.read_text(encoding='utf-8').splitlines()
-    found, unmarked, marker, i = [], [], None, 0
+    and the line numbers of unmarked ```cpp blocks. A run marker has no block: its language is None and its text ''.
+    The text of a data file is its exact content: each line of the block followed by a line end, so an empty block is
+    an empty file and a block of one empty line a file of one line end (noeol is applied later).
+    An unreadable run or datafile marker is kept as ('unreadable', name, ...), so that its program isn't run."""
+    raw = path.read_text(encoding='utf-8')
+    lines = raw.splitlines()
+    found, unmarked, marker, after_run, i = [], [], None, None, 0
     while i < len(lines):
         line = lines[i]
         match = MARKER.match(line)
         fence = FENCE.match(line)
+        if after_run and line.strip():
+            if fence:
+                fail(f'{path}:{after_run}: run marker directly followed by a code block: '
+                     'mark the block (input, datafile or output), or put text between them')
+            after_run = None
         if match:
             if marker:
                 fail(f'{path}:{marker[3]}: marker not followed by a code block')
             kind = match[1] or match[4]
             attributes = match[3] or ''
-            pattern = BROKEN if kind == 'broken' else SOURCE if kind == 'example' else FILE if kind == 'file' else re.compile('^$')
+            pattern = (BROKEN if kind == 'broken' else SOURCE if kind == 'example' else FILE if kind == 'file'
+                       else DATAFILE if kind == 'datafile' else re.compile('^$'))
             parsed = pattern.match(attributes)
             # A compile-stage broken program needs at=; a link-stage one has no file and line to point to,
             # and no compile errors to count, so it takes neither in=, at= nor errors=.
             if not parsed or (kind == 'broken' and (bool(parsed[1]) == bool(parsed[3]) or (parsed[1] and (parsed[2] or parsed[5])))):
                 fail(f'{path}:{i + 1}: cannot read the {kind} marker{unsupported(kind, attributes)}: {line}')
-                kind = 'unreadable'
-            marker = (kind, match[2], attributes, i + 1)
+                if kind in ('run', 'datafile'):
+                    found.append(('unreadable', match[2], attributes, None, '', i + 1))
+                kind = 'unreadable' if kind != 'run' else 'run_unreadable'
+            if kind == 'run':
+                # A run marker stands alone: it starts a run of its program, and no code block belongs to it.
+                found.append(('run', match[2], '', None, '', i + 1))
+                after_run = i + 1
+                marker = None
+            elif kind == 'run_unreadable':
+                marker = None
+            else:
+                marker = (kind, match[2], attributes, i + 1)
+        elif MARKER_LIKE.match(line):
+            fail(f'{path}:{i + 1}: a line that looks like a marker but is not one: {line} '
+                 '(a marker is a line of its own, not indented, exactly "<!-- KIND: NAME ... -->")')
+            if marker:
+                fail(f'{path}:{marker[3]}: marker not followed by a code block')
+                marker = None
         elif fence:
             start, language, body = i + 1, fence[1], []
             i += 1
@@ -166,9 +223,11 @@ def blocks(path):
                 pass  # already reported: its block is neither built nor compared
             elif marker:
                 kind, name, attributes = marker[:3]
-                expected = 'text' if kind in ('output', 'input') else 'cmake' if kind == 'cmake' else 'cpp'
+                expected = 'text' if kind in ('output', 'input', 'datafile') else 'cmake' if kind == 'cmake' else 'cpp'
                 if language != expected:
                     fail(f'{path}:{start}: {kind} marker on a ```{language} block, expected ```{expected}')
+                if kind == 'datafile':
+                    text = ''.join(f'{body_line}\n' for body_line in body)
                 found.append((kind, name, attributes, language, text, start))
             elif language == 'cpp':
                 unmarked.append(start)
@@ -177,6 +236,15 @@ def blocks(path):
             fail(f'{path}:{marker[3]}: marker not followed by a code block')
             marker = None
         i += 1
+    data_files = [block for block in found if block[0] == 'datafile']
+    if data_files and SPLITTING.search(raw):
+        # These characters were already taken as line ends above, so a data file would silently get other bytes.
+        for number, raw_line in enumerate(raw.split('\n'), 1):
+            if SPLITTING.search(raw_line):
+                fail(f'{path}:{number}: a control character that splits lines ({SPLITTING.search(raw_line)[0]!r}) '
+                     'in a lesson with data files')
+        # No program of this lesson runs with a data file that may not be the lesson's.
+        found += [('unreadable', name, '', None, '', line) for _, name, _, _, _, line in data_files]
     return found, unmarked
 
 
@@ -199,8 +267,10 @@ def unsupported(kind, attributes):
 
 
 def check_lesson(path, found):
-    """Checks one lesson's markers; returns its examples, their runs and the broken programs.
-    A run is (standard input, or None for none, [expected outputs])."""
+    """Checks one lesson's markers; returns its examples, their runs, the broken programs, the runs of the programs with
+    run markers, and the names of those programs that must not be run because of a problem found here.
+    A run is (standard input, or None for none, [expected outputs]); a run of a program with run markers is
+    (standard input or None, its data file as (name, bytes) or None, [its one expected output])."""
     examples, broken = {}, {}
     for kind, name, attributes, _, text, line in found:
         if not text.isascii():
@@ -221,10 +291,13 @@ def check_lesson(path, found):
             expectation = BROKEN.match(attributes)
             if expectation:
                 broken[name] = (text, expectation)
+    folder_runs, refused = check_folder_runs(path, found, examples, broken)
     runs = {}
     for kind, name, _, _, text, line in found:
         if kind not in ('output', 'input'):
             continue
+        if name in folder_runs or name in refused:
+            continue  # a program with run markers, or with a data file: its blocks are checked above
         if name not in examples:
             fail(f'{path}:{line}: {kind} {name} has no example')
             continue
@@ -236,6 +309,8 @@ def check_lesson(path, found):
                 name_runs.append((None, []))
             name_runs[-1][1].append(text)
     for name in examples:
+        if name in folder_runs or name in refused:
+            continue
         name_runs = runs.get(name, [])
         if not any(outputs for _, outputs in name_runs):
             fail(f'{path}: example {name} has no output block')
@@ -243,7 +318,90 @@ def check_lesson(path, found):
             fail(f'{path}: example {name}: an output block comes before its first input block')
         elif any(not outputs for _, outputs in name_runs):
             fail(f'{path}: example {name}: an input block has no output block after it')
-    return examples, runs, broken
+    return examples, runs, broken, folder_runs, refused
+
+
+def check_folder_runs(path, found, examples, broken):
+    """Checks the run, input, datafile and output blocks of the programs with run markers. Each run marker starts a run
+    of its program; the program's input, datafile and output blocks after it, up to its next run marker, belong to that
+    run, whatever the blocks of other programs in between. Returns ({NAME: [(standard input or None, data file as
+    (name, bytes) or None, [expected output])]}, the names of programs with run markers that must not be run)."""
+    with_runs = {name for kind, name, *_ in found if kind == 'run'}
+    unreadable = {name for kind, name, *_ in found if kind == 'unreadable'}
+    runs, refused = {}, set()
+
+    def problem(name, message):
+        fail(message)
+        refused.add(name)
+
+    for kind, name, attributes, language, text, line in found:
+        if kind not in ('run', 'datafile') and not (kind in ('input', 'output') and name in with_runs):
+            continue
+        where = f'{path}:{line}: {kind} {name}'
+        if kind != 'run' and language != 'text':
+            refused.add(name)  # the fence is already reported
+        if name not in examples:
+            reason = 'a broken program is never run' if name in broken else f'no example {name} in this lesson'
+            problem(name, f'{where}: {reason}')
+            continue
+        if name not in with_runs:
+            problem(name, f'{where}: a data file belongs to a run: put "<!-- run: {name} -->" before it')
+            continue
+        name_runs = runs.setdefault(name, [])
+        if kind == 'run':
+            name_runs.append({'input': None, 'datafile': None, 'outputs': [], 'line': line})
+            continue
+        if not name_runs:
+            problem(name, f'{where}: comes before the first run marker of {name} (a program with run markers has '
+                          'all of its input, datafile and output blocks in its runs)')
+            continue
+        run = name_runs[-1]
+        number = len(name_runs)
+        if kind == 'input':
+            if run['input'] is not None:
+                problem(name, f'{where}: a second input block in run {number} of {name}')
+            run['input'] = text
+        elif kind == 'output':
+            run['outputs'].append(text)
+            if len(run['outputs']) == 2:
+                problem(name, f'{where}: a second output block in run {number} of {name} (a run has exactly one)')
+        else:
+            file_name, noeol = DATAFILE.match(attributes).groups()
+            reasons = data_file_problems(file_name, noeol, text)
+            for reason in reasons:
+                problem(name, f'{where}: {reason}')
+            if run['datafile'] is not None:
+                problem(name, f'{where}: a second data file in run {number} of {name} (a run has at most one)')
+            elif not reasons:
+                content = text[:-1] if noeol else text
+                run['datafile'] = (file_name, content.encode('ascii'))
+    for name, name_runs in runs.items():
+        for number, run in enumerate(name_runs, 1):
+            if not run['outputs']:
+                problem(name, f'{path}:{run["line"]}: run {number} of {name} has no output block')
+    refused |= unreadable & set(examples)
+    return ({name: [(run['input'], run['datafile'], run['outputs']) for run in name_runs]
+             for name, name_runs in runs.items() if name not in refused}, refused)
+
+
+def data_file_problems(file_name, noeol, text):
+    """What is wrong with a data file named FILE_NAME, with the TEXT of its block (each line followed by a line end)
+    and noeol or not: a list of reasons, empty when it may be written."""
+    reasons = []
+    if not DATA_FILE_NAME.match(file_name):
+        reasons.append(f'{file_name} is not a valid data-file name: lowercase letters, digits and _, starting with a '
+                       'letter, ending in .txt, at most 24 characters, no folders')
+    elif file_name.split('.')[0] in WINDOWS_DEVICES:
+        reasons.append(f'{file_name} is a reserved name on Windows')
+    if noeol and not text:
+        reasons.append('noeol on an empty data file: there is no line end to remove')
+    elif noeol and (text == '\n' or text.endswith('\n\n')):
+        reasons.append('noeol after an empty last line: these bytes are written without noeol and without that line')
+    bad = sorted({c for c in text if c not in '\t\n' and not ' ' <= c <= '~'})
+    if bad:
+        reasons.append(f'control characters in the data: {", ".join(repr(c) for c in bad)} (only printable ASCII, '
+                       'spaces and tabs)')
+    return reasons
 
 
 def check_projects(path, found, examples, broken):
@@ -537,8 +695,9 @@ def executable(build_dir):
     return build_dir / (target + ('.exe' if sys.platform == 'win32' else ''))
 
 
-def run_program(exe, data, timeout):
-    """Runs EXE once, with DATA on standard input (None: an empty standard input).
+def run_program(exe, data, timeout, cwd=None):
+    """Runs EXE once, with DATA on standard input (None: an empty standard input), in the folder CWD (None: the
+    checker's own working directory, as for every program without run markers).
     Returns (exit code, stdout bytes, stderr bytes, whether it timed out, the streams that went over OUTPUT_LIMIT).
 
     Each stream is read by its own thread while the program runs, so a program that fills one pipe never
@@ -548,7 +707,7 @@ def run_program(exe, data, timeout):
     # A pipe, not a terminal: the input is never echoed, so stdout is the program's output alone.
     # Without an input block the program gets an empty standard input, never the checker's own.
     with subprocess.Popen([str(exe)], stdin=subprocess.DEVNULL if data is None else subprocess.PIPE,
-                          stdout=subprocess.PIPE, stderr=subprocess.PIPE) as process:
+                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=cwd) as process:
         kept = {'stdout': bytearray(), 'stderr': bytearray()}
         over_limit = []
 
@@ -597,8 +756,10 @@ def shown(text):
     return f'{text[:SHOWN_LIMIT]!r} and {len(text) - SHOWN_LIMIT} more characters, not shown'
 
 
-def check_example(lesson, name, code, exit_code, runs, args, project=None):
-    """Builds example NAME and runs it once per run; returns the number of runs it started (0 if it didn't build)."""
+def check_example(lesson, name, code, exit_code, runs, args, project=None, folder_runs=None):
+    """Builds example NAME and runs it once per run; returns the number of runs it started (0 if it didn't build).
+    FOLDER_RUNS is None for a program without run markers (RUNS are its runs, in the checker's working directory), or
+    the runs of a program with run markers, each run in a new folder of its own (check_folder_runs)."""
     built = build(lesson, name, code, args, project=project)
     if not built:
         return 0
@@ -610,40 +771,113 @@ def check_example(lesson, name, code, exit_code, runs, args, project=None):
         fail(f'{lesson}: example {name}: build failed{reason}\n{result.stdout}{result.stderr}')
         return 0
     exe = executable(build_dir)
+    if folder_runs is not None:
+        return run_in_folders(lesson, name, exe, exit_code, folder_runs, build_dir.parent, args)
     # The same program for every run: built once above, never rebuilt between inputs.
     for number, (data, expected) in enumerate(runs or [(None, [])], 1):
         label = f'example {name}' if data is None else f'example {name} (input {number} of {len(runs)})'
-        returncode, stdout, stderr, timed_out, over_limit = run_program(exe, data, args.timeout)
-        if over_limit:
-            for stream in over_limit:
-                fail(f'{lesson}: {label}: {stream} exceeded the {OUTPUT_LIMIT}-byte limit, so the program was stopped')
-            continue
-        if timed_out:
-            fail(f'{lesson}: {label}: did not finish within {args.timeout} s')
-            continue
-        # Decoded and normalised only now, within the limit: the limit counts the bytes as printed.
-        out = stdout.decode('ascii', errors='replace').replace('\r\n', '\n')
-        problems = []
-        if returncode != exit_code:
-            problems.append(f'exit code {returncode}, expected {exit_code}')
-        if stderr:
-            problems.append(f'printed to stderr: {shown(stderr.decode("ascii", errors="replace"))}')
-        mismatch = next((text for text in expected if out != text), None)
-        if mismatch is not None:
-            problems.append(f'output {shown(out)}, expected {shown(mismatch)}')
-        if problems:
-            for problem in problems:
-                fail(f'{lesson}: {label}: {problem}')
-            continue
-        print(f'ok   {lesson}: {label} builds, runs, exits with {exit_code} '
-              f'and prints the expected {len(expected)} output block(s):')
-        for line in (data or '').splitlines():
-            print(f'       < {line}')
-        for line in out[:SHOWN_LIMIT].splitlines():
-            print(f'       | {line}')
-        if len(out) > SHOWN_LIMIT:
-            print(f'       ({len(out) - SHOWN_LIMIT} more characters, not shown)')
+        judge_run(lesson, label, run_program(exe, data, args.timeout), exit_code, expected,
+                  [f'       < {line}' for line in (data or '').splitlines()], args)
     return len(runs or [(None, [])])
+
+
+def judge_run(lesson, label, result, exit_code, expected, details, args):
+    """Reports one run of an example: its RESULT from run_program against EXIT_CODE and the EXPECTED outputs.
+    On success, prints the DETAILS lines (the input, the data file) and then the output."""
+    returncode, stdout, stderr, timed_out, over_limit = result
+    if over_limit:
+        for stream in over_limit:
+            fail(f'{lesson}: {label}: {stream} exceeded the {OUTPUT_LIMIT}-byte limit, so the program was stopped')
+        return
+    if timed_out:
+        fail(f'{lesson}: {label}: did not finish within {args.timeout} s')
+        return
+    # Decoded and normalised only now, within the limit: the limit counts the bytes as printed.
+    out = stdout.decode('ascii', errors='replace').replace('\r\n', '\n')
+    problems = []
+    if returncode != exit_code:
+        problems.append(f'exit code {returncode}, expected {exit_code}')
+    if stderr:
+        problems.append(f'printed to stderr: {shown(stderr.decode("ascii", errors="replace"))}')
+    mismatch = next((text for text in expected if out != text), None)
+    if mismatch is not None:
+        problems.append(f'output {shown(out)}, expected {shown(mismatch)}')
+    if problems:
+        for problem in problems:
+            fail(f'{lesson}: {label}: {problem}')
+        return
+    print(f'ok   {lesson}: {label} builds, runs, exits with {exit_code} '
+          f'and prints the expected {len(expected)} output block(s):')
+    for line in details:
+        print(line)
+    for line in out[:SHOWN_LIMIT].splitlines():
+        print(f'       | {line}')
+    if len(out) > SHOWN_LIMIT:
+        print(f'       ({len(out) - SHOWN_LIMIT} more characters, not shown)')
+
+
+def run_in_folders(lesson, name, exe, exit_code, runs, work, args):
+    """Runs example NAME once per run marker, in order. Each run gets a new, empty folder WORK/run_N as its working
+    directory, holding only that run's data file (if it has one), and the folder is removed after the run, whatever
+    its result. Returns the number of runs."""
+    # Started from another working directory, so by its absolute path: a relative one would be looked up from the
+    # run's folder on Linux and macOS, and from the checker's own on Windows.
+    exe = exe.resolve()
+    for number, (data, data_file, expected) in enumerate(runs, 1):
+        label = f'example {name} (run {number} of {len(runs)})'
+        folder = work / f'run_{number}'
+        result, removed = run_in_folder(exe, data, data_file, folder, args.timeout)
+        if not removed:
+            fail(f'{lesson}: {label}: its folder {folder} could not be removed after the run')
+        if isinstance(result, str):
+            fail(f'{lesson}: {label}: {result}')
+            continue
+        details = [f'       < {line}' for line in (data or '').splitlines()]
+        if data_file is None:
+            details.append('       (no data file in its folder)')
+        else:
+            file_name, content = data_file
+            lines = content.count(b'\n') + (0 if content.endswith(b'\n') or not content else 1)
+            ending = '' if content.endswith(b'\n') or not content else ', no line end after the last line'
+            details.append(f'       data file {file_name}: {lines} line(s), {len(content)} byte(s){ending}')
+        judge_run(lesson, label, result, exit_code, expected, details, args)
+    return len(runs)
+
+
+def run_in_folder(exe, data, data_file, folder, timeout):
+    """Runs EXE once with standard input DATA (None: none) in FOLDER, created new and empty, holding only DATA_FILE
+    ((name, bytes), or None for no file). FOLDER is removed afterwards, whatever happens.
+    Returns (run_program's result, or a message why the program wasn't run; whether FOLDER was removed)."""
+    shutil.rmtree(folder, ignore_errors=True)  # never a file of an earlier check
+    try:
+        folder.mkdir(parents=True)
+        result = None
+        if data_file is not None:
+            target = folder / data_file[0]
+            # The names were checked before; this makes sure that nothing is ever written outside the run's folder.
+            if target.resolve().parent != folder.resolve():
+                result = f'its data file {data_file[0]} would be written outside {folder}'
+            else:
+                target.write_bytes(data_file[1])  # bytes: no line ends are translated on any system
+        if result is None:
+            try:
+                result = run_program(exe, data, timeout, cwd=folder)
+            except OSError as error:
+                result = f'could not be started: {error}'
+    finally:
+        removed = remove_folder(folder)
+    return result, removed
+
+
+def remove_folder(folder):
+    """Removes FOLDER and everything in it. The program has ended by now, but on Windows a file can stay locked for a
+    moment (a virus scanner, for example), so it tries a few times. Returns whether FOLDER is gone."""
+    for attempt in range(5):
+        shutil.rmtree(folder, ignore_errors=True)
+        if not folder.exists():
+            return True
+        time.sleep(0.2 * (attempt + 1))
+    return False
 
 
 def check_broken(lesson, name, code, expectation, args):
@@ -830,22 +1064,31 @@ def check_course(args):
         for path, unmarked in ((pl, pl_unmarked), (en, en_unmarked)):
             for line in unmarked:
                 fail(f'{path}:{line}: ```cpp block without a marker')
+        # Run markers and data files are compared too: the same runs, the same file names and the same bytes.
         pl_marked = [(kind, name, attributes, text) for kind, name, attributes, _, text, _ in pl_blocks]
         en_marked = [(kind, name, attributes, text) for kind, name, attributes, _, text, _ in en_blocks]
+        run_markers = sum(1 for block in pl_blocks if block[0] == 'run')
         if pl_marked != en_marked:
             fail(f'{pl}: the marked code blocks differ between {pl.name} and {en.name}')
         else:
-            print(f'ok   {len(pl_marked)} marked blocks are identical in {pl.name} and {en.name}')
-        examples, runs, broken = check_lesson(pl, pl_blocks)
+            also = f', and so are their {run_markers} run markers' if run_markers else ''
+            print(f'ok   {len(pl_marked) - run_markers} marked blocks are identical in {pl.name} and {en.name}{also}')
+        examples, runs, broken, folder_runs, refused_runs = check_lesson(pl, pl_blocks)
         projects, refused = check_projects(pl, pl_blocks, examples, broken)
+        refused |= refused_runs
         if en.exists():
-            en_examples, _, en_broken = check_lesson(en, en_blocks)
+            en_examples, _, en_broken, _, _ = check_lesson(en, en_blocks)
             check_projects(en, en_blocks, en_examples, en_broken)
         fragments = sum(1 for block in pl_blocks if block[0] == 'fragment')
         inputs = sum(1 for block in pl_blocks if block[0] == 'input')
         print(f'     {len(examples)} examples to build and run ({inputs} runs with standard input), '
               f'{len(broken)} broken programs that must not compile, '
               f'{fragments} fragments (deliberately incomplete, not built)')
+        if folder_runs:
+            in_folders = sum(len(name_runs) for name_runs in folder_runs.values())
+            with_files = sum(1 for name_runs in folder_runs.values() for _, data_file, _ in name_runs if data_file)
+            print(f'     {len(folder_runs)} of these examples with run markers: {in_folders} runs, each in a folder of its own, '
+                  f'{with_files} of them with a data file')
         if projects or refused:
             print(f'     {len(projects)} of these programs in several files (file and cmake blocks), '
                   f'{len(refused)} not built because of the problems above')
@@ -855,7 +1098,7 @@ def check_course(args):
             counts[0] += 1
             counts[1] += sum(1 for name in examples if name not in refused)
             counts[2] += sum(1 for name in broken if name not in refused)
-            counts[3] += sum(len(runs.get(name) or [None]) for name in examples if name not in refused)
+            counts[3] += sum(len(folder_runs.get(name) or runs.get(name) or [None]) for name in examples if name not in refused)
             if part != shard[0]:
                 print(f'     part {part} of {shard[1]}: built and run by that part, not by this one ({shard[0]} of {shard[1]})')
                 continue
@@ -864,7 +1107,8 @@ def check_course(args):
         for name, (code, exit_code) in examples.items():
             if name not in refused:
                 built_examples += 1
-                started_runs += check_example(pl.stem, name, code, exit_code, runs.get(name, []), args, projects.get(name))
+                started_runs += check_example(pl.stem, name, code, exit_code, runs.get(name, []), args, projects.get(name),
+                                              folder_runs.get(name))
         for name, (code, expectation) in broken.items():
             if name not in refused:
                 built_broken += 1
@@ -934,9 +1178,57 @@ REPORT_MAIN = ('#include <iostream>\n\n#include "record.hpp"\n#include "report.h
                '    std::cout << "Doubled: " << doubled_points(record) << "\\n";\n}\n')
 
 
+# Reads data.txt as bytes and prints how many there are, their sum and the last one (-1: none), or that it can't open
+# the file. bytes_output() is what it prints for CONTENT (None: no file).
+BYTES = ('#include <fstream>\n#include <iostream>\n\nint main() {\n    std::ifstream input{"data.txt", std::ios::binary};\n\n'
+         '    if (input.fail()) {\n        std::cout << "Cannot open data.txt\\n";\n        return 0;\n    }\n\n'
+         '    int size{0};\n    int sum{0};\n    int last{-1};\n    char c{};\n\n    while (input.get(c)) {\n        ++size;\n'
+         '        sum += c;\n        last = c;\n    }\n\n'
+         '    std::cout << "Bytes: " << size << ", sum: " << sum << ", last: " << last << "\\n";\n}\n')
+# A program in several files that prints the name of its working directory, the files in it, and the lines of steps.txt.
+LISTING_MAIN = '#include "listing.hpp"\n\nint main() {\n    print_folder();\n}\n'
+LISTING_HPP = '#pragma once\n\nvoid print_folder();\n'
+LISTING_CPP = ('#include "listing.hpp"\n\n#include <algorithm>\n#include <filesystem>\n#include <fstream>\n#include <iostream>\n'
+               '#include <string>\n#include <vector>\n\nvoid print_folder() {\n    std::vector<std::string> names{};\n\n'
+               '    for (const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator{"."}) {\n'
+               '        names.push_back(entry.path().filename().string());\n    }\n\n    std::sort(names.begin(), names.end());\n'
+               '    std::cout << "Folder: " << std::filesystem::current_path().filename().string() << "\\n";\n'
+               '    std::cout << "Files:";\n\n    for (const std::string& name : names) {\n        std::cout << " " << name;\n    }\n\n'
+               '    std::cout << "\\n";\n    std::ifstream input{"steps.txt"};\n    std::string line{};\n\n'
+               '    while (std::getline(input, line)) {\n        std::cout << "Line: " << line << "\\n";\n    }\n}\n')
+# Reads a file name from standard input (data.txt when there is none) and prints the first line of that file.
+NAMED_FILE = ('#include <fstream>\n#include <iostream>\n#include <string>\n\nint main() {\n    std::string file_name{};\n'
+              '    std::getline(std::cin, file_name);\n\n    if (std::cin.fail()) {\n        std::cout << "No standard input\\n";\n'
+              '        file_name = "data.txt";\n    }\n\n    std::ifstream input{file_name};\n\n    if (input.fail()) {\n'
+              '        std::cout << "Cannot open " << file_name << "\\n";\n        return 0;\n    }\n\n    std::string line{};\n'
+              '    std::getline(input, line);\n    std::cout << file_name << ": " << line << "\\n";\n}\n')
+# Reads a number, and tells whether a folder named course is in its working directory (it is in the checker's own).
+WHERE = ('#include <filesystem>\n#include <iostream>\n\nint main() {\n    int value{0};\n    std::cin >> value;\n'
+         '    std::cout << "Value: " << value << ", course folder here: " << (std::filesystem::exists("course") ? "yes" : "no")'
+         ' << "\\n";\n}\n')
+
+
+def bytes_output(content):
+    if content is None:
+        return 'Cannot open data.txt\n'
+    return f'Bytes: {len(content)}, sum: {sum(content)}, last: {content[-1] if content else -1}\n'
+
+
 def lesson(*parts):
-    """A fixture lesson made of (marker, language, code) parts."""
-    return ''.join(f'<!-- {marker} -->\n```{language}\n{code}```\n\n' for marker, language, code in parts)
+    """A fixture lesson made of (marker, language, code) parts. A part with no language is a marker alone (a run
+    marker), and a part with no marker is text as it is."""
+    return ''.join(code if marker is None else f'<!-- {marker} -->\n\n' if language is None
+                   else f'<!-- {marker} -->\n```{language}\n{code}```\n\n' for marker, language, code in parts)
+
+
+def run_parts(name, output, data=None, file_name='data.txt', noeol=False, stdin=None):
+    """The parts of one run of program NAME: its run marker, its input and data file (if any) and its output."""
+    parts = [(f'run: {name}', None, '')]
+    if stdin is not None:
+        parts.append((f'input: {name}', 'text', stdin))
+    if data is not None:
+        parts.append((f'datafile: {name} {file_name}{" noeol" if noeol else ""}', 'text', data))
+    return parts + [(f'output: {name}', 'text', output)]
 
 
 def self_test(args):
@@ -972,6 +1264,33 @@ def self_test(args):
     twice_runs = [('input: twice', 'text', '4\n'), ('output: twice', 'text', 'Twice: 8\n'),
                   ('input: twice', 'text', '-3\n'), ('output: twice', 'text', 'Twice: -6\n')]
     twice = program() + twice_runs
+    # Programs that read a data file. bytes_cases: (the file's exact bytes, or None for no file; noeol).
+    bytes_cases = [(b'Alpha\n', False), (b'Alpha', True), (b'', False), (b'\n', False), (b'Alpha\n\n', False),
+                   (b' a\tb \n', False), (None, False)]
+    bytes_runs = [part for content, noeol in bytes_cases
+                  for part in run_parts('bytes', bytes_output(content),
+                                        None if content is None else content.decode('ascii') + ('\n' if noeol else ''),
+                                        noeol=noeol)]
+    listing = [('example: listing', 'cpp', LISTING_MAIN), ('file: listing listing.hpp', 'cpp', LISTING_HPP),
+               ('file: listing listing.cpp', 'cpp', LISTING_CPP),
+               ('cmake: listing', 'cmake', template.replace('main.cpp)', 'main.cpp listing.cpp)'))]
+    bad_names = ['Steps.txt', '../steps.txt', 'con.txt', 'steps.csv', 'steps', 'abcdefghijklmnopqrstu.txt', 'my steps.txt']
+    misused = [('data.txt noeol', '', 'text'), ('data.txt noeol', 'Alpha\n\n', 'text'), ('data.txt noeol noeol', 'x\n', 'text'),
+               ('data.txt eol', 'x\n', 'text'), ('noeol data.txt', 'x\n', 'text'), ('data.txt', 'x\n', 'cpp')]
+    structure = [
+        ('example: s_1', 'cpp', GOOD), ('datafile: s_1 data.txt', 'text', 'x\n'), ('output: s_1', 'text', 'Hi!\n'),
+        ('example: s_2', 'cpp', GOOD), ('output: s_2', 'text', 'Hi!\n'), *run_parts('s_2', 'Hi!\n'),
+        ('example: s_3', 'cpp', GOOD), ('run: s_3', None, ''), (None, None, '```text\nx\n```\n\n'),
+        ('example: s_4', 'cpp', GOOD), *run_parts('s_4', 'Hi!\n'), ('output: s_4', 'text', 'Hi!\n'),
+        ('example: s_5', 'cpp', READ_INT), ('run: s_5', None, ''), ('input: s_5', 'text', '1\n'), ('input: s_5', 'text', '2\n'),
+        ('output: s_5', 'text', 'Count: 1\n'),
+        ('example: s_6', 'cpp', GOOD), ('run: s_6', None, ''), ('datafile: s_6 a.txt', 'text', 'x\n'),
+        ('datafile: s_6 b.txt', 'text', 'y\n'), ('output: s_6', 'text', 'Hi!\n'),
+        ("broken: s_7 at=4 errors=1 error=expected ';'", 'cpp', NO_SEMICOLON), *run_parts('s_7', 'Hi!\n'),
+        *run_parts('s_8', 'Hi!\n'),
+    ]
+    marker_like = ['<!-- datafiles: hi data.txt -->', '<!--run: hi-->', '  <!-- run: hi -->', '<!-- output : hi -->',
+                   '<!-- fragment: x -->', '<!--fragment-->']
     cases = [
         ('correct examples pass', lesson(*good), None, None),
         ('a wrong expected output is detected',
@@ -1252,11 +1571,83 @@ def self_test(args):
         ('a different in= in PL and EN is detected',
          lesson(*program(owner=TOOLS_ERROR, cpp=no_semicolon)),
          lesson(*program(owner=TOOLS_ERROR.replace('in=tools.cpp', 'in=main.cpp'), cpp=no_semicolon)), 'differ between'),
+        # Programs that read a data file: runs declared with run markers, each in a folder of its own.
+        ('a program sees the exact bytes of its data file in each run (a line end, noeol, an empty file, one empty line, '
+         'an empty last line, spaces and a tab), and no file when its run has none',
+         lesson(('example: bytes', 'cpp', BYTES), *bytes_runs), None, None),
+        ('each run has a new folder of its own with only its data file: a file, then none, then the same name with other '
+         'content, in a program in several files, and no run folder is left',
+         lesson(*listing, *run_parts('listing', 'Folder: run_1\nFiles: steps.txt\nLine: A\n', 'A\n', 'steps.txt'),
+                *run_parts('listing', 'Folder: run_2\nFiles:\n'),
+                *run_parts('listing', 'Folder: run_3\nFiles: steps.txt\nLine: B\nLine: C\n', 'B\nC\n', 'steps.txt')),
+         None, None),
+        ('a run without an input block gets an empty standard input, a run may have both, and the blocks of two '
+         'programs may alternate',
+         lesson(('example: named', 'cpp', NAMED_FILE), ('example: bytes', 'cpp', BYTES),
+                ('run: named', None, ''), ('run: bytes', None, ''), ('datafile: named data.txt', 'text', 'Hello\n'),
+                ('datafile: bytes data.txt', 'text', 'Hi\n'), ('output: bytes', 'text', bytes_output(b'Hi\n')),
+                ('output: named', 'text', 'No standard input\ndata.txt: Hello\n'),
+                *run_parts('named', 'other.txt: World\n', 'World\n', 'other.txt', stdin='other.txt\n'),
+                *run_parts('named', 'Cannot open missing.txt\n', stdin='missing.txt\n')),
+         None, None),
+        ('an empty data file in PL and a file of one line end in EN are detected as a difference',
+         lesson(('example: bytes', 'cpp', BYTES), *run_parts('bytes', bytes_output(b''), '')),
+         lesson(('example: bytes', 'cpp', BYTES), *run_parts('bytes', bytes_output(b''), '\n')), 'differ between'),
+        ('every bad data-file name is reported, and nothing is built',
+         lesson(*[part for number, bad in enumerate(bad_names, 1)
+                  for part in [(f'example: bad_{number}', 'cpp', GOOD), *run_parts(f'bad_{number}', 'Hi!\n', 'x\n', bad)]]),
+         None, 'is not a valid data-file name',
+         ['Steps.txt is not a valid', '../steps.txt is not a valid', 'con.txt is a reserved name on Windows',
+          'steps.csv is not a valid', 'steps is not a valid', 'abcdefghijklmnopqrstu.txt is not a valid',
+          "cannot read the datafile marker: <!-- datafile: bad_7 my steps.txt -->"]),
+        ('misused run and datafile markers are reported, and nothing is built',
+         lesson(*[part for number, (attributes, data, language) in enumerate(misused, 1)
+                  for part in [(f'example: m_{number}', 'cpp', GOOD), (f'run: m_{number}', None, ''),
+                               (f'datafile: m_{number} {attributes}', language, data), (f'output: m_{number}', 'text', 'Hi!\n')]],
+                ('example: m_run', 'cpp', GOOD), ('run: m_run extra', None, ''), ('output: m_run', 'text', 'Hi!\n')),
+         None, 'noeol on an empty data file',
+         ['noeol after an empty last line', 'cannot read the datafile marker: <!-- datafile: m_3 data.txt noeol noeol -->',
+          'cannot read the datafile marker: <!-- datafile: m_4 data.txt eol -->',
+          'cannot read the datafile marker: <!-- datafile: m_5 noeol data.txt -->',
+          'datafile marker on a ```cpp block, expected ```text', 'cannot read the run marker: <!-- run: m_run extra -->']),
+        ('problems in the structure of runs are reported before building, and nothing is built',
+         lesson(*structure), None, 'a data file belongs to a run',
+         ['output s_2: comes before the first run marker of s_2', 'run 1 of s_3 has no output block',
+          'a second output block in run 1 of s_4', 'a second input block in run 1 of s_5',
+          'a second data file in run 1 of s_6', 'run s_7: a broken program is never run', 'run s_8: no example s_8 in this lesson',
+          'run marker directly followed by a code block']),
+        ('lines that look like markers but are not are reported',
+         lesson(*good, *[(None, None, f'{line}\n```text\nHi!\n```\n\n') for line in marker_like]),
+         None, 'looks like a marker but is not one', marker_like),
+        ('control characters in a data file are reported, and nothing is built',
+         lesson(('example: bytes', 'cpp', BYTES), *run_parts('bytes', bytes_output(b'a\x01b\n'), 'a\x01b\n'),
+                *run_parts('bytes', bytes_output(b'a\x0bb\n'), 'a\x0bb\n')),
+         None, 'control characters in the data', ["a control character that splits lines ('\\x0b')"]),
+        ('failing runs (a wrong output, an exit code, stderr, one that never finishes, output over the limit) are reported '
+         'with their run, and no run folder is left',
+         lesson(('example: wrong', 'cpp', GOOD), *run_parts('wrong', 'Hello!\n', 'x\n'),
+                ('example: code', 'cpp', RETURN_3), *run_parts('code', 'Hi!\n', 'x\n'),
+                ('example: noise', 'cpp', PRINT_X), *run_parts('noise', '\n', 'x\n', stdin='3 1\n'),
+                ('example: endless', 'cpp', ENDLESS), *run_parts('endless', 'x\n', 'x\n'),
+                ('example: flood', 'cpp', PRINT_X), *run_parts('flood', 'x\n', 'x\n', stdin='70000 0\n')),
+         None, 'example wrong (run 1 of 1): output',
+         ['example code (run 1 of 1): exit code 3, expected 0', 'example noise (run 1 of 1): printed to stderr',
+          'example endless (run 1 of 1): did not finish within', 'example flood (run 1 of 1): stdout exceeded the 65536-byte limit']),
+        ('ordinary HTML comments are text, and an example without run markers keeps its runs and the checker\'s working '
+         'directory next to one with them: old runs stay where they were',
+         lesson((None, None, '<!-- TODO: shorten this section -->\n\n<!-- note: the run below is the main one -->\n\n'
+                             '<!-- run the program twice -->\n\n<!-- datafile names are lowercase -->\n\n<!--\nA comment of '
+                             'several lines\n-->\n\n'),
+                ('example: old', 'cpp', WHERE), ('input: old', 'text', '4\n'),
+                ('output: old', 'text', 'Value: 4, course folder here: yes\n'), ('input: old', 'text', '7\n'),
+                ('output: old', 'text', 'Value: 7, course folder here: yes\n'),
+                ('example: new', 'cpp', WHERE), *run_parts('new', 'Value: 0, course folder here: no\n')),
+         None, None),
     ]
     project = PROJECT.resolve()
     home = os.getcwd()
     failures = 0
-    for title, pl_text, en_text, expected_failure in cases:
+    for title, pl_text, en_text, expected_failure, *also in cases:
         case_args = argparse.Namespace(**vars(args))
         if 'environment' in title:
             case_args.cxx = str(pathlib.Path(tempfile.gettempdir()) / 'no-such-compiler' / 'clang++')
@@ -1277,6 +1668,20 @@ def self_test(args):
                     verdict = not errors
                 else:
                     verdict = len(errors) > 0 and any(expected_failure in e for e in errors)
+                # Some cases expect several problems at once: each of them must be reported.
+                verdict = verdict and all(any(message in e for e in errors) for message in (also[0] if also else []))
+                if 'exact bytes' in title:
+                    # The bytes the checker writes, read from the lesson as the checker reads it, before any program runs.
+                    found, _ = blocks(pathlib.Path('course/module_99_self_test/lesson.md'))
+                    folder_runs = check_lesson(pathlib.Path('lesson.md'), found)[3]
+                    written = [data_file[1] if data_file else None for _, data_file, _ in folder_runs.get('bytes', [])]
+                    verdict = verdict and written == [content for content, _ in bytes_cases]
+                if 'no run folder is left' in title:
+                    verdict = (verdict and pathlib.Path('build/lesson-examples/lesson').is_dir()
+                               and not any(pathlib.Path('build').rglob('run_*')))
+                if 'old runs stay where they were' in title:
+                    old = pathlib.Path('build/lesson-examples/lesson/old')
+                    verdict = verdict and old.is_dir() and not any(old.glob('run_*'))
                 if 'short message' in title:
                     verdict = verdict and all(len(e) <= 4 * SHOWN_LIMIT for e in errors)
                 if 'nothing is built' in title:
@@ -1298,8 +1703,55 @@ def self_test(args):
     failures += limit_failures
     shard_failures, shard_cases = self_test_shards(args)
     failures += shard_failures
-    print(f'\n{"PASSED" if not failures else "FAILED"}: self-test, {len(cases) + limit_cases + shard_cases} cases, {failures} failed')
+    folder_failures, folder_cases = self_test_folders(args)
+    failures += folder_failures
+    total = len(cases) + limit_cases + shard_cases + folder_cases
+    print(f'\n{"PASSED" if not failures else "FAILED"}: self-test, {total} cases, {failures} failed')
     return failures
+
+
+def self_test_folders(args):
+    """Runs run_in_folder() directly, for what a lesson can't arrange: a folder left from before, a data-file name that
+    would leave the folder, and a program that can't be started. Returns (failures, number of checks)."""
+    project = PROJECT.resolve()
+    home = os.getcwd()
+    title = ('the run folder: one left from before is emptied first, a data file is never written outside it, '
+             'and it is removed even when the program cannot be started')
+    print(f'\n##### self-test: {title}')
+    with tempfile.TemporaryDirectory() as root:
+        os.chdir(root)
+        try:
+            PROJECT.parent.mkdir(parents=True)
+            shutil.copy(project, PROJECT)
+            cmake = PROJECT.read_text(encoding='utf-8').replace('main.cpp)', 'main.cpp listing.cpp)')
+            built = build('self_test', 'folders', LISTING_MAIN, args,
+                          project=({'listing.hpp': LISTING_HPP, 'listing.cpp': LISTING_CPP}, cmake))
+            if not built or built[1].returncode != 0:
+                print(f'##### FAIL self-test: {title}: the listing program did not build')
+                return 1, 1
+            exe = executable(built[0]).resolve()
+            work = built[0].parent
+            stale = work / 'run_1'
+            stale.mkdir()
+            (stale / 'old.txt').write_text('old\n', encoding='ascii')
+            result, removed = run_in_folder(exe, None, ('steps.txt', b'A\n'), stale, args.timeout)
+            emptied = (not isinstance(result, str) and result[1].replace(b'\r\n', b'\n')
+                       == b'Folder: run_1\nFiles: steps.txt\nLine: A\n' and removed and not stale.exists())
+            outside = work / 'run_2'
+            result, removed = run_in_folder(exe, None, ('../escaped.txt', b'x\n'), outside, args.timeout)
+            kept_inside = (isinstance(result, str) and 'would be written outside' in result and removed
+                           and not (work / 'escaped.txt').exists() and not outside.exists())
+            missing = work / 'run_3'
+            result, removed = run_in_folder(work / 'no-such-program', None, ('steps.txt', b'A\n'), missing, args.timeout)
+            not_started = isinstance(result, str) and result.startswith('could not be started') and removed and not missing.exists()
+        finally:
+            os.chdir(home)
+    print(f'##### self-test: emptied first: {emptied}, nothing written outside: {kept_inside}, '
+          f'removed after a failed start: {not_started}')
+    verdict = emptied and kept_inside and not_started
+    print(f'##### {"ok  " if verdict else "FAIL"} self-test: {title}')
+    errors.clear()
+    return (0 if verdict else 1), 1
 
 
 def self_test_limits(args):
@@ -1441,6 +1893,17 @@ def self_test_shards(args):
         problems, _, _, _ = run_course({'lesson_a': fragment, 'lesson_b': fragment, 'lesson_c': fragment}, (4, 4))
         return any('part 4 of 4 has no lessons' in e for e in problems)
 
+    def runs_in_folders_split():
+        runs = lesson(('example: bytes', 'cpp', BYTES), *run_parts('bytes', bytes_output(b'A\n'), 'A\n'),
+                      *run_parts('bytes', bytes_output(None)), *run_parts('bytes', bytes_output(b''), ''))
+        lessons = {'lesson_a': fragment, 'lesson_b': runs}
+        whole, first, second = run_course(lessons, None), run_course(lessons, (1, 2)), run_course(lessons, (2, 2))
+        verdicts = [[line for line in result[1].splitlines() if line.startswith(('ok   lesson_b', 'FAIL'))]
+                    for result in (whole, second)]
+        return (not whole[0] and not first[0] and not second[0] and first[3] == [] and second[3] == ['lesson_b']
+                and '(1 example(s), 0 broken program(s), 3 run(s))' in second[1] and len(verdicts[0]) == 3
+                and verdicts[0] == verdicts[1])
+
     def failure_stays_in_its_part():
         wrong = lesson(('example: hi', 'cpp', GOOD), ('output: hi', 'text', 'Hello!\n'))
         lessons = {'lesson_a': fragment, 'lesson_b': wrong}
@@ -1458,6 +1921,8 @@ def self_test_shards(args):
         ('a program in several files is built whole, by its own part only', program_in_several_files_built_whole),
         ('a part without lessons fails', part_without_lessons),
         ('a failing program fails its own part, and the other part neither builds nor passes it', failure_stays_in_its_part),
+        ('an example with run markers is run whole by its own part, with the same verdicts as without --shard',
+         runs_in_folders_split),
     ]
     failures = 0
     for title, check in checks:

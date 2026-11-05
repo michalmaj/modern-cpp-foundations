@@ -72,6 +72,9 @@ Code blocks are marked with an HTML comment, which GitHub doesn't show. The mark
 | `<!-- fragment -->` | ` ```cpp ` | Deliberately incomplete code: never built or run. |
 | `<!-- file: NAME PATH -->` | ` ```cpp ` | One more file of program NAME, a `.cpp` source or a `.hpp` header, saved as PATH (see [Programs in several files](#programs-in-several-files)). |
 | `<!-- cmake: NAME -->` | ` ```cmake ` | The `CMakeLists.txt` of program NAME, for a program in several files. |
+| `<!-- run: NAME -->` | none | A line of its own, **with no code block**: the next run of example NAME, for a program that reads a data file (see [Programs that read a data file](#programs-that-read-a-data-file)). |
+| `<!-- datafile: NAME PATH -->` | ` ```text ` | The file PATH that this run of NAME finds in its working directory. |
+| `<!-- datafile: NAME PATH noeol -->` | ` ```text ` | The same, without a line end after the last line. |
 
 - **NAME** uses lowercase letters, digits and `_`. Within one lesson, every `example` and `broken` program has its own name; a buggy program and its fixed version get different names. `file` and `cmake` blocks use the NAME of the program they belong to.
 - **Attributes** are exactly the ones above, in that order. Anything else makes the marker unreadable and is reported. There is no `warning=` attribute.
@@ -83,7 +86,8 @@ Which marker to use:
 - a line, a header or a sketch to read, or code that must not run, such as an endless loop: `fragment`;
 - a compile error the learner should see: `broken` with `at=`, and in a program in several files `in=` for a file other than `main.cpp`;
 - a link error: `broken` with `stage=link`;
-- a program in several files: its `example` or `broken` block for `main.cpp`, a `file` block for each other file, and one `cmake` block.
+- a program in several files: its `example` or `broken` block for `main.cpp`, a `file` block for each other file, and one `cmake` block;
+- a program that reads a data file: its `example` block and, for each run, a `run` marker with the run's `datafile`, `input` and `output` blocks.
 
 ### Building
 
@@ -320,6 +324,81 @@ Double: -6
 
 In a lesson, the outputs are usually inside `<details>` blocks, so that a prediction comes first. That changes nothing for the check: markers inside `<details>` work the same.
 
+### Programs that read a data file
+
+A program that opens a file with a relative name, such as `std::ifstream input{"steps.txt"};`, looks for it in its **working directory**. Such an example declares **each of its runs** with a `run` marker, and the checker gives each run a new folder of its own, holding only that run's data file.
+
+````markdown
+<!-- example: steps -->
+```cpp
+...the program, which opens steps.txt...
+```
+
+<!-- run: steps -->
+
+<!-- datafile: steps steps.txt -->
+```text
+4200
+7350
+```
+
+<!-- output: steps -->
+```text
+Total steps: 11550
+```
+
+<!-- run: steps -->
+
+<!-- output: steps -->
+```text
+Cannot open steps.txt
+```
+````
+
+**Runs:**
+- `<!-- run: NAME -->` is a line of its own, with **no code block** after it, and starts the next run of example NAME. Runs are numbered from 1, in the order of their markers, and the log names them `example steps (run 2 of 2)`.
+- The `input`, `datafile` and `output` blocks of NAME after a `run` marker, up to NAME's next `run` marker, belong to that run. Blocks of other programs may stand in between: each block belongs to the program it names. The `example` block itself may stand anywhere, before the runs or after them.
+- **Each run has:**
+  - at most one `input` block: without it, the run gets an **empty standard input** (the end of input at once, never the checker's own);
+  - at most one `datafile` block: without it, the run's folder is **empty**, so the program finds no file;
+  - **exactly one** `output` block.
+- **A run with neither** `input` nor `datafile` is a valid run: it tests what the program does when its file is missing.
+- **An example with `run` markers has all of its `input` and `output` blocks in its runs.** One before its first `run` marker is reported, because the old and the new way of grouping runs never mix in one example.
+- `run` and `datafile` are only for an `example`: a `broken` program is never run.
+- **An example without `run` markers is checked exactly as before** ([Runs](#runs-standard-input-and-expected-output)): in the checker's own working directory, and without data files. A `datafile` block in such an example is reported.
+
+**The data file:**
+- **PATH** is the file's name in the working directory:
+  - lowercase letters, digits and `_`, starting with a letter, ending in `.txt`, at most 24 characters (the rule of [file blocks](#programs-in-several-files), with `.txt`);
+  - no folders, `/`, `\`, `..` or spaces;
+  - not a name that Windows reserves (`con.txt`, `nul.txt`, `com1.txt`…).
+
+  Before writing, the checker also makes sure that the file lands inside the run's folder.
+- **Its bytes are the block's lines, each followed by one line end (LF):** no BOM, no CR, no change to spaces or tabs.
+  - An **empty block** is an empty file (zero bytes);
+  - a block of **one empty line** is a file of one line end;
+  - a block ending with an empty line is a file whose last line is empty.
+- **`noeol`** leaves out the final line end only (`Alpha` instead of `Alpha\n`). It isn't allowed on an empty block (nothing to leave out) or after an empty last line (those bytes have their own form: the block without that line and without `noeol`). It is only for data files: `input` and `output` blocks don't take it.
+- **The data are ASCII,** like every marked block: printable characters, spaces and tabs. Other control characters are reported, and so are, in a lesson with data files, characters such as `\v` that would split one line of the block into two.
+
+**The working directory:**
+- Each run gets a new, empty folder, `build/lesson-examples/<lesson>/<NAME>/run_<N>`, as its working directory. Only that run's data file is written there, and nothing of other runs or of the build.
+- The program is started by its absolute path.
+- **After the run the folder is removed,** whatever the result: a pass, a wrong output, an exit code, stderr, a timeout, the output limit, or a program that couldn't be started. A folder still locked on Windows is retried a few times; if it can't be removed, that is reported as a problem.
+- Exit codes, stderr, the timeout and the output limit are checked as for every run.
+
+**Before anything is built,** these are reported, and the example isn't built or run:
+- a `run` or `datafile` marker that can't be read: other attributes, `noeol` twice, or another order;
+- a `run` or `datafile` of a program that isn't an `example` of the lesson;
+- a `datafile` without a `run`;
+- an `input` or `output` block before the first `run` of its example;
+- a second `input`, `datafile` or `output` block in one run, or a run without an `output` block;
+- a bad PATH;
+- `noeol` where it isn't allowed;
+- control characters;
+- a fence other than ` ```text `;
+- a `run` marker directly followed by a code block (mark the block, or put text between them).
+
 ### Exit codes and stderr
 
 - **Exit code:**
@@ -359,7 +438,8 @@ Failure messages and the log of passing runs show at most **1,000 characters** o
 ### Polish and English lessons
 
 - For every `X.md` there must be an `X.en.md`.
-- **The marked blocks of the two files must be the same list:** the same markers (kind, name, attributes) with byte-identical code, input and expected output, in the same order. Fragments, broken programs, `file` and `cmake` blocks are included.
+- **The marked blocks of the two files must be the same list:** the same markers (kind, name, attributes) with byte-identical code, input and expected output, in the same order. Fragments, broken programs, `file` and `cmake` blocks are included, and so are `run` markers and `datafile` blocks.
+  - So both lessons have the same runs in the same order, with the same file names, `noeol` and data, **byte for byte**: an empty data file and a file of one line end are different.
 - **Marked blocks must be ASCII,** so code, input and output contain no Polish characters.
 - **Nothing else is compared:** prose, headings, tables and unmarked blocks aren't checked. The check says nothing about whether the two lessons explain the same things equally well; that remains a review task.
 
@@ -392,8 +472,22 @@ Failure messages and the log of passing runs show at most **1,000 characters** o
   - a problem found before building, reported by a part that doesn't build that lesson;
   - a program in several files built whole by its own part;
   - a part without lessons;
-  - a failing program that fails only its own part.
-- **Size:** the self-test has 115 cases in the current repository; the number grows with the checker and isn't a requirement.
+  - a failing program that fails only its own part;
+  - an example with `run` markers, run whole by its own part with the same verdicts as without `--shard`.
+- **Programs that read a data file:**
+  - the exact bytes each run's program reads: a line end, `noeol`, an empty file, one empty line, an empty last line, spaces and a tab, and no file;
+  - a new folder per run with only its own file (a file, then none, then the same name with other content) in a program in several files, with no run folder left afterwards;
+  - an empty standard input without an `input` block, and a run with both an input and a data file;
+  - two programs whose blocks alternate;
+  - a PL/EN difference of one byte (an empty file against one line end);
+  - bad names (uppercase, `../`, a Windows device name, another extension, no extension, too long, a space);
+  - misused markers and attributes, and problems in the structure of runs, each reported with nothing built;
+  - lines that look like markers but aren't, next to ordinary HTML comments, which stay text;
+  - control characters;
+  - failing runs (output, exit code, stderr, timeout, output limit) with no folder left;
+  - an example without `run` markers, which keeps its runs and the checker's working directory;
+  - and, run directly: a folder left from before, a name that would leave the folder, and a program that can't be started.
+- **Size:** the self-test has 128 cases in the current repository; the number grows with the checker and isn't a requirement.
 - **Workflow:** `.github/workflows/toolchains.yml` runs both modes on Windows (MSVC ABI), Ubuntu 24.04 and macOS. Locally, from the repository root, with the official compiler:
 
 ```sh
@@ -421,10 +515,14 @@ It checks the reference programs and the published data. It does **not** check:
 - whether a program is correct for inputs that aren't published, or robust against arbitrary input (for example text where a number is expected);
 - compiler warnings as an expected result: examples must have none, and a `broken` program can only expect errors;
 - one exit code per run (only per example), or a run whose input doesn't end with a line end;
+- in a program that reads a data file: more than one data file per run, folders, files the program writes, a file that exists but can't be opened, data files with CRLF line ends or non-ASCII text;
 - processes started by an example: lesson programs start none, and the check doesn't manage them;
 - the CMake configure and build output, which isn't limited like a program's output;
 - in a program in several files: a missing header, a dependency-scan error or a CMake error at configuration as the expected result, an error in a source compiled after the one that failed, folders, or a `CMakeLists.txt` other than the lesson 0.5 one with its sources (see [Programs in several files](#programs-in-several-files)).
 
 Two authoring traps:
 - **Markers and code fences must start at the beginning of the line.** An indented block, for example inside a list item, isn't recognised: an indented ` ```cpp ` block is neither checked nor reported as unmarked.
+  - A line that **looks like** a marker (the name of a kind, or its plural, then a colon, however spaced or indented, or `fragment`) must be one exactly, or it is reported: `<!--run: steps-->`, `  <!-- run: steps -->`, `<!-- datafiles: … -->`, `<!-- output : … -->`.
+  - Other HTML comments, such as `<!-- TODO: … -->` or `<!-- run the program twice -->`, are ordinary text.
+  - A marker without its colon (`<!-- datafile steps steps.txt -->`) isn't recognised as one.
 - **A case named in prose or in a table is only checked if it has its own `input`/`output` pair.**
