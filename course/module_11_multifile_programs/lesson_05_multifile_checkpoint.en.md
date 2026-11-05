@@ -902,6 +902,6 @@ After five lessons you can:
 
 ## What's next
 
-This is the end of Module 11. The next module of the course is in preparation.
+This is the end of Module 11. In Module 12, "Data from text files", programs will open text files themselves and read data from them. Start with the first lesson: [Lesson 12.1: Your first data file](../module_12_text_files/lesson_01_first_data_file.en.md).
 
-**Previous lesson:** [Lesson 11.4: Splitting a program by responsibility](lesson_04_splitting_responsibilities.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 11.4: Splitting a program by responsibility](lesson_04_splitting_responsibilities.en.md) · **Next lesson:** [Lesson 12.1: Your first data file](../module_12_text_files/lesson_01_first_data_file.en.md) · [Course overview](../../README.en.md)

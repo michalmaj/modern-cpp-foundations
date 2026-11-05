@@ -902,6 +902,6 @@ Po pięciu lekcjach potrafisz:
 
 ## Co dalej
 
-To koniec Modułu 11. Kolejny moduł kursu jest w przygotowaniu.
+To koniec Modułu 11. W Module 12, „Dane z plików tekstowych”, programy będą same otwierać pliki tekstowe i odczytywać z nich dane. Zacznij od pierwszej lekcji: [Lekcja 12.1: Pierwszy plik z danymi](../module_12_text_files/lesson_01_first_data_file.md).
 
-**Poprzednia lekcja:** [Lekcja 11.4: Podział programu według odpowiedzialności](lesson_04_splitting_responsibilities.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 11.4: Podział programu według odpowiedzialności](lesson_04_splitting_responsibilities.md) · **Następna lekcja:** [Lekcja 12.1: Pierwszy plik z danymi](../module_12_text_files/lesson_01_first_data_file.md) · [Opis kursu](../../README.md)
