@@ -1126,7 +1126,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Następna lekcja to sprawdzian Modułu 12. Jest w przygotowaniu.
+W [lekcji 12.4: Seanse w kinie (sprawdzian Modułu 12)](lesson_04_cinema_screenings.md) samodzielnie zaprojektujesz, napiszesz i sprawdzisz program, który odczytuje i kontroluje plik z danymi.
 
 ---
 
@@ -1428,4 +1428,4 @@ Invalid line 2
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 12.2: Rekordy z pliku: ta sama funkcja odczytu](lesson_02_records_from_a_file.md) · **Następna lekcja:** sprawdzian Modułu 12, w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 12.2: Rekordy z pliku: ta sama funkcja odczytu](lesson_02_records_from_a_file.md) · **Następna lekcja:** [Lekcja 12.4: Seanse w kinie (sprawdzian Modułu 12)](lesson_04_cinema_screenings.md) · [Opis kursu](../../README.md)
