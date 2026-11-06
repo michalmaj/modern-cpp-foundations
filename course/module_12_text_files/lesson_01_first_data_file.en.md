@@ -148,7 +148,7 @@ Only three lines are new: `#include <fstream>`, the creation of the variable `in
 3. Is the number that was read inside its range? If not: `Invalid steps`.
 4. Only then does the program move on to the next number.
 
-**A failed open isn't the same as a failed read.** A failed open means that the program didn't get the file at all: it isn't where the program looks, or it can't be opened for another reason, for example when there's a folder with that name. That's why the message says `Cannot open`, not "the file doesn't exist". A failed read means that the file is open, but where a required number should be there's something else, or nothing.
+**A failed open isn't the same as a failed read.** A failed open means that the program couldn't open the requested file for reading. This can happen when the file isn't where the program looks for it (section 4), or when the system doesn't allow it to be opened. That's why the message says `Cannot open`, not "the file doesn't exist". A failed read means that the file is open, but where a required number should be there's something else, or nothing.
 
 ## 3. Prepare the project
 
@@ -166,7 +166,7 @@ lesson_12_1/
 3. Open the folder in CLion as in lesson 1.1: **File | Open**, then **Trust Project** and the **Debug** profile.
 4. Replace the contents of `main.cpp` with the program of section 2.
 5. Create a file `steps.txt` in the folder `lesson_12_1`, next to `main.cpp` and `CMakeLists.txt`:
-   - **In CLion** (according to the CLion 2026.3 documentation): in the **Project** window, right-click the folder `lesson_12_1` and choose **New | File**. Type the name `steps.txt` and press **Enter**.
+   - **In CLion** (according to the CLion 2026.3 documentation): in the **Project** window, right-click the folder `lesson_12_1` and choose **New | File**, not **New | Directory**: `steps.txt` must be an ordinary text file, not a folder with that name. Type the name `steps.txt` and press **Enter**.
    - **In another text editor** that saves plain text: save the file as `steps.txt` in the folder `lesson_12_1`.
 6. Type the three numbers of section 1 into `steps.txt`, each on its own line, and save the file. After the last number you may press **Enter** or not: the program reads the data the same way (section 6, case G).
 
