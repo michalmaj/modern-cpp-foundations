@@ -1126,7 +1126,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The next lesson is the Module 12 test. It's in preparation.
+In [lesson 12.4: Cinema screenings (the Module 12 test)](lesson_04_cinema_screenings.en.md), you'll design, write and test on your own a program that reads and checks a data file.
 
 ---
 
@@ -1428,4 +1428,4 @@ Invalid line 2
 
 </details>
 
-**Previous lesson:** [Lesson 12.2: Records from a file: the same reading function](lesson_02_records_from_a_file.en.md) · **Next lesson:** the Module 12 test, in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 12.2: Records from a file: the same reading function](lesson_02_records_from_a_file.en.md) · **Next lesson:** [Lesson 12.4: Cinema screenings (the Module 12 test)](lesson_04_cinema_screenings.en.md) · [Course overview](../../README.en.md)
