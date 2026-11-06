@@ -24,6 +24,8 @@ Zajrzenie do podpowiedzi albo do wcześniejszych lekcji nie jest porażką. Waż
 
 **Możesz używać:** CLiona albo terminala, CMake i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; lekcji 12.1–12.3 jako przypomnienia; tabel przypadków. Debugger nie jest potrzebny. Wszystko, czego potrzebujesz, znasz z Modułów 1–12.
 
+Z programów z lekcji 12.1–12.3 możesz też świadomie przenieść fragmenty kodu. Celem sprawdzianu jest jednak samodzielnie przygotowany plan i program zaprojektowany według nowej specyfikacji, a nie sama zamiana nazw w kodzie z lekcji 12.3. Jeśli adaptujesz wcześniejszy kod, zanotuj w samoocenie, z którego programu korzystasz, co w nim zmieniasz i dlaczego.
+
 ---
 
 ## Specyfikacja: seanse w kinie
@@ -1062,6 +1064,8 @@ Przy każdej kompetencji zaznacz jedną odpowiedź:
 | Raport z trzema podsumowaniami | | | | |
 | Przypadki normalne, graniczne i błędne | | | | |
 | Diagnostyka licznika linii | | | | |
+
+Jeśli Twój program powstał z adaptacji wcześniejszego kodu, zapisz pod tabelą, z którego programu korzystano, co z niego przeniesiono, które decyzje podjęto samodzielnie i dlaczego program spełnia nową specyfikację.
 
 Jeśli w kolumnie „Do powtórki” jest coś zaznaczone, wróć do odpowiedniej lekcji:
 
