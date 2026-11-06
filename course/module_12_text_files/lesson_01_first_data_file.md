@@ -831,7 +831,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Program z tej lekcji odczytuje z pliku same liczby. Kolejne lekcje Modułu 12 są w przygotowaniu.
+Program z tej lekcji odczytuje z pliku same liczby. W [lekcji 12.2: Rekordy z pliku: ta sama funkcja odczytu](lesson_02_records_from_a_file.md) odczytasz z pliku rekordy, tą samą funkcją odczytu co z klawiatury.
 
 ---
 
@@ -1072,4 +1072,4 @@ Invalid pages
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 11.5: Samodzielny program wieloplikowy (sprawdzian Modułu 11)](../module_11_multifile_programs/lesson_05_multifile_checkpoint.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 11.5: Samodzielny program wieloplikowy (sprawdzian Modułu 11)](../module_11_multifile_programs/lesson_05_multifile_checkpoint.md) · **Następna lekcja:** [Lekcja 12.2: Rekordy z pliku: ta sama funkcja odczytu](lesson_02_records_from_a_file.md) · [Opis kursu](../../README.md)

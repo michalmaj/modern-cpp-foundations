@@ -831,7 +831,7 @@ Answer in your own words, ideally in writing. Only then compare with the example
 
 ## What's next
 
-The program of this lesson reads only numbers from a file. The next lessons of Module 12 are in preparation.
+The program of this lesson reads only numbers from a file. In [lesson 12.2: Records from a file: the same reading function](lesson_02_records_from_a_file.en.md), you'll read records from a file, with the same reading function as from the keyboard.
 
 ---
 
@@ -1072,4 +1072,4 @@ Invalid pages
 
 </details>
 
-**Previous lesson:** [Lesson 11.5: Building a multi-file program (the Module 11 test)](../module_11_multifile_programs/lesson_05_multifile_checkpoint.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 11.5: Building a multi-file program (the Module 11 test)](../module_11_multifile_programs/lesson_05_multifile_checkpoint.en.md) · **Next lesson:** [Lesson 12.2: Records from a file: the same reading function](lesson_02_records_from_a_file.en.md) · [Course overview](../../README.en.md)
