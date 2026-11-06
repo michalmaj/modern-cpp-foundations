@@ -1084,7 +1084,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The program of this lesson trusts the file's format: an empty line ends the reading, and on an error you don't know where in the file it is. The next lesson of Module 12 will deal with recognising more precisely where the data in a file end and where the error is. It's in preparation.
+The program of this lesson trusts the file's format: an empty line ends the reading, and on an error you don't know where in the file it is. In [lesson 12.3: Where the data end and where the error is](lesson_03_end_of_data_and_errors.en.md), only the end of the file will end the data, and the program will point to the number of the bad line.
 
 ---
 
@@ -1426,4 +1426,4 @@ Result: Old Title, 1
 
 </details>
 
-**Previous lesson:** [Lesson 12.1: Your first data file](lesson_01_first_data_file.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 12.1: Your first data file](lesson_01_first_data_file.en.md) · **Next lesson:** [Lesson 12.3: Where the data end and where the error is](lesson_03_end_of_data_and_errors.en.md) · [Course overview](../../README.en.md)

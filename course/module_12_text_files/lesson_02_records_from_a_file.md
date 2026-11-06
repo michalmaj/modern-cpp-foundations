@@ -1084,7 +1084,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Program z tej lekcji ufa formatowi pliku: pusta linia kończy odczyt, a przy błędzie nie wiadomo, w którym miejscu pliku on jest. Kolejna lekcja Modułu 12 zajmie się dokładniejszym rozpoznawaniem, gdzie kończą się dane w pliku i gdzie jest błąd. Jest w przygotowaniu.
+Program z tej lekcji ufa formatowi pliku: pusta linia kończy odczyt, a przy błędzie nie wiadomo, w którym miejscu pliku on jest. W [lekcji 12.3: Gdzie kończą się dane i gdzie jest błąd](lesson_03_end_of_data_and_errors.md) dane będzie kończył wyłącznie koniec pliku, a program wskaże numer błędnej linii.
 
 ---
 
@@ -1426,4 +1426,4 @@ Result: Old Title, 1
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 12.1: Pierwszy plik z danymi](lesson_01_first_data_file.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 12.1: Pierwszy plik z danymi](lesson_01_first_data_file.md) · **Następna lekcja:** [Lekcja 12.3: Gdzie kończą się dane i gdzie jest błąd](lesson_03_end_of_data_and_errors.md) · [Opis kursu](../../README.md)
