@@ -1091,6 +1091,6 @@ Po czterech lekcjach potrafisz:
 
 ## Co dalej
 
-To koniec Modułu 12 i wszystkich jego zaplanowanych lekcji. Kolejne moduły kursu są w przygotowaniu.
+To koniec Modułu 12 i wszystkich jego zaplanowanych lekcji. W Module 13, „Testowanie własnych funkcji”, programy testowe będą same sprawdzać, czy Twoje funkcje zwracają oczekiwane wyniki. Zacznij od pierwszej lekcji: [Lekcja 13.1: Program, który sam sprawdza wynik](../module_13_testing_functions/lesson_01_self_checking_program.md).
 
-**Poprzednia lekcja:** [Lekcja 12.3: Gdzie kończą się dane i gdzie jest błąd](lesson_03_end_of_data_and_errors.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 12.3: Gdzie kończą się dane i gdzie jest błąd](lesson_03_end_of_data_and_errors.md) · **Następna lekcja:** [Lekcja 13.1: Program, który sam sprawdza wynik](../module_13_testing_functions/lesson_01_self_checking_program.md) · [Opis kursu](../../README.md)

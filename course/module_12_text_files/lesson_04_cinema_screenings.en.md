@@ -1091,6 +1091,6 @@ After four lessons you can:
 
 ## What's next
 
-This is the end of Module 12 and all of its planned lessons. The next modules of the course are in preparation.
+This is the end of Module 12 and all of its planned lessons. In Module 13, "Testing your own functions", test programs will check by themselves whether your functions return the expected results. Start with the first lesson: [Lesson 13.1: A program that checks the result itself](../module_13_testing_functions/lesson_01_self_checking_program.en.md).
 
-**Previous lesson:** [Lesson 12.3: Where the data end and where the error is](lesson_03_end_of_data_and_errors.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 12.3: Where the data end and where the error is](lesson_03_end_of_data_and_errors.en.md) · **Next lesson:** [Lesson 13.1: A program that checks the result itself](../module_13_testing_functions/lesson_01_self_checking_program.en.md) · [Course overview](../../README.en.md)
