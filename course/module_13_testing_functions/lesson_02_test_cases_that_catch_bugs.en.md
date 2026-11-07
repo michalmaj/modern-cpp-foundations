@@ -1048,7 +1048,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-So far the checked functions got ready values. In the next lesson of Module 13 you'll test a function that reads data from a stream. That lesson is in preparation.
+So far the checked functions got ready values. In [lesson 13.3: Testing a reading function without a file](lesson_03_testing_input_without_a_file.en.md) you'll test a function that reads data from a stream, without a file and without typing data.
 
 ---
 
@@ -1396,4 +1396,4 @@ Exit code: 1.
 
 </details>
 
-**Previous lesson:** [Lesson 13.1: A program that checks the result itself](lesson_01_self_checking_program.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 13.1: A program that checks the result itself](lesson_01_self_checking_program.en.md) · **Next lesson:** [Lesson 13.3: Testing a reading function without a file](lesson_03_testing_input_without_a_file.en.md) · [Course overview](../../README.en.md)
