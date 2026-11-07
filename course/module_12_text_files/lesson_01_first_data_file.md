@@ -148,7 +148,7 @@ Nowe są tylko trzy linijki: `#include <fstream>`, utworzenie zmiennej `input` i
 3. Czy odczytana liczba mieści się w swoim zakresie? Jeśli nie: `Invalid steps`.
 4. Dopiero potem program przechodzi do następnej liczby.
 
-**Nieudane otwarcie to nie to samo co nieudany odczyt.** Nieudane otwarcie znaczy, że program w ogóle nie dostał pliku: nie ma go tam, gdzie program szuka, albo nie da się go otworzyć z innego powodu, na przykład gdy pod tą nazwą jest katalog. Dlatego komunikat brzmi `Cannot open`, a nie „pliku nie ma”. Nieudany odczyt znaczy, że plik jest otwarty, ale w miejscu wymaganej liczby jest coś innego albo nic.
+**Nieudane otwarcie to nie to samo co nieudany odczyt.** Nieudane otwarcie znaczy, że programowi nie udało się otworzyć wskazanego pliku do odczytu. Może się tak zdarzyć, gdy pliku nie ma tam, gdzie program go szuka (punkt 4), albo gdy system nie pozwala go otworzyć. Dlatego komunikat brzmi `Cannot open`, a nie „pliku nie ma”. Nieudany odczyt znaczy, że plik jest otwarty, ale w miejscu wymaganej liczby jest coś innego albo nic.
 
 ## 3. Przygotuj projekt
 
@@ -166,7 +166,7 @@ lesson_12_1/
 3. Otwórz katalog w CLionie jak w lekcji 1.1: **File | Open**, potem **Trust Project** i profil **Debug**.
 4. Zastąp zawartość `main.cpp` programem z punktu 2.
 5. Utwórz plik `steps.txt` w katalogu `lesson_12_1`, obok `main.cpp` i `CMakeLists.txt`:
-   - **W CLionie** (według dokumentacji CLion 2026.3): w oknie **Project** kliknij prawym przyciskiem myszy katalog `lesson_12_1` i wybierz **New | File**. Wpisz nazwę `steps.txt` i naciśnij **Enter**.
+   - **W CLionie** (według dokumentacji CLion 2026.3): w oknie **Project** kliknij prawym przyciskiem myszy katalog `lesson_12_1` i wybierz **New | File**, a nie **New | Directory**: `steps.txt` ma być zwykłym plikiem tekstowym, a nie katalogiem o takiej nazwie. Wpisz nazwę `steps.txt` i naciśnij **Enter**.
    - **W innym edytorze tekstu**, który zapisuje zwykły tekst: zapisz plik jako `steps.txt` w katalogu `lesson_12_1`.
 6. Wpisz do `steps.txt` trzy liczby z punktu 1, każdą w osobnej linii, i zapisz plik. Po ostatniej liczbie możesz nacisnąć **Enter** albo nie: program odczyta dane tak samo (punkt 6, przypadek G).
 

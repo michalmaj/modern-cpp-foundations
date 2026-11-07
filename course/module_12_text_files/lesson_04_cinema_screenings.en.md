@@ -24,6 +24,8 @@ Looking at a hint or at an earlier lesson isn't a failure. What matters is to **
 
 **You may use:** CLion or the terminal, CMake and Ninja, as before; `CMakeLists.txt` copied from the original `lesson_05_first_program`; lessons 12.1–12.3 as reminders; the case tables. You won't need the debugger. You know everything you need from Modules 1–12.
 
+You may also consciously reuse parts of the programs of lessons 12.1–12.3. The aim of the test, however, is a plan prepared on your own and a program designed for the new specification, not just renamed code from lesson 12.3. If you adapt earlier code, note in the self-assessment which program you use, what you change in it and why.
+
 ---
 
 ## Specification: cinema screenings
@@ -1062,6 +1064,8 @@ For each competence, mark one answer:
 | A report with three totals | | | | |
 | Normal, boundary and bad cases | | | | |
 | The diagnostic of the line counter | | | | |
+
+If your program was adapted from earlier code, write below the table which program was used, what was carried over from it, which decisions were made on your own and why the program meets the new specification.
 
 If anything is marked in the "To revise" column, go back to the matching lesson:
 
