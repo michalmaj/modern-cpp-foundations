@@ -656,7 +656,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The three tests of section 5 detected the bug for 0 hours. Would they detect a function that returns 29 for 9 hours, or one that is wrong only for 8 hours? In the next lesson of Module 13 you'll check whether the chosen cases can detect important bugs, and learn how to choose them. That lesson is in preparation.
+The three tests of section 5 detected the bug for 0 hours. Would they detect a function that returns 29 for 9 hours, or one that is wrong only for 8 hours? In [lesson 13.2: Test cases that catch bugs](lesson_02_test_cases_that_catch_bugs.en.md) you'll check whether the chosen cases can detect important bugs, and learn how to choose them.
 
 ---
 
@@ -814,4 +814,4 @@ Exit code: 1. This is **a test detecting a bug**: the test program works correct
 
 </details>
 
-**Previous lesson:** [Lesson 12.4: Cinema screenings (the Module 12 test)](../module_12_text_files/lesson_04_cinema_screenings.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 12.4: Cinema screenings (the Module 12 test)](../module_12_text_files/lesson_04_cinema_screenings.en.md) · **Next lesson:** [Lesson 13.2: Test cases that catch bugs](lesson_02_test_cases_that_catch_bugs.en.md) · [Course overview](../../README.en.md)

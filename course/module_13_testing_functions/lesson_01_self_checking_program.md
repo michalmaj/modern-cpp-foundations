@@ -656,7 +656,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Trzy testy z punktu 5 wykryły błąd dla 0 godzin. Czy wykryłyby funkcję, która dla 9 godzin zwraca 29, albo taką, która myli się tylko dla 8 godzin? W następnej lekcji Modułu 13 sprawdzisz, czy wybrane przypadki potrafią wykryć istotne błędy, i nauczysz się je tak dobierać. Ta lekcja jest w przygotowaniu.
+Trzy testy z punktu 5 wykryły błąd dla 0 godzin. Czy wykryłyby funkcję, która dla 9 godzin zwraca 29, albo taką, która myli się tylko dla 8 godzin? W [lekcji 13.2: Przypadki, które wykrywają błędy](lesson_02_test_cases_that_catch_bugs.md) sprawdzisz, czy wybrane przypadki potrafią wykryć istotne błędy, i nauczysz się je tak dobierać.
 
 ---
 
@@ -814,4 +814,4 @@ Kod zakończenia: 1. To **test wykrywający błąd**: program testowy działa po
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 12.4: Seanse w kinie (sprawdzian Modułu 12)](../module_12_text_files/lesson_04_cinema_screenings.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 12.4: Seanse w kinie (sprawdzian Modułu 12)](../module_12_text_files/lesson_04_cinema_screenings.md) · **Następna lekcja:** [Lekcja 13.2: Przypadki, które wykrywają błędy](lesson_02_test_cases_that_catch_bugs.md) · [Opis kursu](../../README.md)
