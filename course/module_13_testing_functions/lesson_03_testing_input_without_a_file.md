@@ -1320,7 +1320,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Programy testowe z tej lekcji zawierają kopię testowanej funkcji. Gdyby ktoś zmienił funkcję w programie dziennika zadań, kopia w programie testowym zostałaby stara. Następna lekcja Modułu 13 jest w przygotowaniu.
+Programy testowe z tej lekcji zawierają kopię testowanej funkcji. Gdyby ktoś zmienił funkcję w programie dziennika zadań, kopia w programie testowym zostałaby stara. W [lekcji 13.4: Testy obok programu](lesson_04_tests_next_to_the_program.md) zbudujesz program i jego testy w jednym projekcie, z jednego pliku z testowaną funkcją.
 
 ---
 
@@ -2276,4 +2276,4 @@ Kod zakończenia: 1.
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 13.2: Przypadki, które wykrywają błędy](lesson_02_test_cases_that_catch_bugs.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 13.2: Przypadki, które wykrywają błędy](lesson_02_test_cases_that_catch_bugs.md) · **Następna lekcja:** [Lekcja 13.4: Testy obok programu](lesson_04_tests_next_to_the_program.md) · [Opis kursu](../../README.md)
