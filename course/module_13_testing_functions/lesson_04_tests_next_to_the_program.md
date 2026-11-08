@@ -759,7 +759,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Umiesz już sprawdzać wyniki funkcji, dobierać przypadki, testować odczyt bez pliku i trzymać testy obok programu, który korzysta z tych samych funkcji. Następna lekcja Modułu 13, jego sprawdzian, jest w przygotowaniu.
+Umiesz już sprawdzać wyniki funkcji, dobierać przypadki, testować odczyt bez pliku i trzymać testy obok programu, który korzysta z tych samych funkcji. Wszystko to połączysz w sprawdzianie Modułu 13: [Lekcja 13.5: Rezerwacje na warsztaty (sprawdzian Modułu 13)](lesson_05_workshop_reservations.md).
 
 ---
 
@@ -1069,4 +1069,4 @@ set_target_properties(function_tests PROPERTIES CXX_EXTENSIONS OFF)
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 13.3: Testowanie odczytu bez pliku](lesson_03_testing_input_without_a_file.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 13.3: Testowanie odczytu bez pliku](lesson_03_testing_input_without_a_file.md) · **Następna lekcja:** [Lekcja 13.5: Rezerwacje na warsztaty (sprawdzian Modułu 13)](lesson_05_workshop_reservations.md) · [Opis kursu](../../README.md)
