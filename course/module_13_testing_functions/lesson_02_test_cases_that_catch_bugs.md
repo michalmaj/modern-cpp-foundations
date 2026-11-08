@@ -1048,7 +1048,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Dotąd sprawdzane funkcje dostawały gotowe wartości. W następnej lekcji Modułu 13 przetestujesz funkcję, która odczytuje dane ze strumienia. Ta lekcja jest w przygotowaniu.
+Dotąd sprawdzane funkcje dostawały gotowe wartości. W [lekcji 13.3: Testowanie odczytu bez pliku](lesson_03_testing_input_without_a_file.md) przetestujesz funkcję, która odczytuje dane ze strumienia, bez pliku i bez wpisywania danych.
 
 ---
 
@@ -1396,4 +1396,4 @@ Kod zakończenia: 1.
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 13.1: Program, który sam sprawdza wynik](lesson_01_self_checking_program.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 13.1: Program, który sam sprawdza wynik](lesson_01_self_checking_program.md) · **Następna lekcja:** [Lekcja 13.3: Testowanie odczytu bez pliku](lesson_03_testing_input_without_a_file.md) · [Opis kursu](../../README.md)
