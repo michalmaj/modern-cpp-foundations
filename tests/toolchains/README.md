@@ -64,6 +64,7 @@ Code blocks are marked with an HTML comment, which GitHub doesn't show. The mark
 | `<!-- example: NAME -->` | ` ```cpp ` | A complete program. It is built and run. |
 | `<!-- example: NAME exit=N -->` | ` ```cpp ` | The same, but every run must end with exit code N instead of 0. |
 | `<!-- example: NAME source=PATH -->` | ` ```cpp ` | The same, and the code must equal the file PATH (relative to the lesson). Lessons 1.1 and 1.4 use it for the lesson 0.5 `main.cpp`. With both attributes: `source=` first, then `exit=`. |
+| `<!-- example: NAME target=function_tests -->` | ` ```cpp ` | The `main.cpp` of a program in several files with a second target, the test program `function_tests`: both are built, and only `function_tests` is run (see [Programs with a test target](#programs-with-a-test-target)). With `exit=N`: `target=` first. Never with `source=`. |
 | `<!-- output: NAME -->` | ` ```text ` | The exact expected standard output of one run of NAME. |
 | `<!-- input: NAME -->` | ` ```text ` | The standard input of one run of NAME (see [Runs](#runs-standard-input-and-expected-output)). |
 | `<!-- broken: NAME at=LINE[:COLUMN] [errors=N] error=REGEX -->` | ` ```cpp ` | A program that must **fail to compile**, with its first error in `main.cpp` at LINE (and COLUMN) and a message matching REGEX; with `errors=N`, `main.cpp` must get exactly N errors. |
@@ -87,6 +88,7 @@ Which marker to use:
 - a compile error the learner should see: `broken` with `at=`, and in a program in several files `in=` for a file other than `main.cpp`;
 - a link error: `broken` with `stage=link`;
 - a program in several files: its `example` or `broken` block for `main.cpp`, a `file` block for each other file, and one `cmake` block;
+- a program in several files and a test program built from the same sources: `example` with `target=function_tests`, a `file` block `function_tests.cpp`, and the `CMakeLists.txt` with two targets;
 - a program that reads a data file: its `example` block and, for each run, a `run` marker with the run's `datafile`, `input` and `output` blocks.
 
 ### Building
@@ -194,7 +196,7 @@ More `input`/`output` pairs give more runs of the same program, as for any examp
   - one line, the sources separated by single spaces, in any order;
   - `main.cpp` included;
   - only `.cpp` files of the program, with exactly their names, each once; headers are not listed;
-  - no other change or command.
+  - no other change or command, except the one fixed form with a second target ([Programs with a test target](#programs-with-a-test-target)).
 
   An `example`, and a `broken` program with a compile error, list all of their `.cpp` files, so a source left out can't hide where an error is. Only a `broken` program with `stage=link` may leave some out: that is how a source missing from the build is shown. A source that isn't a file of the program is reported before CMake runs: CMake would stop at configuration, which a lesson can't use as an expected result.
 - **Preprocessor directives** in `main.cpp` and the `file` blocks:
@@ -258,6 +260,208 @@ Such a program lists **all** of its `.cpp` files in `add_executable`. Building s
 - folders in file names;
 - files shared between programs;
 - any other `CMakeLists.txt`.
+
+### Programs with a test target
+
+A program in several files may have a **second target**, `function_tests`: a test program built in the same project from the **same sources** as the program. The program proper (`first_program`, built from `main.cpp`) and the tests (`function_tests`, built from `function_tests.cpp`) both compile the shared `.cpp` files, so a change in them is seen by the next run of the tests. There is no library, no CTest and no test framework: the test program is an ordinary program that prints its results and ends with an exit code.
+
+**The marker.** The program's own block is still its `main.cpp`, the program proper. `target=function_tests` says that the `output` block is the output of the test program:
+
+```text
+<!-- example: NAME target=function_tests -->
+<!-- example: NAME target=function_tests exit=1 -->
+```
+
+- `target=` comes before `exit=` and is never combined with `source=`.
+- `function_tests` is the only value; `target=tests` or `target=first_program` is reported.
+- It is only for an `example` in several files, and only with the `CMakeLists.txt` below. The two go together: that `CMakeLists.txt` without `target=function_tests`, or `target=function_tests` with the one-target `CMakeLists.txt`, is reported.
+
+**The files:**
+
+| File | Block | Built into |
+|---|---|---|
+| `main.cpp` | the `example` block | `first_program` only |
+| `function_tests.cpp` | a `file` block, required | `function_tests` only |
+| every other `.cpp` file, for example `rules.cpp` | `file` blocks | both targets |
+| `.hpp` headers, for example `rules.hpp` | `file` blocks | included, never listed |
+
+**`CMakeLists.txt`** has exactly ten lines: the lesson 0.5 file with the sources of `first_program`, an empty line, and the same three lines for `function_tests`.
+
+```cmake
+cmake_minimum_required(VERSION 3.28)
+project(first_program LANGUAGES CXX)
+
+add_executable(first_program main.cpp rules.cpp)
+target_compile_features(first_program PRIVATE cxx_std_20)
+set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
+
+add_executable(function_tests function_tests.cpp rules.cpp)
+target_compile_features(function_tests PRIVATE cxx_std_20)
+set_target_properties(function_tests PROPERTIES CXX_EXTENSIONS OFF)
+```
+
+- Only the sources of the two `add_executable` lines may differ. Every other line is compared exactly, so both targets use C++20 without extensions, and nothing else is allowed: no `add_library`, `target_link_libraries`, `add_subdirectory`, `enable_testing`, CTest or third target.
+- **The two lists of sources:**
+  - `first_program` lists `main.cpp` and never `function_tests.cpp`;
+  - `function_tests` lists `function_tests.cpp` and never `main.cpp` (each has its own `main` function);
+  - every other `.cpp` file of the program is listed by **both** targets, so the shared sources are the same set in both lists, and there is at least one;
+  - each list follows the rules of [Programs in several files](#programs-in-several-files): one line, single spaces, each source once, no headers, only files of the program, with exactly their names.
+- **A shared header:** `main.cpp` includes a header of the program (`#include "rules.hpp"`), and `function_tests.cpp` includes at least one of the same headers itself. An `#include` in a comment doesn't count, and neither does a name written with another case (which is reported anyway).
+
+**Building and running:**
+- The whole project is built, as every program in several files (`cmake --build DIR -j 1`, no `--target`): both targets, in the same order on every system.
+- A failed step of **either** target fails the example, although only the tests are run, so a broken program proper can't hide behind passing tests. The message names the step and its target, and nothing is run:
+  - `build failed: main.cpp (target first_program) failed to compile`
+  - `build failed: rules.cpp (target function_tests) failed to compile`
+  - `build failed: first_program failed to link`
+  - `build failed: function_tests failed to link`
+- After a successful build both programs must exist (`first_program` and `function_tests`, with `.exe` on Windows).
+- Only `function_tests` is run, **once**, with an empty standard input, in the checker's working directory. `first_program` is built but not run: running it is the learner's step in the lesson. A lesson that shows the program proper's output shows it as another program, in the usual way.
+- That run is judged as every run ([Exit codes and stderr](#exit-codes-and-stderr), [Timeout](#timeout), [Output limit](#output-limit)): the exit code (0, or `exit=N`), an empty stderr, and stdout equal to its **one** `output` block. The log calls it `example NAME (target function_tests)`, and the lesson's summary counts these programs: `1 of these programs with two targets (both built, function_tests run)`.
+
+**Exit codes.** By the course convention, a test program ends with 0 when every check passed and with 1 when it found a mismatch. A lesson that shows the tests catching a bug marks that program `exit=1`, with its `FAIL` lines as the expected output: exit code 1 is then the expected result, not a CI failure. Marked without `exit=1`, the same program fails the check.
+
+Example: a complete program with a test target.
+
+````markdown
+<!-- example: parking_tests target=function_tests -->
+```cpp
+#include <iostream>
+
+#include "rules.hpp"
+
+int main() {
+    int hours{0};
+
+    std::cin >> hours;
+    std::cout << "Fee: " << parking_fee(hours) << "\n";
+}
+```
+
+<!-- file: parking_tests rules.hpp -->
+```cpp
+#pragma once
+
+int parking_fee(int hours);
+```
+
+<!-- file: parking_tests rules.cpp -->
+```cpp
+#include "rules.hpp"
+
+int parking_fee(int hours) {
+    if (hours < 0 || hours > 8) {
+        return -1;
+    }
+
+    if (hours == 0) {
+        return 0;
+    }
+
+    return 5 + 3 * (hours - 1);
+}
+```
+
+<!-- file: parking_tests function_tests.cpp -->
+```cpp
+#include <iostream>
+#include <string>
+
+#include "rules.hpp"
+
+void check_int(const std::string& name, int expected, int actual, int& checks, int& failed) {
+    ++checks;
+
+    if (actual == expected) {
+        std::cout << "PASS " << name << "\n";
+    } else {
+        std::cout << "FAIL " << name << ": expected " << expected << ", actual " << actual << "\n";
+        ++failed;
+    }
+}
+
+int main() {
+    int checks{0};
+    int failed{0};
+
+    check_int("parking_fee(0)", 0, parking_fee(0), checks, failed);
+    check_int("parking_fee(1)", 5, parking_fee(1), checks, failed);
+    check_int("parking_fee(2)", 8, parking_fee(2), checks, failed);
+    check_int("parking_fee(9)", -1, parking_fee(9), checks, failed);
+
+    std::cout << "Checks: " << checks << ", failed: " << failed << "\n";
+
+    if (failed > 0) {
+        return 1;
+    }
+
+    return 0;
+}
+```
+
+<!-- cmake: parking_tests -->
+```cmake
+cmake_minimum_required(VERSION 3.28)
+project(first_program LANGUAGES CXX)
+
+add_executable(first_program main.cpp rules.cpp)
+target_compile_features(first_program PRIVATE cxx_std_20)
+set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
+
+add_executable(function_tests function_tests.cpp rules.cpp)
+target_compile_features(function_tests PRIVATE cxx_std_20)
+set_target_properties(function_tests PROPERTIES CXX_EXTENSIONS OFF)
+```
+
+<!-- output: parking_tests -->
+```text
+PASS parking_fee(0)
+PASS parking_fee(1)
+PASS parking_fee(2)
+PASS parking_fee(9)
+Checks: 4, failed: 0
+```
+````
+
+With a bug in `rules.cpp`, the same tests fail. That is another program, with all of its blocks repeated under its own name (blocks aren't shared between programs):
+
+| `rules.cpp` returns | `function_tests` prints | Exit code | Marker |
+|---|---|---|---|
+| `5 + 3 * (hours - 1)` | four `PASS` lines, then `Checks: 4, failed: 0` | 0 | `target=function_tests` |
+| `5 + 2 * (hours - 1)` | `FAIL parking_fee(2): expected 8, actual 7` among the `PASS` lines, then `Checks: 4, failed: 1` | 1 | `target=function_tests exit=1` |
+
+**Before anything is built**, mistakes are reported with the rule they break, and the program is not built:
+
+| Mistake | Message (shortened) |
+|---|---|
+| `target=tests` | `unknown target tests (an example can name only target=function_tests)` |
+| `exit=1 target=function_tests` | `cannot read the example marker (expected target=function_tests [exit=N], in this order)` |
+| `source=` and `target=` | `target= can't be combined with source= …` |
+| `target=function_tests` in a one-file program | `target=function_tests is only for a program in several files with two targets` |
+| `target=function_tests` with the one-target `CMakeLists.txt` | `target=function_tests needs the CMakeLists.txt with two targets …` |
+| the `CMakeLists.txt` with two targets, without `target=` | `a CMakeLists.txt with two targets needs target=function_tests on the example` |
+| `cxx_std_17`, a missing line, no empty line, `enable_testing()`, a third `add_executable` | `the cmake block differs from the CMakeLists.txt with two targets …` |
+| no `function_tests.cpp` file block | `target=function_tests needs a file block function_tests.cpp, …` |
+| `main.cpp` in `function_tests` | `function_tests must not list main.cpp (it has its own main function)` |
+| `function_tests.cpp` in `first_program` | `first_program must not list function_tests.cpp (it has its own main function)` |
+| `rules.cpp` in `first_program` only | `rules.cpp is listed by first_program but not by function_tests (the tests build from the same sources as the program)` |
+| no shared `.cpp` file | `first_program and function_tests share no .cpp file, …` |
+| a `.cpp` file in neither list | `helper.cpp is in neither add_executable …` |
+| a header, a source twice, another case or a missing file in a list | `add_executable(function_tests ...) lists the header rules.hpp: …`, and the other messages of one list |
+| `function_tests.cpp` without a header that `main.cpp` includes | `function_tests.cpp includes none of the headers of the program that main.cpp includes (rules.hpp), so the two targets share no interface` |
+| an `input` block, a `run` marker or a data file | `an example with target=function_tests runs once, with an empty standard input: …` |
+| a second `output` block | `an example with target=function_tests has exactly one output block, not 2` |
+| a `broken` program with two targets, or `target=` on a `broken` marker | `a broken program has one target …`, `cannot read the broken marker (target= is only for an example: …)` |
+
+**What the check guarantees, and what it doesn't:**
+1. **The structure, before building:** the marker, the exact `CMakeLists.txt`, the two lists of sources (each program's own `main` file in its own target only, the same shared `.cpp` files in both) and a shared header. This is read from the text, without interpreting CMake or C++.
+2. **Both targets build:** the whole project is built, so both programs compile and link from the same shared sources. A failure of either fails the example.
+3. **The behaviour of each example:** the test program's exact output and exit code are compared with the lesson. That is what a given example shows: for example, a faulty shared source marked `exit=1` with its `FAIL` lines shows, by running, that these tests detect it.
+4. **What it doesn't decide:** which function each check calls. A shared header and shared sources show a common interface and a common implementation in the build, **not** that every check uses the program's function: tests that call a copy under another name, or check nothing useful, would still pass. Telling that apart needs an analysis of the C++ code, which the check doesn't do; it stays a review task. A copy with the same name as a shared function fails to link, and a `static` copy fails to compile in a file that includes the function's header, but those are results of the compiler and the linker, not rules of the check.
+
+**Not supported** (reported, not built): `input` blocks, `run` markers and data files in such an example; running `first_program` in it; a `broken` program with two targets; any other target name; a third target; a library, CTest or a test framework. The mistake "the tests added to the program's own target" is an ordinary one-target `broken` program with `stage=link`: with `add_executable(first_program main.cpp rules.cpp function_tests.cpp)`, the link fails with two `main` functions.
+
+**Compatibility:** a marker without `target=` means what it meant before, and a `CMakeLists.txt` without an `add_executable(function_tests ...)` line is checked by the one-target rules, with the same messages. In a program with one target, `function_tests.cpp` is an ordinary file name.
 
 ### Runs, standard input and expected output
 
@@ -487,7 +691,10 @@ Failure messages and the log of passing runs show at most **1,000 characters** o
   - failing runs (output, exit code, stderr, timeout, output limit) with no folder left;
   - an example without `run` markers, which keeps its runs and the checker's working directory;
   - and, run directly: a folder left from before, a name that would leave the folder, and a program that can't be started.
-- **Size:** the self-test has 128 cases in the current repository; the number grows with the checker and isn't a requirement.
+- **Programs with a test target** have both kinds:
+  - **checked before anything is built:** bad `target=` markers (another value, a one-file program, another order, with `source=`), a marker and a `CMakeLists.txt` that don't go together, a `CMakeLists.txt` that differs from the form with two targets, wrong lists of sources (each `main` file in the wrong target, a shared source missing from one list, no shared source, a `.cpp` file in neither), the rules of one list applied to the second, `main.cpp` and `function_tests.cpp` without a header in common (also through an `#include` in a comment or written with another case), `input` and `run` blocks and a second `output` block, and a `broken` program with two targets or `target=`;
+  - **really built:** a correct program, with both programs and both object files of the shared `rules.cpp` checked; a bug in `rules.cpp` caught by the tests with `exit=1`, and the same bug failing an example that expects every check to pass; a one-file example and a one-target program built as before next to it; a compile error in `main.cpp` and a link error of `first_program`, which fail the example although only the tests are run; a compile error in `function_tests.cpp`; a copy of the tested function in the tests, which fails to link although it would hide the bug; and `function_tests.cpp` added to `first_program` as a one-target `broken` program with `stage=link` (two `main` functions).
+- **Size:** the self-test has 145 cases in the current repository; the number grows with the checker and isn't a requirement.
 - **Workflow:** `.github/workflows/toolchains.yml` runs both modes on Windows (MSVC ABI), Ubuntu 24.04 and macOS. Locally, from the repository root, with the official compiler:
 
 ```sh
@@ -518,7 +725,8 @@ It checks the reference programs and the published data. It does **not** check:
 - in a program that reads a data file: more than one data file per run, folders, files the program writes, a file that exists but can't be opened, data files with CRLF line ends or non-ASCII text;
 - processes started by an example: lesson programs start none, and the check doesn't manage them;
 - the CMake configure and build output, which isn't limited like a program's output;
-- in a program in several files: a missing header, a dependency-scan error or a CMake error at configuration as the expected result, an error in a source compiled after the one that failed, folders, or a `CMakeLists.txt` other than the lesson 0.5 one with its sources (see [Programs in several files](#programs-in-several-files)).
+- in a program in several files: a missing header, a dependency-scan error or a CMake error at configuration as the expected result, an error in a source compiled after the one that failed, folders, or a `CMakeLists.txt` other than the lesson 0.5 one with its sources (see [Programs in several files](#programs-in-several-files));
+- in a program with a test target: which function each check calls, the output of `first_program`, or how CLion shows and runs the two targets (see [Programs with a test target](#programs-with-a-test-target)).
 
 Two authoring traps:
 - **Markers and code fences must start at the beginning of the line.** An indented block, for example inside a list item, isn't recognised: an indented ` ```cpp ` block is neither checked nor reported as unmarked.

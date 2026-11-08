@@ -6,6 +6,9 @@ Lessons mark their code blocks with HTML comments, which GitHub does not show:
     <!-- example: NAME -->              the next ```cpp block is a complete program;
     <!-- example: NAME source=PATH -->  ... and it must equal the file PATH (relative to the lesson);
     <!-- example: NAME exit=N -->        ... and it must exit with code N instead of 0;
+    <!-- example: NAME target=function_tests [exit=N] -->
+                                        ... a program in several files with two targets, of which only the test
+                                        program function_tests is run (see below);
     <!-- output: NAME -->               the next ```text block is the exact output of example NAME;
     <!-- input: NAME -->                the next ```text block is fed to example NAME on standard input, in
                                         a separate run of the same built program; the output blocks that
@@ -48,6 +51,16 @@ exactly one cmake block with the same NAME, anywhere in the lesson:
                                         LINE (and COLUMN), with a message matching REGEX; with errors=N, that step
                                         must report exactly N errors located in PATH. An error in a header is
                                         reported by the source that includes it, so in=PATH may name a header.
+
+An example in several files may have a second target, function_tests: a test program built from the same sources as the
+program. Its marker has target=function_tests (before exit=, never with source=), and its cmake block is the lesson 0.5
+file with the sources of first_program, an empty line, and the same three lines for function_tests:
+add_executable(function_tests SOURCES) and lesson 0.5's two property lines. first_program lists main.cpp, function_tests
+lists the file block function_tests.cpp, and every other .cpp file of the program is listed by both; main.cpp includes a
+header of the program, and function_tests.cpp at least one of the same headers (a shared interface, not a proof of what
+the tests call). Both targets are built, and a failed step of either fails the example; then only function_tests is
+run, once, with an empty standard input, against exactly one output block. Such an example has no input blocks, run
+markers or data files, and a broken program never has two targets.
 
 An example that reads a data file declares each of its runs with a run marker, anywhere in the lesson:
 
@@ -120,7 +133,7 @@ import threading
 import time
 
 MARKER = re.compile(r'^<!-- (?:(example|output|input|broken|file|cmake|run|datafile): ([a-z0-9_]+)(.*?)|(fragment)) -->$')
-SOURCE = re.compile(r'^(?: source=(\S+))?(?: exit=(\d+))?$')
+SOURCE = re.compile(r'^(?: source=(\S+))?(?: target=(\S+))?(?: exit=(\d+))?$')
 BROKEN = re.compile(r'^(?: stage=(link))?(?: in=(\S+))?(?: at=(\d+)(?::(\d+))?)?(?: errors=(\d+))? error=(.+)$')
 FILE = re.compile(r'^ (\S+)$')
 DATAFILE = re.compile(r'^ (\S+)(?: (noeol))?$')
@@ -138,6 +151,10 @@ DATA_FILE_NAME = re.compile(r'^[a-z][a-z0-9_]{0,19}\.txt$')
 # Device names that Windows reserves, even with an extension.
 WINDOWS_DEVICES = {'con', 'prn', 'aux', 'nul', *(f'com{n}' for n in range(1, 10)), *(f'lpt{n}' for n in range(1, 10))}
 ADD_EXECUTABLE = re.compile(r'^add_executable\(first_program((?: [^ ()]+)+)\)$')
+# The second target of a program with two targets: the test program, the file of its main, and its add_executable line.
+TEST_TARGET = 'function_tests'
+TEST_MAIN = 'function_tests.cpp'
+ADD_TEST_EXECUTABLE = re.compile(r'^add_executable\(function_tests((?: [^ ()]+)+)\)$')
 DIRECTIVE = re.compile(r'^\s*#\s*([a-z_]+)')
 INCLUDE = re.compile(r'^#include (?:<[^<>]+>|"([^"]*)")$')
 CONDITIONALS = {'if', 'ifdef', 'ifndef', 'elif', 'elifdef', 'elifndef', 'else', 'endif'}
@@ -249,11 +266,15 @@ def blocks(path):
 
 
 def unsupported(kind, attributes):
-    """Why a broken marker that can't be read asks for something this check doesn't support, or ''.
-    Only the part before error= counts: the regular expression after it may contain anything."""
+    """Why an example or broken marker that can't be read asks for something this check doesn't support, or ''.
+    For a broken marker only the part before error= counts: the regular expression after it may contain anything."""
+    if kind == 'example' and re.search(r'(?:^| )target=', attributes):
+        return f' (expected target={TEST_TARGET} [exit=N], in this order)'
     if kind != 'broken':
         return ''
     head = attributes.split(' error=', 1)[0]
+    if re.search(r'(?:^| )target=', head):
+        return ' (target= is only for an example: a broken program has one target)'
     stage = re.search(r'(?:^| )stage=(\S+)', head)
     if stage and stage[1] != 'link':
         return f' (stage={stage[1]} is not supported: a broken program can only fail to compile or, with stage=link, to link)'
@@ -269,9 +290,10 @@ def unsupported(kind, attributes):
 def check_lesson(path, found):
     """Checks one lesson's markers; returns its examples, their runs, the broken programs, the runs of the programs with
     run markers, and the names of those programs that must not be run because of a problem found here.
+    An example is (its code, its exit code, its target: None, or function_tests for a program with two targets).
     A run is (standard input, or None for none, [expected outputs]); a run of a program with run markers is
     (standard input or None, its data file as (name, bytes) or None, [its one expected output])."""
-    examples, broken = {}, {}
+    examples, broken, targets = {}, {}, {}
     for kind, name, attributes, _, text, line in found:
         if not text.isascii():
             fail(f'{path}:{line}: non-ASCII text in a marked block')
@@ -280,8 +302,11 @@ def check_lesson(path, found):
                 fail(f'{path}:{line}: program {name} defined twice')
         if kind == 'example':
             source = SOURCE.match(attributes)
-            examples[name] = (text, int(source[2]) if source and source[2] else 0)
-            if source and source[1]:
+            target = source[2] if source else None
+            examples[name] = (text, int(source[3]) if source and source[3] else 0, target)
+            if target:
+                targets[name] = (line, bool(source[1]))  # checked below, against the program's other blocks
+            elif source and source[1]:
                 original = (path.parent / source[1]).read_text(encoding='utf-8')
                 if text != original:
                     fail(f'{path}:{line}: example {name} differs from {source[1]}')
@@ -292,6 +317,11 @@ def check_lesson(path, found):
             if expectation:
                 broken[name] = (text, expectation)
     folder_runs, refused = check_folder_runs(path, found, examples, broken)
+    for name, (line, with_source) in targets.items():
+        problem = target_problem(examples[name][2], with_source, [kind for kind, block_name, *_ in found if block_name == name])
+        if problem:
+            fail(f'{path}:{line}: example {name}: {problem}')
+            refused.add(name)
     runs = {}
     for kind, name, _, _, text, line in found:
         if kind not in ('output', 'input'):
@@ -319,6 +349,23 @@ def check_lesson(path, found):
         elif any(not outputs for _, outputs in name_runs):
             fail(f'{path}: example {name}: an input block has no output block after it')
     return examples, runs, broken, folder_runs, refused
+
+
+def target_problem(target, with_source, kinds):
+    """What is wrong with target=TARGET on an example whose blocks are of KINDS (WITH_SOURCE: its marker has source=
+    too), or None. Its CMakeLists.txt and files are checked with the other programs in several files (check_projects)."""
+    if target != TEST_TARGET:
+        return f'unknown target {target} (an example can name only target={TEST_TARGET})'
+    if with_source:
+        return "target= can't be combined with source= (source= is for the lesson 0.5 main.cpp, a program with one target)"
+    if 'file' not in kinds and 'cmake' not in kinds:
+        return f'target={TEST_TARGET} is only for a program in several files with two targets'
+    if any(kind in kinds for kind in ('input', 'run', 'datafile')):
+        return (f'an example with target={TEST_TARGET} runs once, with an empty standard input: '
+                'no input blocks, run markers or data files')
+    if kinds.count('output') > 1:
+        return f'an example with target={TEST_TARGET} has exactly one output block, not {kinds.count("output")}'
+    return None
 
 
 def check_folder_runs(path, found, examples, broken):
@@ -440,9 +487,14 @@ def check_projects(path, found, examples, broken):
         # A broken program with a compile error is built from all of its sources, as an example is, so that a source
         # left out can't hide where the error is. Only a stage=link program may leave one out.
         compile_error = name in broken and broken[name][1][1] != 'link'
+        code = examples[name][0] if name in examples else broken[name][0]
+        with_target = name in examples and examples[name][2] == TEST_TARGET
         problems = []
         if name not in cmakes:
             problems.append('it has file blocks but no cmake block (a program in several files has exactly one)')
+        elif with_target or has_second_target(cmakes[name]):
+            # The form with two targets: only for an example with target=function_tests, and the other way round.
+            problems += two_target_problems(cmakes[name], program_files, code, name in examples, with_target)
         else:
             lists_all = 'an example' if name in examples else 'a broken program with a compile error' if compile_error else None
             problems += cmake_problems(cmakes[name], program_files, lists_all)
@@ -453,7 +505,6 @@ def check_projects(path, found, examples, broken):
             problem = in_problem(broken[name][1][2], program_files)
             if problem:
                 problems.append(problem)
-        code = examples[name][0] if name in examples else broken[name][0]
         problems += include_problems(code, program_files)
         for problem in problems:
             fail(f'{path}: program {name}: {problem}')
@@ -510,20 +561,7 @@ def cmake_problems(text, files, lists_all):
         return ['the cmake block must have add_executable(first_program SOURCES) on one line, '
                 'with the sources separated by single spaces']
     sources = command[1].split()
-    names = {name.lower(): name for name in ['main.cpp', *files]}
-    problems = []
-    for number, source in enumerate(sources):
-        if source in sources[:number]:
-            problems.append(f'add_executable lists {source} twice')
-        elif source.endswith('.hpp'):
-            problems.append(f'add_executable lists the header {source}: headers are not listed in add_executable')
-        elif source == 'main.cpp' or (source in files and source.endswith('.cpp')):
-            continue
-        elif source.lower() in names:
-            problems.append(f'add_executable lists {source}, which differs in case from {names[source.lower()]}')
-        else:
-            problems.append(f'add_executable lists {source}, which is not a .cpp file of the program '
-                            '(CMake would stop at configuration, and stage=configure is not supported)')
+    problems = list_problems(sources, files)
     if 'main.cpp' not in sources:
         problems.append('add_executable must list main.cpp')
     if lists_all:
@@ -532,6 +570,112 @@ def cmake_problems(text, files, lists_all):
                 problems.append(f'{name} is not in add_executable ({lists_all} lists all of its .cpp files; '
                                 'leaving one out is allowed only in a broken stage=link program)')
     return problems
+
+
+def list_problems(sources, files, command='add_executable'):
+    """What is wrong with the SOURCES of one add_executable line (COMMAND in the messages): each listed once, no headers,
+    only main.cpp and the .cpp files among FILES, written exactly as their names."""
+    names = {name.lower(): name for name in ['main.cpp', *files]}
+    problems = []
+    for number, source in enumerate(sources):
+        if source in sources[:number]:
+            problems.append(f'{command} lists {source} twice')
+        elif source.endswith('.hpp'):
+            problems.append(f'{command} lists the header {source}: headers are not listed in add_executable')
+        elif source == 'main.cpp' or (source in files and source.endswith('.cpp')):
+            continue
+        elif source.lower() in names:
+            problems.append(f'{command} lists {source}, which differs in case from {names[source.lower()]}')
+        else:
+            problems.append(f'{command} lists {source}, which is not a .cpp file of the program '
+                            '(CMake would stop at configuration, and stage=configure is not supported)')
+    return problems
+
+
+def has_second_target(text):
+    """Whether the CMakeLists.txt TEXT means to have the second target: a line starts with add_executable(function_tests."""
+    return any(line.startswith(f'add_executable({TEST_TARGET}') for line in text.splitlines())
+
+
+def two_target_problems(text, files, code, example, with_target):
+    """What is wrong with a program with two targets, whose CMakeLists.txt is TEXT, whose other files are FILES and whose
+    main.cpp is CODE. EXAMPLE says whether it is an example (a broken program never has two targets), WITH_TARGET whether
+    its marker has target=function_tests. The CMakeLists.txt must be the lesson 0.5 file with the sources of
+    first_program, an empty line, and lesson 0.5's add_executable line and the lines after it, for function_tests. No
+    CMake code is interpreted. first_program lists main.cpp, function_tests lists function_tests.cpp, and the other .cpp
+    files of the program are the same in both, at least one. main.cpp includes a header of the program, and
+    function_tests.cpp at least one of the same: that checks a shared interface, not which functions the tests call."""
+    if not example:
+        return [f'a broken program has one target (a CMakeLists.txt with two targets is for an example with '
+                f'target={TEST_TARGET})']
+    if not with_target:
+        return [f'a CMakeLists.txt with two targets needs target={TEST_TARGET} on the example']
+    if not has_second_target(text):
+        return [f'target={TEST_TARGET} needs the CMakeLists.txt with two targets (the lesson 0.5 file, an empty line, '
+                f'and the same three lines for {TEST_TARGET})']
+    if TEST_MAIN not in files:
+        return [f'target={TEST_TARGET} needs a file block {TEST_MAIN}, the file of the main function of the tests']
+    template = PROJECT.read_text(encoding='utf-8').splitlines()
+    at = next(i for i, line in enumerate(template) if line.startswith('add_executable('))
+    first = re.search(r'add_executable\((\S+)', template[at])[1]
+    model = template + [''] + [line.replace(f'({first} ', f'({TEST_TARGET} ') for line in template[at:]]
+    second = len(template) + 1
+    lines = text.splitlines()
+    if any(line.startswith('add_executable(') and not line.endswith(')') for line in lines):
+        return ['add_executable must list its sources on one line']
+    if len(lines) != len(model) or any(line != expected for i, (line, expected) in enumerate(zip(lines, model))
+                                       if i not in (at, second)):
+        return [f'the cmake block differs from the CMakeLists.txt with two targets (the lesson 0.5 file with the sources '
+                f'of {first}, an empty line, and the same three lines for {TEST_TARGET}, nothing else)']
+    commands = ADD_EXECUTABLE.match(lines[at]), ADD_TEST_EXECUTABLE.match(lines[second])
+    if not all(commands):
+        return [f'the cmake block must have add_executable({first} SOURCES) and add_executable({TEST_TARGET} SOURCES), '
+                'each on one line, with the sources separated by single spaces']
+    program, tests = (command[1].split() for command in commands)
+    problems = list_problems(program, files, f'add_executable({first} ...)')
+    problems += list_problems(tests, files, f'add_executable({TEST_TARGET} ...)')
+    if 'main.cpp' not in program:
+        problems.append(f'add_executable({first} ...) must list main.cpp')
+    if TEST_MAIN in program:
+        problems.append(f'{first} must not list {TEST_MAIN} (it has its own main function)')
+    if TEST_MAIN not in tests:
+        problems.append(f'{TEST_TARGET} must list {TEST_MAIN}')
+    if 'main.cpp' in tests:
+        problems.append(f'{TEST_TARGET} must not list main.cpp (it has its own main function)')
+    # The shared sources: the program's own .cpp files in each list, other than the two files of a main function.
+    shared = [{source for source in sources if source in files and source.endswith('.cpp') and source != TEST_MAIN}
+              for sources in (program, tests)]
+    for source in sorted(shared[0] - shared[1]):
+        problems.append(f'{source} is listed by {first} but not by {TEST_TARGET} '
+                        '(the tests build from the same sources as the program)')
+    for source in sorted(shared[1] - shared[0]):
+        problems.append(f'{source} is listed by {TEST_TARGET} but not by {first} '
+                        '(the tests build from the same sources as the program)')
+    if not shared[0] | shared[1]:
+        problems.append(f'{first} and {TEST_TARGET} share no .cpp file, so the tests are not built from the '
+                        "program's implementation")
+    for name in files:
+        if name.endswith('.cpp') and name != TEST_MAIN and name not in program and name not in tests:
+            problems.append(f'{name} is in neither add_executable (a program with two targets lists {TEST_MAIN} in '
+                            f'{TEST_TARGET}, and each of its other .cpp files in both)')
+    headers = local_headers(code, files)
+    if not headers:
+        problems.append('main.cpp includes no header of the program, so the two targets share no interface')
+    elif not local_headers(files[TEST_MAIN], files) & headers:
+        problems.append(f'{TEST_MAIN} includes none of the headers of the program that main.cpp includes '
+                        f'({", ".join(sorted(headers))}), so the two targets share no interface')
+    return problems
+
+
+def local_headers(code, files):
+    """The headers of the program (among FILES) that CODE includes with #include "name.hpp", outside comments. A header
+    written with another case, or one that isn't a file of the program, isn't among them (include_problems reports it)."""
+    found = set()
+    for line in active_lines(code):
+        form = INCLUDE.match(line.rstrip())
+        if form and form[1] in files and form[1].endswith('.hpp'):
+            found.add(form[1])
+    return found
 
 
 def include_problems(code, files):
@@ -612,18 +756,27 @@ def active_lines(code):
     return lines
 
 
-def failed_steps(output):
+def failed_steps(output, two_targets=False):
     """Ninja's failed steps in a build OUTPUT, as (kind, what, the step's own output). The kind is 'scan' or 'compile'
-    of a source (what is its file name), 'link' of the program, or 'other' (what is the step's output file)."""
+    of a source (what is its file name), 'link' of the program, or 'other' (what is the step's output file).
+    For a program with two targets (TWO_TARGETS), the link of either target is 'link' (what is the target's name), and
+    what of a source's step names the target it is compiled for too: 'rules.cpp (target function_tests)'."""
     target = re.search(r'add_executable\((\S+)', PROJECT.read_text(encoding='utf-8'))[1]
     steps, lines = [], None
     for line in output.splitlines():
         failed = FAILED_STEP.match(line)
         if failed:
-            name = failed[1].replace('\\', '/').rsplit('/', 1)[-1]
+            path = failed[1].replace('\\', '/')
+            name = path.rsplit('/', 1)[-1]
+            program = name[:-len('.exe')] if name.endswith('.exe') else name
             source = re.match(r'^(.+\.cpp)\.(?:o|obj)(\.ddi)?$', name)
+            folder = re.search(r'(?:^|/)CMakeFiles/([^/]+)\.dir/', path)
             if source:
                 kind, what = ('scan' if source[2] else 'compile'), source[1]
+                if two_targets and folder:
+                    what += f' (target {folder[1]})'
+            elif two_targets and program in (target, TEST_TARGET):
+                kind, what = 'link', program
             elif name in (target, target + '.exe'):
                 kind, what = 'link', name
             else:
@@ -637,10 +790,11 @@ def failed_steps(output):
     return [(kind, what, '\n'.join(text)) for kind, what, text in steps]
 
 
-def step_failure(kind, what):
-    """A failed step in words."""
+def step_failure(kind, what, two_targets=False):
+    """A failed step in words. In a program with two targets (TWO_TARGETS), a link names its target."""
+    link = f'{what} failed to link' if two_targets else 'the program failed to link'
     return {'scan': f'{what} failed dependency scanning', 'compile': f'{what} failed to compile',
-            'link': 'the program failed to link'}.get(kind, f'the build step {what} failed')
+            'link': link}.get(kind, f'the build step {what} failed')
 
 
 def run(command):
@@ -690,8 +844,9 @@ def build(lesson, name, code, args, flags=WARNINGS, project=None):
     return work / 'build', run(command)
 
 
-def executable(build_dir):
-    target = re.search(r'add_executable\((\S+)', PROJECT.read_text(encoding='utf-8'))[1]
+def executable(build_dir, target=None):
+    """The program TARGET built in BUILD_DIR; by default the one target of the lesson 0.5 project, first_program."""
+    target = target or re.search(r'add_executable\((\S+)', PROJECT.read_text(encoding='utf-8'))[1]
     return build_dir / (target + ('.exe' if sys.platform == 'win32' else ''))
 
 
@@ -756,27 +911,35 @@ def shown(text):
     return f'{text[:SHOWN_LIMIT]!r} and {len(text) - SHOWN_LIMIT} more characters, not shown'
 
 
-def check_example(lesson, name, code, exit_code, runs, args, project=None, folder_runs=None):
+def check_example(lesson, name, code, exit_code, runs, args, project=None, folder_runs=None, target=None):
     """Builds example NAME and runs it once per run; returns the number of runs it started (0 if it didn't build).
     FOLDER_RUNS is None for a program without run markers (RUNS are its runs, in the checker's working directory), or
-    the runs of a program with run markers, each run in a new folder of its own (check_folder_runs)."""
+    the runs of a program with run markers, each run in a new folder of its own (check_folder_runs).
+    TARGET is None, or function_tests for a program with two targets: the whole project is built, as always, so a failed
+    step of either target fails the example, both programs must exist, and only TARGET is run."""
     built = build(lesson, name, code, args, project=project)
     if not built:
         return 0
     build_dir, result = built
+    label = f'example {name} (target {target})' if target else f'example {name}'
     if result.returncode != 0:
         # A program in several files names its first failed step: a source that didn't compile, or the link.
-        steps = failed_steps(result.stdout + result.stderr) if project else []
-        reason = f': {step_failure(*steps[0][:2])}' if steps else ''
-        fail(f'{lesson}: example {name}: build failed{reason}\n{result.stdout}{result.stderr}')
+        steps = failed_steps(result.stdout + result.stderr, bool(target)) if project else []
+        reason = f': {step_failure(*steps[0][:2], bool(target))}' if steps else ''
+        fail(f'{lesson}: {label}: build failed{reason}\n{result.stdout}{result.stderr}')
         return 0
-    exe = executable(build_dir)
+    if target:
+        missing = [exe.name for exe in (executable(build_dir), executable(build_dir, target)) if not exe.exists()]
+        if missing:
+            fail(f'{lesson}: {label}: the build succeeded, but {" and ".join(missing)} was not created')
+            return 0
+    exe = executable(build_dir, target)
     if folder_runs is not None:
         return run_in_folders(lesson, name, exe, exit_code, folder_runs, build_dir.parent, args)
     # The same program for every run: built once above, never rebuilt between inputs.
     for number, (data, expected) in enumerate(runs or [(None, [])], 1):
-        label = f'example {name}' if data is None else f'example {name} (input {number} of {len(runs)})'
-        judge_run(lesson, label, run_program(exe, data, args.timeout), exit_code, expected,
+        run_label = label if data is None else f'example {name} (input {number} of {len(runs)})'
+        judge_run(lesson, run_label, run_program(exe, data, args.timeout), exit_code, expected,
                   [f'       < {line}' for line in (data or '').splitlines()], args)
     return len(runs or [(None, [])])
 
@@ -1092,6 +1255,9 @@ def check_course(args):
         if projects or refused:
             print(f'     {len(projects)} of these programs in several files (file and cmake blocks), '
                   f'{len(refused)} not built because of the problems above')
+        with_tests = sum(1 for name in projects if name in examples and examples[name][2] and name not in refused)
+        if with_tests:
+            print(f'     {with_tests} of these programs with two targets (both built, {TEST_TARGET} run)')
         if shard:
             part = (checked - 1) % shard[1] + 1
             counts = parts[part - 1]
@@ -1104,11 +1270,11 @@ def check_course(args):
                 continue
             print(f'     part {part} of {shard[1]}: built and run here')
         # Programs without file and cmake blocks take the same path as before.
-        for name, (code, exit_code) in examples.items():
+        for name, (code, exit_code, target) in examples.items():
             if name not in refused:
                 built_examples += 1
                 started_runs += check_example(pl.stem, name, code, exit_code, runs.get(name, []), args, projects.get(name),
-                                              folder_runs.get(name))
+                                              folder_runs.get(name), target)
         for name, (code, expectation) in broken.items():
             if name not in refused:
                 built_broken += 1
@@ -1206,6 +1372,35 @@ NAMED_FILE = ('#include <fstream>\n#include <iostream>\n#include <string>\n\nint
 WHERE = ('#include <filesystem>\n#include <iostream>\n\nint main() {\n    int value{0};\n    std::cin >> value;\n'
          '    std::cout << "Value: " << value << ", course folder here: " << (std::filesystem::exists("course") ? "yes" : "no")'
          ' << "\\n";\n}\n')
+# A program with two targets: first_program (main.cpp) and the test program function_tests (function_tests.cpp), both
+# built from rules.cpp, declared in rules.hpp. The tests print PASS or FAIL per check and exit with 1 if one failed.
+RULES_HPP = '#pragma once\n\nint parking_fee(int hours);\n'
+RULES_CPP = ('#include "rules.hpp"\n\nint parking_fee(int hours) {\n    if (hours < 0 || hours > 8) {\n        return -1;\n'
+             '    }\n\n    if (hours == 0) {\n        return 0;\n    }\n\n    return 5 + 3 * (hours - 1);\n}\n')
+# Each further hour costs 2 instead of 3: parking_fee(2) is 7 and parking_fee(8) is 19.
+RULES_BUG = RULES_CPP.replace('5 + 3 *', '5 + 2 *')
+# The definition of parking_fee alone, without the #include line: a copy for the test program.
+PARKING_FEE_COPY = RULES_CPP.split('\n', 2)[2]
+PARKING_MAIN = ('#include <iostream>\n\n#include "rules.hpp"\n\nint main() {\n    int hours{0};\n    std::cin >> hours;\n\n'
+                '    if (std::cin.fail()) {\n        std::cout << "Input error\\n";\n        return 0;\n    }\n\n'
+                '    const int fee{parking_fee(hours)};\n\n    if (fee < 0) {\n        std::cout << "Invalid hours\\n";\n'
+                '        return 0;\n    }\n\n    std::cout << "Fee: " << fee << "\\n";\n}\n')
+PARKING_TESTS = ('#include <iostream>\n#include <string>\n\n#include "rules.hpp"\n\n'
+                 'void check_int(const std::string& name, int expected, int actual, int& checks, int& failed) {\n'
+                 '    ++checks;\n\n    if (actual == expected) {\n        std::cout << "PASS " << name << "\\n";\n'
+                 '    } else {\n        std::cout << "FAIL " << name << ": expected " << expected << ", actual " << actual'
+                 ' << "\\n";\n        ++failed;\n    }\n}\n\nint main() {\n    int checks{0};\n    int failed{0};\n\n'
+                 + ''.join(f'    check_int("parking_fee({hours})", {fee}, parking_fee({hours}), checks, failed);\n'
+                           for hours, fee in ((-1, -1), (0, 0), (1, 5), (2, 8), (8, 26), (9, -1)))
+                 + '\n    std::cout << "Checks: " << checks << ", failed: " << failed << "\\n";\n\n'
+                 '    if (failed > 0) {\n        return 1;\n    }\n\n    return 0;\n}\n')
+PARKING_PASS = ''.join(f'PASS parking_fee({hours})\n' for hours in (-1, 0, 1, 2, 8, 9)) + 'Checks: 6, failed: 0\n'
+PARKING_FAIL = ('PASS parking_fee(-1)\nPASS parking_fee(0)\nPASS parking_fee(1)\nFAIL parking_fee(2): expected 8, actual 7\n'
+                'FAIL parking_fee(8): expected 26, actual 19\nPASS parking_fee(9)\nChecks: 6, failed: 2\n')
+CHECK_HPP = ('#pragma once\n\n#include <string>\n\n'
+             'void check_int(const std::string& name, int expected, int actual, int& checks, int& failed);\n')
+# Two main functions in one program, in the wording of GNU ld, lld-link and Apple's ld.
+DUPLICATE_MAIN = "multiple definition of .main'|duplicate symbol: main\\b|duplicate symbol '_main' in:"
 
 
 def bytes_output(content):
@@ -1291,6 +1486,36 @@ def self_test(args):
     ]
     marker_like = ['<!-- datafiles: hi data.txt -->', '<!--run: hi-->', '  <!-- run: hi -->', '<!-- output : hi -->',
                    '<!-- fragment: x -->', '<!--fragment-->']
+    # Programs with two targets. Their cmake block is written out in full, so the checker's own form, derived from the
+    # lesson 0.5 file, is compared with it.
+    cmake_tests = ('cmake_minimum_required(VERSION 3.28)\nproject(first_program LANGUAGES CXX)\n\n'
+                   'add_executable(first_program main.cpp rules.cpp)\ntarget_compile_features(first_program PRIVATE cxx_std_20)\n'
+                   'set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)\n\n'
+                   'add_executable(function_tests function_tests.cpp rules.cpp)\n'
+                   'target_compile_features(function_tests PRIVATE cxx_std_20)\n'
+                   'set_target_properties(function_tests PROPERTIES CXX_EXTENSIONS OFF)\n')
+
+    def two_lists(program='main.cpp rules.cpp', tests='function_tests.cpp rules.cpp'):
+        """The cmake block with two targets, with other sources of first_program or function_tests."""
+        return (cmake_tests.replace('(first_program main.cpp rules.cpp)', f'(first_program {program})')
+                .replace('(function_tests function_tests.cpp rules.cpp)', f'(function_tests {tests})'))
+
+    def parking(name='parking', marker=' target=function_tests', owner='example', main=PARKING_MAIN, cpp=RULES_CPP,
+                tests=PARKING_TESTS, cmake=cmake_tests, output=PARKING_PASS, extra=()):
+        """The parts of program NAME with two targets, with some of them replaced, rules.cpp left out when CPP is None,
+        more file blocks EXTRA ((name, text)), and no output block when OUTPUT is None."""
+        parts = [(f'{owner}: {name}{marker}', 'cpp', main), (f'file: {name} rules.hpp', 'cpp', RULES_HPP)]
+        if cpp is not None:
+            parts.append((f'file: {name} rules.cpp', 'cpp', cpp))
+        parts += [(f'file: {name} function_tests.cpp', 'cpp', tests), *[(f'file: {name} {file_name}', 'cpp', text)
+                                                                        for file_name, text in extra]]
+        parts.append((f'cmake: {name}', 'cmake', cmake))
+        return parts + ([(f'output: {name}', 'text', output)] if output is not None else [])
+
+    with_copy = PARKING_TESTS.replace('#include "rules.hpp"\n\n', '#include "rules.hpp"\n\n' + PARKING_FEE_COPY + '\n')
+    # A copy that doesn't clash with rules.cpp: static, in a file that doesn't include rules.hpp.
+    static_copy = PARKING_TESTS.replace('#include "rules.hpp"\n\n', 'static ' + PARKING_FEE_COPY + '\n')
+    two_target_form = 'the cmake block differs from the CMakeLists.txt with two targets'
     cases = [
         ('correct examples pass', lesson(*good), None, None),
         ('a wrong expected output is detected',
@@ -1643,6 +1868,112 @@ def self_test(args):
                 ('output: old', 'text', 'Value: 7, course folder here: yes\n'),
                 ('example: new', 'cpp', WHERE), *run_parts('new', 'Value: 0, course folder here: no\n')),
          None, None),
+        # Programs with two targets (target=function_tests), checked before anything is built.
+        ('bad target= markers are reported, and nothing is built',
+         lesson(('example: s1_a target=tests', 'cpp', GOOD), ('output: s1_a', 'text', 'Hi!\n'),
+                ('example: s1_b target=first_program', 'cpp', GOOD), ('output: s1_b', 'text', 'Hi!\n'),
+                ('example: s1_c target=function_tests', 'cpp', GOOD), ('output: s1_c', 'text', 'Hi!\n'),
+                ('example: s1_d exit=1 target=function_tests', 'cpp', GOOD),
+                ('example: s1_e source=main.cpp target=function_tests', 'cpp', GOOD), ('output: s1_e', 'text', 'Hi!\n')),
+         None, 'example s1_a: unknown target tests (an example can name only target=function_tests)',
+         ['example s1_b: unknown target first_program',
+          'example s1_c: target=function_tests is only for a program in several files with two targets',
+          'cannot read the example marker (expected target=function_tests [exit=N], in this order): '
+          '<!-- example: s1_d exit=1 target=function_tests -->',
+          "example s1_e: target= can't be combined with source="]),
+        ('target= and the CMakeLists.txt with two targets must agree, and nothing is built',
+         lesson(*parking('s2_a', cmake=template.replace('main.cpp)', 'main.cpp rules.cpp)')), *parking('s2_b', marker='')),
+         None, 'program s2_a: target=function_tests needs the CMakeLists.txt with two targets',
+         ['program s2_b: a CMakeLists.txt with two targets needs target=function_tests on the example']),
+        ('the CMakeLists.txt with two targets is checked line for line (C++20 for both, no other command, no third '
+         'target), and nothing is built',
+         lesson(*parking('s3_a', cmake=cmake_tests.replace('(function_tests PRIVATE cxx_std_20)', '(function_tests PRIVATE cxx_std_17)')),
+                *parking('s3_b', cmake=cmake_tests.replace('target_compile_features(function_tests PRIVATE cxx_std_20)\n', '')),
+                *parking('s3_c', cmake=cmake_tests + 'enable_testing()\n'),
+                *parking('s3_d', cmake=cmake_tests + 'add_executable(more_tests function_tests.cpp rules.cpp)\n'),
+                *parking('s3_e', cmake=cmake_tests.replace('OFF)\n\nadd_executable(function_tests', 'OFF)\nadd_executable(function_tests'))),
+         None, f'program s3_a: {two_target_form}', [f'program s3_{letter}: {two_target_form}' for letter in 'bcde']),
+        ('the source lists of the two targets are checked, and nothing is built',
+         lesson(*parking('s4_a', cmake=two_lists(tests='function_tests.cpp rules.cpp main.cpp')),
+                *parking('s4_b', cmake=two_lists(program='main.cpp rules.cpp function_tests.cpp')),
+                *parking('s4_c', cmake=two_lists(tests='rules.cpp')),
+                *parking('s4_d', cmake=two_lists(tests='function_tests.cpp')),
+                *parking('s4_e', cpp=None, cmake=two_lists(program='main.cpp', tests='function_tests.cpp')),
+                *parking('s4_f', cmake=two_lists(program='rules.cpp'))),
+         None, 'program s4_a: function_tests must not list main.cpp',
+         ['program s4_b: first_program must not list function_tests.cpp',
+          'program s4_c: function_tests must list function_tests.cpp',
+          'program s4_d: rules.cpp is listed by first_program but not by function_tests',
+          'program s4_e: first_program and function_tests share no .cpp file',
+          'program s4_f: add_executable(first_program ...) must list main.cpp']),
+        ('the rules of add_executable apply to both lists, and nothing is built',
+         lesson(*parking('s5_a', cmake=two_lists(tests='function_tests.cpp rules.cpp rules.hpp')),
+                *parking('s5_b', cmake=two_lists(tests='function_tests.cpp rules.cpp rules.cpp')),
+                *parking('s5_c', cmake=two_lists(tests='function_tests.cpp rules.cpp Rules.cpp')),
+                *parking('s5_d', cmake=two_lists(tests='function_tests.cpp rules.cpp rule.cpp')),
+                *parking('s5_e', extra=[('helper.cpp', 'int helper() {\n    return 1;\n}\n')]),
+                *parking('s5_f', cmake=two_lists(program='main.cpp rules.cpp main.cpp'))),
+         None, 'program s5_a: add_executable(function_tests ...) lists the header rules.hpp',
+         ['program s5_b: add_executable(function_tests ...) lists rules.cpp twice',
+          'program s5_c: add_executable(function_tests ...) lists Rules.cpp, which differs in case from rules.cpp',
+          'program s5_d: add_executable(function_tests ...) lists rule.cpp, which is not a .cpp file of the program',
+          'program s5_e: helper.cpp is in neither add_executable',
+          'program s5_f: add_executable(first_program ...) lists main.cpp twice']),
+        # s6_a would pass if it were built: its tests call their own correct copy, not the faulty rules.cpp.
+        ('main.cpp and function_tests.cpp without a header of the program in common are reported (also a commented-out '
+         'or miswritten #include), and nothing is built',
+         lesson(*parking('s6_a', cpp=RULES_BUG, tests=static_copy),
+                *parking('s6_b', main=PARKING_MAIN.replace('#include "rules.hpp"\n', 'int parking_fee(int hours);\n')),
+                *parking('s6_c', tests=PARKING_TESTS.replace('"rules.hpp"', '"check.hpp"'), extra=[('check.hpp', CHECK_HPP)]),
+                *parking('s6_d', tests=PARKING_TESTS.replace('#include "rules.hpp"', '// #include "rules.hpp"')),
+                *parking('s6_e', tests=PARKING_TESTS.replace('"rules.hpp"', '"Rules.hpp"'))),
+         None, 'program s6_a: function_tests.cpp includes none of the headers of the program that main.cpp includes '
+               '(rules.hpp), so the two targets share no interface',
+         ['program s6_b: main.cpp includes no header of the program', 'program s6_c: function_tests.cpp includes none',
+          'program s6_d: function_tests.cpp includes none', 'program s6_e: function_tests.cpp includes none',
+          'program s6_e: function_tests.cpp:4: #include "Rules.hpp" differs in case from rules.hpp']),
+        ('an example with target=function_tests has no input blocks or run markers and one output block, and nothing is '
+         'built',
+         lesson(*parking('s7_a', output=None), ('input: s7_a', 'text', '2\n'), ('output: s7_a', 'text', PARKING_PASS),
+                *parking('s7_b', output=None), *run_parts('s7_b', PARKING_PASS),
+                *parking('s7_c'), ('output: s7_c', 'text', PARKING_PASS)),
+         None, 'example s7_a: an example with target=function_tests runs once, with an empty standard input',
+         ['example s7_b: an example with target=function_tests runs once',
+          'example s7_c: an example with target=function_tests has exactly one output block, not 2']),
+        ("a broken program can't have two targets or target=, and nothing is built",
+         lesson(*parking('s8_a', owner='broken', marker=' stage=link error=main', output=None),
+                ('broken: s8_b target=function_tests stage=link error=main', 'cpp', MIAN)),
+         None, 'program s8_a: a broken program has one target',
+         ['cannot read the broken marker (target= is only for an example: a broken program has one target): '
+          '<!-- broken: s8_b']),
+        # Programs with two targets, really built: both targets, and only function_tests is run.
+        ('a program with two targets builds both targets from the shared rules.cpp, runs function_tests and passes',
+         lesson(*parking()), None, None),
+        ('a bug in the shared rules.cpp is detected by function_tests, which prints its FAIL lines and exits with 1 (exit=1)',
+         lesson(*parking(marker=' target=function_tests exit=1', cpp=RULES_BUG, output=PARKING_FAIL)), None, None),
+        ('a one-file example and a program in several files are built as before next to a program with two targets',
+         lesson(*good, *twice, *parking()), None, None),
+        ('function_tests runs the shared rules.cpp: a bug there fails an example that expects every check to pass',
+         lesson(*parking(cpp=RULES_BUG)), None, 'example parking (target function_tests): exit code 1, expected 0',
+         ['example parking (target function_tests): output']),
+        ('a compile error in main.cpp fails a program with two targets, though only function_tests is run',
+         lesson(*parking(main=PARKING_MAIN.replace('<< fee << "\\n";', '<< fee << "\\n"'))), None,
+         'example parking (target function_tests): build failed: main.cpp (target first_program) failed to compile'),
+        ('a link error of first_program fails a program with two targets, though only function_tests is run',
+         lesson(*parking(main=PARKING_MAIN.replace('int main() {', 'int missing_fee();\n\nint main() {')
+                         .replace('{parking_fee(hours)}', '{parking_fee(hours) + missing_fee()}'))), None,
+         'example parking (target function_tests): build failed: first_program failed to link'),
+        ('a compile error in function_tests.cpp is reported with its target',
+         lesson(*parking(tests=PARKING_TESTS.replace('int checks{0};', 'int checks{0}'))), None,
+         'example parking (target function_tests): build failed: function_tests.cpp (target function_tests) failed to compile'),
+        # The copy would pass every check while rules.cpp is faulty; it clashes with rules.cpp in function_tests instead.
+        ('a copy of parking_fee in function_tests.cpp fails to link as function_tests, though rules.cpp has a bug it would hide',
+         lesson(*parking(cpp=RULES_BUG, tests=with_copy)), None,
+         'example parking (target function_tests): build failed: function_tests failed to link'),
+        # The tests added to the program's own target: one target with two main functions, checked on the old path.
+        ('function_tests.cpp in the list of first_program fails to link with two main functions (stage=link, one target)',
+         lesson(*parking(owner='broken', marker=f' stage=link error={DUPLICATE_MAIN}', output=None,
+                         cmake=template.replace('main.cpp)', 'main.cpp rules.cpp function_tests.cpp)'))), None, None),
     ]
     project = PROJECT.resolve()
     home = os.getcwd()
@@ -1695,6 +2026,20 @@ def self_test(args):
                     verdict = (verdict and sorted(p.name for p in old.iterdir()) == ['CMakeLists.txt', 'main.cpp']
                                and (old / 'CMakeLists.txt').read_bytes() == PROJECT.read_bytes()
                                and sorted(p.name for p in new.iterdir()) == ['CMakeLists.txt', 'main.cpp', 'tools.cpp', 'tools.hpp'])
+                if 'builds both targets from the shared' in title:
+                    # Both programs exist, and each target compiled rules.cpp into an object file of its own.
+                    work = pathlib.Path('build/lesson-examples/lesson/parking/build')
+                    verdict = (verdict and executable(work).exists() and executable(work, TEST_TARGET).exists()
+                               and all(any((work / 'CMakeFiles' / f'{target}.dir' / f'rules.cpp{suffix}').exists()
+                                           for suffix in ('.o', '.obj')) for target in (executable(work).stem, TEST_TARGET)))
+                if 'next to a program with two targets' in title:
+                    # The program with two targets got its own five files; the others have no second target.
+                    work = pathlib.Path('build/lesson-examples/lesson')
+                    verdict = (verdict and sorted(p.name for p in (work / 'parking' / 'src').iterdir())
+                               == ['CMakeLists.txt', 'function_tests.cpp', 'main.cpp', 'rules.cpp', 'rules.hpp']
+                               and executable(work / 'twice' / 'build').exists()
+                               and not executable(work / 'twice' / 'build', TEST_TARGET).exists()
+                               and not executable(work / 'hi' / 'build', TEST_TARGET).exists())
             finally:
                 os.chdir(home)
         print(f'##### {"ok  " if verdict else "FAIL"} self-test: {title}')
