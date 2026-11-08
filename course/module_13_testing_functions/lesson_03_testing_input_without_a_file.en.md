@@ -1320,7 +1320,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The test programs in this lesson contain a copy of the tested function. If someone changed the function in the chore log program, the copy in the test program would stay old. The next lesson of Module 13 is in preparation.
+The test programs in this lesson contain a copy of the tested function. If someone changed the function in the chore log program, the copy in the test program would stay old. In [lesson 13.4: Tests next to the program](lesson_04_tests_next_to_the_program.en.md) you will build the program and its tests in one project, from one file with the tested function.
 
 ---
 
@@ -2276,4 +2276,4 @@ Exit code: 1.
 
 </details>
 
-**Previous lesson:** [Lesson 13.2: Test cases that catch bugs](lesson_02_test_cases_that_catch_bugs.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 13.2: Test cases that catch bugs](lesson_02_test_cases_that_catch_bugs.en.md) · **Next lesson:** [Lesson 13.4: Tests next to the program](lesson_04_tests_next_to_the_program.en.md) · [Course overview](../../README.en.md)
