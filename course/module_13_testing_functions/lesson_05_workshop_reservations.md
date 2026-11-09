@@ -122,6 +122,8 @@ Pozostałe wiersze wyprowadź samodzielnie ze specyfikacji. Zestaw musi obejmowa
 - nieudany odczyt;
 - niezmieniony rekord po każdej odmowie.
 
+**Każda reguła osobno.** Reguły poprawności ze specyfikacji to cztery reguły liczbowe: `capacity >= 1`, `capacity <= 30`, `reserved >= 0` i `reserved <= capacity`. Dla każdej z nich zaplanuj co najmniej jeden przypadek odmowy, w którym obie liczby dają się odczytać, ta reguła jest naruszona, a pozostałe trzy są spełnione. Dzięki temu sprawdzisz każdą kontrolę osobno, jak w lekcji 13.2. Przypadek, który narusza kilka reguł naraz, nie zastępuje tych sprawdzeń: gdyby funkcja pomijała jedną z nich, odmowę i tak mogłaby spowodować inna reguła, a błąd pozostałby ukryty. Nieudany odczyt to osobna kategoria: nie ma w nim dwóch odczytanych liczb, więc ta zasada go nie dotyczy.
+
 Nie musisz mieć wielu przypadków. Liczy się to, czy każdy z nich może wykryć inną pomyłkę.
 
 **Odpowiedz w planie na dziesięć pytań:**
@@ -268,7 +270,7 @@ Sprawdzian jest zaliczony, gdy spełniasz **wszystkie** punkty tej listy. Twoje 
 - [ ] Każdy niezależny przypadek ma własny strumień i własny rekord.
 - [ ] Testy sprawdzają wynik `bool` każdego wywołania.
 - [ ] Testy sprawdzają oba pola `Workshop`, także po odmowie.
-- [ ] Zestaw obejmuje poprawne granice, wartości poza zakresem, zbyt wiele rezerwacji i nieudany odczyt.
+- [ ] Zestaw obejmuje poprawne granice, nieudany odczyt oraz, dla każdej z czterech reguł liczbowych, przypadek odmowy, w którym naruszona jest tylko ta reguła.
 - [ ] Usterka dostarczonej funkcji została wykryta testem przed poprawką `rules.cpp`.
 - [ ] Program testowy po `FAIL` rzeczywiście zakończył się kodem 1.
 - [ ] Po poprawce te same testy, z tymi samymi wynikami oczekiwanymi, przechodzą z kodem 0.
@@ -284,7 +286,7 @@ Rubryka służy do samooceny albo do oceny przez prowadzącego. Kurs nie ma skal
 |---|---:|---|
 | Plan i uzasadnienie przypadków | 10 | plan powstał przed poprawką, ma dla każdego przypadku dane, wynik `bool`, stan rekordu i powód, a odpowiedzi na pytania z części A są poprawne |
 | Organizacja projektu i dwa targety | 20 | pięć plików ma role ze specyfikacji, `CMakeLists.txt` ma dwa targety w postaci z lekcji 13.4, `rules.cpp` stoi na obu listach, definicja `read_workshop` jest tylko w nim, a program właściwy dla `12 8` daje wynik ze specyfikacji |
-| Dobór przypadków i wyniki oczekiwane | 20 | zestaw obejmuje wszystkie wymagane kategorie, każdy przypadek ma powód, a wszystkie wyniki oczekiwane zgadzają się ze specyfikacją |
+| Dobór przypadków i wyniki oczekiwane | 20 | zestaw obejmuje wszystkie wymagane kategorie, a dla każdej z czterech reguł liczbowych przypadek odmowy, w którym naruszona jest tylko ta reguła; każdy przypadek ma powód, a wszystkie wyniki oczekiwane zgadzają się ze specyfikacją |
 | Testy ze `std::istringstream` i kontrola całego wyniku | 20 | każdy przypadek ma własny strumień i rekord, każde wywołanie sprawdza wynik i oba pola, a przy odmowie sprawdzenia pól potwierdzają niezmieniony rekord |
 | Wykrycie usterki, poprawka i ponowne testy | 20 | `FAIL` i kod 1 pojawiły się przed poprawką, przyczyna jest wskazana w `rules.cpp`, poprawka zmienia tylko ten plik, a te same testy przechodzą potem z kodem 0 |
 | Diagnostyka, uzasadnienia i samoocena | 10 | słaby test jest wyjaśniony i wzmocniony, poprawka sprawdzona pełnym zestawem, odpowiedzi odnoszą się do Twojego projektu, a samoocena uczciwie opisuje adaptowany kod |

@@ -122,6 +122,8 @@ Derive the other rows from the specification on your own. The set must cover at 
 - a failed read;
 - an unchanged record after every refusal.
 
+**Each rule on its own.** The validity rules of the specification are four numeric rules: `capacity >= 1`, `capacity <= 30`, `reserved >= 0` and `reserved <= capacity`. For each of them, plan at least one case that must be refused, in which both numbers can be read, that rule is broken and the other three hold. That way you check each validation rule separately, as in lesson 13.2. A case that breaks several rules at once doesn't replace these checks: if the function skipped one of them, another rule could still cause the refusal, and the bug would stay hidden. A failed read is a separate category: it doesn't have two numbers that were read, so this principle doesn't apply to it.
+
 You don't need many cases. What counts is whether each of them can detect a different mistake.
 
 **Answer ten questions in the plan:**
@@ -268,7 +270,7 @@ The test is passed when you meet **all** the items of this list. Your names, hel
 - [ ] Each independent case has its own stream and its own record.
 - [ ] The tests check the `bool` result of each call.
 - [ ] The tests check both fields of `Workshop`, also after a refusal.
-- [ ] The set covers the valid limits, values out of range, too many reservations and a failed read.
+- [ ] The set covers the valid limits, a failed read and, for each of the four numeric rules, a refused case in which only that rule is broken.
 - [ ] The supplied function's bug was detected by a test before `rules.cpp` was fixed.
 - [ ] After `FAIL`, the test program really ended with exit code 1.
 - [ ] After the fix, the same tests, with the same expected results, pass with exit code 0.
@@ -284,7 +286,7 @@ The rubric is for self-assessment or for assessment by a teacher. The course has
 |---|---:|---|
 | The plan and the reasons for the cases | 10 | the plan was made before the fix, gives the data, the `bool` result, the state of the record and a reason for every case, and the answers to the questions of Part A are correct |
 | The project's organisation and two targets | 20 | the five files have the roles of the specification, `CMakeLists.txt` has two targets in the form of lesson 13.4, `rules.cpp` is on both lists, `read_workshop` is defined only in it, and the application program gives the specified result for `12 8` |
-| The choice of cases and the expected results | 20 | the set covers all required categories, each case has a reason, and all expected results agree with the specification |
+| The choice of cases and the expected results | 20 | the set covers all required categories and, for each of the four numeric rules, a refused case in which only that rule is broken; each case has a reason, and all expected results agree with the specification |
 | Tests with `std::istringstream` and a check of the whole result | 20 | each case has its own stream and record, each call checks the result and both fields, and after a refusal the field checks confirm the unchanged record |
 | Detecting the bug, the fix and the tests again | 20 | `FAIL` and exit code 1 appeared before the fix, the cause is pointed out in `rules.cpp`, the fix changes only that file, and the same tests then pass with exit code 0 |
 | Diagnostic, justification and self-assessment | 10 | the weak test is explained and strengthened, the fix is checked with the full set, the answers refer to your project, and the self-assessment describes adapted code honestly |
