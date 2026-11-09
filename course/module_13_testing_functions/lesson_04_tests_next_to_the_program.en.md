@@ -759,7 +759,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-You can now check the results of functions, choose cases, test reading without a file and keep the tests next to the program that uses the same functions. The next lesson of Module 13, its test, is in preparation.
+You can now check the results of functions, choose cases, test reading without a file and keep the tests next to the program that uses the same functions. You will combine all of this in the Module 13 test: [Lesson 13.5: Workshop reservations (the Module 13 test)](lesson_05_workshop_reservations.en.md).
 
 ---
 
@@ -1069,4 +1069,4 @@ set_target_properties(function_tests PROPERTIES CXX_EXTENSIONS OFF)
 
 </details>
 
-**Previous lesson:** [Lesson 13.3: Testing a reading function without a file](lesson_03_testing_input_without_a_file.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 13.3: Testing a reading function without a file](lesson_03_testing_input_without_a_file.en.md) · **Next lesson:** [Lesson 13.5: Workshop reservations (the Module 13 test)](lesson_05_workshop_reservations.en.md) · [Course overview](../../README.en.md)
