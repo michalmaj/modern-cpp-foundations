@@ -829,7 +829,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Funkcje z tej lekcji dostają stan i zamieniają go na tekst. W lekcji 14.3 typ wyliczeniowy stanie się wynikiem funkcji: funkcja, która odmawia, powie nazwanym wynikiem, dlaczego odmówiła. Ta lekcja jest w przygotowaniu.
+Funkcje z tej lekcji dostają stan i zamieniają go na tekst. W [lekcji 14.3: Funkcja mówi, dlaczego odmówiła](lesson_03_function_explains_refusal.md) typ wyliczeniowy stanie się wynikiem funkcji: funkcja, która odmawia, powie nazwanym wynikiem, dlaczego odmówiła.
 
 ---
 
@@ -1077,4 +1077,4 @@ Jeśli w jednym z tych punktów odpowiedź brzmi „nie”, wróć do odpowiedni
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 14.1: Stan z nazwą zamiast tekstu](lesson_01_named_state_instead_of_text.md) · **Następna lekcja:** 14.3, w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 14.1: Stan z nazwą zamiast tekstu](lesson_01_named_state_instead_of_text.md) · **Następna lekcja:** [Lekcja 14.3: Funkcja mówi, dlaczego odmówiła](lesson_03_function_explains_refusal.md) · [Opis kursu](../../README.md)

@@ -829,7 +829,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The functions in this lesson take a state and turn it into text. In lesson 14.3 an enumeration type becomes a function's result: a function that refuses will say, with a named result, why it refused. That lesson is in preparation.
+The functions in this lesson take a state and turn it into text. In [lesson 14.3: A function explains why it refused](lesson_03_function_explains_refusal.en.md) an enumeration type becomes a function's result: a function that refuses will say, with a named result, why it refused.
 
 ---
 
@@ -1077,4 +1077,4 @@ If the answer to one of these is "no", go back to the corresponding section of t
 
 </details>
 
-**Previous lesson:** [Lesson 14.1: A named state instead of text](lesson_01_named_state_instead_of_text.en.md) · **Next lesson:** 14.3, in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 14.1: A named state instead of text](lesson_01_named_state_instead_of_text.en.md) · **Next lesson:** [Lesson 14.3: A function explains why it refused](lesson_03_function_explains_refusal.en.md) · [Course overview](../../README.en.md)
