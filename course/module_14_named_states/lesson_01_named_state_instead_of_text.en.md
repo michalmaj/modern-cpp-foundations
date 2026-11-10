@@ -700,7 +700,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The function `status_text` checks the states one by one with separate conditions, and you learn about a new state that wasn't added there only from a test. In lesson 14.2, "Every state handled", you'll meet a construct that handles the different values of such a type in one place. That lesson is in preparation.
+The function `status_text` checks the states one by one with separate conditions, and you learn about a new state that wasn't added there only from a test. In [lesson 14.2: Handling every state with `switch`](lesson_02_handling_every_state_with_switch.en.md) you'll meet a construct that handles the different values of such a type in one place.
 
 ---
 
@@ -1083,4 +1083,4 @@ If the answer to one of these is "no", go back to the corresponding section of t
 
 </details>
 
-**Previous lesson:** [Lesson 13.5: Workshop reservations (the Module 13 test)](../module_13_testing_functions/lesson_05_workshop_reservations.en.md) · **Next lesson:** 14.2, in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 13.5: Workshop reservations (the Module 13 test)](../module_13_testing_functions/lesson_05_workshop_reservations.en.md) · **Next lesson:** [Lesson 14.2: Handling every state with `switch`](lesson_02_handling_every_state_with_switch.en.md) · [Course overview](../../README.en.md)

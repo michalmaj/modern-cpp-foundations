@@ -700,7 +700,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-Funkcja `status_text` sprawdza stany po kolei osobnymi warunkami, a o nowym stanie, którego nie uzupełniono, dowiadujesz się dopiero z testu. W lekcji 14.2, „Każdy stan obsłużony”, poznasz konstrukcję, która obsługuje różne wartości takiego typu w jednym miejscu. Ta lekcja jest w przygotowaniu.
+Funkcja `status_text` sprawdza stany po kolei osobnymi warunkami, a o nowym stanie, którego nie uzupełniono, dowiadujesz się dopiero z testu. W [lekcji 14.2: Każdy stan obsłużony: `switch`](lesson_02_handling_every_state_with_switch.md) poznasz konstrukcję, która obsługuje różne wartości takiego typu w jednym miejscu.
 
 ---
 
@@ -1083,4 +1083,4 @@ Jeśli w jednym z tych punktów odpowiedź brzmi „nie”, wróć do odpowiedni
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 13.5: Rezerwacje na warsztaty (sprawdzian Modułu 13)](../module_13_testing_functions/lesson_05_workshop_reservations.md) · **Następna lekcja:** 14.2, w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 13.5: Rezerwacje na warsztaty (sprawdzian Modułu 13)](../module_13_testing_functions/lesson_05_workshop_reservations.md) · **Następna lekcja:** [Lekcja 14.2: Każdy stan obsłużony: `switch`](lesson_02_handling_every_state_with_switch.md) · [Opis kursu](../../README.md)
