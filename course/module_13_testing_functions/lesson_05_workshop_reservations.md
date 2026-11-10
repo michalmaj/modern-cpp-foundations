@@ -1428,6 +1428,6 @@ Po pięciu lekcjach potrafisz:
 
 ## Co dalej
 
-To koniec Modułu 13 i wszystkich jego zaplanowanych lekcji. Kolejny moduł kursu jest w przygotowaniu.
+To koniec Modułu 13 i wszystkich jego zaplanowanych lekcji. W Module 14, „Nazwane stany i wyniki funkcji”, stany i wyniki funkcji dostaną własne nazwy, które sprawdza kompilator. Zacznij od pierwszej lekcji: [Lekcja 14.1: Stan z nazwą zamiast tekstu](../module_14_named_states/lesson_01_named_state_instead_of_text.md).
 
-**Poprzednia lekcja:** [Lekcja 13.4: Testy obok programu](lesson_04_tests_next_to_the_program.md) · **Następna lekcja:** w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 13.4: Testy obok programu](lesson_04_tests_next_to_the_program.md) · **Następna lekcja:** [Lekcja 14.1: Stan z nazwą zamiast tekstu](../module_14_named_states/lesson_01_named_state_instead_of_text.md) · [Opis kursu](../../README.md)

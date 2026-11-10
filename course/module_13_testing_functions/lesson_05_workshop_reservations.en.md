@@ -1428,6 +1428,6 @@ After five lessons you can:
 
 ## What's next
 
-This is the end of Module 13 and all of its planned lessons. The next module of the course is in preparation.
+This is the end of Module 13 and all of its planned lessons. In Module 14, "Named states and function results", states and function results get names of their own, checked by the compiler. Start with the first lesson: [Lesson 14.1: A named state instead of text](../module_14_named_states/lesson_01_named_state_instead_of_text.en.md).
 
-**Previous lesson:** [Lesson 13.4: Tests next to the program](lesson_04_tests_next_to_the_program.en.md) · **Next lesson:** in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 13.4: Tests next to the program](lesson_04_tests_next_to_the_program.en.md) · **Next lesson:** [Lesson 14.1: A named state instead of text](../module_14_named_states/lesson_01_named_state_instead_of_text.en.md) · [Course overview](../../README.en.md)
