@@ -1096,7 +1096,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson a function that changes data says with a named result why it refused. In lesson 14.4 the same idea goes into a reading function: it will tell a valid entry from an invalid one, and after an invalid entry it will get the input ready for another try. That lesson is in preparation.
+In this lesson a function that changes data says with a named result why it refused. In [lesson 14.4: Try again: reading that recovers the stream](lesson_04_reading_that_recovers_the_stream.en.md) the same idea goes into a reading function: it will tell a valid entry from an invalid one, and after an invalid entry it will get the input ready for another try.
 
 ---
 
@@ -1757,4 +1757,4 @@ If the answer to any of these is "no", go back to that part of the lesson before
 
 </details>
 
-**Previous lesson:** [Lesson 14.2: Handling every state with `switch`](lesson_02_handling_every_state_with_switch.en.md) · **Next lesson:** 14.4, in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 14.2: Handling every state with `switch`](lesson_02_handling_every_state_with_switch.en.md) · **Next lesson:** [Lesson 14.4: Try again: reading that recovers the stream](lesson_04_reading_that_recovers_the_stream.en.md) · [Course overview](../../README.en.md)
