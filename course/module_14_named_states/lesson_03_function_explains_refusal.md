@@ -1096,7 +1096,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-W tej lekcji funkcja, która zmienia dane, mówi nazwanym wynikiem, dlaczego odmówiła. W lekcji 14.4 ten sam pomysł trafi do funkcji odczytu: rozróżni poprawny wpis od błędnego i po błędnym wpisie przygotuje wejście na kolejną próbę. Ta lekcja jest w przygotowaniu.
+W tej lekcji funkcja, która zmienia dane, mówi nazwanym wynikiem, dlaczego odmówiła. W [lekcji 14.4: Spróbuj jeszcze raz: odczyt, który odzyskuje strumień](lesson_04_reading_that_recovers_the_stream.md) ten sam pomysł trafi do funkcji odczytu: rozróżni poprawny wpis od błędnego i po błędnym wpisie przygotuje wejście na kolejną próbę.
 
 ---
 
@@ -1757,4 +1757,4 @@ Jeśli w jednym z tych punktów odpowiedź brzmi „nie”, wróć do odpowiedni
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 14.2: Każdy stan obsłużony: `switch`](lesson_02_handling_every_state_with_switch.md) · **Następna lekcja:** 14.4, w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 14.2: Każdy stan obsłużony: `switch`](lesson_02_handling_every_state_with_switch.md) · **Następna lekcja:** [Lekcja 14.4: Spróbuj jeszcze raz: odczyt, który odzyskuje strumień](lesson_04_reading_that_recovers_the_stream.md) · [Opis kursu](../../README.md)
