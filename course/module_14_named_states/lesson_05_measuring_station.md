@@ -605,7 +605,7 @@ Sprawdzian jest zaliczony, gdy spełniasz **wszystkie** punkty tej listy. Twoje 
 - [ ] 6. Każdy przypadek ma własny `std::istringstream`; dodatkowe wywołanie po osiągnięciu limitu korzysta z tego samego strumienia co scenariusz.
 - [ ] 7. Każde wywołanie `read_measurement` sprawdza wynik i `temperature`, a `temperature` zaczyna od wartości, której nie daje żaden przypadek.
 - [ ] 8. Każdy scenariusz sprawdza `check_report`: osobne sprawdzenie i osobna etykieta dla każdego pola raportu.
-- [ ] 9. Przypadki obejmują `21.5`, prawdziwe 0, brak danych, całkowicie pusty strumień, wpisy bez przyjętego pomiaru, zero jako pierwszy pomiar, ostatni poprawny i ostatni błędny wpis bez znaku końca wiersza, pusty wiersz, tekst po liczbie, odmowy przed osiągnięciem limitu i limit osiągnięty z resztą danych nieprzeczytaną.
+- [ ] 9. Przypadki obejmują `21.5`, prawdziwe 0, brak danych, całkowicie pusty strumień, wpisy bez przyjętego pomiaru, zero jako pierwszy pomiar, ostatni poprawny i ostatni błędny wpis bez znaku końca wiersza, pusty wiersz, tekst po liczbie, odmowy przed osiągnięciem limitu i limit osiągnięty z resztą danych nieprzeczytaną, a do tego pozostałe rodzaje z części A: każdy punkt list „Przypadki bezpośrednie muszą obejmować” i „Scenariusze muszą obejmować”.
 - [ ] 10. `collect_measurements` liczy do limitu tylko przyjęte pomiary, ustawia `lowest` i `highest` od pierwszego przyjętego pomiaru, a przy odmowie zmienia tylko odpowiedni licznik.
 - [ ] 11. `first_program` został uruchomiony ręcznie z danymi z przykładu w specyfikacji i wypisał raport ze specyfikacji.
 - [ ] 12. Na dostarczonym kodzie `function_tests` dał `FAIL` i zakończył się kodem 1. Zapisane są linijki `FAIL`, kod zakończenia i przyczyna w `read_measurement`.

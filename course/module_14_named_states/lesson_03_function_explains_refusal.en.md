@@ -961,7 +961,7 @@ In `cpp-workspace`, create a folder `card_top_up`, copy `main.cpp` and `CMakeLis
    - a refusal because of the limit;
    - a refusal because of an invalid amount;
    - a refusal because of an inactive card;
-   - a case in which two reasons for refusal apply at once;
+   - two cases in which two reasons for refusal apply at once: an inactive card with an invalid amount, and an active card with an invalid amount for which the balance after the top-up would also exceed the limit;
    - the balance and `active` after the call for each case.
 
    Under the table, write a prediction: which checks will fail, and what will they print after `actual`, when the function starts refusing a top-up also when the balance after it would be exactly 100?
@@ -980,13 +980,13 @@ You don't have to run any other versions. If you like, also check what happens w
 - [ ] All the checks come before the balance changes, each appears once, and their order matches the refusal precedence.
 - [ ] A refusal changes neither the balance nor `active`. A top-up increases the balance by exactly the amount and doesn't change `active`.
 - [ ] `top_up_result_text` uses a `switch` with a `case` label for each of the four values, and the test program checks it for each of them.
-- [ ] The case table was made before the code, and the expected results follow from the contract. The table has all the required kinds of case, including a case with two reasons for refusal at once.
+- [ ] The case table was made before the code, and the expected results follow from the contract. The table has all the required kinds of case, including both cases with two reasons for refusal at once: an inactive card with an invalid amount, and an active card with an invalid amount for which the limit would also be exceeded.
 - [ ] Each case has its own `Card` object, and the program checks its result, balance and `active`.
 - [ ] The program compares the result as a `TopUpResult` value, not as text.
 - [ ] With the correct function every check passes, and the exit code is 0.
 - [ ] With the bug at the limit's boundary, `FAIL` is printed only by the checks of the result and the balance in the cases where the balance was to be exactly 100, and the exit code is 1. The output matches your prediction, or you can explain the difference.
 - [ ] After the correct condition is restored, the same tests, unchanged, pass again with exit code 0.
-- [ ] You can explain why the validation order is part of the contract of `top_up`, and which case in your table checks it.
+- [ ] You can explain why the validation order is part of the contract of `top_up`, and which cases in your table check it.
 
 When the output matches, you can save the project in Git, as in lesson 1.5: `main.cpp` and `CMakeLists.txt`, without the build folder.
 

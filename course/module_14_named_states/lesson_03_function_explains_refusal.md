@@ -961,7 +961,7 @@ W `cpp-workspace` utwórz katalog `card_top_up`, skopiuj do niego `main.cpp` i `
    - odmowę z powodu limitu;
    - odmowę z powodu niepoprawnej kwoty;
    - odmowę z powodu nieaktywnej karty;
-   - przypadek, w którym dwa powody odmowy zachodzą jednocześnie;
+   - dwa przypadki, w których dwa powody odmowy zachodzą jednocześnie: nieaktywna karta z niepoprawną kwotą oraz aktywna karta z niepoprawną kwotą, przy której saldo po doładowaniu przekroczyłoby też limit;
    - dla każdego przypadku saldo i `active` po wywołaniu.
 
    Pod tabelą zapisz przewidywanie: które sprawdzenia się nie udadzą i co wypiszą po `actual`, gdy funkcja zacznie odrzucać doładowanie także wtedy, gdy saldo po nim wyniosłoby dokładnie 100?
@@ -980,13 +980,13 @@ Nie musisz uruchamiać innych wersji. Jeśli chcesz, sprawdź jeszcze, co się s
 - [ ] Wszystkie sprawdzenia stoją przed zmianą salda, każde występuje raz, a ich kolejność odpowiada pierwszeństwu odmowy.
 - [ ] Odmowa nie zmienia ani salda, ani `active`. Doładowanie zwiększa saldo dokładnie o kwotę i nie zmienia `active`.
 - [ ] `top_up_result_text` używa `switch` z etykietą `case` dla każdej z czterech wartości, a program testowy sprawdza ją dla każdej z nich.
-- [ ] Tabela przypadków powstała przed kodem, a wyniki oczekiwane wynikają z kontraktu. Tabela ma wszystkie wymagane rodzaje przypadków, w tym przypadek z dwoma powodami odmowy naraz.
+- [ ] Tabela przypadków powstała przed kodem, a wyniki oczekiwane wynikają z kontraktu. Tabela ma wszystkie wymagane rodzaje przypadków, w tym oba przypadki z dwoma powodami odmowy naraz: nieaktywną kartę z niepoprawną kwotą i aktywną kartę z niepoprawną kwotą, przy której przekroczony byłby też limit.
 - [ ] Każdy przypadek ma własny obiekt `Card`, a program sprawdza dla niego wynik, saldo i `active`.
 - [ ] Wynik program porównuje jako wartość `TopUpResult`, a nie jako tekst.
 - [ ] Z poprawną funkcją wszystkie sprawdzenia przechodzą, a kod zakończenia wynosi 0.
 - [ ] Z usterką granicy limitu `FAIL` wypisują tylko sprawdzenia wyniku i salda w przypadkach, w których saldo miało wynieść dokładnie 100, a kod zakończenia wynosi 1. Wynik zgadza się z Twoim przewidywaniem albo umiesz wyjaśnić różnicę.
 - [ ] Po przywróceniu poprawnego warunku te same testy, bez zmian, znów przechodzą z kodem 0.
-- [ ] Umiesz wyjaśnić, dlaczego kolejność walidacji jest częścią kontraktu `top_up` i który przypadek z Twojej tabeli ją sprawdza.
+- [ ] Umiesz wyjaśnić, dlaczego kolejność walidacji jest częścią kontraktu `top_up` i które przypadki z Twojej tabeli ją sprawdzają.
 
 Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5: `main.cpp` i `CMakeLists.txt`, bez katalogu budowania.
 
