@@ -1439,7 +1439,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 
 ## Co dalej
 
-To była ostatnia lekcja Modułu 14 z nowymi umiejętnościami. Planowana lekcja 14.5 to sprawdzian modułu: program stacji pomiarowej, w którym połączysz nazwane stany, `switch`, nazwane wyniki i odczyt odzyskujący strumień. Ta lekcja jest w przygotowaniu.
+To była ostatnia lekcja Modułu 14 z nowymi umiejętnościami. Wszystko to połączysz w sprawdzianie Modułu 14, programie stacji pomiarowej z nazwanymi stanami, `switch`, nazwanymi wynikami i odczytem odzyskującym strumień: [Lekcja 14.5: Stacja pomiarowa (sprawdzian Modułu 14)](lesson_05_measuring_station.md).
 
 ---
 
@@ -2037,4 +2037,4 @@ Jeśli w jednym z tych punktów odpowiedź brzmi „nie”, wróć do odpowiedni
 
 </details>
 
-**Poprzednia lekcja:** [Lekcja 14.3: Funkcja mówi, dlaczego odmówiła](lesson_03_function_explains_refusal.md) · **Następna lekcja:** 14.5, w przygotowaniu · [Opis kursu](../../README.md)
+**Poprzednia lekcja:** [Lekcja 14.3: Funkcja mówi, dlaczego odmówiła](lesson_03_function_explains_refusal.md) · **Następna lekcja:** [Lekcja 14.5: Stacja pomiarowa (sprawdzian Modułu 14)](lesson_05_measuring_station.md) · [Opis kursu](../../README.md)

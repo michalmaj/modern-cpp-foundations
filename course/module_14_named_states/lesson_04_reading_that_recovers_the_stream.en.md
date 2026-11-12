@@ -1439,7 +1439,7 @@ Answer in your own words, preferably in writing. Only then compare with the samp
 
 ## What's next
 
-This was the last lesson of Module 14 with new skills. The planned lesson 14.5 is the module test: a measuring-station program in which you combine named states, `switch`, named results and reading that recovers the stream. That lesson is in preparation.
+This was the last lesson of Module 14 with new skills. You will combine all of this in the Module 14 test, a measuring-station program with named states, `switch`, named results and reading that recovers the stream: [Lesson 14.5: The measuring station (the Module 14 test)](lesson_05_measuring_station.en.md).
 
 ---
 
@@ -2037,4 +2037,4 @@ If the answer to any of these is "no", go back to the matching section of the le
 
 </details>
 
-**Previous lesson:** [Lesson 14.3: A function explains why it refused](lesson_03_function_explains_refusal.en.md) · **Next lesson:** 14.5, in preparation · [Course overview](../../README.en.md)
+**Previous lesson:** [Lesson 14.3: A function explains why it refused](lesson_03_function_explains_refusal.en.md) · **Next lesson:** [Lesson 14.5: The measuring station (the Module 14 test)](lesson_05_measuring_station.en.md) · [Course overview](../../README.en.md)
