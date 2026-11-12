@@ -1,13 +1,13 @@
 name: Problem with a lesson
-description: Something in a lesson is unclear, wrong or missing. For the Polish or the English version.
+description: Something in a lesson (Polish or English version) is unclear, wrong or missing.
 title: "[Lesson] "
 labels: ["student-feedback", "lesson", "needs-triage"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thank you for helping to improve the course! You can write in **English or Polish**.
-        Fill in what you know. Fields without a red star are optional.
+        Thank you for helping to improve the course! You can write in **English or Polish**, about either language version.
+        Fill in what you know. Fields marked with a red asterisk (*) are required; you can leave the others empty.
   - type: input
     id: lesson
     attributes:
@@ -50,7 +50,7 @@ body:
   - type: textarea
     id: expected
     attributes:
-      label: Expected behavior
+      label: Expected behaviour
       description: What did you expect the lesson to say, show or do?
       placeholder: "e.g. I expected the lesson to explain why the test program ends with exit code 1."
     validations:
@@ -58,7 +58,7 @@ body:
   - type: textarea
     id: actual
     attributes:
-      label: Actual behavior
+      label: Actual behaviour
       description: What does the lesson say, show or do instead?
       placeholder: "e.g. Step 5 says all checks should pass, but the table above expects a FAIL."
     validations:
@@ -67,7 +67,7 @@ body:
     id: steps
     attributes:
       label: Reproduction steps
-      description: If it helps, the steps that led you to the problem.
+      description: If it helps, describe step by step what you did before you noticed the problem.
       placeholder: |
         1. Opened lesson 14.3 in English.
         2. Followed step 5 of the mission.
