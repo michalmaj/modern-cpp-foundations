@@ -1,0 +1,31 @@
+name: Course suggestion
+description: An idea that would make the course easier or better to learn from.
+title: "[Suggestion] "
+labels: ["student-feedback", "suggestion", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your idea! You can write in **English or Polish**, about either language version.
+  - type: input
+    id: area
+    attributes:
+      label: Affected lesson or course area
+      description: A lesson number, or a part of the course, such as the README or the installation lessons.
+      placeholder: "e.g. 14.5, or the installation in lesson 0.4"
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+      description: What would you change or add?
+    validations:
+      required: true
+  - type: textarea
+    id: reason
+    attributes:
+      label: Why it would help learners
+      description: What would it make easier to understand or to do?
+    validations:
+      required: true

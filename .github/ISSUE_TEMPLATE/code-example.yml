@@ -1,0 +1,93 @@
+name: Code example doesn't work
+description: A program from a lesson doesn't build, doesn't run, or prints something different from the lesson.
+title: "[Example] "
+labels: ["student-feedback", "bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting this! You can write in **English or Polish**, about either language version.
+        You don't need to understand the error message: copying it is enough. Fields without a red star are optional.
+  - type: input
+    id: lesson
+    attributes:
+      label: Lesson number
+      description: The number from the lesson's title.
+      placeholder: "e.g. 14.5"
+    validations:
+      required: true
+  - type: input
+    id: example
+    attributes:
+      label: Example identifier
+      description: The heading of the section with the example, or the first line of its code block. A function name from the code also helps.
+      placeholder: "e.g. Part B, the starter code, rules.cpp"
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Windows 11
+        - Windows 10
+        - macOS
+        - Ubuntu 24.04
+        - Other Linux
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: ide
+    attributes:
+      label: IDE
+      description: Where did you build and run the program?
+      options:
+        - CLion
+        - Terminal only
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: compiler
+    attributes:
+      label: Compiler and version
+      description: If you know it, the first line printed by `clang++ --version`, or the compiler line from CLion's CMake window. Leave it empty if you're not sure.
+      placeholder: "e.g. clang version 22.1.8"
+    validations:
+      required: false
+  - type: textarea
+    id: steps
+    attributes:
+      label: Build and run steps
+      description: What did you do, step by step?
+      placeholder: |
+        1. Copied the program into main.cpp of the lesson_05_first_program project.
+        2. Chose Build | Build Project.
+        3. Ran first_program.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      description: What should have happened, according to the lesson?
+      placeholder: "e.g. The program prints the report shown in the specification."
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      description: What happened instead?
+      placeholder: "e.g. The build failed, or the program printed different numbers."
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Compiler or runtime output
+      description: Copy the first error message, or what the program printed. Start with the first line that says `error`, if there is one.
+      render: text
+    validations:
+      required: false

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Course overview in Polish
+    url: https://github.com/michalmaj/modern-cpp-foundations/blob/main/README.md
+    about: How the course works, where to start, and the list of lessons.
+  - name: Course overview in English
+    url: https://github.com/michalmaj/modern-cpp-foundations/blob/main/README.en.md
+    about: How the course works, where to start, and the list of lessons.

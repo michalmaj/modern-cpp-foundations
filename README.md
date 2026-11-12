@@ -2,9 +2,21 @@
 
 **Polski** · [English](README.en.md)
 
+[![Toolchains](https://github.com/michalmaj/modern-cpp-foundations/actions/workflows/toolchains.yml/badge.svg?branch=main)](https://github.com/michalmaj/modern-cpp-foundations/actions/workflows/toolchains.yml)
+[![Lesson commands](https://github.com/michalmaj/modern-cpp-foundations/actions/workflows/lesson-commands.yml/badge.svg?branch=main)](https://github.com/michalmaj/modern-cpp-foundations/actions/workflows/lesson-commands.yml)
+![C++20](https://img.shields.io/badge/C%2B%2B-20-00599C)
+![CMake 3.28+](https://img.shields.io/badge/CMake-3.28%2B-064F8C)
+![LLVM Clang 22+](https://img.shields.io/badge/compiler-LLVM%20Clang%2022%2B-262D3A)
+![Tested on Windows, macOS and Ubuntu](https://img.shields.io/badge/tested%20on-Windows%20%7C%20macOS%20%7C%20Ubuntu-informational)
+![Languages: Polish and English](https://img.shields.io/badge/languages-PL%20%7C%20EN-blue)
+![Status: alpha](https://img.shields.io/badge/status-alpha-orange)
+![86 lessons, 476 checked examples](https://img.shields.io/badge/content-86%20lessons%20%C2%B7%20476%20checked%20examples-blue)
+
 Kurs programowania od zera, w języku C++. Nie musisz wcześniej programować. Wystarczy, że umiesz korzystać z komputera tak jak na co dzień.
 
 > **Stan kursu: w przygotowaniu.** Moduł 0 jest funkcjonalnie kompletny (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 1 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 2 (osiem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 3 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 4 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 5 (siedem lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 6 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 7 (pięć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 8 (sześć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 9 (pięć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 10 (pięć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 11 (pięć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 12 (cztery lekcje, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 13 (pięć lekcji, wersja pilotażowa). Dostępne są też wszystkie lekcje Modułu 14 (pięć lekcji, wersja pilotażowa). Szczegóły znajdziesz w sekcji [Stan kursu](#stan-kursu).
+
+> **Faza alpha.** Kurs jest udostępniony publicznie w fazie alpha. Programy z lekcji Modułów 1–14 są automatycznie budowane i uruchamiane na Windowsie, macOS i Ubuntu, a ich wyniki są porównywane z tym, co pokazują lekcje. Kurs nie przeszedł jeszcze pilotażu dydaktycznego z osobami uczącymi się: czas pracy podany w lekcjach to szacunek, a część kroków w CLionie opisujemy według dokumentacji, bez sprawdzenia na każdym systemie. Każda uwaga pomaga: [zgłoś problem albo sugestię](#zgłaszanie-problemów-i-uwag).
 
 ## Ścieżka nauki C++
 
@@ -83,6 +95,14 @@ CLion jest wygodny, ale nie jest konieczny: każdy projekt z kursu da się zbudo
 
 Na Windowsie kompilator korzysta dodatkowo z narzędzi Microsoftu (Visual Studio Build Tools z Windows SDK). Lekcja 0.4 pokazuje, jak je zainstalować.
 
+## Jak korzystać z kursu
+
+- **Dwie wersje językowe.** Każda lekcja jest dostępna po polsku i po angielsku. Obie wersje mają tę samą treść, te same programy i te same wyniki. Przełącznik języka znajdziesz na górze każdej lekcji i tego pliku.
+- **Lekcje po kolei.** Każda lekcja korzysta z poprzednich, więc przechodź je w kolejności z części [Jak zacząć](#jak-zacząć).
+- **Programy z lekcji.** W lekcji 0.5 przygotujesz pierwszy projekt w CLionie, a w lekcji 0.6 zbudujesz ten sam program z terminala. Programy z kolejnych lekcji wpisujesz albo kopiujesz do takiego projektu, budujesz i uruchamiasz, a lekcja pokazuje wynik, który powinien się pojawić.
+- **Zadania, podpowiedzi i rozwiązania.** Misje i sprawdziany mają kryteria sukcesu albo listy kontrolne. Podpowiedzi i przykładowe rozwiązania są zwinięte: otwórz je dopiero po własnej próbie.
+- **Gdy coś pójdzie inaczej.** Większość lekcji ma tabelę typowych problemów z ich przyczyną i tym, co zrobić. Jeśli to nie pomoże, [zgłoś problem](#zgłaszanie-problemów-i-uwag).
+
 ## Stan kursu
 
 Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie ma:
@@ -90,6 +110,8 @@ Kurs jest **w przygotowaniu**. Uczciwie o tym, co już jest, a czego jeszcze nie
 | Element | Stan |
 |---|---|
 | Opis kursu (ten plik) | Gotowy |
+| Automatyczne sprawdzanie programów z lekcji | Działa na Windowsie, macOS i Ubuntu, przy każdej zmianie lekcji |
+| Pilotaż z osobami uczącymi się | Jeszcze nieprzeprowadzony |
 | Moduł 0, lekcja 1: [Pliki, katalogi i pierwsze spotkanie z terminalem](course/module_00_tooling/lesson_01_files_and_terminal.md) | Dostępna (wersja pilotażowa) |
 | Moduł 0, lekcja 2: [Poruszanie się między katalogami](course/module_00_tooling/lesson_02_moving_between_folders.md) | Dostępna (wersja pilotażowa) |
 | Moduł 0, lekcja 3: [Co się dzieje, gdy wpisujesz polecenie?](course/module_00_tooling/lesson_03_commands_and_programs.md) | Dostępna (wersja pilotażowa) |
@@ -274,6 +296,18 @@ Przechodź lekcje po kolei, zaczynając od pierwszej:
 Do lekcji 0.1–0.3 potrzebujesz tylko komputera z Windows, macOS albo Linuksem. W lekcji 0.4 zainstalujesz narzędzia kursu.
 
 W Module 1 (lekcje 1.1–1.6) zaczniesz czytać i pisać własny kod w C++20. W Module 2 (lekcje 2.1–2.8) programy zaczną pamiętać wartości, liczyć, pobierać dane od użytkownika i przechowywać tekst. Kończy go sprawdzian w lekcji 2.8. W Module 3 (lekcje 3.1–3.6) programy zaczną podejmować decyzje. Kończy go sprawdzian w lekcji 3.6. W Module 4 (lekcje 4.1–4.7) programy zaczną powtarzać działania. Kończy go sprawdzian w lekcji 4.7. W Module 5 (lekcje 5.1–5.7) nauczysz się dzielić programy na mniejsze, nazwane części: własne funkcje. Kończy go sprawdzian w lekcji 5.7. W Module 6 (lekcje 6.1–6.6) programy zaczną przechowywać wiele wartości tego samego rodzaju w jednej zmiennej: `std::vector`. Kończy go sprawdzian w lekcji 6.6. W Module 7 (lekcje 7.1–7.5) przejrzysz tekst znak po znaku: `char` i `std::string`. Kończy go sprawdzian w lekcji 7.5. W Module 8 (lekcje 8.1–8.6) zdefiniujesz własne typy danych: struktury, które łączą kilka informacji o jednym obiekcie. Kończy go sprawdzian w lekcji 8.6. W Module 9 (lekcje 9.1–9.5) funkcje zaczną świadomie zmieniać istniejące dane: rekordy przekazane przez modyfikowalną referencję. Kończy go sprawdzian w lekcji 9.5. W Module 10 (lekcje 10.1–10.5) programy zaczną budować rekordy z danych odczytanych z wejścia. Kończy go sprawdzian w lekcji 10.5. W Module 11 (lekcje 11.1–11.5) programy zaczną się składać z kilku plików źródłowych i własnych plików nagłówkowych, także ze wspólnymi typami, podzielonych według odpowiedzialności. Kończy go sprawdzian w lekcji 11.5. W Module 12 (lekcje 12.1–12.4) programy zaczną odczytywać dane z plików tekstowych, także rekordy, tą samą funkcją odczytu co z klawiatury, i wskazywać numer błędnej linii pliku. Kończy go sprawdzian w lekcji 12.4. W Module 13 (lekcje 13.1–13.5) programy testowe zaczną same sprawdzać wyniki Twoich funkcji, także funkcji odczytu, na przypadkach dobranych tak, żeby wykrywały błędy, a program i jego testy zbudujesz w jednym projekcie, z tych samych funkcji. Kończy go sprawdzian w lekcji 13.5. W Module 14 (lekcje 14.1–14.5) stany i wyniki funkcji dostaną własne nazwy, które sprawdza kompilator, instrukcja `switch` obsłuży każdy stan w jednym miejscu, funkcja, która odmawia, powie nazwanym wynikiem, dlaczego odmówiła, a funkcja odczytu po błędnym wpisie odzyska strumień i pozwoli spróbować jeszcze raz. Kończy go sprawdzian w lekcji 14.5.
+
+## Zgłaszanie problemów i uwag
+
+Coś w lekcji jest niejasne albo błędne, przykład nie działa tak, jak opisuje lekcja, albo masz pomysł na ulepszenie? Zgłoś to w **[GitHub Issues](https://github.com/michalmaj/modern-cpp-foundations/issues/new/choose)**. Do wyboru są trzy krótkie formularze:
+
+| Formularz | Kiedy go wybrać |
+|---|---|
+| **Problem with a lesson** | wyjaśnienie jest niejasne lub błędne albo brakuje instrukcji |
+| **Code example doesn't work** | program z lekcji się nie buduje, nie uruchamia albo wypisuje coś innego niż w lekcji |
+| **Course suggestion** | masz pomysł, który ułatwiłby naukę |
+
+Formularze są po angielsku, ale zgłoszenie możesz napisać po polsku, także gdy dotyczy polskiej wersji lekcji. Najbardziej pomagają numer lekcji, wersja językowa i opis tego, co się stało. Wypełnij to, co wiesz: pola opcjonalne możesz pominąć. Zgłoszenia są publiczne, więc nie wpisuj w nich danych osobowych.
 
 ## Co dalej po tym kursie
 

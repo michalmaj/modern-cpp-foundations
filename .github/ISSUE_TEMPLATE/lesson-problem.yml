@@ -1,0 +1,82 @@
+name: Problem with a lesson
+description: Something in a lesson is unclear, wrong or missing. For the Polish or the English version.
+title: "[Lesson] "
+labels: ["student-feedback", "lesson", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping to improve the course! You can write in **English or Polish**.
+        Fill in what you know. Fields without a red star are optional.
+  - type: input
+    id: lesson
+    attributes:
+      label: Lesson number
+      description: The number from the lesson's title.
+      placeholder: "e.g. 14.3"
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language version
+      description: Which version of the lesson were you reading?
+      options:
+        - Polish
+        - English
+        - Both
+    validations:
+      required: true
+  - type: input
+    id: section
+    attributes:
+      label: Lesson section or example
+      description: The heading of the section, or the first line of the code block or table.
+      placeholder: "e.g. 8. Mission: topping up a card"
+    validations:
+      required: false
+  - type: dropdown
+    id: category
+    attributes:
+      label: Problem category
+      options:
+        - Unclear explanation
+        - Factual or technical error
+        - Missing instruction
+        - Exercise or test problem
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect the lesson to say, show or do?
+      placeholder: "e.g. I expected the lesson to explain why the test program ends with exit code 1."
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What does the lesson say, show or do instead?
+      placeholder: "e.g. Step 5 says all checks should pass, but the table above expects a FAIL."
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      description: If it helps, the steps that led you to the problem.
+      placeholder: |
+        1. Opened lesson 14.3 in English.
+        2. Followed step 5 of the mission.
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context
+      description: Anything else that may help. You can paste a screenshot here, but it isn't required.
+    validations:
+      required: false
