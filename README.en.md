@@ -2,9 +2,21 @@
 
 [Polski](README.md) · **English**
 
+[![Toolchains](https://github.com/michalmaj/modern-cpp-foundations/actions/workflows/toolchains.yml/badge.svg?branch=main)](https://github.com/michalmaj/modern-cpp-foundations/actions/workflows/toolchains.yml)
+[![Lesson commands](https://github.com/michalmaj/modern-cpp-foundations/actions/workflows/lesson-commands.yml/badge.svg?branch=main)](https://github.com/michalmaj/modern-cpp-foundations/actions/workflows/lesson-commands.yml)
+![C++20](https://img.shields.io/badge/C%2B%2B-20-00599C)
+![CMake 3.28+](https://img.shields.io/badge/CMake-3.28%2B-064F8C)
+![LLVM Clang 22+](https://img.shields.io/badge/compiler-LLVM%20Clang%2022%2B-262D3A)
+![Tested on Windows, macOS and Ubuntu](https://img.shields.io/badge/tested%20on-Windows%20%7C%20macOS%20%7C%20Ubuntu-informational)
+![Languages: Polish and English](https://img.shields.io/badge/languages-PL%20%7C%20EN-blue)
+![Status: alpha](https://img.shields.io/badge/status-alpha-orange)
+![86 lessons, 476 checked examples](https://img.shields.io/badge/content-86%20lessons%20%C2%B7%20476%20checked%20examples-blue)
+
 A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
 > **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). All lessons of Module 7 are available too (five lessons, pilot version). All lessons of Module 8 are available too (six lessons, pilot version). All lessons of Module 9 are available too (five lessons, pilot version). All lessons of Module 10 are available too (five lessons, pilot version). All lessons of Module 11 are available too (five lessons, pilot version). All lessons of Module 12 are available too (four lessons, pilot version). All lessons of Module 13 are available too (five lessons, pilot version). All lessons of Module 14 are available too (five lessons, pilot version). See [Course status](#course-status) for details.
+
+> **Alpha stage.** The course is publicly available as an alpha. The programs in the lessons of Modules 1–14 are built and run automatically on Windows, macOS and Ubuntu, and their results are compared with what the lessons show. The course hasn't had a teaching pilot with learners yet: the working times given in the lessons are estimates, and some CLion steps are described according to the documentation, without a check on every system. Every piece of feedback helps: [report a problem or a suggestion](#reporting-problems-and-feedback).
 
 ## The C++ learning path
 
@@ -83,6 +95,14 @@ CLion is convenient but not required: every project in the course can also be bu
 
 On Windows, the compiler also relies on Microsoft tools (Visual Studio Build Tools, including the Windows SDK). Lesson 0.4 shows how to install them.
 
+## How to use the course
+
+- **Two language versions.** Every lesson is available in Polish and in English. Both versions have the same content, the same programs and the same results. You'll find the language switch at the top of each lesson and of this file.
+- **Lessons in order.** Each lesson builds on the earlier ones, so take them in the order of [How to start](#how-to-start).
+- **Programs from the lessons.** In lesson 0.5 you set up your first project in CLion, and in lesson 0.6 you build the same program from the terminal. You type or copy the programs of later lessons into such a project, build and run them, and the lesson shows the result that should appear.
+- **Tasks, hints and solutions.** Missions and tests have success criteria or checklists. Hints and sample solutions are collapsed: open them only after your own attempt.
+- **When something goes differently.** Most lessons have a table of common problems with their cause and what to do. If that doesn't help, [report the problem](#reporting-problems-and-feedback).
+
 ## Course status
 
 The course is **in preparation**. Here is an honest overview of what exists and what does not yet:
@@ -90,6 +110,8 @@ The course is **in preparation**. Here is an honest overview of what exists and 
 | Item | Status |
 |---|---|
 | Course overview (this file) | Ready |
+| Automatic checks of the lesson programs | Running on Windows, macOS and Ubuntu, on every lesson change |
+| A pilot with learners | Not carried out yet |
 | Module 0, lesson 1: [Files, folders and your first look at the terminal](course/module_00_tooling/lesson_01_files_and_terminal.en.md) | Available (pilot version) |
 | Module 0, lesson 2: [Moving between folders](course/module_00_tooling/lesson_02_moving_between_folders.en.md) | Available (pilot version) |
 | Module 0, lesson 3: [What happens when you type a command?](course/module_00_tooling/lesson_03_commands_and_programs.en.md) | Available (pilot version) |
@@ -274,6 +296,18 @@ Work through the lessons in order, starting with the first:
 For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
 
 In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2 (lessons 2.1–2.8), programs start to remember values, calculate, take data from the user and store text. It ends with the test in lesson 2.8. In Module 3 (lessons 3.1–3.6), programs start to make decisions. It ends with the test in lesson 3.6. In Module 4 (lessons 4.1–4.7), programs start to repeat actions. It ends with the test in lesson 4.7. In Module 5 (lessons 5.1–5.7) you'll learn to split programs into smaller, named parts: your own functions. It ends with the test in lesson 5.7. In Module 6 (lessons 6.1–6.6), programs start to store many values of the same kind in one variable: `std::vector`. It ends with the test in lesson 6.6. In Module 7 (lessons 7.1–7.5), you'll go through text character by character: `char` and `std::string`. It ends with the test in lesson 7.5. In Module 8 (lessons 8.1–8.6), you'll define your own data types: structs that join several pieces of information about one object. It ends with the test in lesson 8.6. In Module 9 (lessons 9.1–9.5), functions start to change existing data on purpose: records passed by a modifiable reference. It ends with the test in lesson 9.5. In Module 10 (lessons 10.1–10.5), programs start to build records from data read from the input. It ends with the test in lesson 10.5. In Module 11 (lessons 11.1–11.5), programs start to consist of several source files and your own header files, also with shared types, split by responsibility. It ends with the test in lesson 11.5. In Module 12 (lessons 12.1–12.4), programs start to read data from text files, also records, with the same reading function as from the keyboard, and to point to the number of a bad line in a file. It ends with the test in lesson 12.4. In Module 13 (lessons 13.1–13.5), test programs start to check the results of your functions by themselves, reading functions too, on cases chosen so that they detect bugs, and you will build a program and its tests in one project, from the same functions. It ends with the test in lesson 13.5. In Module 14 (lessons 14.1–14.5), states and function results get names of their own, checked by the compiler, the `switch` statement handles every state in one place, a function that refuses says with a named result why it refused, and a reading function recovers the stream after a bad entry and lets you try again. It ends with the test in lesson 14.5.
+
+## Reporting problems and feedback
+
+Is something in a lesson unclear or wrong, does an example not work as the lesson describes, or do you have an idea for an improvement? Report it in **[GitHub Issues](https://github.com/michalmaj/modern-cpp-foundations/issues/new/choose)**. There are three short forms to choose from:
+
+| Form | When to choose it |
+|---|---|
+| **Problem with a lesson** | an explanation is unclear or wrong, or an instruction is missing |
+| **Code example doesn't work** | a program from a lesson doesn't build, doesn't run or prints something different from the lesson |
+| **Course suggestion** | you have an idea that would make learning easier |
+
+The forms are in English, but you can write your report in Polish too, also when it's about the Polish version of a lesson. The lesson number, the language version and a description of what happened help most. Fill in what you know: you can skip the optional fields. Reports are public, so don't include personal data.
 
 ## What comes next
 
