@@ -12,11 +12,9 @@
 ![Status: alpha](https://img.shields.io/badge/status-alpha-orange)
 ![86 lessons, 476 checked examples](https://img.shields.io/badge/content-86%20lessons%20%C2%B7%20476%20checked%20examples-blue)
 
-A course that teaches programming from scratch, in C++. You don't need any previous programming experience. Everyday computer skills are enough.
+A course that teaches programming from scratch in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
-> **Course status: in preparation.** Module 0 is functionally complete (six lessons, pilot version). All lessons of Module 1 are available too (six lessons, pilot version). All lessons of Module 2 are available too (eight lessons, pilot version). All lessons of Module 3 are available too (six lessons, pilot version). All lessons of Module 4 are available too (seven lessons, pilot version). All lessons of Module 5 are available too (seven lessons, pilot version). All lessons of Module 6 are available too (six lessons, pilot version). All lessons of Module 7 are available too (five lessons, pilot version). All lessons of Module 8 are available too (six lessons, pilot version). All lessons of Module 9 are available too (five lessons, pilot version). All lessons of Module 10 are available too (five lessons, pilot version). All lessons of Module 11 are available too (five lessons, pilot version). All lessons of Module 12 are available too (four lessons, pilot version). All lessons of Module 13 are available too (five lessons, pilot version). All lessons of Module 14 are available too (five lessons, pilot version). See [Course status](#course-status) for details.
-
-> **Alpha stage.** The course is publicly available as an alpha. The programs in the lessons of Modules 1–14 are built and run automatically on Windows, macOS and Ubuntu, and their results are compared with what the lessons show. The course hasn't had a teaching pilot with learners yet: the working times given in the lessons are estimates, and some CLion steps are described according to the documentation, without a check on every system. Every piece of feedback helps: [report a problem or a suggestion](#reporting-problems-and-feedback).
+> **Alpha stage.** The course is publicly available as an alpha: you can use all 86 lessons of Modules 0–14. The programs in the lessons of Modules 1–14 are built and run automatically on Windows, macOS and Ubuntu, and their results are compared with what the lessons show. The course hasn't yet been through a teaching pilot with learners. The working times given in the lessons are estimates. Some CLion steps are based on the CLion documentation and haven't been checked on every system yet. See [Course status](#course-status) for details. Every piece of feedback helps: [report a problem or make a suggestion](#reporting-problems-and-giving-feedback).
 
 ## The C++ learning path
 
@@ -24,7 +22,7 @@ Modern C++ Foundations is the first of three courses that together form a C++ le
 
 | Part | Course | What it covers | Repository | Status |
 |---|---|---|---|---|
-| **A: you are here** | **Modern C++ Foundations** | Programming fundamentals and modern C++ | [modern-cpp-foundations](https://github.com/michalmaj/modern-cpp-foundations) | In preparation |
+| **A: you are here** | **Modern C++ Foundations** | Programming fundamentals and modern C++ | [modern-cpp-foundations](https://github.com/michalmaj/modern-cpp-foundations) | Alpha |
 | B | Advanced Modern C++ | C++ in depth: how the language works “under the hood”, templates, memory management, programs that do several things at once, performance | `advanced-modern-cpp` (not created yet) | Planned |
 | C | C++ Vision & AI Systems | C++ in practice: image processing, artificial intelligence and systems where performance matters | `cpp-vision-ai-systems` (not created yet) | Planned |
 
@@ -46,7 +44,7 @@ The course starts before your first program. We don't assume you know:
 - how the text you write becomes a program you can run;
 - what a compiler, Git or a development environment is.
 
-Every new idea is explained before we use it. You don't need to know any other programming language either.
+We explain every new concept before we use it. You don't need to know any other programming language either.
 
 From the first lesson we teach modern C++. We don't start with outdated habits that you would later have to unlearn. Older ways of writing code appear only as historical background, when they help explain something.
 
@@ -62,9 +60,9 @@ By the end of the course you will be able to:
 - understand how a program uses memory, and write code that manages it safely;
 - explain what happens between writing code and running a program;
 - check that a program works correctly: write tests, use a debugger (a tool for following a program step by step) and act on warnings;
-- use the terminal, Git and GitHub, the tools for recording the history of your code and sharing it, the way professional programmers do.
+- use the terminal, as well as Git and GitHub (tools for recording the history of your code and sharing it), the way professional programmers do.
 
-## How learning works
+## How you will learn
 
 Most of the work consists of **short, independent tasks**. Each one has its own short story that explains why you are writing the program, and a clear way to check that your solution works. The tasks don't add up to one big application: if you get stuck on one, it won't block the next. Every now and then there is a larger, standalone project that brings several skills together.
 
@@ -89,7 +87,7 @@ At first we guide you step by step. Over time you make more of the decisions you
 | **Ninja** | Quickly carries out the build steps prepared by CMake. |
 | **CTest** | Runs tests that check whether a program works correctly. |
 
-You don't need to understand these names yet, or install anything. Every tool is explained in the course, and you will install them in [lesson 0.4](course/module_00_tooling/lesson_04_installing_the_tools.en.md). It is a pilot version: some installation steps have not yet been checked on every system.
+You don't need to understand these names or install anything yet. The course explains every tool, and you will install them in [lesson 0.4](course/module_00_tooling/lesson_04_installing_the_tools.en.md). Some installation steps haven't been checked on every system yet.
 
 CLion is convenient but not required: every project in the course can also be built and run from the terminal.
 
@@ -98,111 +96,111 @@ On Windows, the compiler also relies on Microsoft tools (Visual Studio Build Too
 ## How to use the course
 
 - **Two language versions.** Every lesson is available in Polish and in English. Both versions have the same content, the same programs and the same results. You'll find the language switch at the top of each lesson and of this file.
-- **Lessons in order.** Each lesson builds on the earlier ones, so take them in the order of [How to start](#how-to-start).
-- **Programs from the lessons.** In lesson 0.5 you set up your first project in CLion, and in lesson 0.6 you build the same program from the terminal. You type or copy the programs of later lessons into such a project, build and run them, and the lesson shows the result that should appear.
-- **Tasks, hints and solutions.** Missions and tests have success criteria or checklists. Hints and sample solutions are collapsed: open them only after your own attempt.
-- **When something goes differently.** Most lessons have a table of common problems with their cause and what to do. If that doesn't help, [report the problem](#reporting-problems-and-feedback).
+- **Lessons in order.** Each lesson builds on the earlier ones, so work through them in the order listed in [Getting started](#getting-started).
+- **Programs from the lessons.** In lesson 0.5 you set up your first project in CLion, and in lesson 0.6 you build the same program from the terminal. You type or copy the programs from later lessons into a project like this, then build and run them. The lesson shows the result you should see.
+- **Tasks, hints and solutions.** Missions and tests have success criteria or checklists. Hints and example solutions are collapsed: open them only after you have tried on your own.
+- **When something goes wrong.** Most lessons have a table of common problems, with their likely causes and what to do. If that doesn't help, [report the problem](#reporting-problems-and-giving-feedback).
 
 ## Course status
 
-The course is **in preparation**. Here is an honest overview of what exists and what does not yet:
+The course is in its **alpha stage**: all lessons of Modules 0–14 are available, but their content may still change. Here is what is already in place and what isn't yet:
 
 | Item | Status |
 |---|---|
 | Course overview (this file) | Ready |
-| Automatic checks of the lesson programs | Running on Windows, macOS and Ubuntu, on every lesson change |
-| A pilot with learners | Not carried out yet |
-| Module 0, lesson 1: [Files, folders and your first look at the terminal](course/module_00_tooling/lesson_01_files_and_terminal.en.md) | Available (pilot version) |
-| Module 0, lesson 2: [Moving between folders](course/module_00_tooling/lesson_02_moving_between_folders.en.md) | Available (pilot version) |
-| Module 0, lesson 3: [What happens when you type a command?](course/module_00_tooling/lesson_03_commands_and_programs.en.md) | Available (pilot version) |
-| Module 0, lesson 4: [Set up your workshop: installing the tools](course/module_00_tooling/lesson_04_installing_the_tools.en.md) | Available (pilot version; the installation steps have not yet been checked on every system) |
-| Module 0, lesson 5: [Your first working program in CLion](course/module_00_tooling/lesson_05_first_program_in_clion.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 0, lesson 6: [The same program without CLion](course/module_00_tooling/lesson_06_same_program_without_clion.en.md) | Available (pilot version) |
-| Module 1, lesson 1: [The first program, from the inside](course/module_01_first_programs/lesson_01_first_program_inside.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 1, lesson 2: [When the compiler complains](course/module_01_first_programs/lesson_02_when_the_compiler_complains.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 1, lesson 3: [A program from a blank page](course/module_01_first_programs/lesson_03_a_program_from_a_blank_page.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 1, lesson 4: [From source code to an executable](course/module_01_first_programs/lesson_04_from_source_code_to_an_executable.en.md) | Available (pilot version) |
-| Module 1, lesson 5: [Save the history of your work](course/module_01_first_programs/lesson_05_save_the_history_of_your_work.en.md) | Available (pilot version) |
-| Module 1, lesson 6: [From an idea to a working program, on your own](course/module_01_first_programs/lesson_06_from_idea_to_working_program.en.md) (the Module 1 test) | Available (pilot version) |
-| Module 2, lesson 1: [Values the program remembers](course/module_02_values_and_calculations/lesson_01_values_the_program_remembers.en.md) | Available (pilot version) |
-| Module 2, lesson 2: [When values change](course/module_02_values_and_calculations/lesson_02_when_values_change.en.md) | Available (pilot version) |
-| Module 2, lesson 3: [See what happens in the program](course/module_02_values_and_calculations/lesson_03_see_what_happens_in_the_program.en.md) | Available (pilot version; the debugger steps in CLion have not yet been checked on every system) |
-| Module 2, lesson 4: [Division, remainder and the order of operations](course/module_02_values_and_calculations/lesson_04_division_remainder_and_order_of_operations.en.md) | Available (pilot version) |
-| Module 2, lesson 5: [Numbers with a fractional part: `double` and `auto`](course/module_02_values_and_calculations/lesson_05_numbers_with_a_fractional_part.en.md) | Available (pilot version) |
-| Module 2, lesson 6: [A program that asks the user](course/module_02_values_and_calculations/lesson_06_a_program_that_asks_the_user.en.md) | Available (pilot version) |
-| Module 2, lesson 7: [Text the program remembers (`std::string`)](course/module_02_values_and_calculations/lesson_07_text_the_program_remembers.en.md) | Available (pilot version) |
-| Module 2, lesson 8: [From data to result](course/module_02_values_and_calculations/lesson_08_from_data_to_result.en.md) (the Module 2 test) | Available (pilot version) |
-| Module 3, lesson 1: [The program's first decision (`if`)](course/module_03_decisions_and_conditions/lesson_01_the_first_decision.en.md) | Available (pilot version) |
-| Module 3, lesson 2: [Two possibilities (`else`), equality and `bool`](course/module_03_decisions_and_conditions/lesson_02_two_ways.en.md) | Available (pilot version) |
-| Module 3, lesson 3: [Choosing among many possibilities (`else if`)](course/module_03_decisions_and_conditions/lesson_03_many_possibilities.en.md) | Available (pilot version) |
-| Module 3, lesson 4: [Combining conditions (`&&`, `\|\|`, `!`)](course/module_03_decisions_and_conditions/lesson_04_combining_conditions.en.md) | Available (pilot version) |
-| Module 3, lesson 5: [Checking data before calculating](course/module_03_decisions_and_conditions/lesson_05_check_before_calculating.en.md) | Available (pilot version) |
-| Module 3, lesson 6: [The program makes decisions (the Module 3 test)](course/module_03_decisions_and_conditions/lesson_06_the_program_decides.en.md) | Available (pilot version) |
-| Module 4, lesson 1: [The first loop (`while`)](course/module_04_repeating_actions/lesson_01_the_first_loop.en.md) | Available (pilot version) |
-| Module 4, lesson 2: [Sums and accumulators](course/module_04_repeating_actions/lesson_02_sums_and_accumulators.en.md) | Available (pilot version) |
-| Module 4, lesson 3: [The `for` loop: counter, condition and update in one place](course/module_04_repeating_actions/lesson_03_the_for_loop.en.md) | Available (pilot version) |
-| Module 4, lesson 4: [Repeating until the goal is reached](course/module_04_repeating_actions/lesson_04_repeat_until_the_goal.en.md) | Available (pilot version) |
-| Module 4, lesson 5: [Asking again for a valid value](course/module_04_repeating_actions/lesson_05_ask_again.en.md) | Available (pilot version) |
-| Module 4, lesson 6: [A failed read, recovering the stream and the end of the data](course/module_04_repeating_actions/lesson_06_recover_and_end_of_input.en.md) | Available (pilot version) |
-| Module 4, lesson 7: [The program repeats actions (the Module 4 test)](course/module_04_repeating_actions/lesson_07_the_program_repeats.en.md) | Available (pilot version) |
-| Module 5, lesson 1: [Your first function (`void`)](course/module_05_functions/lesson_01_the_first_function.en.md) | Available (pilot version) |
-| Module 5, lesson 2: [Parameters, arguments and passing by value](course/module_05_functions/lesson_02_parameters_and_arguments.en.md) | Available (pilot version) |
-| Module 5, lesson 3: [A function returns a result (`return`)](course/module_05_functions/lesson_03_returning_a_result.en.md) | Available (pilot version) |
-| Module 5, lesson 4: [Several ways to `return`](course/module_05_functions/lesson_04_several_returns.en.md) | Available (pilot version) |
-| Module 5, lesson 5: [Several functions, one program](course/module_05_functions/lesson_05_several_functions.en.md) | Available (pilot version) |
-| Module 5, lesson 6: [Declaration, definition and linking](course/module_05_functions/lesson_06_declaration_and_definition.en.md) | Available (pilot version) |
-| Module 5, lesson 7: [A program built from your own functions (the Module 5 test)](course/module_05_functions/lesson_07_a_program_of_functions.en.md) | Available (pilot version) |
-| Module 6, lesson 1: [Your first `std::vector` and the range-based `for` loop](course/module_06_collections/lesson_01_the_first_vector.en.md) | Available (pilot version) |
-| Module 6, lesson 2: [Adding data to a vector: `push_back()` and `empty()`](course/module_06_collections/lesson_02_adding_to_a_vector.en.md) | Available (pilot version) |
-| Module 6, lesson 3: [Element positions and neighbouring values in a `std::vector`](course/module_06_collections/lesson_03_positions_and_neighbours.en.md) | Available (pilot version) |
-| Module 6, lesson 4: [A vector as a function parameter: `const&`](course/module_06_collections/lesson_04_a_vector_as_a_parameter.en.md) | Available (pilot version) |
-| Module 6, lesson 5: [A function creates and returns a new vector](course/module_06_collections/lesson_05_a_function_returns_a_vector.en.md) | Available (pilot version) |
-| Module 6, lesson 6: [A training log (the Module 6 test)](course/module_06_collections/lesson_06_training_log.en.md) | Available (pilot version) |
-| Module 7, lesson 1: [First characters: `char` and going through a `std::string`](course/module_07_text/lesson_01_first_characters.en.md) | Available (pilot version) |
-| Module 7, lesson 2: [Positions and neighbouring characters in a `std::string`](course/module_07_text/lesson_02_positions_and_neighbours.en.md) | Available (pilot version) |
-| Module 7, lesson 3: [A function creates a new text](course/module_07_text/lesson_03_a_function_creates_a_new_text.en.md) | Available (pilot version) |
-| Module 7, lesson 4: [Processing successive lines with `std::getline`](course/module_07_text/lesson_04_successive_lines.en.md) | Available (pilot version) |
-| Module 7, lesson 5: [Parcel code check (the Module 7 test)](course/module_07_text/lesson_05_parcel_code_check.en.md) | Available (pilot version) |
-| Module 8, lesson 1: [Your first struct: several pieces of data describing one object](course/module_08_structs/lesson_01_first_struct.en.md) | Available (pilot version) |
-| Module 8, lesson 2: [Changing fields and an independent copy of a record](course/module_08_structs/lesson_02_changing_fields_and_copies.en.md) | Available (pilot version) |
-| Module 8, lesson 3: [Functions that analyse a record](course/module_08_structs/lesson_03_functions_that_analyse_a_record.en.md) | Available (pilot version) |
-| Module 8, lesson 4: [Many records in a `std::vector`](course/module_08_structs/lesson_04_many_records_in_a_vector.en.md) | Available (pilot version) |
-| Module 8, lesson 5: [A function returns a record with several results](course/module_08_structs/lesson_05_a_function_returns_a_record.en.md) | Available (pilot version) |
-| Module 8, lesson 6: [Race results (the Module 8 test)](course/module_08_structs/lesson_06_race_results.en.md) | Available (pilot version) |
-| Module 9, lesson 1: [A function changes an existing record](course/module_09_mutable_references/lesson_01_a_function_changes_a_record.en.md) | Available (pilot version) |
-| Module 9, lesson 2: [A change only when the conditions are met](course/module_09_mutable_references/lesson_02_a_change_only_when_allowed.en.md) | Available (pilot version) |
-| Module 9, lesson 3: [Changing the elements of a vector through a reference](course/module_09_mutable_references/lesson_03_changing_vector_elements.en.md) | Available (pilot version) |
-| Module 9, lesson 4: [Find a record and change the right object](course/module_09_mutable_references/lesson_04_find_a_record_and_change_it.en.md) | Available (pilot version) |
-| Module 9, lesson 5: [A delivery drone fleet (the Module 9 test)](course/module_09_mutable_references/lesson_05_drone_fleet.en.md) | Available (pilot version) |
-| Module 10, lesson 1: [One record from input](course/module_10_input_records/lesson_01_one_record_from_input.en.md) | Available (pilot version) |
-| Module 10, lesson 2: [Names with spaces: `>>` and `std::getline`](course/module_10_input_records/lesson_02_names_with_spaces.en.md) | Available (pilot version) |
-| Module 10, lesson 3: [Building a vector of records from input](course/module_10_input_records/lesson_03_building_a_vector_of_records.en.md) | Available (pilot version) |
-| Module 10, lesson 4: [A record-reading function and the ending of the data](course/module_10_input_records/lesson_04_reading_function_and_end_of_data.en.md) | Available (pilot version) |
-| Module 10, lesson 5: [Workshop registrations (the Module 10 test)](course/module_10_input_records/lesson_05_workshop_registrations.en.md) | Available (pilot version) |
-| Module 11, lesson 1: [A second source file](course/module_11_multifile_programs/lesson_01_second_source_file.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 11, lesson 2: [Your own header file](course/module_11_multifile_programs/lesson_02_own_header_file.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 11, lesson 3: [A shared type in a header](course/module_11_multifile_programs/lesson_03_shared_type_in_header.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 11, lesson 4: [Splitting a program by responsibility](course/module_11_multifile_programs/lesson_04_splitting_responsibilities.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 11, lesson 5: [Building a multi-file program (the Module 11 test)](course/module_11_multifile_programs/lesson_05_multifile_checkpoint.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 12, lesson 1: [Your first data file](course/module_12_text_files/lesson_01_first_data_file.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 12, lesson 2: [Records from a file: the same reading function](course/module_12_text_files/lesson_02_records_from_a_file.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 12, lesson 3: [Where the data end and where the error is](course/module_12_text_files/lesson_03_end_of_data_and_errors.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 12, lesson 4: [Cinema screenings (the Module 12 test)](course/module_12_text_files/lesson_04_cinema_screenings.en.md) | Available (pilot version; the CLion steps have not yet been checked on every system) |
-| Module 13, lesson 1: [A program that checks the result itself](course/module_13_testing_functions/lesson_01_self_checking_program.en.md) | Available (pilot version) |
-| Module 13, lesson 2: [Test cases that catch bugs](course/module_13_testing_functions/lesson_02_test_cases_that_catch_bugs.en.md) | Available (pilot version) |
-| Module 13, lesson 3: [Testing a reading function without a file](course/module_13_testing_functions/lesson_03_testing_input_without_a_file.en.md) | Available (pilot version) |
-| Module 13, lesson 4: [Tests next to the program](course/module_13_testing_functions/lesson_04_tests_next_to_the_program.en.md) | Available (pilot version) |
-| Module 13, lesson 5: [Workshop reservations (the Module 13 test)](course/module_13_testing_functions/lesson_05_workshop_reservations.en.md) | Available (pilot version) |
-| Module 14, lesson 1: [A named state instead of text](course/module_14_named_states/lesson_01_named_state_instead_of_text.en.md) | Available (pilot version) |
-| Module 14, lesson 2: [Handling every state with `switch`](course/module_14_named_states/lesson_02_handling_every_state_with_switch.en.md) | Available (pilot version) |
-| Module 14, lesson 3: [A function explains why it refused](course/module_14_named_states/lesson_03_function_explains_refusal.en.md) | Available (pilot version) |
-| Module 14, lesson 4: [Try again: reading that recovers the stream](course/module_14_named_states/lesson_04_reading_that_recovers_the_stream.en.md) | Available (pilot version) |
-| Module 14, lesson 5: [The measuring station (the Module 14 test)](course/module_14_named_states/lesson_05_measuring_station.en.md) | Available (pilot version) |
+| Automatic checks of the lesson programs | Run on Windows, macOS and Ubuntu whenever a lesson changes |
+| Teaching pilot with learners | Not carried out yet |
+| Module 0, lesson 1: [Files, folders and your first look at the terminal](course/module_00_tooling/lesson_01_files_and_terminal.en.md) | Available |
+| Module 0, lesson 2: [Moving between folders](course/module_00_tooling/lesson_02_moving_between_folders.en.md) | Available |
+| Module 0, lesson 3: [What happens when you type a command?](course/module_00_tooling/lesson_03_commands_and_programs.en.md) | Available |
+| Module 0, lesson 4: [Set up your workshop: installing the tools](course/module_00_tooling/lesson_04_installing_the_tools.en.md) | Available (the installation steps have not yet been checked on every system) |
+| Module 0, lesson 5: [Your first working program in CLion](course/module_00_tooling/lesson_05_first_program_in_clion.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 0, lesson 6: [The same program without CLion](course/module_00_tooling/lesson_06_same_program_without_clion.en.md) | Available |
+| Module 1, lesson 1: [The first program, from the inside](course/module_01_first_programs/lesson_01_first_program_inside.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 1, lesson 2: [When the compiler complains](course/module_01_first_programs/lesson_02_when_the_compiler_complains.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 1, lesson 3: [A program from a blank page](course/module_01_first_programs/lesson_03_a_program_from_a_blank_page.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 1, lesson 4: [From source code to an executable](course/module_01_first_programs/lesson_04_from_source_code_to_an_executable.en.md) | Available |
+| Module 1, lesson 5: [Save the history of your work](course/module_01_first_programs/lesson_05_save_the_history_of_your_work.en.md) | Available |
+| Module 1, lesson 6: [From an idea to a working program, on your own](course/module_01_first_programs/lesson_06_from_idea_to_working_program.en.md) (the Module 1 test) | Available |
+| Module 2, lesson 1: [Values the program remembers](course/module_02_values_and_calculations/lesson_01_values_the_program_remembers.en.md) | Available |
+| Module 2, lesson 2: [When values change](course/module_02_values_and_calculations/lesson_02_when_values_change.en.md) | Available |
+| Module 2, lesson 3: [See what happens in the program](course/module_02_values_and_calculations/lesson_03_see_what_happens_in_the_program.en.md) | Available (the debugger steps in CLion have not yet been checked on every system) |
+| Module 2, lesson 4: [Division, remainder and the order of operations](course/module_02_values_and_calculations/lesson_04_division_remainder_and_order_of_operations.en.md) | Available |
+| Module 2, lesson 5: [Numbers with a fractional part: `double` and `auto`](course/module_02_values_and_calculations/lesson_05_numbers_with_a_fractional_part.en.md) | Available |
+| Module 2, lesson 6: [A program that asks the user](course/module_02_values_and_calculations/lesson_06_a_program_that_asks_the_user.en.md) | Available |
+| Module 2, lesson 7: [Text the program remembers (`std::string`)](course/module_02_values_and_calculations/lesson_07_text_the_program_remembers.en.md) | Available |
+| Module 2, lesson 8: [From data to result (the Module 2 test)](course/module_02_values_and_calculations/lesson_08_from_data_to_result.en.md) | Available |
+| Module 3, lesson 1: [The program's first decision (`if`)](course/module_03_decisions_and_conditions/lesson_01_the_first_decision.en.md) | Available |
+| Module 3, lesson 2: [Two possibilities (`else`), equality and `bool`](course/module_03_decisions_and_conditions/lesson_02_two_ways.en.md) | Available |
+| Module 3, lesson 3: [Choosing among many possibilities (`else if`)](course/module_03_decisions_and_conditions/lesson_03_many_possibilities.en.md) | Available |
+| Module 3, lesson 4: [Combining conditions (`&&`, `\|\|`, `!`)](course/module_03_decisions_and_conditions/lesson_04_combining_conditions.en.md) | Available |
+| Module 3, lesson 5: [Checking data before calculating](course/module_03_decisions_and_conditions/lesson_05_check_before_calculating.en.md) | Available |
+| Module 3, lesson 6: [The program makes decisions (the Module 3 test)](course/module_03_decisions_and_conditions/lesson_06_the_program_decides.en.md) | Available |
+| Module 4, lesson 1: [The first loop (`while`)](course/module_04_repeating_actions/lesson_01_the_first_loop.en.md) | Available |
+| Module 4, lesson 2: [Sums and accumulators](course/module_04_repeating_actions/lesson_02_sums_and_accumulators.en.md) | Available |
+| Module 4, lesson 3: [The `for` loop: counter, condition and update in one place](course/module_04_repeating_actions/lesson_03_the_for_loop.en.md) | Available |
+| Module 4, lesson 4: [Repeating until the goal is reached](course/module_04_repeating_actions/lesson_04_repeat_until_the_goal.en.md) | Available |
+| Module 4, lesson 5: [Asking again for a valid value](course/module_04_repeating_actions/lesson_05_ask_again.en.md) | Available |
+| Module 4, lesson 6: [A failed read, recovering the stream and the end of the data](course/module_04_repeating_actions/lesson_06_recover_and_end_of_input.en.md) | Available |
+| Module 4, lesson 7: [The program repeats actions (the Module 4 test)](course/module_04_repeating_actions/lesson_07_the_program_repeats.en.md) | Available |
+| Module 5, lesson 1: [Your first function (`void`)](course/module_05_functions/lesson_01_the_first_function.en.md) | Available |
+| Module 5, lesson 2: [Parameters, arguments and passing by value](course/module_05_functions/lesson_02_parameters_and_arguments.en.md) | Available |
+| Module 5, lesson 3: [A function returns a result (`return`)](course/module_05_functions/lesson_03_returning_a_result.en.md) | Available |
+| Module 5, lesson 4: [Several ways to `return`](course/module_05_functions/lesson_04_several_returns.en.md) | Available |
+| Module 5, lesson 5: [Several functions, one program](course/module_05_functions/lesson_05_several_functions.en.md) | Available |
+| Module 5, lesson 6: [Declaration, definition and linking](course/module_05_functions/lesson_06_declaration_and_definition.en.md) | Available |
+| Module 5, lesson 7: [A program built from your own functions (the Module 5 test)](course/module_05_functions/lesson_07_a_program_of_functions.en.md) | Available |
+| Module 6, lesson 1: [Your first `std::vector` and the range-based `for` loop](course/module_06_collections/lesson_01_the_first_vector.en.md) | Available |
+| Module 6, lesson 2: [Adding data to a vector: `push_back()` and `empty()`](course/module_06_collections/lesson_02_adding_to_a_vector.en.md) | Available |
+| Module 6, lesson 3: [Element positions and neighbouring values in a `std::vector`](course/module_06_collections/lesson_03_positions_and_neighbours.en.md) | Available |
+| Module 6, lesson 4: [A vector as a function parameter: `const&`](course/module_06_collections/lesson_04_a_vector_as_a_parameter.en.md) | Available |
+| Module 6, lesson 5: [A function creates and returns a new vector](course/module_06_collections/lesson_05_a_function_returns_a_vector.en.md) | Available |
+| Module 6, lesson 6: [A training log (the Module 6 test)](course/module_06_collections/lesson_06_training_log.en.md) | Available |
+| Module 7, lesson 1: [First characters: `char` and going through a `std::string`](course/module_07_text/lesson_01_first_characters.en.md) | Available |
+| Module 7, lesson 2: [Positions and neighbouring characters in a `std::string`](course/module_07_text/lesson_02_positions_and_neighbours.en.md) | Available |
+| Module 7, lesson 3: [A function creates a new text](course/module_07_text/lesson_03_a_function_creates_a_new_text.en.md) | Available |
+| Module 7, lesson 4: [Processing successive lines with `std::getline`](course/module_07_text/lesson_04_successive_lines.en.md) | Available |
+| Module 7, lesson 5: [Parcel code check (the Module 7 test)](course/module_07_text/lesson_05_parcel_code_check.en.md) | Available |
+| Module 8, lesson 1: [Your first struct: several pieces of data describing one object](course/module_08_structs/lesson_01_first_struct.en.md) | Available |
+| Module 8, lesson 2: [Changing fields and an independent copy of a record](course/module_08_structs/lesson_02_changing_fields_and_copies.en.md) | Available |
+| Module 8, lesson 3: [Functions that analyse a record](course/module_08_structs/lesson_03_functions_that_analyse_a_record.en.md) | Available |
+| Module 8, lesson 4: [Many records in a `std::vector`](course/module_08_structs/lesson_04_many_records_in_a_vector.en.md) | Available |
+| Module 8, lesson 5: [A function returns a record with several results](course/module_08_structs/lesson_05_a_function_returns_a_record.en.md) | Available |
+| Module 8, lesson 6: [Race results (the Module 8 test)](course/module_08_structs/lesson_06_race_results.en.md) | Available |
+| Module 9, lesson 1: [A function changes an existing record](course/module_09_mutable_references/lesson_01_a_function_changes_a_record.en.md) | Available |
+| Module 9, lesson 2: [A change only when the conditions are met](course/module_09_mutable_references/lesson_02_a_change_only_when_allowed.en.md) | Available |
+| Module 9, lesson 3: [Changing the elements of a vector through a reference](course/module_09_mutable_references/lesson_03_changing_vector_elements.en.md) | Available |
+| Module 9, lesson 4: [Find a record and change the right object](course/module_09_mutable_references/lesson_04_find_a_record_and_change_it.en.md) | Available |
+| Module 9, lesson 5: [A delivery drone fleet (the Module 9 test)](course/module_09_mutable_references/lesson_05_drone_fleet.en.md) | Available |
+| Module 10, lesson 1: [One record from input](course/module_10_input_records/lesson_01_one_record_from_input.en.md) | Available |
+| Module 10, lesson 2: [Names with spaces: `>>` and `std::getline`](course/module_10_input_records/lesson_02_names_with_spaces.en.md) | Available |
+| Module 10, lesson 3: [Building a vector of records from input](course/module_10_input_records/lesson_03_building_a_vector_of_records.en.md) | Available |
+| Module 10, lesson 4: [A record-reading function and the ending of the data](course/module_10_input_records/lesson_04_reading_function_and_end_of_data.en.md) | Available |
+| Module 10, lesson 5: [Workshop registrations (the Module 10 test)](course/module_10_input_records/lesson_05_workshop_registrations.en.md) | Available |
+| Module 11, lesson 1: [A second source file](course/module_11_multifile_programs/lesson_01_second_source_file.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 11, lesson 2: [Your own header file](course/module_11_multifile_programs/lesson_02_own_header_file.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 11, lesson 3: [A shared type in a header](course/module_11_multifile_programs/lesson_03_shared_type_in_header.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 11, lesson 4: [Splitting a program by responsibility](course/module_11_multifile_programs/lesson_04_splitting_responsibilities.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 11, lesson 5: [Building a multi-file program (the Module 11 test)](course/module_11_multifile_programs/lesson_05_multifile_checkpoint.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 12, lesson 1: [Your first data file](course/module_12_text_files/lesson_01_first_data_file.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 12, lesson 2: [Records from a file: the same reading function](course/module_12_text_files/lesson_02_records_from_a_file.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 12, lesson 3: [Where the data end and where the error is](course/module_12_text_files/lesson_03_end_of_data_and_errors.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 12, lesson 4: [Cinema screenings (the Module 12 test)](course/module_12_text_files/lesson_04_cinema_screenings.en.md) | Available (the CLion steps have not yet been checked on every system) |
+| Module 13, lesson 1: [A program that checks the result itself](course/module_13_testing_functions/lesson_01_self_checking_program.en.md) | Available |
+| Module 13, lesson 2: [Test cases that catch bugs](course/module_13_testing_functions/lesson_02_test_cases_that_catch_bugs.en.md) | Available |
+| Module 13, lesson 3: [Testing a reading function without a file](course/module_13_testing_functions/lesson_03_testing_input_without_a_file.en.md) | Available |
+| Module 13, lesson 4: [Tests next to the program](course/module_13_testing_functions/lesson_04_tests_next_to_the_program.en.md) | Available |
+| Module 13, lesson 5: [Workshop reservations (the Module 13 test)](course/module_13_testing_functions/lesson_05_workshop_reservations.en.md) | Available |
+| Module 14, lesson 1: [A named state instead of text](course/module_14_named_states/lesson_01_named_state_instead_of_text.en.md) | Available |
+| Module 14, lesson 2: [Handling every state with `switch`](course/module_14_named_states/lesson_02_handling_every_state_with_switch.en.md) | Available |
+| Module 14, lesson 3: [A function explains why it refused](course/module_14_named_states/lesson_03_function_explains_refusal.en.md) | Available |
+| Module 14, lesson 4: [Try again: reading that recovers the stream](course/module_14_named_states/lesson_04_reading_that_recovers_the_stream.en.md) | Available |
+| Module 14, lesson 5: [The measuring station (the Module 14 test)](course/module_14_named_states/lesson_05_measuring_station.en.md) | Available |
 | Further modules | Planned |
 | Full course plan | Not published yet |
 | Courses B and C | Planned, repositories do not exist yet |
 
-## How to start
+## Getting started
 
 Work through the lessons in order, starting with the first:
 
@@ -217,7 +215,7 @@ Work through the lessons in order, starting with the first:
 9. **[Lesson 1.3: A program from a blank page](course/module_01_first_programs/lesson_03_a_program_from_a_blank_page.en.md)**
 10. **[Lesson 1.4: From source code to an executable](course/module_01_first_programs/lesson_04_from_source_code_to_an_executable.en.md)**
 11. **[Lesson 1.5: Save the history of your work](course/module_01_first_programs/lesson_05_save_the_history_of_your_work.en.md)**
-12. **[Lesson 1.6: From an idea to a working program, on your own](course/module_01_first_programs/lesson_06_from_idea_to_working_program.en.md)**
+12. **[Lesson 1.6: From an idea to a working program, on your own](course/module_01_first_programs/lesson_06_from_idea_to_working_program.en.md)** (the Module 1 test)
 13. **[Lesson 2.1: Values the program remembers](course/module_02_values_and_calculations/lesson_01_values_the_program_remembers.en.md)**
 14. **[Lesson 2.2: When values change](course/module_02_values_and_calculations/lesson_02_when_values_change.en.md)**
 15. **[Lesson 2.3: See what happens in the program](course/module_02_values_and_calculations/lesson_03_see_what_happens_in_the_program.en.md)**
@@ -293,22 +291,38 @@ Work through the lessons in order, starting with the first:
 85. **[Lesson 14.4: Try again: reading that recovers the stream](course/module_14_named_states/lesson_04_reading_that_recovers_the_stream.en.md)**
 86. **[Lesson 14.5: The measuring station (the Module 14 test)](course/module_14_named_states/lesson_05_measuring_station.en.md)**
 
-For lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you will install the course tools.
+What the modules cover:
 
-In Module 1 (lessons 1.1–1.6) you will start reading and writing your own C++20 code. In Module 2 (lessons 2.1–2.8), programs start to remember values, calculate, take data from the user and store text. It ends with the test in lesson 2.8. In Module 3 (lessons 3.1–3.6), programs start to make decisions. It ends with the test in lesson 3.6. In Module 4 (lessons 4.1–4.7), programs start to repeat actions. It ends with the test in lesson 4.7. In Module 5 (lessons 5.1–5.7) you'll learn to split programs into smaller, named parts: your own functions. It ends with the test in lesson 5.7. In Module 6 (lessons 6.1–6.6), programs start to store many values of the same kind in one variable: `std::vector`. It ends with the test in lesson 6.6. In Module 7 (lessons 7.1–7.5), you'll go through text character by character: `char` and `std::string`. It ends with the test in lesson 7.5. In Module 8 (lessons 8.1–8.6), you'll define your own data types: structs that join several pieces of information about one object. It ends with the test in lesson 8.6. In Module 9 (lessons 9.1–9.5), functions start to change existing data on purpose: records passed by a modifiable reference. It ends with the test in lesson 9.5. In Module 10 (lessons 10.1–10.5), programs start to build records from data read from the input. It ends with the test in lesson 10.5. In Module 11 (lessons 11.1–11.5), programs start to consist of several source files and your own header files, also with shared types, split by responsibility. It ends with the test in lesson 11.5. In Module 12 (lessons 12.1–12.4), programs start to read data from text files, also records, with the same reading function as from the keyboard, and to point to the number of a bad line in a file. It ends with the test in lesson 12.4. In Module 13 (lessons 13.1–13.5), test programs start to check the results of your functions by themselves, reading functions too, on cases chosen so that they detect bugs, and you will build a program and its tests in one project, from the same functions. It ends with the test in lesson 13.5. In Module 14 (lessons 14.1–14.5), states and function results get names of their own, checked by the compiler, the `switch` statement handles every state in one place, a function that refuses says with a named result why it refused, and a reading function recovers the stream after a bad entry and lets you try again. It ends with the test in lesson 14.5.
+- **Module 0 (lessons 0.1–0.6):** for lessons 0.1–0.3 all you need is a computer running Windows, macOS or Linux. In lesson 0.4 you install the course tools, and in lessons 0.5 and 0.6 you build and run your first program, in CLion and from the terminal.
+- **Module 1 (lessons 1.1–1.6):** you start reading and writing your own C++20 code.
+- **Module 2 (lessons 2.1–2.8):** programs start to remember values, calculate, take data from the user and store text.
+- **Module 3 (lessons 3.1–3.6):** programs start to make decisions.
+- **Module 4 (lessons 4.1–4.7):** programs start to repeat actions.
+- **Module 5 (lessons 5.1–5.7):** you learn to split programs into smaller, named parts: your own functions.
+- **Module 6 (lessons 6.1–6.6):** programs start to store many values of the same kind in one variable: `std::vector`.
+- **Module 7 (lessons 7.1–7.5):** you go through text character by character: `char` and `std::string`.
+- **Module 8 (lessons 8.1–8.6):** you define your own data types: structs that combine several pieces of information about one object.
+- **Module 9 (lessons 9.1–9.5):** functions start to change existing data on purpose: records passed through a modifiable reference.
+- **Module 10 (lessons 10.1–10.5):** programs start to build records from data read from input.
+- **Module 11 (lessons 11.1–11.5):** programs start to consist of several source files and your own header files. Shared types go into a header, and you split the program by responsibility.
+- **Module 12 (lessons 12.1–12.4):** programs start to read data from text files, records included. They use the same reading function as for data typed on the keyboard, and they point to the number of a bad line in the file.
+- **Module 13 (lessons 13.1–13.5):** test programs start to check the results of your functions by themselves, reading functions included, on cases chosen to catch bugs. You build a program and its tests in one project, and both use the same functions.
+- **Module 14 (lessons 14.1–14.5):** states and function results get names of their own, which the compiler checks. A `switch` statement handles every state in one place. A function that refuses returns a named result that says why. After a bad entry, a reading function recovers the stream and lets you try again.
 
-## Reporting problems and feedback
+Modules 1–14 each end with a test in their last lesson: 1.6, 2.8, 3.6, 4.7, 5.7, 6.6, 7.5, 8.6, 9.5, 10.5, 11.5, 12.4, 13.5 and 14.5.
 
-Is something in a lesson unclear or wrong, does an example not work as the lesson describes, or do you have an idea for an improvement? Report it in **[GitHub Issues](https://github.com/michalmaj/modern-cpp-foundations/issues/new/choose)**. There are three short forms to choose from:
+## Reporting problems and giving feedback
+
+Is something in a lesson unclear or wrong? Does an example not work the way the lesson describes? Do you have an idea for an improvement? Let us know in **[GitHub Issues](https://github.com/michalmaj/modern-cpp-foundations/issues/new/choose)**. There are three short forms to choose from:
 
 | Form | When to choose it |
 |---|---|
 | **Problem with a lesson** | an explanation is unclear or wrong, or an instruction is missing |
-| **Code example doesn't work** | a program from a lesson doesn't build, doesn't run or prints something different from the lesson |
+| **Code example doesn't work** | a program from a lesson doesn't build, doesn't run or prints something other than what the lesson shows |
 | **Course suggestion** | you have an idea that would make learning easier |
 
-The forms are in English, but you can write your report in Polish too, also when it's about the Polish version of a lesson. The lesson number, the language version and a description of what happened help most. Fill in what you know: you can skip the optional fields. Reports are public, so don't include personal data.
+The forms are in English, but you can write your report in Polish or English, whichever language version of the lesson it is about. The most helpful details are the lesson number, the language version and a description of what happened. Fill in what you know: you can skip the optional fields. Reports are public, so don't include personal data.
 
 ## What comes next
 
-The natural next step is **Advanced Modern C++ (B)**, which builds on what you learn here. If you become interested in image processing and artificial intelligence, you can then move on to **C++ Vision & AI Systems (C)**. That course will officially support Ubuntu 24.04 LTS only.
+The natural next step will be **Advanced Modern C++ (B)**, a planned course that will build on what you learn here. If you become interested in image processing and artificial intelligence, you can later move on to **C++ Vision & AI Systems (C)**, also planned. It will officially support Ubuntu 24.04 LTS only.

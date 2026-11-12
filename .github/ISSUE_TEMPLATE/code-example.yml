@@ -1,5 +1,5 @@
 name: Code example doesn't work
-description: A program from a lesson doesn't build, doesn't run, or prints something different from the lesson.
+description: A program from a lesson doesn't build, doesn't run or prints something other than what the lesson shows.
 title: "[Example] "
 labels: ["student-feedback", "bug", "needs-triage"]
 body:
@@ -7,7 +7,7 @@ body:
     attributes:
       value: |
         Thank you for reporting this! You can write in **English or Polish**, about either language version.
-        You don't need to understand the error message: copying it is enough. Fields without a red star are optional.
+        You don't need to understand the error message: copying it is enough. Fields marked with a red asterisk (*) are required; you can leave the others empty.
   - type: input
     id: lesson
     attributes:
