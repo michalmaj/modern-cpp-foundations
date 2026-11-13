@@ -35,7 +35,7 @@ After this lesson you will:
 - store values read from the input in a vector, only after a successful read;
 - tell the number of read attempts from the number of stored elements;
 - compute the average of the stored values without integer division, and only when there's data;
-- design on your own a program that stores only the data that meets the requirements.
+- design a program on your own that stores only the data that meets the requirements.
 
 ## 1. Prepare the project
 
@@ -254,7 +254,7 @@ Measurements stored: 3
 5
 ```
 
-- `push_back` stands **after** the read is checked. Only a value that was really read goes into the vector.
+- `push_back` comes **after** the read is checked. Only a value that was really read goes into the vector.
 - The vector is printed only **after** the reading loop. First the program collects all the elements, then it goes through them.
 - If one read fails, the following ones fail too (lesson 4.5). The loop still ends after three passes, and `std::cin.fail()` after the loop still gives `true`.
 
@@ -443,7 +443,7 @@ A program that prints an average of 5 here computes it with integer division.
 
 **Before you write the program**, prepare a table of test cases: zero reports, one time of 0, one time of 20, an average with a fractional part, all zeros, a time equal to the average, times skipped before a valid one, between valid ones and after them, only skipped times, report counts of -1 and 7, text instead of the report count and instead of a time, and data that ends after the report count or after a few times. For each case, write down the expected standard output.
 
-Run the program for examples A, B and C and for 4–6 cases of your choice from the table. Analyse the cases where the data ends early on paper, instead of running them, and compare them with the full list of check cases. All the cases of the full check list are checked automatically.
+Run the program for examples A, B and C and for 4–6 cases of your choice from the table. Analyse on paper the cases where the data ends early, instead of running them, and compare them with the full list of check cases. All the cases in that list are checked automatically.
 
 ### Success criteria
 
@@ -842,12 +842,12 @@ int main() {
 
 The program's output before the fix, and the fixed program, are in [Example solutions](#example-solutions).
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
 | `no matching member function for call to 'push_back'` | The vector is `const`, so no elements can be added to it (section 3). | Remove `const` from the definition of a vector that should take elements. |
-| `size()` is larger than the number of allowed values | `push_back` also runs for skipped values (section 9). | Check that `push_back` stands only in the branch for an allowed value. |
+| `size()` is larger than the number of allowed values | `push_back` also runs for skipped values (section 9). | Check that `push_back` is only in the branch for an allowed value. |
 | The average is a whole number, for example 5 instead of 5.5 | The sum is an `int`, so the division is integer division. | Sum into a `double` variable (section 7). |
 | The number of times above the average is too large when some time equals the average | `>=` instead of `>`. | Check the case `3`, `4`, `8`, `12`: the result is 1. |
 | An average appears after zero reports or after only skipped times | The `empty()` check before the calculation is missing. | Check `empty()` before you compute the average (section 7). |
@@ -978,13 +978,13 @@ int main() {
 }
 ```
 
-- **Three outcomes of a read**, three branches: a failed read sets the flag, an allowed time goes into the vector, and a time that isn't allowed is skipped with a message. `push_back` stands in only one of them.
-- **The loop** runs at most `report_count` times, also when some time is skipped: each pass uses up one report. It ends early only when a read fails, because its condition also checks `!input_failed`. For zero reports it doesn't run at all.
+- **Three outcomes of a read**, three branches: a failed read sets the flag, an allowed time goes into the vector, and a time that isn't allowed is skipped with a message. `push_back` is in only one of them.
+- **The loop** runs at most `report_count` times, even when some time is skipped: each pass uses up one report. It ends early only when a read fails, because its condition also checks `!input_failed`. For zero reports it doesn't run at all.
 - **`size()`** is the number of stored times, not the number of reports. For example A there are 4 reports, and `size()` gives 3.
 - **An empty vector**, after zero reports or after only skipped times, ends with the message `No valid waiting times`, without computing an average.
 - **The first pass** sums the times in a `double`, so the average can have a fractional part. **The second** compares each time with the finished average. The condition `waiting_time > average` compares an `int` with a `double`: the time is treated as a `double` for a moment, and its value doesn't change.
 - **A failed read:** the earlier questions and messages stay, and instead of a summary the program prints `Input could not be read`.
-- The same program can be written with a `while` loop, as in lesson 5.7. What matters is that the loop ends after a failed read, and that `push_back` stands only in the branch for an allowed time.
+- The same program can be written with a `while` loop, as in lesson 5.7. What matters is that the loop ends after a failed read, and that `push_back` is only in the branch for an allowed time.
 
 </details>
 
@@ -1030,7 +1030,7 @@ Stored scores: 3
 
 - With only valid scores the program behaves as required, because every score should go into the vector anyway. Only a score outside the range reveals the bug.
 - For `15`, the program prints `Score 2 skipped` and still stores 15: `size()` gives 3 instead of 2, and 15 is in the list.
-- **The cause:** `push_back` stands **after** the `if` block, so it runs in every pass, whatever the condition. The "skipped" message doesn't skip anything.
+- **The cause:** `push_back` comes **after** the `if` block, so it runs in every pass, whatever the condition. The "skipped" message doesn't skip anything.
 - **The fix:** move the adding into an `else` branch. Then either the message or `push_back` runs, never both.
 
 <!-- example: scores_fixed -->

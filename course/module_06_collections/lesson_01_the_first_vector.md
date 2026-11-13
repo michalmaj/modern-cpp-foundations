@@ -23,7 +23,7 @@ Stacja pomiarowa z lekcji 4.7 odczytywała kolejne temperatury i od razu aktuali
 
 Co, jeśli po obliczeniu podsumowania chcesz wrócić do wcześniejszych wartości? Na przykład wskazać temperatury wyższe od średniej albo sprawdzić, ile razy powtórzyła się najwyższa z nich. Z samej sumy i liczby pomiarów tego nie odczytasz: suma 15 z trzech pomiarów to może być 3, 7 i 5, ale też 5, 5 i 5.
 
-W tej lekcji poznasz **`std::vector`**: zmienną, która przechowuje wiele wartości tego samego typu w ustalonej kolejności, oraz pętlę, która kolejno je przegląda.
+W tej lekcji poznasz **`std::vector`**: dzięki niemu jedna zmienna przechowuje wiele wartości tego samego typu w ustalonej kolejności. Poznasz też pętlę, która kolejno je przegląda.
 
 Po tej lekcji będziesz:
 

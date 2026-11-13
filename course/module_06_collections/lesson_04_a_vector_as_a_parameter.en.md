@@ -95,7 +95,7 @@ South cold days: 0
 | `const` | Through this parameter, the function can only **read** the vector; it can't change it. |
 | `temperatures` | The name of the parameter, which the function uses in its body. |
 
-A simple model: **the function gets the ability to read an existing vector, without creating a copy of it.** The word "reference" means here that, during the call, `temperatures` is another name for the same vector that `main` passed.
+A simple model: **the function gets the ability to read an existing vector, without creating a copy of it.** Here, the word "reference" simply means that, during the call, `temperatures` is another name for the same vector that `main` passed.
 
 **Compare with lesson 5.2.** There, `void count_down(int remaining)` got its own copy of a number, and changing `remaining` didn't change the variable in `main`. A copy of one `int` costs nothing, so single numbers are still passed by value. A vector can have very many elements, and a function that only reads it doesn't need a copy. That's why a vector for reading is passed by `const&`. Passing a vector by value is also correct C++. We use the `const&` pattern when the function should **only read** the collection.
 
@@ -225,7 +225,7 @@ The vector for reading goes by `const&`, and the threshold, a small number, by v
 
 ## 7. Mission: two weeks of reading
 
-The program compares the reading in two weeks. Each week is a separate vector with the number of pages read on successive days. A week can have from 0 to 6 recorded days, and every value is in the range 0–30. The data is written in the code:
+The program compares two weeks of reading. Each week is a separate vector with the number of pages read on successive days. A week can have from 0 to 6 recorded days, and every value is in the range 0–30. The data is written in the code:
 
 <!-- fragment -->
 ```cpp
@@ -237,9 +237,9 @@ const std::vector<int> week_b{5, 18, 11, 16};
 
 - Both vectors are defined in `main` as `const std::vector<int>`. The program doesn't read anything from the input.
 - For each week, the program prints the total number of pages and the number of days on which **at least** 10 pages were read. Exactly 10 pages meets the goal. A day with 0 pages is an ordinary day of data.
-- Then it compares the **total numbers of pages** and prints in which week more was read, or a tie. The number of goal days doesn't decide the result.
+- Then it compares the **total numbers of pages** and prints in which week more was read, or that it's a tie. The number of goal days doesn't decide the result.
 - The program has at least two of your own calculating functions:
-  - a function that returns the sum of the values of the vector it gets, as an `int`;
+  - a function that returns the sum of the values in the vector it gets, as an `int`;
   - a function that returns the number of elements reaching a threshold, as an `int`, with the threshold passed as an extra `int` parameter.
 - Both functions get the vector through `const std::vector<int>&`, are defined before `main` and print nothing. You choose the names of the functions and parameters yourself.
 - The functions compute the sums and the counters, not `main`. `main` prepares the data, calls the functions, compares the results and prints the report.
@@ -262,7 +262,7 @@ More pages: Week B
 
 The values are small: a week has at most 6 days of at most 30 pages, so the sums and counters fit safely in an `int`.
 
-**This isn't the stations program with different messages.** There, there was one ready-made function. You have to decide on your own:
+**This isn't the stations program with different messages.** That had one ready-made function. You have to decide on your own:
 
 1. what task each of the two functions has, and what to call them;
 2. what parameters the functions have, and in what order;
@@ -287,7 +287,7 @@ The values are small: a week has at most 6 days of at most 30 pages, so the sums
 - The program builds as C++20 and, for the data from the requirements, prints exactly the five lines shown above.
 - Both functions take the vector through `const std::vector<int>&`, return an `int` and print nothing. The threshold is an `int` parameter.
 - Each function is called for both weeks. The calculations aren't repeated in `main`.
-- The result of the comparison depends on the sum of pages, also when the numbers of goal days differ.
+- The result of the comparison depends on the sum of pages, even when the numbers of goal days differ.
 - The program works for empty weeks and for a value equal to the threshold.
 - The test printouts of the functions were made before the report was put together, and were removed from the final program.
 - You can explain why the vector goes by `const&` and the threshold by value.
@@ -297,7 +297,7 @@ When the result matches, you can save the project in Git, as in lesson 1.5.
 <details>
 <summary>Hint 1</summary>
 
-Which calculations do you do both for week A and for week B? Can each of them become one function?
+Which calculations do you do for both week A and week B? Can each of them become one function?
 
 </details>
 
@@ -311,7 +311,7 @@ A function doesn't need to know whether it got the data of week A or week B. It 
 <details>
 <summary>Hint 3</summary>
 
-Design separately a function that sums the pages and a function that counts the days meeting the goal. Call both for both weeks, and leave the comparison of the totals to `main()`.
+Design two separate functions: one that sums the pages and one that counts the days meeting the goal. Call both for both weeks, and leave the comparison of the totals to `main()`.
 
 </details>
 
@@ -330,7 +330,7 @@ Design separately a function that sums the pages and a function that counts the 
 | H | `{10, 10, 10}` | `{30}` | 30, 3 | 30, 1 | `More pages: Tie` | a tie of the sums with a different spread |
 | I | `{12, 0, 8, 15, 9}` | `{12, 0, 8, 15, 9}` | 44, 2 | 44, 2 | `More pages: Tie` | two identical weeks (section 8) |
 
-**Automatic tests and your own runs.** Every case in the table is checked automatically by a check program. It's the same report and the same functions as the reference solution, but it reads both weeks from the input: the number of days and the pages of week A, then of week B. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution. By hand, it's enough to check a few cases, as described above.
+**Automatic tests and your own runs.** Every case in the table is checked automatically by the check program. It's the same report and the same functions as the reference solution, but it reads both weeks from the input: the number of days and the pages of week A, then of week B. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution. By hand, it's enough to check a few cases, as described above.
 
 </details>
 
@@ -416,7 +416,7 @@ int main() {
 
 The program prints no questions: type the numbers in order, each on its own line.
 
-1. Read the mission's requirement and **predict** the report for two identical weeks `{12, 0, 8, 15, 9}`, the data `5`, `12`, `0`, `8`, `15`, `9`, `5`, `12`, `0`, `8`, `15`, `9`.
+1. Read the mission's requirement and **predict** the report for two identical weeks `{12, 0, 8, 15, 9}`, that is, the data `5`, `12`, `0`, `8`, `15`, `9`, `5`, `12`, `0`, `8`, `15`, `9`.
 2. Run the program with that data. Is the report correct?
 3. Run it with the data of example A: `5`, `12`, `0`, `8`, `15`, `9`, `4`, `5`, `18`, `11`, `16`.
 4. Compare both reports with the requirement. Why doesn't the first test reveal the bug?
@@ -428,7 +428,7 @@ The program prints no questions: type the numbers in order, each on its own line
 
 The program's output before the fix, and the fixed program, are in [Example solutions](#example-solutions).
 
-## 9. When something goes differently
+## 9. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -443,7 +443,7 @@ The program's output before the fix, and the fixed program, are in [Example solu
 
 Answer in your own words, preferably in writing. Only then compare with the example answers.
 
-1. Why can a function need a whole vector as a parameter?
+1. Why might a function need a whole vector as a parameter?
 2. What does `const std::vector<int>&` mean?
 3. How does it differ from an `int` parameter passed by value?
 4. Does a function with such a parameter create a copy of the whole vector?
@@ -862,7 +862,7 @@ More pages: Tie
 ```
 
 - For identical weeks the report is correct: week B's sum is computed from week A, but both weeks have the same data, so the result comes out the same.
-- For example A, week B has 50 pages, but the program prints 44 and declares a tie. The number of goal days for B, 3, is correct, because that call gets the right vector.
+- In example A, week B has 50 pages, but the program prints 44 and declares a tie. The number of goal days for B, 3, is correct, because that call gets the right vector.
 - **The cause:** `const int pages_b{total_pages(week_a)};`. The argument is `week_a`, but it should be `week_b`. The compiler won't detect this: both vectors have the same type, so the call is valid C++. It's a logic error.
 - **The fix:** `const int pages_b{total_pages(week_b)};`.
 

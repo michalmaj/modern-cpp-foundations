@@ -98,11 +98,11 @@ Original after: 3 -2 0 -5 4
 - **The input goes by `const&`**, as in lesson 6.4: the function only reads `values`.
 - **`selected` is a separate, local vector**, empty at first. It has no `const`, because the function adds elements to it.
 - The loop goes through the input values, and `push_back` adds to `selected` only those that meet the condition. So the order of the chosen elements is the same as in the input.
-- **`return selected;`** passes the finished vector to the place of the call. It's returning **by value**, like the `return` of a number in lesson 5.3: the caller gets its own result. The vector `selected`, as a local variable, ends together with the function, but its contents reach `main` as the result.
+- **`return selected;`** passes the finished vector to the place of the call. It's returning **by value**, like the `return` of a number in lesson 5.3: the caller gets its own result. The vector `selected`, as a local variable, exists only until the function ends, but its contents reach `main` as the result.
 
 **`main`:**
 
-- `const std::vector<int> selected{keep_negative(temperatures)};` creates a new variable and stores the result of the call in it. `main` doesn't intend to change this collection, so it has `const`. That isn't a rule: in another program, a returned vector can be changed further.
+- `const std::vector<int> selected{keep_negative(temperatures)};` creates a new variable and stores the result of the call in it. `main` doesn't intend to change this collection, so it has `const`. That isn't required: in another program, a returned vector can be changed further.
 - **The original is unchanged.** The function removes nothing from it: it only reads it and builds a separate collection. The third line confirms that.
 - The values are printed with a space **before** each number, and the label, for example `Original:`, ends with a colon. That way no extra space is left at the end of the line.
 
@@ -121,7 +121,7 @@ The name `selected` appears in both functions, but they're two different local v
 | the result in `main` | `selected`: `{-2, -5}` |
 | the original | `temperatures`: still `{3, -2, 0, -5, 4}` |
 
-The function does three different things: it **reads** an existing vector through a reference, **builds** a new collection, and **returns** it by value. The new vector isn't a second name for the original, but a separate result.
+The function does three different things: it **reads** an existing vector through a reference, **builds** a new collection, and **returns** it by value. The new vector isn't a second name for the original; it's a separate result.
 
 This lesson completes the three ways of working with a vector in this module:
 
@@ -256,10 +256,10 @@ const std::vector<int> lengths{28, 30, 45, 65, 60, 29, 30};
 
 - The original vector is a `const std::vector<int>` in `main`, and stays unchanged. The program doesn't read anything from the input.
 - **The selecting function:** takes the existing vector through `const&`, plus the lower and upper bound as two `int` parameters, builds a new vector with the accepted lengths, in their order, and returns it as a `std::vector<int>`. It prints nothing.
-- **The summing function:** takes a vector through `const&` and returns the sum of its values as an `int`, also for an empty vector. It prints nothing.
+- **The summing function:** takes a vector through `const&` and returns the sum of its values as an `int`, even for an empty vector. It prints nothing.
 - You choose the names of the functions and parameters yourself.
 - `main` calls the selecting function, stores the result in a variable, passes it to the summing function and prints the report:
-  - `Original pieces: N`: the number of elements of the original vector;
+  - `Original pieces: N`: the number of elements in the original vector;
   - `Accepted pieces: N`: the number of accepted elements;
   - `Accepted lengths:` followed, after a space, by the accepted lengths separated by spaces, with no space at the end of the line, or `Accepted lengths: none` when no piece was accepted;
   - `Total accepted length: N`: the sum of the accepted lengths, 0 for an empty result.
@@ -342,7 +342,7 @@ After you get the new vector, don't compute the sum again in `main()`. Pass the 
 | L | `{30, 45}` | `30 45` | 75 | without the upper bound (section 7) |
 | M | `{30, 60}` | `30 60` | 90 | with the upper bound (section 7) |
 
-**Automatic tests and your own runs.** Every case is checked automatically by a check program. It has the same functions and the same report as the reference solution, but it reads the lengths from the input: first how many there are, then the values. It's only a checking tool, not part of the mission. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
+**Automatic tests and your own runs.** Every case is checked automatically by the check program. It has the same functions and the same report as the reference solution, but it reads the lengths from the input: first how many there are, then the values. It's only a checking tool, not part of the mission. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
 
 </details>
 
@@ -430,12 +430,12 @@ The program prints no questions: type the numbers in order, each on its own line
 
 The program's output before the fix, and the fixed program, are in [Example solutions](#example-solutions).
 
-## 8. When something goes differently
+## 8. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
 | A length of 60 or 30 isn't accepted | The condition uses `<` or `>` instead of `<=` or `>=`. | The bounds are inclusive. Check cases F, G and M. |
-| Every length is accepted | `push_back` stands outside the condition, as in lesson 6.2. | `push_back` only inside the `if` block. |
+| Every length is accepted | `push_back` is outside the condition, as in lesson 6.2. | `push_back` only inside the `if` block. |
 | The order of the lengths in the result differs from the original | The result isn't built in one pass over the original, from start to end. | Add the elements in the order of the range-based loop. Check case J. |
 | The line with the lengths ends with a space | A space is printed **after** each number. | Print the space **before** each number, as in section 2. |
 | For an empty result, `none` is missing, or only `Accepted lengths:` appears | The `empty()` check before printing is missing. | Check `empty()` on the returned vector. |
@@ -445,7 +445,7 @@ The program's output before the fix, and the fixed program, are in [Example solu
 
 Answer in your own words, preferably in writing. Only then compare with the example answers.
 
-1. Why can a function return a vector instead of an `int`?
+1. Why might a function return a vector instead of an `int`?
 2. What does the result type `std::vector<int>` mean?
 3. Why does the input parameter have `const&`, while the result type has no `&`?
 4. Why does the local result vector have no `const`, while the result received in `main` can have it?
@@ -464,9 +464,9 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 2. That the function returns a vector of `int`s, a whole collection.
 3. The parameter refers to the caller's existing vector and only reads it, so it needs no copy. The result is a new collection the caller doesn't have yet, so the function passes it as a value.
 4. The function adds elements to the local vector, so it has to change it. `main` gets a finished result and, if it doesn't intend to change it, marks it `const`.
-5. It passes the new vector as the result to the place of the call. The local variable ends together with the function, but the caller already has its own result and can use it.
+5. It passes the new vector as the result to the place of the call. The local variable exists only until the function ends, but the caller already has its own result and can use it.
 6. No. It gets it through `const&`, so it can only read it. The chosen values go into a separate vector.
-7. Yes, when no element meets the condition or the input is empty. It's a correct result, and `empty()` gives `true` then.
+7. Yes, when no element meets the condition or the input is empty. It's a correct result, and `empty()` then gives `true`.
 8. Because the function goes through the input from the first element to the last, and `push_back` adds each chosen element at the end of the result.
 9. Yes. It's an ordinary `std::vector<int>`, so it can be passed to a function taking `const std::vector<int>&`, like the summing function.
 10. Because its task is choosing data. Printing is `main`'s task, as in lessons 5.5 and 6.4. That way the function can also be used where nothing needs printing.
@@ -552,7 +552,7 @@ int main() {
 4. **It can be returned**, because `return` passes its contents to the place of the call as the result, like a number in lesson 5.3.
 5. **The received result `accepted` has `const`**, because `main` doesn't change it any more: it only prints it and passes it on.
 6. **The flow:** `lengths` → `keep_in_range` (reads through `const&`, builds and returns a new vector) → `accepted` in `main` → `total_length` (reads through `const&`, returns an `int`) → the report.
-7. **The original stays unchanged**, because both functions get it, or the result, through `const&` and only read.
+7. **The original stays unchanged**, because each function gets either the original or the result through `const&`, and only reads it.
 8. **An empty result** means "no element meets the condition". The program then prints `none`, and `total_length` returns 0, because its loop makes no passes.
 
 The bounds are parameters, so the same function will also select a different range. This is one possible split: for example, you can print the lengths in a separate `void` function, as long as the calculating functions print nothing.

@@ -280,7 +280,7 @@ Wartości są małe: tydzień ma najwyżej 6 dni po najwyżej 30 stron, więc su
 4. Porównaj z oczekiwanym.
 5. Usuń wydruki testowe z docelowego programu.
 
-**Potem sprawdź cały program.** Uruchom go dla danych z wymagań, a następnie zmień wartości w nawiasach klamrowych na dwa, trzy przypadki z pełnej listy kontrolnej, na przykład remis sum i dwa puste tygodnie. Pozostałe przypadki z listy są sprawdzone automatycznie, więc nie musisz wpisywać ich wszystkich.
+**Potem sprawdź cały program.** Uruchom go dla danych z wymagań, a następnie zmień wartości w nawiasach klamrowych na dwa, trzy przypadki z pełnej listy przypadków kontrolnych, na przykład remis sum i dwa puste tygodnie. Pozostałe przypadki z listy są sprawdzone automatycznie, więc nie musisz wpisywać ich wszystkich.
 
 ### Kryterium sukcesu
 
@@ -556,7 +556,7 @@ int main() {
 
 To jeden z możliwych podziałów. Poprawne jest też na przykład zapamiętanie wszystkich czterech wyników w zmiennych albo inna kolejność parametrów funkcji z progiem, jeśli wywołania jej odpowiadają.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Funkcje są te same co wyżej, a część `main` od `const int daily_goal{10};` jest taka sama, poza wcięciem. Różni się źródło danych: oba tygodnie są odczytywane z wejścia przez `push_back`, jak w lekcji 6.2, więc wektory nie mają `const`. Program nie wypisuje pytań, więc jego standardowe wyjście jest takie jak wynik misji.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Funkcje są te same co wyżej, a część `main` od `const int daily_goal{10};` jest taka sama, poza wcięciem. Różni się źródło danych: oba tygodnie są odczytywane z wejścia przez `push_back`, jak w lekcji 6.2, więc wektory nie mają `const`. Program nie wypisuje pytań, więc jego standardowe wyjście jest takie jak wynik misji.
 
 <!-- example: reading_weeks_check -->
 ```cpp
@@ -629,7 +629,7 @@ int main() {
 }
 ```
 
-Dane wejściowe to liczba dni i strony tygodnia A, potem liczba dni i strony tygodnia B. Przypadki są w kolejności z listy kontrolnej, od A do I.
+Dane wejściowe to liczba dni i strony tygodnia A, potem liczba dni i strony tygodnia B. Przypadki są w kolejności z listy przypadków kontrolnych, od A do I.
 
 <!-- input: reading_weeks_check -->
 ```text
@@ -866,7 +866,7 @@ More pages: Tie
 - **Przyczyna:** `const int pages_b{total_pages(week_a)};`. Argument to `week_a`, a powinien być `week_b`. Kompilator tego nie wykryje: oba wektory mają ten sam typ, więc wywołanie jest poprawnym C++. To błąd logiki.
 - **Poprawka:** `const int pages_b{total_pages(week_b)};`.
 
-Poprawiony program to program kontrolny z punktu 7: różni się od programu z błędem tylko tym argumentem. Dla obu zestawów danych daje wyniki z listy kontrolnej: przypadek I (identyczne tygodnie) i przypadek A (`More pages: Week B`).
+Poprawiony program to program kontrolny z punktu 7: różni się od programu z błędem tylko tym argumentem. Dla obu zestawów danych daje wyniki z listy przypadków kontrolnych: przypadek I (identyczne tygodnie) i przypadek A (`More pages: Week B`).
 
 </details>
 

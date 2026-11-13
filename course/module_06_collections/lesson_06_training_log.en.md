@@ -8,19 +8,19 @@
 
 ## How this test works
 
-This lesson introduces nothing new. You check whether you can design on your own a program that **collects data into a vector, analyses it several times** and uses cooperating functions to prepare a report. You also fix two short programs with bugs and explain your decisions.
+This lesson introduces nothing new. You check whether you can design a program on your own that **collects data into a vector, analyses it several times** and uses cooperating functions to prepare a report. You also fix two short programs with bugs and explain your decisions.
 
 The lesson has two parts:
 
 - **Part A: the test.** Requirements, examples, tasks, questions and criteria. No hints and no solution code. Everything you need is from Modules 1–6.
 - **Part B: checking and discussion.** Hints, the full list of check cases, the reference solution, fixes, answers and self-assessment. Go there after doing Part A, or when you consciously decide to stop trying on your own.
 
-Looking at Part B, at earlier lessons or at your notes isn't a failure. What matters is that you **honestly note what you did on your own and what with help**. A suggested split into two sessions:
+Looking at Part B, at earlier lessons or at your notes isn't a failure. What matters is that you **honestly note what you did on your own and what you did with help**. A suggested split into two sessions:
 
 - **first:** designing the functions, writing the program for task 1, checking the functions on their own, and the basic report cases;
 - **second:** the boundary cases, task 2, comparing with the solution, task 3 and the self-assessment.
 
-**You may use:** CLion or the terminal, CMake and Ninja, as before; a `CMakeLists.txt` copied from the original `lesson_05_first_program`; trace and case tables, and temporary test printouts. You won't need the debugger. You don't need to end the data from the keyboard: you analyse the cases where the data ends early on paper.
+**You may use:** CLion or the terminal, CMake and Ninja, as before; a `CMakeLists.txt` copied from the original `lesson_05_first_program`; trace and case tables, and temporary test printouts. You won't need the debugger. You don't need to end the data from the keyboard: you analyse on paper the cases where the data ends early.
 
 ---
 
@@ -164,7 +164,7 @@ The average is 7, and the value 7 equals it, so the new vector holds only 9.
    - the new vector for no results, one result and several results, a value exactly equal to the threshold, and an empty input;
    - the improvements for an empty vector, one element, two rising values, two falling values, two equal values, and a longer set with an improvement only at the end.
 4. **Remove the test printouts** and put the report together.
-5. **Run the whole program** for examples A, B and C and for 2–3 other cases from your table. Every case in the full list of check cases is checked automatically, so you don't need to type them all. Analyse the cases where the data ends early on paper.
+5. **Run the whole program** for examples A, B and C and for 2–3 other cases from your table. Every case in the full list of check cases is checked automatically, so you don't need to type them all. Analyse on paper the cases where the data ends early.
 
 When the result matches, you can save the project in Git, as in lesson 1.5. Before you commit, check `git status`: only `main.cpp` and `CMakeLists.txt` go into the history.
 
@@ -270,7 +270,7 @@ int main() {
 2. Trace the indices for `{10, 8, 12}`: which index does the loop start at, at which index does it end, and which pairs does it compare?
 3. Run the program. Why doesn't the first test reveal the bug?
 4. Find the pair the program doesn't compare, and fix the loop's condition.
-5. Check the fixed function also for an empty and a one-element vector.
+5. Also check the fixed function for an empty and a one-element vector.
 
 </details>
 
@@ -314,7 +314,7 @@ Come here after doing Part A, or when you consciously decide to stop trying on y
 ## How to check your work
 
 - **Standard output:** run the program for the examples and a few cases from your table, and compare the program's lines with the expected ones, character by character. Ignore the typed data visible because of the echo.
-- **End of the data:** check the cases where the data ends with a trace table, and compare them with the full list of check cases. Each of them is checked automatically there.
+- **End of the data:** use a trace table to check the cases where the data ends, and compare them with the full list of check cases. Each of them is checked automatically there.
 - **Functions:** does each have a task you can describe in one sentence? Does some algorithm also appear in `main`?
 - **Data:** is the vector built only from valid values, and does no function change it?
 
