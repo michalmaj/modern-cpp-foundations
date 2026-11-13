@@ -237,7 +237,7 @@ Kamera była używana o 2 dni dłużej, niż pozwala wypożyczenie, i nadal nie 
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: brak opóźnienia, limit osiągnięty dokładnie, przekroczony limit przy urządzeniu niezwróconym i zwróconym, zwrot w terminie, zero dozwolonych dni i zero dni korzystania. Przy każdym zapisz `Overdue days` i `Contact needed`.
 
-**Potem** uruchom program dla danych z wymagań i dla dwóch innych przypadków z tabeli, na przykład dla limitu osiągniętego dokładnie i dla urządzenia zwróconego po terminie. Zmieniaj przy tym tylko wartości w klamrach obiektu. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+**Potem** uruchom program dla danych z wymagań i dla dwóch innych przypadków z tabeli, na przykład dla limitu osiągniętego dokładnie i dla urządzenia zwróconego po terminie. Zmieniaj przy tym tylko wartości w klamrach obiektu. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 ### Kryterium sukcesu
 
@@ -485,7 +485,7 @@ int main() {
 
 **Inne poprawne rozwiązania:** druga funkcja może sprawdzić warunki samodzielnie, `return loan.days_used > loan.allowed_days && !loan.returned;`, bo opóźnienie jest dodatnie dokładnie wtedy, gdy liczba dni przekracza limit. Wywołanie pierwszej funkcji ma tę zaletę, że reguła opóźnienia stoi w jednym miejscu. Pierwsza funkcja może mieć `if` i `else`. Pola mogą mieć inne nazwy i inną kolejność, jeśli wartości w `{}` stoją w tej samej kolejności co pola.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Struktura i obie funkcje są takie same jak wyżej, a `main` od utworzenia obiektu też, poza wcięciem. Różnica jest jedna: dane wypożyczenia są odczytywane z wejścia do zwykłych zmiennych, a obiekt `loan` powstaje z ich wartości. Nazwy urządzeń mają jedno słowo, więc wszystko odczytuje `>>`. Informację o zwrocie program odczytuje jako tekst `yes` albo `no` i zamienia na `bool` porównaniem, jak w lekcji 3.4.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Struktura i obie funkcje są takie same jak wyżej, a `main` od utworzenia obiektu też, poza wcięciem. Różnica jest jedna: dane wypożyczenia są odczytywane z wejścia do zwykłych zmiennych, a obiekt `loan` powstaje z ich wartości. Nazwy urządzeń mają jedno słowo, więc wszystko odczytuje `>>`. Informację o zwrocie program odczytuje jako tekst `yes` albo `no` i zamienia na `bool` porównaniem, jak w lekcji 3.4.
 
 <!-- example: equipment_loan_check -->
 ```cpp
@@ -551,7 +551,7 @@ int main() {
 }
 ```
 
-Każdy przypadek to cztery linijki wejścia: nazwa urządzenia, liczba dni korzystania, dozwolona liczba dni oraz `yes` albo `no` dla zwrotu, w kolejności z listy kontrolnej, od A do J.
+Każdy przypadek to cztery linijki wejścia: nazwa urządzenia, liczba dni korzystania, dozwolona liczba dni oraz `yes` albo `no` dla zwrotu, w kolejności z listy przypadków kontrolnych, od A do J.
 
 <!-- input: equipment_loan_check -->
 ```text

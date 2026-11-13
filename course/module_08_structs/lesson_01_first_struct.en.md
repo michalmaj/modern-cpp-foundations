@@ -27,7 +27,7 @@ const bool finished{false};
 
 These are three different pieces of information: the title, the number of pages, and whether the book has been read. They all describe one book, but nothing in the code says so: they're three separate variables.
 
-- How do you know these values belong to the same book? Only from the names and from the fact that they stand next to each other.
+- How do you know these values belong to the same book? Only from the names and from the fact that they're next to each other.
 - What happens when a second book appears? You'll need three more variables, for example `second_title`, `second_pages` and `second_finished`.
 - How do you avoid mixing up one book's title with another book's page count? By watching every name.
 - Can such a set of data be named as one type, like `int` or `std::string`?
@@ -69,7 +69,7 @@ struct Book {
 | `;` after `}` | Ends the definition of the whole type. It's needed regardless of the semicolons after the fields. |
 
 - **A type definition doesn't create any book yet.** It only describes what every book consists of: a title, a number of pages and whether it's been read. It's like a form with boxes that nobody has filled in yet. That's why the fields have no values here: each book will get its own.
-- **Where the definition stands:** outside `main`, before the place where you use the type, like a function definition in lesson 5.1. A type definition isn't a variable and stores no values, so the rule "no variables declared outside functions" doesn't apply to it.
+- **Where the definition goes:** outside `main`, before the place where you use the type, like a function definition in lesson 5.1. A type definition isn't a variable and stores no values, so the rule "no variables declared outside functions" doesn't apply to it.
 - **Names:** in this course we write the name of your own type with a capital letter (`Book`), and field names, like variable names, in `snake_case` (`title`, `unit_price`). That way the type `Book` is easy to tell from the object `book`.
 
 C++ also has the keyword `class`, which defines your own types too. In this part of the course we use only `struct`.
@@ -118,7 +118,7 @@ Finished: no
 The line `const Book book{"C++ Basics", 180, false};` **creates an object**, one specific book:
 
 - `Book` is the type and `book` is the object's name, just as in `const int pages{180};` the type is `int` and the name is `pages`;
-- the values in `{}` go into the fields one after another, **in the same order as the fields stand in the type's definition**:
+- the values in `{}` go into the fields one after another, **in the same order as the fields appear in the type's definition**:
 
 | Field | Type | Value |
 |---|---|---|
@@ -131,7 +131,7 @@ The line `const Book book{"C++ Basics", 180, false};` **creates an object**, one
 
 ## 4. The dot operator
 
-Read `book.title` as "the field `title` of the object `book`". You know the dot from `std::cin.fail()` and `text.size()`: there, a function that belongs to the object stood after the dot; here, a field stands there, a value stored in the object.
+Read `book.title` as "the field `title` of the object `book`". You know the dot from `std::cin.fail()` and `text.size()`: there, a function that belongs to the object came after the dot; here, it's a field, a value stored in the object.
 
 | Expression | Type | Value |
 |---|---|---|
@@ -190,7 +190,7 @@ Pages to read: 180
 </details>
 
 - **Both objects have the type `Book`,** so they have the same fields: `title`, `pages` and `finished`.
-- **The field values differ:** each object stores its own. `second` isn't a copy of `first`, but a second book, created separately.
+- **The field values differ:** each object stores its own. `second` isn't a copy of `first`; it's a second book, created separately.
 - **The name before the dot chooses the object.** `first.pages` is the first book's number of pages, and `second.pages` the second book's.
 - Only the pages of a book whose own `finished` field gives `false` go into the sum (`!` from lesson 3.4, `+=` from lesson 4.2). Each condition checks a field of the same object the program takes the pages from.
 
@@ -386,22 +386,22 @@ The stock value depends on the stock and the price. The number of pieces to add 
 | E | `Glue` | 1 | 1 | 0 | 0 | 0 | a zero price and a stock equal to the minimum |
 | F | `Paper` | 2 | 5 | 1 | 2 | 3 | a price of 1: the value equals the stock |
 
-**Automatic tests and your own runs.** Every case is checked automatically by a check program. It has the same struct and the same report as the reference solution, but it reads the product's data from the input, one value per line. It's only a checking tool, not part of the mission: in the mission, the data is written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
+**Automatic tests and your own runs.** Every case is checked automatically by the check program. It has the same struct and the same report as the reference solution, but it reads the product's data from the input, one value per line. It's only a checking tool, not part of the mission: in the mission, the data is written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
 
 </details>
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
 | `expected ';' after struct` | The semicolon after the closing brace of the definition is missing (section 7). | Add `;` after `}`. |
 | `excess elements in struct initializer` | There are more values in `{}` than fields. | Give one value for each field. |
-| A message with `no viable conversion` or `cannot initialize a member subobject` where the object is created | A value has a different type than the field it goes into, for example a number stands where the text should be. | Put the values in the order of the fields in the definition. |
+| A message with `no viable conversion` or `cannot initialize a member subobject` where the object is created | A value has a different type than the field it goes into, for example there's a number where the text should be. | Put the values in the order of the fields in the definition. |
 | `use of undeclared identifier` with a field's name, for example `title` | The field is used without an object. | Name the object: `book.title`. |
-| `'Book' does not refer to a value` | The name of the type stands before the dot, not an object's. | Write the object's name before the dot, for example `book`. |
-| The program builds, but the values of two number fields are swapped | The values in `{}` stand in a different order than the fields (section 8). | Compare the order of the values with the order of the fields in the definition. |
+| `'Book' does not refer to a value` | There's a type name before the dot, not an object's name. | Write the object's name before the dot, for example `book`. |
+| The program builds, but the values of two number fields are swapped | The values in `{}` are in a different order from the fields (section 8). | Compare the order of the values with the order of the fields in the definition. |
 | A number field has the value 0, and a `bool` field the value `false`, although you didn't give them | There are fewer values in `{}` than fields. Fields without a value get 0, `false` or an empty text. | Give a value for every field. |
 | The program prints `1` or `0` instead of `yes` or `no` | The `bool` field is printed directly. | Choose the text with an `if`, as in section 3. |
 
@@ -438,7 +438,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## Summary
 
-- **`struct`** defines your own type: a named group of fields, each with a type and a name. A semicolon stands after the definition's closing brace.
+- **`struct`** defines your own type: a named group of fields, each with a type and a name. A semicolon comes after the definition's closing brace.
 - A type definition doesn't create an object. You create an object like a variable: the type, a name and the values in `{}`, for example `const Book book{"C++ Basics", 180, false};`.
 - The values in `{}` go into the fields in the order of their declarations. The compiler checks types, but it can't tell swapped values of the same type apart.
 - The `.` operator chooses a field of a specific object: `book.pages` is the number of pages of the book `book`. You use a field like an ordinary variable of its type, in calculations and conditions.
@@ -497,7 +497,7 @@ int main() {
 7. **`const`:** the program only reads the product's fields, so the object can be constant, like any variable we don't change.
 8. **A second product** is a second object of the same type, with its own values, for example `const Product rice{"Rice", 8, 8, 4};`. The fields `rice.stock` and `product.stock` are independent of each other.
 
-**The number of pieces to add** starts at 0 and changes only when the stock is below the minimum. That's why the result is 0 for a stock equal to the minimum or above it, and the difference is never negative. The same condition can also be written as an `if` and `else`, with a separate `To add` line in each branch. The fields may have other names and another order, as long as the values in `{}` stand in the same order as the fields.
+**The number of pieces to add** starts at 0 and changes only when the stock is below the minimum. That's why the result is 0 for a stock equal to the minimum or above it, and the difference is never negative. The same condition can also be written as an `if` and `else`, with a separate `To add` line in each branch. The fields may have other names and another order, as long as the values in `{}` are in the same order as the fields.
 
 **The check program** checks every case in the list of check cases. The struct and the report are the same as above, apart from the indentation. There's one difference: the product's data is read from the input into four ordinary variables, and the object is created from their values.
 
@@ -678,7 +678,7 @@ Full: yes
 
 - **The output looks right,** because both numbers are 30: swapping two equal values changes nothing.
 - **The compiler reports no error,** because both fields and both variables have the type `int`. The types match, and the compiler doesn't know what the values mean.
-- **Data that reveal the bug:** any two different numbers. For example 30 seats and 24 people, that is `available_seats{30}` and `registered_people{24}`. The correct output is 30 seats, 24 people and `Full: no`. The program with the bug prints:
+- **Data that reveals the bug:** any two different numbers. For example 30 seats and 24 people, that is `available_seats{30}` and `registered_people{24}`. The correct output is 30 seats, 24 people and `Full: no`. The program with the bug prints:
 
 <!-- example: room_order_revealed -->
 ```cpp
@@ -758,7 +758,7 @@ People: 24
 Full: no
 ```
 
-For 30 and 30 the fixed program prints the same as before the fix: with equal values both orders give the same output. That's why data with two equal numbers aren't enough to check the order of the fields.
+For 30 and 30 the fixed program prints the same as before the fix: with equal values both orders give the same output. That's why data with two equal numbers isn't enough to check the order of the fields.
 
 </details>
 

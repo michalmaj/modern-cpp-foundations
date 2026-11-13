@@ -15,7 +15,7 @@ The lesson has two parts:
 - **Part A: the test.** Requirements, examples, tasks, questions and criteria. No hints and no solution code. Everything you need is from Modules 1–8.
 - **Part B: checking and discussion.** Hints, the full list of check cases, the reference solution, fixes, answers and self-assessment. Go there after doing Part A, or when you consciously decide to stop trying on your own.
 
-Looking at Part B, at earlier lessons or at your notes isn't a failure. What matters is that you **honestly note what you did on your own and what with help**. A suggested split into two sessions:
+Looking at Part B, at earlier lessons or at your notes isn't a failure. What matters is that you **honestly note what you did on your own and what you did with help**. A suggested split into two sessions:
 
 - **first:** analysing the requirements, designing both types and both functions, writing them, and the report for the data in the requirements;
 - **second:** the boundary cases, task 2, comparing with the solution, task 3 and the self-assessment.
@@ -58,7 +58,7 @@ The **qualifying limit** is the longest time allowed for a qualified runner. In 
 
 - **Finished:** the runner's record says that the runner finished the race. That doesn't yet mean qualifying.
 - **Qualified:** the runner finished the race **and** has a time less than or equal to the limit. With a limit of 600, a time of 600 qualifies, and 601 no longer does. A runner who didn't finish never qualifies, not even with the recorded time 0.
-- **Best result:** the shortest time **among all the runners who finished**, including those who didn't qualify. In a tie, the runner who stands **earlier** in the vector wins. When no runner finished, there's no best result.
+- **Best result:** the shortest time **among all the runners who finished**, including those who didn't qualify. In a tie, the runner who comes **earlier** in the vector wins. When no runner finished, there's no best result.
 
 ### The report
 
@@ -99,7 +99,7 @@ Qualified: 4
 Best finisher: Cora (510 s)
 ```
 
-`Bruno` is over the limit, although the race is finished. `Daniel` didn't finish. `Filip` has a time equal to the limit, which qualifies. `Cora` and `Ewa` have the same shortest time, and `Cora` stands earlier.
+`Bruno` is over the limit, although the race is finished. `Daniel` didn't finish. `Filip` has a time equal to the limit, which qualifies. `Cora` and `Ewa` have the same shortest time, and `Cora` comes earlier.
 
 Examples B–D are checked automatically by the check program from Part B, which reads the runners from the input: first their number, then each one on a separate line. That data is in the collapsed blocks. In your program the same data goes in the vector's braces. In all the examples the limit is 600.
 
@@ -314,7 +314,7 @@ Answer briefly, in writing, referring to your own program from task 1:
 1. Why are the runner and the summary two different types? Why isn't the limit a field of the runner?
 2. Why does the function for one runner return a `bool`, while the function for the whole race returns a struct?
 3. Why does the best result need separate information about whether anything was found? Why doesn't a runner without a finished race, with the time 0, win?
-4. Why does the runner who stands earlier stay in a tie? What in your report can a change in the order of the runners change, and what can't it?
+4. Why does the runner who comes earlier stay in a tie? What in your report can a change in the order of the runners change, and what can't it?
 5. Does zero qualified runners mean that no runner finished? Point to a case in your table.
 6. Why does none of your functions change the records?
 7. Does the number of qualified runners not exceeding the number of runners who finished prove that the program works correctly?
@@ -326,11 +326,11 @@ You pass the test when you meet **all** the criteria. You may use Part B while d
 - `race_results/main.cpp` was written from an empty file, in valid C++20. The program builds without errors.
 - There are two types of your own: a runner with three fields and a summary with five fields of the required types. All the fields have explicit starting values.
 - The function for one runner gets it by `const&` and the limit by value, and returns a `bool`. The function for the whole race gets the vector by `const&` and the limit by value, uses the function for one runner and returns the summary by value. Neither changes the data, prints anything or reads anything.
-- The limit is an `int` variable in `main`, and the runners stand in one `const` vector, in the order of the table.
+- The limit is an `int` variable in `main`, and the runners are in one `const` vector, in the order of the table.
 - The standard output for examples A and D matches the requirements. Cases B and C match your analysis on paper and the full list of check cases.
-- A runner without a finished race doesn't qualify and doesn't win. A time equal to the limit qualifies. In a tie, the runner who stands earlier wins. A best result exists even with zero qualified runners, as long as at least one race is finished.
+- A runner without a finished race doesn't qualify and doesn't win. A time equal to the limit qualifies. In a tie, the runner who comes earlier wins. A best result exists even with zero qualified runners, as long as at least one race is finished.
 - The search for the best result starts from the information "nothing found yet", not from a made-up number. The program reads no elements that don't exist, for example the first element of an empty vector.
-- The qualifying condition stands in one place in the program.
+- The qualifying condition is in one place in the program.
 - The bug in diagnostic A was fixed and the fix was checked, and the fragment in diagnostic B was analysed without running it.
 - You can explain every line of your program and answer the questions in task 3.
 
@@ -345,7 +345,7 @@ Come here after doing Part A, or when you consciously decide to stop trying on y
 ## How to check your work
 
 - **Standard output:** compare the program's lines with the expected ones, character by character, including the names under `Qualified runners:` and their order.
-- **Boundary cases:** check the empty vector and the vector without finished races with a trace table, and compare them with the full list of check cases. Each case is checked automatically there.
+- **Boundary cases:** use a trace table to check the empty vector and the vector without finished races, and compare them with the full list of check cases. Each case is checked automatically there.
 - **Functions:** does each have a task you can describe in one sentence? Does the qualifying condition or the search for the best result also appear in `main`?
 - **The logic of the results:** the dependencies described with the reference solution help you catch a bug, but they don't replace cases with expected reports.
 
@@ -394,7 +394,7 @@ Examples A–D are in Part A. In every case the limit is 600, and "no" means a r
 | K | `Ewa` 510, `Cora` 510 | `Ewa`, `Cora` | 2 | 2 | `Ewa (510 s)` | the tie in the reverse order |
 | L | `Slow` 700, `Slower` 900, `Late` 601 | none | 3 | 0 | `Late (601 s)` | several finished races, no one qualifies |
 
-**Automatic tests and your own runs.** Every case is checked automatically by a check program. It has the same types, the same functions and the same report as the reference solution, but it reads the runners from the input. It's only a checking tool, not part of the mission: in the mission, the vector is written in the code. The check program and its results are with the [reference solution](#the-reference-solution), because they contain the solution.
+**Automatic tests and your own runs.** Every case is checked automatically by the check program. It has the same types, the same functions and the same report as the reference solution, but it reads the runners from the input. It's only a checking tool, not part of the mission: in the mission, the vector is written in the code. The check program and its results are with the [reference solution](#the-reference-solution), because they contain the solution.
 
 </details>
 
@@ -492,7 +492,7 @@ int main() {
 5. **`summarise_race` returns a struct,** because one analysis gives five related pieces of information.
 6. **No finished race, no qualifying:** the condition starts with `runner.finished`, so the time 0 doesn't matter.
 7. **The time 0 isn't a result,** only a record of a race that wasn't finished. If it took part in the comparisons, it would beat every real time.
-8. **We search for the best only among finished races,** because only they have a real time. The whole search stands inside `if (runner.finished)`.
+8. **We search for the best only among finished races,** because only they have a real time. The whole search is inside `if (runner.finished)`.
 9. **First we need to know whether a candidate already exists,** because the vector can be empty or have no finished race at all. There's also no "first element" that could be assumed in advance.
 10. **The first finished race:** while `has_best` is `false`, the condition `!summary.has_best` is true, so the first finished race becomes the candidate without any comparison. Thanks to the short-circuit evaluation from lesson 3.4, the comparison with the starting value 0 isn't evaluated at all then.
 11. **Later comparisons:** once there's a candidate, a new race replaces it only when `runner.time_seconds < summary.best_time`. The name and the time always change together.
@@ -500,7 +500,7 @@ int main() {
 13. **An empty vector:** the loop makes no pass, so the starting values stay: zeros and `has_best` equal to `false`. The program prints `none` and reads no element.
 14. **No finished races:** the loop goes through the records, but never enters `if (runner.finished)`, so `has_best` stays `false`.
 15. **A best result with zero qualified runners:** the search for the best doesn't depend on the limit, so in example D `Slow` wins without qualifying.
-16. **`summarise_race` uses `is_qualified`,** so the qualifying condition stands in the program once. `main` doesn't repeat it either.
+16. **`summarise_race` uses `is_qualified`,** so the qualifying condition appears in the program once. `main` doesn't repeat it either.
 17. **The second pass in `main`:** the summary doesn't store a list of names, so `main` goes through the vector again and prints the qualified runners in the order of the vector. `is_qualified` makes the decision, and `main` only prints.
 18. **No modifiable references,** because nothing changes the runners: the result is built in the local summary.
 19. **No `std::vector<std::string>`,** because the names of the qualified runners can be printed straight away, in the second pass over the runners.
@@ -612,7 +612,7 @@ int main() {
 }
 ```
 
-Each case starts with the number of runners. Then each runner takes one line: the name, the time, and `yes` or `no` for finishing. Cases B–D are with the examples in Part A. The others stand below, in the order of the list of check cases: first A, then E to L.
+Each case starts with the number of runners. Then each runner takes one line: the name, the time, and `yes` or `no` for finishing. Cases B–D are with the examples in Part A. The others are below, in the order of the list of check cases: first A, then E to L.
 
 <!-- input: race_results_check -->
 ```text
@@ -796,7 +796,7 @@ Best finisher: none
 ```
 
 - **The result looks right,** because no race is finished: the times are never compared at all. A correct program would print the same. An empty vector behaves the same way.
-- **Data that reveal the bug:** any data with at least one finished race. For example, adding `{"Ivo", 580, true}`. The correct report is `Ivo` on the list, 1, 1 and `Best finisher: Ivo (580 s)`. The program with the bug prints:
+- **Data that reveals the bug:** any data with at least one finished race. For example, adding `{"Ivo", 580, true}`. The correct report is `Ivo` on the list, 1, 1 and `Best finisher: Ivo (580 s)`. The program with the bug prints:
 
 <!-- example: best_time_revealed -->
 ```cpp
@@ -982,7 +982,7 @@ Qualified: 1
 Best finisher: Ivo (580 s)
 ```
 
-The fixed function is the same as in the reference solution, so the check program, with the same function, covers the other checks from step 9. A tie gives the runner who stands earlier (cases A and K), an empty vector gives `none` (case B), and for example D the result is `Slow (700 s)`. For data without a finished race, the fixed program prints the same as before the fix.
+The fixed function is the same as in the reference solution, so the check program, with the same function, covers the other checks from step 9. A tie gives the runner who comes earlier (cases A and K), an empty vector gives `none` (case B), and for example D the result is `Slow (700 s)`. For data without a finished race, the fixed program prints the same as before the fix.
 
 </details>
 
@@ -994,14 +994,14 @@ The fixed function is the same as in the reference solution, so the check progra
 3. No. `time_seconds` is an ordinary `int` field. The problem is the access through a `const` parameter, as in lessons 8.3 and 8.4.
 4. That the function has read-only access to an existing runner, without a copy. Through this parameter it can't change any field.
 5. No. The function answers a question, and doesn't correct the data. Changing the time would also destroy information that the report reads later.
-6. Write the rule as a condition, without changing the record: `return runner.finished && runner.time_seconds <= limit;`. A runner without a finished race drops out already at the first part of the condition.
+6. Write the rule as a condition, without changing the record: `return runner.finished && runner.time_seconds <= limit;`. A runner without a finished race already drops out at the first part of the condition.
 
 </details>
 
 ## Answers to task 3
 
 <details>
-<summary>Sample answers</summary>
+<summary>Example answers</summary>
 
 1. Because the runner is the data of one person, and the summary is the result of analysing the whole race: they have different fields and different tasks. The limit is a shared qualifying rule, not a feature of a person, so it belongs to the function call, not to the record.
 2. Because qualifying is a yes-or-no question about one person. The analysis of the whole race gives several related pieces of information at once, so it returns them in one record.
@@ -1060,7 +1060,7 @@ After six lessons, you can:
 - write functions that get a record or a vector of records by `const&` and return a number, a `bool` answer or a whole record with several results;
 - store many records in a `std::vector` and go through them with a range-based loop by `const&`, without copying or changing them;
 - separate the input data from the result of the analysis, and the calculations from the printing;
-- choose the best record in a collection, also when there may be no candidate or when there's a tie.
+- choose the best record in a collection, even when there may be no candidate or when there's a tie.
 
 Structs have many more possibilities, which you'll meet in later modules.
 

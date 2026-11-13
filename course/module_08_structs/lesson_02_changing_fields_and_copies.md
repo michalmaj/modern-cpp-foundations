@@ -257,7 +257,7 @@ Wolnych miejsc jest 5, więc 3 nowe osoby się mieszczą: zapisanych jest teraz 
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: mniej nowych osób niż wolnych miejsc, dokładnie tyle samo, o jedną więcej, pełne wydarzenie, wydarzenie bez zapisanych osób, zero nowych rezerwacji i zero miejsc. Przy każdym zapisz `Accepted`, `After` i `Seats left`.
 
-**Potem** uruchom program dla danych z wymagań i dla dwóch innych przypadków z tabeli, na przykład dla odrzuconej prośby i dla zera nowych rezerwacji. Zmieniaj przy tym tylko wartości w klamrach i liczbę nowych rezerwacji. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+**Potem** uruchom program dla danych z wymagań i dla dwóch innych przypadków z tabeli, na przykład dla odrzuconej prośby i dla zera nowych rezerwacji. Zmieniaj przy tym tylko wartości w klamrach i liczbę nowych rezerwacji. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 ### Kryterium sukcesu
 
@@ -274,7 +274,7 @@ Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5.
 <details>
 <summary>Podpowiedź 1</summary>
 
-Jak zachować liczbę zarejestrowanych osób sprzed zmiany, jeżeli bieżący rekord ma później przechowywać nową liczbę?
+Jak zachować liczbę zapisanych osób sprzed zmiany, jeżeli bieżący rekord ma później przechowywać nową liczbę?
 
 </details>
 
@@ -476,7 +476,7 @@ int main() {
 
 `Seats left` nigdy nie jest ujemne: na początku liczba zapisanych nie przekracza liczby miejsc, a nowe osoby dochodzą tylko wtedy, gdy się mieszczą.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Struktura i logika od obliczenia wolnych miejsc są takie same jak wyżej, poza wcięciem. Różnica jest jedna: nazwa wydarzenia i trzy liczby są odczytywane z wejścia do zwykłych zmiennych, a obiekt `current` powstaje z ich wartości. Nazwę odczytuje `std::getline`, bo może zawierać spację, a liczby `>>`, dopiero po niej.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Struktura i logika od obliczenia wolnych miejsc są takie same jak wyżej, poza wcięciem. Różnica jest jedna: nazwa wydarzenia i trzy liczby są odczytywane z wejścia do zwykłych zmiennych, a obiekt `current` powstaje z ich wartości. Nazwę odczytuje `std::getline`, bo może zawierać spację, a liczby `>>`, dopiero po niej.
 
 <!-- example: event_bookings_check -->
 ```cpp
@@ -530,7 +530,7 @@ int main() {
 }
 ```
 
-Każdy przypadek to cztery linijki wejścia: nazwa wydarzenia, liczba miejsc, liczba zapisanych i liczba nowych rezerwacji, w kolejności z listy kontrolnej, od A do H.
+Każdy przypadek to cztery linijki wejścia: nazwa wydarzenia, liczba miejsc, liczba zapisanych i liczba nowych rezerwacji, w kolejności z listy przypadków kontrolnych, od A do H.
 
 <!-- input: event_bookings_check -->
 ```text

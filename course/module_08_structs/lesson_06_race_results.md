@@ -20,7 +20,7 @@ Zajrzenie do części B, do wcześniejszych lekcji albo do notatek nie jest pora
 - **pierwsze:** analiza wymagań, projekt obu typów i obu funkcji, ich napisanie i raport dla danych z wymagań;
 - **drugie:** przypadki graniczne, zadanie 2, porównanie z rozwiązaniem, zadanie 3 i samoocena.
 
-**Możesz używać:** CLiona albo terminala, CMake i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przypadków i przebiegu oraz tymczasowych wydruków testowych. Debugger nie jest potrzebny.
+**Możesz używać:** CLiona albo terminala, CMake'a i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przypadków i przebiegu oraz tymczasowych wydruków testowych. Debugger nie jest potrzebny.
 
 ---
 
@@ -179,7 +179,7 @@ Best finisher: Slow (700 s)
 1. **Zaprojektuj oba typy i obie funkcje, zanim zaczniesz pisać `main`.** Przy każdej funkcji zapisz jednym zdaniem jej zadanie, parametry i typ wyniku.
 2. **Przygotuj tabelę przypadków:** pusty wektor; same rekordy bez ukończonego biegu; jedna osoba z kwalifikacją, jedna z ukończonym biegiem bez kwalifikacji i jedna bez ukończonego biegu; czas równy limitowi, o sekundę krótszy i o sekundę dłuższy; najlepszy wynik na początku, w środku i na końcu wektora; pierwszy rekord bez ukończonego biegu; remis i ten sam remis w odwrotnej kolejności; kilka ukończonych biegów bez żadnej kwalifikacji. Przy każdym zapisz cały oczekiwany raport.
 3. Jeśli chcesz, sprawdź funkcję dla jednego uczestnika osobno, wydrukami testowymi z lekcji 5.5: czasy 599, 600 i 601 oraz rekord bez ukończonego biegu z czasem 0. Potem usuń wydruki testowe.
-4. **Uruchom cały program** dla danych z wymagań (przykład A) i dla danych z przykładu D. Zmieniaj przy tym tylko zawartość klamer wektora, a na koniec przywróć dane z wymagań. Przypadki B i C przeanalizuj na papierze: prześledź, co zwróci Twoja funkcja, gdy pętla nie wykona żadnego przebiegu albo nie trafi na ukończony bieg. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+4. **Uruchom cały program** dla danych z wymagań (przykład A) i dla danych z przykładu D. Zmieniaj przy tym tylko zawartość klamer wektora, a na koniec przywróć dane z wymagań. Przypadki B i C przeanalizuj na papierze: prześledź, co zwróci Twoja funkcja, gdy pętla nie wykona żadnego przebiegu albo nie trafi na ukończony bieg. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5. Przed commitem sprawdź `git status`: do historii trafiają tylko `main.cpp` i `CMakeLists.txt`.
 
@@ -327,7 +327,7 @@ Sprawdzian jest zaliczony, gdy spełniasz **wszystkie** kryteria. Możesz przy t
 - Są dwa własne typy: uczestnika z trzema polami i podsumowania z pięcioma polami wymaganych typów. Wszystkie pola mają jawne wartości początkowe.
 - Funkcja dla jednego uczestnika dostaje go przez `const&`, a limit przez wartość, i zwraca `bool`. Funkcja dla całego biegu dostaje wektor przez `const&`, a limit przez wartość, korzysta z funkcji dla jednego uczestnika i zwraca podsumowanie przez wartość. Żadna nie zmienia danych, niczego nie wypisuje ani nie odczytuje.
 - Limit jest zmienną `int` w `main`, a uczestnicy stoją w jednym wektorze `const`, w kolejności z tabeli.
-- Standardowe wyjście dla przykładów A i D zgadza się z wymaganiami. Przypadki B i C zgadzają się z Twoją analizą na papierze i z pełną listą kontrolną.
+- Standardowe wyjście dla przykładów A i D zgadza się z wymaganiami. Przypadki B i C zgadzają się z Twoją analizą na papierze i z pełną listą przypadków kontrolnych.
 - Osoba bez ukończonego biegu nie kwalifikuje się i nie wygrywa. Czas równy limitowi daje kwalifikację. Przy remisie wygrywa osoba stojąca wcześniej. Najlepszy wynik istnieje także przy zerze kwalifikacji, jeśli jest choć jeden ukończony bieg.
 - Szukanie najlepszego wyniku zaczyna się od informacji „nic jeszcze nie znaleziono”, a nie od wymyślonej liczby. Program nie odczytuje elementów, których nie ma, na przykład pierwszego elementu pustego wektora.
 - Warunek kwalifikacji stoi w programie w jednym miejscu.
@@ -345,7 +345,7 @@ Przejdź tutaj po wykonaniu części A albo wtedy, gdy świadomie zrezygnujesz z
 ## Jak sprawdzić swoją pracę
 
 - **Standardowe wyjście:** porównaj linijki programu z oczekiwanymi, znak po znaku, także nazwy pod `Qualified runners:` i ich kolejność.
-- **Przypadki graniczne:** pusty wektor i wektor bez ukończonych biegów sprawdź tabelą przebiegu i porównaj z pełną listą kontrolną. Każdy przypadek jest tam sprawdzony automatycznie.
+- **Przypadki graniczne:** pusty wektor i wektor bez ukończonych biegów sprawdź tabelą przebiegu i porównaj z pełną listą przypadków kontrolnych. Każdy przypadek jest tam sprawdzony automatycznie.
 - **Funkcje:** czy każda ma zadanie, które da się opisać jednym zdaniem? Czy warunek kwalifikacji albo szukanie najlepszego wyniku stoi też w `main`?
 - **Logika wyników:** zależności opisane przy rozwiązaniu referencyjnym pomagają wyłapać błąd, ale nie zastępują przypadków z oczekiwanymi raportami.
 
@@ -400,7 +400,7 @@ Przykłady A–D są w części A. We wszystkich przypadkach limit wynosi 600, a
 
 ## Rozwiązanie referencyjne
 
-Porównaj je ze swoim programem po zakończeniu części A. Nazwy, kolejność pól i drobne decyzje mogą być inne, jeśli raport jest taki sam dla wszystkich przypadków z listy kontrolnej.
+Porównaj je ze swoim programem po zakończeniu części A. Nazwy, kolejność pól i drobne decyzje mogą być inne, jeśli raport jest taki sam dla wszystkich przypadków z listy przypadków kontrolnych.
 
 <details>
 <summary>Zadanie 1: wyniki biegu</summary>
@@ -517,7 +517,7 @@ int main() {
 
 **Inne poprawne rozwiązania:** zamiast `!summary.has_best || ...` można osobno obsłużyć pierwszy ukończony bieg w `if` i `else`. Kolejność pól i nazwy mogą być inne. Kwalifikację można też liczyć wewnątrz `if (runner.finished)`, jeśli nadal służy do tego `is_qualified`.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Typy i funkcje są takie same jak wyżej, a raport od odebrania wyniku też, poza wcięciem. Różnica jest jedna: wektor nie jest zapisany w kodzie, tylko powstaje z wejścia. Program odczytuje liczbę uczestników, a potem każdego uczestnika: nazwę, czas oraz `yes` albo `no` dla ukończenia biegu, zamienione na `bool` porównaniem, jak w lekcji 3.4. Każdy odczytany uczestnik trafia na koniec wektora przez `push_back`, jak w programach kontrolnych lekcji 8.4 i 8.5. Misja nie potrzebuje ani wejścia, ani `push_back`.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Typy i funkcje są takie same jak wyżej, a raport od odebrania wyniku też, poza wcięciem. Różnica jest jedna: wektor nie jest zapisany w kodzie, tylko powstaje z wejścia. Program odczytuje liczbę uczestników, a potem każdego uczestnika: nazwę, czas oraz `yes` albo `no` dla ukończenia biegu, zamienione na `bool` porównaniem, jak w lekcji 3.4. Każdy odczytany uczestnik trafia na koniec wektora przez `push_back`, jak w programach kontrolnych lekcji 8.4 i 8.5. Misja nie potrzebuje ani wejścia, ani `push_back`.
 
 <!-- example: race_results_check -->
 ```cpp
@@ -612,7 +612,7 @@ int main() {
 }
 ```
 
-Każdy przypadek zaczyna się od liczby uczestników. Potem każdy uczestnik zajmuje jedną linijkę: nazwa, czas oraz `yes` albo `no` dla ukończenia biegu. Przypadki B–D są przy przykładach w części A. Pozostałe stoją niżej, w kolejności z listy kontrolnej: najpierw A, potem od E do L.
+Każdy przypadek zaczyna się od liczby uczestników. Potem każdy uczestnik zajmuje jedną linijkę: nazwa, czas oraz `yes` albo `no` dla ukończenia biegu. Przypadki B–D są przy przykładach w części A. Pozostałe stoją niżej, w kolejności z listy przypadków kontrolnych: najpierw A, potem od E do L.
 
 <!-- input: race_results_check -->
 ```text

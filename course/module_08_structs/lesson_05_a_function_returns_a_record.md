@@ -143,7 +143,7 @@ Ten sam model znasz z lekcji 6.5 i 7.3, gdzie funkcja zwracała nowy wektor albo
 3. zwraca wynik przez wartość;
 4. kod wywołujący odbiera go we własnej zmiennej.
 
-Zmienna `result` kończy się razem z funkcją, ale jej wartość trafia do `main` jako wynik. **To nie jest referencja do zmiennej funkcji:** `main` ma własny rekord. Współczesny C++ zwraca takie obiekty wydajnie, a jak dokładnie to robi, poznasz później. W tej lekcji wystarczy model.
+Zmienna `result` istnieje tylko do końca funkcji, ale jej wartość trafia do `main` jako wynik. **To nie jest referencja do zmiennej funkcji:** `main` ma własny rekord. Współczesny C++ zwraca takie obiekty wydajnie, a jak dokładnie to robi, poznasz później. W tej lekcji wystarczy model.
 
 **Przewidź:** wynik odebrano tym razem bez `const`, a potem zmieniono jego pole.
 
@@ -220,7 +220,7 @@ Has unverified: yes
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: pusty wektor, jeden licznik poniżej progu, równo z progiem i powyżej, wszystkie odczyty zweryfikowane, jeden niezweryfikowany odczyt na początku, w środku i na końcu listy oraz kilka niezweryfikowanych. Przy każdym zapisz wszystkie trzy wyniki.
 
-**Potem** uruchom program dla danych z wymagań i dla pustego wektora. Zmieniaj przy tym tylko zawartość klamer wektora. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+**Potem** uruchom program dla danych z wymagań i dla pustego wektora. Zmieniaj przy tym tylko zawartość klamer wektora. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 ### Kryterium sukcesu
 
@@ -395,7 +395,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 2. Struktura wejściowa opisuje dane, na przykład jeden licznik. Wynikowa opisuje odpowiedzi analizy. Wynik nie musi powtarzać pól wejścia: zawiera tylko to, co analiza oblicza.
 3. Tak. Typ wyniku funkcji to wtedy nazwa struktury, a `return result;` oddaje cały obiekt, ze wszystkimi polami.
 4. Bo funkcja zmienia pola wyniku podczas obliczeń. `const` przy parametrze dotyczy tylko danych wejściowych, a lokalny wynik to osobny obiekt funkcji.
-5. Nie. Wynik jest zwracany przez wartość: `result` kończy się razem z funkcją, a kod wywołujący dostaje własny rekord, jak wektor w lekcji 6.5.
+5. Nie. Wynik jest zwracany przez wartość: `result` istnieje tylko do końca funkcji, a kod wywołujący dostaje własny rekord, jak wektor w lekcji 6.5.
 6. Bo każde pole odpowiada na inne pytanie i ma typ pasujący do odpowiedzi: suma zużycia to `int`, liczba liczników to `std::size_t`, a odpowiedź tak albo nie to `bool`.
 7. Wartości początkowe: zero, zero i `false`. Pętla nie wykonuje przebiegu, więc funkcja zwraca wynik taki, jaki utworzyła na początku. To poprawny rekord, bez specjalnego kodu.
 8. Zacząć od `false` i ustawiać `true`, gdy pojawi się szukany przypadek, ale nigdy nie przepisywać do pola odpowiedzi dotyczącej tylko bieżącego rekordu. Raz ustawione `true` zostaje do końca pętli.
@@ -494,7 +494,7 @@ int main() {
 7. **Równość nie jest przekroczeniem,** bo reguła mówi o zużyciu większym od progu. `Hall` ma 7 przy progu 7, więc się nie liczy.
 8. **Flaga nie wraca do `false`:** program ustawia ją na `true` wewnątrz `if (!meter.verified)`, a poza wartością początkową nigdzie nie zapisuje `false`. Późniejszy zweryfikowany licznik nie zmienia już tej informacji.
 9. **Pusty wektor daje poprawny rekord:** pętla nie wykona przebiegu, więc funkcja zwróci wartości początkowe.
-10. **Przez wartość,** bo `main` ma dostać własny, gotowy wynik, jak nowy wektor w lekcji 6.5. Lokalny `result` kończy się z funkcją, więc referencja do niego nie miałaby sensu.
+10. **Przez wartość,** bo `main` ma dostać własny, gotowy wynik, jak nowy wektor w lekcji 6.5. Lokalny `result` istnieje tylko do końca funkcji, więc referencja do niego nie miałaby sensu.
 11. **Wejście się nie zmienia:** wektor jest `const`, a funkcja dostaje go i przegląda przez `const&`. Funkcja zmienia tylko swój lokalny wynik.
 12. **Wypisywanie w `main`,** bo funkcja ma tylko liczyć. Ten sam wynik `main` może wypisać inaczej albo wykorzystać dalej.
 
@@ -502,7 +502,7 @@ int main() {
 
 **Inne poprawne rozwiązania:** zamiast `if` można napisać `result.has_unverified = result.has_unverified || !meter.verified;`, co daje to samo. Typy i pola mogą mieć inne nazwy i inną kolejność, jeśli wartości w klamrach stoją w tej samej kolejności co pola.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Typy i funkcja są takie same jak wyżej, a raport od odebrania wyniku też, poza wcięciem. Różnica jest jedna: wektor nie jest zapisany w kodzie, tylko powstaje z wejścia. Program odczytuje liczbę liczników, a potem każdy licznik: nazwę, zużycie, próg oraz `yes` albo `no` dla weryfikacji, zamienione na `bool` porównaniem, jak w lekcji 3.4. Każdy odczytany licznik trafia na koniec wektora przez `push_back`, jak w programie kontrolnym lekcji 8.4. Misja nie potrzebuje ani wejścia, ani `push_back`.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Typy i funkcja są takie same jak wyżej, a raport od odebrania wyniku też, poza wcięciem. Różnica jest jedna: wektor nie jest zapisany w kodzie, tylko powstaje z wejścia. Program odczytuje liczbę liczników, a potem każdy licznik: nazwę, zużycie, próg oraz `yes` albo `no` dla weryfikacji, zamienione na `bool` porównaniem, jak w lekcji 3.4. Każdy odczytany licznik trafia na koniec wektora przez `push_back`, jak w programie kontrolnym lekcji 8.4. Misja nie potrzebuje ani wejścia, ani `push_back`.
 
 <!-- example: meter_summary_check -->
 ```cpp
@@ -581,7 +581,7 @@ int main() {
 }
 ```
 
-Każdy przypadek zaczyna się od liczby liczników. Potem każdy licznik zajmuje jedną linijkę: nazwa, zużycie, próg oraz `yes` albo `no` dla weryfikacji. Przypadki stoją w kolejności z listy kontrolnej, od A do M.
+Każdy przypadek zaczyna się od liczby liczników. Potem każdy licznik zajmuje jedną linijkę: nazwa, zużycie, próg oraz `yes` albo `no` dla weryfikacji. Przypadki stoją w kolejności z listy przypadków kontrolnych, od A do M.
 
 <!-- input: meter_summary_check -->
 ```text
@@ -944,7 +944,7 @@ Above limit: 1
 Has unverified: yes
 ```
 
-Dla pustego wektora poprawiony program wypisze to samo co program kontrolny w przypadku B: pętla nie wykona przebiegu, więc zostają wartości początkowe. Gdy wszystkie odczyty są zweryfikowane, obie wersje zwracają `false`, bo flaga nigdy nie dostaje `true`. Ani pusty wektor, ani taki wektor, ani lista z niezweryfikowanym odczytem na końcu nie ujawniają więc błędu: potrzebny jest niezweryfikowany odczyt, po którym stoi jeszcze zweryfikowany. Dane z misji też kończą się niezweryfikowanym odczytem (`Lab`), więc ten sam błąd w Twoim programie przeszedłby dla nich niezauważony. Ujawniają go przypadki I, K i M z listy kontrolnej.
+Dla pustego wektora poprawiony program wypisze to samo co program kontrolny w przypadku B: pętla nie wykona przebiegu, więc zostają wartości początkowe. Gdy wszystkie odczyty są zweryfikowane, obie wersje zwracają `false`, bo flaga nigdy nie dostaje `true`. Ani pusty wektor, ani taki wektor, ani lista z niezweryfikowanym odczytem na końcu nie ujawniają więc błędu: potrzebny jest niezweryfikowany odczyt, po którym stoi jeszcze zweryfikowany. Dane z misji też kończą się niezweryfikowanym odczytem (`Lab`), więc ten sam błąd w Twoim programie przeszedłby dla nich niezauważony. Ujawniają go przypadki I, K i M z listy przypadków kontrolnych.
 
 </details>
 
