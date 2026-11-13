@@ -8,7 +8,7 @@
 
 ## How this test works
 
-This lesson introduces nothing new. You check whether you can, on your own, design a program that takes data from the user, stores it in well-chosen variables, calculates, and prints a result. On top of that, you diagnose two short reports and explain your own decisions.
+This lesson introduces nothing new. You check whether you can, on your own, design a program that takes data from the user, stores it in well-chosen variables, calculates and prints a result. On top of that, you diagnose two short reports and explain your own decisions.
 
 The lesson has two parts:
 
@@ -281,7 +281,7 @@ The route name has spaces, so `>>` would read only its first word. Which method 
 <details>
 <summary>Task 1, hint 3: the calculations</summary>
 
-The distance: `int` times `double` gives `double` (lesson 2.5), so the result's type must fit `{}`. The packs: "how many full groups?" and "how many are left?" are questions for `/` and `%` (lesson 2.4). Build the text `Route: …` with `+` from a literal and the route name (lesson 2.7).
+The distance: `int` times `double` gives `double` (lesson 2.5), so the result's type must fit `{}`. The packs: “how many full groups?” and “how many are left?” are questions for `/` and `%` (lesson 2.4). Build the text `Route: …` with `+` from a literal and the route name (lesson 2.7).
 
 </details>
 
@@ -472,7 +472,7 @@ For each criterion, mark one answer:
 
 The debugger row is about the **tool**, and the row about the table of values and `std::cout` is about the **technique of finding an error**. The two skills complement each other, but neither replaces the other. If the debugger doesn't work in your environment, leave its row empty and come back to lesson 2.3 once it works.
 
-If something is marked in the "To revise" column, go back to the matching lesson:
+If something is marked in the “To revise” column, go back to the matching lesson:
 
 | Topic | Lesson |
 |---|---|
@@ -499,12 +499,12 @@ After eight lessons you can:
 - read and use `auto` in simple declarations;
 - take data from the user, and run the same program with different data;
 - store and join text, and read whole lines;
-- analyse how a program runs with a table of values, by printing, or with the debugger, and find simple logic errors.
+- analyse how a program runs with a table of values, by printing or with the debugger, and find simple logic errors.
 
-About the state of the materials: the code and calculations in all Module 2 lessons are checked automatically on three systems. The instructions for using the debugger in CLion remain a pilot: they haven't yet been checked by hand on all three systems.
+About the state of the materials: the code and calculations in all Module 2 lessons are checked automatically on three systems. The instructions for using the debugger in CLion haven't yet been checked by hand on all three systems.
 
 ## What's next: Module 3
 
-So far your programs always execute the same statements, from top to bottom. In Module 3 they'll start **making decisions**: you'll learn comparisons and conditions, which let a program execute different statements depending on the data. Start with [lesson 3.1: The program's first decision (`if`)](../module_03_decisions_and_conditions/lesson_01_the_first_decision.en.md). Module 3 is in development: the further lessons are in preparation.
+So far your programs always execute the same statements, from top to bottom. In Module 3 they'll start **making decisions**: you'll learn comparisons and conditions, which let a program execute different statements depending on the data. Start with [lesson 3.1: The program's first decision (`if`)](../module_03_decisions_and_conditions/lesson_01_the_first_decision.en.md).
 
 **Previous lesson:** [Lesson 2.7: Text the program remembers (`std::string`)](lesson_07_text_the_program_remembers.en.md) · **Next lesson:** [Lesson 3.1: The program's first decision (`if`)](../module_03_decisions_and_conditions/lesson_01_the_first_decision.en.md) · [Course overview](../../README.en.md)

@@ -16,7 +16,7 @@ This lesson assumes that after lesson 2.1:
 
 ## The situation
 
-In lesson 2.1, every variable got its value once, when it was created, and never changed it afterwards. Real programs often keep track of something that changes: the number of free seats, points in a game, the state of a counter. Today you'll change the value of an existing variable, learn to predict values step by step, and mark the values that should **not** change.
+In lesson 2.1, every variable got its value once, when it was created, and the value never changed afterwards. Real programs often keep track of something that changes: the number of free seats, points in a game, the state of a counter. Today you'll change the value of an existing variable, learn to predict values step by step, and mark the values that should **not** change.
 
 After this lesson you will:
 
@@ -73,18 +73,18 @@ Seats left: 9
 1. first the program **calculates the right-hand side**: it takes the current value of `seats_left` (12) and subtracts 3, which gives 9;
 2. then it **stores the result** in the variable on the left. The previous value, 12, is replaced.
 
-So read it as "`seats_left` gets the value `seats_left - 3`", not "`seats_left` equals …". Checking whether two values are equal is a separate notation that you'll meet in Module 3.
+So read it as “`seats_left` gets the value `seats_left - 3`”, not “`seats_left` equals …”. Checking whether two values are equal is a separate notation that you'll meet in Module 3.
 
-**Order matters.** Statements run from top to bottom, as in Module 1. The first `std::cout` stands before the assignment, so it prints the old value. If both `std::cout` lines stood below the assignment, both would print `9`.
+**Order matters.** Statements run from top to bottom, as in Module 1. The first `std::cout` comes before the assignment, so it prints the old value. If both `std::cout` lines were below the assignment, both would print `9`.
 
-## 3. Initialisation vs. assignment
+## 3. Initialisation vs assignment
 
 | Code | What it does |
 |---|---|
 | `int count{3};` | **Declaration with initialisation:** creates a new variable `count` and gives it a starting value. |
 | `count = 5;` | **Assignment:** changes the value of the variable `count`, which already exists. No type is written here. |
 
-You declare a variable **once**. What happens if you try to "change the value" with a second declaration? **Predict**, then build this program:
+You declare a variable **once**. What happens if you try to “change the value” with a second declaration? **Predict**, then build this program:
 
 <!-- broken: redefinition at=5:9 errors=1 error=^redefinition of 'count'$ -->
 ```cpp
@@ -157,7 +157,7 @@ second: 4
 
 </details>
 
-**Why does `second` still have `4`?** The assignment `second = first;` takes the **value** that `first` has **at that moment** (4), and stores a copy of it in `second`. The variables are not linked. When `first` then gets 9, `second` doesn't "know" about it: it still holds its copy, 4. This is how `int` variables like these behave.
+**Why does `second` still have `4`?** The assignment `second = first;` takes the **value** that `first` has **at that moment** (4), and stores a copy of it in `second`. The variables are not linked. When `first` then gets 9, `second` doesn't “know” about it: it still holds its copy, 4. This is how `int` variables like these behave.
 
 ## 5. Trace the values step by step
 
@@ -225,7 +225,7 @@ Capacity: 20
 Occupied: 8
 ```
 
-- `const int parking_capacity{20};` creates an `int` variable whose value **can't be changed** after initialisation. The word `const` stands before the type.
+- `const int parking_capacity{20};` creates an `int` variable whose value **can't be changed** after initialisation. The word `const` comes before the type.
 - `available_spaces` has no `const`, because its value is meant to change.
 - You can **read** a constant and use it in calculations, like any variable: here in `parking_capacity - available_spaces`.
 - A constant must get its value **right away**, at the declaration. It can't be given one later.
@@ -282,7 +282,7 @@ A small car park has 20 spaces and is empty in the morning. During the day:
 - at noon, 4 more arrive;
 - in the afternoon, 6 cars leave.
 
-In `cpp-workspace`, create a folder `parking_day`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp`, and write the program yourself. The program must print exactly:
+In `cpp-workspace`, create a folder `parking_day`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp` and write the program yourself. The program must print exactly:
 
 <!-- output: parking_day -->
 ```text
@@ -336,16 +336,16 @@ Capacity at closing: 20
 
 Example solutions are in [Example solutions](#example-solutions).
 
-## 8. When something goes differently
+## 8. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
 | `redefinition of '…'` | The same name was declared a second time, with a type at the start. | To change the value of an existing variable, use an assignment without a type: `count = 5;`. |
 | `cannot assign to variable '…' with const-qualified type …` | You're trying to change a constant. | If the value is meant to change, remove `const` from the declaration. If not, remove the assignment. |
-| `use of undeclared identifier '…'` on an assignment | The assignment stands above the declaration, or the name has a typo. | Declare the variable first, then assign to it. Compare the names character by character. |
-| A printed value is "one step" too old or too new | `std::cout` is in the wrong place relative to the assignment. | Statements run from top to bottom. Move `std::cout` below the assignment whose result it should show. |
+| `use of undeclared identifier '…'` on an assignment | The assignment comes before the declaration, or the name has a typo. | Declare the variable first, then assign to it. Compare the names character by character. |
+| A printed value is “one step” too old or too new | `std::cout` is in the wrong place relative to the assignment. | Statements run from top to bottom. Move `std::cout` below the assignment whose result it should show. |
 | A value doesn't change, although there's a line with a subtraction, for example `seats_left - 3;` | The program calculates the result but doesn't store it anywhere. The compiler may print a warning (`warning`) about it. | Store the result with an assignment: `seats_left = seats_left - 3;`. |
-| Changing one variable didn't "carry over" to another | That's expected: assignment copies the value (section 4). | If the second variable should get the new value, assign it again after the change. |
+| Changing one variable didn't “carry over” to another | That's expected: assignment copies the value (section 4). | If the second variable should get the new value, assign it again after the change. |
 
 ## 9. Explain
 
@@ -378,7 +378,7 @@ Because `second = first;` copied the value that `first` had at that moment, whic
 
 </details>
 
-**4.** In the mission: why does the capacity have `const`, and the number of free spaces doesn't?
+**4.** In the mission: why does the capacity have `const` while the number of free spaces doesn't?
 
 <details>
 <summary>Example answer</summary>

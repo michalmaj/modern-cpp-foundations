@@ -43,7 +43,7 @@ If it succeeds, `cd` prints nothing. So after every move, check where you are wi
 
 ## 2. Try it: go home
 
-A terminal doesn't always start in your home folder. That depends on the system, its settings, and where the terminal was started from. So first go somewhere you definitely know:
+A terminal doesn't always start in your home folder. That depends on the system, its settings and where the terminal was started from. So first go somewhere you definitely know:
 
 ```text
 cd ~
@@ -80,7 +80,7 @@ Then, in the file window:
 3. Go into `krakow` and create `museums` in it.
 4. Go back one level (with the “Back” arrow in the window), go into `gdansk` and create `beaches` in it.
 
-The names deliberately have no special letters.
+The names deliberately have no accented letters.
 
 > If `trip-plan` already exists because you are doing this lesson a second time, check that it has the folders above and add any that are missing.
 
@@ -135,7 +135,7 @@ You will see `museums`. Many people expect the word `krakow` here, but `..` is t
 
 </details>
 
-`..` can be combined: `..\..` on Windows or `../..` on macOS and Linux means “two levels up”. Check what `ls` shows with such a path, typed from the `museums` folder.
+`..` can be combined: `..\..` on Windows or `../..` on macOS and Linux means “two levels up”. From the `museums` folder, check what `ls` shows with such a path.
 
 ### How high can you go?
 
@@ -204,14 +204,14 @@ Four are enough: twice up, twice down.
 
 **Part C: back again.** From `beaches`, go back to your home folder. Do it in two ways: once with a command using `~`, and once using only `..`. How many `..` do you need?
 
-### Success criterion
+### Success criteria
 
 - After part A and after part B, the output of `pwd` ends with `trip-plan\gdansk\beaches` (Windows) or `trip-plan/gdansk/beaches` (macOS, Linux).
 - In `beaches`, `ls` (or `ls -F`) **prints nothing**. That's fine: the folder is empty. No output is not an error. An error would look like the message from section 4.
 - After part C, `pwd` shows your home folder.
 
 <details>
-<summary>Sample solution</summary>
+<summary>Example solution</summary>
 
 On macOS and Linux (on Windows use `\` instead of `/`):
 
@@ -223,7 +223,7 @@ On macOS and Linux (on Windows use `\` instead of `/`):
 
 ## 9. Same names, different tools
 
-On Windows you type `cd`, `pwd` and `ls`, just as on macOS and Linux. In PowerShell, however, these are **aliases**: additional, shorter names for PowerShell's own commands:
+On Windows you type `cd`, `pwd` and `ls`, just as on macOS and Linux. In PowerShell, however, these are **aliases**, that is, additional, shorter names for PowerShell's own commands:
 
 | You type | In PowerShell it is really |
 |---|---|
@@ -233,7 +233,7 @@ On Windows you type `cd`, `pwd` and `ls`, just as on macOS and Linux. In PowerSh
 
 They look the same, but they are different tools from the ones on macOS and Linux, so the details differ. That's why `ls -F` from lesson 0.1 doesn't work on Windows, and the table below lists a few more differences. A rule for the future: **the same name doesn't mean the same tool**. When something behaves differently from the example, check the version of the command for your system.
 
-## 10. When things look different
+## 10. When something goes wrong
 
 First check `pwd`: most surprises with `cd` come from being in a different folder than you think. If you get lost, `cd ~` takes you home.
 
@@ -246,7 +246,7 @@ First check `pwd`: most surprises with `cd` come from being in a different folde
 | macOS and Linux: after `cd trip-plan\krakow`, a message about a missing folder `trip-plankrakow` | On macOS and Linux the separator is `/`. The `\` character means something else there and the shell removes it, which is why the name in the message is glued together. | Use `/`. PowerShell on Windows accepts both separators, but in this course we write `\` on Windows. |
 | `ls` in `beaches` prints nothing | The folder is empty. | Everything is fine. |
 
-## 11. Explain it
+## 11. Explain
 
 Answer in your own words, ideally out loud or on paper. Only then expand the answer.
 

@@ -76,12 +76,12 @@ Bring: your favourite game, or "Dixit" from the shelf
 Have fun!
 ```
 
-- Before saving, see how this version differs from the saved one, and be able to describe it.
+- Before saving, see how this version differs from the saved one, and describe the difference.
 - Build and run the changed program and check the output.
 - Save a **second commit**.
 - Confirm that the history contains both versions and that the project has no unsaved changes.
 
-If you want to check your independence, do this task without looking at the solution of task 1.
+If you want to check how well you work on your own, do this task without looking at the solution of task 1.
 
 ## Task 3: Two reports
 
@@ -304,7 +304,7 @@ Saving to C:\games\list.txt
 <details>
 <summary>Task 3: report 2</summary>
 
-- **Stage:** configuring. The error appears already on `cmake -S . -B build-terminal …`, and neither the compiler nor the linker started. If `build-terminal` was configured before, `cmake --build` shows the same error, because it runs CMake again first.
+- **Stage:** configuring. The error already appears at `cmake -S . -B build-terminal …`, and neither the compiler nor the linker started. If `build-terminal` was configured before, `cmake --build` shows the same error, because it runs CMake again first.
 - **First relevant information:**
 
 ```text
@@ -348,7 +348,7 @@ For each criterion, mark one answer:
 | Two commits without generated files | | | | |
 | The explanations in task 4 | | | | |
 
-If anything is marked "To go over again", go back to the matching lesson:
+If anything is marked “To go over again”, go back to the matching lesson:
 
 | Topic | Lesson |
 |---|---|
@@ -375,6 +375,6 @@ After six lessons, you can:
 
 ## What's next: Module 2
 
-So far, your programs always print the same text. In Module 2 they will start to **remember and calculate**: you'll learn about values, types, variables, expressions and calculations, and how to read simple input from the user. Start with [lesson 2.1: Values the program remembers](../module_02_values_and_calculations/lesson_01_values_the_program_remembers.en.md). Module 2 is in development: further lessons are in preparation.
+So far, your programs always print the same text. In Module 2 they will start to **remember and calculate**: you'll learn about values, types, variables, expressions and calculations, and how to read simple input from the user. Start with [lesson 2.1: Values the program remembers](../module_02_values_and_calculations/lesson_01_values_the_program_remembers.en.md).
 
 **Previous lesson:** [Lesson 1.5: Save the history of your work](lesson_05_save_the_history_of_your_work.en.md) · **Next lesson:** [Lesson 2.1: Values the program remembers](../module_02_values_and_calculations/lesson_01_values_the_program_remembers.en.md) · [Course overview](../../README.en.md)

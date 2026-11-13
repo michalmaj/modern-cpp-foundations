@@ -3,7 +3,7 @@
 **Polski** · [English](lesson_04_installing_the_tools.en.md) · [Opis kursu](../../README.md)
 
 > **Moduł 0, lekcja 4** · zwykle od 30 minut do 2 godzin, zależnie od komputera i szybkości internetu
-> **Potrzebujesz:** komputera z Windows 10/11, macOS albo Ubuntu 24.04, dostępu do internetu, kilku gigabajtów wolnego miejsca na dysku i **uprawnień administratora** (patrz [punkt 2](#2-zanim-zaczniesz-instalować)).
+> **Potrzebujesz:** komputera z Windowsem 10/11, macOS albo Ubuntu 24.04, dostępu do internetu, kilku gigabajtów wolnego miejsca na dysku i **uprawnień administratora** (patrz [punkt 2](#2-zanim-zaczniesz-instalować)).
 
 ## Zanim zaczniesz
 
@@ -35,7 +35,7 @@ Po tej lekcji będziesz:
 | Narzędzie | Do czego służy | Kiedy go użyjesz |
 |---|---|---|
 | **LLVM/Clang 22** z kompilatorem `clang++` | Kompilator C++: zamienia Twój kod w program. | W następnej lekcji, przy pierwszym programie |
-| **Narzędzia systemowe**: na Windowsie *Visual Studio Build Tools*, na macOS *Command Line Tools*, na Ubuntu pakiety, które system doinstaluje razem z Clangiem | Gotowe części, z których korzysta każdy program w C++, na przykład **biblioteka standardowa** (gotowy kod do wypisywania tekstu czy liczenia), oraz pliki systemu operacyjnego potrzebne do zbudowania programu. | Za każdym razem, gdy kompilujesz, choć nie uruchamiasz ich samodzielnie |
+| **Narzędzia systemowe**: na Windowsie *Visual Studio Build Tools*, na macOS *Command Line Tools*, na Ubuntu pakiety, które system doinstaluje razem z Clangiem | Gotowe części, z których korzysta każdy program w C++, na przykład **biblioteka standardowa** (gotowy kod do wypisywania tekstu czy liczenia), oraz pliki systemu operacyjnego potrzebne do zbudowania programu. | Za każdym razem, gdy budujesz program, choć nie uruchamiasz ich samodzielnie |
 | **CMake** | Opisuje, z jakich plików składa się projekt i jak go zbudować. | Od następnej lekcji |
 | **Ninja** | Szybko wykonuje kroki budowania, które przygotował CMake. | Od następnej lekcji, „w tle” |
 | **CLion** | Środowisko programistyczne (IDE): tu piszesz, uruchamiasz i sprawdzasz programy. | Od następnej lekcji |
@@ -50,7 +50,7 @@ Większość z nich zainstalujesz **menedżerem pakietów**. To program, który 
 - **Komputer szkolny, uczelniany albo służbowy.** Często nie ma na nim uprawnień administratora. Wtedy poproś administratora tego komputera o instalację narzędzi wymienionych w tej lekcji. Nie szukaj w internecie sposobów na obejście blokad: łatwo wtedy zainstalować coś innego, niż potrzebujesz.
 - **Wpisywanie hasła w terminalu.** Gdy terminal pyta o hasło, **nie widać wpisywanych znaków**, nawet gwiazdek. To normalne. Wpisz hasło i naciśnij <kbd>Enter</kbd>.
 - **Długie polecenia.** Część poleceń w tej lekcji jest długa. Możesz je skopiować i wkleić. Na Windowsie i macOS zrób to zwykłym skrótem, a w terminalu Ubuntu skrótem <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>V</kbd>.
-- **Zrób tylko część dla swojego systemu.** Punkt 3 ma osobne instrukcje dla Windows, macOS i Ubuntu.
+- **Zrób tylko część dla swojego systemu.** Punkt 3 ma osobne instrukcje dla Windowsa, macOS i Ubuntu.
 
 ## 3. Zainstaluj narzędzia
 
@@ -84,7 +84,7 @@ choco install cmake --installargs '"ADD_CMAKE_TO_PATH=System"' -y
 choco install ninja -y
 ```
 
-Dopisek `--installargs '"ADD_CMAKE_TO_PATH=System"'` prosi instalator CMake, żeby dodał CMake do listy `PATH`. Bez niego polecenie `cmake` nie zadziała w terminalu.
+Dopisek `--installargs '"ADD_CMAKE_TO_PATH=System"'` prosi instalator CMake'a, żeby dodał CMake do listy `PATH`. Bez niego polecenie `cmake` nie zadziała w terminalu.
 
 **Krok 4.** Zamknij terminal administratora i otwórz **zwykły** terminal. Sprawdzanie i dalsza praca odbywają się już bez uprawnień administratora.
 
@@ -111,7 +111,7 @@ Otworzy się okno z pytaniem o instalację narzędzi. Kliknij **Zainstaluj** i p
 brew install llvm@22 cmake ninja
 ```
 
-Formuła `llvm@22` to LLVM w serii 22. Homebrew celowo **nie dodaje** jej do listy `PATH`, żeby nie zasłonić kompilatora dostarczonego przez Apple. Dlatego w punkcie 4 uruchomisz ją po pełnej ścieżce.
+Formuła `llvm@22` to LLVM z serii 22. Homebrew celowo **nie dodaje** jej do listy `PATH`, żeby nie zasłonić kompilatora dostarczonego przez Apple. Dlatego w punkcie 4 uruchomisz ją po pełnej ścieżce.
 
 ### Ubuntu 24.04
 
@@ -196,7 +196,7 @@ Wypełnij tabelę dla swojego komputera:
 | narzędzia systemowe | | | |
 | CLion | uruchomienie programu | | |
 
-W kolumnie „Twój wynik” wpisz to, co pokazał sposób sprawdzenia z punktu 4. Dla kompilatora, CMake i Ninja będzie to numer wersji. Dla narzędzi systemowych: na Windowsie „Build Tools 2022 na liście”, na macOS ścieżka z `xcode-select -p`, na Ubuntu „instalują się razem z clang-22”. Dla CLiona: „uruchamia się”.
+W kolumnie „Twój wynik” wpisz to, co pokazał sposób sprawdzenia z punktu 4. Dla kompilatora, CMake'a i Ninja będzie to numer wersji. Dla narzędzi systemowych: na Windowsie „Build Tools 2022 na liście”, na macOS ścieżka z `xcode-select -p`, na Ubuntu „instalują się razem z clang-22”. Dla CLiona: „uruchamia się”.
 
 Do każdego wiersza dopisz jednym zdaniem, **do czego** to narzędzie posłuży w następnej lekcji.
 
@@ -216,12 +216,12 @@ Jeśli wszystko się zgadza, Twój warsztat jest gotowy. Nie musisz jeszcze nicz
 | Polecenie nie jest rozpoznawane zaraz po instalacji (`… is not recognized…` albo `command not found`) | Terminal otwarty przed instalacją ma starą listę `PATH`. | Zamknij terminal i otwórz nowy. Jeśli to nie pomoże, sprawdź, czy instalacja zakończyła się bez błędów. |
 | Windows: Chocolatey zgłasza, że nie działa w terminalu z uprawnieniami administratora | Instalacja wymaga uprawnień administratora. | Otwórz terminal przez **Uruchom jako administrator** (punkt 3, krok 2). |
 | Brak uprawnień administratora na komputerze szkolnym lub służbowym | Bez nich nie zainstalujesz tych narzędzi. | Poproś administratora tego komputera o instalację. Nie stosuj obejść z internetu. |
-| Ubuntu: `E: Unable to locate package clang-22` | System nie zna źródła pakietów LLVM. | Sprawdź, czy wykonano oba polecenia z kroku 2, a potem `sudo apt update`. |
+| Ubuntu: `E: Unable to locate package clang-22` | System nie zna źródła pakietów LLVM. | Sprawdź, czy wykonano oba polecenia z kroku 2, a potem wpisz `sudo apt update`. |
 | macOS: `clang++ --version` pokazuje `Apple clang` | To kompilator Apple, a nie nasz. | Tak ma być. Nasz kompilator uruchamiasz pełną ścieżką z punktu 4. |
 | Ubuntu: `clang++ --version` pokazuje wersję 18 | To starszy Clang z pakietów Ubuntu. | Używaj `clang++-22`. |
 | Windows: `Get-Command clang++` pokazuje inną ścieżkę niż `C:\Program Files\LLVM\bin` | Na komputerze jest inny `clang++`, który powłoka znajduje pierwszy. | Nie odinstalowuj niczego na ślepo. Zapisz tę ścieżkę. W następnej lekcji podamy CLionowi pełną ścieżkę do właściwego kompilatora. |
-| Windows: instalator Build Tools prosi o ponowne uruchomienie | Część plików zostanie dokończona po restarcie. | Uruchom komputer ponownie, a potem przejdź do kroku 2. |
-| Kompilator jest zainstalowany, ale później pierwsza kompilacja zgłasza brak plików, na przykład `'iostream' file not found` albo na Windowsie `lld-link: error: could not open 'kernel32.lib'` | Brakuje narzędzi systemowych z biblioteką standardową. | Wróć do tej lekcji i sprawdź narzędzia systemowe (punkt 4). Taki problem widać dopiero przy kompilacji, w następnej lekcji. |
+| Windows: instalator Build Tools prosi o ponowne uruchomienie | Instalator dokończy część pracy po ponownym uruchomieniu. | Uruchom komputer ponownie, a potem przejdź do kroku 2. |
+| Kompilator jest zainstalowany, ale później pierwsze budowanie zgłasza brak plików, na przykład `'iostream' file not found` albo na Windowsie `lld-link: error: could not open 'kernel32.lib'` | Brakuje narzędzi systemowych z biblioteką standardową. | Wróć do tej lekcji i sprawdź narzędzia systemowe (punkt 4). Taki problem widać dopiero przy budowaniu, w następnej lekcji. |
 
 ## 7. Wyjaśnij
 

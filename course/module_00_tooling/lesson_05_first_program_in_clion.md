@@ -54,7 +54,7 @@ W katalogu `lesson_05_first_program` są dwa pliki:
 | Plik | Co to jest |
 |---|---|
 | `main.cpp` | **Kod źródłowy** programu w C++. |
-| `CMakeLists.txt` | **Opis projektu** dla CMake: z jakich plików powstaje program i że to C++20. |
+| `CMakeLists.txt` | **Opis projektu** dla CMake'a: z jakich plików powstaje program i że to C++20. |
 
 Tak wygląda `main.cpp`:
 
@@ -86,7 +86,7 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 
 `main.cpp`: taki jak w przykładzie powyżej.
 
-Zastąp oba pliki, a nie tylko `main.cpp`: plik `CMakeLists.txt` z kreatora może wymagać nowszego CMake, niż mają niektóre systemy.
+Zastąp oba pliki, a nie tylko `main.cpp`: plik `CMakeLists.txt` z kreatora może wymagać nowszego CMake'a, niż mają niektóre systemy.
 
 </details>
 
@@ -113,7 +113,7 @@ Otwórz ustawienia: na Windowsie i Ubuntu **File | Settings**, a na macOS **CLio
 4. **Architecture:** `amd64`.
 5. **C Compiler:** `C:\Program Files\LLVM\bin\clang.exe`
 6. **C++ Compiler:** `C:\Program Files\LLVM\bin\clang++.exe`
-7. Pól CMake i Build Tool nie zmieniaj: CLion użyje swoich wbudowanych CMake i Ninja.
+7. Pól CMake i Build Tool nie zmieniaj: CLion użyje swoich wbudowanych wersji CMake'a i Ninja.
 
 > **Wersja pilotażowa:** tej konfiguracji nie sprawdziliśmy jeszcze w CLionie na Windowsie. Jeśli CLion zgłosi, że kompilator nie pasuje do toolchainu Visual Studio, wypróbuj zamiast niego **+ → System** z tymi samymi ścieżkami kompilatorów. Do budowania i uruchamiania programu powinno to wystarczyć. Debugger, którym zajmiemy się później, może w tym wariancie wymagać innych ustawień.
 
@@ -246,8 +246,8 @@ Spraw, żeby program wypisywał wybrany przez Ciebie komunikat, bez polskich lit
 | Windows: CLion zgłasza, że kompilator nie pasuje do toolchainu | Ta konfiguracja nie jest jeszcze sprawdzona. | Wypróbuj wariant **System** z ramki w punkcie 4. |
 | Przycisk Run jest nieaktywny albo nie ma konfiguracji `first_program` | Projekt nie został wczytany. | Sprawdź okno CMake: czy są błędy? Czy wybrano **Trust Project**? Jeśli projekt jest w trybie bezpiecznym (Safe Mode), wybierz **Trust Project** w komunikacie u góry okna. |
 | Budowanie zgłasza `'iostream' file not found` albo `could not open 'kernel32.lib'` | Brakuje narzędzi systemowych. | Wróć do lekcji 0.4, punkt 4, „Narzędzia systemowe”. |
-| `CMake 3.28 or higher is required` | CLion używa starszego CMake. | W ustawieniach toolchainu przywróć wbudowany CMake (**Bundled**). |
-| Terminal: program nie jest znaleziony | Albo program nie został jeszcze zbudowany, albo ścieżka jest inna. | Zbuduj projekt. Sprawdź `pwd` i `ls cmake-build-debug`. Na Windowsie pamiętaj o `.\` i `.exe`. |
+| `CMake 3.28 or higher is required` | CLion używa starszego CMake'a. | W ustawieniach toolchainu przywróć wbudowany CMake (**Bundled**). |
+| Terminal: powłoka nie znajduje programu | Albo program nie został jeszcze zbudowany, albo ścieżka jest inna. | Zbuduj projekt. Sprawdź `pwd` i `ls cmake-build-debug`. Na Windowsie pamiętaj o `.\` i `.exe`. |
 | Polskie litery w komunikacie wyglądają dziwnie | Terminal inaczej odczytuje polskie znaki. | Na razie używaj liter bez polskich znaków. |
 
 ## 11. Wyjaśnij

@@ -16,7 +16,7 @@ Ta lekcja zakłada, że:
 
 ## Sytuacja
 
-Wiele razy klikano już **Build** i wpisywano `cmake --build`, a potem pojawiał się program. Co dzieje się po drodze? Dziś wykonasz te kroki ręcznie, zobaczysz, na którym z nich powstają różne rodzaje błędów, i przeczytasz plik `CMakeLists.txt`, który opisuje projekt.
+Od kilku lekcji klikasz **Build** i wpisujesz `cmake --build`, a za każdym razem pojawia się program. Co dzieje się po drodze? Dziś wykonasz te kroki ręcznie, zobaczysz, na którym z nich powstają różne rodzaje błędów, i przeczytasz plik `CMakeLists.txt`, który opisuje projekt.
 
 Najważniejsza umiejętność tej lekcji: **gdy budowanie się nie udaje, rozpoznać, na którym etapie, i na tej podstawie szukać przyczyny.** Komunikatów nie trzeba zapamiętywać.
 
@@ -100,7 +100,7 @@ To polecenie dostaje plik obiektowy, a nie `main.cpp`. `clang++` wie więc, że 
 
 Powstał plik wykonywalny `hello` (na Windowsie `hello.exe`), który wypisuje znany komunikat.
 
-### To samo w CMake
+### To samo w CMake'u
 
 Te same dwa etapy wykonuje za Ciebie CMake z Ninja. W wyniku `cmake --build` (lekcja 0.6) i w oknie Build w CLionie widać je było jako dwie linijki:
 
@@ -236,9 +236,9 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 
 | Linijka | Co mówi narzędziom |
 |---|---|
-| `cmake_minimum_required(VERSION 3.28)` | Ten projekt wymaga CMake 3.28 lub nowszego. Starszy CMake zatrzyma się z komunikatem o wymaganej wersji. |
-| `project(first_program LANGUAGES CXX)` | Nazwa całego **projektu** i jego język: `CXX` to w CMake nazwa C++. Tu CMake szuka kompilatora C++ i sprawdza, czy działa. |
-| `add_executable(first_program main.cpp)` | Zbuduj **program wykonywalny** o nazwie `first_program` z pliku `main.cpp`. W CMake taki program nazywa się **targetem** (ang. *target*, cel budowania). |
+| `cmake_minimum_required(VERSION 3.28)` | Ten projekt wymaga CMake'a 3.28 lub nowszego. Starszy CMake zatrzyma się z komunikatem o wymaganej wersji. |
+| `project(first_program LANGUAGES CXX)` | Nazwa całego **projektu** i jego język: `CXX` to w CMake'u nazwa C++. Tu CMake szuka kompilatora C++ i sprawdza, czy działa. |
+| `add_executable(first_program main.cpp)` | Zbuduj **program wykonywalny** o nazwie `first_program` z pliku `main.cpp`. W CMake'u taki program nazywa się **targetem** (ang. *target*, cel budowania). |
 | `target_compile_features(first_program PRIVATE cxx_std_20)` | Kompiluj ten program jako C++20. Dlatego w poleceniach widać `-std=c++20`. `PRIVATE` na razie pomiń. |
 | `set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)` | Używaj samego standardowego C++20, bez dodatków konkretnego kompilatora. |
 
@@ -274,7 +274,7 @@ W `build-terminal` są teraz **oba** programy: nowy `hello_cmake` i stary `first
 
 **Wróć do pierwotnej wersji.** Najbezpieczniej skopiować jeszcze raz `CMakeLists.txt` z oryginalnego `lesson_05_first_program` i zastąpić nim zmieniony plik. Potem `cmake --build build-terminal`. Plik `hello_cmake` zostanie w `build-terminal`, dopóki go nie usuniesz. Możesz też usunąć cały katalog `build-terminal`: to wynik budowania, a następna konfiguracja utworzy go od nowa.
 
-## 6. Misja: Który etap protestuje?
+## 6. Misja: który etap protestuje?
 
 Ktoś z zespołu zgłasza cztery problemy. W każdym przypadku zmieniono **jedną rzecz** w działającym projekcie. Twoje zadanie: ustalić, na którym etapie coś jest nie tak, i to naprawić.
 
@@ -330,7 +330,7 @@ int main() {
 }
 ```
 
-**Zgłoszenie C.** `main.cpp` jest działający, ale w `CMakeLists.txt` jedna linijka wygląda tak:
+**Zgłoszenie C.** `main.cpp` jest w działającej wersji, ale w `CMakeLists.txt` jedna linijka wygląda tak:
 
 ```cmake
 add_executable(first_program program.cpp)
@@ -368,7 +368,7 @@ Zapisuj wyniki w tabeli, na przykład w notatkach:
 
 ### Kryterium sukcesu
 
-- Każde zgłoszenie ma przypisany właściwy etap i **cytat z wyniku narzędzi**, który to potwierdza. Przy zgłoszeniu, w którym nikt nie zgłasza błędu, dowodem jest wynik programu.
+- Każde zgłoszenie ma przypisany właściwy etap i **cytat z wyniku narzędzi**, który to potwierdza. Przy zgłoszeniu, w którym żadne narzędzie nie zgłasza błędu, dowodem jest wynik programu.
 - Każde zgłoszenie naprawiono jedną zmianą, a po naprawie program buduje się i wypisuje oczekiwane dwie linijki.
 - Przy każdym zgłoszeniu umiesz w jednym zdaniu powiedzieć, **dlaczego** problem zatrzymał budowanie właśnie na tym etapie, albo dlaczego żaden etap go nie zatrzymał.
 

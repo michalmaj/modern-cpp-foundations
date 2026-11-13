@@ -67,7 +67,7 @@ In this lesson you always **build** first (**Build | Build Project**) and click 
 
 Before you break anything, tell two situations apart:
 
-| | The program doesn't build | The program builds, but prints something other than you want |
+| | The program doesn't build | The program builds, but prints something other than what you want |
 |---|---|---|
 | What you see | Messages with the word `error` in the **Build** window. No new program is created. | The build succeeds, and the **Run** window shows different text than expected. |
 | Who notices the problem | The compiler. | You, when you compare the output with the expected one. |
@@ -136,7 +136,7 @@ Below it, the compiler shows that line of code. The `^` marks position 35, right
 
 ### Step 3. Form a hypothesis
 
-For example: "In line 4, the semicolon after the text is missing, so the compiler doesn't know where the first statement ends."
+For example: “In line 4, the semicolon after the text is missing, so the compiler doesn't know where the first statement ends.”
 
 Why does it matter? The **syntax** of a language is its rules for writing code, and in C++ a `std::cout << …` statement ends with a semicolon. Going to a new line means nothing to the compiler. Without the semicolon it reads on and attaches the `std::cout` from line 5 to the first statement, which no longer makes sense.
 
@@ -174,7 +174,7 @@ int main() {
 
 1. How many `error` messages are there?
 2. Which lines and positions do they refer to?
-3. What do they say? An *identifier* here means "a name", and *undeclared* means one the compiler doesn't know.
+3. What do they say? An *identifier* here means “a name”, and *undeclared* means one the compiler doesn't know.
 
 <details>
 <summary>Check your answers</summary>
@@ -187,7 +187,7 @@ int main() {
 
 1. Two.
 2. Line 2, position 5, and line 3, position 5: where `std` starts in both.
-3. "The name `std` was used, but the compiler doesn't know it."
+3. “The name `std` was used, but the compiler doesn't know it.”
 
 </details>
 
@@ -195,8 +195,8 @@ int main() {
 
 **Explanation.** The compiler reads the file from the top and must know every name you use. `std::cout` isn't built into the language: it's part of the **standard library**, and the compiler only learns about it from the line `#include <iostream>`.
 
-- Lines that start with `#` are **preprocessor directives**: instructions for the build tools, carried out before the actual compiling. **They are not statements of the program.** They don't run while the program runs, they don't stand inside `main`, and they don't end with a semicolon.
-- `#include <iostream>` means: "insert here the **declarations** from the part of the standard library called `iostream`". A declaration tells the compiler that something with a given name exists and how to use it. One of these declarations is `std::cout`.
+- Lines that start with `#` are **preprocessor directives**: instructions for the build tools, carried out before the actual compiling. **They are not statements of the program.** They don't run while the program runs, they aren't written inside `main`, and they don't end with a semicolon.
+- `#include <iostream>` means: “insert here the **declarations** from the part of the standard library called `iostream`”. A declaration tells the compiler that something with a given name exists and how to use it. One of these declarations is `std::cout`.
 - Without that line, the compiler knows neither `std` nor `std::cout`.
 
 This is the case promised in experiment A: **the cause is somewhere other than the lines the messages point to**. The compiler shows where an unknown name was used, but what's missing is at the very top of the file.
@@ -225,7 +225,7 @@ int main() {
 
 1. Predict whether the program will build.
 2. Build it and find the first relevant information: the file, line, position and description.
-3. Write down a hypothesis: what is wrong and **why**. "You have to add `std::`" doesn't yet answer the question "why".
+3. Write down a hypothesis: what is wrong and **why**. “You have to add `std::`” doesn't yet answer the question “why”.
 4. Fix one thing, build again and check the output.
 
 <details>
@@ -247,9 +247,9 @@ The message has two parts separated by a semicolon. The second one is the compil
 1 error generated.
 ```
 
-- **What the message says:** "the name `cout` was used, but the compiler doesn't know it; did you mean `std::cout`?".
+- **What the message says:** “the name `cout` was used, but the compiler doesn't know it; did you mean `std::cout`?”.
 - **The `note:` line** leads to the standard library's `iostream` file, to where `std::cout` is declared. Its path and line number depend on the system, because each one has a different standard library. It's not your file, and you don't change anything in it.
-- **Why:** the names of the standard library belong to a group of names called `std` (the technical term is *namespace*; you'll learn more about them later). `std::cout` is the full name: "`cout` from the group `std`". Plain `cout` is a **different name** to the compiler, looked up outside that group. Nobody declared it, so the compiler doesn't know it. `#include <iostream>` is in place, so the compiler knows `std::cout`, and that's why it can suggest it.
+- **Why:** the names of the standard library belong to a group of names called `std` (the technical term is *namespace*; you'll learn more about them later). `std::cout` is the full name: “`cout` from the group `std`”. Plain `cout` is a **different name** to the compiler, looked up outside that group. Nobody declared it, so the compiler doesn't know it. `#include <iostream>` is in place, so the compiler knows `std::cout`, and that's why it can suggest it.
 - **The fix:** restore `std::` in line 5.
 - **The compiler's suggestion** was right here, but treat it as a hypothesis to check, not an order. Understand why it makes sense before you accept it.
 
@@ -259,7 +259,7 @@ On the internet you may come across the line `using namespace std;`, which lets 
 
 ## 6. Mission: a shopping list
 
-Someone wrote a program that should print a shopping list, but the program doesn't build, and maybe that's not all. Repair it.
+Someone wrote a program that should print a shopping list, but the program doesn't build, and maybe that's not all. Fix it.
 
 **Prepare the project:**
 
@@ -329,7 +329,7 @@ After every fix, read the messages again: new ones may appear, and the line numb
 
 An example solution, with an example log, is in [Example solutions](#example-solutions).
 
-## 7. When something goes differently
+## 7. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -337,7 +337,7 @@ An example solution, with an example log, is in [Example solutions](#example-sol
 | New messages appeared after a fix | The compiler got further and noticed something it hadn't checked before. Or the fix introduced a new problem. | Read the messages again. If the fix didn't explain anything, undo it (<kbd>Ctrl</kbd> + <kbd>Z</kbd>, on macOS <kbd>⌘ Cmd</kbd> + <kbd>Z</kbd>) and form a new hypothesis. |
 | The message text differs from the lesson | The wording depends on the compiler version and the system. | Look for the same information: the file, line, position and the meaning of the description. |
 | The line number doesn't match what you see in the editor | The code changed since the last build, for example a line was added at the top. | Build again and read the new messages. |
-| The build succeeded, but the output differs from the expected one | This is not a problem for the compiler: the code is valid C++, but it does something other than you want. | Compare the output with the expected one character by character, and find the statement that prints the differing part. |
+| The build succeeded, but the output differs from the expected one | This is not a problem for the compiler: the code is valid C++, but it does something other than what you want. | Compare the output with the expected one character by character, and find the statement that prints the differing part. |
 | In the terminal, the program prints an old result | The last build failed, so the previous executable is still there (lesson 0.5). | Check the build output and fix the errors. Run the program only after a successful build. |
 
 ## 8. Explain
@@ -349,7 +349,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 <details>
 <summary>Example answer</summary>
 
-When the program doesn't build, the compiler reports an `error` and no new program is created. The code isn't valid C++. When the program builds but prints the wrong text, the code is valid C++, but it does something other than we wanted. The compiler won't notice; you see it only by comparing the output with the expected one.
+When the program doesn't build, the compiler reports an `error` and no new program is created. The code isn't valid C++. When the program builds but prints the wrong text, the code is valid C++, but it does something other than what we wanted. The compiler won't notice; you see it only by comparing the output with the expected one.
 
 </details>
 
@@ -391,8 +391,8 @@ Because then you know what each change did: whether the hypothesis was right and
 
 ## Summary
 
-- Compile errors are a normal part of programming. A message says **where** (file, line, position) and **what** doesn't fit for the compiler.
-- Read the build output from the top and look for the first information that points to a place in your code. That place is where you start looking: the cause can be earlier, even on another line.
+- Compile errors are a normal part of programming. A message says **where** (file, line, position) and **what** doesn't fit.
+- Read the build output from the top and look for the first piece of information that points to a place in your code. That place is where you start looking: the cause can be earlier, even on another line.
 - One mistake can produce several messages, and other mistakes can stay invisible until you fix the first one.
 - Work in a loop: **see the problem → read the diagnostics → form a hypothesis → fix one thing → build again → check the result**.
 - `;` ends a statement. `#include <iostream>` gives the compiler declarations, including `std::cout`. `std::` says that a name comes from the standard library.
@@ -402,7 +402,7 @@ Because then you know what each change did: whether the hypothesis was right and
 
 ## Example solutions
 
-Look here **after your own attempt**. Your order of fixes may differ and still be right, as long as each fix was reasoned and the program prints exactly the expected output.
+Look here **after your own attempt**. Your order of fixes may differ and still be right, as long as each fix is justified and the program prints exactly the expected output.
 
 <details>
 <summary>Mission: an example diagnostic log</summary>

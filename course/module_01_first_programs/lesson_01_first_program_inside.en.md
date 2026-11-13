@@ -16,7 +16,7 @@ This lesson assumes that after Module 0:
 
 ## The situation
 
-In Module 0 the program was a black box to you: only the text in quotes changed. Today you'll look inside. You'll read `main.cpp` line by line, predict what the program prints, change it, and at the end write your first own C++ statements.
+In Module 0 the program was a black box to you: only the text in quotes changed. Today you'll look inside. You'll read `main.cpp` line by line, predict what the program prints, change it and at the end write your first C++ statements of your own.
 
 Today's path: **recognise → predict → change → fill in → write → explain**.
 
@@ -26,7 +26,7 @@ After this lesson you will:
 - point out `main` in a program: the place where your code starts running;
 - recognise statements that print text, and their parts: `std::cout`, `<<`, text in quotes and the semicolon;
 - predict the order in which a program prints its messages;
-- add statements that print text on your own, build the program and check the result.
+- add your own statements that print text, build the program and check the result.
 
 ## 1. Set up your own workspace
 
@@ -115,9 +115,9 @@ std::cout << "Hello! My first C++20 program works.\n";
 ```
 
 - **`std::cout`** is where the program sends text to be shown: CLion's Run window or the terminal. `std::` means that `cout` comes from the standard library. For now, always write them together: `std::cout`.
-- **`<<`** reads here as "send to": send what is on the right to `std::cout`. The arrows show the direction: the text flows left, into `std::cout`.
+- **`<<`** reads here as “send to”: send what is on the right to `std::cout`. The arrows show the direction: the text flows left, into `std::cout`.
 - **`"…"`** is **text in quotes** (the technical term is *string literal*). The program prints it exactly as written: the same letters, spaces and characters. The quotes themselves only mark where the text starts and ends; they don't appear in the output.
-- **`\n`** at the end of the text is not two characters to print but an instruction: "go to a new line". You'll see what it does in section 4.
+- **`\n`** at the end of the text is not two characters to print but an instruction: “go to a new line”. You'll see what it does in section 4.
 - **`;`** (the semicolon) ends the statement, a bit like a full stop ends a sentence.
 
 **What can you already change safely, and what should you leave alone for now?**
@@ -213,7 +213,7 @@ Time to write some C++.Good morning!
 
 </details>
 
-**What happened?** A new statement doesn't start a new line by itself. The output moves to a new line only when the text contains `\n`. Without it, the second text starts right after the first, not even with a space.
+**What happened?** A new statement doesn't start a new line by itself. The output moves to a new line only when the text contains `\n`. Without it, the second text starts right after the first, without even a space.
 
 The code for both changes is in [Example solutions](#example-solutions) at the end of the lesson. Look there after your own attempt.
 
@@ -248,7 +248,7 @@ Type this one statement on the keyboard; don't copy it. The code won't build as 
 <details>
 <summary>Hint 1</summary>
 
-Which of the existing lines does almost the same as the missing one should?
+Which of the existing lines does almost the same thing as the missing one should?
 
 </details>
 
@@ -297,7 +297,7 @@ Print each line with its own statement. You write the code yourself: you already
 ### Success criteria
 
 - The program prints **exactly** these three lines, in this order: the same letters (capital and small), spaces, colons and dash.
-- There are no extra lines, no empty lines, and no text glued together on one line.
+- There are no extra lines, no empty lines and no text glued together on one line.
 - Each line of the output comes from its own statement, and each statement ends with a semicolon.
 - The program was built from the `cpp-workspace/parcel_label` folder, and the CMake window says `Clang 22`.
 - You can point out which statement prints which line.
@@ -318,7 +318,7 @@ Start with one line: make the program print only `TO: Ola Nowak`. Click **Run** 
 
 An example solution is in [Example solutions](#example-solutions). Look there only once your program meets all the criteria, or if you're really stuck.
 
-## 7. When something goes differently
+## 7. When something goes wrong
 
 When the build fails, CLion shows the compiler's messages in the **Build** window. **Read them from the top** and find the first piece of information that points to a place in your code: the file `main.cpp` and a line number. Start looking for the cause there. [Lesson 1.2](lesson_02_when_the_compiler_complains.en.md) shows how to read these messages.
 
@@ -327,7 +327,7 @@ When the build fails, CLion shows the compiler's messages in the **Build** windo
 | Two messages glued together on one line | The first text is missing `\n`. | Add `\n` at the end of the text, before the closing quote. |
 | An extra empty line | One text has `\n` twice, or there is a statement that prints only `\n`. | Each text should end with a single `\n`. |
 | The build fails with an error (`error:`) | The compiler doesn't understand some line. | Check one by one: does every statement end with `;`? Does every text have a quote at the start and at the end? Are the statements between `{` and `}`? Are the underscores from section 5 still there? |
-| An error on a line with text, although everything looks fine | A quote may be a "curly" one (`“` or `”`), for example after copying text from a document or a chat app. | Delete the quotes and type them on the keyboard in CLion: `"`. |
+| An error on a line with text, although everything looks fine | A quote may be a “curly” one (`“` or `”`), for example after copying text from a document or a chat app. | Delete the quotes and type them on the keyboard in CLion: `"`. |
 | The output of a different exercise | A different project is open in CLion. | Check the project name at the top of the CLion window. Open the right folder (**File \| Open**). |
 | The CMake window shows a compiler other than `Clang 22` | This project uses a different toolchain. | Section 1, step 4. Then **Tools \| CMake \| Reset Cache and Reload Project**. |
 | Different capital letters or a missing space in the output | The program prints the text exactly as written. | Compare the text in the code with the expected output, character by character. |
@@ -368,7 +368,7 @@ Save the file, build the program again and run it. Run in CLion does this in one
 <details>
 <summary>Example answer</summary>
 
-I understand: the code runs from `{` to `}` in `main`, from top to bottom; `std::cout << "…";` prints a text; `\n` moves to a new line; `;` ends a statement. For now I only recognise `#include <iostream>`, `int` before `main`, and `std::`. I'll learn what they mean in the next lessons.
+I understand: the code runs from `{` to `}` in `main`, from top to bottom; `std::cout << "…";` prints a text; `\n` moves to a new line; `;` ends a statement. For now I only recognise `#include <iostream>`, `int` before `main` and `std::`. I'll learn what they mean in the next lessons.
 
 </details>
 

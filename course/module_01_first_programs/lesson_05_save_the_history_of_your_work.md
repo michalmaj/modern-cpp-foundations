@@ -20,7 +20,7 @@ Twój program z biletem do kina działa. Chcesz go zmienić, ale boisz się, że
 
 Najprostszy pomysł to kopie: `cinema_ticket_final`, `cinema_ticket_final_2`, `cinema_ticket_final_naprawde`. Po tygodniu nie wiadomo już, która kopia jest która, czym się różnią i która działała. Każda kopia ciągnie za sobą katalogi budowania. Łatwo też poprawić nie tę kopię, co trzeba.
 
-Programiści rozwiązują ten problem **systemem kontroli wersji**. To program, który na Twoje polecenie zapisuje wersje wybranych plików, z opisem, autorem i datą. Potem pokazuje, co zmieniło się między wersjami, i pozwala zobaczyć każdą wcześniejszą wersję. Najpopularniejszy taki system to **Git**.
+Ten problem rozwiązuje **system kontroli wersji**. To program, który na Twoje polecenie zapisuje wersje wybranych plików, z opisem, autorem i datą. Potem pokazuje, co zmieniło się między wersjami, i pozwala zobaczyć każdą wcześniejszą wersję. Najpopularniejszy taki system to **Git**.
 
 Po tej lekcji będziesz:
 
@@ -30,7 +30,7 @@ Po tej lekcji będziesz:
 - sprawdzać stan plików (`git status`) i zmiany (`git diff`);
 - wybierać pliki do zapisania (`git add`) i tworzyć commity z sensownym opisem (`git commit`);
 - przeglądać historię (`git log`);
-- pomijać pliki wygenerowane przez narzędzia za pomocą `.gitignore`.
+- za pomocą `.gitignore` pomijać pliki wygenerowane przez narzędzia.
 
 ## 1. Git i GitHub
 
@@ -457,7 +457,7 @@ W tym kursie nie dodajesz wszystkiego naraz (`git add .`). Wybierasz pliki albo 
 | `LF will be replaced by CRLF` (Windows) | Informacja o końcach linijek (punkt 6). | Nic nie rób. |
 | Do przechowalni trafił niewłaściwy plik | `git add` wybrał za dużo. | `git restore --staged <plik>` wyjmuje go z przechowalni. Plik na dysku się nie zmienia. |
 | `The following paths are ignored by one of your .gitignore files` | Próbujesz dodać plik pomijany przez `.gitignore`. | To ochrona przed pomyłką. Nie dodawaj go. |
-| Plik budowania już jest w historii | Dodano go, zanim był `.gitignore`. | `git rm --cached <plik>`, a potem commit. Plik zostaje na dysku, znika tylko z następnych wersji w historii. |
+| Plik budowania już jest w historii | Dodano go, zanim powstał `.gitignore`. | `git rm --cached <plik>`, a potem commit. Plik zostaje na dysku, znika tylko z następnych wersji w historii. |
 | `git show` z `\` w ścieżce nie znajduje pliku (Windows) | W `identyfikator:ścieżka` Git oczekuje `/`. | Wpisz ścieżkę z `/`, na przykład `cinema_ticket/main.cpp`. |
 
 Nie usuwaj katalogu `.git`, żeby „zacząć od nowa”: tracisz wtedy całą historię. Każdy problem z tej tabeli rozwiązuje się bez tego.

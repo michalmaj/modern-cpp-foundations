@@ -18,7 +18,7 @@ Ta lekcja zakłada, że po lekcjach 1.1 i 1.2:
 
 Do tej pory zawsze był gotowy program albo prawie gotowy kod. Dziś zaczniesz od **pustego pliku** `main.cpp` i napiszesz w nim cały program samodzielnie.
 
-Poznasz też cztery nowe drobiazgi, bo bez nich wiele prostych programów nie da się napisać: jak wypisać cudzysłów `"`, jak wypisać ukośnik odwrotny `\`, jak dodać komentarz i co znaczy `return 0;` na końcu `main`.
+Poznasz też cztery nowe drobiazgi, bo bez nich wielu prostych programów nie da się napisać: jak wypisać cudzysłów `"`, jak wypisać ukośnik odwrotny `\`, jak dodać komentarz i co znaczy `return 0;` na końcu `main`.
 
 Po tej lekcji będziesz:
 
@@ -128,7 +128,7 @@ int main() {
 }
 ```
 
-**Przewidź:** czy ten program się zbuduje? Potem sprawdź: zastąp nim zawartość `main.cpp` i zbuduj. Programem z kawiarnią się nie przejmuj, w punkcie 6 napiszesz go jeszcze raz.
+**Przewidź:** czy ten program się zbuduje? Potem sprawdź: zastąp nim zawartość `main.cpp` i zbuduj. Programem z kawiarnią się nie przejmuj: w punkcie 6 napiszesz go jeszcze raz.
 
 Przejdź przez pętlę z lekcji 1.2. Komunikat mówi o brakującym średniku, a przecież średnik jest na końcu linijki. Spójrz na **pozycję**, którą wskazuje kompilator. Co stoi tuż przed nią?
 

@@ -15,7 +15,7 @@ Ta lekcja zakłada, że po lekcji 1.1:
 
 ## Sytuacja
 
-Każdy programista codziennie widzi błędy kompilacji. To nie porażka, tylko normalna część pracy. Kompilator nie zgaduje, co miało być w kodzie: gdy czegoś nie rozumie, przerywa budowanie i pisze, **gdzie** i **co** mu nie pasuje.
+Każdy, kto programuje, codziennie widzi błędy kompilacji. To nie porażka, tylko normalna część pracy. Kompilator nie zgaduje, co miało być w kodzie: gdy czegoś nie rozumie, przerywa budowanie i pisze, **gdzie** i **co** mu nie pasuje.
 
 Dziś celowo popsujesz działający program na trzy sposoby i nauczysz się czytać te komunikaty. Nie chodzi o zapamiętanie trzech poprawek. Chodzi o **sposób pracy**, który zadziała też przy komunikatach, których jeszcze nie znasz:
 
@@ -199,7 +199,7 @@ int main() {
 - `#include <iostream>` znaczy: „wstaw w tym miejscu **deklaracje** z części biblioteki standardowej o nazwie `iostream`”. Deklaracja to informacja dla kompilatora, że coś o danej nazwie istnieje i jak tego używać. Jedną z tych deklaracji jest `std::cout`.
 - Bez tej linijki kompilator nie zna ani `std`, ani `std::cout`.
 
-To przykład z eksperymentu A: **przyczyna jest w innym miejscu niż wskazane linijki**. Kompilator pokazuje, gdzie użyto nieznanej nazwy, a brakuje czegoś na samej górze pliku.
+To przypadek zapowiedziany w eksperymencie A: **przyczyna jest w innym miejscu niż wskazane linijki**. Kompilator pokazuje, gdzie użyto nieznanej nazwy, a brakuje czegoś na samej górze pliku.
 
 **Jeden błąd, kilka komunikatów.** Jedna brakująca linijka dała dwa komunikaty, po jednym w każdym miejscu, gdzie użyto `std`. Gdyby program miał dziesięć takich instrukcji, komunikatów byłoby dziesięć, a błąd nadal jeden. Dlatego nie poprawiaj każdego komunikatu osobno: szukaj **wspólnej przyczyny**.
 

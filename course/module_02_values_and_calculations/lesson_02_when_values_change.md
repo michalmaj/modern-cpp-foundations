@@ -16,7 +16,7 @@ Ta lekcja zakłada, że po lekcji 2.1:
 
 ## Sytuacja
 
-W lekcji 2.1 każda zmienna dostawała wartość raz, przy tworzeniu, i potem już jej nie zmieniała. Prawdziwe programy często śledzą coś, co się zmienia: liczbę wolnych miejsc, punkty w grze, stan licznika. Dziś zmienisz wartość istniejącej zmiennej, nauczysz się przewidywać wartości krok po kroku i oznaczysz te wartości, które zmieniać się **nie** powinny.
+W lekcji 2.1 każda zmienna dostawała wartość raz, przy tworzeniu, i potem ta wartość już się nie zmieniała. Prawdziwe programy często śledzą coś, co się zmienia: liczbę wolnych miejsc, punkty w grze, stan licznika. Dziś zmienisz wartość istniejącej zmiennej, nauczysz się przewidywać wartości krok po kroku i oznaczysz te wartości, które zmieniać się **nie** powinny.
 
 Po tej lekcji będziesz:
 
@@ -196,7 +196,7 @@ Pamiętaj: w każdym przypisaniu prawa strona korzysta z wartości **z poprzedni
 
 **Krok 3. Sprawdź każdy krok.** Dopisz w programie, pod każdym przypisaniem, instrukcję `std::cout`, która wypisze obie wartości w tej samej postaci co ostatnia linijka programu. Uruchom program i porównaj każdy wypisany wiersz z tabelą. Jeśli któryś się nie zgadza, znajdź pierwszy taki wiersz i sprawdź, z której wartości skorzystano przy obliczaniu prawej strony.
 
-Takie śledzenie wartości to umiejętność, której programiści używają stale. W kolejnych lekcjach przyda się jeszcze nieraz.
+Takie śledzenie wartości to umiejętność, z której w programowaniu korzysta się stale. W kolejnych lekcjach przyda się jeszcze nieraz.
 
 ## 6. Wartości, które się nie zmieniają: `const`
 

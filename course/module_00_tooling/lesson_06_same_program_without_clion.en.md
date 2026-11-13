@@ -80,7 +80,7 @@ From the terminal, a program is created in **three steps**:
 |---|---|---|
 | 1. **Configuring** | `cmake -S . -B build-terminal …` | CMake reads `CMakeLists.txt`, checks the compiler and writes a **build plan** in the `build-terminal` folder. |
 | 2. **Building** | `cmake --build build-terminal` | CMake asks Ninja to carry out the plan, and Ninja runs `clang++`. An executable file is created. |
-| 3. **Running** | `./build-terminal/first_program` | The computer carries out the finished program. |
+| 3. **Running** | `./build-terminal/first_program` | The computer executes the finished program. |
 
 You configure **once**. After each change to the code, building is enough.
 
@@ -146,7 +146,7 @@ Our program is a single short file, so the compiler can handle it on its own. Ty
 
 The program prints the same message.
 
-**Why was one command enough?** The program has one file and needs no extra settings, so `clang++` carries out all the steps needed to produce an executable file by itself.
+**Why was one command enough?** The program has one file and needs no extra settings, so `clang++` carries out by itself all the steps needed to produce an executable file.
 
 **So why CMake?** Real programs have many files and settings. CMake remembers them in `CMakeLists.txt`, and the same description works in CLion and in the terminal, on every system. That's why **in this course we build with CMake**. Calling `clang++` directly was only an experiment, to see what the compiler does on its own.
 
@@ -160,7 +160,7 @@ You now have two or three executable files built from the same `main.cpp`:
 
 **Step 1.** Change the code, using CLion only as an editor. Open the project in it as in lesson 0.5 (**Open** and the `lesson_05_first_program` folder), click `main.cpp` and change the text between the quotes, for example to `Three programs, one source.` Use plain English letters for now. Save the file (<kbd>Ctrl</kbd> + <kbd>S</kbd>, on macOS <kbd>⌘ Cmd</kbd> + <kbd>S</kbd>).
 
-**Don't click Build or Run.** Editing and saving a file in CLion doesn't build anything: you will build the program in the terminal, with your own commands. If CLion shows messages about the project meanwhile, you don't need them just for editing. Other text editors can quietly change characters, such as quotes, so stay with CLion for now.
+**Don't click Build or Run.** Editing and saving a file in CLion doesn't build anything: you will build the program in the terminal, with your own commands. If CLion shows messages about the project while you do this, they don't matter for editing. Other text editors can quietly change characters, such as quotes, so stay with CLion for now.
 
 **Step 2. Predict:** what will each program print if you run it now, before any building? Write your predictions in the table:
 
@@ -186,17 +186,17 @@ This mission brings together everything Module 0 has taught you. Do the building
 2. **Check the compiler:** check the compiler version (the command from lesson 0.4) and find the `The CXX compiler identification is Clang 22…` line in the configure output.
 3. **Configure and build:** use a new build folder, for example `build-mission`.
 4. **Run** the built program.
-5. **Change the message** to your own (in CLion, as in section 6), **build again** (without configuring), and check the new result.
+5. **Change the message** to your own (in CLion, as in section 6), **build again** (without configuring) and check the new result.
 6. **Explain** in your own words, one sentence each, what these are for: `main.cpp`, the `clang++` compiler, CMake, Ninja and the executable file.
 
-### Success criterion
+### Success criteria
 
 - Configuring shows `Clang 22` and the path to our compiler.
 - The program in `build-mission` first prints the old message, and after the change and a rebuild, your message.
 - Building and running were done in the terminal; CLion was used at most as an editor.
 - The explanations tell the source code apart from the executable, and describe the roles of CMake (the plan), Ninja (carrying out the plan) and the compiler (turning code into a program).
 
-## 8. When things look different
+## 8. When something goes wrong
 
 When something fails, **read the messages from the top** and find the first piece of information that explains the cause. Often that is the first `CMake Error` or `error:` message, but it can also be an earlier warning (`Warning`), a configuration line such as one showing the wrong compiler, or a note about a missing file. The lines after it are usually consequences of that first problem.
 
@@ -205,13 +205,13 @@ When something fails, **read the messages from the top** and find the first piec
 | `The source directory … does not appear to contain CMakeLists.txt` | The terminal is in a different folder from the project. | Check `pwd` and `ls`. Go to `lesson_05_first_program`. |
 | Windows: `Ignoring extra path from command line: "Files\LLVM\bin\clang++.exe"`, followed by `The CXX compiler identification is unknown` | The quotes are missing: PowerShell split the path at the space in `Program Files`. | Put the whole part in quotes: `"-DCMAKE_CXX_COMPILER=C:\Program Files\LLVM\bin\clang++.exe"`. |
 | Configuring shows a compiler other than `Clang 22` | A different compiler path was typed. | Check the path from section 4. |
-| A message about changed settings and deleting the cache (`You have changed variables that require your cache to be deleted`) | This build folder already had a configuration with a different compiler. CMake starts it again. | Check that `Clang 22` now appears. If something still doesn't match, delete the build folder in the file window (it goes to the Trash) and configure again. |
+| A message about changed settings and deleting the cache (`You have changed variables that require your cache to be deleted`) | This build folder already had a configuration with a different compiler. CMake starts the configuration again from scratch. | Check that `Clang 22` now appears. If something still doesn't match, delete the build folder in the file window (it goes to the Trash) and configure again. |
 | Building ends with an error and there is no program | The executable wasn't created. | Find the first message in the build output that explains the cause. If you changed the code, check that you didn't remove a quote or another character. |
 | The program prints the old message | You ran a program that wasn't rebuilt after the code changed. | Build that program again, or check that you typed the path to the right file. |
-| The program isn't recognised when you type just its name | Programs in the current folder aren't on the `PATH` list (lesson 0.3). | Add the path: `./` on macOS and Ubuntu, `.\` on Windows. |
+| The program isn't recognised when you type just its name | The current folder isn't on the `PATH` list (lesson 0.3). | Add the path: `./` on macOS and Ubuntu, `.\` on Windows. |
 | macOS: `clang++ -std=c++20 …` works, but it's Apple's compiler | On macOS, plain `clang++` is Apple's compiler. | Use the full path from section 5. |
 
-## 9. Explain it
+## 9. Explain
 
 **1.** What is the difference between configuring and building?
 
@@ -236,7 +236,7 @@ The build plan already existed, and nothing in the project itself had changed. N
 <details>
 <summary>Answer</summary>
 
-Because `cmake --build build-terminal` only built the program in `build-terminal`. `first_program_direct` is a separate file that only changes after compiling it again with `clang++`.
+Because `cmake --build build-terminal` only built the program in `build-terminal`. `first_program_direct` is a separate file that only changes when you compile it again with `clang++`.
 
 </details>
 
@@ -245,7 +245,7 @@ Because `cmake --build build-terminal` only built the program in `build-terminal
 <details>
 <summary>Answer</summary>
 
-No. CMake, Ninja and the compiler build the program. CLion calls the same tools and makes work easier: an editor, buttons, windows with results, and later a debugger.
+No. CMake, Ninja and the compiler build the program. CLion calls the same tools and makes work easier: an editor, buttons, windows with results and later a debugger.
 
 </details>
 
@@ -258,7 +258,7 @@ No. CMake, Ninja and the compiler build the program. CLion calls the same tools 
 
 ## Module 0 summary
 
-Look at the road already behind you:
+Look how far you have already come:
 
 1. **Lesson 0.1:** files, folders, paths and your first terminal commands.
 2. **Lesson 0.2:** moving between folders.
@@ -271,6 +271,6 @@ At the start of Module 0, the terminal may have been completely new to you. Now 
 
 ## What's next: Module 1
 
-In Module 1 you will start to really understand and write C++20 code. You will learn what the lines in `main.cpp` mean, and write your first programs of your own. Start with [lesson 1.1: The first program, from the inside](../module_01_first_programs/lesson_01_first_program_inside.en.md). Module 1 is in development: further lessons are in preparation.
+In Module 1 you will start to really understand and write C++20 code. You will learn what the lines in `main.cpp` mean, and write your first programs of your own. Start with [lesson 1.1: The first program, from the inside](../module_01_first_programs/lesson_01_first_program_inside.en.md).
 
 **Previous lesson:** [Lesson 0.5: Your first working program in CLion](lesson_05_first_program_in_clion.en.md) · **Next lesson:** [Lesson 1.1: The first program, from the inside](../module_01_first_programs/lesson_01_first_program_inside.en.md) · [Course overview](../../README.en.md)

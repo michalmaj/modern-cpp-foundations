@@ -188,7 +188,7 @@ Komunikat znasz z lekcji 1.2: `use of undeclared identifier 'ticket_cout'; did y
 
 ## 5. Zmień wartości
 
-Wróć do programu z kasą biletową (ten z trzema zmiennymi). **Zmień tylko** wartość początkową `ticket_count` z `3` na `5`.
+Wróć do programu z kasą biletową (tego z trzema zmiennymi). **Zmień tylko** wartość początkową `ticket_count` z `3` na `5`.
 
 **Przewidź**, co wypisze program, zanim go zbudujesz i uruchomisz.
 
@@ -302,10 +302,10 @@ Przykładowe rozwiązania są w części [Przykładowe rozwiązania](#przykłado
 | Zamiast liczby pojawia się nazwa zmiennej, na przykład `Total: total_cost` | Nazwa stoi w cudzysłowie, więc jest zwykłym napisem. | Usuń cudzysłowy wokół nazwy: `<< total_cost <<`. |
 | Wynik sklejony z tekstem, na przykład `Total:240` | W napisie przed wartością brakuje spacji. | Dopisz spację na końcu napisu: `"Total: "`. |
 | `use of undeclared identifier '…'` | Kompilator nie zna tej nazwy: literówka, inna wielkość liter albo zmienna użyta wyżej, niż została zadeklarowana. | Porównaj nazwę z deklaracją, znak po znaku. Sprawdź, czy deklaracja stoi wyżej. Kompilator często podpowiada właściwą nazwę (`did you mean …?`). |
-| Błąd kompilacji w linijce z `<<` | Brakuje `<<` między elementami albo cudzysłowu w napisie. | Każdy element (napis, wartość, `"\n"`) poprzedza własne `<<`. |
+| Błąd kompilacji w linijce z `<<` | Brakuje `<<` między elementami albo cudzysłowu w napisie. | Przed każdym elementem (napisem, wartością, `"\n"`) stoi własne `<<`. |
 | Program po zmianie wartości wypisuje stary wynik | Program nie został zbudowany ponownie. | Zbuduj ponownie (Run w CLionie robi to sam). |
 
-**Uwaga:** tekstu i liczby nie łączy się w C++ znakiem `+`, tak jak w niektórych innych językach. Każdy element wysyłasz do `std::cout` osobnym `<<`.
+**Uwaga:** w C++ tekstu i liczby nie łączy się znakiem `+`, choć niektóre inne języki na to pozwalają. Każdy element wysyłasz do `std::cout` osobnym `<<`.
 
 ## 9. Wyjaśnij
 

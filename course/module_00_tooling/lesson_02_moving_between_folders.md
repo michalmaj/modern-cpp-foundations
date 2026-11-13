@@ -3,7 +3,7 @@
 **Polski** · [English](lesson_02_moving_between_folders.en.md) · [Opis kursu](../../README.md)
 
 > **Moduł 0, lekcja 2** · około 30–40 minut
-> **Potrzebujesz:** komputera z Windows, macOS albo Linuksem. Nie musisz niczego instalować.
+> **Potrzebujesz:** komputera z Windowsem, macOS albo Linuksem. Nie musisz niczego instalować.
 
 ## Zanim zaczniesz
 
@@ -135,7 +135,7 @@ Zobaczysz `muzea`. Wiele osób spodziewa się tu słowa `krakow`, ale `..` to sa
 
 </details>
 
-`..` można łączyć: `..\..` na Windowsie albo `../..` na macOS i Linuksie oznacza „dwa poziomy w górę”. Sprawdź, co pokaże `ls` z taką ścieżką, wpisane z katalogu `muzea`.
+`..` można łączyć: `..\..` na Windowsie albo `../..` na macOS i Linuksie oznacza „dwa poziomy w górę”. Będąc w katalogu `muzea`, sprawdź, co pokaże `ls` z taką ścieżką.
 
 ### Jak wysoko można wejść?
 
@@ -264,7 +264,7 @@ Na dysku nic. `muzea` jest tam, gdzie było. W powłoce zmienił się bieżący 
 <details>
 <summary>Odpowiedź</summary>
 
-Udało się Oli, bo `gdansk` leży w `plan-podrozy`. W `krakow` nie ma katalogu `gdansk`, więc Bartek zobaczy błąd. Bartek może wpisać `cd ..\gdansk` (Windows) albo `cd ../gdansk` (macOS, Linux), czyli „poziom w górę, potem do `gdansk`”, albo użyć ścieżki bezwzględnej.
+Uda się Oli, bo `gdansk` leży w `plan-podrozy`. W `krakow` nie ma katalogu `gdansk`, więc Bartek zobaczy błąd. Bartek może wpisać `cd ..\gdansk` (Windows) albo `cd ../gdansk` (macOS, Linux), czyli „poziom w górę, potem do `gdansk`”, albo użyć ścieżki bezwzględnej.
 
 </details>
 

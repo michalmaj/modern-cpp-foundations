@@ -33,7 +33,7 @@ Po tej lekcji będziesz:
 | Element | Co to jest |
 |---|---|
 | `main.cpp` | **Kod źródłowy**: tekst programu w C++. |
-| `CMakeLists.txt` | **Opis projektu** dla CMake: z czego powstaje program i że to C++20. |
+| `CMakeLists.txt` | **Opis projektu** dla CMake'a: z czego powstaje program i że to C++20. |
 | program w katalogu budowania CLiona, zwykle `cmake-build-debug` | **Plik wykonywalny**, który zbudował CLion w lekcji 0.5 (jeśli zbudował). |
 | **budowanie** | Zamiana kodu źródłowego w plik wykonywalny. |
 
@@ -130,7 +130,7 @@ cmake --build build-terminal
 2. **Budowanie:** ostatnia linijka mówi `Linking CXX executable first_program` (na Windowsie `first_program.exe`).
 3. **Uruchamianie:** program wypisuje ten sam komunikat co wersja z CLiona. To ten sam kod, więc i ten sam wynik.
 
-## 5. Eksperyment: kompilator bez CMake
+## 5. Eksperyment: kompilator bez CMake'a
 
 Nasz program to jeden krótki plik, więc kompilator poradzi sobie z nim sam. Wpisz:
 
@@ -194,7 +194,7 @@ Ta misja zbiera wszystko, czego nauczył Cię Moduł 0. Budowanie i uruchamianie
 - Konfiguracja pokazuje `Clang 22` i ścieżkę do naszego kompilatora.
 - Program z `build-mission` wypisuje najpierw stary, a po zmianie i ponownym zbudowaniu Twój komunikat.
 - Budowanie i uruchamianie wykonano w terminalu; CLion służył najwyżej jako edytor.
-- Wyjaśnienia odróżniają kod źródłowy od pliku wykonywalnego oraz rolę CMake (plan), Ninja (wykonanie planu) i kompilatora (zamiana kodu w program).
+- Wyjaśnienia odróżniają kod źródłowy od pliku wykonywalnego oraz rolę CMake'a (plan), Ninja (wykonanie planu) i kompilatora (zamiana kodu w program).
 
 ## 8. Gdy coś pójdzie inaczej
 
@@ -208,7 +208,7 @@ Gdy coś się nie udaje, **czytaj komunikaty od początku** i znajdź pierwszą 
 | Komunikat o zmianie ustawień i usuwaniu cache (`You have changed variables that require your cache to be deleted`) | W tym katalogu budowania była już konfiguracja z innym kompilatorem. CMake zaczyna ją od nowa. | Sprawdź, czy teraz widać `Clang 22`. Jeśli coś dalej się nie zgadza, usuń katalog budowania w oknie plików (trafi do Kosza) i skonfiguruj ponownie. |
 | Budowanie kończy się błędem i programu nie ma | Plik wykonywalny nie powstał. | Znajdź w wyniku budowania pierwszy komunikat, który wyjaśnia przyczynę. Jeśli zmieniano kod, sprawdź, czy nie usunięto cudzysłowu albo innego znaku. |
 | Program wypisuje stary komunikat | Uruchomiono program, którego nie zbudowano po zmianie kodu. | Zbuduj ten program ponownie albo sprawdź, czy wpisano ścieżkę do właściwego pliku. |
-| Program nie jest rozpoznawany, gdy wpisujesz samą nazwę | Programu z bieżącego katalogu nie ma na liście `PATH` (lekcja 0.3). | Dopisz ścieżkę: `./` na macOS i Ubuntu, `.\` na Windowsie. |
+| Program nie jest rozpoznawany, gdy wpisujesz samą nazwę | Bieżącego katalogu nie ma na liście `PATH` (lekcja 0.3). | Dopisz ścieżkę: `./` na macOS i Ubuntu, `.\` na Windowsie. |
 | macOS: `clang++ -std=c++20 …` działa, ale to kompilator Apple | Samo `clang++` to na macOS kompilator Apple. | Użyj pełnej ścieżki z punktu 5. |
 
 ## 9. Wyjaśnij
@@ -271,6 +271,6 @@ Na początku Modułu 0 terminal mógł być czymś zupełnie nowym. Teraz potraf
 
 ## Co dalej: Moduł 1
 
-W Module 1 zaczniesz naprawdę rozumieć i pisać kod w C++20. Dowiesz się, co znaczą linijki w `main.cpp`, i napiszesz pierwsze własne programy. Zacznij od [lekcji 1.1: Pierwszy program od środka](../module_01_first_programs/lesson_01_first_program_inside.md). Moduł 1 jest rozwijany: kolejne lekcje są w przygotowaniu.
+W Module 1 zaczniesz naprawdę rozumieć i pisać kod w C++20. Dowiesz się, co znaczą linijki w `main.cpp`, i napiszesz pierwsze własne programy. Zacznij od [lekcji 1.1: Pierwszy program od środka](../module_01_first_programs/lesson_01_first_program_inside.md).
 
 **Poprzednia lekcja:** [Lekcja 0.5: Twój pierwszy działający program w CLionie](lesson_05_first_program_in_clion.md) · **Następna lekcja:** [Lekcja 1.1: Pierwszy program od środka](../module_01_first_programs/lesson_01_first_program_inside.md) · [Opis kursu](../../README.md)

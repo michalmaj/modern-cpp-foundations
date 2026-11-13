@@ -3,7 +3,7 @@
 [Polski](lesson_04_from_source_code_to_an_executable.md) · **English** · [Course overview](../../README.en.md)
 
 > **Module 1, lesson 4** · about 75 minutes
-> **You need:** the `cpp-workspace` folder, the original `lesson_05_first_program` project, and the terminal commands from [lesson 0.6](../module_00_tooling/lesson_06_same_program_without_clion.en.md).
+> **You need:** the `cpp-workspace` folder, the original `lesson_05_first_program` project and the terminal commands from [lesson 0.6](../module_00_tooling/lesson_06_same_program_without_clion.en.md).
 > **Pilot version:** the terminal commands in this lesson are checked automatically on Windows, Ubuntu and macOS. The CLion steps follow the CLion 2026.2 documentation.
 
 ## Before you start
@@ -16,7 +16,7 @@ This lesson assumes that:
 
 ## The situation
 
-You've clicked **Build** and typed `cmake --build` many times, and a program appeared. What happens along the way? Today you'll do these steps by hand, see at which of them different kinds of errors arise, and read the `CMakeLists.txt` file that describes the project.
+You've clicked **Build** and typed `cmake --build` many times, and each time a program appeared. What happens along the way? Today you'll do these steps by hand, see at which of them different kinds of errors arise, and read the `CMakeLists.txt` file that describes the project.
 
 The most important skill in this lesson: **when a build fails, recognise at which stage, and look for the cause based on that.** You don't need to memorise the messages.
 
@@ -64,7 +64,7 @@ main.cpp  ──►  preprocessor and compiling  ──►  main.o  ──►  l
 - **The preprocessor** is the first step of compiling. It handles the lines that start with `#`. For example, `#include <iostream>` inserts declarations from the standard library, including `std::cout`. It does this before the actual compiling starts (lesson 1.2).
 - **Compiling** checks the C++ in **this one file** and translates it into machine code, the instructions for the processor. All the errors from lessons 1.2 and 1.3 came from here. The result is an **object file**, for example `main.o`.
 - **An object file is not a program yet.** Two things are missing from it:
-  - the ready code of the standard library that actually prints the text. `#include` only gave the compiler the declaration of `std::cout`, the information that such a thing exists;
+  - the ready-made code of the standard library that actually prints the text. `#include` only gave the compiler the declaration of `std::cout`, the information that such a thing exists;
   - the **startup code**: a short piece that every program has. It prepares the program to run and calls your `main` function.
 - **Linking** is done by the **linker**. It joins the object file with the standard library code and the startup code into one **executable**. While doing so, it checks that everything the program needs really exists.
 
@@ -82,7 +82,7 @@ main.cpp  ──►  preprocessor and compiling  ──►  main.o  ──►  l
 | macOS | `/opt/homebrew/opt/llvm@22/bin/clang++ -std=c++20 -c main.cpp` |
 | Ubuntu | `clang++-22 -std=c++20 -c main.cpp` |
 
-`-c` means "compile only". On a Mac with an Intel processor, type `/usr/local/opt/llvm@22` instead of `/opt/homebrew/opt/llvm@22`, as in lesson 0.6.
+`-c` means “compile only”. On a Mac with an Intel processor, type `/usr/local/opt/llvm@22` instead of `/opt/homebrew/opt/llvm@22`, as in lesson 0.6.
 
 The command prints nothing. Check with `ls` (`ls -F` on macOS and Ubuntu). A file **`main.o`** has appeared, with the same name on all three systems. That's the object file. There is no program yet, and don't try to run `main.o`: it isn't a program.
 
@@ -161,7 +161,7 @@ clang++: error: linker command failed with exit code 1 (use -v to see invocation
 <details>
 <summary>Answer</summary>
 
-At linking. Compiling succeeded: `main.o` was created and there was no message. Step 2 failed, and on every system the last line says `linker command failed`. No message points to a line in `main.cpp` (like `main.cpp:4:5`), because the linker doesn't read the source code: it gets a ready object file.
+At linking. Compiling succeeded: `main.o` was created and there was no message. Step 2 failed, and on every system the last line says `linker command failed`. No message points to a line in `main.cpp` (like `main.cpp:4:5`), because the linker doesn't read the source code: it gets a finished object file.
 
 </details>
 
@@ -202,7 +202,7 @@ int main() {
 Hello! My first C++20 program works.
 ```
 
-### A compile error vs. a link error
+### A compile error vs a link error
 
 | | A missing semicolon (lesson 1.2) | `mian` instead of `main` |
 |---|---|---|
@@ -221,7 +221,7 @@ When you build with CMake, you don't need to remember the commands from experime
 - **CMake** (configuring, `cmake -S . -B …`) reads `CMakeLists.txt`, checks the compiler and writes a **build plan**: which commands to run and in what order;
 - **Ninja** (building, `cmake --build …`) carries out the plan: it runs `clang++` to compile, then to link. It redoes only what's needed, for example after `main.cpp` changes.
 
-These are two different jobs: CMake plans, Ninja carries out.
+These are two different jobs: CMake plans, and Ninja carries out the plan.
 
 ### What `CMakeLists.txt` says
 
@@ -262,7 +262,7 @@ You know **Debug and Release** from lesson 0.5. This choice isn't written in `CM
 
 **Predict:** what will appear in `build-terminal` after building again? Will `first_program` disappear?
 
-4. Build again: `cmake --build build-terminal`. You don't need to configure yourself: Ninja notices the change in `CMakeLists.txt` and runs CMake first on its own. You'll see `Re-running CMake...` at the start of the output. Then come compiling and `Linking CXX executable hello_cmake`.
+4. Build again: `cmake --build build-terminal`. You don't need to configure again by hand: Ninja notices the change in `CMakeLists.txt` and runs CMake first on its own. You'll see `Re-running CMake...` at the start of the output. Then come compiling and `Linking CXX executable hello_cmake`.
 5. Check `ls build-terminal` (`ls -F build-terminal` on macOS and Ubuntu), and run the new program: `.\build-terminal\hello_cmake.exe` (macOS and Ubuntu: `./build-terminal/hello_cmake`).
 
 <details>
@@ -272,9 +272,9 @@ You know **Debug and Release** from lesson 0.5. This choice isn't written in `CM
 
 </details>
 
-**Go back to the original version.** The safest way is to copy `CMakeLists.txt` again from the original `lesson_05_first_program` and replace the changed file with it. Then `cmake --build build-terminal`. The `hello_cmake` file stays in `build-terminal` until you delete it. You can also delete the whole `build-terminal` folder: it's a build result, and the next configuring creates it again.
+**Go back to the original version.** The safest way is to copy `CMakeLists.txt` again from the original `lesson_05_first_program` and replace the changed file with it. Then `cmake --build build-terminal`. The `hello_cmake` file stays in `build-terminal` until you delete it. You can also delete the whole `build-terminal` folder: it's a build result, and the next time you configure, it is created again.
 
-## 6. Mission: Which stage complains?
+## 6. Mission: which stage complains?
 
 Someone on the team reports four problems. In each case, **one thing** was changed in a working project. Your task: find out at which stage something is wrong, and fix it.
 
@@ -351,11 +351,11 @@ int main() {
 
 **For each report:**
 
-1. **Predict** before you run anything: will the build succeed? Will running it?
+1. **Predict** before you run anything: will the build succeed? Will the program run?
 2. Build (`cmake --build build-terminal`) and, if possible, run the program.
-3. Determine the **stage**: configuring (CMake), compiling, linking, or running the program (it builds, but the output is wrong).
+3. Determine the **stage**: configuring (CMake), compiling, linking or running the program (it builds, but the output is wrong).
 4. Find **the first relevant piece of information**, and copy it down.
-5. Write down **the cause**, fix **one thing**, and check the result.
+5. Write down **the cause**, fix **one thing** and check the result.
 
 Record the results in a table, for example in your notes:
 
@@ -382,13 +382,13 @@ Before you read the messages, answer two questions: was an object file created? 
 <details>
 <summary>Hint 2</summary>
 
-Check who writes the first message: CMake (`CMake Error`), the compiler (`main.cpp:` with a line number), or the linker (`linker command failed`)? Or does nobody write anything, and yet something is wrong? The first relevant information can also be a `warning`.
+Check who writes the first message: CMake (`CMake Error`), the compiler (`main.cpp:` with a line number), or the linker (`linker command failed`)? Or does nobody write anything, and yet something is wrong? The first relevant piece of information can also be a `warning`.
 
 </details>
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 7. When something goes differently
+## 7. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -459,7 +459,7 @@ Because changing the name in `add_executable` tells the tools what to build from
 
 ## What's next
 
-After four lessons of Module 1, you can write a small program, fix errors, and you know how an executable is made. In [lesson 1.5](lesson_05_save_the_history_of_your_work.en.md) you will start saving the history of your work.
+After four lessons of Module 1, you can write a small program and fix errors, and you know how an executable is made. In [lesson 1.5](lesson_05_save_the_history_of_your_work.en.md) you will start saving the history of your work.
 
 ---
 
