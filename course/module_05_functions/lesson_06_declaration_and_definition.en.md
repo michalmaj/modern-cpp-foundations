@@ -16,7 +16,7 @@ This lesson assumes that you:
 
 ## The situation
 
-So far, every function had to stand in the file before its first call. That works, but it imposes an order: helper functions first, `main` at the end. In this lesson you'll answer two questions. **Can a function be called before its definition appears in the file?** And **why can a program pass compiling and still fail to link?**
+So far, every function had to come in the file before its first call. That works, but it imposes an order: helper functions first, `main` at the end. In this lesson you'll answer two questions. **Can a function be called before its definition appears in the file?** And **why can a program pass compiling and still fail to link?**
 
 After this lesson you will:
 
@@ -32,7 +32,7 @@ In `cpp-workspace`, create a `lesson_5_6` folder and copy `main.cpp` and `CMakeL
 
 ## 2. A familiar layout, and one change
 
-You know this layout from lesson 5.5: the function's definition stands before `main`, so the compiler already knows it at the place of the call.
+You know this layout from lesson 5.5: the function's definition comes before `main`, so the compiler already knows it at the place of the call.
 
 <!-- example: score_definition_first -->
 ```cpp
@@ -72,7 +72,7 @@ int double_points(int points) {
 <details>
 <summary>What the compiler reports, and why</summary>
 
-The program won't build. The compiler reports `use of undeclared identifier 'double_points'` on line 4, as in lesson 5.1. This is a **compile error**: the compiler reads the file from the top, and at the place of the call it doesn't know the name `double_points` yet. The definition stands further down in the same file, but that doesn't make the compiler know the name earlier. Compiling doesn't finish, so linking never starts.
+The program won't build. The compiler reports `use of undeclared identifier 'double_points'` on line 4, as in lesson 5.1. This is a **compile error**: the compiler reads the file from the top, and at the place of the call it doesn't know the name `double_points` yet. The definition is further down in the same file, but that doesn't make the compiler know the name earlier. Compiling doesn't finish, so linking never starts.
 
 </details>
 
@@ -134,7 +134,7 @@ Point out in it: the declaration, `main`, the function call, the definition and 
 Score: 8
 ```
 
-The result is the same as in section 2. At the place of the call the compiler already knows the function, thanks to the declaration on line 3, so compiling succeeds. The function's body stands further down, in the definition. The declaration ran nothing: at the call, the program runs the statements from the definition.
+The result is the same as in section 2. At the place of the call the compiler already knows the function, thanks to the declaration on line 3, so compiling succeeds. The function's body is further down, in the definition. The declaration ran nothing: at the call, the program runs the statements from the definition.
 
 </details>
 
@@ -173,7 +173,7 @@ int main() {
 // the definitions of the three functions
 ```
 
-In this program two functions cooperate, and the definitions stand below `main`, in any order:
+In this program two functions cooperate, and the definitions are below `main`, in any order:
 
 <!-- example: score_two_declarations -->
 ```cpp
@@ -195,7 +195,7 @@ int double_points(int points) {
 }
 ```
 
-**Predict** the result. Notice that `score_with_bonus` calls `double_points`, although `double_points`'s definition stands further down in the file.
+**Predict** the result. Notice that `score_with_bonus` calls `double_points`, although `double_points`'s definition comes further down in the file.
 
 <details>
 <summary>Standard output and explanation</summary>
@@ -271,7 +271,7 @@ The workshop room has 10 places. Two groups report their numbers of participants
 - If either number is outside the range 0 to 8, it prints only `Invalid group size`.
 - For valid data it prints `Total attendees: N` and one of the lines `Room status: Fits` or `Room status: Too many people`. Exactly 10 people fit; 11 and more don't.
 - The program doesn't ask again.
-- The program has **at least two own functions**: one works out the total number of people and returns an `int`, the other decides whether the total doesn't exceed the room's capacity and returns a `bool`. **The second function uses the first one's result.** You choose the names of the functions and their parameters.
+- The program has **at least two functions of your own**: one works out the total number of people and returns an `int`, the other decides whether the total doesn't exceed the room's capacity and returns a `bool`. **The second function uses the first one's result.** You choose the names of the functions and their parameters.
 - The functions print nothing and read nothing. `main` chooses the status message based on the `bool` result: neither `0` nor `1` appears in the report.
 - **The file layout:** first `#include`, then the declarations of both functions, then `main`, and finally the definitions of the functions.
 - Don't use variables declared outside functions.
@@ -567,11 +567,11 @@ Input could not be read
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 9. When something goes differently
+## 9. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
-| `use of undeclared identifier` with your function's name | At the place of the call the compiler doesn't know the function: the declaration is missing, or it stands below the call. | Add a declaration before the first call, for example before `main`. |
+| `use of undeclared identifier` with your function's name | At the place of the call the compiler doesn't know the function: the declaration is missing, or it comes after the call. | Add a declaration before the first call, for example before `main`. |
 | `undefined reference`, `undefined symbol` or `referenced from`, and `linker command failed` at the end | The function is declared and called, but the linker can't find its definition. | Add a definition that matches the declaration. Check that the name in the definition is the same. |
 | A link error, although the definition is in the file | The definition doesn't match the declaration, for example it has a different name or different parameter types. | Compare the declaration and the definition: the name, the result type, the number and types of parameters. |
 | A compile error at a declaration | The semicolon at the end of the declaration is missing. | A declaration ends with `;`, and a definition with a body in braces. |
@@ -598,7 +598,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 13. What happens when a called function is declared but has no definition?
 14. How does a compile error differ from a link error?
 15. Do linker messages on different systems have to look the same?
-16. Does every call of an own function need an earlier separate declaration ending with a semicolon?
+16. Does every call to one of your functions need an earlier separate declaration ending with a semicolon?
 
 <details>
 <summary>Example answers</summary>
@@ -720,7 +720,7 @@ int total_attendees(int first_group, int second_group) {
 ```
 
 - **The file layout:** `#include`, two declarations, `main`, two definitions. Each declaration has the same types and the same order of parameters as its definition.
-- **The order of the definitions:** `fits_in_room` stands before `total_attendees`, although it calls it. This works because at the place of the call the compiler knows `total_attendees` from the declaration at the start of the file.
+- **The order of the definitions:** `fits_in_room` comes before `total_attendees`, although it calls it. This works because at the place of the call the compiler knows `total_attendees` from the declaration at the start of the file.
 - **Cooperation:** `fits_in_room` doesn't repeat the addition; it uses the result of `total_attendees` and compares it with the capacity, `<= 10`. Exactly 10 people fit.
 - **`main`** checks the read and the range, prints the total number of people, and chooses the status message based on the `bool` result.
 - **A failed read** or out-of-range data ends the program with one message, without calling the functions.

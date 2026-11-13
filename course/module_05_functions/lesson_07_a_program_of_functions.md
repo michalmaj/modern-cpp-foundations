@@ -20,7 +20,7 @@ Zajrzenie do części B, do wcześniejszych lekcji albo do notatek nie jest pora
 - **pierwsze:** zaprojektowanie funkcji i zapisanie ich zadań, napisanie programu z zadania 1, sprawdzenie funkcji osobno i podstawowe przypadki całego programu;
 - **drugie:** przypadki graniczne, zadania 2 i 3, porównanie z rozwiązaniem, pytania i samoocena.
 
-**Możesz używać:** CLiona albo terminala, CMake i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przebiegu i przypadków oraz tymczasowych wydruków testowych. Debugger nie jest potrzebny. Nie musisz kończyć danych z klawiatury: przypadki, w których dane kończą się wcześniej, analizujesz na papierze.
+**Możesz używać:** CLiona albo terminala, CMake'a i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przebiegu i przypadków oraz tymczasowych wydruków testowych. Debugger nie jest potrzebny. Nie musisz kończyć danych z klawiatury: przypadki, w których dane kończą się wcześniej, analizujesz na papierze.
 
 ---
 
@@ -154,7 +154,7 @@ Prośba o 3 rowery przy 2 dostępnych jest odrzucona i nie zmienia stanu. Dwie k
 - jakie funkcje utworzysz, co każda dostaje, co zwraca i kto ją wywołuje;
 - tabelę przypadków testowych: plan bez zgłoszeń, granice planu i wartości tuż poza nimi, zgłoszenie dokładnie wykorzystujące pozostałe rowery, zgłoszenie większe niż dostępność, a po nim mniejsze, kilka przyjęć i kilka odrzuceń z rzędu, prośby o 0, -1 i 4, tekst zamiast danych planu i zamiast liczby w zgłoszeniu oraz dane, które kończą się przed pierwszym zgłoszeniem i po kilku zgłoszeniach. Przy każdym przypadku zapisz oczekiwane standardowe wyjście.
 
-Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, zamiast je uruchamiać, i porównaj z pełną listą kontrolną w części B.
+Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, zamiast je uruchamiać, i porównaj z pełną listą przypadków kontrolnych w części B.
 
 **Najpierw sprawdź funkcje osobno**, wydrukami testowymi jak w lekcji 5.5:
 
@@ -173,7 +173,7 @@ Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5. Przed
 
 ## Zadanie 2: Trzy zgłoszenia
 
-W `cpp-workspace` utwórz katalog `diagnosis_5`, skopiuj do niego `main.cpp` i `CMakeLists.txt` z oryginalnego `lesson_05_first_program`. Każdy z poniższych programów wpisz po kolei w `main.cpp` tego katalogu.
+W `cpp-workspace` utwórz katalog `diagnosis_5` i skopiuj do niego `main.cpp` i `CMakeLists.txt` z oryginalnego `lesson_05_first_program`. Każdy z poniższych programów wpisz po kolei w `main.cpp` tego katalogu.
 
 **Zgłoszenie A: zasięg.** Funkcja ma obliczyć, ile rowerów zostanie na stacji z 6 rowerami po wypożyczeniu 2. Program się nie buduje:
 
@@ -345,7 +345,7 @@ Przejdź tutaj po wykonaniu części A albo wtedy, gdy świadomie zrezygnujesz z
 ## Jak sprawdzić swoją pracę
 
 - **Standardowe wyjście:** uruchom program dla każdego przypadku z tabeli, który możesz wpisać, i porównaj linijki programu z oczekiwanymi, znak po znaku. Pomiń wpisane dane widoczne dzięki echu.
-- **Koniec danych:** przypadki, w których dane się kończą, sprawdź tabelą przebiegu i porównaj z pełną listą kontrolną. Każdy z nich jest tam sprawdzony automatycznie.
+- **Koniec danych:** przypadki, w których dane się kończą, sprawdź tabelą przebiegu i porównaj z pełną listą przypadków kontrolnych. Każdy z nich jest tam sprawdzony automatycznie.
 - **Funkcje:** czy każda ma zadanie, które da się opisać jednym zdaniem? Czy któraś funkcja tylko przekazuje argumenty dalej? Czy jakaś reguła stoi w dwóch miejscach?
 - **Stan:** czy liczba dostępnych rowerów i liczniki zmieniają się w jednym miejscu, tylko na podstawie wyniku funkcji?
 

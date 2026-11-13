@@ -77,7 +77,7 @@ int main() {
 <details>
 <summary>What the compiler reports, and why</summary>
 
-The program won't build. The compiler reports `invalid operands to binary expression ('void' and 'int')` on line 8: on the left of `+` stands something of type `void`, on the right an `int`, and such values can't be added.
+The program won't build. The compiler reports `invalid operands to binary expression ('void' and 'int')` on line 8: on the left of `+` there's something of type `void`, on the right an `int`, and such values can't be added.
 
 The function `print_seconds` worked out 180 and printed that number, but it **passed nothing back** to the place of the call. Its result type is `void`, so the call `print_seconds(3)` isn't a number that can be added to 30. Printing text on the screen is something different from passing a result on.
 
@@ -180,12 +180,12 @@ End
 ```
 
 - **The first call:** the function ends at `return seconds;`, and `main` stores the result 120 in `stored_seconds`. Only the next line prints it.
-- **The second call** stands inside a `std::cout` statement. The function ends at `return`, and the printing is done by `std::cout` in `main`. The function didn't print anything, either time.
+- **The second call** is inside a `std::cout` statement. The function ends at `return`, and the printing is done by `std::cout` in `main`. The function didn't print anything, either time.
 - `seconds` in the function and `stored_seconds` in `main` are two different variables, like the parameter and the argument in lesson 5.2.
 
 </details>
 
-**What does `return` do?** Running a `return` statement **ends the current call of the function** and passes the result back to the place of the call. If any statements stood after the `return` in the same function, they wouldn't run in that call any more. In this lesson, every function that returns a result has one `return`, at the end of its body. A `void` function passes back no ordinary result value, which is why its call can't be added or stored in an `int` variable.
+**What does `return` do?** Running a `return` statement **ends the current call of the function** and passes the result back to the place of the call. If any statements came after the `return` in the same function, they wouldn't run in that call any more. In this lesson, every function that returns a result has one `return`, at the end of its body. A `void` function passes back no ordinary result value, which is why its call can't be added or stored in an `int` variable.
 
 ## 5. Back to `int main()`
 
@@ -598,7 +598,7 @@ The temperatures in these tests were chosen so that the `double` calculations gi
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 11. When something goes differently
+## 11. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -608,7 +608,7 @@ An example solution is in [Example solutions](#example-solutions).
 | The average has no fractional part | The division happens on `int` numbers before the result reaches `return` (section 8). | Divide by `2.0`, or work with `double` numbers. |
 | The temperature change has the wrong sign | The subtraction is in the reverse order. | The change is the second temperature minus the first. |
 | A converted temperature is wrong | The formula is written differently from `C · 9 / 5 + 32`. | Check the formula for 0 (result 32) and 100 (result 212). |
-| Part of the report appears after bad data | The report stands before the data check, or outside the branch for valid data. | First check the read and the range, and print the report only for valid data. |
+| Part of the report appears after bad data | The report comes before the data check, or outside the branch for valid data. | First check the read and the range, and print the report only for valid data. |
 | The program does nothing and waits | It's waiting for another number, as in lesson 2.6. | Type a number and press **Enter**. Don't check a case where the data runs out this way: trace it on paper. |
 
 ## 12. Explain
@@ -791,7 +791,7 @@ int main() {
 - **`main`** calls the function twice, with different arguments. It stores both results in `const double` variables, because it uses each one twice: in the report and in the difference. The formula isn't repeated in `main`.
 - **The difference** is `second_fahrenheit - first_fahrenheit`, that is, second minus first. For `40`, `-40` it's -144; for `20`, `20` it's 0.
 - **The order of operations:** `celsius * 9.0 / 5.0 + 32.0` multiplies, divides, and only then adds 32, as in the formula. The constants `9.0` and `5.0` make the whole calculation happen on `double` numbers.
-- **The data:** one `std::cin.fail()` check after both reads is enough, as in lesson 5.2. The range check stands in the branch for a successful read, and the report only in the branch for valid data.
+- **The data:** one `std::cin.fail()` check after both reads is enough, as in lesson 5.2. The range check is in the branch for a successful read, and the report only in the branch for valid data.
 
 </details>
 

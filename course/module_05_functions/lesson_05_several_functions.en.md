@@ -17,12 +17,12 @@ This lesson assumes that after lesson 5.4 you:
 
 ## The situation
 
-So far every program has had one own function, sometimes called several times, and a `main` that used it. A bigger problem, though, is made of several smaller jobs: something has to be checked, something calculated, something chosen. In this lesson one program will consist of **several functions with different jobs**, and functions will use the results of **other functions**. The point isn't to have as many functions as possible, but to split the problem sensibly.
+So far every program has had one function of its own, sometimes called several times, and a `main` that used it. A bigger problem, though, is made of several smaller jobs: something has to be checked, something calculated, something chosen. In this lesson one program will consist of **several functions with different jobs**, and functions will use the results of **other functions**. The point isn't to have as many functions as possible, but to split the problem sensibly.
 
 After this lesson you will:
 
 - split a problem into several jobs and point out each function's job;
-- write a function that calls another own function and uses its result;
+- write a function that calls another of your functions and uses its result;
 - trace the order of calls and returns between functions;
 - check individual functions with controlled calls and printouts;
 - tell checking one function from checking the whole program;
@@ -147,12 +147,12 @@ int main() {
 
 ## 4. A function calls a function
 
-In lessons 5.1–5.4 the pattern was always the same: `main` calls an own function, and the result goes back to `main`. Now the path is longer:
+In lessons 5.1–5.4 the pattern was always the same: `main` calls a function of your own, and the result goes back to `main`. Now the path is longer:
 
 **`main` → `measurement_status` → a checking function → the result goes back to `measurement_status` → the result goes back to `main`**
 
 - `main` doesn't have to call every function. The checking functions are called by `measurement_status`.
-- An own function can call another own function the same way `main` does: by its name, with arguments in parentheses.
+- One of your functions can call another of your functions the same way `main` does: by its name, with arguments in parentheses.
 - A helper function's result goes to **the function that called it**, here `measurement_status`, and becomes a value in its condition.
 - The helper function doesn't know who will finally print the report, and doesn't need to.
 - Data passes between functions only through arguments and returned results, by value, as in lesson 5.2. The functions have no shared variables.
@@ -377,9 +377,9 @@ The program works out the cost of delivering a parcel, in whole zloty. It's a si
 - If both numbers were read but at least one is outside its range, it prints only `Invalid shipping data`.
 - For valid data it prints `Shipping cost: N`, where `N` is the cost in whole zloty.
 - The program doesn't ask again.
-- The program has **at least three own functions besides `main`**. **At least one of them calls another own function.** The calculating and checking functions print nothing and read nothing.
+- The program has **at least three functions of your own besides `main`**. **At least one of them calls another of your functions.** The calculating and checking functions print nothing and read nothing.
 - `main` prints the question, reads the data, checks the read, uses your function to check the data, gets the cost and prints the report. The rules for the base price and the surcharges aren't in `main`.
-- The helper functions' definitions stand before the functions that use them, and all of them before `main`.
+- The helper functions' definitions come before the functions that use them, and all of them before `main`.
 - Don't use variables declared outside functions.
 
 In `cpp-workspace`, create a `shipping_cost` folder, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp` and write the program on your own.
@@ -439,7 +439,7 @@ Analyse the cases where the data ends early on paper, as in lessons 4.5–5.4, i
 
 - The program builds as C++20, and its standard output for the data `2`, `3` and `6`, `2` is exactly as shown above.
 - For every case you can type, the standard output matches the list of check cases. You check the cases where the data ends early by reasoning.
-- The program has at least three own functions besides `main`, and at least one of them calls another own function and uses its result.
+- The program has at least three functions of your own besides `main`, and at least one of them calls another of your functions and uses its result.
 - Each pricing rule appears in the code once, in a function. `main` contains no weight thresholds or surcharges.
 - The calculating and checking functions neither print nor read anything.
 - After a failed read or out-of-range data, `Shipping cost` doesn't appear.
@@ -466,7 +466,7 @@ Think about which function knows the base-price rules, and which one can use its
 <details>
 <summary>Hint 3</summary>
 
-If the function that works out the total cost needs the base price, it can call another own function and use the value it gets in a further calculation.
+If the function that works out the total cost needs the base price, it can call another of your functions and use the value it gets in a further calculation.
 
 </details>
 
@@ -715,11 +715,11 @@ Input could not be read
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
-| `use of undeclared identifier` with your function's name | The function is called in the file before its definition, also by another function. | Write helper functions before the functions that use them. |
+| `use of undeclared identifier` with your function's name | The function is called in the file before its definition, including by another function. | Write helper functions before the functions that use them. |
 | Out-of-range data gets an ordinary result | The checking function's result is skipped, or the function isn't called (section 7). | Check that the result of every call is used in a condition or a calculation. |
 | A test printout shows a good result, but the whole program a bad one | The function is correct, but the function using it, or `main`, uses it wrongly (section 6). | Also check the cooperation: call the calling function for the same boundaries. |
 | The cost is wrong only at a boundary, for example for 2 kg or 5 kg | A threshold in the base-price function uses `<` instead of `<=`, or the other way round. | Check that function with printouts for 2, 3, 5 and 6. |
@@ -732,8 +732,8 @@ An example solution is in [Example solutions](#example-solutions).
 
 Answer in your own words, preferably in writing. Only then compare with the example answers.
 
-1. Why might a program need more than one own function?
-2. Can an own function call another own function?
+1. Why might a program need more than one function of its own?
+2. Can one of your functions call another of your functions?
 3. What happens to a helper function's result?
 4. Does every function have to be called directly by `main`?
 5. Why can a range-checking function return `bool`?
@@ -766,7 +766,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 12. Because bugs often sit exactly at the boundaries, for example `<` instead of `<=`. A value in the middle of a band doesn't reveal them.
 13. No. A function makes sense when it has a clear job. A function that only passes its arguments on doesn't improve the program.
 14. Because the functions pass data through arguments and returned results. That way each one depends only on what it received, and can be checked on its own.
-15. Because the compiler reads the file from the top, and at the place of a call it must already know the function being called. That's why helper functions stand before the functions that use them.
+15. Because the compiler reads the file from the top, and at the place of a call it must already know the function being called. That's why helper functions come before the functions that use them.
 16. No. The parameters, arguments and `return` you know from lessons 5.2–5.4 are enough.
 
 </details>
@@ -774,9 +774,9 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 ## Summary
 
 - One program can consist of **several functions with different jobs**. Each should have a job that can be named.
-- **An own function can call another own function.** A helper function's result goes to the function that called it.
+- **One of your functions can call another of your functions.** A helper function's result goes to the function that called it.
 - Data passes between functions through arguments and returned results. The call, the run and the return can be traced in a table, step by step.
-- Helper functions stand in the file before the functions that use them, and all of them before `main`.
+- Helper functions come in the file before the functions that use them, and all of them before `main`.
 - A **test printout** is a few calls with chosen arguments and a comparison of the results with expectations. It doesn't stay in the program for the user.
 - Checking one function isn't the same as checking the program. **Functions can be correct on their own and still work together wrongly**, for example when a helper function's result is skipped.
 - More functions don't mean a better program. A function makes sense when it has a clear job.
@@ -804,7 +804,7 @@ Before the fix:
 2, 41.0: Measurement ready
 ```
 
-- **For 2, 12.5 and 0, 12.5** the results are correct. These cases don't reveal the bug: the first temperature is within the range, and the second pair is rejected already on the number of measurements.
+- **For 2, 12.5 and 0, 12.5** the results are correct. These cases don't reveal the bug: the first temperature is within the range, and the second pair is already rejected on the number of measurements.
 - **For 2, -21.0 and 2, 41.0** the requirement says `Invalid station data`, but the program prints `Below freezing` and `Measurement ready`.
 - **The cause:** the function `is_valid_temperature` is correct and it is called, but the line `is_valid_temperature(temperature);` **throws its result away**. No decision uses the answer `false`. The compiler doesn't warn, because calling a function on its own is a valid statement.
 - **The fix:** use the result in a condition, as in section 3:
@@ -1009,7 +1009,7 @@ int main() {
 | `shipping_cost` | the total cost | the weight and the zone | `int` | `main` |
 
 - **Cooperation:** `shipping_cost` doesn't know the weight thresholds or the surcharges. It calls `base_price` and `zone_surcharge` and adds their results in its `return`. Each pricing rule appears in the code once.
-- **The order of definitions:** `base_price` and `zone_surcharge` stand before `shipping_cost`, which calls them, and all of them before `main`.
+- **The order of definitions:** `base_price` and `zone_surcharge` come before `shipping_cost`, which calls them, and all of them before `main`.
 - **An assumption:** `base_price` and `zone_surcharge` calculate correctly only for data within the range. For 9 kg, `base_price` would return 12. That's why `main` calls `shipping_cost` only after checking `is_valid_shipping_data`.
 - **Checking on their own:** the program with test printouts checks every function at its boundaries (2 and 3, 5 and 6, every zone, out-of-range values), and the last two printouts check the cooperation. The final program contains only the report.
 - **A failed read:** `main` checks `std::cin.fail()` first. After a failed read, including when the data ends after one number, no pricing function is called.

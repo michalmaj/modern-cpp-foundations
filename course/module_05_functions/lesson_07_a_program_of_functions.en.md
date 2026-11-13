@@ -58,8 +58,8 @@ The number of accepted requests isn't the number of bikes rented: one request ca
 
 **Functions:**
 
-- The program has **at least three sensible own functions besides `main`**. At least one returns a `bool`, and at least one an `int`.
-- **At least one own function calls another own function** and uses its result.
+- The program has **at least three sensible functions of your own besides `main`**. At least one returns a `bool`, and at least one an `int`.
+- **At least one of your functions calls another of your functions** and uses its result.
 - Data passes through parameters and returned values. The calculating and checking functions neither read nor print anything.
 - You choose the names, the parameters and the split yourself. As a starting point, you can separate three responsibilities:
   1. whether the number of bikes asked for is acceptable;
@@ -164,7 +164,7 @@ Analyse the cases where the data ends early on paper, instead of running them, a
 4. Temporarily print the result of its call.
 5. Compare.
 6. Check a boundary case.
-7. Repeat for the function that uses another own function.
+7. Repeat for the function that uses another of your functions.
 8. Remove the test printouts before you check the final standard output.
 
 Check at least: a valid request for 1 and for 3 bikes, an unacceptable request for 0 and for 4, enough and not enough available bikes, a situation where exactly as many bikes are available as are asked for, and the result of a function that uses another function.
@@ -308,7 +308,7 @@ Answer briefly, in writing, referring to your own program from task 1:
 1. Why did you choose these functions? What job does each of them have?
 2. Which function checks whether the number of bikes asked for is acceptable?
 3. Which function decides about assigning bikes?
-4. Which function calls another own function? What values does it pass, and what result does it get?
+4. Which function calls another of your functions? What values does it pass, and what result does it get?
 5. Why don't your functions need to know `main`'s local variables?
 6. Why does the number of available bikes change exactly at the place in the program where you change it?
 7. Can a function correctly return a `bool` without printing anything? Point out such a function in your program.
@@ -323,7 +323,7 @@ Answer briefly, in writing, referring to your own program from task 1:
 You pass the test when you meet **all** the criteria. You may use part B as you go, as long as you note it honestly in the self-assessment.
 
 - `bike_rental/main.cpp` was written from an empty file, in correct C++20. The program builds with no errors.
-- The program has at least three sensible own functions besides `main`, including at least one that returns a `bool` and at least one that returns an `int`. At least one own function calls another and uses its result.
+- The program has at least three sensible functions of your own besides `main`, including at least one that returns a `bool` and at least one that returns an `int`. At least one of your functions calls another and uses its result.
 - The calculating and checking functions neither read nor print anything. The request rules aren't repeated in `main`, and no function exists just to meet the number.
 - The number of available bikes and the counters change in `main`, based on the functions' results: an accepted request reduces the availability, a rejected one doesn't change it.
 - The standard output for examples A, B and C, and for the cases you can type, matches the requirements. The cases where the data ends early match your trace table.
@@ -346,7 +346,7 @@ Come here after doing part A, or when you consciously decide to stop trying on y
 
 - **Standard output:** run the program for every case in your table that you can type, and compare the program's lines with the expected ones, character by character. Skip the typed data shown by the echo.
 - **The end of the data:** check the cases where the data runs out with a trace table, and compare with the full list of check cases. Each of them is checked there automatically.
-- **Functions:** does each one have a job that can be described in one sentence? Does any function only pass its arguments on? Does any rule stand in two places?
+- **Functions:** does each one have a job that can be described in one sentence? Does any function only pass its arguments on? Does any rule appear in two places?
 - **State:** do the number of available bikes and the counters change in one place, only based on a function's result?
 
 ## Hints
@@ -1053,7 +1053,7 @@ Rounds: 3, steps: 2
 
 - **For 0 and 1 rounds** the result is correct, so these tests don't reveal the bug.
 - **For 3 rounds** the result is 2 instead of 6.
-- **The cause:** `return total;` stands **in the loop's body**. `return` doesn't end one iteration: it ends **the whole call of the function** (lesson 5.4). So the function ends after the first iteration, with the result 2. For 0 rounds the loop doesn't run, and for 1 round the first iteration is the only one, which is why both cases look right.
+- **The cause:** `return total;` is **in the loop's body**. `return` doesn't end one iteration: it ends **the whole call of the function** (lesson 5.4). So the function ends after the first iteration, with the result 2. For 0 rounds the loop doesn't run, and for 1 round the first iteration is the only one, which is why both cases look right.
 - **The fix:** remove the `return` from the loop. The final `return` returns the result, after all the iterations.
 
 <!-- example: steps_fixed -->
@@ -1089,9 +1089,9 @@ Rounds: 3, steps: 6
 <details>
 <summary>Task 3: answers</summary>
 
-**Case A.** There's no separate declaration. The definition stands below `main`, and the call `bikes_left(2)` is in `main`. **Compiling fails:** the compiler reports `use of undeclared identifier 'bikes_left'` on line 4, because it reads the file from the top and doesn't know that name yet at the place of the call. The fix: add the declaration `int bikes_left(int rented_bikes);` before `main`, or move the definition above `main`.
+**Case A.** There's no separate declaration. The definition is below `main`, and the call `bikes_left(2)` is in `main`. **Compiling fails:** the compiler reports `use of undeclared identifier 'bikes_left'` on line 4, because it reads the file from the top and doesn't know that name yet at the place of the call. The fix: add the declaration `int bikes_left(int rented_bikes);` before `main`, or move the definition above `main`.
 
-**Case B.** The declaration stands before `main`, the call is in `main`, and there's no definition anywhere. **Compiling succeeds**, because the declaration is enough for the compiler. **Linking fails:** the linker can't find the called function's definition, so no program is created. The message depends on the system, but it contains the name `bikes_left(int)`, and `linker command failed` appears at the end. The fix: add a definition that matches the declaration:
+**Case B.** The declaration comes before `main`, the call is in `main`, and there's no definition anywhere. **Compiling succeeds**, because the declaration is enough for the compiler. **Linking fails:** the linker can't find the called function's definition, so no program is created. The message depends on the system, but it contains the name `bikes_left(int)`, and `linker command failed` appears at the end. The fix: add a definition that matches the declaration:
 
 <!-- example: bikes_declared -->
 ```cpp
@@ -1132,7 +1132,7 @@ The answers are about the reference solution. Yours may differ, as long as they 
 8. The compiler wouldn't report it, because both arguments are `int`s (lesson 5.2). The program would make wrong decisions, for example `can_serve(5, 2)` instead of `can_serve(2, 5)`. A test with different values would reveal it.
 9. Because one request doesn't check how the availability changes between requests, a rejection after the bikes are used up, or counters greater than 1.
 10. Because `main` can use a correct result wrongly, for example forget to subtract the bikes or increase the wrong counter (lesson 5.5).
-11. Each helper function's definition stands before the function that calls it, and all of them before `main`, so at every call the compiler already knows the function. In the layout with declarations, the declarations at the start of the file would give it that knowledge (lesson 5.6).
+11. Each helper function's definition comes before the function that calls it, and all of them before `main`, so at every call the compiler already knows the function. In the layout with declarations, the declarations at the start of the file would give it that knowledge (lesson 5.6).
 12. Because the plan wasn't fully carried out: some requests weren't read, so the numbers in the summary wouldn't describe the planned day.
 
 </details>

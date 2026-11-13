@@ -12,19 +12,19 @@ This lesson assumes that after Module 4 you:
 
 - write programs with `if`/`else` and with `while` and `for` loops;
 - check the range of the data before the program starts working;
-- know that `main` is a function, where the program starts running (lesson 1.3);
+- know that `main` is the function where the program starts running (lesson 1.3);
 - read compiler messages and fix compile errors (lesson 1.2).
 
 ## The situation
 
-Your programs already do a lot, but each one is a single long `main`. When the same piece has to run in several places of a program, you have to write it several times. In this lesson you'll meet a way to **name** such a piece, write it **once** and run it wherever it's needed: **your own function**.
+Your programs already do a lot, but each one is a single long `main`. When the same piece has to run in several places in a program, you have to write it several times. In this lesson you'll meet a way to **name** such a piece, write it **once** and run it wherever it's needed: **your own function**.
 
 After this lesson you will:
 
 - explain why a piece of code is moved into a function;
-- point out, in a function, `void`, its name, the empty parentheses and its body;
+- point out the parts of a function: `void`, its name, the empty parentheses and its body;
 - tell a function's definition from its call;
-- predict the order in which a program with a function runs, also when the function isn't called or is called several times;
+- predict the order in which a program with a function runs, including when the function isn't called or is called several times;
 - find a call that is one too many;
 - write your own `void` function and decide where to call it in a program with a loop.
 
@@ -135,8 +135,8 @@ Keep tools organised
 The standard output is identical to section 2. What changed is how it's written: the rules appear in the code **once**.
 
 - **`show_workshop_rules();`** is a **function call**: the name, empty parentheses and a semicolon. A call says: "run this function's statements now".
-- **`main` is a function too** (lesson 1.3), but it has a special role: the program starts running from it. The program doesn't start with `show_workshop_rules`, even though that function stands higher up in the file. You've known the word `int` before `main` since the start of the course. It's also a special part of `main`, which we'll come back to when you meet functions that pass back a result.
-- You call your own function the same way as the `std::getline(…)` you already know: by its name and parentheses. In `std::getline`'s parentheses stood `std::cin` and the variable that receives the text. The parentheses of `show_workshop_rules()` are empty.
+- **`main` is a function too** (lesson 1.3), but it has a special role: the program starts running from it. The program doesn't start with `show_workshop_rules`, even though that function comes earlier in the file. You've known the word `int` before `main` since the start of the course. It's also a special part of `main`, which we'll come back to when you meet functions that pass back a result.
+- You call your own function the same way as the `std::getline(…)` you already know: by its name and parentheses. `std::getline` had `std::cin` and the variable that receives the text in its parentheses. The parentheses of `show_workshop_rules()` are empty.
 
 ## 5. The order of execution
 
@@ -230,7 +230,7 @@ Morning briefing
 Afternoon briefing
 ```
 
-The rules didn't appear. **Writing a function's definition doesn't run its statements.** The program starts with `main` and runs only what `main` tells it to. The function stands higher up in the file, but without a call its body doesn't run.
+The rules didn't appear. **Writing a function's definition doesn't run its statements.** The program starts with `main` and runs only what `main` tells it to. The function comes earlier in the file, but without a call its body doesn't run.
 
 </details>
 
@@ -289,7 +289,7 @@ int main() {
 }
 ```
 
-**Predict** in how many places of the standard output the new text will appear. Then run the program.
+**Predict** in how many places in the standard output the new text will appear. Then run the program.
 
 <details>
 <summary>Standard output after the change</summary>
@@ -346,7 +346,7 @@ The program's output before the fix, and the fixed program, are in [Example solu
 
 ## 9. A function written below `main`
 
-In this program the function's definition stands **after** `main`:
+In this program the function's definition comes **after** `main`:
 
 <!-- broken: rules_after_main at=5:5 errors=1 error=^use of undeclared identifier 'show_workshop_rules'$ -->
 ```cpp
@@ -370,7 +370,7 @@ void show_workshop_rules() {
 
 The program won't build. The compiler reports `use of undeclared identifier 'show_workshop_rules'` on line 5: it doesn't know that name. You know the same message from lessons 3.2 and 4.3, where it was about a variable.
 
-The compiler reads the file from the top. When it reaches the call on line 5, it hasn't seen any function with that name yet. The definition stands further down, but at this point the compiler doesn't know about it yet.
+The compiler reads the file from the top. When it reaches the call on line 5, it hasn't seen any function with that name yet. The definition is further down, but at this point the compiler doesn't know about it yet.
 
 </details>
 
@@ -432,10 +432,10 @@ Training complete
 
 **Then work in this order:**
 
-1. Design where in the program, and under what condition, the function call stands.
+1. Design where in the program, and under what condition, the function call goes.
 2. Write the program.
 3. Run it for 2 and 3 rounds and compare the results with your table.
-4. Change one line of the break in the function for a moment. **Predict** in how many places of the result for 3 rounds the change will appear, and check.
+4. Change one line of the break in the function for a moment. **Predict** in how many places in the result for 3 rounds the change will appear, and check.
 5. Restore the required break text.
 6. Check the remaining cases in your table: 0, 1, 5, -1 and 6.
 
@@ -575,15 +575,15 @@ Invalid round count
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 11. When something goes differently
+## 11. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
-| `use of undeclared identifier` with your function's name | The call stands in the file before the function's definition, or the name in the call differs from the name in the definition. | Move the definition before `main`. Compare the names character by character. |
-| A compile error at the function's definition | The definition stands inside `main`, between its braces. | Write the definition outside `main`, before it. Only the call stands in `main`. |
+| `use of undeclared identifier` with your function's name | The call comes in the file before the function's definition, or the name in the call differs from the name in the definition. | Move the definition before `main`. Compare the names character by character. |
+| A compile error at the function's definition | The definition is inside `main`, between its braces. | Write the definition outside `main`, before it. Only the call goes in `main`. |
 | The function's statements don't appear in the result | The function isn't called, or the call is missing its parentheses: for example `show_break;` doesn't call anything, and the compiler shows at most a warning. | A call is the name, `()` and a semicolon. |
 | A break appears after the last round | The call runs in every iteration of the loop, with no condition. | Think about which rounds need a break after them (hint 2). |
-| A break appears before the first round | The call stands before the round is printed and also runs in the first iteration. | Check the one-round case in your table. |
+| A break appears before the first round | The call comes before the round is printed and also runs in the first iteration. | Check the one-round case in your table. |
 | The same lines appear once too often | There's an extra function call (section 8). | Count the calls and compare with the requirement. |
 | The program does nothing and waits | It's waiting for a number, as in lesson 2.6. | Type a number and press **Enter**. |
 
@@ -631,7 +631,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 - **A definition isn't a call.** The function's body runs only when the program reaches the call `show_workshop_rules();`. Each call runs it once.
 - After the body has run, the program comes back to just after the call.
 - `main` is a function too: the program starts running from it.
-- For now, a function's definition stands in the file before the place where it's called. Otherwise the compiler reports `use of undeclared identifier`.
+- For now, a function's definition comes in the file before the place where it's called. Otherwise the compiler reports `use of undeclared identifier`.
 - A change in the function's body changes the result of every call.
 - The code that calls a function decides when to call it, for example with a condition in a loop in `main`.
 
@@ -666,7 +666,7 @@ See you tomorrow
 
 - **The rules appear three times**, and the requirement says: twice, right after the name of each session.
 - **The cause:** the call after `Lunch` is one too many. The function itself is correct. The bug is in the **place of the call**.
-- **The fix:** remove the call that stands after `Lunch`.
+- **The fix:** remove the call that comes after `Lunch`.
 
 <!-- example: day_plan_fixed -->
 ```cpp
@@ -704,7 +704,7 @@ See you tomorrow
 <details>
 <summary>Section 9: the fixed program</summary>
 
-The definition stands before `main`, so at the line of the call the compiler already knows the function:
+The definition comes before `main`, so at the line of the call the compiler already knows the function:
 
 <!-- example: rules_before_main -->
 ```cpp
@@ -764,9 +764,9 @@ int main() {
 }
 ```
 
-- The **definition** of the function `show_break` stands before `main`. The **call** `show_break();` stands in the loop, in `main`.
+- The **definition** of the function `show_break` comes before `main`. The **call** `show_break();` is in the loop, in `main`.
 - **The function doesn't know which round is on.** It always prints the same two lines. `main` decides whether a break is needed: round `round_number` is followed by another round only when `round_number < round_count`.
-- **After the last round** the condition gives `false`, so there's no break. For one round, the condition `1 < 1` gives `false` already in the first iteration.
+- **After the last round** the condition gives `false`, so there's no break. For one round, the condition `1 < 1` already gives `false` in the first iteration.
 - **For zero rounds** the loop condition `1 <= 0` gives `false` straight away. There's no round and no break, and the program prints `Training complete`.
 - **Another correct solution:** call the function **before** printing the round, but only from the second round on, with the condition `round_number > 1`. The result is the same.
 - The range is checked with `if`/`else` before the program starts the plan, as in lesson 4.1.

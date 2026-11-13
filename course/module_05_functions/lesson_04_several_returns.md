@@ -402,12 +402,12 @@ Queue status: Manageable queue
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków testowych. Uwzględnij przypadki, w których pasują **dwie reguły naraz**, granicę trzykrotności (dokładnie trzykrotność i o jeden więcej), wartości tuż poza oboma zakresami, także w połączeniu z zerem osób, tekst zamiast pierwszej i zamiast drugiej liczby oraz dane, które kończą się po jednej liczbie. Przy każdym przypadku zapisz oczekiwane standardowe wyjście.
 
-Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, jak w lekcjach 4.5–5.3, zamiast je uruchamiać, i porównaj ze zwiniętą listą kontrolną. Program z tej lekcji jest dla takich danych sprawdzany osobno, automatycznymi testami kursu.
+Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, jak w lekcjach 4.5–5.3, zamiast je uruchamiać, i porównaj ze zwiniętą listą przypadków kontrolnych. Program z tej lekcji jest dla takich danych sprawdzany osobno, automatycznymi testami kursu.
 
 ### Kryterium sukcesu
 
 - Program buduje się jako C++20, a jego standardowe wyjście dla danych `4`, `1`, dla `0`, `0` i dla `3`, `1` jest dokładnie takie jak powyżej.
-- Dla każdego przypadku, który możesz wpisać, standardowe wyjście zgadza się z listą kontrolną. Przypadki z danymi, które kończą się wcześniej, sprawdzasz rozumowaniem.
+- Dla każdego przypadku, który możesz wpisać, standardowe wyjście zgadza się z listą przypadków kontrolnych. Przypadki z danymi, które kończą się wcześniej, sprawdzasz rozumowaniem.
 - Status ustala Twoja funkcja zwracająca `std::string`, z dwoma parametrami `int` i kilkoma instrukcjami `return`. Funkcja nie wypisuje i nie odczytuje niczego, a reguły nie powtarzają się w `main`.
 - Dla każdych dwóch liczb całkowitych funkcja dochodzi do jakiegoś `return`.
 - Po nieudanym odczycie nie pojawia się `Queue status`.

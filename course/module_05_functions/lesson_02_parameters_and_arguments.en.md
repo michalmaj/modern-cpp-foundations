@@ -178,7 +178,7 @@ Done
 ```
 
 - The function is called 4 times, with the values 3, 4, 6 and 0. The loop does 3, 4, 6 and 0 iterations.
-- **For zero**, the first check of the condition, `0 < 0`, gives `false`, so the loop prints no dash. But the statement `std::cout << "\n";` stands **after** the loop, so it always runs. That's why there's an **empty line** between `Zero:` and `Done`: a line with no characters, but with its line ending.
+- **For zero**, the first check of the condition, `0 < 0`, gives `false`, so the loop prints no dash. But the statement `std::cout << "\n";` comes **after** the loop, so it always runs. That's why there's an **empty line** between `Zero:` and `Done`: a line with no characters, but with its line ending.
 
 </details>
 
@@ -453,7 +453,7 @@ Day 3: [####]
 **This isn't `print_line` or `show_pair` with new names.** `print_line` had one parameter and always the same character, and `show_pair` only printed two values. Here the function gets **two values with different roles**: one is printed as a number, the other controls a loop. It also has to put one line together from several parts. You have to decide on your own:
 
 1. what parameters the function has, and in what order;
-2. how the function builds one line, also for zero blocks;
+2. how the function builds one line, including for zero blocks;
 3. how `main` checks the data before drawing anything;
 4. what arguments the function gets in each of the three calls.
 
@@ -627,7 +627,7 @@ Input could not be read
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 12. When something goes differently
+## 12. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -865,11 +865,11 @@ int main() {
 }
 ```
 
-- **The function `print_bar`** has two parameters with different roles. `day` is only printed, and `blocks` controls the loop. The start of the line, and the `]` with the line ending, stand outside the loop, so zero blocks give `Day N: []`.
+- **The function `print_bar`** has two parameters with different roles. `day` is only printed, and `blocks` controls the loop. The start of the line, and the `]` with the line ending, are outside the loop, so zero blocks give `Day N: []`.
 - **The arguments:** in every call the first argument is the day number and the second is the number of blocks, in the same order as the parameters. For the data `2`, `0`, `4` the function gets (1, 2), (2, 0) and (3, 4) in turn.
 - **`main`** reads the data, checks it and decides on the calls. The function doesn't know where the values came from.
 - **A failed read:** after a failed read, the following reads fail too, so one `std::cin.fail()` check after the three reads is enough. That also covers data that ends after two numbers: reading the third one fails. The variables' values aren't used then.
-- **The range check** stands in the branch for a successful read, with three named conditions as in lesson 3.4. The chart is drawn only when all three hold.
+- **The range check** is in the branch for a successful read, with three named conditions as in lesson 3.4. The chart is drawn only when all three hold.
 - You can also put the parameters in the definition in the reverse order, for example `print_bar(int blocks, int day)`. Then the correct call for the first day is `print_bar(first_day_blocks, 1)`. Both arrangements are fine, as long as the definition and the calls agree.
 
 </details>
