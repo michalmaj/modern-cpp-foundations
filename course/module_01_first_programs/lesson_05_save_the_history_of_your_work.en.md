@@ -18,7 +18,7 @@ This lesson assumes that:
 
 Your cinema ticket program works. You want to change it, but you're afraid of breaking something and not remembering what the working version looked like.
 
-The simplest idea is copies: `cinema_ticket_final`, `cinema_ticket_final_2`, `cinema_ticket_final_really`. After a week, nobody knows which copy is which, how they differ, or which one worked. Every copy drags its build folders along. It's also easy to edit the wrong copy.
+The simplest idea is copies: `cinema_ticket_final`, `cinema_ticket_final_2`, `cinema_ticket_final_really`. After a week, nobody knows which copy is which, how they differ or which one worked. Every copy drags its build folders along. It's also easy to edit the wrong copy.
 
 Programmers solve this problem with a **version control system**. It's a program that, when you tell it to, saves versions of chosen files, with a description, an author and a date. Later it shows what changed between versions and lets you see any earlier version. The most popular such system is **Git**.
 
@@ -183,7 +183,7 @@ git config user.name
 - Without an extra option, as here, the setting applies **only to this repository**. It's stored in `.git` and doesn't affect other projects on your computer.
 - With the `--global` option, it would apply to **all** repositories of your account. You don't use it today.
 
-**Privacy.** The name and email stay in the history of every commit. If you ever publish the repository, everyone will see them. You may use a nickname. How to hide your email address when publishing, you'll learn when the time comes.
+**Privacy.** The name and email stay in the history of every commit. If you ever publish the repository, everyone will see them. You may use a nickname. You'll learn how to hide your email address for publishing when the time comes.
 
 ## 5. What should go into the history? `.gitignore`
 
@@ -193,7 +193,7 @@ See **all** the files Git sees, including those inside folders:
 git status --untracked-files=all
 ```
 
-The list is long. Here is a part of it:
+The list is long. Here is part of it:
 
 ```text
 cinema_ticket/.idea/workspace.xml
@@ -266,7 +266,7 @@ You'll start with one finished project: the cinema ticket from the lesson 1.3 mi
 git add .gitignore cinema_ticket/main.cpp cinema_ticket/CMakeLists.txt
 ```
 
-You write the paths with `/` on all systems, also in PowerShell. Git understands them.
+You write the paths with `/` on all systems, even in PowerShell. Git understands them.
 
 On Windows, a warning may appear:
 
@@ -340,7 +340,7 @@ Date:   Tue Oct 20 18:28:10 2026 +0000
 
 You'll see your own details, date and identifier. If the output doesn't fit, <kbd>q</kbd> quits.
 
-**Saving a file vs. a commit.** <kbd>Ctrl</kbd> + <kbd>S</kbd> in the editor saves the file on disk: there is only one, current content, and you overwrite the previous one. A commit saves **a version in the history**: it's created only when you decide, and all earlier versions stay.
+**Saving a file vs a commit.** <kbd>Ctrl</kbd> + <kbd>S</kbd> in the editor saves the file on disk: the file only ever has its current content, and you overwrite the previous one. A commit saves **a version in the history**: it's created only when you decide, and all earlier versions stay.
 
 ## 7. Change the program and save a second version
 
@@ -351,7 +351,7 @@ Less guidance now.
 3. See the change: `git diff`.
 4. Prepare the change for a commit, and check what's in the staging area.
 5. Save a second commit with a message that says what changed.
-6. See the history in short: `git log --oneline`.
+6. See the history in a shorter form: `git log --oneline`.
 
 <details>
 <summary>Hint: which commands?</summary>
@@ -395,7 +395,7 @@ After `git add`, a plain `git diff` shows nothing any more, because the file mat
 git show 6d29aa9:cinema_ticket/main.cpp
 ```
 
-Instead of `6d29aa9`, type your own identifier. Write the file path with `/`, also on Windows. Git prints the file **as it was in that version**, with `Row 7, seat 12`. Your file on disk hasn't changed: it still has the new version. Git keeps every saved version, and you can look at any of them.
+Instead of `6d29aa9`, type your own identifier. Write the file path with `/`, even on Windows. Git prints the file **as it was in that version**, with `Row 7, seat 12`. Your file on disk hasn't changed: it still has the new version. Git keeps every saved version, and you can look at any of them.
 
 ## 8. Mission: keep two stages of your work
 
@@ -418,7 +418,7 @@ Choose **another** project of yours in `cpp-workspace`, for example `parcel_labe
 <details>
 <summary>Hint 1</summary>
 
-First you check, then you choose, then you check again, and finally you save. Go back to the order in section 7.
+First you check, then you choose, then you check again and finally you save. Go back to the order in section 7.
 
 </details>
 
@@ -445,14 +445,14 @@ In this course you don't add everything at once (`git add .`). You choose files 
 
 **Git in CLion.** CLion can also show Git changes and history (the **Commit** and **Git** windows). This course doesn't need them: the terminal commands do the same and work the same way in any environment.
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
 | `git` is not recognised | The terminal doesn't know Git yet. | Close the terminal and open a new one (on Windows an ordinary one, not the administrator one). Check `git --version`. If it still doesn't work, repeat the installation. Don't change the `PATH` variable by hand. |
 | `git status` **before** `git init` shows `On branch …` | The folder is already inside another repository. | **Don't run `git init`**, and don't delete anything. `git rev-parse --show-toplevel` shows where that repository starts. Check that `cpp-workspace` is where it should be (in your home folder, lesson 1.1). |
 | `Author identity unknown` and `Please tell me who you are` on `git commit` | Git doesn't know who you are. | Set your name and email (section 4) and repeat `git commit`. |
-| A text editor opened in the terminal | A commit without `-m "…"`: Git is waiting for the message in an editor. | The simplest fix is to give up and repeat with `-m`. In the *Vim* editor (common on Windows and macOS), press <kbd>Esc</kbd>, type `:q!` and press <kbd>Enter</kbd>. In the *nano* editor (common on Ubuntu), press <kbd>Ctrl</kbd> + <kbd>X</kbd>. No commit is created. |
+| A text editor opened in the terminal | A commit without `-m "…"`: Git is waiting for the message in an editor. | The simplest fix is to cancel and repeat the commit with `-m`. In the *Vim* editor (common on Windows and macOS), press <kbd>Esc</kbd>, type `:q!` and press <kbd>Enter</kbd>. In the *nano* editor (common on Ubuntu), press <kbd>Ctrl</kbd> + <kbd>X</kbd>. No commit is created. |
 | The `git log`/`git diff` output doesn't end, and there's a `:` at the bottom | Git shows long output page by page. | <kbd>Space</kbd> shows the next page, <kbd>q</kbd> quits. |
 | `LF will be replaced by CRLF` (Windows) | Information about line endings (section 6). | Do nothing. |
 | The wrong file went into the staging area | `git add` chose too much. | `git restore --staged <file>` takes it out of the staging area. The file on disk doesn't change. |
@@ -460,7 +460,7 @@ In this course you don't add everything at once (`git add .`). You choose files 
 | A build file is already in the history | It was added before `.gitignore` existed. | `git rm --cached <file>`, then a commit. The file stays on disk; it only disappears from the next versions in the history. |
 | `git show` with `\` in the path finds no file (Windows) | In `identifier:path`, Git expects `/`. | Type the path with `/`, for example `cinema_ticket/main.cpp`. |
 
-Don't delete the `.git` folder to "start over": you lose the whole history. Every problem in this table is solved without that.
+Don't delete the `.git` folder to “start over”: you lose the whole history. Every problem in this table is solved without that.
 
 ## 11. Explain
 
@@ -574,7 +574,7 @@ parcel_label/CMakeLists.txt
 parcel_label/main.cpp
 ```
 
-An explanation of the change, for example: "In the second version, the program prints an extra line with the sender's address. `git diff` showed it as one line with `+` and none with `-`, because nothing was removed."
+An explanation of the change, for example: “In the second version, the program prints an extra line with the sender's address. `git diff` showed it as one line with `+` and none with `-`, because nothing was removed.”
 
 </details>
 

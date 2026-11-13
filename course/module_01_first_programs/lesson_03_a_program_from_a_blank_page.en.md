@@ -16,7 +16,7 @@ This lesson assumes that after lessons 1.1 and 1.2:
 
 ## The situation
 
-So far there has always been a ready program, or almost ready code. Today you'll start from an **empty file** `main.cpp` and write a whole program in it yourself.
+So far there has always been a ready-made program, or almost finished code. Today you'll start from an **empty file** `main.cpp` and write a whole program in it yourself.
 
 You'll also learn four small new things, because many simple programs can't be written without them: how to print a quote `"`, how to print a backslash `\`, how to add a comment, and what `return 0;` at the end of `main` means.
 
@@ -25,13 +25,13 @@ After this lesson you will:
 - start from an empty `main.cpp` and write the program skeleton on your own;
 - write a program that prints several lines in a given order;
 - print `"` and `\` inside text, and tell what is in the code apart from what appears in the output;
-- add comments that help the reader, knowing that they are not statements;
+- add comments that help the reader, and know that they are not statements;
 - explain what a program's exit code is and how it differs from the text the program prints;
 - explain every important line of your own program.
 
 ## 1. Prepare an empty `main.cpp`
 
-"From a blank page" means here: **you write `main.cpp` yourself**. You take `CMakeLists.txt` ready-made, the same as always.
+“From a blank page” means here: **you write `main.cpp` yourself**. You take `CMakeLists.txt` ready-made, the same as always.
 
 1. In `cpp-workspace`, create a folder `lesson_1_3`.
 2. Copy `main.cpp` and `CMakeLists.txt` into it from the original course folder `lesson_05_first_program`, as in lessons 1.1 and 1.2.
@@ -46,7 +46,7 @@ Don't build the empty file yet. A program without `main` won't build, and that e
 
 Don't look at the earlier lessons. Answer from memory, preferably on paper, and only then check.
 
-**1.** What must stand at the very top of the file so that the compiler knows `std::cout`? Does that line end with a semicolon?
+**1.** What must go at the very top of the file so that the compiler knows `std::cout`? Does that line end with a semicolon?
 
 <details>
 <summary>Check</summary>
@@ -55,7 +55,7 @@ Don't look at the earlier lessons. Answer from memory, preferably on paper, and 
 
 </details>
 
-**2.** How does the part of the program that the computer runs after starting begin, and how does it end?
+**2.** How does the part of the program that the computer runs when the program starts begin, and how does it end?
 
 <details>
 <summary>Check</summary>
@@ -69,7 +69,7 @@ It begins with `int main() {` and ends with the brace `}`. You write the stateme
 <details>
 <summary>Check</summary>
 
-`std::cout << "text\n";` – where the text is sent (`std::cout`), "send to" (`<<`), the text in quotes ending with `\n`, and the semicolon.
+`std::cout << "text\n";` – where the text is sent (`std::cout`), “send to” (`<<`), the text in quotes ending with `\n`, and the semicolon.
 
 </details>
 
@@ -104,7 +104,7 @@ Write the skeleton and one statement, for the first line, and build the program.
 
 An example solution is in [Example solutions](#example-solutions). Look there only after a successful attempt.
 
-**Stop for a moment.** That was your first program written entirely on your own, from the first line to the last, without a ready model.
+**Stop for a moment.** That was your first program written entirely on your own, from the first line to the last, without a model to copy.
 
 ## 4. A quote and a backslash in text
 
@@ -128,14 +128,14 @@ int main() {
 }
 ```
 
-**Predict:** will this program build? Then check: replace the content of `main.cpp` with it and build. Don't worry about the café program, you'll write it again in section 6.
+**Predict:** will this program build? Then check: replace the content of `main.cpp` with it and build. Don't worry about the café program: you'll write it again in section 6.
 
-Go through the loop from lesson 1.2. The message talks about a missing semicolon, and yet there is a semicolon at the end of the line. Look at the **position** the compiler points to. What stands just before it?
+Go through the loop from lesson 1.2. The message talks about a missing semicolon, and yet there is a semicolon at the end of the line. Look at the **position** the compiler points to. What comes just before it?
 
 <details>
 <summary>Explanation: read it after your own attempt</summary>
 
-The compiler reads text from a `"` to the **next** `"`. So the text `"Press "` ends at the second quote. Right after it stands `1`, and the compiler expected the end of the statement there. Hence `expected ';' after expression` at the position where `1` begins.
+The compiler reads text from a `"` to the **next** `"`. So the text `"Press "` ends at the second quote. Right after it comes `1`, and the compiler expected the end of the statement there. Hence `expected ';' after expression` at the position where `1` begins.
 
 The message points to the right **place**, but its suggestion, a semicolon, is not the solution here. The hypothesis has to explain the cause: the second quote ended the text too early.
 
@@ -181,7 +181,7 @@ otes.txt
 
 </details>
 
-The program built, but printed something other than the code suggests. Inside text, a backslash `\` starts a **special notation**: together with the next character, it means something other than those two characters on their own. So the `\n` in the middle of the path did what it always does: it moved to a new line. The compiler reported no error, because the code is valid C++; it just does something other than we wanted (lesson 1.2).
+The program built, but printed something other than the code suggests. Inside text, a backslash `\` starts a **special notation**: together with the next character, it means something other than those two characters on their own. So the `\n` in the middle of the path did what it always does: it moved to a new line. The compiler reported no error, because the code is valid C++; it just does something other than what we wanted (lesson 1.2).
 
 To print one backslash, write **two** in the text: `\\`.
 
@@ -249,8 +249,8 @@ Comments start with // in C++.
 Every time a program finished, CLion added `Process finished with exit code 0` below its output. Where does that `0` come from?
 
 - `main` is a **function**: a named piece of a program. The system runs the function `main` when your program starts.
-- When it finishes, `main` hands **one whole number** to whoever started the program: the **exit code**. The word `int` before `main` means exactly that: "integer", a whole number. You'll learn about types properly in Module 2.
-- By convention, `0` means "everything is fine". Another number means "something went wrong", and what exactly is up to the program's author.
+- When it finishes, `main` hands **one whole number** to whoever started the program: the **exit code**. The word `int` before `main` means exactly that: “integer”, a whole number. You'll learn about types properly in Module 2.
+- By convention, `0` means “everything is fine”. Another number means “something went wrong”, and what exactly is up to the program's author.
 - The statement `return 0;` ends `main` and hands over the code `0`.
 - **When the program reaches the end of `main` without a `return`, it works the same as `return 0;`.** That's why all the programs so far ended with exit code 0, although they had no `return`. So in `main` you may write `return 0;` at the end to show this explicitly, or leave it out. Both versions are correct.
 
@@ -342,7 +342,7 @@ Two lines changed, and two others swapped places. If you understand your program
 
 Example solutions for the mission and the variant are in [Example solutions](#example-solutions).
 
-## 8. When something goes differently
+## 8. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -375,7 +375,7 @@ A comment changes nothing, because the compiler skips it. Putting `//` before a 
 
 </details>
 
-**3.** A program printed "Everything went wrong!", and CLion showed `exit code 0`. Is that a contradiction?
+**3.** A program printed “Everything went wrong!”, and CLion showed `exit code 0`. Is that a contradiction?
 
 <details>
 <summary>Example answer</summary>
@@ -407,9 +407,9 @@ For example `std::cout << "Film: \"The Long Night\"\n";`. Not in the output: `st
 - You start a program from a blank page with the skeleton: `#include <iostream>`, `int main() {`, `}`. You add statements one at a time and build after each.
 - Inside text, `\` starts a special notation: `\n` is a new line, `\"` is a quote, `\\` is one backslash. What you see in the code isn't always what appears in the output.
 - A `//` comment is a note for people, not a statement. Write one where something needs explaining.
-- `main` hands the system an exit code: `0` means "fine". `return 0;` does this explicitly; the end of `main` without a `return` works the same. The exit code isn't part of the program's output.
+- `main` hands the system an exit code: `0` means “fine”. `return 0;` does this explicitly; the end of `main` without a `return` works the same. The exit code isn't part of the program's output.
 
-After this lesson you can say: **"I can write a small C++ program on my own, fix basic errors and check that it works."**
+After this lesson you can say: **“I can write a small C++ program on my own, fix basic errors and check that it works.”**
 
 ## What's next
 
@@ -419,7 +419,7 @@ Every time, you click **Build** and a program appears. In [lesson 1.4](lesson_04
 
 ## Example solutions
 
-Look here **after your own attempt**. Your code may differ, for example in comments, empty lines, or whether there is a `return 0;` at the end, and still be right, as long as it meets the criteria.
+Look here **after your own attempt**. Your code may differ, for example in comments, empty lines or whether there is a `return 0;` at the end, and still be right, as long as it meets the criteria.
 
 <details>
 <summary>Section 3: the café sign</summary>

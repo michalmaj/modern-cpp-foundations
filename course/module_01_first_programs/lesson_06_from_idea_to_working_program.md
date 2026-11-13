@@ -19,7 +19,7 @@ Zajrzenie do części B, do wcześniejszych lekcji albo do swoich notatek nie je
 
 **Możesz używać:**
 
-- terminala, CMake i Ninja (polecenia z lekcji 0.6 i 1.4);
+- terminala, CMake'a i Ninja (polecenia z lekcji 0.6 i 1.4);
 - CLiona jako edytora i IDE;
 - Gita w terminalu (lekcja 1.5);
 - `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`. Nie musisz pisać CMake z pamięci.
@@ -76,7 +76,7 @@ Bring: your favourite game, or "Dixit" from the shelf
 Have fun!
 ```
 
-- Przed zapisaniem zobacz, czym ta wersja różni się od zapisanej, i umiej to opisać.
+- Przed zapisaniem zobacz, czym ta wersja różni się od zapisanej, i opisz tę różnicę.
 - Zbuduj i uruchom zmieniony program i sprawdź wynik.
 - Zapisz **drugi commit**.
 - Potwierdź, że historia zawiera obie wersje, a projekt nie ma niezapisanych zmian.
@@ -375,6 +375,6 @@ Po sześciu lekcjach potrafisz:
 
 ## Co dalej: Moduł 2
 
-Twoje programy wypisują na razie zawsze ten sam tekst. W Module 2 zaczną **pamiętać i liczyć**: poznasz wartości, typy, zmienne, wyrażenia i obliczenia oraz nauczysz się wczytywać proste dane od użytkownika. Zacznij od [lekcji 2.1: Wartości, które program pamięta](../module_02_values_and_calculations/lesson_01_values_the_program_remembers.md). Moduł 2 jest rozwijany: kolejne lekcje są w przygotowaniu.
+Twoje programy wypisują na razie zawsze ten sam tekst. W Module 2 zaczną **pamiętać i liczyć**: poznasz wartości, typy, zmienne, wyrażenia i obliczenia oraz nauczysz się wczytywać proste dane od użytkownika. Zacznij od [lekcji 2.1: Wartości, które program pamięta](../module_02_values_and_calculations/lesson_01_values_the_program_remembers.md).
 
 **Poprzednia lekcja:** [Lekcja 1.5: Zapisz historię swojej pracy](lesson_05_save_the_history_of_your_work.md) · **Następna lekcja:** [Lekcja 2.1: Wartości, które program pamięta](../module_02_values_and_calculations/lesson_01_values_the_program_remembers.md) · [Opis kursu](../../README.md)
