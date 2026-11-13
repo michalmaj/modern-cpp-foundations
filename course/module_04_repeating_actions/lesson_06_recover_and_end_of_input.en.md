@@ -369,7 +369,7 @@ Input ended
 
 </details>
 
-Each of these runs ends by itself. The loop doesn't go on forever, neither after bad text nor after the end of the data.
+Each of these runs ends by itself. The loop doesn't go on forever, either after bad text or after the end of the data.
 
 ## 9. Experiment: `12abc`
 
@@ -634,7 +634,7 @@ When the result matches, you can save the project in Git, as in lesson 1.5.
 <details>
 <summary>Hint 1</summary>
 
-Which two events can end the work: reaching the goal, or no more data?
+Which two events can end the work? One is about the goal, the other about the data.
 
 </details>
 
@@ -653,7 +653,7 @@ After a failed read, first find out whether the data has run out. Only when it's
 </details>
 
 <details>
-<summary>The full list of control cases: open after preparing your own table</summary>
+<summary>The full list of check cases: open after preparing your own table</summary>
 
 | Data | Ending | Collected | What it checks |
 |---|---|---|---|
@@ -809,7 +809,7 @@ Input ended: 0 items collected
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 12. When something goes differently
+## 12. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -919,7 +919,7 @@ Because the goal is the sum collected, not a single valid answer. The loop's con
 
 ## What's next
 
-This was the last lesson of Module 4 with new skills. In lesson 4.7 you'll test them in an independent test: [Lesson 4.7: The program repeats actions (the Module 4 test)](lesson_07_the_program_repeats.en.md).
+This was the last lesson of Module 4 with new skills. In lesson 4.7 you'll test them on your own: [Lesson 4.7: The program repeats actions (the Module 4 test)](lesson_07_the_program_repeats.en.md).
 
 ---
 

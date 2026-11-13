@@ -18,7 +18,7 @@ This lesson assumes that after lessons 4.1 and 4.2:
 
 ## The situation
 
-Every loop in lessons 4.1 and 4.2 had the same layout: a counter with its start value **before** the loop, the condition **at the top**, and the counter's change **at the end** of the body. Three things that together control the repetition stood in three different places in the program. In a longer loop it's easy to miss where the counter starts, or whether it changes at all.
+Every loop in lessons 4.1 and 4.2 had the same layout: a counter with its start value **before** the loop, the condition **at the top**, and the counter's change **at the end** of the body. Three things that together control the repetition were in three different places in the program. In a longer loop it's easy to miss where the counter starts, or whether it changes at all.
 
 Today you'll meet the `for` loop, which gathers these three parts into one line. It does nothing that `while` can't do. It just tidies up how a counter-controlled loop is written.
 
@@ -116,9 +116,9 @@ for (int lap{1}; lap <= total_laps; ++lap)
 | **Condition** | `lap <= total_laps` | Before every run of the body. If it's false, the body doesn't run, and the program carries on after the loop. |
 | **Update** | `++lap` | After every run of the body, before the next condition check. Here it increases the counter by 1. |
 
-- **The semicolons** separate these three parts of the header. They aren't the semicolons that end the statements in the loop body: the body's statements stand in braces as always, each with its own semicolon.
+- **The semicolons** separate these three parts of the header. They aren't the semicolons that end the statements in the loop body: the body's statements are in braces as always, each with its own semicolon.
 - **The loop body** is, as in `while`, the statements between `{` and `}`.
-- `++lap` stands in the header **before** the body, but runs **after** it. That's the most important difference between where it's written and when it runs.
+- `++lap` is written in the header **before** the body, but runs **after** it. That's the most important difference between where it's written and when it runs.
 
 ## 4. The order of execution
 
@@ -141,7 +141,7 @@ When a condition check gives `false`, the program goes on past the loop. The tra
 
 - The initialisation isn't in any row: it ran once, **before** the first check.
 - The fourth check gives `false`. It isn't an iteration: neither the body nor the update runs any more.
-- **Compare with the table from lesson 4.1.** The rows are the same: the same counter values, the same condition results, the same printed lines. In `while`, the counter's change was the body's last statement; in `for`, it stands in the header as the update. The mechanism is the same; the way it's written is different.
+- **Compare with the table from lesson 4.1.** The rows are the same: the same counter values, the same condition results, the same printed lines. In `while`, the counter's change was the body's last statement; in `for`, it sits in the header as the update. The mechanism is the same; the way it's written is different.
 
 **Your turn.** Write down, in order, every step of this loop when `total_laps` is 2: "initialisation: `lap` = 1", "check: `1 <= 2`, `true`", "body: …" and so on, to the end of the loop. How many condition checks are there, and how many updates? The answer is in [Example solutions](#example-solutions).
 
@@ -308,7 +308,7 @@ lap += 1;
 
 - When you only want to increase the counter by one, all three have the same effect. In a `for` header you'll most often see `++lap`.
 - Use `++lap` as a step of its own: as the update in the header, or as a separate statement, for example `++laps_done;`. In this course we don't put it inside longer expressions.
-- `+= 1` is still correct, also for the event counters from lesson 4.2. Choose the form that reads most clearly.
+- `+= 1` is still correct, including for the event counters from lesson 4.2. Choose the form that reads most clearly.
 - To an accumulator you add the right value, as before: `total += number;`, not `++`.
 
 ## 7. Where does a `for` counter exist?
@@ -420,7 +420,7 @@ The accumulator is declared before the loop, because its value is needed after i
 
 ## 10. Mission: a training plan
 
-The program draws up a plan for a simple exercise. The user gives the number of rounds and the number of repetitions in the first round. In each following round, the number of repetitions goes up by 2. The program prints the number of repetitions in each round, and finally the total number of repetitions in the whole training.
+The program draws up a plan for a simple exercise. The user gives the number of rounds and the number of repetitions in the first round. In each following round, the number of repetitions goes up by 2. The program prints the number of repetitions in each round, and finally the total number of repetitions in the whole training session.
 
 **Requirements:**
 
@@ -493,12 +493,12 @@ Three things happen in one round: printing the round's data, adding its repetiti
 <details>
 <summary>Hint 3</summary>
 
-The `for` header answers three questions: which number the first round starts from, while what the loop should keep going, and how to move to the next round's number. Check your condition for 1 round in a trace table.
+The `for` header answers three questions: which number the first round starts from, how long the loop should keep going, and how to move to the next round's number. Check your condition for 1 round in a trace table.
 
 </details>
 
 <details>
-<summary>The full list of control cases: open after preparing your own table</summary>
+<summary>The full list of check cases: open after preparing your own table</summary>
 
 | Rounds | Start | Repetitions printed | Sum | What it checks |
 |---|---|---|---|---|
@@ -639,7 +639,7 @@ Both loops can do many of the same tasks: every loop in this lesson can be writt
 
 This lesson shows the basic `for` pattern with a counter. In lesson 4.4 you'll see a loop without such a counter, which keeps repeating until a goal is reached.
 
-## 12. When something goes differently
+## 12. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -714,7 +714,7 @@ Because it exists only in that loop, like a variable declared in a block (lesson
 <details>
 <summary>Example answer</summary>
 
-Often when a counter with a start value, a condition and an update controls the repetition. In `for` all three stand in one line. When we think rather "repeat while something is true", `while` is often more natural.
+Often when a counter with a start value, a condition and an update controls the repetition. In `for` all three are in one line. When you think more in terms of "repeat while something is true", `while` is often more natural.
 
 </details>
 
@@ -878,7 +878,7 @@ Round 3
 Done
 ```
 
-- **The bug shows already for 0:** the requirement allows no round, but the program prints `Round 0`. Every case has one iteration too many, and the numbering starts at 0.
+- **The bug already shows for 0:** the requirement allows no round, but the program prints `Round 0`. Every case has one iteration too many, and the numbering starts at 0.
 - **The cause:** the counter starts at 0, and the condition `round <= round_count` also allows the last number. From 0 to 3 inclusive there are four numbers, not three.
 - **The fix:** the requirement says "from 1 to the number of rounds inclusive", so the counter starts at 1:
 

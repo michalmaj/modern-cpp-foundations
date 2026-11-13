@@ -17,7 +17,7 @@ Ta lekcja zakłada, że:
 
 ## Sytuacja
 
-Program pyta o liczbę sesji nauki. Dopuszczalne są wartości od 1 do 5. W Module 3 umiesz już sprawdzić odczytaną liczbę: jeśli pasuje, program ją przyjmuje, a jeśli nie, wypisuje komunikat i kończy pracę.
+Program pyta o liczbę sesji nauki. Dopuszczalne są wartości od 1 do 5. Od Modułu 3 umiesz już sprawdzić odczytaną liczbę: jeśli pasuje, program ją przyjmuje, a jeśli nie, wypisuje komunikat i kończy pracę.
 
 Teraz wymaganie się zmienia: **jeśli użytkownik poda liczbę spoza zakresu, program ma zapytać ponownie**. Program ma powtarzać pytanie, dopóki nie dostanie odpowiedniej wartości, czyli dopóki nie osiągnie celu, jak w lekcji 4.4. Po drodze wyjdzie na jaw coś nowego: czasem nie da się w ogóle odczytać liczby. Program musi to zauważyć, zanim zacznie sprawdzać wartość.
 
@@ -36,7 +36,7 @@ W `cpp-workspace` utwórz katalog `lesson_4_5` i skopiuj do niego `main.cpp` i `
 
 ## 2. Jedno sprawdzenie to za mało
 
-Tak sprawdzało się wartość w Module 3:
+Tak w Module 3 program sprawdzał wartość:
 
 <!-- fragment -->
 ```cpp
@@ -355,7 +355,7 @@ Input could not be read
 
 Po `abc` odczyt liczby się nie udaje, więc program nie sprawdza wartości i nie pyta ponownie. To świadome ograniczenie tej lekcji. Po nieudanym odczycie strumień jest w stanie błędu i kolejny taki sam odczyt też by się nie udał. W lekcji 4.6 nauczysz się przywracać strumień do stanu, w którym można czytać dalej, i odróżniać tekst od końca danych.
 
-Jedno uczciwe zastrzeżenie: odczyt liczby przez `>>` nie sprawdza całej wpisanej linijki. Po wpisaniu `12abc` program odczyta liczbę 12, a znaki `abc` zostaną w strumieniu na później. Sprawdzanie całych linijek nie należy do tej lekcji.
+Jedno zastrzeżenie: odczyt liczby przez `>>` nie sprawdza całej wpisanej linijki. Po wpisaniu `12abc` program odczyta liczbę 12, a znaki `abc` zostaną w strumieniu na później. Sprawdzanie całych linijek nie należy do tej lekcji.
 
 ## 9. Wartość odrzucona, nieudany odczyt, koniec danych
 

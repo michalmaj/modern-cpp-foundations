@@ -778,7 +778,7 @@ Bo pierwszego dnia czyta się co najmniej 1 stronę, a każdego następnego dwa 
 
 ## Co dalej
 
-Jak dotąd złe dane kończyły program komunikatem. W lekcji 4.5 pętla będzie powtarzać pytanie, **dopóki użytkownik nie poda dopuszczalnej wartości**: celem będzie wtedy poprawna odpowiedź: [Lekcja 4.5: Ponawianie pytania o poprawną wartość](lesson_05_ask_again.md).
+Jak dotąd złe dane kończyły program komunikatem. W lekcji 4.5 pętla będzie powtarzać pytanie, **dopóki użytkownik nie poda dopuszczalnej wartości**. Celem będzie wtedy poprawna odpowiedź: [Lekcja 4.5: Ponawianie pytania o poprawną wartość](lesson_05_ask_again.md).
 
 ---
 

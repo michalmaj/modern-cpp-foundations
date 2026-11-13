@@ -17,7 +17,7 @@ This lesson assumes that after lesson 4.1:
 
 ## The situation
 
-What is 1 + 2 + 3? That's easy: 6. It's also easy to type `1 + 2 + 3` into a program. But if the user said how far to add, to 10, to 500 or to 1000, you couldn't write that expression in advance.
+What is 1 + 2 + 3? That's easy: 6. It's also easy to type `1 + 2 + 3` into a program. But if the user said how far to add (to 10, to 500 or to 1000), you couldn't write that expression in advance.
 
 You can, however, add up the way you do in your head: **step by step**. First you have 0. You add 1 and have 1. You add 2 and have 3. You add 3 and have 6. At each step you remember just one number: the sum so far. Today the loop learns to **build up a result** this way.
 
@@ -449,7 +449,7 @@ Each iteration of the loop should read one weight and change the total sum.
 </details>
 
 <details>
-<summary>The full list of control cases: open after preparing your own table</summary>
+<summary>The full list of check cases: open after preparing your own table</summary>
 
 | Number of parcels | Weights | Weight prompts | Last line | What it checks |
 |---|---|---|---|---|
@@ -522,7 +522,7 @@ Invalid parcel count
 
 ### Optional variant: heavy parcels
 
-This variant isn't required. The program should also count how many parcels weigh **at least 2 kg**, and after the total weight line print `Heavy parcels: K`. You need a separate event counter and an `if`, as in section 6. Predict the result for the five parcels from the control list, then check.
+This variant isn't required. The program should also count how many parcels weigh **at least 2 kg**, and after the total weight line print `Heavy parcels: K`. You need a separate event counter and an `if`, as in section 6. Predict the result for the five parcels from the list of check cases, then check.
 
 <details>
 <summary>The variant's cases: open after your own attempt</summary>
@@ -585,7 +585,7 @@ A parcel weighing exactly 2 kg counts, because the requirement says "at least".
 
 Example solutions are in [Example solutions](#example-solutions).
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -660,7 +660,7 @@ Because the weights have a fractional part. An `int` sum would lose that part, a
 <details>
 <summary>Example answer</summary>
 
-Because the weight read is in the loop body, and for zero parcels the condition is false already at the first check. The body doesn't run even once, and the sum stays equal to its start value, 0.
+Because the weight read is in the loop body, and for zero parcels the condition is already false at the first check. The body doesn't run even once, and the sum stays equal to its start value, 0.
 
 </details>
 

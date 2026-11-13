@@ -119,7 +119,7 @@ The table for a goal of 100 zl and payments of 30 zl:
 | 5 | 120 | `false` | **none**: the loop ends | — | — |
 
 - The condition was checked **5 times**, and there were **4** payments. The fifth check gives `false` and isn't an iteration.
-- At 90 zl, 10 zl are still missing, so the program makes another **full** payment. The sum passes the goal by 20 zl. That's fine: we always pay in the same amount, and the program doesn't calculate a partial payment. It's an exercise in repeating until a condition is met, not a banking system.
+- At 90 zl, 10 zl is still missing, so the program makes another **full** payment. The sum passes the goal by 20 zl. That's fine: we always pay in the same amount, and the program doesn't calculate a partial payment. It's an exercise in repeating until a condition is met, not a banking system.
 
 ## 4. Goal, progress and step
 
@@ -191,7 +191,7 @@ Payments: 0
 Saved: 0 zl
 ```
 
-`saved` starts at 0, and the condition `0 < 0` is false already at the first check. Nothing needs to be paid in: a goal of 0 zl is reached from the start. The loop body doesn't run even once, `payment_count` stays 0, and the summary after the loop is printed anyway. That's correct behaviour, not bad data: a goal of 0 is within the accepted range.
+`saved` starts at 0, and the condition `0 < 0` is already false at the first check. Nothing needs to be paid in: a goal of 0 zl is reached from the start. The loop body doesn't run even once, `payment_count` stays 0, and the summary after the loop is printed anyway. That's correct behaviour, not bad data: a goal of 0 is within the accepted range.
 
 </details>
 
@@ -342,7 +342,7 @@ Invalid savings data
 
 Checking inside the loop would be too late: the bad payment would already have been made. In this lesson, bad data ends the program with a message. You'll learn to ask for the data again in the next lesson.
 
-## 8. What guarantees the ending?
+## 8. What guarantees that the loop ends?
 
 For acceptable data the loop always ends, **because the sum grows by at least 25 zl in every iteration, and the goal is at most 500 zl**. After 20 payments the sum is at least 500 zl, so the condition `saved < goal` must become false by then at the latest. There's no need for a formal proof, but you should be able to answer four questions:
 
@@ -517,7 +517,7 @@ The `while` condition answers the question: is the total read still less than th
 </details>
 
 <details>
-<summary>The full list of control cases: open after preparing your own table</summary>
+<summary>The full list of check cases: open after preparing your own table</summary>
 
 | Goal | First day | Pages on successive days | Days | Total pages | What it checks |
 |---|---|---|---|---|---|
@@ -689,7 +689,7 @@ Invalid reading data
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 12. When something goes differently
+## 12. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -778,7 +778,7 @@ Because on the first day you read at least 1 page, and on each following day twi
 
 ## What's next
 
-So far, bad data ended the program with a message. In lesson 4.5, the loop will repeat a question **until the user gives an acceptable value**: the goal will then be a valid answer: [Lesson 4.5: Asking again for a valid value](lesson_05_ask_again.en.md).
+So far, bad data ended the program with a message. In lesson 4.5, the loop will repeat a question **until the user gives an acceptable value**. The goal will then be a valid answer: [Lesson 4.5: Asking again for a valid value](lesson_05_ask_again.en.md).
 
 ---
 
@@ -798,7 +798,7 @@ Look here **after your own attempt**. Your names may differ, as long as the stan
 </details>
 
 <details>
-<summary>Section 8: four questions about the ending</summary>
+<summary>Section 8: four questions about how the loop ends</summary>
 
 1. Yes. Every payment is at least 25 zl, so the sum grows in every iteration.
 2. No. The goal doesn't change and is at most 500 zl, while the sum keeps growing, so it eventually catches up.

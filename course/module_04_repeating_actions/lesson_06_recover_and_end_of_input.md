@@ -25,7 +25,7 @@ Program z lekcji 4.5 pytał o liczbę sesji nauki od 1 do 5. Rozróżniał trzy 
 
 Ostatnia reakcja jest bezpieczna, ale surowa: jedna literówka kończy cały program. Nowe wymaganie brzmi: **po `abc` program ma poinformować o problemie i pozwolić wpisać liczbę ponownie.** Dla danych `abc`, `0`, `3` program powinien:
 
-1. stwierdzić, że odczytu `abc` nie udało się zamienić na liczbę;
+1. stwierdzić, że `abc` nie da się odczytać jako liczby;
 2. usunąć to, co przeszkadza, i zapytać ponownie;
 3. odczytać `0`: to liczba, ale spoza zakresu, więc znowu zapytać;
 4. odczytać `3` i przyjąć tę wartość.
@@ -170,7 +170,7 @@ int main() {
 ```
 
 - **Dwie flagi.** `accepted` oznacza przyjętą wartość, a `input_ended` brak dalszych danych. Pętla działa, dopóki żadna z nich nie jest ustawiona.
-- **Gałąź pierwsza: odczyt udany.** Dopiero tu program sprawdza zakres. Za zakres wypisuje `Session count out of range`, a flagi się nie zmieniają, więc program pyta ponownie.
+- **Gałąź pierwsza: odczyt udany.** Dopiero tu program sprawdza zakres. Dla wartości spoza zakresu wypisuje `Session count out of range`, a flagi się nie zmieniają, więc program pyta ponownie.
 - **Gałąź druga: odczyt nieudany, bo dane się skończyły.** Program ustawia `input_ended`. Nie wywołuje `clear()` i nie pyta ponownie.
 - **Gałąź trzecia: odczyt nieudany z innego powodu, czyli przez błędny tekst.** Program przywraca stan, odrzuca resztę linijki i wypisuje `Invalid integer input, try again`, po czym pętla pyta ponownie.
 - **Koniec danych podczas odrzucania.** Jeśli błędna linijka była ostatnia i nie miała końca, `getline` dochodzi do końca danych i `eof()` daje `true`. Wtedy program nie obiecuje kolejnej próby: ustawia `input_ended`, a pętla nie odczytuje już nic więcej. Sprawdzenie `fail()` obejmuje rzadką sytuację, w której odrzucanie w ogóle się nie udało.
@@ -634,7 +634,7 @@ Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5.
 <details>
 <summary>Podpowiedź 1</summary>
 
-Jakie dwa zdarzenia mogą zakończyć pracę: osiągnięcie celu czy brak dalszych danych?
+Jakie dwa zdarzenia mogą zakończyć pracę? Jedno dotyczy celu, drugie danych.
 
 </details>
 
@@ -648,7 +648,7 @@ W których przypadkach zgromadzona liczba przedmiotów powinna się zmienić?
 <details>
 <summary>Podpowiedź 3</summary>
 
-Po nieudanym odczycie najpierw ustal, czy skończyły się dane. Dopiero przy możliwości kontynuacji usuń stan błędu i pozostały tekst.
+Po nieudanym odczycie najpierw ustal, czy skończyły się dane. Dopiero gdy można czytać dalej, usuń stan błędu i pozostały tekst.
 
 </details>
 
