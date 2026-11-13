@@ -17,7 +17,7 @@ This lesson assumes that you:
 
 The range-based loop from lesson 7.1 reads every character of the text `"Book"`. But try to answer these questions with it alone:
 
-- Which character stands in the second position?
+- Which character is in the second position?
 - Are the two middle characters the same?
 - In which position does a character repeat?
 - How do you compare each character with the previous one?
@@ -29,7 +29,7 @@ After this lesson you will:
 - read the character at a chosen index with `text[index]`, with indices from 0, and turn an index into a position shown to a person;
 - read the first and last character of a non-empty text;
 - go through a text with an index loop using `std::size_t`;
-- safely compare neighbouring characters, also in an empty and a one-character text;
+- safely compare neighbouring characters, including in an empty and a one-character text;
 - count every pair of identical neighbouring characters, overlapping pairs included.
 
 ## 1. Prepare the project
@@ -220,7 +220,7 @@ const std::string text{"coffee 111"};
 - **Pairs may overlap.** In `"AAA"` there are two pairs: positions 1–2 and 2–3. In `"AAAA"` there are three: 1–2, 2–3 and 3–4. A character that belongs to one pair can also belong to the next.
 - We compare characters exactly: `'A'` and `'a'` don't form a pair, and two spaces do.
 - When there's no pair, the program prints only `Characters: N` and `Repeated pairs: 0`, with no extra message.
-- The program works after changing only the text in the braces, also for an empty and a one-character text, and never reads characters outside the text. It reads nothing from the input and doesn't change the text.
+- The program works after changing only the text in the braces, including for an empty and a one-character text, and never reads characters outside the text. It reads nothing from the input and doesn't change the text.
 
 In `cpp-workspace`, create a folder `repeated_pairs`, copy `CMakeLists.txt` from the original `lesson_05_first_program` into it, create an empty `main.cpp` and write the program on your own.
 
@@ -241,11 +241,11 @@ In `coffee`, `f` and `e` repeat. The final `111` gives two overlapping pairs. Th
 **This isn't the program from section 5 with a different text.** That program only printed the pairs. You have to decide on your own:
 
 1. how to recognise a pair of identical characters;
-2. where the counter stands and when it grows;
+2. where the counter goes and when it grows;
 3. how to work out the numbers of both positions from the current index;
 4. how to print the repeated character;
 5. how to make sure overlapping pairs aren't lost;
-6. what the program prints when there are no pairs, also for an empty and a one-character text.
+6. what the program prints when there are no pairs, including for an empty and a one-character text.
 
 **Before you write the program**, prepare a table of cases: an empty text, one character, two different characters, two, three and four identical characters, two separate pairs, capital and lower-case letters next to each other, two spaces, a repeated full stop, and a repeated digit. For each, write down the expected `Pair` lines and the counter.
 
@@ -305,7 +305,7 @@ Increase the counter for every identical pair. Don't skip the next comparison, b
 | M | `bookkeeper` | 2-3 `[o]`, 4-5 `[k]`, 6-7 `[e]` | 3 | three different repetitions |
 | N | `1233` | 3-4 `[3]` | 1 | a repeated digit at the end |
 
-**Automatic tests and your own runs.** Every case is checked automatically by a check program. It has the same report as the reference solution, but it reads the text from the input as one line, with `std::getline` from lesson 2.7. An empty text is an empty line in it, not missing data. It's only a checking tool, not part of the mission. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
+**Automatic tests and your own runs.** Every case is checked automatically by the check program. It has the same report as the reference solution, but it reads the text from the input as one line, with `std::getline` from lesson 2.7. An empty text is an empty line in it, not missing data. It's only a checking tool, not part of the mission. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
 
 </details>
 
@@ -360,7 +360,7 @@ int main() {
 
 The program's output before the fix, and the fixed program, are in [Example solutions](#example-solutions).
 
-## 8. When something goes differently
+## 8. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|

@@ -357,7 +357,7 @@ Characters processed: 3
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: pusta linia jako pierwsza, jedna linia, dane zakończone bez pustej linii, same spacje, spacje na początku i na końcu, pusta linia między dwoma tekstami i różna wielkość liter. Przy każdym zapisz inicjały oraz liczby linii i znaków z podsumowania.
 
-**Potem** uruchom program dla danych z przykładu, bez `Ignored line`, i dla jednego przypadku z tabeli, najlepiej linii z samych spacji, zakończonej pustą linią. W terminalu wpisywane linie mieszają się z raportem, bo program odpowiada zaraz po każdej linii. Przypadki zakończone końcem danych prześledź na papierze. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, więc pozostałych nie musisz uruchamiać.
+**Potem** uruchom program dla danych z przykładu, bez `Ignored line`, i dla jednego przypadku z tabeli, najlepiej linii z samych spacji, zakończonej pustą linią. W terminalu wpisywane linie mieszają się z raportem, bo program odpowiada zaraz po każdej linii. Przypadki zakończone końcem danych prześledź na papierze. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie, więc pozostałych nie musisz uruchamiać.
 
 ### Kryterium sukcesu
 
@@ -381,7 +381,7 @@ Jakie trzy decyzje trzeba podjąć po każdej próbie odczytu jednej linii: czy 
 <details>
 <summary>Podpowiedź 2</summary>
 
-Licznik przetworzonych linii powinien rosnąć tylko dla linii, która rzeczywiście trafiła do analizy. Pusta linia kończąca nie jest rekordem.
+Licznik przetworzonych linii powinien rosnąć tylko dla linii, która rzeczywiście trafiła do analizy. Pusta linia kończąca nie jest linią danych.
 
 </details>
 
@@ -598,7 +598,7 @@ int main() {
 1. **Dlaczego pętla.** Każda linia wymaga tych samych kroków: odczytu, decyzji i raportu. Pętla powtarza je dla kolejnych linii bez osobnego kodu dla każdej z nich.
 2. **Liczba linii nie musi być znana z góry.** Pętla nie liczy przebiegów do żadnej granicy. Działa, dopóki flaga `reading` jest prawdziwa, a kończy ją sytuacja w danych: pusta linia albo nieudany odczyt.
 3. **Najpierw odczyt, potem analiza.** `std::cin.fail()` jest sprawdzane jako pierwsze, bo po nieudanym odczycie nie wolno polegać na zawartości `line`. Dopiero po udanym odczycie program sprawdza `line.empty()`.
-4. **Pusta linia kończy pracę**, bo to umówiony sygnał od użytkownika. Nie jest rekordem, więc nie trafia do raportu ani do liczników.
+4. **Pusta linia kończy pracę**, bo to umówiony sygnał od użytkownika. Nie jest linią danych, więc nie trafia do raportu ani do liczników.
 5. **Same spacje nie kończą pracy.** `"   "` ma trzy znaki, więc `empty()` daje `false`. Linia jest przetwarzana, a funkcja zwraca dla niej puste inicjały.
 6. **Ostatnia linia może nie mieć znaku końca linii.** Gdy dane kończą się zaraz po jej ostatnim znaku, `getline` i tak ją dostarcza, a `fail()` daje `false`. Program ją przetwarza, a pętlę kończy dopiero następna, nieudana próba.
 7. **Licznik po sprawdzeniach.** `++lines_processed` stoi w gałęzi dla niepustej, poprawnie odczytanej linii. Dzięki temu numer w raporcie i liczba w podsumowaniu dotyczą tylko przetworzonych linii.
@@ -610,7 +610,7 @@ int main() {
 
 **Inne poprawne układy.** Obie gałęzie, które kończą pętlę, można połączyć w jeden warunek: `if (std::cin.fail() || line.empty())`. Krótkie obliczanie z lekcji 3.4 sprawdza wtedy `line.empty()` tylko po udanym odczycie. Ważne, żeby przetwarzanie i liczniki stały wyłącznie w gałęzi dla niepustej, poprawnie odczytanej linii. W innych programach możesz też spotkać odczyt wpisany wprost w warunek pętli: `while (std::getline(std::cin, line))`. To poprawny C++, ale jego zrozumienie wymaga wiedzy o strumieniach, której jeszcze nie mamy, więc w tym kursie zostajemy przy fladze i `std::cin.fail()`.
 
-**Wyniki pozostałych przypadków z listy kontrolnej.** Przypadki A, B i E są w treści misji. W przypadkach D i K dane kończą się po ostatniej podanej linii.
+**Wyniki pozostałych przypadków z listy przypadków kontrolnych.** Przypadki A, B i E są w treści misji. W przypadkach D i K dane kończą się po ostatniej podanej linii.
 
 Przypadek C, `Ada` i pusta linia:
 
@@ -839,7 +839,7 @@ Lines processed: 1
 Characters processed: 0
 ```
 
-- **Przyczyna:** program zwiększa licznik po każdym udanym odczycie, zanim sprawdzi, czy linia jest pusta. Pusta linia kończąca to udany odczyt, więc też zostaje policzona, choć nie jest rekordem. Raporty `Line N` są poprawne, bo dla pustej linii program niczego nie wypisuje. Błędne jest tylko podsumowanie. Ustawienie flagi na `false` kończy pętlę, ale nie cofa już wykonanego `++lines_processed;`.
+- **Przyczyna:** program zwiększa licznik po każdym udanym odczycie, zanim sprawdzi, czy linia jest pusta. Pusta linia kończąca to udany odczyt, więc też zostaje policzona, choć nie jest linią danych. Raporty `Line N` są poprawne, bo dla pustej linii program niczego nie wypisuje. Błędne jest tylko podsumowanie. Ustawienie flagi na `false` kończy pętlę, ale nie cofa już wykonanego `++lines_processed;`.
 - **Dlaczego zestaw (a) nie ujawnia błędu:** dane kończą się bez pustej linii. Ostatnia próba się nie udaje, a po nieudanym odczycie licznik nie rośnie, więc podsumowanie jest poprawne.
 - **Poprawka:** przenieś `++lines_processed;` do gałęzi dla niepustej linii, przed `characters_processed += line.size();`. W gałęzi `else` zostaje wtedy sam `if`, który można zapisać jako `else if`.
 

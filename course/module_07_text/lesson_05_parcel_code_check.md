@@ -20,7 +20,7 @@ Zajrzenie do części B, do wcześniejszych lekcji albo do notatek nie jest pora
 - **pierwsze:** analiza wymagań, projekt obu funkcji, ich napisanie i sprawdzenie wydrukami testowymi, połączenie z pętlą odczytu;
 - **drugie:** przypadki graniczne, pełny raport, pusta linia i linia ze spacjami, zadanie 2, porównanie z rozwiązaniem, zadanie 3 i samoocena.
 
-**Możesz używać:** CLiona albo terminala, CMake i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przypadków i przebiegu oraz tymczasowych wydruków testowych. Debugger nie jest potrzebny. Nie musisz kończyć danych z klawiatury: przypadki, w których dane kończą się bez pustej linii, analizujesz na papierze.
+**Możesz używać:** CLiona albo terminala, CMake'a i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przypadków i przebiegu oraz tymczasowych wydruków testowych. Debugger nie jest potrzebny. Nie musisz kończyć danych z klawiatury: przypadki, w których dane kończą się bez pustej linii, analizujesz na papierze.
 
 ---
 
@@ -183,7 +183,7 @@ Invalid codes: 0
    - usuwanie spacji: spacje w różnych miejscach, same spacje i pusty tekst, z wynikiem w nawiasach kwadratowych, żeby było widać spacje;
    - sprawdzanie formatu: kilka poprawnych kodów, kody z błędem na różnych pozycjach, za krótkie, za długie i pusty tekst. Wartości `bool` wypisują się jako `1` albo `0`.
 4. **Usuń wydruki testowe** i połącz funkcje z pętlą odczytu.
-5. **Uruchom cały program** dla przykładów A, B i C oraz dla 1–2 innych przypadków z tabeli. Każdą linię kończ klawiszem **Enter**, a pustą linię wpisz samym **Enter**. Wpisywane linie mieszają się w terminalu z raportem, bo program odpowiada zaraz po każdej linii. Przypadki, w których dane kończą się bez pustej linii, przeanalizuj na papierze. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+5. **Uruchom cały program** dla przykładów A, B i C oraz dla 1–2 innych przypadków z tabeli. Każdą linię kończ klawiszem **Enter**, a pustą linię wpisz samym **Enter**. Wpisywane linie mieszają się w terminalu z raportem, bo program odpowiada zaraz po każdej linii. Przypadki, w których dane kończą się bez pustej linii, przeanalizuj na papierze. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5. Przed commitem sprawdź `git status`: do historii trafiają tylko `main.cpp` i `CMakeLists.txt`.
 
@@ -294,7 +294,7 @@ Sprawdzian jest zaliczony, gdy spełniasz **wszystkie** kryteria. Możesz przy t
 - Są dwie funkcje o zadaniach z wymagań. Obie dostają tekst przez `const std::string&`, niczego nie odczytują ani nie wypisują i nie zmieniają przekazanego tekstu. Typ wyniku każdej z nich pasuje do jej zadania.
 - Funkcja usuwająca spacje buduje nowy tekst przez `push_back` i usuwa wszystkie spacje, także ze środka kodu. Funkcja sprawdzająca format nie odczytuje znaku spoza tekstu, także dla pustego tekstu i kodów krótszych niż siedem znaków.
 - Linia z samych spacji jest liczona jako niepoprawny kod, a o końcu odczytu decyduje oryginalna linia. Program nie przechowuje wcześniejszych linii.
-- Standardowe wyjście dla przykładów A, B i C oraz dla wpisanych przypadków zgadza się z wymaganiami. Przypadki zakończone bez pustej linii zgadzają się z Twoją analizą na papierze i z pełną listą kontrolną.
+- Standardowe wyjście dla przykładów A, B i C oraz dla wpisanych przypadków zgadza się z wymaganiami. Przypadki zakończone bez pustej linii zgadzają się z Twoją analizą na papierze i z pełną listą przypadków kontrolnych.
 - Funkcje sprawdzono osobno wydrukami testowymi, a w programie końcowym takich wydruków nie ma.
 - Błąd z diagnostyki A poprawiono i sprawdzono, a fragment z diagnostyki B przeanalizowano bez uruchamiania.
 - Umiesz wyjaśnić każdą linijkę swojego programu i odpowiedzieć na pytania z zadania 3.
@@ -310,7 +310,7 @@ Przejdź tutaj po wykonaniu części A albo wtedy, gdy świadomie zrezygnujesz z
 ## Jak sprawdzić swoją pracę
 
 - **Standardowe wyjście:** porównaj linijki programu z oczekiwanymi, znak po znaku. Pomiń linie, które wpisujesz: widać je w terminalu, ale nie są częścią standardowego wyjścia programu.
-- **Koniec danych:** przypadki zakończone bez pustej linii sprawdź tabelą przebiegu i porównaj z pełną listą kontrolną. Każdy z nich jest tam sprawdzony automatycznie.
+- **Koniec danych:** przypadki zakończone bez pustej linii sprawdź tabelą przebiegu i porównaj z pełną listą przypadków kontrolnych. Każdy z nich jest tam sprawdzony automatycznie.
 - **Funkcje:** czy każda ma zadanie, które da się opisać jednym zdaniem? Czy któryś algorytm stoi też w `main`?
 - **Kolejność:** czy o końcu odczytu decyduje oryginalna linia? Czy funkcja sprawdzająca format zna długość kodu, zanim odczyta pierwszy znak?
 

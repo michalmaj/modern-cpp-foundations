@@ -249,7 +249,7 @@ W `coffee` powtarzają się `f` i `e`. Końcowe `111` daje dwie nakładające si
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: pusty tekst, jeden znak, dwa różne znaki, dwa, trzy i cztery jednakowe znaki, dwie rozłączne pary, wielkie i małe litery obok siebie, dwie spacje, powtórzona kropka i powtórzona cyfra. Przy każdym zapisz oczekiwane linijki `Pair` i licznik.
 
-**Potem:** uruchom program dla tekstu z wymagań, a następnie zmień tekst na 3–4 przypadki z tabeli, na przykład `"AAA"`, `"AABB"`, `"aAa"` i pusty tekst. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, więc nie musisz wpisywać ich wszystkich.
+**Potem:** uruchom program dla tekstu z wymagań, a następnie zmień tekst na 3–4 przypadki z tabeli, na przykład `"AAA"`, `"AABB"`, `"aAa"` i pusty tekst. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie, więc nie musisz wpisywać ich wszystkich.
 
 ### Kryterium sukcesu
 
@@ -463,7 +463,7 @@ int main() {
 
 Pary można też wykrywać inaczej, na przykład porównując znak z następnym w pętli o innym warunku, jeśli żadne porównanie nie sięga poza tekst i nakładające się pary są liczone.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Raport i pętla są takie same jak wyżej, poza wcięciem. Tekst jest odczytywany z wejścia jako jedna linijka przez `std::getline`, więc nie ma `const`.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Raport i pętla są takie same jak wyżej, poza wcięciem. Tekst jest odczytywany z wejścia jako jedna linijka przez `std::getline`, więc nie ma `const`.
 
 <!-- example: repeated_pairs_check -->
 ```cpp
@@ -494,7 +494,7 @@ int main() {
 }
 ```
 
-Każdy przypadek to jedna linijka wejścia, w kolejności z listy kontrolnej, od A do N. Przypadek B to pusta linijka, a przypadek K to linijka z dwiema spacjami.
+Każdy przypadek to jedna linijka wejścia, w kolejności z listy przypadków kontrolnych, od A do N. Przypadek B to pusta linijka, a przypadek K to linijka z dwiema spacjami.
 
 <!-- input: repeated_pairs_check -->
 ```text
@@ -731,7 +731,7 @@ Repeated pairs: 2
 
 Odczytu spoza tekstu tu nie ma: po dodatkowym przesunięciu warunek `index < text.size()` nadal sprawdza indeks przed odczytem.
 
-Poprawiony program to program kontrolny z punktu 6: różni się od programu z błędem tylko tą jedną linijką. Dla wszystkich trzech tekstów daje wyniki z listy kontrolnej: przypadki H, F i G.
+Poprawiony program to program kontrolny z punktu 6: różni się od programu z błędem tylko tą jedną linijką. Dla wszystkich trzech tekstów daje wyniki z listy przypadków kontrolnych: przypadki H, F i G.
 
 </details>
 
