@@ -21,7 +21,7 @@ In lesson 3.1, a program could do something or skip it. Often, though, you need 
 After this lesson you will:
 
 - choose one of two branches with `if` and `else`, and predict which one runs;
-- check equality with the `==` operator and inequality with `!=`, also for text;
+- check equality with the `==` operator and inequality with `!=`, for text as well;
 - tell assignment `=` apart from comparison `==`;
 - explain what `bool`, `true` and `false` are, and store the result of a comparison in a `bool` variable;
 - know where to declare a variable that you use after an `if`;
@@ -111,7 +111,7 @@ Score checked
 - When the condition is satisfied, the program executes the **first branch**, the block after `if`.
 - Otherwise it executes the **`else` branch** ("else" meaning "otherwise").
 - **Exactly one** of the two branches runs, never both one after the other.
-- `else` **has no condition of its own**. Its block runs when the condition at `if` isn't satisfied.
+- `else` **has no condition of its own**. Its block runs when the `if` condition isn't satisfied.
 - After the chosen branch the program carries on: `Score checked` always appears.
 - The braces mark both branches, and the indentation helps you see them. `else` comes right after the closing brace of the first branch.
 
@@ -710,7 +710,7 @@ You can store the result of comparing the word, and the result of checking evenn
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -773,12 +773,12 @@ No. `is_even` is of type `bool`. By default, `std::cout` prints `true` as `1` an
 
 ## Summary
 
-- `if`/`else` chooses **one of two** branches. `else` has no condition and runs when the condition at `if` isn't satisfied. After the chosen branch the program carries on.
-- `==` checks equality and `!=` inequality, also for `std::string`. A comparison changes nothing. `=` is assignment, a different operation.
+- `if`/`else` chooses **one of two** branches. `else` has no condition and runs when the `if` condition isn't satisfied. After the chosen branch the program carries on.
+- `==` checks equality and `!=` inequality, for `std::string` too. A comparison changes nothing. `=` is assignment, a different operation.
 - Comparing `std::string` values distinguishes upper and lower case.
 - The result of a comparison is of type `bool`: `true` or `false`. You can store it in a variable and use it as a condition. A stored value doesn't follow later changes in the data.
 - By default, `std::cout` prints a `bool` as `1` or `0`. The variable is still a `bool`.
-- A variable declared in a block exists only in it. Declare a value you need after the `if`/`else` before it, and assign it in the branches.
+- A variable declared in a block exists only in it. If you need a value after the `if`/`else`, declare the variable before it, and only assign the value in the branches.
 - Several separate `if`/`else` constructs make several separate decisions.
 
 ## What's next
@@ -810,7 +810,7 @@ Look here **after your own attempt**. Your names may differ, as long as the stan
 </details>
 
 <details>
-<summary>Section 9: mission, the mini quiz</summary>
+<summary>Section 9: the mission, the mini quiz</summary>
 
 <!-- example: mini_quiz -->
 ```cpp

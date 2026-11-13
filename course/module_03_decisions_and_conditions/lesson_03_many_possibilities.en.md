@@ -17,7 +17,7 @@ This lesson assumes that after lessons 3.1 and 3.2:
 
 ## The situation
 
-In lesson 3.2, a program chose one of two ways: `Passed` or `Not passed`. Often, though, there are more possibilities: a result can be weak, fair, good or excellent, and a ticket can be reduced, regular or for seniors. Today you'll meet `else if`, a way to choose **one of several** ways. You'll also learn to **plan test cases** for every limit before you run the program.
+In lesson 3.2, a program chose one of two ways: `Passed` or `Not passed`. Often, though, there are more possibilities: a result can be weak, fair, good or excellent, and a ticket can be reduced, regular or for seniors. Today you'll meet `else if`, which lets a program choose **one of several** ways. You'll also learn to **plan test cases** for every limit before you run the program.
 
 After this lesson you will:
 
@@ -168,7 +168,7 @@ The program was checked for 49, 75, 90 and 95. Is that enough? **Before you look
 Some questions to help: what does the program print for 50? For 74? For 89? Why is the result for 100 still `Excellent`? Can the program print more than one level at once?
 
 <details>
-<summary>The full list of control cases: open after your own attempt</summary>
+<summary>The full list of check cases: open after your own attempt</summary>
 
 Each of the three limits (50, 75, 90) is checked from both sides, plus both ends of the range, 0 and 100:
 
@@ -249,7 +249,7 @@ The values 49, 75 and 90 were already checked in section 2. For each value the p
 
 ## 5. Find the bug: the wrong order
 
-This program has the same requirements as the program in section 2. It compiles without errors, but someone put the conditions in a different order:
+This program has the same requirements as the program in section 2. It builds without errors, but someone put the conditions in a different order:
 
 <!-- example: score_order_bug -->
 ```cpp
@@ -444,7 +444,7 @@ Category: Regular
 ### Success criteria
 
 - The program builds as C++20, and for every age it prints the request and exactly one line `Category: …`, according to the table.
-- The age is an `int` variable with a starting value, read with `std::cin`.
+- The age is an `int` variable with a starting value, and the program reads it with `std::cin`.
 - A chain of `if`, `else if` and `else` chooses the category, with braces around every branch.
 - The conditions are in an order that makes every branch reachable. You can explain why that order is correct.
 - The table of cases was prepared before running the program, and it checks every limit from both sides.
@@ -467,7 +467,7 @@ Order the conditions as in section 2: from the highest threshold to the lowest, 
 </details>
 
 <details>
-<summary>The full list of control cases: open after your own attempt</summary>
+<summary>The full list of check cases: open after your own attempt</summary>
 
 | Age | Category | Limit |
 |---|---|---|
@@ -581,7 +581,7 @@ The other limits (7 and 18) didn't change, so their cases give the same results 
 
 Example solutions are in [Example solutions](#example-solutions).
 
-## 9. When something goes differently
+## 9. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -589,7 +589,7 @@ Example solutions are in [Example solutions](#example-solutions).
 | No category appears for some values | The chain has no final `else`, and no condition is satisfied. | If every value must get a category, add a final `else`. |
 | Two or more categories appear | These are separate `if`s, not one chain. | Join them into a chain: `else if` instead of another separate `if`. |
 | A wrong result exactly at a limit | `>` was confused with `>=`, or a threshold is off by one. | Check every limit from both sides, using your table of cases. |
-| A compile error at `else if` | A brace is missing before `else`, or the parentheses around the condition. | Each branch ends with `}`, followed by `else if (…) {`. |
+| A compile error at `else if` | A brace is missing before `else`, or the parentheses around the condition. | Each branch ends with the brace `}`, followed right away by `else if (…) {`. |
 
 ## 10. Explain
 
@@ -642,7 +642,7 @@ Separate `if`s are separate decisions: several blocks can run. In a chain, at mo
 
 ## Summary
 
-- A chain of `if`, `else if`, …, `else` chooses **one of several** branches. `else if` is `else` followed by another `if`, not a separate keyword.
+- A chain of `if`, `else if`, …, `else` chooses **one of several** branches. `else if` is `else` followed by another `if`, not one new word.
 - The conditions are checked **in order**. The branch of the **first** satisfied condition runs, and the rest of the chain is skipped.
 - Order matters: with thresholds using `>=`, order them from the highest, or some branches become unreachable.
 - The final `else` handles everything the earlier branches didn't. It's needed when every value must get a result.
@@ -819,7 +819,7 @@ Both versions are correct. What matters is whether, in the written order, each b
 </details>
 
 <details>
-<summary>Section 8: mission, the ticket category</summary>
+<summary>Section 8: the mission, the ticket category</summary>
 
 <!-- example: ticket_category -->
 ```cpp

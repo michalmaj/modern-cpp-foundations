@@ -23,7 +23,7 @@ After this lesson you will:
 
 - explain the meaning of `&&`, `||` and `!`, and choose the operator that fits a requirement;
 - check whether a number lies in a range;
-- know that `||` gives "yes" also when both conditions are satisfied;
+- know that `||` gives "yes" even when both conditions are satisfied;
 - write combined conditions readably, with named `bool` variables and parentheses;
 - understand when the right-hand side of `&&` and `||` isn't evaluated at all;
 - find a bug in a combined condition, and choose the test cases that reveal it.
@@ -60,7 +60,7 @@ int main() {
 - `in_range` is a `bool` variable that stores the result of the whole expression. `if (in_range)` uses it as in lesson 3.2.
 - A logical operator changes nothing: `number` has the same value after the comparison.
 
-In C++ a range isn't written as at school, as one chain of inequalities with the number in the middle. You have to join **two** comparisons explicitly with `&&`, as above.
+In C++ you don't write a range the way you do at school, as one chain of inequalities with the number in the middle. You have to join **two** comparisons explicitly with `&&`, as above.
 
 **Predict** what the program prints for 0, 1, 5, 10 and 11. Write down your answers, then run it five times.
 
@@ -144,7 +144,7 @@ Out of range
 
 </details>
 
-0 and 11 are ordinary numbers, read correctly. They simply **don't meet the condition**: they lie out of the range from 1 to 10. For 0 the first comparison is false, and for 11 the second. In both cases that's enough to make the whole `&&` false.
+0 and 11 are ordinary numbers, read correctly. They simply **don't meet the condition**: they lie outside the range from 1 to 10. For 0 the first comparison is false, and for 11 the second. In both cases that's enough to make the whole `&&` false.
 
 ## 3. One condition is enough: `||`
 
@@ -365,8 +365,8 @@ Day checked
 ```
 
 - `!` reverses a logical value: `!true` gives `false`, and `!false` gives `true`.
-- `!is_weekend` reads "not weekend". The result is a **new** logical value, and `is_weekend` doesn't change.
-- **`!` isn't `!=`.** The `!=` from lesson 3.2 compares two values ("are they different?"). `!` stands before **one** logical value and reverses it.
+- `!is_weekend` reads as "not weekend". The result is a **new** logical value, and `is_weekend` doesn't change.
+- **`!` isn't `!=`.** The `!=` from lesson 3.2 compares two values ("are they different?"). `!` goes before **one** logical value and reverses it.
 - Use `if (!condition)` where the requirement really says "if not …". Avoid double negations: they can usually be written more simply.
 
 ## 5. Readable conditions
@@ -548,7 +548,7 @@ Entry is allowed when both parts are met at once. Which operator joins two `bool
 </details>
 
 <details>
-<summary>The full list of control cases: open after your own attempt</summary>
+<summary>The full list of check cases: open after your own attempt</summary>
 
 | Age | Day | Result | What it checks |
 |---|---|---|---|
@@ -707,7 +707,7 @@ Entry allowed
 
 Example solutions are in [Example solutions](#example-solutions).
 
-## 9. When something goes differently
+## 9. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -854,7 +854,7 @@ Friday (5) is treated as a weekend day, and Sunday (7) as a weekday. Saturday (6
 </details>
 
 <details>
-<summary>Section 8: mission, weekend workshops</summary>
+<summary>Section 8: the mission, weekend workshops</summary>
 
 <!-- example: weekend_workshop -->
 ```cpp

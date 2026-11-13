@@ -21,7 +21,7 @@ Do tej pory każdy warunek zadawał jedno pytanie: czy liczba jest mniejsza od 5
 
 Po tej lekcji będziesz:
 
-- wyjaśniać znaczenie `&&`, `||` i `!` i dobierać operator do wymagania;
+- wyjaśniać znaczenie `&&`, `||` i `!` oraz dobierać operator do wymagania;
 - sprawdzać, czy liczba należy do przedziału;
 - wiedzieć, że `||` daje „tak” także wtedy, gdy spełnione są oba warunki;
 - zapisywać złożone warunki czytelnie, z nazwanymi zmiennymi `bool` i nawiasami;
@@ -235,7 +235,7 @@ int main() {
 }
 ```
 
-**Przewidź** wynik dla czterech kombinacji: bilet i brak na liście, brak biletu i obecność na liście, **i bilet, i lista**, ani biletu, ani listy.
+**Przewidź** wynik dla czterech kombinacji: bilet i brak na liście, brak biletu i obecność na liście, **i bilet, i lista** oraz ani biletu, ani listy.
 
 <!-- input: entry_check -->
 ```text

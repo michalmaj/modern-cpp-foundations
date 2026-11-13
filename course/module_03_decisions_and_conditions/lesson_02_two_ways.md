@@ -20,7 +20,7 @@ W lekcji 3.1 program mógł coś zrobić albo to pominąć. Często jednak trzeb
 
 Po tej lekcji będziesz:
 
-- wybierać jedną z dwóch gałęzi przez `if` i `else` i przewidywać, która się wykona;
+- wybierać jedną z dwóch gałęzi przez `if` i `else` oraz przewidywać, która się wykona;
 - sprawdzać równość operatorem `==` i nierówność operatorem `!=`, także dla tekstu;
 - odróżniać przypisanie `=` od porównania `==`;
 - wyjaśniać, czym są `bool`, `true` i `false`, i przechowywać wynik porównania w zmiennej `bool`;
@@ -109,7 +109,7 @@ Score checked
 </details>
 
 - Gdy warunek jest spełniony, program wykonuje **pierwszą gałąź**, czyli blok po `if`.
-- W przeciwnym razie wykonuje **gałąź `else`** (po polsku „w przeciwnym razie”).
+- Gdy warunek nie jest spełniony, wykonuje **gałąź `else`** (po polsku „w przeciwnym razie”).
 - Wykonuje się **dokładnie jedna** z dwóch gałęzi, nigdy obie po kolei.
 - `else` **nie ma własnego warunku**. Jego blok wykonuje się wtedy, gdy warunek przy `if` nie jest spełniony.
 - Po wybranej gałęzi program idzie dalej: `Score checked` pojawia się zawsze.
@@ -295,7 +295,7 @@ Even
 - `is_even` **przechowuje** ten wynik: `true` dla liczby parzystej, `false` dla nieparzystej. Wartość się nie zmienia, więc jest stałą.
 - `if (is_even)` korzysta z przechowanej wartości. Warunek w `if` to po prostu wartość `bool`: blok wykonuje się, gdy jest `true`.
 
-**Przechowana wartość nie śledzi zmian.** `is_even` zawiera odpowiedź obliczoną **w chwili inicjalizacji**. Jeśli później zmienisz `number`, `is_even` sama się nie zaktualizuje. Ten program pokazuje to, a przy okazji to, jak `std::cout` wypisuje wartość `bool`:
+**Przechowana wartość nie śledzi zmian.** `is_even` zawiera odpowiedź obliczoną **w chwili inicjalizacji**. Jeśli później zmienisz `number`, `is_even` sama się nie zaktualizuje. Pokazuje to ten program. Przy okazji zobaczysz, jak `std::cout` wypisuje wartość `bool`:
 
 <!-- example: stored_bool -->
 ```cpp
@@ -715,7 +715,7 @@ Przykładowe rozwiązanie jest w części [Przykładowe rozwiązania](#przykład
 | Co widzisz | Co to znaczy | Co zrobić |
 |---|---|---|
 | Wykonały się obie gałęzie | Druga gałąź nie jest połączona z `if` przez `else`, na przykład stoi po prostu za blokiem. | Gałąź alternatywna to `else { … }` zaraz za zamykającą klamrą bloku `if`. |
-| Błąd kompilacji przy `else` | `else` nie stoi zaraz po bloku `if`, albo ktoś dopisał przy nim warunek. | `else` nie ma warunku i musi następować bezpośrednio po `}` bloku `if`. |
+| Błąd kompilacji przy `else` | `else` nie stoi zaraz po bloku `if` albo ktoś dopisał przy nim warunek. | `else` nie ma warunku i musi następować bezpośrednio po `}` bloku `if`. |
 | Zmienna ma nagle inną wartość, choć miała być tylko sprawdzona | W miejscu porównania jest przypisanie `=`. | Do sprawdzania równości służy `==`, dwa znaki. |
 | Słowo wygląda na poprawne, a program mówi `incorrect` | Porównanie rozróżnia wielkość liter. | `Orbit` i `orbit` to różne napisy. Wpisz słowo dokładnie tak, jak oczekuje program. |
 | Na ekranie jest `1` albo `0` zamiast słowa | Program wypisał wartość `bool`. | To domyślny sposób wypisywania `true` i `false`. Wypisuj słowa w gałęziach `if`/`else`. |
@@ -778,7 +778,7 @@ Nie. `is_even` jest typu `bool`. `std::cout` domyślnie wypisuje `true` jako `1`
 - Porównanie `std::string` rozróżnia wielkość liter.
 - Wynik porównania jest typu `bool`: `true` albo `false`. Można go zapisać w zmiennej i użyć jako warunku. Zapisana wartość nie śledzi późniejszych zmian danych.
 - `std::cout` wypisuje `bool` domyślnie jako `1` albo `0`. Zmienna nadal jest typu `bool`.
-- Zmienna zadeklarowana w bloku istnieje tylko w nim. Wartość potrzebną po `if`/`else` deklaruj przed nim i przypisuj w gałęziach.
+- Zmienna zadeklarowana w bloku istnieje tylko w nim. Jeśli wartość jest potrzebna po `if`/`else`, zadeklaruj zmienną przed nim, a w gałęziach tylko przypisz jej wartość.
 - Kilka osobnych `if`/`else` podejmuje kilka osobnych decyzji.
 
 ## Co dalej
