@@ -131,7 +131,7 @@ Hello, Ada
 
 </details>
 
-- `greeting + name` tworzy **nowy tekst**: `Hello, ` i zaraz za nim `Ada`. Spacja jest na końcu `greeting`, więc trafia między słowa. `+` niczego nie dodaje do siebie arytmetycznie, tylko dokleja jeden tekst do drugiego.
+- `greeting + name` tworzy **nowy tekst**: `Hello, ` i zaraz za nim `Ada`. Spacja jest na końcu `greeting`, więc trafia między słowa. `+` nie dodaje tu niczego arytmetycznie, tylko dokleja jeden tekst do drugiego.
 - **Znaczenie operatora zależy od typów operandów**, jak w lekcji 2.5: dla liczb `+` dodaje, a dla dwóch wartości `std::string` łączy.
 - Wynik jest zapisany w nowej stałej `message`. Można go potem wypisać, jak każdą wartość.
 - Obie linijki wyglądają na ekranie tak samo, ale program robi co innego:
@@ -232,7 +232,7 @@ Full name: Ola Nowak
 
 </details>
 
-- `std::getline` to **funkcja z biblioteki standardowej**: gotowa, nazwana operacja, którą wywołujesz, podając w nawiasach, czego ma użyć. Własne funkcje poznasz później. Tutaj tylko korzystasz z gotowej.
+- `std::getline` to **funkcja z biblioteki standardowej**: gotowa, nazwana operacja, którą wywołujesz, podając w nawiasach, czego ma użyć. Pisać własne funkcje nauczysz się później. Tutaj tylko korzystasz z gotowej.
 - W nawiasach podajesz dwie rzeczy: **skąd czytać** (`std::cin`) i **dokąd zapisać** (`full_name`, zmienna typu `std::string`).
 - `std::getline` czyta **do końca linijki**, czyli do miejsca, w którym naciśnięto **Enter**. Spacje są częścią odczytanego tekstu.
 - Sam znak końca linijki nie trafia do `full_name`: zmienna przechowuje `Ada Lovelace`, bez niczego na końcu.
@@ -289,7 +289,7 @@ Hello, Grace Hopper!
 
 ## 8. Uwaga: najpierw `getline`, potem `>>`
 
-Po odczycie przez `std::cin >>` w standardowym wejściu zostaje koniec linijki z wciśniętego **Enter**. Gdyby zaraz potem program wywołał `std::getline`, mógłby odczytać tylko ten pusty koniec linijki i dostać pusty tekst. Jak sobie z tym radzić, poznasz później.
+Po odczycie przez `std::cin >>` w standardowym wejściu zostaje koniec linijki po naciśnięciu **Enter**. Gdyby zaraz potem program wywołał `std::getline`, mógłby odczytać tylko ten pusty koniec linijki i dostać pusty tekst. Jak sobie z tym radzić, dowiesz się później.
 
 Na razie wystarczy jedna zasada: **jeśli program czyta tekst przez `std::getline` i liczbę przez `>>`, najpierw wywołaj `std::getline`, a dopiero potem `>>`.** Tak jest w misji.
 
@@ -404,7 +404,7 @@ Przykładowe rozwiązanie jest w części [Przykładowe rozwiązania](#przykład
 | Błąd kompilacji przy `+` z dwoma tekstami w cudzysłowie | Dwa literały nie są wartościami `std::string` (punkt 4). | Przynajmniej jeden operand każdego `+` musi być typu `std::string`. Albo wypisz teksty przez `<<`. |
 | `std::getline` odczytał pusty tekst, choć wpisano imię | Przed `std::getline` był odczyt przez `>>`, a po nim został koniec linijki (punkt 8). | Najpierw `std::getline`, potem `>>`. |
 | Wpisany tekst jest widoczny na ekranie dwa razy albo między linijkami programu | Jedno z wystąpień to echo, a nie wynik programu (lekcja 2.6). | Nic. Standardowe wyjście to tylko to, co wypisuje `std::cout`. |
-| Litery z polskimi znakami albo inne znaki spoza podstawowego alfabetu wyświetlają się dziwnie | Wyświetlanie takich znaków zależy od ustawień systemu i konsoli. | W tej lekcji używaj w danych liter bez polskich znaków, na przykład `Lukasz` zamiast `Łukasz`. Pracę z takimi znakami poznasz później. |
+| Litery z polskimi znakami albo inne znaki spoza podstawowego alfabetu wyświetlają się dziwnie | Wyświetlanie takich znaków zależy od ustawień systemu i konsoli. | W tej lekcji używaj w danych liter bez polskich znaków, na przykład `Lukasz` zamiast `Łukasz`. Jak pracować z takimi znakami, dowiesz się później. |
 
 ## 11. Wyjaśnij
 

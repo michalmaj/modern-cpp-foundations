@@ -56,7 +56,7 @@ Event: Science Fair
 
 - `"Hello!"` is a **text literal**: text written directly in the code, in quotes, as in Module 1.
 - `std::string` is a **type from the standard library** that stores text. `greeting` is a variable of that type, and `{"Hello!"}` gives it its starting value, just as `{3}` does for an `int` variable.
-- A literal and a variable are two different things, even though here they contain the same text. A literal is a fixed piece of the code. A `std::string` variable stores text that the program can change, join with other text, and read from the user.
+- A literal and a variable are two different things, even though here they contain the same text. A literal is a fixed piece of the code. A `std::string` variable stores text that the program can change, join with other text and read from the user.
 - The text in a `std::string` can contain spaces, like `Science Fair`.
 - `std::cout` prints text from a variable just as it prints a number.
 - The `std::string` type needs the header **`#include <string>`**. Programs that print or read also need `#include <iostream>`, as before. Sometimes a program builds without `#include <string>`, because another header includes it along the way. Don't rely on that: if you use `std::string`, write `#include <string>`.
@@ -179,7 +179,7 @@ Name: Ola
 
 </details>
 
-- `>>` reads **one word** into a `std::string`: it skips the spacing before it, and **a space ends the read**. So `name` gets `Ola`.
+- `>>` reads **one word** into a `std::string`: it skips any whitespace before it, and **a space ends the read**. So `name` gets `Ola`.
 - The rest, ` Nowak`, hasn't disappeared. It's still in standard input, unread. This program simply doesn't use it.
 - **This doesn't mean that a `std::string` can't hold spaces.** `event_name` in section 2 stores `Science Fair`. The limitation comes from the **read operation** `>>`, not from the type.
 
@@ -300,9 +300,9 @@ Write a program that prepares a simple badge for a participant at an event. The 
 1. the participant's full name, which can contain spaces;
 2. a seat number, as a whole number.
 
-The program prints the full name, the seat number, and a greeting with the full name.
+The program prints the full name, the seat number and a greeting with the full name.
 
-In `cpp-workspace`, create a folder `participant_badge`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp`, and write the program on your own.
+In `cpp-workspace`, create a folder `participant_badge`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp` and write the program on your own.
 
 **The first run:**
 
@@ -346,7 +346,7 @@ Welcome, Grace Hopper!
 - The program has `#include <string>` and `#include <iostream>`.
 - The full name goes into a `std::string` variable through `std::getline`, and the seat number into an `int` variable through `std::cin >>`, **in that order**. Both variables have starting values and aren't `const`.
 - The greeting `Welcome, …!` is **text built with `+`** and stored in a `std::string` constant.
-- The code contains neither `Ada Lovelace`, `Grace Hopper`, 12 nor 8: the data comes from standard input.
+- The code contains none of `Ada Lovelace`, `Grace Hopper`, 12 or 8: the data comes from standard input.
 - The program uses only what you already know.
 - You can explain what in the program is text and what is a number, and why you read the name with `std::getline` and not with `>>`.
 
@@ -394,7 +394,7 @@ The program works without changes to the code, because `std::getline` reads the 
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -415,7 +415,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 <details>
 <summary>Example answer</summary>
 
-`"Hello!"` is a text literal: text written directly in the code. `greeting` is a variable of type `std::string`, which stores a copy of that text as its starting value. The variable's value can then be changed by assignment, joined with other text, or read from the user.
+`"Hello!"` is a text literal: text written directly in the code. `greeting` is a variable of type `std::string`, which stores a copy of that text as its starting value. The variable's value can then be changed by assignment, joined with other text or read from the user.
 
 </details>
 
@@ -466,7 +466,7 @@ Because after a number is read with `>>`, the line ending stays in the input, an
 
 ## What's next
 
-You now know all the tools of Module 2: whole and fractional numbers, text, calculations, constants, data from the user, and ways of finding errors in results. In lesson 2.8 you'll test them in an independent task: [Lesson 2.8: From data to result (the Module 2 test)](lesson_08_from_data_to_result.en.md).
+You now know all the tools of Module 2: whole and fractional numbers, text, calculations, constants, data from the user and ways of finding errors in results. In lesson 2.8 you'll test them in an independent task: [Lesson 2.8: From data to result (the Module 2 test)](lesson_08_from_data_to_result.en.md).
 
 ---
 
@@ -475,7 +475,7 @@ You now know all the tools of Module 2: whole and fractional numbers, text, calc
 Look here **after your own attempt**. Your names may differ, as long as the standard output is as required.
 
 <details>
-<summary>Section 9: mission, the participant badge</summary>
+<summary>Section 9: the mission, the participant badge</summary>
 
 <!-- example: participant_badge -->
 ```cpp

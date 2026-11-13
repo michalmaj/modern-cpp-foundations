@@ -3,7 +3,7 @@
 [Polski](lesson_03_see_what_happens_in_the_program.md) · **English** · [Course overview](../../README.en.md)
 
 > **Module 2, lesson 3** · about 60 minutes
-> **You need:** the `cpp-workspace` folder, the original `lesson_05_first_program` project, and CLion with the `LLVM 22` toolchain from lesson 0.5.
+> **You need:** the `cpp-workspace` folder, the original `lesson_05_first_program` project and CLion with the `LLVM 22` toolchain from lesson 0.5.
 > **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS. The debugger steps were prepared from the CLion 2026.2 documentation, but they haven't yet been checked by hand on every configuration. If the debugger doesn't work in your environment, you can trace the values with the `std::cout` method from section 8 and still complete this lesson.
 
 ## Before you start
@@ -96,9 +96,9 @@ A **debugger** is a tool that runs your program under its control. It can stop t
 
 - **Run** starts the program the ordinary way: it runs from start to finish without stopping.
 - **Debug** starts the program under the debugger. The program will stop at the places you mark.
-- A **breakpoint** is a marker next to a statement that says: "stop **before** you execute this statement".
+- A **breakpoint** is a marker next to a statement that says: “stop **before** you execute this statement”.
 
-**Why the Debug configuration?** In lesson 0.5 you build the program in the CMake **Debug** profile. In this configuration the compiler adds extra **information for the debugger** to the program: which part of the compiled program belongs to which line of code, and where the variables are. Without it, the debugger doesn't know where your statement is. The **Release** configuration is prepared for running fast: the compiler may reorder and combine statements in it, and by default it doesn't add this information. So always use the Debug profile when looking for errors.
+**Why the Debug configuration?** Since lesson 0.5, you have been building programs in the CMake **Debug** profile. In this configuration the compiler adds extra **information for the debugger** to the program: which part of the compiled program belongs to which line of code, and where the variables are. Without it, the debugger doesn't know where your statement is. The **Release** configuration is prepared for running fast: the compiler may reorder and combine statements in it, and by default it doesn't add this information. So always use the Debug profile when looking for errors.
 
 ## 4. Check the settings before your first session
 
@@ -153,7 +153,7 @@ Always set a breakpoint on a line with a statement, not on an empty line or on `
 <details>
 <summary>What you should see, and why</summary>
 
-`total` has the value **0**, even though the blue statement adds the price of bread. Nothing is broken: that statement hasn't run yet. Only what stands above it has run, and there `total` got its starting value 0.
+`total` has the value **0**, even though the blue statement adds the price of bread. Nothing is broken: that statement hasn't run yet. Only what comes before it has run, and there `total` got its starting value 0.
 
 </details>
 
@@ -161,7 +161,7 @@ The **Variables** tab may show other variables too, for example the prices. Toda
 
 **Step 5. Run one statement.** On the toolbar of the **Debug** window, find the **Step Over** button (its name appears when you hover the mouse pointer over it). Click it **once**. The blue statement runs, and the blue line moves to the next statement. Check `total` in the **Variables** tab: now you see the value **after** the statement ran.
 
-**Step 6. Step by step, up to the first difference.** Copy this table. In the "expected" column, write the values from the table in section 2. Before each click on **Step Over**, write down what `total` is **now**, and after the click write down the new value.
+**Step 6. Step by step, up to the first difference.** Copy this table. In the “expected” column, write the values from the table in section 2. Before each click on **Step Over**, write down what `total` is **now**, and after the click write down the new value.
 
 | Statement in blue (not run yet) | `total` now | Expected `total` after it runs | `total` after **Step Over** |
 |---|---|---|---|
@@ -170,7 +170,7 @@ The **Variables** tab may show other variables too, for example the prices. Toda
 | `total = cheese_price;` | | | |
 | `total = total - coupon;` | | | |
 
-The "after" value of one row is the "now" value of the next. You are looking for the **first** row where the last column differs from the expected one. The statement in that row was the first to give a wrong result.
+The “after” value of one row is the “now” value of the next. You are looking for the **first** row where the last column differs from the expected one. The statement in that row was the first to give a wrong result.
 
 **Step 7. End the session.** When the blue line reaches the statement with `std::cout`, stop clicking **Step Over**. Click **Resume Program** (the button on the toolbar of the **Debug** window, or the menu **Run | Debugging Actions | Resume Program**). The program runs the rest of its statements without stopping, because there are no more breakpoints, and finishes. If you want to end the session earlier, click **Stop** on the toolbar of the **Debug** window.
 
@@ -394,9 +394,9 @@ Mark what fits your work:
 - I found the error by **printing values** with `std::cout`.
 - I needed the **hints** or the **example solution** to find the error.
 
-Each of these is fine. If the debugger wasn't available, using it stays for you to catch up on later. If you needed the solution, come back to the mission in a few days and try again.
+Each of these is fine. If the debugger wasn't available, you can catch up on using it later. If you needed the solution, come back to the mission in a few days and try again.
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -406,7 +406,7 @@ Each of these is fine. If the debugger wasn't available, using it stays for you 
 | On Windows, the switcher shows a profile of type GDB | For the format in which `clang++` writes the information for the debugger on Windows, CLion provides its bundled LLDB. | Choose the LLDB profile you created in section 4. |
 | After **Step Over**, an unfamiliar file or code you didn't write opens | The debugger went past the last statement of your program. | Click **Stop**. Next time, end the session with **Resume Program** when the blue line reaches `std::cout`. |
 | The debugger shows code from another exercise | Another project is open in CLion. | Open the right folder (**File \| Open**). |
-| After the fix, the result is still wrong | A different statement was fixed than the one to blame, or a new mistake crept in. | Go back to the table and find the first difference again. |
+| After the fix, the result is still wrong | The fix changed a different statement from the one to blame, or a new mistake crept in. | Go back to the table and find the first difference again. |
 
 ## 11. Explain
 
@@ -504,7 +504,7 @@ The first difference is in the third row: after `total = cheese_price;`, `total`
 </details>
 
 <details>
-<summary>Section 9: mission, the school library</summary>
+<summary>Section 9: the mission, the school library</summary>
 
 | Statement | `on_shelf` | `borrowed` |
 |---|---|---|

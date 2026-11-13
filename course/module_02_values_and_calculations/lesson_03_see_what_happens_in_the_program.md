@@ -98,7 +98,7 @@ Odpowiedź znajdziesz za pomocą debuggera.
 - **Debug** uruchamia program pod debuggerem. Program zatrzyma się w miejscach, które wskażesz.
 - **Breakpoint** (punkt przerwania) to znacznik przy instrukcji, który mówi: „zatrzymaj się, **zanim** wykonasz tę instrukcję”.
 
-**Dlaczego konfiguracja Debug?** W lekcji 0.5 budujesz program w profilu CMake **Debug**. W tej konfiguracji kompilator dołącza do programu dodatkowe **informacje dla debuggera**: która część skompilowanego programu odpowiada której linijce kodu i gdzie są zmienne. Bez nich debugger nie wie, gdzie jest Twoja instrukcja. Konfiguracja **Release** jest przygotowana do szybkiego działania: kompilator może w niej przestawiać i łączyć instrukcje i domyślnie nie dołącza tych informacji. Do szukania błędów używaj więc zawsze profilu Debug.
+**Dlaczego konfiguracja Debug?** Od lekcji 0.5 budujesz programy w profilu CMake **Debug**. W tej konfiguracji kompilator dołącza do programu dodatkowe **informacje dla debuggera**: która część skompilowanego programu odpowiada której linijce kodu i gdzie są zmienne. Bez nich debugger nie wie, gdzie jest Twoja instrukcja. Konfiguracja **Release** jest przygotowana do szybkiego działania: kompilator może w niej przestawiać i łączyć instrukcje i domyślnie nie dołącza tych informacji. Do szukania błędów używaj więc zawsze profilu Debug.
 
 ## 4. Sprawdź ustawienia przed pierwszą sesją
 
@@ -123,7 +123,7 @@ CLion sam przygotowuje domyślny profil z wbudowanym debuggerem **LLDB**. Niczeg
 
 ### Windows
 
-Na Windowsie `clang++` zapisuje informacje dla debuggera w formacie Microsoftu (w pliku `.pdb`). CLion ma do nich wbudowany debugger oparty na **LLDB**, przygotowany dla toolchainu Visual Studio. Potrzebujesz więc profilu typu **LLDB**, a nie GDB. Najpewniej będzie utworzyć taki profil samodzielnie i nadać mu własną nazwę. Wtedy wiesz, jakiego jest typu:
+Na Windowsie `clang++` zapisuje informacje dla debuggera w formacie Microsoftu (w pliku `.pdb`). CLion ma do nich wbudowany debugger oparty na **LLDB**, przygotowany dla toolchainu Visual Studio. Potrzebujesz więc profilu typu **LLDB**, a nie GDB. Najpewniejszy sposób to utworzyć taki profil samodzielnie i nadać mu własną nazwę. Wtedy wiesz, jakiego jest typu:
 
 1. W ustawieniach otwórz **Build, Execution, Deployment | Debugger | Debug Profiles**.
 2. W części **General-purpose debuggers** kliknij kafelek **LLDB**. CLion doda do listy nowy profil tego typu.
@@ -174,7 +174,7 @@ Wartość „po” z jednego wiersza to wartość „teraz” w następnym. Szuk
 
 **Krok 7. Zakończ sesję.** Gdy niebieska linia dojdzie do instrukcji ze `std::cout`, przestań klikać **Step Over**. Kliknij **Resume Program** (przycisk na pasku narzędzi okna **Debug** albo menu **Run | Debugging Actions | Resume Program**). Program wykona resztę instrukcji bez zatrzymywania, bo nie ma już dalszych breakpointów, i się zakończy. Jeśli chcesz przerwać sesję wcześniej, kliknij **Stop** na pasku narzędzi okna **Debug**.
 
-Nie klikaj **Step Over** za ostatnią instrukcją programu. Debugger mógłby wtedy przejść do kodu, który uruchamia i kończy programy i nie pochodzi z Twojego pliku. Jeśli zobaczysz nieznany plik albo kod, którego nie piszesz, kliknij **Stop**.
+Nie klikaj **Step Over** za ostatnią instrukcją programu. Debugger mógłby wtedy przejść do kodu, który uruchamia i kończy programy i nie pochodzi z Twojego pliku. Jeśli zobaczysz nieznany plik albo kod spoza Twojego programu, kliknij **Stop**.
 
 Wypełniona tabela i wyjaśnienie są w części [Przykładowe rozwiązania](#przykładowe-rozwiązania). Zajrzyj tam po własnej próbie.
 
@@ -231,7 +231,7 @@ Ta metoda przyda się, jeśli w Twoim środowisku:
 - zakładka **Variables** jest pusta;
 - nie da się wybrać właściwego profilu debugowania.
 
-Znasz ją z lekcji 2.2, punkt 5. Wykonaj ją na programie z paragonem, w wersji **z błędem**:
+Znasz ją z lekcji 2.2, punkt 5. Zastosuj ją do programu z paragonem, w wersji **z błędem**:
 
 1. Przygotuj tabelę oczekiwanych wartości z punktu 2.
 2. Pod każdym przypisaniem do `total` dopisz instrukcję, która wypisze aktualną wartość, na przykład:
@@ -404,7 +404,7 @@ Każda z tych dróg jest w porządku. Jeśli debugger nie był dostępny, obsłu
 | CLion oznacza breakpoint jako nieprawidłowy (*invalid*) albo program uruchomiony przez **Debug** się nie zatrzymuje | Debugger nie umie dopasować breakpointu do programu: linijka nie zawiera instrukcji, program nie jest zbudowany w profilu Debug albo, na Windowsie, aktywny profil debugowania nie jest typu LLDB. | Przenieś breakpoint na instrukcję. Sprawdź punkt 4. Jeśli to nie pomoże, użyj metody z punktu 8. |
 | Przy pierwszym zatrzymaniu `total` ma 0, a nie 4 | Tak ma być: niebieska instrukcja jeszcze się nie wykonała. | Kliknij **Step Over** i sprawdź wartość ponownie. |
 | Na Windowsie przełącznik pokazuje profil typu GDB | Do formatu, w którym `clang++` zapisuje na Windowsie informacje dla debuggera, CLion przewiduje wbudowany LLDB. | Wybierz profil LLDB utworzony w punkcie 4. |
-| Po **Step Over** otwiera się nieznany plik albo kod, którego nie piszesz | Debugger przeszedł za ostatnią instrukcję Twojego programu. | Kliknij **Stop**. Następnym razem zakończ sesję przez **Resume Program**, gdy niebieska linia dojdzie do `std::cout`. |
+| Po **Step Over** otwiera się nieznany plik albo kod spoza Twojego programu | Debugger przeszedł za ostatnią instrukcję Twojego programu. | Kliknij **Stop**. Następnym razem zakończ sesję przez **Resume Program**, gdy niebieska linia dojdzie do `std::cout`. |
 | Debugger pokazuje kod z innego ćwiczenia | W CLionie jest otwarty inny projekt. | Otwórz właściwy katalog (**File \| Open**). |
 | Po poprawce wynik jest nadal zły | Poprawiono inną instrukcję niż ta, która zawiniła, albo pojawiła się nowa pomyłka. | Wróć do tabeli i jeszcze raz znajdź pierwszą różnicę. |
 

@@ -19,7 +19,7 @@ Zajrzenie do części B, do wcześniejszych lekcji albo do swoich notatek nie je
 
 **Możesz używać:**
 
-- CLiona albo terminala, CMake i Ninja, jak dotąd;
+- CLiona albo terminala, CMake'a i Ninja, jak dotąd;
 - `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`;
 - debuggera z lekcji 2.3, jeśli działa w Twoim środowisku, albo tabeli wartości i tymczasowych instrukcji `std::cout`;
 - Gita, jeśli chcesz zapisać gotową pracę.
@@ -501,10 +501,10 @@ Po ośmiu lekcjach potrafisz:
 - przechowywać i łączyć tekst oraz odczytywać całe linijki;
 - analizować przebieg programu tabelą wartości, wypisywaniem albo debuggerem i znajdować proste błędy logiczne.
 
-O stanie materiałów: kod i obliczenia ze wszystkich lekcji Modułu 2 są sprawdzane automatycznie na trzech systemach. Instrukcja obsługi debuggera w CLionie pozostaje pilotażowa: nie została jeszcze ręcznie sprawdzona na wszystkich trzech systemach.
+O stanie materiałów: kod i obliczenia ze wszystkich lekcji Modułu 2 są sprawdzane automatycznie na trzech systemach. Instrukcji obsługi debuggera w CLionie nie sprawdziliśmy jeszcze ręcznie na wszystkich trzech systemach.
 
 ## Co dalej: Moduł 3
 
-Twoje programy wykonują na razie zawsze te same instrukcje, od góry do dołu. W Module 3 zaczną **podejmować decyzje**: poznasz porównania i warunki, dzięki którym program wykona różne instrukcje w zależności od danych. Zacznij od [lekcji 3.1: Pierwsza decyzja programu (`if`)](../module_03_decisions_and_conditions/lesson_01_the_first_decision.md). Moduł 3 jest rozwijany: kolejne lekcje są w przygotowaniu.
+Twoje programy wykonują na razie zawsze te same instrukcje, od góry do dołu. W Module 3 zaczną **podejmować decyzje**: poznasz porównania i warunki, dzięki którym program wykona różne instrukcje w zależności od danych. Zacznij od [lekcji 3.1: Pierwsza decyzja programu (`if`)](../module_03_decisions_and_conditions/lesson_01_the_first_decision.md).
 
 **Poprzednia lekcja:** [Lekcja 2.7: Tekst, który program pamięta (`std::string`)](lesson_07_text_the_program_remembers.md) · **Następna lekcja:** [Lekcja 3.1: Pierwsza decyzja programu (`if`)](../module_03_decisions_and_conditions/lesson_01_the_first_decision.md) · [Opis kursu](../../README.md)

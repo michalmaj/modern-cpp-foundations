@@ -233,7 +233,7 @@ Copy the table. For each expression, **predict** the result and mark whether the
 | f | `1 / 2 * 4.0` | | | |
 | g | `1.0 / 2 * 4` | | | |
 
-Only when the table is filled in, run the program:
+Run the program only when the table is filled in:
 
 <!-- example: mixed_predictions -->
 ```cpp
@@ -294,7 +294,7 @@ int main() {
 
 The program won't build. On line 4, the compiler reports `type 'double' cannot be narrowed to 'int' in initializer list`. On the same line it also prints the warning `implicit conversion from 'double' to 'int' changes value from 2.5 to 2`: after such a change, 2.5 would become 2. The number 2.5 can't fit into an `int` without losing its fractional part. A change of type like this, which could change the value, is called a **narrowing conversion**. Initialisation with `{}` doesn't allow it: instead of silently storing 2 in `ticket_count`, the compiler stops the build. Skip the `note:` line suggesting an explicit cast for now: here the right fix is choosing the type.
 
-Restore correct code. The number of tickets is a whole number, so write, for example, `{2}`. If the value really had to have a fractional part, the variable would have to be of type `double`.
+Restore the correct code. The number of tickets is a whole number, so write, for example, `{2}`. If the value really had to have a fractional part, the variable would have to be of type `double`.
 
 Not every change of type is an error. A whole number can be stored in a `double` without losing anything, so this builds and runs:
 
@@ -356,7 +356,7 @@ second: 3.5
 | `auto first{7 / 2};` | a division of two `int`s | `int` | 3 |
 | `auto second{7.0 / 2};` | a `double` divided by an `int` | `double` | 3.5 |
 
-- `auto` **doesn't mean** "any type". Each of these variables has one specific type, which the compiler worked out from the starting value before the program even runs.
+- `auto` **doesn't mean** “any type”. Each of these variables has one specific type, which the compiler works out from the starting value before the program even runs.
 - That type **doesn't change** while the program runs. `ticket_count` is an `int` from its declaration to the end, just as if you had written `int ticket_count{3};`.
 - `auto` **doesn't perform** any extra calculation, and fixes nothing. `first` receives the result of an integer division, 3, and its type is `int`, because that is the type of the result of `7 / 2`.
 - These values don't change, so following the rule from lesson 2.2 they could also be `const`, for example `const auto ticket_count{3};`. Here `const` is left out to focus on `auto`.
@@ -478,7 +478,7 @@ Example answers are in [Example solutions](#example-solutions).
 
 In a running training session, 5 laps of a track took 37.5 seconds altogether, according to the stopwatch. The program must calculate the average time of one lap.
 
-In `cpp-workspace`, create a folder `lap_times`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp`, and write the program on your own. The program must print exactly:
+In `cpp-workspace`, create a folder `lap_times`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp` and write the program on your own. The program must print exactly:
 
 <!-- output: lap_times -->
 ```text
@@ -525,7 +525,7 @@ Average lap time: 8.5 s
 
 Example solutions are in [Example solutions](#example-solutions).
 
-## 13. When something goes differently
+## 13. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -638,7 +638,7 @@ For an average of whole-number marks, remember section 4: a `double` variable fo
 </details>
 
 <details>
-<summary>Section 12: mission, the average lap time</summary>
+<summary>Section 12: the mission, the average lap time</summary>
 
 <!-- example: lap_times -->
 ```cpp

@@ -107,7 +107,7 @@ Między uruchomieniami **nie zmienił się** kod, plik `CMakeLists.txt` ani plik
 
 ## 4. Co robi `std::cin >> count;`
 
-- **`std::cin`** to **standardowe wejście** programu: strumień, z którego program może pobierać dane. Para do znanego `std::cout`, czyli **standardowego wyjścia**.
+- **`std::cin`** to **standardowe wejście** programu: strumień, z którego program może pobierać dane. Tworzy parę ze znanym `std::cout`, czyli **standardowym wyjściem**.
 - **`>>`** odczytuje ze strumienia wartość i **zapisuje ją w zmiennej** po prawej stronie. Po `std::cin >> count;` zmienna `count` ma odczytaną wartość.
 - Kierunek strzałek pokazuje drogę danych:
   - `std::cout << count` wysyła wartość **ze zmiennej do wyjścia**, na ekran;
@@ -493,7 +493,7 @@ Przykładowe rozwiązanie jest w części [Przykładowe rozwiązania](#przykład
 | Co widzisz | Co to znaczy | Co zrobić |
 |---|---|---|
 | Program nic nie wypisuje albo wypisał prośbę i „stoi” | Czeka na dane przy `std::cin`. Nie zawiesił się. | Wpisz wartość w oknie programu i naciśnij **Enter**. |
-| W oknie **Run** CLiona nie da się nic wpisać | To miejsce tej instrukcji nie jest jeszcze sprawdzone na każdym systemie. | Uruchom program w terminalu, jak w punkcie 3. |
+| W oknie **Run** CLiona nie da się nic wpisać | Ten krok lekcji nie jest jeszcze sprawdzony na każdym systemie. | Uruchom program w terminalu, jak w punkcie 3. |
 | Wynik nie zależy od wpisanych danych | Obliczenie albo wypisanie stoi **przed** odczytem i korzysta z wartości początkowej. | Odczyt musi być przed obliczeniem, które z niego korzysta. |
 | Wpisana liczba pojawia się na ekranie, choć jej nie wypisujesz | To echo okna, w którym piszesz, a nie wynik programu. | Nic. To nie jest standardowe wyjście programu. |
 | Błąd kompilacji przy `std::cin >>` ze zmienną `const` | Do stałej nie da się wczytać wartości. | Zmienna na dane nie może mieć `const`. |

@@ -58,14 +58,14 @@ int main() {
 
 </details>
 
-Not 3.5, but 3. This isn't a bug in the program, it's a rule:
+Not 3.5, but 3. This isn't a bug in the program but a rule:
 
 - the numbers on both sides of an operator are its **operands**. Here both operands, `7` and `2`, are of type `int`, that is, whole numbers;
 - when both operands are whole numbers, `/` performs **integer division**, and its result is a whole number too;
 - for positive numbers, that result is the **whole part** of the quotient: how many times 2 fits into 7 completely. The fractional part isn't kept;
 - C++ **doesn't round** this result to the nearest whole number. It simply never produces the fraction.
 
-**The fractional part disappears in the division itself, not when the result is stored in a variable.** `7 / 2` gives `3` straight away. There is no 3.5 along the way that the `int` variable then "cuts down". Check this in the next program: its last line prints the result of a division without any variable. The parentheses around the division in `std::cout` show clearly what is to be calculated, as in lesson 2.1.
+**The fractional part disappears in the division itself, not when the result is stored in a variable.** `7 / 2` gives `3` straight away. There is no 3.5 along the way that the `int` variable then “cuts down”. Check this in the next program: its last line prints the result of a division without any variable. The parentheses around the division in `std::cout` show clearly what is to be calculated, as in lesson 2.1.
 
 <!-- example: division_cases -->
 ```cpp
@@ -131,7 +131,7 @@ Remaining items: 2
 - `%` tells you how many items are **left over**: `17 % 5` gives `2`. It is the **remainder operator**.
 - Together they describe everything: 3 full groups of 5 make 15 crayons, and with the remaining 2 there are 17.
 
-**Watch out for the `%` sign.** In C++ it has nothing to do with percentages. `17 % 5` doesn't mean "17 percent of 5". It is always the remainder of dividing 17 by 5.
+**Watch out for the `%` sign.** In C++ it has nothing to do with percentages. `17 % 5` doesn't mean “17 percent of 5”. It is always the remainder of dividing 17 by 5.
 
 As with `/`, both numbers used with `%` in this lesson are positive.
 
@@ -197,7 +197,7 @@ int main() {
 | `10 - 8 / 2` | `10 - (8 / 2)` | 10 − 4 | 6 |
 | `(10 - 8) / 2` | already in parentheses | 2 / 2 | 1 |
 
-**Watch out for a common mistake.** You sometimes hear the rule "multiplication first, then division". That's wrong, in C++ and in maths: `*` and `/` are on the **same** level. In `20 / 5 * 2` the division comes first, because it stands further to the left. If you want the multiplication first, write it in parentheses, as in `20 / (5 * 2)`.
+**Watch out for a common mistake.** You sometimes hear the rule “multiplication first, then division”. That's wrong, in C++ and in maths: `*` and `/` are on the **same** level. In `20 / 5 * 2` the division comes first, because it is further to the left. If you want the multiplication first, write it in parentheses, as in `20 / (5 * 2)`.
 
 **Parentheses for clarity.** If you aren't sure how an expression will be grouped, or you don't want the reader to have to think about it, add parentheses even when they change nothing: `(20 / 5) * 2` means the same as `20 / 5 * 2`, but it's quicker to read. The same was true of the parentheses in `std::cout` in lesson 2.1.
 
@@ -221,7 +221,7 @@ Each of these expressions tests a different trap. Copy the table, and for each r
 | e | `2 + 3 * 4` | | | |
 | f | `(2 + 3) * 4` | | | |
 
-Only when the table is filled in, run the program:
+Run the program only when the table is filled in:
 
 <!-- example: predictions -->
 ```cpp
@@ -314,7 +314,7 @@ Teams: 6
 
 `/` is grouped before `+`, so the expression means `first_class_pupils + (second_class_pupils / team_size)`. Only the second class is split into teams: `16 / 5` gives 3, and then the program adds the whole first class, 14 pupils. The result is 17, a number that makes no sense: part of it is pupils, part of it is teams.
 
-The intended calculation is "first add up all the pupils, then divide by the team size". So the addition has to go in parentheses:
+The intended calculation is “first add up all the pupils, then divide by the team size”. So the addition has to go in parentheses:
 
 <!-- example: teams_fixed -->
 ```cpp
@@ -339,7 +339,7 @@ Now `30 / 5` gives 6.
 
 The organisers of a school festival have 29 badges. They put 6 badges into each kit for a team. They want to know how many **full** kits they can prepare, and how many badges will be left unused.
 
-In `cpp-workspace`, create a folder `badge_kits`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp`, and write the program on your own. The program must print exactly:
+In `cpp-workspace`, create a folder `badge_kits`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp` and write the program on your own. The program must print exactly:
 
 <!-- output: badge_kits -->
 ```text
@@ -355,7 +355,7 @@ Badges left: 5
 - The number of badges and the number of badges per kit have their own variables, with meaningful English names and starting values.
 - Values that don't change in the program are `const`.
 - The number of full kits is calculated with `/`, and the number of badges left with `%`. The numbers 4 and 5 are **calculated by the program**: they don't appear in the code.
-- The numbers 29 and 6 appear in the code **only once**, in the declarations. The calculations and the output use the variables. That way, a single value is enough to change in the variant.
+- The numbers 29 and 6 appear in the code **only once**, in the declarations. The calculations and the output use the variables. That way, in the variant you only need to change one value.
 - The program uses only what you already know: `int`, `const`, `{}`, `+`, `-`, `*`, `/`, `%` and `std::cout`.
 - You can check the result without a computer: full kits times 6, plus the badges left, gives 29.
 
@@ -364,7 +364,7 @@ Once the output matches, you can save the project in Git, as in lesson 1.5.
 <details>
 <summary>Hint 1</summary>
 
-The question "how many full kits" is a question about the number of full groups. The question "how many are left" is a question about the remainder. Which operators answer them?
+The question “how many full kits” is a question about the number of full groups. The question “how many are left” is a question about the remainder. Which operators answer them?
 
 </details>
 
@@ -406,12 +406,12 @@ Badges left: 0
 
 Example solutions are in [Example solutions](#example-solutions).
 
-## 9. When something goes differently
+## 9. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
 | You expected 3.5, and the program prints 3 | Both operands are whole numbers, so `/` performs integer division. | That's expected. If you need the remainder, use `%`. You'll meet numbers with a fractional part in lesson 2.5. |
-| The result is the number "left over" when it should be the number of full groups (or the other way round) | `/` and `%` have swapped places. | `/` gives full groups, `%` gives the remainder. |
+| The result is the number “left over” when it should be the number of full groups (or the other way round) | `/` and `%` have swapped places. | `/` gives full groups, `%` gives the remainder. |
 | A longer expression gives a different result than predicted | The operations were grouped differently than you assumed. | Add the invisible parentheses following section 5. Write the intended grouping with real parentheses. |
 | `20 / 5 * 2` gives 8, and you expected 2 | You assumed that multiplication comes before division. | `*` and `/` are on the same level and are grouped from the left. Write `20 / (5 * 2)` if that's what you mean. |
 | An expression divides by zero or uses `% 0` | Undefined behaviour, even if the program built. | Remove it. The divisor must be a positive number. |
@@ -469,9 +469,9 @@ Because integer division by zero and the remainder of a division by zero have un
 ## Summary
 
 - When both operands are whole numbers, `/` performs **integer division**: for positive numbers it gives the whole part of the quotient, without rounding. The fractional part disappears in the division itself.
-- `%` gives the **remainder of a division**. Together, `/` and `%` answer "how many full groups?" and "how many are left?". `%` has nothing to do with percentages.
+- `%` gives the **remainder of a division**. Together, `/` and `%` answer “how many full groups?” and “how many are left?”. `%` has nothing to do with percentages.
 - You **must not** divide by zero or take the remainder of a division by zero: it is undefined behaviour.
-- `*`, `/` and `%` are grouped before `+` and `-`. Operators on the same level are grouped from left to right in these expressions. "Multiplication before division" is a wrong rule.
+- `*`, `/` and `%` are grouped before `+` and `-`. Operators on the same level are grouped from left to right in these expressions. “Multiplication before division” is a wrong rule.
 - Parentheses change the grouping and help the reader. It's worth writing the intended calculation with parentheses.
 - With a longer expression, first add the invisible parentheses, then calculate.
 
@@ -500,7 +500,7 @@ Look here **after your own attempt**. Your names may differ, as long as the outp
 </details>
 
 <details>
-<summary>Section 8: mission, badge kits</summary>
+<summary>Section 8: the mission, badge kits</summary>
 
 <!-- example: badge_kits -->
 ```cpp

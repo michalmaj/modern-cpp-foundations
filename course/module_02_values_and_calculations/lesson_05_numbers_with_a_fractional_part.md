@@ -276,7 +276,7 @@ Wypełniona tabela z wyjaśnieniem jest w części [Przykładowe rozwiązania](#
 
 Zwykle tego nie widać: `std::cout` domyślnie wypisuje `double` w skróconej postaci, z najwyżej sześcioma cyframi znaczącymi. Pamiętaj jednak, że wypisana liczba nie zawsze jest dokładnie tą, którą przechowuje program.
 
-W tym kursie przykłady korzystają na razie z wartości takich jak `0.5`, `0.25`, `1.5`, `2.5`, `3.75`, które `double` zapisuje dokładnie. Ich wyniki są przewidywalne i takie same na każdym systemie. Jak pracować z przybliżeniami w poważniejszych obliczeniach, poznasz później.
+W tym kursie przykłady korzystają na razie z wartości takich jak `0.5`, `0.25`, `1.5`, `2.5`, `3.75`, które `double` zapisuje dokładnie. Ich wyniki są przewidywalne i takie same na każdym systemie. Jak pracować z przybliżeniami w poważniejszych obliczeniach, dowiesz się później.
 
 ## 7. Nawiasy klamrowe pilnują wartości
 
@@ -591,7 +591,7 @@ Bo okrążeń jest zawsze całkowita liczba. Część ułamkową mają czasy. Wy
 - Rodzaj dzielenia zależy od **operandów**: dwa `int` dają dzielenie całkowite, a gdy jeden operand jest typu `double`, wykonuje się dzielenie zmiennoprzecinkowe.
 - Typ zmiennej wynikowej **nie zmienia** obliczenia, które już się wykonało: `const double first{7 / 2};` przechowuje 3.
 - W prostych działaniach `int` z `double` obliczenie wykonuje się na `double`. W dłuższym wyrażeniu dotyczy to każdego działania osobno.
-- `double` przechowuje wartości **przybliżone**: nie każda liczba dziesiętna da się zapisać dokładnie. Wypisana liczba nie zawsze zdradza typ ani dokładną wartość.
+- `double` przechowuje wartości **przybliżone**: nie każdą liczbę dziesiętną da się zapisać dokładnie. Wypisana liczba nie zawsze zdradza typ ani dokładną wartość.
 - Inicjalizacja przez `{}` nie pozwala zapisać po cichu wartości, która by się zmieniła, na przykład 2.5 w `int`.
 - `auto` ustala jeden konkretny typ z wartości początkowej, przy deklaracji. Ten typ się potem nie zmienia, a `auto` niczego nie oblicza za Ciebie.
 - Jawny typ jest dobry przy danych, `auto` tam, gdzie typ jasno wynika z wartości początkowej.

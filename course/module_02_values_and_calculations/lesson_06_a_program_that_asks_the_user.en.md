@@ -234,7 +234,7 @@ Floor height: 2.75 m
 
 - The number of floors is a whole number, so it goes into an `int`. A floor height can have a fractional part, so it goes into a `double`. **The variable's type must fit the kind of data** you want to read.
 - Type a value with a fractional part with a **dot**: `2.75`, just as in the code.
-- `>>` skips the spacing before a value: spaces, tabs and line breaks. That's why you can also type both values on one line, separated by a space. Check it: run the program again and type `3 2.75`, then **Enter**. The result is the same:
+- `>>` skips any whitespace before a value: spaces, tabs and line breaks. That's why you can also type both values on one line, separated by a space. Check it: run the program again and type `3 2.75`, then **Enter**. The result is the same:
 
 <!-- input: floors_and_height -->
 ```text
@@ -272,7 +272,7 @@ The program won't build. The compiler reports an error on line 5, at `>>`, but i
 - on Ubuntu and macOS: `invalid operands to binary expression ('istream' (aka 'basic_istream<char>') and 'const int')`;
 - on Windows: `use of overloaded operator '>>' is ambiguous (with operand types 'istream' (aka 'basic_istream<char, char_traits<char>>') and 'const int')`.
 
-Below it come many `note:` lines about the standard library, several dozen on some systems. You don't need to read them. As in lesson 1.2, what counts is the first line with `error` in `main.cpp`. Both versions end the same way: `'const int'`. That's the cause: `>>` can't store a value in a constant. Restore correct code: remove `const`.
+Below it come many `note:` lines about the standard library, several dozen on some systems. You don't need to read them. As in lesson 1.2, what counts is the first line with `error` in `main.cpp`. Both versions end the same way: `'const int'`. That's the cause: `>>` can't store a value in a constant. Restore the correct code: remove `const`.
 
 - **After** reading, you can use the data to create a constant, if the result of a calculation shouldn't change any more. You'll do that in the next section.
 - The starting value `0` does **not** protect the program against bad data. It's simply a correctly initialised variable (more in section 11).
@@ -352,7 +352,7 @@ Total items: 56
 
 ## 10. When the result's type doesn't fit
 
-In lesson 2.5, all the data were constants with values written in the code. Now the values appear only while the program runs, and that matters for `{}`. This program stores the number of seats in a room as a `double`:
+In lesson 2.5, all the data was in constants with values written in the code. Now the values appear only while the program runs, and that matters for `{}`. This program stores the number of seats in a room as a `double`:
 
 <!-- broken: seats_as_double at=8 errors=1 error=^non-constant-expression cannot be narrowed from type 'int' to 'double' in initializer list -->
 ```cpp
@@ -405,7 +405,7 @@ You'll see the same with division: `const double average{points / games};` with 
 
 ## 11. We assume correct data
 
-For now, your programs assume that the user gives data that matches the request: a whole number where the program asks for a whole number, and a number with a dot where it asks for a number with a fractional part. **The program can't yet handle correctly** a situation in which someone:
+For now, your programs assume that the user gives data that matches the request: a whole number where the program asks for a whole number, and a number with a dot where it asks for a number with a fractional part. **The program can't yet correctly handle** a situation in which someone:
 
 - types text instead of a number;
 - doesn't give a required value;
@@ -424,7 +424,7 @@ Write a program that calculates the total distance of a running session. The use
 
 The program calculates **total distance = number of laps × lap length** and prints it.
 
-In `cpp-workspace`, create a folder `training_distance`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp`, and write the program on your own.
+In `cpp-workspace`, create a folder `training_distance`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp` and write the program on your own.
 
 **The first run:** 4 laps of 1.25 km.
 
@@ -488,12 +488,12 @@ First the variables for the data, then a request and a read for each value, and 
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 13. When something goes differently
+## 13. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
-| The program prints nothing, or printed the request and "stands still" | It's waiting for data at `std::cin`. It hasn't frozen. | Type a value into the program's window and press **Enter**. |
-| You can't type anything into CLion's **Run** window | This part of the instructions hasn't been checked on every system yet. | Run the program in the terminal, as in section 3. |
+| The program prints nothing, or printed the request and “stands still” | It's waiting for data at `std::cin`. It hasn't frozen. | Type a value into the program's window and press **Enter**. |
+| You can't type anything into CLion's **Run** window | This step of the lesson hasn't been checked on every system yet. | Run the program in the terminal, as in section 3. |
 | The result doesn't depend on the data you type | The calculation or the output comes **before** the read, and uses the starting value. | The read must come before the calculation that uses it. |
 | The number you typed appears on the screen, although you don't print it | That's the echo of the window you type into, not the program's output. | Nothing. It isn't the program's standard output. |
 | A compile error at `std::cin >>` with a `const` variable | You can't read a value into a constant. | A variable for data can't be `const`. |
@@ -571,7 +571,7 @@ Your programs now ask for numbers. In lesson 2.7 you'll meet text values, and a 
 Look here **after your own attempt**. Your names may differ, as long as the standard output is as required.
 
 <details>
-<summary>Section 12: mission, the training distance</summary>
+<summary>Section 12: the mission, the training distance</summary>
 
 <!-- example: training_distance -->
 ```cpp

@@ -63,7 +63,7 @@ Nie 3,5, tylko 3. To nie błąd programu, tylko zasada:
 - liczby po obu stronach operatora to jego **operandy**. Tutaj oba operandy, `7` i `2`, są typu `int`, czyli są liczbami całkowitymi;
 - gdy oba operandy są całkowite, `/` wykonuje **dzielenie całkowite**, a jego wynik też jest liczbą całkowitą;
 - dla liczb dodatnich ten wynik to **pełna część** ilorazu: ile razy 2 mieści się w 7 w całości. Część ułamkowa nie zostaje zachowana;
-- C++ tego wyniku **nie zaokrągla** do najbliższej liczby całkowitej. Po prostu go nie tworzy.
+- C++ tego wyniku **nie zaokrągla** do najbliższej liczby całkowitej. Po prostu w ogóle nie tworzy części ułamkowej.
 
 **Część ułamkowa znika już w samym dzieleniu, nie przy zapisie do zmiennej.** `7 / 2` od razu daje `3`. Nie powstaje po drodze 3,5, które dopiero zmienna `int` „przycina”. Sprawdź to w kolejnym programie: ostatnia linijka wypisuje wynik dzielenia bez żadnej zmiennej. Nawiasy wokół dzielenia w `std::cout` pokazują wyraźnie, co ma zostać obliczone, jak w lekcji 2.1.
 
@@ -106,7 +106,7 @@ W tym kursie dzielimy na razie tylko **liczby dodatnie**. Dla liczb ujemnych zas
 
 ## 3. Reszta z dzielenia: `%`
 
-W klasie jest 17 kredek do rozdania do pudełek po 5. Ile pudełek będzie pełnych i ile kredek zostanie? Odpowiadają na to dwa operatory:
+W klasie jest 17 kredek, które trzeba rozłożyć do pudełek po 5. Ile pudełek będzie pełnych i ile kredek zostanie? Odpowiadają na to dwa operatory:
 
 <!-- example: groups_and_remainder -->
 ```cpp
@@ -141,7 +141,7 @@ Tak jak przy `/`, w tej lekcji obie liczby przy `%` są dodatnie.
 
 Takie działanie ma w C++ **niezdefiniowane zachowanie** (*undefined behaviour*). Oznacza to, że język nie określa, co się wtedy stanie. Program może się nagle zakończyć, wypisać przypadkową wartość albo zachowywać się różnie na różnych komputerach. Kompilator czasem ostrzeże o dzieleniu przez zero widocznym w kodzie, ale nie zawsze może to zauważyć przed uruchomieniem programu.
 
-W tej lekcji dzielnik jest zawsze **znaną liczbą dodatnią**, wpisaną w kodzie. Jak sprawdzić dzielnik, którego wartości nie znasz z góry, poznasz w Module 3.
+W tej lekcji dzielnik jest zawsze **znaną liczbą dodatnią**, wpisaną w kodzie. Jak sprawdzić dzielnik, którego wartości nie znasz z góry, dowiesz się w Module 3.
 
 ## 5. Kolejność działań
 

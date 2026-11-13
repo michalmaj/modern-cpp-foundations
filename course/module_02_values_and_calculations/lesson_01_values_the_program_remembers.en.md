@@ -34,7 +34,7 @@ After this lesson you will:
 
 In `cpp-workspace`, create a folder `lesson_2_1` and copy `main.cpp` and `CMakeLists.txt` into it from the original `lesson_05_first_program`, as in Module 1. You type the programs of this lesson into that folder's `main.cpp`. You build and run it as before: in CLion or in the terminal.
 
-## 2. Text vs. number
+## 2. Text vs number
 
 Replace the content of `main.cpp` with this program:
 
@@ -63,8 +63,8 @@ int main() {
 
 **What happened?**
 
-- **The first statement** prints **text**, as in Module 1. The quotes say: "print these characters exactly as they are". Digits inside text are just characters, like letters.
-- **In the second statement,** `3` and `4` stand **without quotes**. They are **numeric literals**: numbers written directly in the code. The program treats them as numbers, so `3 + 4` is an **expression** that the program **calculates** while it runs. It sends the result to `std::cout`: the value `7`.
+- **The first statement** prints **text**, as in Module 1. The quotes say: “print these characters exactly as they are”. Digits inside text are just characters, like letters.
+- **In the second statement,** `3` and `4` are **not in quotes**. They are **numeric literals**: numbers written directly in the code. The program treats them as numbers, so `3 + 4` is an **expression** that the program **calculates** while it runs. It sends the result to `std::cout`: the value `7`.
 - **The parentheses** around `3 + 4` show clearly what is to be calculated. You'll learn the exact rules of the order of operations in a later lesson.
 - **What's new is the two `<<` in one statement:** `std::cout << (3 + 4) << "\n";`. Each `<<` sends the next item to `std::cout`, from left to right: first the value `7`, then the text `"\n"`, which moves to a new line.
 
@@ -161,7 +161,7 @@ The whole line is a **declaration** of the variable: it tells the compiler that 
 
 - `ticket_count * ticket_price` in the third line **reads** the values of both variables and multiplies them. The result, `75`, becomes the starting value of the new variable `total_cost`.
 - `std::cout << ticket_count` prints the variable's **value**, `3`. The name alone, without quotes, means the value. `"ticket_count"` in quotes would be ordinary text, and the program would print the word `ticket_count`.
-- You use a variable **after** its declaration, that is, lower in the code. That's why `total_cost` stands below `ticket_count` and `ticket_price`.
+- You use a variable **after** its declaration, that is, lower in the code. That's why `total_cost` comes below `ticket_count` and `ticket_price`.
 
 **Good habits, from the very first variable:**
 
@@ -243,7 +243,7 @@ Look at how `total_cost` is created in section 4: the type, the name, and in `{}
 
 A concert hall has 50 seats. A ticket costs 40, and 6 tickets have been sold. The cashier wants a program that prints a short summary.
 
-In `cpp-workspace`, create a folder `ticket_office`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp`, and write the program yourself.
+In `cpp-workspace`, create a folder `ticket_office`, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp` and write the program yourself.
 
 The program must print exactly:
 
@@ -261,7 +261,7 @@ Seats left: 44
 - The number of seats in the hall, the price and the number of tickets sold are stored in `int` variables, each **once**, with a starting value in `{}`.
 - **The program calculates** `240` and `44`. These numbers don't appear in the code.
 - Variable names are in English, in `snake_case`, and say what the value means.
-- You can explain how the program "knows" that 44 seats are left.
+- You can explain how the program “knows” that 44 seats are left.
 
 Once the output matches, you can save the project in Git, as in lesson 1.5.
 
@@ -281,7 +281,7 @@ The number of seats left is the number of seats in the hall **minus** the number
 
 ### Variant: more tickets sold
 
-3 more tickets have been sold, so 9 in total. **Predict** the new output, then change **one** starting value in the program, build it and run it. The output must be:
+Three more tickets have been sold, so 9 in total. **Predict** the new output, then change **one** starting value in the program, build it and run it. The output must be:
 
 <!-- output: ticket_office_variant -->
 ```text
@@ -295,13 +295,13 @@ If you have to change more than one number in the program, go back to the missio
 
 Example solutions are in [Example solutions](#example-solutions).
 
-## 8. When something goes differently
+## 8. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
 | The name of a variable appears instead of a number, for example `Total: total_cost` | The name is in quotes, so it's ordinary text. | Remove the quotes around the name: `<< total_cost <<`. |
 | The output is glued to the text, for example `Total:240` | The text before the value is missing a space. | Add a space at the end of the text: `"Total: "`. |
-| `use of undeclared identifier '…'` | The compiler doesn't know this name: a typo, different letter case, or a variable used above its declaration. | Compare the name with the declaration, character by character. Check that the declaration is above. The compiler often suggests the right name (`did you mean …?`). |
+| `use of undeclared identifier '…'` | The compiler doesn't know this name: a typo, different letter case or a variable used above its declaration. | Compare the name with the declaration, character by character. Check that the declaration is above. The compiler often suggests the right name (`did you mean …?`). |
 | A compile error on a line with `<<` | A `<<` is missing between items, or a quote is missing in a text. | Every item (text, value, `"\n"`) gets its own `<<` before it. |
 | After changing a value, the program prints the old result | The program wasn't built again. | Build again (Run in CLion does it for you). |
 
@@ -347,7 +347,7 @@ The first prints the variable's value, for example `75`. The second prints text:
 
 </details>
 
-**5.** In the mission: how does the program "know" that 44 seats are left?
+**5.** In the mission: how does the program “know” that 44 seats are left?
 
 <details>
 <summary>Example answer</summary>
