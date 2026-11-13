@@ -459,12 +459,12 @@ Day 3: [####]
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków testowych: same zera, górna granica 6, kilka różnych wartości, wartość ujemna, wartość powyżej 6, tekst zamiast liczby i dane, które kończą się po dwóch liczbach. Przy każdym przypadku zapisz oczekiwane standardowe wyjście. Dla danych `2`, `0`, `4` zapisz też, jakie argumenty dostaje funkcja w każdym wywołaniu.
 
-Przypadek z danymi, które kończą się wcześniej, przeanalizuj na papierze, jak w lekcjach 4.5–4.7, zamiast go uruchamiać: przyjmij, że po ostatniej linijce wejście się kończy, prześledź program i porównaj odpowiedź ze zwiniętą listą kontrolną. Program z tej lekcji jest dla takich danych sprawdzany osobno, automatycznymi testami kursu.
+Przypadek z danymi, które kończą się wcześniej, przeanalizuj na papierze, jak w lekcjach 4.5–4.7, zamiast go uruchamiać: przyjmij, że po ostatniej linijce wejście się kończy, prześledź program i porównaj odpowiedź ze zwiniętą listą przypadków kontrolnych. Program z tej lekcji jest dla takich danych sprawdzany osobno, automatycznymi testami kursu.
 
 ### Kryterium sukcesu
 
 - Program buduje się jako C++20, a jego standardowe wyjście dla danych `2`, `0`, `4` jest dokładnie takie jak powyżej.
-- Dla każdego przypadku, który możesz wpisać, standardowe wyjście zgadza się z listą kontrolną. Przypadek z danymi kończącymi się po dwóch liczbach sprawdzasz rozumowaniem: prześledzony program wypisuje te same linijki co lista kontrolna.
+- Dla każdego przypadku, który możesz wpisać, standardowe wyjście zgadza się z listą przypadków kontrolnych. Przypadek z danymi kończącymi się po dwóch liczbach sprawdzasz rozumowaniem: prześledzony program wypisuje te same linijki co lista przypadków kontrolnych.
 - Słupek wypisuje Twoja funkcja `void` z dwoma parametrami `int`, zdefiniowana przed `main`. Znak `#` występuje w kodzie tylko w tej funkcji.
 - Dla zera bloków słupek to `[]`.
 - Przy nieudanym odczycie albo danych spoza zakresu nie pojawia się żaden słupek.

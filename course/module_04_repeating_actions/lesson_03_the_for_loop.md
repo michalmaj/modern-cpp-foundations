@@ -101,7 +101,7 @@ Wynik jest identyczny. Oba programy sterują powtarzaniem tak samo, tylko zapisu
 
 </details>
 
-Tym razem programy celowo nie wypisują `lap` po pętli, jak w lekcji 4.1. Dlaczego, zobaczysz w punkcie 7.
+Tym razem programy celowo nie wypisują `lap` po pętli, inaczej niż w lekcji 4.1. Dlaczego, zobaczysz w punkcie 7.
 
 ## 3. Trzy części nagłówka `for`
 
@@ -493,7 +493,7 @@ W jednej rundzie dzieją się trzy rzeczy: wypisanie danych rundy, dodanie jej p
 <details>
 <summary>Podpowiedź 3</summary>
 
-Nagłówek `for` odpowiada na trzy pytania: od jakiego numeru zaczyna się pierwsza runda, dopóki co pętla ma trwać i jak przejść do numeru następnej rundy. Sprawdź swój warunek dla 1 rundy w tabeli przebiegu.
+Nagłówek `for` odpowiada na trzy pytania: od jakiego numeru zaczyna się pierwsza runda, jak długo pętla ma trwać i jak przejść do numeru następnej rundy. Sprawdź swój warunek dla 1 rundy w tabeli przebiegu.
 
 </details>
 
@@ -796,7 +796,7 @@ Trzy sprawdzenia warunku, dwa przebiegi ciała, dwie aktualizacje i jedna inicja
 | -1 | 0 (pętla pominięta przez `else`) | — | — |
 | 6 | 0 (pętla pominięta przez `else`) | — | — |
 
-Dla 0 pętla jest wykonywana, ale jej ciało nie: warunek jest fałszywy od początku. Dla -1 i 6 program w ogóle nie dochodzi do pętli.
+Dla 0 program dochodzi do pętli, ale jej ciało się nie wykonuje: warunek jest fałszywy od początku. Dla -1 i 6 program w ogóle nie dochodzi do pętli.
 
 </details>
 

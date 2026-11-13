@@ -236,7 +236,7 @@ Invalid values
 
 ## 5. Two stages of decision: a nested `if`
 
-The message `Invalid values` doesn't say **which** value is wrong. You can ask the questions in turn: first about the children, and only when that answer is good, about the candies. Then one `if` stands **inside** a branch of the other:
+The message `Invalid values` doesn't say **which** value is wrong. You can ask the questions in turn: first about the children, and only when that answer is good, about the candies. Then one `if` sits **inside** a branch of the other:
 
 <!-- example: candy_check_nested -->
 ```cpp
@@ -538,7 +538,7 @@ Which number is the divisor, and what condition must it meet for the division to
 </details>
 
 <details>
-<summary>The full list of control cases: open after your own attempt</summary>
+<summary>The full list of check cases: open after your own attempt</summary>
 
 | Minutes | Sessions | Result | What it checks |
 |---|---|---|---|
@@ -609,7 +609,7 @@ Invalid session data
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -738,7 +738,7 @@ For 0 candies and 5 children the program prints `Invalid values`, although the r
 </details>
 
 <details>
-<summary>Section 9: mission, a study plan</summary>
+<summary>Section 9: the mission, a study plan</summary>
 
 <!-- example: study_plan -->
 ```cpp
@@ -768,7 +768,7 @@ int main() {
 ```
 
 - Two requirements lead to one decision, so one condition with `&&` is enough.
-- `/` and `%` stand in the branch where `sessions > 0`, so a division by zero never runs.
+- `/` and `%` are in the branch where `sessions > 0`, so a division by zero never runs.
 - `total_minutes >= 0` allows zero: 0 minutes divided into sessions gives 0 per session and 0 left over.
 
 </details>

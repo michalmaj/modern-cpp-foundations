@@ -332,12 +332,12 @@ Room status: Too many people
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków testowych: same zera, jedna pusta grupa, łączna liczba 9, 10 i 11, obie grupy po 8, wartości tuż poza zakresem dla każdej grupy, tekst zamiast pierwszej i zamiast drugiej liczby oraz dane, które kończą się po jednej liczbie. Przy każdym przypadku zapisz oczekiwane standardowe wyjście.
 
-Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, jak w lekcjach 4.5–5.5, zamiast je uruchamiać, i porównaj ze zwiniętą listą kontrolną. Program z tej lekcji jest dla takich danych sprawdzany osobno, automatycznymi testami kursu.
+Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, jak w lekcjach 4.5–5.5, zamiast je uruchamiać, i porównaj ze zwiniętą listą przypadków kontrolnych. Program z tej lekcji jest dla takich danych sprawdzany osobno, automatycznymi testami kursu.
 
 ### Kryterium sukcesu
 
 - Program buduje się jako C++20, a jego standardowe wyjście dla trzech przykładów powyżej jest dokładnie takie, jak pokazano.
-- Dla każdego przypadku, który możesz wpisać, standardowe wyjście zgadza się z listą kontrolną. Przypadki z danymi, które kończą się wcześniej, sprawdzasz rozumowaniem.
+- Dla każdego przypadku, który możesz wpisać, standardowe wyjście zgadza się z listą przypadków kontrolnych. Przypadki z danymi, które kończą się wcześniej, sprawdzasz rozumowaniem.
 - Plik ma układ: `#include`, deklaracje, `main`, definicje. Każda deklaracja pasuje do swojej definicji.
 - Funkcja `bool` korzysta z wyniku funkcji `int`, a obie niczego nie wypisują i nie odczytują.
 - Po nieudanym odczycie albo danych spoza zakresu nie pojawia się `Total attendees`.

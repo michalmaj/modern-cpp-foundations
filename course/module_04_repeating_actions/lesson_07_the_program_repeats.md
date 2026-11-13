@@ -20,7 +20,7 @@ Zajrzenie do części B, do wcześniejszych lekcji albo do notatek nie jest pora
 - **pierwsze:** projekt, napisanie i podstawowe testy programu z zadania 1;
 - **drugie:** zadania 2 i 3, przypadki graniczne, porównanie z rozwiązaniem, pytania i samoocena.
 
-**Możesz używać:** CLiona albo terminala, CMake i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przebiegu i przypadków oraz tymczasowych instrukcji `std::cout`. Debugger nie jest potrzebny. Nie musisz kończyć danych z klawiatury: programy sprawdzamy na danych, które same się kończą.
+**Możesz używać:** CLiona albo terminala, CMake'a i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przebiegu i przypadków oraz tymczasowych instrukcji `std::cout`. Debugger nie jest potrzebny. Nie musisz kończyć danych z klawiatury: programy sprawdzamy na danych, które same się kończą.
 
 ---
 
@@ -133,13 +133,13 @@ Input ended: 2 of 3 measurements recorded
 
 Przy każdym przypadku zapisz oczekiwane standardowe wyjście, łącznie z liczbą pytań. Dobierz temperatury tak, żeby średnią łatwo było policzyć w pamięci: liczby całkowite i połówki.
 
-Przypadków z końcem danych, także trzeciego przykładu, nie musisz uruchamiać, bo nie wymagamy kończenia danych z klawiatury. Zapisz w tabeli przebiegu, co program zrobi po każdej próbie, i porównaj to z pełną listą kontrolną w części B.
+Przypadków z końcem danych, także trzeciego przykładu, nie musisz uruchamiać, bo nie wymagamy kończenia danych z klawiatury. Zapisz w tabeli przebiegu, co program zrobi po każdej próbie, i porównaj to z pełną listą przypadków kontrolnych w części B.
 
 Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5. Przed commitem sprawdź `git status`: do historii trafiają tylko `main.cpp` i `CMakeLists.txt`.
 
 ## Zadanie 2: Dwa zgłoszenia
 
-W `cpp-workspace` utwórz katalog `diagnosis_4`, skopiuj do niego `main.cpp` i `CMakeLists.txt` z oryginalnego `lesson_05_first_program`. Każdy z poniższych programów wpisz po kolei w `main.cpp` tego katalogu. Oba się budują, kończą działanie i dają złe wyniki.
+W `cpp-workspace` utwórz katalog `diagnosis_4` i skopiuj do niego `main.cpp` i `CMakeLists.txt` z oryginalnego `lesson_05_first_program`. Każdy z poniższych programów wpisz po kolei w `main.cpp` tego katalogu. Oba się budują, kończą działanie i dają złe wyniki.
 
 **Zgłoszenie A.** Rozgrzewka składa się z kilku kroków. Program ma wypisać kroki **od 1 do podanej liczby kroków włącznie**, każdy jako `Step K of N`, a na końcu `Warm-up done`. Liczba kroków to od 0 do 5.
 
@@ -291,7 +291,7 @@ Przejdź tutaj po wykonaniu części A albo wtedy, gdy świadomie zrezygnujesz z
 
 - **Standardowe wyjście:** uruchom program dla każdego przypadku z tabeli i porównaj linijki programu z oczekiwanymi, znak po znaku, łącznie z liczbą pytań. Pomiń wpisane dane widoczne dzięki echu.
 - **Ten sam program:** między uruchomieniami nie zmieniaj kodu.
-- **Koniec danych:** przypadki, w których dane się kończą, sprawdź tabelą przebiegu i porównaj z pełną listą kontrolną. Każdy z nich jest tam sprawdzony automatycznie.
+- **Koniec danych:** przypadki, w których dane się kończą, sprawdź tabelą przebiegu i porównaj z pełną listą przypadków kontrolnych. Każdy z nich jest tam sprawdzony automatycznie.
 - **Pełne listy przypadków kontrolnych** poniżej porównaj ze swoją tabelą. Czy Twoja tabela obejmowała te same granice i te same sytuacje końca danych?
 - **Kolejność:** przejrzyj obie pętle. Czy po nieudanym odczycie najpierw sprawdzasz koniec danych? Czy suma i liczniki zmieniają się tylko w jednym miejscu?
 

@@ -167,7 +167,7 @@ The answers are in [Example solutions](#example-solutions).
 
 ## 5. Before the block, in the block, after the block
 
-This program prints something before the `if`, something in the `if` block, and something after it:
+This program prints something before the `if`, something in the `if` block and something after it:
 
 <!-- example: hot_day -->
 ```cpp
@@ -264,7 +264,7 @@ int main() {
 4. Fix the condition.
 5. Check **all three** cases again.
 
-The test data is three separate runs: `4`, `5` and `6`.
+The test data is `4`, `5` and `6`, each in a separate run.
 
 The program's output before the fix, and the fixed program, are in [Example solutions](#example-solutions). Look there after your own attempt.
 
@@ -343,16 +343,16 @@ The order is as in section 2: the variable and the constant, the request and the
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 8. When something goes differently
+## 8. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
 | The warning always appears, or never | The condition doesn't match the requirement, for example it has the opposite sign (`>` instead of `<`). | Read the condition aloud: "if … is less than …". Check a value for which the answer should be "yes". |
 | The program works for values far from the limit, but goes wrong exactly at it | `<` was confused with `<=`, or `>` with `>=`. | Check the limit itself and the values right next to it (section 6). |
-| A message that should always appear appears only sometimes | It is inside the block, before the closing brace. | Move it after `}`. |
-| The warning appears although the condition isn't satisfied | The warning is outside the block, after `}`. | A statement that should depend on the condition must stand between `{` and `}`. |
+| A message that should always appear shows up only sometimes | It is inside the block, before the closing brace. | Move it after `}`. |
+| The warning appears although the condition isn't satisfied | The warning is outside the block, after `}`. | A statement that should depend on the condition must be between `{` and `}`. |
 | A compile error at `if` | Usually a parenthesis or a brace is missing. | The condition goes in `( )`, the block in `{ }`. Every parenthesis and every brace has its pair. |
-| `=<` or `= <` instead of `<=` | The operator is written with two characters, in the order `<=` (or `>=`), without a space. | Fix it to `<=` or `>=`. |
+| `=<` or `= <` instead of `<=` | The operator is written with two characters, in the order `<=` (or `>=`), without a space. | Write it as `<=` or `>=`. |
 
 ## 9. Explain
 
@@ -586,7 +586,7 @@ Check complete
 </details>
 
 <details>
-<summary>Section 7: mission, the luggage weight limit</summary>
+<summary>Section 7: the mission, the luggage weight limit</summary>
 
 <!-- example: luggage_check -->
 ```cpp

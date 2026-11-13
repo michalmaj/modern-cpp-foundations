@@ -249,7 +249,7 @@ Wartości 49, 75 i 90 sprawdzono już w punkcie 2. Dla każdej wartości program
 
 ## 5. Znajdź błąd: zła kolejność
 
-Ten program ma te same wymagania co program z punktu 2. Kompiluje się bez błędów, ale ktoś ułożył warunki w innej kolejności:
+Ten program ma te same wymagania co program z punktu 2. Buduje się bez błędów, ale ktoś ułożył warunki w innej kolejności:
 
 <!-- example: score_order_bug -->
 ```cpp
@@ -424,7 +424,7 @@ Muzeum ustala kategorię biletu według wieku zwiedzającej osoby:
 | 18–64 | `Regular` |
 | 65 i więcej | `Senior` |
 
-W `cpp-workspace` utwórz katalog `ticket_category`, skopiuj do niego `CMakeLists.txt` z oryginalnego `lesson_05_first_program`, utwórz pusty `main.cpp` i napisz program samodzielnie. Program odczytuje jedną liczbę całkowitą, wiek, i wypisuje dokładnie jedną kategorię. Zakładamy, że odczyt się udaje, a wiek jest sensowny: liczbą nieujemną.
+W `cpp-workspace` utwórz katalog `ticket_category`, skopiuj do niego `CMakeLists.txt` z oryginalnego `lesson_05_first_program`, utwórz pusty `main.cpp` i napisz program samodzielnie. Program odczytuje jedną liczbę całkowitą, wiek, i wypisuje dokładnie jedną kategorię. Zakładamy, że odczyt się udaje, a wiek jest sensowny: to liczba nieujemna.
 
 Dla wieku 30 standardowe wyjście ma być takie:
 
@@ -444,7 +444,7 @@ Category: Regular
 ### Kryterium sukcesu
 
 - Program buduje się jako C++20 i dla każdego wieku wypisuje prośbę i dokładnie jedną linijkę `Category: …`, zgodnie z tabelą.
-- Wiek jest zmienną `int` z wartością początkową, odczytaną przez `std::cin`.
+- Wiek jest zmienną `int` z wartością początkową, a program odczytuje go przez `std::cin`.
 - Kategorie wybiera łańcuch `if`, `else if` i `else`, z klamrami przy każdej gałęzi.
 - Warunki są w takiej kolejności, że każda gałąź jest osiągalna. Umiesz wyjaśnić, dlaczego ta kolejność jest poprawna.
 - Tabela przypadków powstała przed uruchomieniem programu i sprawdza wszystkie granice z obu stron.
@@ -589,7 +589,7 @@ Przykładowe rozwiązania są w części [Przykładowe rozwiązania](#przykłado
 | Dla niektórych wartości nie pojawia się żadna kategoria | Łańcuch nie ma końcowego `else`, a żaden warunek nie jest spełniony. | Jeśli każda wartość ma dostać kategorię, dodaj końcowe `else`. |
 | Pojawiają się dwie albo więcej kategorii | To osobne `if`, a nie jeden łańcuch. | Połącz je w łańcuch: `else if` zamiast kolejnego samodzielnego `if`. |
 | Zły wynik dokładnie na granicy | Pomylono `>` z `>=` albo próg jest przesunięty o jeden. | Sprawdź każdą granicę z obu stron, według tabeli przypadków. |
-| Błąd kompilacji przy `else if` | Brakuje klamry przed `else` albo nawiasów wokół warunku. | Każda gałąź kończy się `}`, a po nim stoi `else if (…) {`. |
+| Błąd kompilacji przy `else if` | Brakuje klamry przed `else` albo nawiasów wokół warunku. | Każda gałąź kończy się klamrą `}`, a zaraz za nią stoi `else if (…) {`. |
 
 ## 10. Wyjaśnij
 
@@ -642,7 +642,7 @@ Osobne `if` to osobne decyzje: może wykonać się kilka bloków. W łańcuchu w
 
 ## Podsumowanie
 
-- Łańcuch `if`, `else if`, …, `else` wybiera **jedną z kilku** gałęzi. `else if` to `else` z kolejnym `if`, a nie osobne słowo kluczowe.
+- Łańcuch `if`, `else if`, …, `else` wybiera **jedną z kilku** gałęzi. `else if` to `else` z kolejnym `if`, a nie jedno nowe słowo.
 - Warunki są sprawdzane **po kolei**. Wykonuje się gałąź **pierwszego** spełnionego warunku, a reszta łańcucha zostaje pominięta.
 - Kolejność ma znaczenie: przy progach z `>=` układaj je od najwyższego, inaczej część gałęzi stanie się nieosiągalna.
 - Końcowe `else` obsługuje wszystko, czego nie obsłużyły wcześniejsze gałęzie. Jest potrzebne, gdy każda wartość musi dostać wynik.

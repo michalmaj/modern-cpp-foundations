@@ -411,12 +411,12 @@ Change Fahrenheit: 13.5
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków testowych: obie granice zakresu, równe temperatury, druga temperatura niższa od pierwszej, temperatura z częścią ułamkową, wartości tuż poza zakresem, tekst zamiast pierwszej i zamiast drugiej liczby oraz dane, które kończą się po jednej liczbie. Przy każdym przypadku zapisz oczekiwane standardowe wyjście. Dobieraj temperatury tak, żeby wynik łatwo było policzyć w pamięci.
 
-Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, jak w lekcjach 4.5–5.2, zamiast je uruchamiać, i porównaj ze zwiniętą listą kontrolną. Program z tej lekcji jest dla takich danych sprawdzany osobno, automatycznymi testami kursu.
+Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, jak w lekcjach 4.5–5.2, zamiast je uruchamiać, i porównaj ze zwiniętą listą przypadków kontrolnych. Program z tej lekcji jest dla takich danych sprawdzany osobno, automatycznymi testami kursu.
 
 ### Kryterium sukcesu
 
 - Program buduje się jako C++20, a jego standardowe wyjście dla danych `0`, `10` oraz `12.5`, `20` jest dokładnie takie jak powyżej.
-- Dla każdego przypadku, który możesz wpisać, standardowe wyjście zgadza się z listą kontrolną. Przypadki z danymi, które kończą się wcześniej, sprawdzasz rozumowaniem.
+- Dla każdego przypadku, który możesz wpisać, standardowe wyjście zgadza się z listą przypadków kontrolnych. Przypadki z danymi, które kończą się wcześniej, sprawdzasz rozumowaniem.
 - Przeliczenie wykonuje Twoja funkcja, która przyjmuje `double`, zwraca `double`, nie wypisuje i nie odczytuje niczego. Wzór występuje w kodzie tylko w niej.
 - Każda temperatura w raporcie pojawia się raz. Różnica jest obliczona z wyników zwróconych przez funkcję.
 - Przy nieudanym odczycie albo danych spoza zakresu nie pojawia się żadna linijka raportu.

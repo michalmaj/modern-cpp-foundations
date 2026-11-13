@@ -433,12 +433,12 @@ Program, który obsługuje użytkownika, nie zawiera wydruków testowych.
 
 **Zanim napiszesz program**, przygotuj też tabelę przypadków dla całego programu: każda granica masy i strefy z obu stron, wartości spoza zakresu dla masy i dla strefy, tekst zamiast pierwszej i zamiast drugiej liczby oraz dane, które kończą się po jednej liczbie. Przy każdym przypadku zapisz oczekiwane standardowe wyjście.
 
-Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, jak w lekcjach 4.5–5.4, zamiast je uruchamiać, i porównaj ze zwiniętą listą kontrolną. Program z tej lekcji jest dla takich danych sprawdzany osobno, automatycznymi testami kursu.
+Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, jak w lekcjach 4.5–5.4, zamiast je uruchamiać, i porównaj ze zwiniętą listą przypadków kontrolnych. Program z tej lekcji jest dla takich danych sprawdzany osobno, automatycznymi testami kursu.
 
 ### Kryterium sukcesu
 
 - Program buduje się jako C++20, a jego standardowe wyjście dla danych `2`, `3` i `6`, `2` jest dokładnie takie jak powyżej.
-- Dla każdego przypadku, który możesz wpisać, standardowe wyjście zgadza się z listą kontrolną. Przypadki z danymi, które kończą się wcześniej, sprawdzasz rozumowaniem.
+- Dla każdego przypadku, który możesz wpisać, standardowe wyjście zgadza się z listą przypadków kontrolnych. Przypadki z danymi, które kończą się wcześniej, sprawdzasz rozumowaniem.
 - Program ma co najmniej trzy własne funkcje oprócz `main`, a co najmniej jedna z nich wywołuje inną własną funkcję i korzysta z jej wyniku.
 - Każda reguła cenowa występuje w kodzie raz, w funkcji. `main` nie zawiera progów masy ani dopłat.
 - Funkcje obliczające i sprawdzające nie wypisują i nie odczytują niczego.

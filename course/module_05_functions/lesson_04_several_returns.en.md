@@ -330,7 +330,7 @@ Several rules can fit the same data. Then the rule higher on the list applies.
 **Program requirements:**
 
 - The program prints `Enter waiting people and available desks:` and reads two whole numbers: the number of people, then the number of desks.
-- If not both numbers could be read, it prints only `Input could not be read` and doesn't work out a status. It doesn't ask again.
+- If it can't read both numbers, it prints only `Input could not be read` and doesn't work out a status. It doesn't ask again.
 - Otherwise it prints one line: `Queue status: STATUS`, where `STATUS` is the text returned by the function.
 - The status is worked out by **your own function**, which takes two `int` parameters and returns a `std::string`. It applies rules 1–5, including the range check, and has several `return` statements. It prints nothing and reads nothing. You choose the names of the function and its parameters, and the order of the parameters.
 - `main` is responsible for the question, the read, checking that the read succeeded, calling the function and printing the report. It doesn't repeat the classification rules.
@@ -392,7 +392,7 @@ Queue status: Manageable queue
 
 </details>
 
-**This isn't `progress_status` with new text.** There, there was one value and thresholds along one axis. Here the function gets **two values with different roles**, and the rules can overlap: some data fits several rules at once. You have to decide on your own:
+**This isn't `progress_status` with new text.** That had one value and thresholds along one axis. Here the function gets **two values with different roles**, and the rules can overlap: some data fits several rules at once. You have to decide on your own:
 
 1. how to name the function and its parameters, and in what order to take them;
 2. how to check both ranges, and how that rule affects the others;
@@ -658,12 +658,12 @@ Input could not be read
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 9. When something goes differently
+## 9. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
-| The result for one value is "taken over" by another rule | A more general condition stands before a more specific one, and its `return` ends the function too early (section 6). | Arrange the conditions by precedence. Check a case that fits two rules. |
-| Unacceptable data gets an ordinary status | The range check stands after another rule, or misses one of the values. | Check the range of both values at the start of the function, as a guard clause. |
+| The result for one value is "taken over" by another rule | A more general condition comes before a more specific one, and its `return` ends the function too early (section 6). | Arrange the conditions by precedence. Check a case that fits two rules. |
+| Unacceptable data gets an ordinary status | The range check comes after another rule, or misses one of the values. | Check the range of both values at the start of the function, as a guard clause. |
 | A warning that a function doesn't return a value on all paths | Some path through the function doesn't end in a `return` (section 7). | Find an argument that skips every `return`, and add a result that matches the requirement. |
 | `cannot initialize return object of type …` | A `return` gives a value of a different type from the function's result type (section 5). | Every `return` must give a value that matches the result type. |
 | A compile error with `std::string` | The `<string>` header is missing. | Add `#include <string>`. |
@@ -702,7 +702,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 5. An early check for a special case, for example unacceptable data, with a `return` that ends the function straight away. The rest of the function then deals only with ordinary data.
 6. No. It's a way of arranging the `if` and `return` you know.
 7. No. Both versions can be correct. A guard clause is a choice for readability, not the only allowed style.
-8. Because the first true condition ends the function with its `return`. If a more general condition stands higher, it catches data that should go to a more specific rule.
+8. Because the first true condition ends the function with its `return`. If a more general condition comes earlier, it catches data that should go to a more specific rule.
 9. For the arguments that take that path, the call has undefined behaviour. The compiler may only warn, and the program may build, but its result can't be relied on.
 10. No. That rule applies only to `main` (lesson 5.3).
 11. Yes, for example `progress_status`. The `<string>` header is needed.
@@ -719,7 +719,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 - A function can have **several `return` statements**. In one call only one runs: the first one the program reaches.
 - **A `return` that runs ends the call at once.** The function's later conditions and statements are no longer checked or run.
 - A **guard clause** is an early check for a special case, with a `return` at the start of the function. It's a way of arranging the `if` and `return` you know, not a new statement. The version with `else` is correct too.
-- **The order of conditions matters.** Every condition can be correct on its own, and the function can still give a wrong result if a more general rule stands before a more specific one.
+- **The order of conditions matters.** Every condition can be correct on its own, and the function can still give a wrong result if a more general rule comes before a more specific one.
 - Test cases where **two rules fit at once**, and boundaries, for example "exactly three times".
 - A function can return a `std::string`. Every `return` must give a value that matches the result type.
 - **Every path through a function that returns a value must end in a `return` with a correct result.** A missing `return` on some path is undefined behaviour, even if the compiler only warns.
@@ -779,7 +779,7 @@ Before the fix:
 
 - **For 4, 5 and 9** the results are correct. These cases don't reveal the bug.
 - **For 10** the requirement says `Complete`, but the program prints `In progress`.
-- **The cause:** the condition `completed >= 5` is also true for 10. It stands higher, so its `return "In progress";` ends the function before the program reaches `completed == 10`. That rule is never reached. Every condition on its own is correct, but the order isn't.
+- **The cause:** the condition `completed >= 5` is also true for 10. It comes earlier, so its `return "In progress";` ends the function before the program reaches `completed == 10`. That rule is never reached. Every condition on its own is correct, but the order isn't.
 - **The fix:** check `completed == 10` before `completed >= 5`.
 
 <!-- example: progress_order_fixed -->
@@ -869,8 +869,8 @@ int main() {
 }
 ```
 
-- **The order of conditions matches the precedence of the rules.** The guard clause for invalid data stands first, so 0 people and 5 desks give `Invalid queue data`, not `Queue empty`. The empty queue stands before the missing desks, so 0 and 0 give `Queue empty`.
-- **`waiting > 3 * desks`** stands after the `desks == 0` check. For zero desks this rule wouldn't be reached anyway. The comparison is strict: 3 people at 1 desk is still `Manageable queue`.
+- **The order of conditions matches the precedence of the rules.** The guard clause for invalid data comes first, so 0 people and 5 desks give `Invalid queue data`, not `Queue empty`. The empty-queue rule comes before the no-desks rule, so 0 and 0 give `Queue empty`.
+- **`waiting > 3 * desks`** comes after the `desks == 0` check. For zero desks this rule wouldn't be reached anyway. The comparison is strict: 3 people at 1 desk is still `Manageable queue`.
 - **The final `return`** handles all the remaining valid data. Every pair of whole numbers reaches some `return`.
 - **The function** prints nothing and doesn't know where the numbers came from. **`main`** checks the read, and only after a successful read calls the function and prints the report.
 - This order isn't the only correct way to write it. For example, two separate `if`s checking the ranges at the start of the function give the same results. But checking `desks == 0` before `waiting == 0` would give the wrong result for 0 and 0. What counts is whether the right rule wins for all data.

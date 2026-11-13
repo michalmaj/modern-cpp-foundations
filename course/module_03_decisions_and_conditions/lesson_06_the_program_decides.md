@@ -17,7 +17,7 @@ Lekcja ma dwie części:
 
 Zajrzenie do części B, do wcześniejszych lekcji albo do notatek nie jest porażką. Ważne jest, żeby **uczciwie zanotować, co zrobiono samodzielnie, a co z pomocą**. Sprawdzian możesz podzielić na dwa podejścia, na przykład zadanie 1 jednego dnia, a zadania 2 i 3 następnego.
 
-**Możesz używać:** CLiona albo terminala, CMake i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabeli przypadków i tymczasowych instrukcji `std::cout`; debuggera z lekcji 2.3, jeśli działa w Twoim środowisku.
+**Możesz używać:** CLiona albo terminala, CMake'a i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabeli przypadków i tymczasowych instrukcji `std::cout`; debuggera z lekcji 2.3, jeśli działa w Twoim środowisku.
 
 We wszystkich zadaniach zakładamy, że użytkownik wpisuje dane w poprawnej postaci: tekst tam, gdzie program pyta o tekst, i liczby tam, gdzie pyta o liczby. **Wartości** liczb mogą jednak nie spełniać wymagań zadania i to program ma sprawdzić.
 
@@ -51,8 +51,8 @@ Jeśli którekolwiek wymaganie nie jest spełnione, program po prośbach o dane 
 
    | Czas trwania | Kategoria |
    |---|---|
-   | do 1.5 godziny włącznie | `Short` |
-   | powyżej 1.5, do 3 godzin włącznie | `Standard` |
+   | do 1,5 godziny włącznie | `Short` |
+   | powyżej 1,5 godziny, do 3 godzin włącznie | `Standard` |
    | powyżej 3 godzin | `Extended` |
 
 3. liczbę **pełnych** grup po 6 uczestników i liczbę uczestników, którzy zostają poza pełnymi grupami (dla 19 osób: 3 pełne grupy i 1 osoba);
@@ -121,7 +121,7 @@ Invalid event data
 
 **Przed uruchomieniem programu przygotuj tabelę przypadków testowych.** Musi sprawdzać co najmniej:
 
-- obie granice kategorii czasu (1.5 i 3), na samej granicy i tuż nad nią;
+- obie granice kategorii czasu (1,5 i 3 godziny), na samej granicy i tuż nad nią;
 - najmniejszą i największą dopuszczalną liczbę uczestników oraz liczby tuż poza zakresem;
 - granicę 18 uczestników dla dodatkowej pomocy, na samej granicy i tuż nad nią;
 - wszystkie cztery kombinacje warunków dodatkowej pomocy: żaden, tylko czas, tylko liczba uczestników, oba;
@@ -130,13 +130,13 @@ Invalid event data
 
 Przy każdym przypadku zapisz oczekiwany wynik. Potem uruchom program dla wszystkich i porównaj.
 
-Na ekranie zobaczysz między linijkami programu także wpisane dane: to echo, a nie standardowe wyjście (lekcja 2.6). Czas 2.0 możesz wpisać też jako `2`.
+Na ekranie zobaczysz między linijkami programu także wpisane dane: to echo, a nie standardowe wyjście (lekcja 2.6). Czas `2.0` możesz wpisać też jako `2`.
 
 Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5. Przed commitem sprawdź `git status`: do historii trafiają tylko `main.cpp` i `CMakeLists.txt`.
 
 ## Zadanie 2: Dwa zgłoszenia
 
-W `cpp-workspace` utwórz katalog `diagnosis_3`, skopiuj do niego `main.cpp` i `CMakeLists.txt` z oryginalnego `lesson_05_first_program`. Każdy z poniższych programów wpisz po kolei w `main.cpp` tego katalogu. Oba się budują i działają, ale dają złe wyniki.
+W `cpp-workspace` utwórz katalog `diagnosis_3` i skopiuj do niego `main.cpp` i `CMakeLists.txt` z oryginalnego `lesson_05_first_program`. Każdy z poniższych programów wpisz po kolei w `main.cpp` tego katalogu. Oba się budują i działają, ale dają złe wyniki.
 
 **Zgłoszenie A.** Firma kurierska klasyfikuje paczki według wagi w kilogramach (liczba całkowita, co najmniej 1):
 
@@ -219,7 +219,7 @@ Odpowiedz krótko, na piśmie, odwołując się do własnego programu z zadania 
 3. Dlaczego decyzja o dodatkowej pomocy korzysta z `||`? Co się stanie, gdy spełnione są oba jej warunki?
 4. Dlaczego kolejność warunków w łańcuchu `else if` ma znaczenie? Pokaż to na swoim łańcuchu kategorii.
 5. Jeśli `needs_extra_helper` jest zmienną typu `bool`, co oznacza `!needs_extra_helper`?
-6. Dlaczego warto sprawdzać wartości dokładnie na granicach? Podaj jedną granicę z zadania 1, przy której pomyłka `<` i `<=` zmieniłaby wynik.
+6. Dlaczego warto sprawdzać wartości dokładnie na granicach? Podaj jedną granicę z zadania 1, przy której pomyłka `<` z `<=` zmieniłaby wynik.
 7. Dlaczego nie można twierdzić, że Twój program poprawnie obsługuje wpisanie `abc` zamiast liczby?
 
 ## Kryteria sukcesu
@@ -850,7 +850,7 @@ Po sześciu lekcjach potrafisz:
 - pisać programy, które wybierają różne działania zależnie od danych;
 - zapisywać porównania i przechowywać ich wyniki w zmiennych `bool`;
 - budować konstrukcje `if`, `else` i łańcuchy `else if` w poprawnej kolejności;
-- łączyć warunki przez `&&` i `||` i odwracać je przez `!`;
+- łączyć warunki przez `&&` i `||` oraz odwracać je przez `!`;
 - rozumieć krótkie obliczanie `&&` i `||`;
 - planować przypadki testowe i sprawdzać wartości dokładnie na granicach;
 - znajdować błędy w kolejności warunków i w doborze operatorów;

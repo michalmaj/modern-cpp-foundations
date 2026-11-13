@@ -13,7 +13,7 @@ This lesson introduces nothing new. You check whether you can design a program o
 The lesson has two parts:
 
 - **Part A: the test.** Requirements, test data, expected results, tasks, questions and criteria. No hints and no solution code. Everything you need, you know from Modules 1–4.
-- **Part B: checking and discussion.** Hints, full lists of control cases, example solutions, explanations and a self-assessment. Go there after finishing part A, or when you knowingly decide to stop trying on your own.
+- **Part B: checking and discussion.** Hints, full lists of check cases, example solutions, explanations and a self-assessment. Go there after finishing part A, or when you knowingly decide to stop trying on your own.
 
 Looking at part B, at earlier lessons or at your notes is not a failure. What matters is **honestly noting what was done on your own and what was done with help**. A suggested split into two sessions:
 
@@ -133,7 +133,7 @@ Input ended: 2 of 3 measurements recorded
 
 Write down the expected standard output for each case, including the number of questions. Choose temperatures whose average is easy to work out in your head: whole numbers and halves.
 
-You don't have to run the cases with the end of the data, including the third example, because ending the data from the keyboard isn't required. Write down in a trace table what the program does after each attempt, and compare it with the full list of control cases in part B.
+You don't have to run the cases with the end of the data, including the third example, because ending the data from the keyboard isn't required. Write down in a trace table what the program does after each attempt, and compare it with the full list of check cases in part B.
 
 When the result matches, you can save the project in Git, as in lesson 1.5. Before committing, check `git status`: only `main.cpp` and `CMakeLists.txt` go into the history.
 
@@ -291,8 +291,8 @@ Come here after finishing part A, or when you knowingly decide to stop trying on
 
 - **Standard output:** run the program for every case in your table and compare the program's lines with the expected ones, character by character, including the number of questions. Skip the typed data that the echo shows.
 - **The same program:** don't change the code between runs.
-- **The end of the data:** check the cases in which the data runs out with a trace table, and compare them with the full list of control cases. Each of them is checked automatically there.
-- **Compare the full lists of control cases** below with your table. Did your table cover the same boundaries and the same end-of-data situations?
+- **The end of the data:** check the cases in which the data runs out with a trace table, and compare them with the full list of check cases. Each of them is checked automatically there.
+- **Compare the full lists of check cases** below with your table. Did your table cover the same boundaries and the same end-of-data situations?
 - **Order:** look through both loops. After a failed read, do you check for the end of the data first? Do the sum and the counters change in only one place?
 
 ## Hints
@@ -341,7 +341,7 @@ After the end of the data, the read fails. Which branch runs then, and can anyth
 
 </details>
 
-## The full list of control cases: task 1
+## The full list of check cases: task 1
 
 <details>
 <summary>Open after preparing your own table</summary>
@@ -899,7 +899,7 @@ Step 3 of 3
 Warm-up done
 ```
 
-- **The bug shows already for 0 steps:** the program prints `Step 0 of 0`, although it shouldn't print any step. Every case has one iteration too many.
+- **The bug already shows for 0 steps:** the program prints `Step 0 of 0`, although it shouldn't print any step. Every case has one iteration too many.
 - **The cause:** the counter starts at 0, and the condition `<=` also allows the last number.
 - **The fix:** the counter starts at 1, because the requirement says "from 1":
 

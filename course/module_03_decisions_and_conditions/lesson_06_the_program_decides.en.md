@@ -13,7 +13,7 @@ This lesson introduces nothing new. You check whether you can design a program o
 The lesson has two parts:
 
 - **Part A: the test.** Requirements, test data, expected results, questions and criteria. No hints and no solution code. Everything you need, you know from Modules 1–3.
-- **Part B: checking and discussion.** Hints, full lists of control cases, example solutions, explanations and a self-assessment. Go there after finishing part A, or when you knowingly decide to stop trying on your own.
+- **Part B: checking and discussion.** Hints, full lists of check cases, example solutions, explanations and a self-assessment. Go there after finishing part A, or when you knowingly decide to stop trying on your own.
 
 Looking at part B, at earlier lessons or at your notes is not a failure. What matters is **honestly noting what was done on your own and what was done with help**. You can split the test into two sessions, for example task 1 on one day and tasks 2 and 3 on the next.
 
@@ -130,7 +130,7 @@ Invalid event data
 
 Write down the expected result for each case. Then run the program for all of them and compare.
 
-On the screen you'll also see the typed data between the program's lines: that's the echo, not standard output (lesson 2.6). You can also type the duration 2.0 as `2`.
+On the screen you'll also see the typed data between the program's lines: that's the echo, not standard output (lesson 2.6). You can also type the duration `2.0` as `2`.
 
 When the result matches, you can save the project in Git, as in lesson 1.5. Before committing, check `git status`: only `main.cpp` and `CMakeLists.txt` go into the history.
 
@@ -249,7 +249,7 @@ Come here after finishing part A, or when you knowingly decide to stop trying on
 
 - **Standard output:** run the program for every case in your table and compare the program's lines with the expected ones, character by character. Skip the typed data that the echo shows.
 - **The same program:** don't change the code between runs.
-- **Compare the full lists of control cases** below with your table. Did your table cover the same boundaries?
+- **Compare the full lists of check cases** below with your table. Did your table cover the same boundaries?
 - **Order:** read the program from the top. Does any division or classification run before the data check?
 
 ## Hints
@@ -291,7 +291,7 @@ The requirement says both conditions must hold at the same time. Which of the fo
 
 </details>
 
-## The full list of control cases: task 1
+## The full list of check cases: task 1
 
 <details>
 <summary>Open after preparing your own table</summary>
@@ -533,7 +533,7 @@ int main() {
 - **The check first:** `valid_data` combines three requirements with `&&`, because all of them must hold. The classification, the division and the helper decision are in the branch for acceptable data. For data that doesn't meet the requirements, the program calculates nothing.
 - **The categories:** the "up to … inclusive" thresholds go from the lowest, with `<=`. The program reaches `else if (duration_hours <= 3.0)` only when the duration exceeds 1.5, so that branch handles exactly the range from 1.5 (exclusive) to 3.0 (inclusive).
 - **The groups:** `/` gives the full groups, `%` the participants outside them. The divisor is the constant 6, so there's no risk of dividing by zero.
-- **The helper:** `||`, because one condition is enough, also when both hold. The boundaries 3.0 and 18 don't give a helper, because the requirement says "exceeds".
+- **The helper:** `||`, because one condition is enough, even when both hold. The boundaries 3.0 and 18 don't give a helper, because the requirement says "exceeds".
 - The category chain and the helper decision are inside the `if (valid_data)` branch, one level deeper. That's allowed nesting. Other readable layouts that give the same result are correct too.
 
 </details>

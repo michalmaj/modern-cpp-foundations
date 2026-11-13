@@ -22,7 +22,7 @@ Twoje programy robią już sporo, ale każdy jest jednym długim `main`. Gdy ten
 Po tej lekcji będziesz:
 
 - wyjaśniać, po co wydziela się fragment kodu do funkcji;
-- wskazywać w funkcji `void`, jej nazwę, puste nawiasy i ciało;
+- wskazywać części funkcji: `void`, jej nazwę, puste nawiasy i ciało;
 - odróżniać definicję funkcji od jej wywołania;
 - przewidywać kolejność wykonania programu z funkcją, także gdy funkcja nie jest wywołana albo jest wywołana kilka razy;
 - znajdować wywołanie, którego jest za dużo;

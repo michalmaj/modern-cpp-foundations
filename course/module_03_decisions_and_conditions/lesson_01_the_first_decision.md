@@ -145,10 +145,10 @@ Oprócz `<` znasz już z matematyki trzy podobne porównania. W C++ zapisuje si�
 
 | Operator | Znaczenie | Przykład | Kiedy odpowiedź brzmi „tak” |
 |---|---|---|---|
-| `<` | mniej niż | `seats_left < 5` | wolnych miejsc jest mniej niż 5 |
-| `<=` | mniej niż lub równo | `temperature_c <= 25` | temperatura nie przekracza 25 stopni |
-| `>` | więcej niż | `weight_kg > 20.0` | bagaż przekracza 20 kg |
-| `>=` | więcej niż lub równo | `points >= 50` | wynik osiągnął wymagane minimum 50 punktów |
+| `<` | mniejsze niż | `seats_left < 5` | wolnych miejsc jest mniej niż 5 |
+| `<=` | mniejsze lub równe | `temperature_c <= 25` | temperatura nie przekracza 25 stopni |
+| `>` | większe niż | `weight_kg > 20.0` | bagaż przekracza 20 kg |
+| `>=` | większe lub równe | `points >= 50` | wynik osiągnął wymagane minimum 50 punktów |
 
 - `<=` i `>=` zapisuje się dwoma znakami, bez spacji między nimi, z `=` na drugim miejscu.
 - Różnica między `<` a `<=` (i między `>` a `>=`) dotyczy **tylko samej granicy**. Dla 25 warunek `temperature_c <= 25` jest spełniony, a warunek `temperature_c < 25` nie.
@@ -264,7 +264,7 @@ int main() {
 4. Popraw warunek.
 5. Sprawdź ponownie **wszystkie trzy** przypadki.
 
-Dane testowe to trzy osobne uruchomienia: `4`, `5` i `6`.
+Dane testowe to `4`, `5` i `6`, każda wartość w osobnym uruchomieniu.
 
 Wyniki programu przed poprawką i poprawiony program są w części [Przykładowe rozwiązania](#przykładowe-rozwiązania). Zajrzyj tam po własnej próbie.
 
@@ -381,7 +381,7 @@ Należą do niego instrukcje między `{` a `}` po warunku. Wcięcie pomaga je zo
 <details>
 <summary>Przykładowa odpowiedź</summary>
 
-`<` znaczy „mniej niż”, a `<=` „mniej niż lub równo”. Różną odpowiedź dają tylko dla 5: `5 < 5` to „nie”, a `5 <= 5` to „tak”.
+`<` znaczy „mniejsze niż”, a `<=` „mniejsze lub równe”. Różną odpowiedź dają tylko dla 5: `5 < 5` to „nie”, a `5 <= 5` to „tak”.
 
 </details>
 

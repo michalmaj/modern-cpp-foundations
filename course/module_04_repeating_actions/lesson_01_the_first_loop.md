@@ -88,7 +88,7 @@ Ostatnia linijka mówi `4`, a nie `3`. Dlaczego, wyjaśniają punkty 3 i 4.
 
 ## 3. Cztery części pętli
 
-`while` (po polsku „dopóki”) powtarza blok w klamrach **dopóki** warunek jest spełniony. Ta pętla ma cztery części:
+`while` (po polsku „dopóki”) powtarza blok w klamrach, **dopóki** warunek jest spełniony. Ta pętla ma cztery części:
 
 | Część | W programie | Rola |
 |---|---|---|
@@ -109,7 +109,7 @@ Jedno wykonanie ciała pętli to **przebieg** (iteracja).
 
 ## 4. Tabela przebiegu
 
-Przebieg pętli najlepiej widać w tabeli. Każdy wiersz to **jedno sprawdzenie warunku**:
+To, jak działa pętla, najlepiej widać w tabeli przebiegu. Każdy wiersz to **jedno sprawdzenie warunku**:
 
 | Sprawdzenie warunku | `lap` przy sprawdzeniu | `lap <= total_laps` | Ciało pętli | `lap` po ciele |
 |---|---|---|---|---|
@@ -355,7 +355,7 @@ Jeśli przez pomyłkę uruchomisz pętlę, która się nie kończy, przerwij pro
 
 Program zatrzymuje się, a Ty możesz poprawić kod i zbudować go ponownie. Niczego nie psujesz: przerywasz tylko własny program.
 
-Program może też **czekać na dane**, jak w lekcji 2.6, wtedy również nic się nie dzieje. Zapytaj więc: czy program poprosił o dane, których jeszcze nie wpisano? Jeśli tak, to czeka. Jeśli dane wpisano, a na ekranie bez końca przybywa tych samych linijek, to pętla się nie kończy.
+Program może też **czekać na dane**, jak w lekcji 2.6. Wtedy również nic się nie dzieje. Zapytaj więc: czy program poprosił o dane, których jeszcze nie wpisano? Jeśli tak, to czeka. Jeśli dane wpisano, a na ekranie bez końca przybywa tych samych linijek, to pętla się nie kończy.
 
 ## 10. Misja: odliczanie
 
@@ -528,7 +528,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 <details>
 <summary>Przykładowa odpowiedź</summary>
 
-Przed każdym przebiegiem: pierwszy raz zanim ciało wykona się po raz pierwszy, a potem za każdym razem, gdy program po wykonaniu ciała wraca na górę pętli.
+Przed każdym przebiegiem: pierwszy raz, zanim ciało wykona się po raz pierwszy, a potem za każdym razem, gdy program po wykonaniu ciała wraca na górę pętli.
 
 </details>
 

@@ -139,7 +139,7 @@ if (std::cin.fail()) {
 - `std::cin` represents the standard input stream, from which the program reads data.
 - **The dot** after `std::cin` lets you refer to a function that belongs to this object, i.e. to its **member function**. `std::cin.fail()` is a question asked of the stream `std::cin`.
 - `fail` is the name of that function. **The parentheses** `()` mean that the function is called, i.e. that the question is asked now.
-- The result is a `bool`: `true` when the stream is in a read-error state, and `false` when the reads so far succeeded. That's why `std::cin.fail()` can stand in an `if` condition.
+- The result is a `bool`: `true` when the stream is in a read-error state, and `false` when the reads so far succeeded. That's why `std::cin.fail()` can be used as an `if` condition.
 
 **What exactly does `true` mean?** That a read failed. It does **not** say why. The cause might be text instead of a number, but also simply that the data ran out. This lesson doesn't tell these causes apart, which is why the program prints a neutral message, `Input could not be read`, not "text was typed" or "end of data".
 
@@ -355,7 +355,7 @@ Input could not be read
 
 After `abc`, reading the number fails, so the program doesn't check the value and doesn't ask again. That's a deliberate limit of this lesson. After a failed read the stream is in an error state, and another read of the same kind would fail too. In lesson 4.6 you'll learn to bring the stream back to a state in which reading can continue, and to tell text from the end of the data.
 
-One honest caveat: reading a number with `>>` doesn't check the whole line that was typed. After typing `12abc`, the program reads the number 12, and the characters `abc` stay in the stream for later. Checking whole lines isn't part of this lesson.
+One caveat: reading a number with `>>` doesn't check the whole line that was typed. After typing `12abc`, the program reads the number 12, and the characters `abc` stay in the stream for later. Checking whole lines isn't part of this lesson.
 
 ## 9. A rejected value, a failed read, the end of the data
 
@@ -519,7 +519,7 @@ The rejection counter should change only after a successful read of a value that
 </details>
 
 <details>
-<summary>The full list of control cases: open after preparing your own table</summary>
+<summary>The full list of check cases: open after preparing your own table</summary>
 
 | Data | Result | Rejections | What it checks |
 |---|---|---|---|
@@ -696,7 +696,7 @@ Input could not be read
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 12. When something goes differently
+## 12. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -804,7 +804,7 @@ How to bring the stream back into working order after a failed read, so the prog
 
 ## Summary
 
-- To ask again, the program has to go back to the read. So the question and the read stand in the body of a `while` loop, once per iteration.
+- To ask again, the program has to go back to the read. So the question and the read go in the body of a `while` loop, once per iteration.
 - `std::cin.fail()` checks whether a read failed. It's a call to a **member function**: the dot refers to a function of the object `std::cin`, and the parentheses call it. The result is a `bool`.
 - `fail()` doesn't say why a read failed: the cause may be text or the end of the data. That's why the message is neutral.
 - **Check the read first, the value only afterwards.** After a failed read, no decision is based on the variable's value.

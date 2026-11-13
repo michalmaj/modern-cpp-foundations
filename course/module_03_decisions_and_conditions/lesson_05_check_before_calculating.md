@@ -22,7 +22,7 @@ Do tej pory dane od użytkownika zawsze pasowały do zadania. Prawdziwi użytkow
 Po tej lekcji będziesz:
 
 - wyjaśniać, dlaczego niektóre obliczenia wymagają wcześniejszego sprawdzenia wartości;
-- sprawdzać dzielnik przed `/` i `%` i wykonywać obliczenie tylko w odpowiedniej gałęzi;
+- sprawdzać dzielnik przed `/` i `%` oraz wykonywać obliczenie tylko w odpowiedniej gałęzi;
 - odróżniać wartość poprawnie odczytaną od wartości, która spełnia wymagania zadania;
 - łączyć kilka wymagań przez `&&` i pisać jeden poziom zagnieżdżonego `if`;
 - wybierać między połączonym warunkiem a zagnieżdżeniem;
@@ -733,7 +733,7 @@ Enter children:
 Invalid values
 ```
 
-Dla 0 cukierków i 5 dzieci program wypisuje `Invalid values`, choć wymaganie dopuszcza zero cukierków. Warunek `candies > 0` wyklucza samo zero. Powinien być `candies >= 0`, czyli „nie ujemna”. Poprawiony program to program z punktu 4, który dla 0 i 5 wypisuje `Each child: 0` i `Remaining: 0`, a dla -3 i 4 oraz 12 i 0 `Invalid values`.
+Dla 0 cukierków i 5 dzieci program wypisuje `Invalid values`, choć wymaganie dopuszcza zero cukierków. Warunek `candies > 0` wyklucza samo zero. Powinien być `candies >= 0`, czyli „nieujemna”. Poprawiony program to program z punktu 4, który dla 0 i 5 wypisuje `Each child: 0` i `Remaining: 0`, a dla -3 i 4 oraz 12 i 0 `Invalid values`.
 
 </details>
 

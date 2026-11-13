@@ -344,11 +344,11 @@ while (lap <= total_laps) {
 
 Every check sees the same value of `lap`, so it gives the same result: `true`. Nothing in the body brings the program closer to the answer "no", so the loop **has no way to end**. The program would print `Lap 1` forever. A loop like this is called an **infinite loop**.
 
-So for every loop, ask: **what changes in the body, and does that change lead to the condition stopping to hold at some point?** In this lesson the answer is the counter's change. In later lessons you'll see loops that end for other reasons, because their condition depends on other changing values.
+So for every loop, ask: **what changes in the body, and will that change eventually make the condition stop holding?** In this lesson the answer is the counter's change. In later lessons you'll see loops that end for other reasons, because their condition depends on other changing values.
 
 ## 9. How do you stop a program that runs too long?
 
-If you start a loop that doesn't end by mistake, stop the program:
+If you accidentally start a loop that never ends, stop the program:
 
 - **in the terminal** (PowerShell, macOS and Linux): press <kbd>Ctrl</kbd> + <kbd>C</kbd>;
 - **in CLion:** click the **Stop** button (the red square) in the **Run** window or on the top toolbar.
@@ -440,7 +440,7 @@ The laps grew, but the countdown gets smaller. How do you write the counter's ne
 </details>
 
 <details>
-<summary>The full list of control cases: open after preparing your own table</summary>
+<summary>The full list of check cases: open after preparing your own table</summary>
 
 | `N` | Standard output after the prompt | What it checks |
 |---|---|---|
@@ -507,13 +507,13 @@ Countdown length must be from 0 to 5
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 11. When something goes differently
+## 11. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
 | The same line appears forever | The counter doesn't change, or changes in the wrong direction, so the condition always gives "yes". | Stop the program (section 9). Fill in a trace table for two or three checks, and find the statement that should bring the counter closer to the end. |
 | The last number is missing, or there's one too many | An off-by-one error: a wrong start value, or `<` instead of `<=` (or the other way round). | Check the case with one iteration and the largest value. Fill in a trace table. |
-| The loop doesn't run even once, although it should | The condition is false already at the first check. | Put the counter's start value into the condition and check whether the answer is "yes". |
+| The loop doesn't run even once, although it should | The condition is already false at the first check. | Put the counter's start value into the condition and check whether the answer is "yes". |
 | The printed values are shifted by one | The counter's change comes before the statement that prints it. | Decide which value the iteration should show: before the change or after it (section 6). |
 | The final message appears several times | It's in the loop body, before the closing brace. | Move it after the loop's `}`. |
 | The program does nothing and waits | It's waiting for data, as in lesson 2.6. | Type a number and press **Enter**. |
@@ -573,7 +573,7 @@ Every check of the condition sees the same value and gives the same result. If t
 <details>
 <summary>Example answer</summary>
 
-`lap < total_laps` gives `false` already when `lap` equals `total_laps`, so it skips the last lap: for 3 it prints only two. `<=` also allows equality. For 0, neither version prints anything, so that case doesn't reveal the bug. 1 and 3 reveal it.
+`lap < total_laps` gives `false` as soon as `lap` equals `total_laps`, so it skips the last lap: for 3 it prints only two. `<=` also allows equality. For 0, neither version prints anything, so that case doesn't reveal the bug. 1 and 3 reveal it.
 
 </details>
 
@@ -601,7 +601,7 @@ When the condition gives `false`, the program skips the body and runs the statem
 - The condition is checked **before every** iteration. After running the body, the program goes back to the condition. When the answer is "no", it carries on after the loop.
 - A counting loop has four parts: the start value before the loop, the condition, the body, and the counter's change in the body. `while` changes nothing by itself.
 - The number of iterations follows from the start value, the condition and the change. The condition is always checked one more time than the body runs: the last check gives `false`.
-- A loop can run zero times, when the condition is false from the start.
+- A loop can run zero times if the condition is false from the start.
 - The program doesn't leave the body halfway. The condition is checked only after the whole body has run.
 - If nothing in the body brings the condition closer to the answer "no", the loop doesn't end. You stop the program with <kbd>Ctrl</kbd> + <kbd>C</kbd> in the terminal, or with the **Stop** button in CLion.
 - Test a loop for zero iterations, one, several and the largest acceptable value. An off-by-one error is often revealed by only one of these cases.

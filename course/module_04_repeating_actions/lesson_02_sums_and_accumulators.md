@@ -17,7 +17,7 @@ Ta lekcja zakłada, że po lekcji 4.1:
 
 ## Sytuacja
 
-Ile to jest 1 + 2 + 3? To łatwe: 6. Do programu też łatwo wpisać `1 + 2 + 3`. Ale gdyby użytkownik podawał, do jakiej liczby sumować, do 10, do 500 albo do 1000, takiego wyrażenia nie da się zapisać z góry.
+Ile to jest 1 + 2 + 3? To łatwe: 6. Do programu też łatwo wpisać `1 + 2 + 3`. Ale gdyby to użytkownik podawał, do jakiej liczby sumować (do 10, do 500 albo do 1000), takiego wyrażenia nie dałoby się zapisać z góry.
 
 Można jednak liczyć tak, jak liczy się w pamięci: **krok po kroku**. Najpierw masz 0. Dodajesz 1 i masz 1. Dodajesz 2 i masz 3. Dodajesz 3 i masz 6. W każdym kroku pamiętasz tylko jedną liczbę: dotychczasową sumę. Dziś pętla nauczy się w ten sposób **gromadzić wynik**.
 
@@ -522,7 +522,7 @@ Invalid parcel count
 
 ### Wariant dla chętnych: ciężkie paczki
 
-Ten wariant nie jest wymagany. Program ma dodatkowo policzyć, ile paczek waży **co najmniej 2 kg**, i po linijce z łączną wagą wypisać `Heavy parcels: K`. Potrzebujesz osobnego licznika zdarzeń i `if`, jak w punkcie 6. Przewidź wynik dla pięciu paczek z listy kontrolnej, a potem sprawdź.
+Ten wariant nie jest wymagany. Program ma dodatkowo policzyć, ile paczek waży **co najmniej 2 kg**, i po linijce z łączną wagą wypisać `Heavy parcels: K`. Potrzebujesz osobnego licznika zdarzeń i `if`, jak w punkcie 6. Przewidź wynik dla pięciu paczek z listy przypadków kontrolnych, a potem sprawdź.
 
 <details>
 <summary>Przypadki wariantu: otwórz po własnej próbie</summary>
@@ -651,7 +651,7 @@ Wartość początkowa przed pętlą ustawia sumę raz, zanim zacznie się gromad
 <details>
 <summary>Przykładowa odpowiedź</summary>
 
-Bo wagi mają część ułamkową. Suma typu `int` gubiłaby tę część, a `+=` nie zgłosiłby błędu tak jak inicjalizacja przez `{}`.
+Bo wagi mają część ułamkową. Suma typu `int` gubiłaby tę część, a `+=`, w przeciwieństwie do inicjalizacji przez `{}`, nie zgłosiłby błędu.
 
 </details>
 
