@@ -35,7 +35,7 @@ After this lesson you will:
 | Tool | What it is for | When you will use it |
 |---|---|---|
 | **LLVM/Clang 22**, with the `clang++` compiler | The C++ compiler: turns your code into a program. | In the next lesson, for your first program |
-| **System tools**: on Windows *Visual Studio Build Tools*, on macOS the *Command Line Tools*, on Ubuntu packages the system installs together with Clang | Ready-made parts that every C++ program uses, such as the **standard library** (ready-made code for printing text or doing calculations), plus the operating system files needed to build a program. | Every time you compile, although you never start them yourself |
+| **System tools**: on Windows *Visual Studio Build Tools*, on macOS the *Command Line Tools*, on Ubuntu packages the system installs together with Clang | Ready-made parts that every C++ program uses, such as the **standard library** (ready-made code for printing text or doing calculations), plus the operating system files needed to build a program. | Every time you build a program, although you never start them yourself |
 | **CMake** | Describes which files make up a project and how to build it. | From the next lesson |
 | **Ninja** | Quickly carries out the build steps prepared by CMake. | From the next lesson, “behind the scenes” |
 | **CLion** | The development environment (IDE): where you write, run and check your programs. | From the next lesson |
@@ -71,7 +71,7 @@ This does not install the Visual Studio program. You only get the parts `clang++
    - **Windows 11:** in the Start menu, type `Terminal`, right-click **Terminal** and choose **Run as administrator**.
    - **Windows 10:** in the Start menu, type `PowerShell`, right-click **Windows PowerShell** and choose **Run as administrator**. It's the same shell as in lesson 0.1, just with administrator rights.
 
-   The system asks whether to allow this app to make changes. Agree.
+   The system asks whether to allow this app to make changes. Allow it.
 2. Go to [chocolatey.org/install](https://chocolatey.org/install), choose the **Individual** installation and copy the command shown there.
 3. Paste the command into the terminal and press <kbd>Enter</kbd>.
 4. When the installation finishes, **close the terminal and open a new one, again as administrator**. The new terminal knows about the new programs (remember `PATH` from lesson 0.3).
@@ -131,7 +131,7 @@ wget -qO- https://apt.llvm.org/llvm-snapshot.gpg.key | sudo tee /etc/apt/trusted
 echo "deb https://apt.llvm.org/noble/ llvm-toolchain-noble-22 main" | sudo tee /etc/apt/sources.list.d/llvm-22.list
 ```
 
-The first command saves a key that lets the system check that the packages really come from LLVM. The second adds the address of the source. Both print what they saved in the terminal. That's normal.
+The first command saves a key that lets the system check that the packages really come from LLVM. The second adds the address of the source. Both print in the terminal what they saved. That's normal.
 
 **Step 3. LLVM 22, CMake and Ninja.**
 
@@ -145,7 +145,7 @@ Together with `clang-22`, the system automatically installs the C++ standard lib
 ### CLion (every system)
 
 1. Download CLion from [jetbrains.com/clion/download](https://www.jetbrains.com/clion/download/) and install it like any other program. On Ubuntu you can also use the command `sudo snap install clion --classic`.
-2. Start CLion. On the first start, choose a licence. If you learn on your own, you can choose the free licence **for non-commercial use**. It needs a JetBrains account, and its condition is that CLion sends anonymous usage statistics to JetBrains, which you can't switch off. Schools and universities have separate licences for computer labs, so on a school computer ask your teacher or the administrator.
+2. Start CLion. On the first start, choose a licence. If you are learning on your own, you can choose the free licence **for non-commercial use**. It needs a JetBrains account, and its condition is that CLion sends anonymous usage statistics to JetBrains, which you can't switch off. Schools and universities have separate licences for computer labs, so on a school computer ask your teacher or the administrator.
 3. If CLion offers to create a project or set up tools, you can close that window. You will set it up in the next lesson.
 
 ## 4. Check: is your workshop ready?
@@ -168,7 +168,7 @@ What matters is the **major version number: 22**. The last digits may be higher 
 One computer can have several compilers with similar names. From lesson 0.3 you know that the shell starts the first program with a given name that it finds. Check:
 
 - **macOS:** type just `clang++ --version`. You will see `Apple clang version …`. That's **Apple's compiler**, not ours. It's part of the system and does no harm, but in this course we use Homebrew clang, by its full path.
-- **Ubuntu:** just `clang++ --version` may show an older version, such as `Ubuntu clang version 18…`, or report that the command doesn't exist. Our compiler is `clang++-22`, with the number in its name.
+- **Ubuntu:** plain `clang++ --version` may show an older version, such as `Ubuntu clang version 18…`, or report that the command doesn't exist. Our compiler is `clang++-22`, with the number in its name.
 - **Windows:** `Get-Command clang++` must point to the `C:\Program Files\LLVM\bin` folder. If it points somewhere else, such as a Visual Studio or MinGW folder, see section 6.
 
 ### CMake and Ninja
@@ -200,7 +200,7 @@ In the “Your result” column, write what the check from section 4 showed. For
 
 For each row, add one sentence saying **what** that tool will be used for in the next lesson.
 
-### Success criterion
+### Success criteria
 
 - The compiler reports **version 22** and is **our** compiler: on Windows from `C:\Program Files\LLVM\bin`, on macOS “Homebrew clang” (not “Apple clang”), on Ubuntu `clang++-22`.
 - `cmake --version` shows 3.28 or newer, and `ninja --version` prints a version.
@@ -209,7 +209,7 @@ For each row, add one sentence saying **what** that tool will be used for in the
 
 If everything matches, your workshop is ready. You don't need to compile anything yet: you will do that in the next lesson.
 
-## 6. When things look different
+## 6. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -220,10 +220,10 @@ If everything matches, your workshop is ready. You don't need to compile anythin
 | macOS: `clang++ --version` shows `Apple clang` | That's Apple's compiler, not ours. | That's expected. You start our compiler by the full path from section 4. |
 | Ubuntu: `clang++ --version` shows version 18 | That's the older Clang from Ubuntu's own packages. | Use `clang++-22`. |
 | Windows: `Get-Command clang++` shows a path other than `C:\Program Files\LLVM\bin` | There is another `clang++` on the computer, which the shell finds first. | Don't uninstall anything blindly. Write down that path. In the next lesson we will give CLion the full path to the right compiler. |
-| Windows: the Build Tools installer asks for a restart | Some files are completed after the restart. | Restart the computer, then go on to step 2. |
-| The compiler is installed, but later your first compilation reports missing files, such as `'iostream' file not found` or, on Windows, `lld-link: error: could not open 'kernel32.lib'` | The system tools with the standard library are missing. | Come back to this lesson and check the system tools (section 4). This kind of problem only shows up when compiling, in the next lesson. |
+| Windows: the Build Tools installer asks for a restart | The installer finishes part of its work after the restart. | Restart the computer, then go on to step 2. |
+| The compiler is installed, but later your first build reports missing files, such as `'iostream' file not found` or, on Windows, `lld-link: error: could not open 'kernel32.lib'` | The system tools with the standard library are missing. | Come back to this lesson and check the system tools (section 4). This kind of problem only shows up when you build, in the next lesson. |
 
-## 7. Explain it
+## 7. Explain
 
 Answer in your own words, and only then expand the answer.
 

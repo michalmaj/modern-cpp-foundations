@@ -3,7 +3,7 @@
 **Polski** · [English](lesson_03_commands_and_programs.en.md) · [Opis kursu](../../README.md)
 
 > **Moduł 0, lekcja 3** · około 30 minut
-> **Potrzebujesz:** komputera z Windows, macOS albo Linuksem. Nie musisz niczego instalować.
+> **Potrzebujesz:** komputera z Windowsem, macOS albo Linuksem. Nie musisz niczego instalować.
 
 ## Zanim zaczniesz
 
@@ -17,7 +17,7 @@ Nie potrzebujesz żadnych plików z poprzednich lekcji.
 
 ## Sytuacja
 
-Wpisywało się już dziesiątki poleceń: `pwd`, `ls`, `cd`. Za każdym razem coś się działo. Ale kto właściwie to zrobił? Czy gdzieś na dysku leży coś, co nazywa się `pwd`?
+Masz już za sobą dziesiątki poleceń: `pwd`, `ls`, `cd`. Za każdym razem coś się działo. Ale kto właściwie to zrobił? Czy gdzieś na dysku leży coś, co nazywa się `pwd`?
 
 Odpowiedź na to pytanie prowadzi prosto do celu tego modułu: uruchomienia programu napisanego w C++.
 
@@ -40,7 +40,7 @@ Gdy naciśniesz <kbd>Enter</kbd>, powłoka patrzy na nazwę i ma dwie możliwoś
 
 Na Windowsie jest jeszcze krok wcześniej, znany z lekcji 0.2: jeśli nazwa jest **aliasem**, PowerShell najpierw zamienia ją na właściwe polecenie.
 
-Za chwilę sprawdzisz, która możliwość zachodzi dla poleceń, których już używasz.
+Za chwilę sprawdzisz, która z tych możliwości dotyczy poleceń, których już używasz.
 
 ## 2. Wypróbuj: uruchom program
 
@@ -63,7 +63,7 @@ Ten wynik przygotował **program** `whoami`: zapytał system, kto jest zalogowan
 
 ## 3. Eksperyment: zapytaj powłokę, czym jest polecenie
 
-Powłoka może Ci powiedzieć, co kryje się pod daną nazwą. Służy do tego inne polecenie w każdym systemie:
+Powłoka może Ci powiedzieć, co kryje się pod daną nazwą. Na Windowsie służy do tego inne polecenie niż na macOS i Linuksie:
 
 | Windows (PowerShell) | macOS i Linux |
 |---|---|
@@ -171,7 +171,7 @@ To samo słowo `ls` jest więc na Windowsie poleceniem PowerShella, a na macOS o
 | Linux (bash): `whoami is hashed (/usr/bin/whoami)` | Bash zapamiętał, gdzie znalazł ten program. To wciąż osobny plik. | Nic nie trzeba robić. |
 | Linux: ``ls is aliased to `ls --color=auto'`` | `ls` to tu alias: system dodaje opcję, dzięki której `ls` koloruje wyniki. Pod spodem i tak uruchamia się program `ls`. | Zapisz w misji „alias”. |
 | Komunikat `type` po polsku, na przykład że polecenie jest wbudowane w powłokę | Bash tłumaczy komunikaty na język systemu. | Liczy się znaczenie komunikatu, nie jego język. |
-| Windows: `The term '…' is not recognized…`<br>macOS i Linux: `… not found` | Powłoka nie zna takiego polecenia: nie jest wbudowane i nie znalazła programu o tej nazwie. | Sprawdź pisownię. Ten sam komunikat może się pojawić po instalacji narzędzia, jeśli coś poszło nie tak. Wrócimy do tego przy instalacji. |
+| Windows: `The term '…' is not recognized…`<br>macOS i Linux: `… not found` | Powłoka nie zna takiego polecenia: nie ma go wśród poleceń wbudowanych i nie znalazła programu o tej nazwie. | Sprawdź pisownię. Ten sam komunikat może się pojawić po instalacji narzędzia, jeśli coś poszło nie tak. Wrócimy do tego przy instalacji. |
 | Ścieżka do programu jest inna niż w przykładzie, na przykład `/usr/bin/ls` zamiast `/bin/ls` | Systemy różnie układają swoje katalogi. | Nic nie trzeba robić. Liczy się to, że w ogóle jest ścieżka do pliku. |
 
 ## 8. Wyjaśnij

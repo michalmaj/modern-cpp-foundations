@@ -3,7 +3,7 @@
 **Polski** · [English](lesson_01_files_and_terminal.en.md) · [Opis kursu](../../README.md)
 
 > **Moduł 0, lekcja 1** · około 30–45 minut
-> **Potrzebujesz:** komputera z Windows, macOS albo Linuksem. Nie musisz niczego instalować.
+> **Potrzebujesz:** komputera z Windowsem, macOS albo Linuksem. Nie musisz niczego instalować.
 
 ## Sytuacja
 
@@ -64,7 +64,7 @@ Na co dzień obsługujesz komputer myszką: klikasz ikony i otwierasz okna. Moż
 - **Terminal** to okno, w którym wpisujesz polecenia i czytasz odpowiedzi.
 - **Powłoka** (ang. *shell*) to program działający w tym oknie. Odczytuje Twoje polecenie, wykonuje je i wypisuje wynik. Na Windowsie używamy powłoki **PowerShell**. Na macOS domyślna powłoka to **zsh**, a na Linuksie zwykle **bash**.
 
-Po co to wszystko, skoro jest myszka? Większość narzędzi programisty obsługuje się właśnie poleceniami, w tym narzędzie, które zamienia napisany tekst w działający program. Poznasz je w tym kursie. Terminal pokazuje też dokładnie, co się wydarzyło i w którym miejscu na dysku.
+Po co to wszystko, skoro jest myszka? Większość narzędzi do programowania obsługuje się właśnie poleceniami, w tym narzędzie, które zamienia napisany tekst w działający program. Poznasz je w tym kursie. Terminal pokazuje też dokładnie, co się wydarzyło i w którym miejscu na dysku.
 
 Powłoka zawsze „jest” w jakimś katalogu, tak jak okno plików zawsze pokazuje jeden katalog naraz. Ten katalog to **bieżący katalog**. Polecenia działają w nim, chyba że wskażesz inne miejsce.
 

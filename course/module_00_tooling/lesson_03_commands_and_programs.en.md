@@ -63,7 +63,7 @@ This result was produced by the **program** `whoami`: it asked the system who is
 
 ## 3. Experiment: ask the shell what a command is
 
-The shell can tell you what is behind a given name. Each system uses a different command for this:
+The shell can tell you what is behind a given name. Windows uses one command for this, and macOS and Linux use another:
 
 | Windows (PowerShell) | macOS and Linux |
 |---|---|
@@ -125,7 +125,7 @@ These are two different files:
 - **Source code** is what you read and change. It is text, like `list.txt` from lesson 0.1.
 - **A program** is what you run. Changing the source code doesn't change the program until the compiler builds it again.
 
-That is what this course will teach you: to write source code in C++ and turn it into a working program. In the next lessons you will prepare the tools you need, the compiler and CLion. At the end of this module you will run your first program in C++.
+That is what this course will teach you: to write source code in C++ and turn it into a working program. In the next lessons you will prepare the tools you need: the compiler and CLion. At the end of this module you will run your first program in C++.
 
 ## 6. Mission: command detective
 
@@ -140,7 +140,7 @@ Investigate four commands you already use: `pwd`, `cd`, `ls` and `whoami`. For e
 
 Finally, answer in two or three sentences: **where did the output of `whoami` come from?**
 
-### Success criterion
+### Success criteria
 
 - The kind in every row matches what the shell showed **on your computer**. Results may differ between systems, and that's fine.
 - The table contains at least one command without a separate file behind it, and at least one that is a separate program.
@@ -162,7 +162,7 @@ So the same word `ls` is a PowerShell command on Windows and a separate program 
 
 </details>
 
-## 7. When things look different
+## 7. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -171,10 +171,10 @@ So the same word `ls` is a PowerShell command on Windows and a separate program 
 | Linux (bash): `whoami is hashed (/usr/bin/whoami)` | Bash has remembered where it found this program. It is still a separate file. | Nothing to do. |
 | Linux: ``ls is aliased to `ls --color=auto'`` | Here `ls` is an alias: the system adds an option that makes `ls` colour its output. Underneath, the program `ls` still runs. | Write “alias” in the mission. |
 | The `type` message is in another language, for example saying the command is built into the shell | Bash translates its messages into the system's language. | What matters is the meaning of the message, not its language. |
-| Windows: `The term '…' is not recognized…`<br>macOS and Linux: `… not found` | The shell doesn't know such a command: it isn't built in, and no program with that name was found. | Check the spelling. The same message can appear after installing a tool if something went wrong. We will come back to this when installing. |
+| Windows: `The term '…' is not recognized…`<br>macOS and Linux: `… not found` | The shell doesn't know such a command: it isn't built in, and no program with that name was found. | Check the spelling. The same message can appear after installing a tool if something went wrong. We will come back to this when you install the tools. |
 | The path to a program differs from the example, for example `/usr/bin/ls` instead of `/bin/ls` | Systems organise their folders differently. | Nothing to do. What matters is that there is a path to a file at all. |
 
-## 8. Explain it
+## 8. Explain
 
 Answer in your own words, ideally out loud or on paper. Only then expand the answer.
 

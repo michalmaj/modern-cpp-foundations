@@ -34,7 +34,7 @@ Working with a program means three different activities:
 
 1. **Editing:** you change the text in a source code file, here `main.cpp`.
 2. **Building:** the tools turn the source code into an **executable file**. CMake prepares a plan, Ninja carries it out, and the `clang++` compiler does the actual conversion.
-3. **Running:** the computer carries out the finished executable file, and the program prints its result.
+3. **Running:** the computer executes the finished executable file, and the program prints its result.
 
 In CLion, a **toolchain** is the set of tools used for building: the compiler, CMake and Ninja. You need to select it, because CLion may pick a different set on its own, for example the MinGW compiler bundled with CLion on Windows, or Apple's compiler on macOS. The program would probably still build, but not with our compiler.
 
@@ -95,7 +95,7 @@ Replace both files, not just `main.cpp`: the wizard's `CMakeLists.txt` may requi
 1. Start CLion. On the Welcome screen, click **Open** (or, in an already open window, choose **File | Open**).
 2. Select the `lesson_05_first_program` folder and confirm.
 3. CLion asks whether you trust the project. Choose **Trust Project**. The project comes from the course, and without trusting it CLion won't build the program.
-4. On the first open, CLion shows the **CMake Profiles** window with a **Debug** profile. Keep the defaults and confirm (**OK**). You will select the toolchain in a moment.
+4. When you open the project for the first time, CLion shows the **CMake Profiles** window with a **Debug** profile. Keep the defaults and confirm (**OK**). You will select the toolchain in a moment.
 
 CLion loads the project. You can follow the progress in the **CMake** window at the bottom of the screen.
 
@@ -186,7 +186,7 @@ Process finished with exit code 0
 
 `exit code 0` means the program finished without an error.
 
-Before running, **Run** builds the program by itself if needed. That's why Run usually “just works”, but underneath it is two activities: building and running. The experiment in the next section separates them.
+Before running, **Run** builds the program by itself if needed. That's why Run usually “just works”, but underneath there are two activities: building and running. The experiment in the next section separates them.
 
 ## 7. Experiment: source code versus the finished program
 
@@ -231,13 +231,13 @@ Make the program print a message of your choice, using plain English letters, an
 2. **Your program works:** the Run window with your message and `Process finished with exit code 0`.
 3. **An explanation:** two or three sentences on why, in step 3 of the experiment, the program started from the terminal printed the old message.
 
-### Success criterion
+### Success criteria
 
 - The CMake window shows `Clang 22` (on Windows with `GNU-like command-line`) and the path to our compiler.
 - The Run window shows your message and `exit code 0`.
 - Your explanation tells the source code (`main.cpp`) apart from the executable file, and says that the executable only changes after building.
 
-## 10. When things look different
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -247,17 +247,17 @@ Make the program print a message of your choice, using plain English letters, an
 | The Run button is greyed out, or there is no `first_program` configuration | The project hasn't loaded. | Check the CMake window: are there errors? Did you choose **Trust Project**? If the project is in Safe Mode, choose **Trust Project** in the message at the top of the window. |
 | Building reports `'iostream' file not found` or `could not open 'kernel32.lib'` | The system tools are missing. | Go back to lesson 0.4, section 4, “System tools”. |
 | `CMake 3.28 or higher is required` | CLion uses an older CMake. | In the toolchain settings, switch back to the built-in CMake (**Bundled**). |
-| Terminal: the program isn't found | Either it hasn't been built yet, or the path is different. | Build the project. Check `pwd` and `ls cmake-build-debug`. On Windows, remember `.\` and `.exe`. |
+| Terminal: the shell can't find the program | Either it hasn't been built yet, or the path is different. | Build the project. Check `pwd` and `ls cmake-build-debug`. On Windows, remember `.\` and `.exe`. |
 | Letters outside plain English look strange in the message | The terminal reads those characters differently. | For now, use plain English letters only. |
 
-## 11. Explain it
+## 11. Explain
 
 **1.** What is the difference between editing, building and running a program?
 
 <details>
 <summary>Answer</summary>
 
-Editing changes the source code. Building turns the source code into an executable file. Running carries out that file.
+Editing changes the source code. Building turns the source code into an executable file. Running executes that file.
 
 </details>
 

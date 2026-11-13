@@ -64,7 +64,7 @@ Day to day, you use your computer with a mouse: you click icons and open windows
 - A **terminal** is a window where you type commands and read the answers.
 - A **shell** is the program running in that window. It reads your command, carries it out and prints the result. On Windows we use the **PowerShell** shell. On macOS the default shell is **zsh**, and on Linux it is usually **bash**.
 
-Why bother, when there is a mouse? Most programmer tools are used through commands, including the tool that turns the text you write into a working program. You will meet it in this course. A terminal also shows you exactly what happened and where on the drive.
+Why bother, when there is a mouse? Most programming tools are used through commands, including the tool that turns the text you write into a working program. You will meet it in this course. A terminal also shows you exactly what happened and where on the drive.
 
 A shell is always “in” some folder, just as a file window always shows one folder at a time. That folder is the **current folder** (programmers often say *current directory*). Commands work there unless you point them somewhere else.
 
@@ -170,7 +170,7 @@ Now, in that window, create a new folder named `first-experiment`:
 - **macOS:** right-click an empty area, choose **New Folder**, type the name and press <kbd>Enter</kbd>.
 - **Linux:** right-click an empty area, choose **New Folder**, type the name and confirm.
 
-The name deliberately has no spaces or special letters: such names are easier to type in a terminal.
+The name deliberately has no spaces or accented letters: such names are easier to type in a terminal.
 
 **Predict before you check:** will `first-experiment` appear in the output of `ls`? How will you tell that it is a folder and not a file?
 
@@ -246,7 +246,7 @@ These are only examples for the home folder `ola`. Your path starts the way your
 > **Windows:** if your path contains a space (for example `C:\Users\Jan Kowalski`), put the whole path in quotes:
 > `ls "C:\Users\Jan Kowalski\first-experiment\list.txt"`
 
-## 9. When things look different
+## 9. When something goes wrong
 
 First, **read the message**. It usually says what the shell didn't understand or couldn't find, and quotes what was typed. Fix one thing and try again. Depending on your system settings, messages may appear in English or in another language.
 
@@ -256,12 +256,12 @@ First, **read the message**. It usually says what the shell didn't understand or
 | Windows: `…the parameter name 'F' is ambiguous…` | The macOS and Linux version of a command was typed on Windows. | On Windows, type just `ls`. |
 | Windows: `Cannot find path '…' because it does not exist.`<br>macOS and Linux: `No such file or directory` | There is nothing at that path. Either the name is different, or you are in a different folder than you think. | Check `pwd` and the spelling of the name. On Windows the message shows the full path the shell looked for, so compare it with the output of `pwd`. |
 | Windows: the prompt doesn't start with `PS`, and `pwd` is an unknown command | “Command Prompt”, a different shell, has opened. | Open Terminal or PowerShell (see section 3). |
-| The file window shows different names than the terminal, for example on a Polish system **Pobrane** instead of `Downloads` or **Użytkownicy** instead of `Users` | Windows and macOS can display translated folder names. The terminal shows the real names. They are the same folders. | Nothing to do. On Linux in a non-English language, the real names may be translated too, and then the terminal shows them that way as well. |
+| The file window shows different names from the terminal, for example on a Polish system **Pobrane** instead of `Downloads` or **Użytkownicy** instead of `Users` | Windows and macOS can display translated folder names. The terminal shows the real names. They are the same folders. | Nothing to do. On Linux in a non-English language, the real names may be translated too, and then the terminal shows them that way as well. |
 | `first-experiment` doesn't appear in the output of `ls` | The folder was created somewhere else or has a different name, for example “New folder”. | Open the window with the command from section 6 and check whether the folder is there and what it is called. |
 | Linux: `xdg-open` doesn't work | Your system doesn't have this command. | Open a file window by hand (for example the **Files** app) and go to your home folder (usually called **Home**). Don't use `open` on Linux, because it is a completely different command. |
 | macOS asks whether Terminal may access files in some folder | The system protects certain folders, such as `Documents`. | This lesson doesn't need it. You can decline. |
 
-## 10. Explain it
+## 10. Explain
 
 Answer in your own words, ideally out loud or on paper. Only then expand the answer.
 
