@@ -13,13 +13,13 @@ This lesson assumes that:
 - you write a function with a `Product&` parameter that changes the record it gets (lesson 9.1);
 - you write functions that return `bool` (lesson 5.3), and guard clauses with an early `return` (lesson 5.4);
 - you join conditions with the `||` operator and know that its right side isn't evaluated when the left side already decides the result (lesson 3.4);
-- you know the "all or nothing" rule from the reservations in lesson 8.2, where `main` checked the free seats before changing the field.
+- you know the "all or nothing" rule from the bookings in lesson 8.2, where `main` checked the free seats before changing the field.
 
 ## The situation
 
 A warehouse issues goods. The product `Tea` has 8 units. Issuing 3 units is possible, but issuing 6 of the remaining 5 isn't: the stock can't fall below zero. The function from lesson 9.1 changed the record every time. Here the change is allowed only when the conditions are met, and the caller must find out whether the operation was accepted.
 
-In lesson 8.2 the condition was checked by `main`. If goods were issued in several places of a program, the rule would stand in each of them, and one forgotten check would spoil the record. Now the rule belongs to the function that changes the record: the function first checks the conditions, changes the record only when that's allowed, and returns a `bool` that tells whether it accepted the operation.
+In lesson 8.2 the condition was checked by `main`. If goods were issued in several places of a program, the rule would appear in each of them, and one forgotten check would spoil the record. Now the rule belongs to the function that changes the record: the function first checks the conditions, changes the record only when that's allowed, and returns a `bool` that tells whether it accepted the operation.
 
 After this lesson you'll:
 
@@ -28,7 +28,7 @@ After this lesson you'll:
 - protect a record with a guard clause: all the checks first, then all the changes;
 - leave the whole record unchanged when an operation is refused;
 - predict the result and the state of a record after a series of accepted and refused operations;
-- choose data that reveal a change made before the check.
+- choose data that reveals a change made before the check.
 
 ## 1. Prepare the project
 
@@ -125,7 +125,7 @@ The function `issue_units` has an **effect**, the changed record, and a **result
 
 **The agreement in this lesson:** `true` means that the operation was accepted and performed. `false` means a refusal, after which **all the fields of the record are unchanged**. This is the agreement of our functions, not the meaning of every `bool` in C++: `is_even` from lesson 5.3 returns `bool` too, but it only answers a question.
 
-We accept only positive amounts, so `true` always means a real change, and an amount of 0 is refused. In lesson 8.2, zero new reservations were accepted as an update without a change. That's a valid agreement too, just a different one.
+We accept only positive amounts, so `true` always means a real change, and an amount of 0 is refused. In lesson 8.2, zero new bookings were accepted as an update without a change. That's a valid agreement too, just a different one.
 
 ## 4. A guard clause protects the record
 
@@ -256,7 +256,7 @@ A program stores one record of a city travel card: its name, the number of credi
 **Rules:**
 
 - At the start, the balance and the number of rides are non-negative. The fare of a ride is a whole number.
-- A payment is **accepted** only when the fare is greater than zero and the balance covers the whole fare, including exactly. An accepted payment lowers the balance by exactly the fare and raises the number of rides by 1.
+- A payment is **accepted** only when the fare is greater than zero and the balance covers the whole fare, even when it's exactly equal to it. An accepted payment lowers the balance by exactly the fare and raises the number of rides by 1.
 - In every other situation the payment is **refused**. A fare of 0 and a negative fare are invalid requests. A refused payment changes no field: the program never takes part of a fare, and the balance is never negative.
 - The card's name never changes.
 
@@ -264,7 +264,7 @@ A program stores one record of a city travel card: its name, the number of credi
 
 - The program defines its own type with three fields: a name (`std::string`), a balance of credits (`int`) and a number of rides (`int`). You choose the names of the type and the fields.
 - There's **one** object of that type in `main`. The program doesn't create new cards for later attempts.
-- The program has one function of your own that tries to pay for one ride: it gets the existing record and the fare (`int`) and returns `bool`, `true` for an accepted payment and `false` for a refused one. It prints nothing and reads nothing from the input. You choose the names of the function and its parameters.
+- The program has one function of its own that tries to pay for one ride: it gets the existing record and the fare (`int`) and returns `bool`, `true` for an accepted payment and `false` for a refused one. It prints nothing and reads nothing from the input. You choose the names of the function and its parameters.
 - `main` calls this function **three times for the same object**: for 7, 15 and 13. After each call it prints the result of the attempt, chosen with an `if` based on the function's result, and the current state of the card.
 - The program prints exactly eight lines, as in the example below. The words `credits` and `rides` always have the same form, whatever the number.
 - The program reads nothing from the input.
@@ -302,13 +302,13 @@ The second attempt is refused, because only 13 credits are left after the first.
 
 **Before you write the program**, prepare a table of cases: the data from the requirements, a fare of 1, a fare equal to the balance, a fare 1 above the balance, a fare of 0, a negative fare, an empty balance, two accepted payments in a row, and a refusal followed by an accepted payment. For each attempt, write down the result, the balance and the number of rides.
 
-**Then** run the program for the data from the requirements and for one variant that starts with two refusals, for example: a balance of 10, 0 rides, fares 0, 11 and 10. Change only the data while doing so. All the cases of the full check list are checked automatically.
+**Then** run the program for the data from the requirements and for one variant that starts with two refusals, for example: a balance of 10, 0 rides, fares 0, 11 and 10. Change only the data while doing so. Every case in the full list of check cases is checked automatically.
 
-### Success criterion
+### Success criteria
 
 - The program builds as C++20 and, for the data from the requirements, prints exactly the eight lines shown above.
 - The function gets the record through `&` and the fare by value, returns `bool`, and prints and reads nothing.
-- All the checks stand before the changes. On a refusal no field changes, and on an accepted payment exactly two change.
+- All the checks come before the changes. On a refusal no field changes, and on an accepted payment exactly two change.
 - All three calls concern the same object, and `main` chooses `accepted` or `refused` based on the function's result.
 - The table of cases was ready before you ran the program.
 - You can explain why the conditions are checked before the fields change.
@@ -354,7 +354,7 @@ The "After each attempt" column gives the result, followed by the balance and th
 
 In every case the card's name after the attempts is the same as at the start. A correct balance alone doesn't prove that the program works: for each attempt, check the result and the number of rides as well.
 
-**Automatic tests and your own tries.** All the cases are checked automatically by a check program. It has the same type and the same function as the reference solution, but it reads the starting state and the fares from the input, and prints the result and the state after each attempt. It's only a checking tool, not part of the mission: in the mission the data are written in the code, and there are exactly three attempts. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
+**Automatic tests and your own runs.** All the cases are checked automatically by the check program. It has the same type and the same function as the reference solution, but it reads the starting state and the fares from the input, and prints the result and the state after each attempt. It's only a checking tool, not part of the mission: in the mission the data is written in the code, and there are exactly three attempts. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
 
 </details>
 
@@ -442,7 +442,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 1. Why can a function that changes a record return `bool`? What is its result, and what is its effect?
 2. What do `true` and `false` mean in this lesson? Does every C++ function that returns `bool` have this meaning?
 3. What must a function do so that `false` means a refusal without any change?
-4. Why is a fare of 0 refused in the mission? How is that different from zero new reservations in lesson 8.2?
+4. Why is a fare of 0 refused in the mission? How is that different from zero new bookings in lesson 8.2?
 5. Why must the balance be checked before it's lowered?
 6. What does "all or nothing" mean for an operation that changes two fields?
 7. A function raises the ride count before checking the fare, but still returns `false` on a refusal. Why is that a bug?
@@ -456,7 +456,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 1. Because changing an object and returning a value are two independent features of a function. The effect is the changed record, which `main` sees after the call. The result is `true` or `false`: whether the operation was accepted.
 2. `true`: the operation was accepted and performed according to the agreement. `false`: the operation was refused, and all the fields of the record are unchanged. This is the agreement of our functions, not a rule of C++. Other functions returning `bool` may only answer a question, like `is_even` from lesson 5.3.
 3. It must check all the conditions before changing any field, and end with `return false;` on a refusal. Then no change has time to happen.
-4. Because the mission's agreement says that a ride for 0 credits is an invalid request: accepting it would add a ride without a payment. In lesson 8.2, zero reservations were accepted as an update without a change. That's a different agreement, also valid. In the mission `true` always means a real change.
+4. Because the mission's agreement says that a ride for 0 credits is an invalid request: accepting it would add a ride without a payment. In lesson 8.2, zero bookings were accepted as an update without a change. That's a different agreement, also valid. In the mission `true` always means a real change.
 5. Because only before the change is it known whether the balance covers the whole fare. After the subtraction it would be too late: the balance could already be negative, and the card in an invalid state.
 6. That an accepted payment changes both fields, the balance and the number of rides, and a refused one changes neither. It never changes just one.
 7. Because the refusal then leaves the record partly changed: the number of rides grows although no fare was taken. `false` reports the refusal correctly, but the caller assumes that nothing changed, while the state of the card is already different.
@@ -470,8 +470,8 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 - A function with a `&` parameter can change a record only when the conditions are met, and return `bool`. The result tells whether the operation was accepted, and the effect is the changed record.
 - In this lesson `true` means an operation that was accepted and performed, and `false` a refusal after which all the fields are unchanged. This is the agreement of our functions, not the meaning of every `bool`.
-- All or nothing: the guard clause with `return false;` stands before all the changes. A change before the check can leave a record partly changed despite `false`.
-- `main` stores the result of each call and prints the report based on it. Later calls on the same object start from the state left by the previous ones, also after a refusal.
+- All or nothing: the guard clause with `return false;` comes before all the changes. A change before the check can leave a record partly changed despite `false`.
+- `main` stores the result of each call and prints the report based on it. Later calls on the same object start from the state left by the previous ones, even after a refusal.
 
 ## What's next
 
@@ -571,7 +571,7 @@ int main() {
 - the fares written directly in the calls and in the texts. Then, though, each fare has to be changed in two places;
 - the call in the condition itself, `if (pay_fare(card, first_fare))`: the function also runs once, but the change of the card is then hidden in the condition. A variable holding the result shows it more clearly.
 
-**The check program** checks all the cases of the check list. The type and the function are the same as above. The difference is in `main`: the program reads the name, the starting state and the fares from the input, calls the function for each fare on the same object, prints the result and the state after each attempt, and the name at the end. It reads the input in the same way as the check program of lesson 9.1: the name with `std::getline`, the numbers with `>>`, and the fares first into a vector of `int`, so that it can check the reading before anything changes. The mission needs neither the input nor a vector.
+**The check program** checks every case in the list of check cases. The type and the function are the same as above. The difference is in `main`: the program reads the name, the starting state and the fares from the input, calls the function for each fare on the same object, prints the result and the state after each attempt, and the name at the end. It reads the input in the same way as the check program of lesson 9.1: the name with `std::getline`, the numbers with `>>`, and the fares first into a vector of `int`, so that it can check the reading before anything changes. The mission needs neither the input nor a vector.
 
 <!-- example: city_pass_check -->
 ```cpp
@@ -637,7 +637,7 @@ int main() {
 }
 ```
 
-Each case is the card's name on the first line, then the balance, the number of rides, the number of attempts and the fares, in the order of the check list, from A to H.
+Each case is the card's name on the first line, then the balance, the number of rides, the number of attempts and the fares, in the order of the list of check cases, from A to H.
 
 <!-- input: city_pass_check -->
 ```text
@@ -812,7 +812,7 @@ After: 13 credits, 3 rides
 ```
 
 - **For an accepted payment the result is correct,** because both changes run anyway: the number of rides grows by 1, and the balance falls by 7. Only their order differs, and the report doesn't show it.
-- **Data that reveal the bug:** any fare that the function should refuse. For example 25, more than the balance. The correct outcome is `refused` and an unchanged state: 20 credits, 2 rides. The buggy program prints:
+- **Data that reveals the bug:** any fare that the function should refuse. For example 25, more than the balance. The correct outcome is `refused` and an unchanged state: 20 credits, 2 rides. The buggy program prints:
 
 <!-- example: fare_order_revealed -->
 ```cpp
@@ -872,7 +872,7 @@ After: 20 credits, 3 rides
 
 - **The field changed too early:** the number of rides. The function raises it before it knows whether the payment is allowed.
 - **Why `false` isn't enough:** the result reports the refusal correctly, but the record is already partly changed. The caller assumes that nothing changed after `false`, while the card has a ride that nobody paid for. Every other refusal works the same way, for example a fare of 0 or a negative fare.
-- **The fix:** move `++card.rides;` after the guard clause, next to `card.credits -= fare;`. Then all the checks stand before all the changes.
+- **The fix:** move `++card.rides;` after the guard clause, next to `card.credits -= fare;`. Then all the checks come before all the changes.
 
 <!-- example: fare_order_fixed -->
 ```cpp

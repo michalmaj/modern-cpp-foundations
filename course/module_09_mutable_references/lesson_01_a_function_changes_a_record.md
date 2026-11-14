@@ -221,7 +221,7 @@ Pierwsza sesja daje 90 + 35, czyli 125 minut, i trzecią sesję. Druga dodaje 20
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: dane z wymagań, początkowe zera i jedna sesja, początkowe zera i dwie sesje, dwie sesje tej samej długości, sesje po 1 i po 120 minut. Przy każdym zapisz wszystkie linijki raportu.
 
-**Potem** uruchom program dla danych z wymagań i dla jednego innego przypadku z tabeli, na przykład początkowych zer. Zmieniaj przy tym tylko wartości w klamrach i długości sesji. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+**Potem** uruchom program dla danych z wymagań i dla jednego innego przypadku z tabeli, na przykład początkowych zer. Zmieniaj przy tym tylko wartości w klamrach i długości sesji. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 ### Kryterium sukcesu
 
@@ -438,7 +438,7 @@ int main() {
 
 **Inne poprawne rozwiązania:** zamiast `++progress.sessions;` można napisać `progress.sessions += 1;`. Pola mogą mieć inne nazwy i inną kolejność, jeśli wartości w `{}` stoją w tej samej kolejności co pola. Długości sesji mogą stać w zmiennych `const int` w `main`.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Typ i funkcja są takie same jak wyżej. Różnica jest w `main`: program odczytuje temat, stan początkowy i długości sesji z wejścia, wywołuje funkcję dla każdej sesji na tym samym obiekcie i po każdej wypisuje stan, a na końcu temat. Temat odczytuje `std::getline`, bo może zawierać spację, a liczby `>>`, dopiero po nim, jak w programie kontrolnym lekcji 8.2. Długości sesji trafiają najpierw do wektora `int` przez `push_back` (lekcja 6.2), żeby program mógł sprawdzić odczyt, zanim cokolwiek zmieni. Misja nie potrzebuje ani wejścia, ani wektora.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Typ i funkcja są takie same jak wyżej. Różnica jest w `main`: program odczytuje temat, stan początkowy i długości sesji z wejścia, wywołuje funkcję dla każdej sesji na tym samym obiekcie i po każdej wypisuje stan, a na końcu temat. Temat odczytuje `std::getline`, bo może zawierać spację, a liczby `>>`, dopiero po nim, jak w programie kontrolnym lekcji 8.2. Długości sesji trafiają najpierw do wektora `int` przez `push_back` (lekcja 6.2), żeby program mógł sprawdzić odczyt, zanim cokolwiek zmieni. Misja nie potrzebuje ani wejścia, ani wektora.
 
 <!-- example: study_log_check -->
 ```cpp
@@ -495,7 +495,7 @@ int main() {
 }
 ```
 
-Każdy przypadek to temat w pierwszej linijce, potem łączna liczba minut, liczba sesji, liczba nowych sesji i ich długości, w kolejności z listy kontrolnej, od A do H.
+Każdy przypadek to temat w pierwszej linijce, potem łączna liczba minut, liczba sesji, liczba nowych sesji i ich długości, w kolejności z listy przypadków kontrolnych, od A do H.
 
 <!-- input: study_log_check -->
 ```text

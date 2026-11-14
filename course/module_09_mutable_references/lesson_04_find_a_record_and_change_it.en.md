@@ -10,7 +10,7 @@
 
 This lesson assumes that:
 
-- you know that an executed `return` ends the whole function call, also when it stands in a loop (lessons 5.4 and 5.7);
+- you know that an executed `return` ends the whole function call, even when it's inside a loop (lessons 5.4 and 5.7);
 - you pass a text to a function through `const std::string&` (lesson 7.3) and compare texts with `==` (lesson 3.4);
 - you know the function `issue_units` from lesson 9.2: it issues goods only when the conditions are met, and returns `bool`;
 - you change the elements of a vector in a function with a `std::vector<Product>&` parameter and the loop `for (Product& product : products)` (lesson 9.3).
@@ -27,7 +27,7 @@ After this lesson you'll:
 - end a function with `return` in the loop once the record is found, and put `return false;` after the loop;
 - change only the record found, using the function for one record;
 - tell finding a record from the success of the operation;
-- choose data that reveal a `return` that comes too early.
+- choose data that reveals a `return` that comes too early.
 
 ## 1. Prepare the project
 
@@ -148,7 +148,7 @@ The two refusals have different causes, and the result is the same: `false`.
 | the current record matches, the operation is refused | the function ends with `false` |
 | no record matches | the loop ends, and then the function returns `false` |
 
-`return` doesn't end one pass of the loop, but **the whole function call**, as in report C of lesson 5.7. Here that's intended: once the record is found, the job is done. That's why it matters **where** `return false;` stands. Compare:
+`return` doesn't end one pass of the loop, but **the whole function call**, as in report C of lesson 5.7. Here that's intended: once the record is found, the job is done. That's why it matters **where** `return false;` goes. Compare:
 
 <!-- fragment -->
 ```cpp
@@ -172,7 +172,7 @@ for (Product& product : products) {
 }
 ```
 
-In the first version, `false` means: all the records were checked, and none matched. In the second, `return false;` stands in the loop's body, so the function ends already after the first record that doesn't match, and doesn't check the further ones.
+In the first version, `false` means: all the records were checked, and none matched. In the second, `return false;` is in the loop's body, so the function already ends after the first record that doesn't match, and doesn't check the further ones.
 
 ## 4. Found, or succeeded?
 
@@ -219,7 +219,7 @@ The requests, in this order: `TAB-03`, `MIC-02`, `BAD-99`, `TAB-03` again, and `
 
 **Rules:**
 
-- The codes are non-empty, unique, and made of plain ASCII text. The numbers of loans are non-negative. The data meet these assumptions, so the program doesn't check them.
+- The codes are non-empty, unique, and made of plain ASCII text. The numbers of loans are non-negative. The data meets these assumptions, so the program doesn't check them.
 - **Issuing an item:** if the item is available, it becomes unavailable, and its number of loans grows by 1. If it's unavailable, no field changes.
 - **A request to issue by code:** if the vector has an item with that code, the program tries to issue it. If there's no such code, nothing changes. Other items never change.
 - An item's code never changes, and the vector always has the same elements in the same order.
@@ -282,9 +282,9 @@ Borrow CAM-01: refused
 
 **Before you write the program**, prepare a table of cases: the data from the requirements, an empty vector, one available item, one unavailable item, a code that isn't there, the code of the first, the middle and the last item, the same request twice, and a refusal followed by a successful issue of another item. For each, write down the results and the records that should change, with their new state. The other records must stay unchanged, and the `After` report shows them all: a correct `bool` result doesn't prove that the right record changed.
 
-**Then** run the program for the data from the requirements and for the empty-vector variant. All the cases of the full check list are checked automatically.
+**Then** run the program for the data from the requirements and for the empty-vector variant. Every case in the full list of check cases is checked automatically.
 
-### Success criterion
+### Success criteria
 
 - The program builds as C++20 and, for both runs, prints exactly the lines shown above.
 - The function for one item checks the availability before changing anything, and changes nothing on a refusal.
@@ -292,7 +292,7 @@ Borrow CAM-01: refused
 - Both functions change the existing data from `main`, not copies of them. They print and read nothing.
 - All the requests concern the same vector, and only the issued items change.
 - The table of cases was ready before you ran the program.
-- You can explain why `return false;` stands after the loop, not in it.
+- You can explain why `return false;` comes after the loop, not inside it.
 
 When the result matches, you can save the project in Git, as in lesson 1.5.
 
@@ -338,7 +338,7 @@ Each item is written as its code, its availability and its number of loans.
 
 In every case, the records outside the "Changed records" column are the same after the requests as before them, and the codes, the number of items and their order don't change.
 
-**Automatic tests and your own tries.** All the cases are checked automatically by a check program. It has the same type and the same functions as the reference solution, but it reads the items and the requests from the input. It's only a checking tool, not part of the mission: in the mission the data are written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
+**Automatic tests and your own runs.** All the cases are checked automatically by the check program. It has the same type and the same functions as the reference solution, but it reads the items and the requests from the input. It's only a checking tool, not part of the mission: in the mission the data is written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
 
 </details>
 
@@ -441,7 +441,7 @@ The results, an example value and the fixed program are in [Example solutions](#
 
 | What you see | What it means | What to do |
 |---|---|---|
-| Only the first item's code works, and later ones are refused | `return false;` stands in the loop and ends the function after the first record that doesn't match (section 7). | Move `return false;` after the loop. |
+| Only the first item's code works, and later ones are refused | `return false;` is inside the loop and ends the function after the first record that doesn't match (section 7). | Move `return false;` after the loop. |
 | One request issues several items | The function calls the operation for every element, or doesn't end after the match. | Call the operation only for the record whose code matches, and return its result at once. |
 | The result is `accepted`, but `After` shows the old state | The loop variable or the vector parameter has no `&`, so a copy changes (lesson 9.3). | A function that changes the elements needs `&` in the parameter and in the loop variable. |
 | The second request for `TAB-03` is accepted | The function for one item doesn't check the availability, or doesn't set it to `false`. | Check the availability before the change, and mark the item as unavailable after issuing it. |
@@ -484,7 +484,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 ## Summary
 
 - A searching function goes through the existing vector through `&`, compares the key field with the text searched for using `==`, and changes only the record found, using the function for one record.
-- `return` in a loop ends the whole function call. After finding the record that's intended, and `return false;` stands after the loop, because "not found" is known only after checking all the records.
+- `return` in a loop ends the whole function call. After finding the record that's intended, and `return false;` comes after the loop, because "not found" is known only after checking all the records.
 - `false` means that the operation didn't happen and the collection is unchanged. It can come from a missing record or from a refusal, and the result alone doesn't tell these causes apart.
 - For an empty vector the loop makes no pass, and the function returns `false`.
 - A correct `bool` result doesn't prove a correct state: all the records have to be checked.
@@ -622,7 +622,7 @@ int main() {
 7. **`borrow_by_code` doesn't repeat it:** it only finds the record and passes it to `borrow_item`. The rule is in one place.
 8. **A match ends the search,** because the codes are unique, so later records can't match, and the job is already done.
 9. **`return` in the loop ends the whole function,** not one pass. That's why `return borrow_item(item);` passes the result straight to `main`.
-10. **`return false;` stands after the loop,** because only after checking all the records is it known that the code isn't there.
+10. **`return false;` comes after the loop,** because only after checking all the records is it known that the code isn't there.
 11. **An unavailable item doesn't change,** because `borrow_item` ends with `return false;` before the changes, as in lesson 9.2.
 12. **A missing code changes nothing,** because without a match `borrow_item` isn't called for any record.
 13. **The second request for `TAB-03` is refused,** because the first one changed the same record in the same vector to unavailable.
@@ -690,7 +690,7 @@ int main() {
 }
 ```
 
-**The check program** checks all the cases of the check list. The type and both functions are the same as above. The difference is in `main`: the program reads the number of items, then each item (its code, `yes` or `no` for the availability, and its number of loans), and then the number of requests. Each item goes to the end of the vector with `push_back`, as in the check programs of lessons 8.4–9.3. The program reads the requests' codes one at a time, only in the loop over the requests, and performs each request at once. It prints `Before`, the result of each request and `After`, like the mission, but without the word `again`. The mission needs neither the input nor `push_back`.
+**The check program** checks every case in the list of check cases. The type and both functions are the same as above. The difference is in `main`: the program reads the number of items, then each item (its code, `yes` or `no` for the availability, and its number of loans), and then the number of requests. Each item goes to the end of the vector with `push_back`, as in the check programs of lessons 8.4–9.3. The program reads the requests' codes one at a time, only in the loop over the requests, and performs each request at once. It prints `Before`, the result of each request and `After`, like the mission, but without the word `again`. The mission needs neither the input nor `push_back`.
 
 <!-- example: school_loans_check -->
 ```cpp
@@ -794,7 +794,7 @@ int main() {
 }
 ```
 
-Each case starts with the number of items. Then each item takes one line: its code, its availability and its number of loans. Next come the number of requests and the requests' codes, one per line. The cases are in the order of the check list, from A to K.
+Each case starts with the number of items. Then each item takes one line: its code, its availability and its number of loans. Next come the number of requests and the requests' codes, one per line. The cases are in the order of the list of check cases, from A to K.
 
 <!-- input: school_loans_check -->
 ```text
@@ -1073,7 +1073,7 @@ TAB-03: available yes, loans 0
 ```
 
 - **For the first item the result is correct,** because the match happens in the first pass, before the wrong `return false;` has a chance to run.
-- **Data that reveal the bug:** the code of an item that isn't first. For example `TAB-03`, the third one, which is available. The correct result is `accepted` and `TAB-03: available no, loans 1`. The buggy program prints:
+- **Data that reveals the bug:** the code of an item that isn't first. For example `TAB-03`, the third one, which is available. The correct result is `accepted` and `TAB-03: available no, loans 1`. The buggy program prints:
 
 <!-- example: borrow_early_revealed -->
 ```cpp
@@ -1166,10 +1166,10 @@ TAB-03: available yes, loans 0
 | 2 | `MIC-02` | not checked | — |
 | 3 | `TAB-03` | not checked | — |
 
-- **The loop makes one pass.** `return false;` stands in the loop's body, after the `if`, so it runs in the first pass in which the code doesn't match. The function ends before it reaches `TAB-03`.
+- **The loop makes one pass.** `return false;` is in the loop's body, after the `if`, so it runs in the first pass in which the code doesn't match. The function ends before it reaches `TAB-03`.
 - **The current record not matching doesn't mean that none matches.** This `return false;` announces "not found" after checking one record of three. The existing, available item is neither found nor issued, and the report says `refused`.
 - **The fix:** move `return false;` after the loop. Then it runs only after all the records have been checked.
-- **Compared with lesson 5.7:** in report C, `return total;` also stood in the loop's body without a condition, and ended the function after the first pass. There it was masked by 0 and 1 rounds, here by a match at the first position and by an empty vector. What's new is that this loop also has an intended `return`, after the match, and that the bug has an effect on the data: the right record exists, but doesn't change.
+- **Compared with lesson 5.7:** in report C, `return total;` was also in the loop's body without a condition, and ended the function after the first pass. There it was masked by 0 and 1 rounds, here by a match at the first position and by an empty vector. What's new is that this loop also has an intended `return`, after the match, and that the bug has an effect on the data: the right record exists, but doesn't change.
 
 <!-- example: borrow_early_fixed -->
 ```cpp

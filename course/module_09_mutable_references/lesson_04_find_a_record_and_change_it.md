@@ -282,7 +282,7 @@ Borrow CAM-01: refused
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: dane z wymagań, pusty wektor, jeden dostępny egzemplarz, jeden niedostępny, kod, którego nie ma, kod pierwszego, środkowego i ostatniego egzemplarza, to samo żądanie dwa razy, odmowa, a po niej udane wydanie innego egzemplarza. Przy każdym zapisz wyniki oraz rekordy, które powinny się zmienić, z ich nowym stanem. Pozostałe rekordy mają zostać bez zmian, a raport `After` pokazuje je wszystkie: poprawny wynik `bool` nie dowodzi, że zmienił się właściwy rekord.
 
-**Potem** uruchom program dla danych z wymagań i dla wariantu z pustym wektorem. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+**Potem** uruchom program dla danych z wymagań i dla wariantu z pustym wektorem. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 ### Kryterium sukcesu
 
@@ -690,7 +690,7 @@ int main() {
 }
 ```
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Typ i obie funkcje są takie same jak wyżej. Różnica jest w `main`: program odczytuje liczbę egzemplarzy, potem każdy egzemplarz (kod, `yes` albo `no` dla dostępności, liczbę wypożyczeń), a potem liczbę żądań. Każdy egzemplarz trafia na koniec wektora przez `push_back`, jak w programach kontrolnych lekcji 8.4–9.3. Kody żądań program odczytuje po jednym, dopiero w pętli żądań, i od razu wykonuje każde żądanie. Wypisuje `Before`, wynik każdego żądania i `After`, jak misja, ale bez słowa `again`. Misja nie potrzebuje ani wejścia, ani `push_back`.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Typ i obie funkcje są takie same jak wyżej. Różnica jest w `main`: program odczytuje liczbę egzemplarzy, potem każdy egzemplarz (kod, `yes` albo `no` dla dostępności, liczbę wypożyczeń), a potem liczbę żądań. Każdy egzemplarz trafia na koniec wektora przez `push_back`, jak w programach kontrolnych lekcji 8.4–9.3. Kody żądań program odczytuje po jednym, dopiero w pętli żądań, i od razu wykonuje każde żądanie. Wypisuje `Before`, wynik każdego żądania i `After`, jak misja, ale bez słowa `again`. Misja nie potrzebuje ani wejścia, ani `push_back`.
 
 <!-- example: school_loans_check -->
 ```cpp
@@ -794,7 +794,7 @@ int main() {
 }
 ```
 
-Każdy przypadek zaczyna się od liczby egzemplarzy. Potem każdy egzemplarz zajmuje jedną linijkę: kod, dostępność i liczba wypożyczeń. Dalej stoi liczba żądań i kody żądań, po jednym w linijce. Przypadki stoją w kolejności z listy kontrolnej, od A do K.
+Każdy przypadek zaczyna się od liczby egzemplarzy. Potem każdy egzemplarz zajmuje jedną linijkę: kod, dostępność i liczba wypożyczeń. Dalej stoi liczba żądań i kody żądań, po jednym w linijce. Przypadki stoją w kolejności z listy przypadków kontrolnych, od A do K.
 
 <!-- input: school_loans_check -->
 ```text
