@@ -12,7 +12,7 @@ This lesson assumes that you:
 
 - define a struct, create its objects in `{}` and read fields with `.` (lesson 8.1), and create a copy of a record with `Book before{current};` (lesson 8.2);
 - write functions that return an `int` or a `bool` result, and leave the printing to `main` (lessons 5.3 and 5.5);
-- know that a function can call another function whose definition stands higher up in the file (lessons 5.5 and 5.6);
+- know that a function can call another function whose definition comes higher up in the file (lessons 5.5 and 5.6);
 - know the `const&` parameter, through which a function reads an existing vector or text without copying it (lessons 6.4 and 7.3).
 
 ## The situation
@@ -28,7 +28,7 @@ After this lesson you will:
 - match the result type to the question: a number is an `int`, and a yes-or-no answer is a `bool`;
 - tell a by-value parameter from a `const&` parameter and from the copy in lesson 8.2;
 - design two cooperating functions that only read a record;
-- choose data that reveal mixed-up fields in a calculation.
+- choose data that reveals mixed-up fields in a calculation.
 
 ## 1. Prepare the project
 
@@ -77,11 +77,11 @@ Rice stock value: 32
 
 </details>
 
-- **`Product` is our type,** here in the role of a parameter type. The struct's definition stands before the function, because the function uses the type `Product` already in its header.
-- **`product` is the parameter's name.** In the first call it means the object `tea`, and in the second `rice`. The function doesn't know the names of the objects in `main`, just as `count_cold_days` in lesson 6.4 didn't know the names of the vectors. The capital letter tells the type `Product` from the parameter `product`.
+- **`Product` is our type,** here in the role of a parameter type. The struct's definition comes before the function, because the function uses the type `Product` already in its header.
+- **`product` is the parameter's name.** In the first call it means the object `tea`, and in the second `rice`. The function doesn't know the names of the objects in `main`, just as `count_cold_days` in lesson 6.4 didn't know the names of the vectors. The capital letter distinguishes the type `Product` from the parameter `product`.
 - **`product.stock` and `product.unit_price`** read two fields of the record passed in. The result depends on two fields of one object.
 - **The function returns an `int`:** the stock value. It prints nothing and doesn't change the record: `main` prints.
-- **The formula stands in the code once,** and works for both products: `3 * 6` gives 18, and `8 * 4` gives 32.
+- **The formula appears in the code once,** and works for both products: `3 * 6` gives 18, and `8 * 4` gives 32.
 
 ## 3. What `const Product&` means
 
@@ -289,7 +289,7 @@ The number of overdue days can't be negative. Contact makes sense only when the 
 | I | `Battery` | 5 | 3 | yes | 2 | no | returned late with another limit |
 | J | `Charger` | 0 | 5 | no | 0 | no | zero days used |
 
-**Automatic tests and your own runs.** Every case is checked automatically by a check program. It has the same type, the same functions and the same report as the reference solution, but it reads the loan's data from the input, one value per line. It's only a checking tool, not part of the mission: in the mission, the data is written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
+**Automatic tests and your own runs.** Every case is checked automatically by the check program. It has the same type, the same functions and the same report as the reference solution, but it reads the loan's data from the input, one value per line. It's only a checking tool, not part of the mission: in the mission, the data is written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
 
 </details>
 
@@ -297,7 +297,7 @@ An example solution is in [Example solutions](#example-solutions).
 
 ## 7. Find the bug: swapped fields in a subtraction
 
-Do this task **after the mission**: the program below contains functions similar to yours. Someone checks the loan of a tripod in it. You may type the program or copy it into `main.cpp`.
+Do this task **after the mission**: the program below contains functions similar to yours. In it, someone checks the loan of a tripod. You may type the program or copy it into `main.cpp`.
 
 <details>
 <summary>The program to check: open it after writing your own program</summary>
@@ -341,7 +341,7 @@ int main() {
 ```
 
 1. **Predict** the standard output for the data in the program: a tripod used for 5 days with 7 allowed, not returned. Then run the program. Does the result look right?
-2. Which line of `overdue_days` returns the result for this data? Which lines of this function doesn't the program run at all then?
+2. Which line of `overdue_days` returns the result for this data? Which lines of this function does the program not run at all then?
 3. Change the values in `{}` so that the bug becomes visible. First write down the correct result for your data, then run the program.
 4. Trace the data flow for your data: which fields go into the subtraction, what number `overdue_days` returns, and what `needs_contact` does with that number.
 5. Point to the line with the bug. Why didn't the compiler report it?
@@ -352,12 +352,12 @@ int main() {
 
 The results, example data and the fixed program are in [Example solutions](#example-solutions).
 
-## 8. When something goes differently
+## 8. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
 | `cannot assign to variable 'product' with const-qualified type 'const Product &'` | The function changes a field through a `const&` parameter. | A function that analyses a record only reads it: calculate the result and return it. |
-| `unknown type name` with your type's name, in a function header | The function stands in the file before the struct's definition. | Put the struct's definition before the functions that use it. |
+| `unknown type name` with your type's name, in a function header | The function comes before the struct's definition in the file. | Put the struct's definition before the functions that use it. |
 | `use of undeclared identifier` in a function | The function uses a name it doesn't know there: a field alone (`stock`), an object from `main` (`tea`), or a function defined further down. | Read fields through the parameter: `product.stock`, not as the hint with `Product::` suggests. Define the called function higher up. |
 | The warning `address of function ... will always evaluate to 'true'`, and the program always prints `yes` | The condition holds only the function's name, without a call. | Call the function with an argument, for example `needs_restock(tea)`. |
 | The program works, although the parameter has no `const&` | A by-value parameter is valid C++, but the function gets a copy of the record (section 5). | In the mission, pass the record by `const&`: the function only reads it. |
@@ -375,10 +375,10 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 4. Can the function change a field through a `const&` parameter? Does the object in `main` become constant because of it?
 5. Is passing a record by value a mistake? Why do we choose `const&` in this lesson?
 6. When should a function's result have the type `int`, and when `bool`? Give examples from this lesson.
-7. Why do the calculations stand in functions, and the printing in `main`?
+7. Why are the calculations in functions, and the printing in `main`?
 8. Does a function that calls another function need a new C++ mechanism? What must be true?
 9. Why are two `int` fields easy to mix up in a calculation, and why won't the compiler notice?
-10. Which data let you tell the correct formula for overdue days from the formula with swapped fields, and which data don't?
+10. Which data lets you tell the correct formula for overdue days apart from the formula with swapped fields, and which data doesn't?
 
 <details>
 <summary>Example answers</summary>
@@ -389,10 +389,10 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 4. No: through `const&` a field can only be read, and an attempt to assign to it doesn't build. The object in `main` doesn't become constant, because the `const` in the parameter concerns only access through that parameter.
 5. No, it's valid C++. A by-value parameter is, however, a copy of the whole record, the text in the `std::string` field included. The functions in this lesson only read records, so a copy isn't needed.
 6. `int` when the answer is a number: the stock value, the number of overdue days. `bool` when the answer is yes or no: whether to restock, whether contact is needed.
-7. Because a function with one task works for different records, the formula stands in one place, and it can be checked separately. `main` creates the data, calls the functions and decides what to print (lesson 5.5).
-8. No. You call it just as from `main`: by its name, with an argument in parentheses. At the place of the call the compiler must already know the called function, so its definition (or a declaration from lesson 5.6) stands higher up in the file.
+7. Because a function with one task works for different records, the formula is in one place, and it can be checked separately. `main` creates the data, calls the functions and decides what to print (lesson 5.5).
+8. No. You call it just as from `main`: by its name, with an argument in parentheses. At the place of the call the compiler must already know the called function, so its definition (or a declaration from lesson 5.6) comes higher up in the file.
 9. Because the compiler checks types, not what the fields mean. `loan.allowed_days - loan.days_used` and `loan.days_used - loan.allowed_days` are two valid expressions of type `int`. In the same way, in lesson 8.1 the swapped values of two `int` fields built without an error.
-10. Data for which the formula really runs: a number of days used greater than the limit. Then the correct formula gives a positive number, and the swapped one a negative number. Data without a delay, a number of days equal to the limit included, end at `return 0;` and give the same result in both versions.
+10. Data for which the formula really runs: a number of days used greater than the limit. Then the correct formula gives a positive number, and the swapped one a negative number. Data without a delay, a number of days equal to the limit included, ends at `return 0;` and gives the same result in both versions.
 
 </details>
 
@@ -473,17 +473,17 @@ int main() {
 3. **`const&`,** because the functions only read the record.
 4. **No copy:** during the call, the parameter `loan` refers to the object in `main`, which is also called `loan`. The call connects them, not the name. The copy from lesson 8.2 isn't needed: nobody changes the record or has to remember its old state.
 5. **`int`,** because `overdue_days` answers the question "how many days?".
-6. **`bool`,** because `needs_contact` answers the question "whether?". `main` chooses the text `yes` or `no`.
+6. **`bool`,** because `needs_contact` answers a yes-or-no question. `main` chooses the text `yes` or `no`.
 7. **Fields and results:** the number of overdue days depends on `days_used` and `allowed_days`, and the need for contact on the delay and on `returned`. The device's name affects no result: it only goes into the report.
 8. **The delay isn't negative:** the subtraction runs only when the number of days exceeds the limit, so the difference is positive. In the other cases the function returns 0. For 0 days and a limit of 0 the values are equal, and 0 doesn't exceed 0, so the delay is 0. Without a delay, contact isn't needed.
 9. **Returned equipment:** `needs_contact` requires a delay **and** no return (`&&` and `!` from lesson 3.4). A late return leaves a positive delay, for example 3 days for `Mixer`, but contact is no longer needed.
 10. **Printing in `main`:** the functions only calculate. `main` creates the record, calls the functions, stores their results and prints the report, without repeating the calculations.
-11. **The record doesn't change:** the object is `const`, and the functions get `const&`, so the compiler wouldn't let a field change. The report prints the fields after both calls, and shows the same values that stand in `{}`.
+11. **The record doesn't change:** the object is `const`, and the functions get `const&`, so the compiler wouldn't let a field change. The report prints the fields after both calls, and shows the same values that are in `{}`.
 12. **No new record:** the function that returns a number calculates it from the fields of the existing record and returns just the number. It creates no `Loan` object and no copy.
 
-**The order of definitions:** `needs_contact` calls `overdue_days`, so `overdue_days` stands higher up in the file, like the helper functions in lesson 5.5. Separate declarations from lesson 5.6 aren't needed.
+**The order of definitions:** `needs_contact` calls `overdue_days`, so `overdue_days` comes higher up in the file, like the helper functions in lesson 5.5. Separate declarations from lesson 5.6 aren't needed.
 
-**Other correct solutions:** the second function can check the conditions itself, `return loan.days_used > loan.allowed_days && !loan.returned;`, because the delay is positive exactly when the number of days exceeds the limit. Calling the first function has the advantage that the delay rule stands in one place. The first function can use `if` and `else`. The fields can have other names and another order, as long as the values in `{}` stand in the same order as the fields.
+**Other correct solutions:** the second function can check the conditions itself, `return loan.days_used > loan.allowed_days && !loan.returned;`, because the delay is positive exactly when the number of days exceeds the limit. Calling the first function has the advantage that the delay rule is in one place. The first function can use `if` and `else`. The fields can have other names and another order, as long as the values in `{}` are in the same order as the fields.
 
 **The check program** checks every case in the list of check cases. The struct and both functions are the same as above, and so is `main` from the creation of the object on, apart from the indentation. There's one difference: the loan's data is read from the input into ordinary variables, and the object `loan` is created from their values. The device names are one word each, so `>>` reads everything. The program reads the information about the return as the text `yes` or `no`, and turns it into a `bool` with a comparison, as in lesson 3.4.
 
@@ -748,7 +748,7 @@ Contact needed: no
 ```
 
 - **The result looks right.** 5 doesn't exceed 7, so the condition in `overdue_days` is false and the function returns 0 from its last line. The subtraction doesn't run at all, so the bug in it has no effect on the result. The correct function would return the same.
-- **Data that reveal the bug:** any data in which the number of days used exceeds the limit. For example the data from the mission: `Camera`, 9 days with 7 allowed, not returned. The correct result is 2 overdue days and contact needed. The program with the bug prints:
+- **Data that reveals the bug:** any data in which the number of days used exceeds the limit. For example the data from the mission: `Camera`, 9 days with 7 allowed, not returned. The correct result is 2 overdue days and contact needed. The program with the bug prints:
 
 <!-- example: loan_overdue_revealed -->
 ```cpp
@@ -852,7 +852,7 @@ Overdue days: 2
 Contact needed: yes
 ```
 
-For the tripod's data, the fixed program prints the same as before the fix, because for that data the function still ends at `return 0;`. That's why data without a delay aren't enough to check the formula: you need data for which the formula really runs.
+For the tripod's data, the fixed program prints the same as before the fix, because for that data the function still ends at `return 0;`. That's why data without a delay isn't enough to check the formula: you need data for which the formula really runs.
 
 </details>
 

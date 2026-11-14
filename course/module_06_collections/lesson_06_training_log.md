@@ -20,7 +20,7 @@ Zajrzenie do części B, do wcześniejszych lekcji albo do notatek nie jest pora
 - **pierwsze:** zaprojektowanie funkcji, napisanie programu z zadania 1, sprawdzenie funkcji osobno i podstawowe przypadki raportu;
 - **drugie:** przypadki graniczne, zadanie 2, porównanie z rozwiązaniem, zadanie 3 i samoocena.
 
-**Możesz używać:** CLiona albo terminala, CMake i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przebiegu i przypadków oraz tymczasowych wydruków testowych. Debugger nie jest potrzebny. Nie musisz kończyć danych z klawiatury: przypadki, w których dane kończą się wcześniej, analizujesz na papierze.
+**Możesz używać:** CLiona albo terminala, CMake'a i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przebiegu i przypadków oraz tymczasowych wydruków testowych. Debugger nie jest potrzebny. Nie musisz kończyć danych z klawiatury: przypadki, w których dane kończą się wcześniej, analizujesz na papierze.
 
 ---
 
@@ -164,7 +164,7 @@ Improved days: 2
    - nowy wektor dla braku wyników, jednego i kilku wyników, wartości dokładnie równej progowi i pustego wejścia;
    - poprawy dla pustego wektora, jednego elementu, dwóch rosnących, dwóch malejących i dwóch równych wartości oraz dłuższego zestawu z poprawą dopiero na końcu.
 4. **Usuń wydruki testowe** i złóż raport.
-5. **Uruchom cały program** dla przykładów A, B i C oraz dla 2–3 innych przypadków z tabeli. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, więc nie musisz wpisywać ich wszystkich. Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze.
+5. **Uruchom cały program** dla przykładów A, B i C oraz dla 2–3 innych przypadków z tabeli. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie, więc nie musisz wpisywać ich wszystkich. Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze.
 
 Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5. Przed commitem sprawdź `git status`: do historii trafiają tylko `main.cpp` i `CMakeLists.txt`.
 
@@ -314,7 +314,7 @@ Przejdź tutaj po wykonaniu części A albo wtedy, gdy świadomie zrezygnujesz z
 ## Jak sprawdzić swoją pracę
 
 - **Standardowe wyjście:** uruchom program dla przykładów i kilku przypadków z tabeli i porównaj linijki programu z oczekiwanymi, znak po znaku. Pomiń wpisane dane widoczne dzięki echu.
-- **Koniec danych:** przypadki, w których dane się kończą, sprawdź tabelą przebiegu i porównaj z pełną listą kontrolną. Każdy z nich jest tam sprawdzony automatycznie.
+- **Koniec danych:** przypadki, w których dane się kończą, sprawdź tabelą przebiegu i porównaj z pełną listą przypadków kontrolnych. Każdy z nich jest tam sprawdzony automatycznie.
 - **Funkcje:** czy każda ma zadanie, które da się opisać jednym zdaniem? Czy któryś algorytm stoi też w `main`?
 - **Dane:** czy wektor powstaje tylko z poprawnych wartości i czy żadna funkcja go nie zmienia?
 

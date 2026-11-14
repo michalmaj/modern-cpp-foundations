@@ -98,7 +98,7 @@ Original after: 3 -2 0 -5 4
 - **Wejście idzie przez `const&`**, jak w lekcji 6.4: funkcja tylko odczytuje `values`.
 - **`selected` to osobny, lokalny wektor**, na początku pusty. Nie ma `const`, bo funkcja dopisuje do niego elementy.
 - Pętla przegląda wartości wejściowe, a `push_back` dodaje do `selected` tylko te, które spełniają warunek. Kolejność wybranych elementów jest więc taka sama jak w wejściu.
-- **`return selected;`** przekazuje gotowy wektor do miejsca wywołania. To zwracanie **przez wartość**, tak jak `return` liczby w lekcji 5.3: wywołujący dostaje własny wynik. Wektor `selected` jako zmienna lokalna kończy się razem z funkcją, ale jego zawartość trafia do `main` jako wynik.
+- **`return selected;`** przekazuje gotowy wektor do miejsca wywołania. To zwracanie **przez wartość**, tak jak `return` liczby w lekcji 5.3: wywołujący dostaje własny wynik. Wektor `selected` jako zmienna lokalna istnieje tylko do końca funkcji, ale jego zawartość trafia do `main` jako wynik.
 
 **`main`:**
 
@@ -288,7 +288,7 @@ Total accepted length: 165
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: dane z wymagań, pusty wektor, brak pasujących długości, same pasujące, obie granice osobno i razem, wartości tuż poza granicami (29 i 61), powtórzone wartości i inna kolejność tych samych długości. Przy każdym zapisz zaakceptowane długości i sumę.
 
-**Potem:** uruchom program dla danych z wymagań, a następnie zmień wartości w nawiasach klamrowych na dwa, trzy przypadki z tabeli, na przykład pusty wynik i obie granice. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, więc nie musisz wpisywać ich wszystkich.
+**Potem:** uruchom program dla danych z wymagań, a następnie zmień wartości w nawiasach klamrowych na dwa, trzy przypadki z tabeli, na przykład pusty wynik i obie granice. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie, więc nie musisz wpisywać ich wszystkich.
 
 ### Kryterium sukcesu
 
@@ -464,7 +464,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 2. Że funkcja zwraca wektor liczb `int`, czyli całą kolekcję.
 3. Parametr odnosi się do istniejącego wektora wywołującego i tylko go czyta, więc nie potrzebuje kopii. Wynik to nowa kolekcja, której wywołujący jeszcze nie ma, więc funkcja przekazuje ją jako wartość.
 4. Funkcja dopisuje do lokalnego wektora elementy, więc musi go zmieniać. `main` dostaje gotowy wynik i, jeśli nie zamierza go zmieniać, oznacza go `const`.
-5. Przekazuje nowy wektor jako wynik do miejsca wywołania. Zmienna lokalna kończy się razem z funkcją, ale wywołujący ma już własny wynik i może go używać.
+5. Przekazuje nowy wektor jako wynik do miejsca wywołania. Zmienna lokalna istnieje tylko do końca funkcji, ale wywołujący ma już własny wynik i może go używać.
 6. Nie. Dostaje go przez `const&`, więc może go tylko czytać. Wybrane wartości trafiają do osobnego wektora.
 7. Tak, gdy żaden element nie spełnia warunku albo wejście jest puste. To poprawny wynik, a `empty()` daje wtedy `true`.
 8. Bo funkcja przegląda wejście od pierwszego do ostatniego elementu, a `push_back` dodaje każdy wybrany element na koniec wyniku.
@@ -552,12 +552,12 @@ int main() {
 4. **Można go zwrócić**, bo `return` przekazuje jego zawartość do miejsca wywołania jako wynik, tak jak liczbę w lekcji 5.3.
 5. **Odebrany wynik `accepted` ma `const`**, bo `main` go już nie zmienia: tylko wypisuje i przekazuje dalej.
 6. **Przepływ:** `lengths` → `keep_in_range` (czyta przez `const&`, buduje i zwraca nowy wektor) → `accepted` w `main` → `total_length` (czyta przez `const&`, zwraca `int`) → raport.
-7. **Oryginał zostaje bez zmian**, bo obie funkcje dostają go albo wynik przez `const&` i tylko czytają.
+7. **Oryginał zostaje bez zmian**, bo każda z funkcji dostaje przez `const&` oryginał albo wynik i tylko go czyta.
 8. **Pusty wynik** znaczy „żaden element nie spełnia warunku”. Program wypisuje wtedy `none`, a `total_length` zwraca 0, bo jej pętla nie wykonuje żadnego przebiegu.
 
 Granice idą jako parametry, więc ta sama funkcja wybierze też inny przedział. To jeden z możliwych podziałów: można na przykład wypisywać długości w osobnej funkcji `void`, jeśli funkcje obliczeniowe niczego nie wypisują.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Funkcje są te same co wyżej, a część `main` od `const std::vector<int> accepted{...}` jest taka sama, poza wcięciem. Długości są odczytywane z wejścia przez `push_back`, jak w lekcji 6.2, więc wektor `lengths` nie ma `const`.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Funkcje są te same co wyżej, a część `main` od `const std::vector<int> accepted{...}` jest taka sama, poza wcięciem. Długości są odczytywane z wejścia przez `push_back`, jak w lekcji 6.2, więc wektor `lengths` nie ma `const`.
 
 <!-- example: piece_lengths_check -->
 ```cpp
@@ -620,7 +620,7 @@ int main() {
 }
 ```
 
-Dane wejściowe to liczba elementów, a po niej ich długości. Przypadki są w kolejności z listy kontrolnej, od A do M.
+Dane wejściowe to liczba elementów, a po niej ich długości. Przypadki są w kolejności z listy przypadków kontrolnych, od A do M.
 
 <!-- input: piece_lengths_check -->
 ```text
@@ -869,7 +869,7 @@ Total accepted length: 30
 - **Przyczyna:** warunek `value < highest` akceptuje długości od 30 do **mniej niż** 60. Wymaganie mówi o przedziale włącznie.
 - **Poprawka:** `value <= highest`. Dolna granica była poprawna: `value >= lowest`.
 
-Poprawiony program to program kontrolny z punktu 6: różni się od programu z błędem tylko tym porównaniem. Dla obu zestawów danych daje wyniki z listy kontrolnej: przypadki L i M. Granice sprawdzają też przypadki C, E, F i G.
+Poprawiony program to program kontrolny z punktu 6: różni się od programu z błędem tylko tym porównaniem. Dla obu zestawów danych daje wyniki z listy przypadków kontrolnych: przypadki L i M. Granice sprawdzają też przypadki C, E, F i G.
 
 </details>
 

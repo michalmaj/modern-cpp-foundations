@@ -40,8 +40,8 @@ After this lesson you will:
 - read the first and last element of a non-empty vector;
 - store sizes and indices in the type `std::size_t`;
 - go through positions with a `for` loop and turn an index into a number shown to the user;
-- safely compare each element with the previous one, also for an empty and a one-element vector;
-- find on your own the largest drop between consecutive measurements.
+- safely compare each element with the previous one, including for an empty and a one-element vector;
+- find the largest drop between consecutive measurements on your own.
 
 ## 1. Prepare the project
 
@@ -81,9 +81,9 @@ Read `readings[1]` as "the element of `readings` at index 1". The number in the 
 | 3 | 2 | 11 |
 | 4 | 3 | 19 |
 
-The vector has four elements, so it has the indices 0, 1, 2 and 3. There's no index 4: no element stands there. In general, a vector with `N` elements has the indices from 0 to `N - 1`.
+The vector has four elements, so it has the indices 0, 1, 2 and 3. There's no index 4: there's no element there. In general, a vector with `N` elements has the indices from 0 to `N - 1`.
 
-An index only says **where** an element is. The element's value is something else: at index 2 stands the value 11.
+An index only says **where** an element is. The element's value is something else: the value at index 2 is 11.
 
 ## 3. Out of range
 
@@ -155,7 +155,7 @@ int main() {
 <details>
 <summary>What the compiler reports, and why</summary>
 
-The program won't build. On line 6, the compiler reports `non-constant-expression cannot be narrowed from type ... to 'int' in initializer list`. In place of the dots stands the name of the type `size()` gives. That name depends on the system, for example `'size_type' (aka 'unsigned long')`. It's the same protection as in lesson 2.5: `{}` doesn't allow a narrowing conversion. The type `int` holds negative numbers but can't hold every possible size, so such a change of type could change the value.
+The program won't build. On line 6, the compiler reports `non-constant-expression cannot be narrowed from type ... to 'int' in initializer list`. The dots stand for the name of the type that `size()` gives. That name depends on the system, for example `'size_type' (aka 'unsigned long')`. It's the same protection as in lesson 2.5: `{}` doesn't allow a narrowing conversion. The type `int` holds negative numbers but can't hold every possible size, so such a change of type could change the value.
 
 </details>
 
@@ -312,7 +312,7 @@ A **drop** is when the earlier day's temperature is higher than the next day's. 
 - For at least two days, if the temperature never dropped, it prints `No temperature drop`.
 - Otherwise it prints `Largest drop: N`, the largest drop, and `From day X to day Y`, the numbers of the days between which it happened. Days are numbered from 1.
 - If the same largest drop happened several times, the program points to the **first** such occurrence.
-- The program works correctly after changing only the values in the braces, also for an empty vector and for one day. It doesn't read elements out of range.
+- The program works correctly after changing only the values in the braces, including for an empty vector and for one day. It doesn't read elements out of range.
 
 In `cpp-workspace`, create a folder `largest_drop`, copy `CMakeLists.txt` from the original `lesson_05_first_program` into it, create an empty `main.cpp` and write the program on your own.
 
@@ -346,7 +346,7 @@ Examples B and C, like all the check cases, are checked automatically in the ful
 1. where to store the largest drop and what value it starts from;
 2. how to recognise that the current change is a drop, and how to compute its size;
 3. what else you need to remember to print the day numbers;
-4. when to replace the remembered result with a new one, also when there's a tie;
+4. when to replace the remembered result with a new one, including when there's a tie;
 5. how to turn positions in the vector into day numbers;
 6. how to recognise that there was no drop;
 7. how to handle an empty vector and one day without reaching for elements that don't exist.
@@ -364,7 +364,7 @@ Examples B and C, like all the check cases, are checked automatically in the ful
 - The program builds as C++20 and, for the data from the requirements, prints exactly the three lines of example A.
 - For 4–6 cases of your choice from the table the result matches the requirements, after changing only the values in the braces.
 - With a tie, the program points to the first occurrence of the largest drop.
-- No index in the program goes out of range, also for an empty vector and for one day.
+- No index in the program goes out of range, including for an empty vector and for one day.
 - The indices are of type `std::size_t`, and the day numbers shown to the user start at 1.
 - The table of cases was made before the program was run.
 - You can explain which index your loop starts at, and why.
@@ -486,7 +486,7 @@ The program prints no questions: type the numbers in order, each on its own line
 
 The program's output before the fix, and the fixed program, are in [Example solutions](#example-solutions).
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -495,7 +495,7 @@ The program's output before the fix, and the fixed program, are in [Example solu
 | A compile error at `std::size_t` | `#include <cstddef>` is missing, or the name has a typo. On some systems the program builds without `<cstddef>` too, but on others it doesn't. | Add `#include <cstddef>`. |
 | The day numbers are one too small, for example `From day 2 to day 3` instead of `From day 3 to day 4` | The program prints indices instead of day numbers. | A day number is the index + 1. Check which index you remember: the current one or the previous one. |
 | The drop comes out negative, or appears where there was a rise | The subtraction is the wrong way round. | A drop is the earlier day's temperature minus the next day's. |
-| With a tie, the program points to the last occurrence | The condition stores a new result also when it equals the remembered one (section 9). | Store only a result that is strictly greater. |
+| With a tie, the program points to the last occurrence | The condition stores a new result even when it equals the remembered one (section 9). | Store only a result that is strictly greater. |
 | The program prints strange numbers or ends unexpectedly | Probably a read out of range: an index equal to `size()`, or `index - 1` for index 0. | Check the loop's condition and initial value. A loop over neighbours starts at index 1. |
 
 ## 11. Explain
@@ -539,12 +539,12 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 - You store sizes and indices in `std::size_t` from `<cstddef>`. You don't store `size()` in an `int`, and you don't compare `int` variables with it.
 - A loop over indices: `for (std::size_t index{0}; index < values.size(); ++index)`. It ends when the index reaches `size()`, without reading an element that doesn't exist.
 - The number shown to the user is `index + 1`. The vector's indexing doesn't change.
-- You go through pairs of neighbours from index 1: `values[index]` and `values[index - 1]`. That loop is safe also for an empty and a one-element vector.
+- You go through pairs of neighbours from index 1: `values[index]` and `values[index - 1]`. That loop is safe even for an empty and a one-element vector.
 - When the position isn't needed, a range-based loop is still a good choice.
 
 ## What's next
 
-So far, a whole program with a vector fitted in `main`. In the next lesson you'll pass a vector to your own function, which only reads it: [Lesson 6.4: A vector as a function parameter: `const&`](lesson_04_a_vector_as_a_parameter.en.md).
+So far, each program with a vector has fitted entirely in `main`. In the next lesson you'll pass a vector to your own function, which only reads it: [Lesson 6.4: A vector as a function parameter: `const&`](lesson_04_a_vector_as_a_parameter.en.md).
 
 ---
 
@@ -860,7 +860,7 @@ From day 3 to day 4
 
 - For data A the result is correct, because the largest drop occurs only once.
 - For `7`, `1`, `7`, `1` the drop of 6 occurs twice: between days 1 and 2, and between days 3 and 4. The requirement asks for the first occurrence, but the program points to days 3–4.
-- **The cause:** the condition `drop >= largest_drop` stores a new result also when the drop is **equal** to the remembered one. So the second drop of 6 replaces the first.
+- **The cause:** the condition `drop >= largest_drop` stores a new result even when the drop is **equal** to the remembered one. So the second drop of 6 replaces the first.
 - **The fix:** change `>=` to `>`. Then only a strictly greater drop replaces the result.
 
 The fixed program is the check program from section 8: it differs from the buggy program only in that one character. For both data sets above it gives the results from the list of check cases: days 3–4 for A, and days 1–2 for `7`, `1`, `7`, `1`.

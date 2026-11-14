@@ -443,7 +443,7 @@ Program, który wypisze tu średnią 5, liczy ją dzieleniem całkowitym.
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków testowych: zero zgłoszeń, jeden czas 0, jeden czas 20, średnią z częścią ułamkową, same zera, czas równy średniej, czasy pominięte przed poprawnym, między poprawnymi i po nich, same pominięte czasy, liczby zgłoszeń -1 i 7, tekst zamiast liczby zgłoszeń i zamiast czasu oraz dane, które kończą się po liczbie zgłoszeń albo po kilku czasach. Przy każdym przypadku zapisz oczekiwane standardowe wyjście.
 
-Uruchom program dla przykładów A, B i C oraz dla 4–6 wybranych przypadków z tabeli. Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, zamiast je uruchamiać, i porównaj z pełną listą kontrolną. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+Uruchom program dla przykładów A, B i C oraz dla 4–6 wybranych przypadków z tabeli. Przypadki z danymi, które kończą się wcześniej, przeanalizuj na papierze, zamiast je uruchamiać, i porównaj z pełną listą przypadków kontrolnych. Wszystkie przypadki z tej listy są sprawdzone automatycznie.
 
 ### Kryterium sukcesu
 

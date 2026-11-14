@@ -37,7 +37,7 @@ The earlier lines don't need to be stored: two counters are enough for the summa
 After this lesson you will:
 
 - read successive lines in a `while` loop controlled by a `bool` flag;
-- tell an empty line from a failed read, also for the last line of the data;
+- tell an empty line from a failed read, including for the last line of the data;
 - combine a reading loop with a text function, and count the processed lines and characters.
 
 ## 1. Prepare the project
@@ -274,11 +274,11 @@ The first line isn't empty, so it was processed and counted, with its three spac
 
 The program gets successive lines with short texts, for example first names and surnames. It numbers each line, prints it and gives its initials, and at the end it prints a summary.
 
-**What data is possible.** The same as in lesson 7.3: the letters `A`–`Z` and `a`–`z` and ordinary spaces, with no digits, tabs, punctuation or Polish letters. There can be several spaces, they can stand at the start and the end of a line, and a line can consist of spaces only. You don't need to check these assumptions.
+**What data is possible.** The same as in lesson 7.3: the letters `A`–`Z` and `a`–`z` and ordinary spaces, with no digits, tabs, punctuation or Polish letters. There can be several spaces, they can appear at the start and the end of a line, and a line can consist of spaces only. You don't need to check these assumptions.
 
 **Rules:**
 
-- The program processes successive lines until it reads an empty line or a read fails. The empty line isn't reported, and the program doesn't read anything that stands after it.
+- The program processes successive lines until it reads an empty line or a read fails. The empty line isn't reported, and the program doesn't read anything that comes after it.
 - For each processed line it prints `Line N: [TEXT]` and `Initials N: [RESULT]`: the number from 1, the original line with all its spaces, and its initials, as in lesson 7.3.
 - At the end it prints `Lines processed: N` and `Characters processed: N`. The number of characters is the sum of `size()` over the processed lines: with spaces, but without end-of-line characters and without the initials.
 - The summary doesn't depend on what ended the reading. The program prints no questions and no message about finishing.
@@ -313,7 +313,7 @@ Lines processed: 2
 Characters processed: 26
 ```
 
-`Ada Lovelace` has 12 characters and `Mary ann SMITH` 14, 26 in total. `Ignored line` stands after the empty line, so the program doesn't read it. When you type the data yourself, the program ends straight after the empty line.
+`Ada Lovelace` has 12 characters and `Mary ann SMITH` 14, 26 in total. `Ignored line` comes after the empty line, so the program doesn't read it. When you type the data yourself, the program ends straight after the empty line.
 
 When the first line is empty, the program processes no line. It's an empty line, not missing data:
 
@@ -357,7 +357,7 @@ Characters processed: 3
 
 **Before you write the program**, prepare a table of cases: an empty first line, one line, data that ends without an empty line, only spaces, spaces at the start and the end, an empty line between two texts, and mixed letter case. For each, write down the initials, and the numbers of lines and characters from the summary.
 
-**Then** run the program for the data from the example, without `Ignored line`, and for one case from your table, preferably a line of only spaces, followed by an empty line. In the terminal, the lines you type mix with the report, because the program answers straight after each line. Trace the cases that end with the end of the data on paper. Every case in the full list of check cases is checked automatically, so you don't need to run the others.
+**Then** run the program for the data from the example, without `Ignored line`, and for one case from your table, preferably a line of only spaces, followed by an empty line. In the terminal, the lines you type mix with the report, because the program answers straight after each line. Trace on paper the cases that end with the end of the data. Every case in the full list of check cases is checked automatically, so you don't need to run the others.
 
 ### Success criteria
 
@@ -381,7 +381,7 @@ Which three decisions must be made after each attempt to read one line: did the 
 <details>
 <summary>Hint 2</summary>
 
-The counter of processed lines should grow only for a line that really went on to be analysed. The empty line that ends the input isn't a record.
+The counter of processed lines should grow only for a line that really went on to be analysed. The empty line that ends the input isn't a data line.
 
 </details>
 
@@ -486,7 +486,7 @@ int main() {
 
 The program's output before the fix, and the fixed program, are in [Example solutions](#example-solutions).
 
-## 9. When something goes differently
+## 9. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -514,8 +514,8 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 <details>
 <summary>Example answers</summary>
 
-1. One read gives one text. When there are many lines, and their number isn't known in advance, the read stands in a loop: one attempt per pass, until an empty line or a failed read ends the work.
-2. It keeps every space, also at the start and the end of the line. It doesn't add the end-of-line character: it takes it from the input, but that character only ends the read. That's why it isn't in `size()`.
+1. One read gives one text. When there are many lines, and their number isn't known in advance, the read goes inside a loop: one attempt per pass, until an empty line or a failed read ends the work.
+2. It keeps every space, including those at the start and the end of the line. It doesn't add the end-of-line character: it takes it from the input, but that character only ends the read. That's why it isn't in `size()`.
 3. Yes. An empty line is a successful read: `fail()` gives `false`, and the text read has no characters, so `line.empty()` gives `true`. In this lesson it's the user's signal that there are no more texts. The text `"   "` isn't empty: it has three characters, spaces, so `size()` gives 3 and `empty()` gives `false`. It's an ordinary data line with empty initials.
 4. Because after a failed read, the contents of `line` can't be relied on. First you need to know whether a line was read at all. Only then do its contents, including whether it's empty, mean anything.
 5. No. The last line can be read successfully even when the data ends straight after it. `fail()` decides whether it's processed, and only the next, failed attempt ends the loop.
@@ -598,17 +598,17 @@ int main() {
 1. **Why a loop.** Every line needs the same steps: reading, a decision and a report. The loop repeats them for successive lines, without separate code for each one.
 2. **The number of lines needn't be known in advance.** The loop doesn't count passes up to any limit. It runs while the flag `reading` is true, and a situation in the data ends it: an empty line or a failed read.
 3. **The read first, then the analysis.** `std::cin.fail()` is checked first, because after a failed read the contents of `line` can't be relied on. Only after a successful read does the program check `line.empty()`.
-4. **An empty line ends the work**, because it's the agreed signal from the user. It isn't a record, so it goes neither into the report nor into the counters.
+4. **An empty line ends the work**, because it's the agreed signal from the user. It isn't a data line, so it goes neither into the report nor into the counters.
 5. **Spaces only don't end the work.** `"   "` has three characters, so `empty()` gives `false`. The line is processed, and the function returns empty initials for it.
 6. **The last line may have no end-of-line character.** When the data ends straight after its last character, `getline` still delivers it, and `fail()` gives `false`. The program processes it, and only the next, failed attempt ends the loop.
-7. **The counter after the checks.** `++lines_processed` stands in the branch for a non-empty, successfully read line. So the number in the report and the count in the summary concern only processed lines.
+7. **The counter after the checks.** `++lines_processed` is in the branch for a non-empty, successfully read line. So the number in the report and the count in the summary concern only processed lines.
 8. **The function for each line separately.** Each line is a separate text with its own initials. `initials_of` gets it through `const std::string&`, without copying, and returns a new text that `main` prints straight away.
 9. **No vector.** A line's report is made straight after the line is read, and the summary needs only two numbers. No decision needs the earlier lines.
-10. **The same summary.** Both causes of ending set the same flag, and the summary stands after the loop, so it doesn't depend on what ended it.
+10. **The same summary.** Both causes of ending set the same flag, and the summary comes after the loop, so it doesn't depend on what ended it.
 11. **Only `getline`.** After a read with `>>`, an end-of-line character would stay in the input. `getline` would read it as an empty line, and the program would end before processing any text.
 12. **What we leave for later:** telling the causes of a failed read apart, combining `>>` with `getline`, checking whether the lines meet the mission's assumptions, for example whether they contain digits, and reading data from files.
 
-**Other correct layouts.** Both branches that end the loop can be joined in one condition: `if (std::cin.fail() || line.empty())`. Short-circuit evaluation from lesson 3.4 then checks `line.empty()` only after a successful read. What matters is that the processing and the counters stand only in the branch for a non-empty, successfully read line. In other programs you may also meet the read written straight into the loop's condition: `while (std::getline(std::cin, line))`. It's correct C++, but understanding it needs knowledge about streams that we don't have yet, so in this course we stay with the flag and `std::cin.fail()`.
+**Other correct layouts.** Both branches that end the loop can be joined in one condition: `if (std::cin.fail() || line.empty())`. Short-circuit evaluation from lesson 3.4 then checks `line.empty()` only after a successful read. What matters is that the processing and the counters are only in the branch for a non-empty, successfully read line. In other programs you may also meet the read written straight into the loop's condition: `while (std::getline(std::cin, line))`. It's correct C++, but understanding it needs knowledge about streams that we don't have yet, so in this course we stay with the flag and `std::cin.fail()`.
 
 **The results of the remaining check cases.** Cases A, B and E are in the mission's text. In cases D and K the data ends after the last line given.
 
@@ -839,7 +839,7 @@ Lines processed: 1
 Characters processed: 0
 ```
 
-- **The cause:** the program increases the counter after every successful read, before it checks whether the line is empty. The empty line at the end is a successful read, so it gets counted too, although it isn't a record. The `Line N` reports are correct, because the program prints nothing for an empty line. Only the summary is wrong. Setting the flag to `false` ends the loop, but doesn't undo the `++lines_processed;` that has already run.
+- **The cause:** the program increases the counter after every successful read, before it checks whether the line is empty. The empty line at the end is a successful read, so it gets counted too, although it isn't a data line. The `Line N` reports are correct, because the program prints nothing for an empty line. Only the summary is wrong. Setting the flag to `false` ends the loop, but doesn't undo the `++lines_processed;` that has already run.
 - **Why set (a) doesn't reveal the bug:** the data ends without an empty line. The last attempt fails, and the counter doesn't grow after a failed read, so the summary is correct.
 - **The fix:** move `++lines_processed;` into the branch for a non-empty line, before `characters_processed += line.size();`. The `else` branch then holds just an `if`, which can be written as `else if`.
 

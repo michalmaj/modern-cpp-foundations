@@ -8,19 +8,19 @@
 
 ## How this test works
 
-This lesson introduces nothing new. You check whether you can design on your own a program that **reads successive texts, transforms them and checks their format**, then builds a report from the results of cooperating functions. You also analyse two short problems in code and explain your decisions.
+This lesson introduces nothing new. You check whether you can design a program on your own that **reads successive texts, transforms them and checks their format**, then builds a report from the results of cooperating functions. You also analyse two short problems in code and explain your decisions.
 
 The lesson has two parts:
 
 - **Part A: the test.** Requirements, examples, tasks, questions and criteria. No hints and no solution code. Everything you need is from Modules 1–7.
 - **Part B: checking and discussion.** Hints, the full list of check cases, the reference solution, fixes, answers and self-assessment. Go there after doing Part A, or when you consciously decide to stop trying on your own.
 
-Looking at Part B, at earlier lessons or at your notes isn't a failure. What matters is that you **honestly note what you did on your own and what with help**. A suggested split into two sessions:
+Looking at Part B, at earlier lessons or at your notes isn't a failure. What matters is that you **honestly note what you did on your own and what you did with help**. A suggested split into two sessions:
 
 - **first:** analysing the requirements, designing both functions, writing them and checking them with test printouts, connecting them to the reading loop;
 - **second:** the boundary cases, the full report, the empty line and the line of spaces, task 2, comparing with the solution, task 3 and the self-assessment.
 
-**You may use:** CLion or the terminal, CMake and Ninja, as before; a `CMakeLists.txt` copied from the original `lesson_05_first_program`; case and trace tables, and temporary test printouts. You won't need the debugger. You don't need to end the data from the keyboard: you analyse the cases where the data ends without an empty line on paper.
+**You may use:** CLion or the terminal, CMake and Ninja, as before; a `CMakeLists.txt` copied from the original `lesson_05_first_program`; case and trace tables, and temporary test printouts. You won't need the debugger. You don't need to end the data from the keyboard: you analyse on paper the cases where the data ends without an empty line.
 
 ---
 
@@ -48,7 +48,7 @@ Once the spaces are removed, a valid code has **exactly seven characters**: two 
 
 - Valid codes include `AB-1234`, `AA-0000`, `ZZ-9999` and `BC-0102`. The letters may repeat, and the digits may start with a zero.
 - **Letter case matters.** The program doesn't turn lower-case letters into capitals, so `Ab-1234` and `ab-1234` are invalid.
-- The four digits are four characters, not a number: you only check that each of them is a digit and stands in its place.
+- The four digits are four characters, not a number: you only check that each of them is a digit and is in its place.
 
 ### Input data
 
@@ -183,7 +183,7 @@ Invalid codes: 0
    - removing spaces: spaces in different places, spaces only and an empty text, with the result in square brackets so that the spaces show;
    - checking the format: a few valid codes, codes with a mistake at different positions, too short ones, too long ones and an empty text. `bool` values print as `1` or `0`.
 4. **Remove the test printouts** and connect the functions to the reading loop.
-5. **Run the whole program** for examples A, B and C and for 1–2 other cases from your table. End each line with **Enter**, and type an empty line as **Enter** alone. In the terminal the lines you type mix with the report, because the program answers straight after each line. Analyse the cases where the data ends without an empty line on paper. Every case in the full list of check cases is checked automatically.
+5. **Run the whole program** for examples A, B and C and for 1–2 other cases from your table. End each line with **Enter**, and type an empty line as **Enter** alone. In the terminal the lines you type mix with the report, because the program answers straight after each line. Analyse on paper the cases where the data ends without an empty line. Every case in the full list of check cases is checked automatically.
 
 When the result matches, you can save the project in Git, as in lesson 1.5. Before you commit, check `git status`: only `main.cpp` and `CMakeLists.txt` go into the history.
 
@@ -292,7 +292,7 @@ You pass the test when you meet **all** the criteria. You may use Part B while d
 - `parcel_codes/main.cpp` was written from an empty file, in valid C++20. The program builds without errors.
 - The program reads the lines with `std::getline` in a `while` loop with a `bool` flag, checks the read's success before `empty()`, and ends the reading after the first empty line or after a failed read.
 - There are two functions with the tasks from the requirements. Both get the text through `const std::string&`, read and print nothing, and don't change the text they get. The result type of each fits its task.
-- The function removing spaces builds a new text with `push_back` and removes every space, also from the middle of the code. The function checking the format reads no character outside the text, also for an empty text and for codes shorter than seven characters.
+- The function removing spaces builds a new text with `push_back` and removes every space, including from the middle of the code. The function checking the format reads no character outside the text, even for an empty text and for codes shorter than seven characters.
 - A line of spaces only is counted as an invalid code, and the original line decides whether the reading ends. The program doesn't store earlier lines.
 - The standard output for examples A, B and C and for the cases you typed matches the requirements. The cases that end without an empty line match your analysis on paper and the full list of check cases.
 - The functions were checked on their own with test printouts, and the final program contains no such printouts.
@@ -310,7 +310,7 @@ Come here after doing Part A, or when you consciously decide to stop trying on y
 ## How to check your work
 
 - **Standard output:** compare the program's lines with the expected ones, character by character. Ignore the lines you type: you see them in the terminal, but they aren't part of the program's standard output.
-- **End of the data:** check the cases that end without an empty line with a trace table, and compare them with the full list of check cases. Each of them is checked automatically there.
+- **End of the data:** use a trace table to check the cases that end without an empty line, and compare them with the full list of check cases. Each of them is checked automatically there.
 - **Functions:** does each have a task you can describe in one sentence? Does some algorithm also appear in `main`?
 - **Order:** does the original line decide whether the reading ends? Does the function checking the format know the code's length before it reads the first character?
 
@@ -685,7 +685,7 @@ int main() {
 7. **A `bool` result.** The question "does the code have the required format?" has two answers: yes or no. The function only answers, and `main` decides what to print and which counter to increase. That's why you can check the function with test printouts, without the whole program, as in lesson 5.5.
 8. **The length first.** The guard clause `if (code.size() != 7)` from lesson 5.4 ends the function before it reads any character. After it, every index from 0 to 6 is known to exist. Codes that are too short, a hyphen alone and an empty text get `false` without any character being read.
 9. **The positions.** At indices 0 and 1 the function checks the range from `'A'` to `'Z'`, as in lesson 7.1. At index 2 it compares the character with `'-'`. The loop from index 3 to the last one sets `all_digits` to `false` for every character outside the range from `'0'` to `'9'`. The function returns `true` only when all four conditions hold.
-10. **Lower-case letters.** Capital and lower-case letters are two separate ASCII ranges (lesson 7.1). `'b'` doesn't fit into the range from `'A'` to `'Z'`, so `Ab-1234` is invalid. The program changes nothing: it checks each character exactly as it stands in the code.
+10. **Lower-case letters.** Capital and lower-case letters are two separate ASCII ranges (lesson 7.1). `'b'` doesn't fit into the range from `'A'` to `'Z'`, so `Ab-1234` is invalid. The program changes nothing: it checks each character exactly as it appears in the code.
 11. **Three counters.** `codes_processed` grows for every checked code and gives its number. Exactly one of the other two counters grows with it: in the `if` branch or in the `else` branch. That's why `codes_processed` always equals `valid_codes + invalid_codes`.
 12. **An empty code is invalid.** Removing the spaces from `"   "` leaves an empty text. Its `size()` gives 0, so the guard clause returns `false` before the function reads `code[0]`. An empty text is a correct result of removing spaces (lesson 7.3), but not a valid code.
 13. **The last line at the end of the data.** When the data ends right after a line's last character, with no end-of-line character, `getline` still delivers that line, and `fail()` gives `false`. The program checks it, and only the next, failed attempt ends the loop (lesson 7.4).
@@ -799,7 +799,7 @@ bool is_valid_code(const std::string& code) {
 ## Answers to task 3
 
 <details>
-<summary>Sample answers</summary>
+<summary>Example answers</summary>
 
 1. Because only the original tells an empty line from a line of spaces: the empty one has length zero, and `"   "` has three characters. Once the spaces are removed, both give an empty text. If the program checked for the end only on the text without spaces, the line of spaces would end the reading, and the next codes wouldn't be checked. Such a line is a submitted code: someone typed something in it. Once its spaces are removed, no character is left, and an empty text doesn't have seven characters, so it's an invalid code.
 2. Because it's a different text from the line: it has other characters and another length. The function builds it from scratch and returns it, and the line stays as it was typed, because the function gets it through `const&` and can only read it.

@@ -340,7 +340,7 @@ Stan 3 razy cena 6 daje wartość zapasu 18. Do minimum 8 brakuje 5 sztuk.
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: stan mniejszy od minimum, równy minimum i większy od minimum, zerowy stan i zerowa cena. Przy każdym zapisz oczekiwaną wartość zapasu i liczbę sztuk do dodania.
 
-**Potem** uruchom program dla danych z wymagań i dla dwóch innych przypadków z tabeli, na przykład stanu równego minimum i zerowego stanu. Zmieniaj przy tym tylko wartości w klamrach obiektu. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+**Potem** uruchom program dla danych z wymagań i dla dwóch innych przypadków z tabeli, na przykład stanu równego minimum i zerowego stanu. Zmieniaj przy tym tylko wartości w klamrach obiektu. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 ### Kryterium sukcesu
 
@@ -499,7 +499,7 @@ int main() {
 
 **Liczba sztuk do dodania** startuje od 0 i zmienia się tylko wtedy, gdy stan jest mniejszy od minimum. Dlatego dla stanu równego minimum albo większego wynik to 0, a różnica nigdy nie jest ujemna. Ten sam warunek można też zapisać jako `if` i `else`, z osobną linijką `To add` w każdej gałęzi. Pola mogą mieć inne nazwy i inną kolejność, jeśli wartości w `{}` stoją w tej samej kolejności co pola.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Struktura i raport są takie same jak wyżej, poza wcięciem. Różnica jest jedna: dane produktu są odczytywane z wejścia do czterech zwykłych zmiennych, a obiekt powstaje z ich wartości.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Struktura i raport są takie same jak wyżej, poza wcięciem. Różnica jest jedna: dane produktu są odczytywane z wejścia do czterech zwykłych zmiennych, a obiekt powstaje z ich wartości.
 
 <!-- example: product_card_check -->
 ```cpp
@@ -545,7 +545,7 @@ int main() {
 }
 ```
 
-Każdy przypadek to cztery linijki wejścia: nazwa, stan, minimum i cena, w kolejności z listy kontrolnej, od A do F.
+Każdy przypadek to cztery linijki wejścia: nazwa, stan, minimum i cena, w kolejności z listy przypadków kontrolnych, od A do F.
 
 <!-- input: product_card_check -->
 ```text

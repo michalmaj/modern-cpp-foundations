@@ -28,7 +28,7 @@ After this lesson you will:
 - receive the returned record in `main` and read its fields;
 - combine a sum, a count and a yes-or-no answer in one result;
 - keep, in a loop, information about what happened in all the records seen so far;
-- choose data that reveal that such information gets lost.
+- choose data that reveals that such information gets lost.
 
 ## 1. Prepare the project
 
@@ -143,7 +143,7 @@ You know the same model from lessons 6.5 and 7.3, where a function returned a ne
 3. it returns the result by value;
 4. the calling code receives it in its own variable.
 
-The variable `result` ends together with the function, but its value reaches `main` as the result. **It isn't a reference to the function's variable:** `main` has its own record. Modern C++ returns such objects efficiently, and you'll learn how exactly later. For this lesson the model is enough.
+The variable `result` exists only until the function ends, but its value reaches `main` as the result. **It isn't a reference to the function's variable:** `main` has its own record. Modern C++ returns such objects efficiently, and you'll learn exactly how later. For this lesson the model is enough.
 
 **Predict:** this time the result was received without `const`, and then one of its fields was changed.
 
@@ -277,7 +277,7 @@ The sum grows by the usage, the count grows only when a limit is exceeded, and t
 | L | `North` 6/4, `South` 6/4, `West` 6/4 | 3 | 18 | 3 | no | the same numbers in several records |
 | M | the data from the requirements in reverse order | 4 | 28 | 2 | yes | another order, the same result |
 
-**Automatic tests and your own runs.** Every case is checked automatically by a check program. It has the same types, the same function and the same report as the reference solution, but it reads the meters from the input. It's only a checking tool, not part of the mission: in the mission, the vector is written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
+**Automatic tests and your own runs.** Every case is checked automatically by the check program. It has the same types, the same function and the same report as the reference solution, but it reads the meters from the input. It's only a checking tool, not part of the mission: in the mission, the vector is written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
 
 </details>
 
@@ -361,18 +361,18 @@ int main() {
 
 The results, example data and the fixed program are in [Example solutions](#example-solutions).
 
-## 8. When something goes differently
+## 8. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
-| The warning `non-void function does not return a value` | The function doesn't return a result: the `return` is missing. The result of such a call isn't defined (lesson 5.3). | At the end of the function, return the whole record: `return result;`. |
+| The warning `non-void function does not return a value` | The function doesn't return a result: the `return` is missing. Such a program has undefined behaviour (lesson 5.3). | At the end of the function, return the whole record: `return result;`. |
 | `no viable conversion from 'ProductReport' to ...` | The function's result, a whole record, goes into a variable of another type, for example `int`. | Receive the whole record, and read the number from its field, for example `report.stock_value`. |
 | `invalid operands to binary expression` at `std::cout << report` | `std::cout` won't print a whole record at once. | Print the fields one by one, for example `report.stock_value`. |
 | `cannot assign to variable ... with const-qualified type` | The function changes the input record through `const&`, or `main` changes a result received as `const`. | Change only the local result in the function. Only read the input data. |
 | The results are random numbers | The local result was created without starting values, for example `ProductReport result;`. Reading such fields is undefined behaviour, and the compiler doesn't have to warn about it. | Give the starting values of all the result's fields in `{}`. |
 | `Has unverified` depends only on the last meter | The field is overwritten in each pass of the loop (section 7). | Set it to `true` when you meet an unverified reading, and never set it back. |
 | `Above limit` also counts usage equal to the limit | The condition uses `>=` instead of `>`. | Above the limit means usage **greater** than the limit. |
-| `Total usage` is too small | The addition of the usage stands inside a condition, so some meters, for example unverified ones, don't get into the sum. | Add the usage of every meter, outside any condition. |
+| `Total usage` is too small | The addition of the usage is inside a condition, so some meters, for example unverified ones, don't get into the sum. | Add the usage of every meter, outside any condition. |
 
 ## 9. Explain
 
@@ -395,7 +395,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 2. The input struct describes data, for example one meter. The result struct describes the answers of the analysis. The result doesn't have to repeat the input's fields: it contains only what the analysis calculates.
 3. Yes. The function's result type is then the struct's name, and `return result;` hands over the whole object, with all its fields.
 4. Because the function changes the result's fields during the calculation. The `const` at the parameter concerns only the input data, and the local result is a separate object of the function.
-5. No. The result is returned by value: `result` ends together with the function, and the calling code gets its own record, like the vector in lesson 6.5.
+5. No. The result is returned by value: `result` exists only until the function ends, and the calling code gets its own record, like the vector in lesson 6.5.
 6. Because each field answers a different question and has a type that fits the answer: the total usage is an `int`, a number of meters is a `std::size_t`, and a yes-or-no answer is a `bool`.
 7. The starting values: zero, zero and `false`. The loop makes no pass, so the function returns the result as it created it at the start. It's a valid record, with no special code.
 8. Start with `false` and set `true` when the case you're looking for appears, but never copy into the field an answer that concerns only the current record. A `true`, once set, stays until the end of the loop.
@@ -494,13 +494,13 @@ int main() {
 7. **Equality isn't exceeding the limit,** because the rule speaks of usage greater than the limit. `Hall` has 7 with a limit of 7, so it doesn't count.
 8. **The flag doesn't go back to `false`:** the program sets it to `true` inside `if (!meter.verified)`, and apart from the starting value it stores `false` nowhere. A later verified meter no longer changes this information.
 9. **An empty vector gives a valid record:** the loop makes no pass, so the function returns the starting values.
-10. **By value,** because `main` is to get its own, finished result, like the new vector in lesson 6.5. The local `result` ends with the function, so a reference to it wouldn't make sense.
+10. **By value,** because `main` is to get its own, finished result, like the new vector in lesson 6.5. The local `result` exists only until the function ends, so a reference to it wouldn't make sense.
 11. **The input doesn't change:** the vector is `const`, and the function gets it and goes through it by `const&`. The function changes only its own local result.
 12. **Printing in `main`,** because the function is only to calculate. `main` can print the same result differently, or use it further.
 
 **The order of the meters doesn't change the result:** the sum and the number of limits exceeded don't depend on the order, and the flag answers whether an unverified reading appeared anywhere. Cases I, J, K and M check this.
 
-**Other correct solutions:** instead of the `if`, you can write `result.has_unverified = result.has_unverified || !meter.verified;`, which gives the same. The types and fields can have other names and another order, as long as the values in the braces stand in the same order as the fields.
+**Other correct solutions:** instead of the `if`, you can write `result.has_unverified = result.has_unverified || !meter.verified;`, which gives the same. The types and fields can have other names and another order, as long as the values in the braces are in the same order as the fields.
 
 **The check program** checks every case in the list of check cases. The types and the function are the same as above, and so is the report from receiving the result on, apart from the indentation. There's one difference: the vector isn't written in the code, it's built from the input. The program reads the number of meters, then each meter: the name, the usage, the limit, and `yes` or `no` for the verification, turned into a `bool` with a comparison, as in lesson 3.4. Each meter read goes to the end of the vector with `push_back`, as in the check program of lesson 8.4. The mission needs neither input nor `push_back`.
 
@@ -797,8 +797,8 @@ Above limit: 1
 Has unverified: yes
 ```
 
-- **All three results look right.** The sum 4 + 9 + 2 is 15, only `Attic` is above its limit, and `Porch` has an unverified reading. But `Porch` stands at the end of the list, and the function copies into the flag the answer about the current meter. So the final flag describes only the last meter, and here that happens to be the correct answer.
-- **Data that reveal the bug:** an unverified reading followed by at least one verified meter. For example, adding `{"Shed", 1, 4, true}` at the end. The correct results are 4, 16, 1 and `yes`. The program with the bug prints:
+- **All three results look right.** The sum 4 + 9 + 2 is 15, only `Attic` is above its limit, and `Porch` has an unverified reading. But `Porch` is at the end of the list, and the function copies into the flag the answer about the current meter. So the final flag describes only the last meter, and here that happens to be the correct answer.
+- **Data that reveals the bug:** an unverified reading followed by at least one verified meter. For example, adding `{"Shed", 1, 4, true}` at the end. The correct results are 4, 16, 1 and `yes`. The program with the bug prints:
 
 <!-- example: unverified_flag_revealed -->
 ```cpp
@@ -944,7 +944,7 @@ Above limit: 1
 Has unverified: yes
 ```
 
-For an empty vector the fixed program prints the same as the check program in case B: the loop makes no pass, so the starting values stay. When all readings are verified, both versions return `false`, because the flag never gets `true`. So neither an empty vector, nor such a vector, nor a list with the unverified reading at the end reveals the bug: you need an unverified reading followed by a verified one. The data from the mission also end with an unverified reading (`Lab`), so the same bug in your program would go unnoticed for them. Cases I, K and M from the list of check cases reveal it.
+For an empty vector the fixed program prints the same as the check program in case B: the loop makes no pass, so the starting values stay. When all readings are verified, both versions return `false`, because the flag never gets `true`. So neither an empty vector, nor such a vector, nor a list with the unverified reading at the end reveals the bug: you need an unverified reading followed by a verified one. The data from the mission also ends with an unverified reading (`Lab`), so the same bug in your program would go unnoticed for it. Cases I, K and M from the list of check cases reveal it.
 
 </details>
 

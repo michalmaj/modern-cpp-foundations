@@ -30,7 +30,7 @@ for (const int number : numbers) {
 
 Text is made of successive elements too: `"ABC"` is A, then B, then C. But a program that knows only the whole text can't answer questions about its inside: how many digits are in it? how many letters? are there spaces?
 
-**Can a text be gone through like the elements of a vector?** Yes. A `std::string` also lets you go through its successive elements, and each of them is one **character**, a value of a new type, `char`. `std::string` is a different type from `std::vector`, but the way of going through it is similar.
+**Can you go through a text like the elements of a vector?** Yes. A `std::string` also lets you go through its successive elements, and each of them is one **character**, a value of a new type, `char`. `std::string` is a different type from `std::vector`, but the way of going through it is similar.
 
 After this lesson you will:
 
@@ -226,7 +226,7 @@ Done
 
 </details>
 
-Empty `{}` create a text with no elements. `size()` gives 0, `empty()` gives `true`, and the range-based loop makes no passes, as for an empty vector in lesson 6.1. An empty text is a valid case that has to be taken into account.
+Empty braces `{}` create a text with no elements. `size()` gives 0, `empty()` gives `true`, and the range-based loop makes no passes, as for an empty vector in lesson 6.1. An empty text is a valid case that has to be taken into account.
 
 ## 7. The boundary: ASCII text
 
@@ -269,7 +269,7 @@ Digits: 2
 
 - The loop goes through seven elements: `R`, `o`, `o`, `m`, a space, `1` and `2`.
 - The counter grows only for `'1'` and `'2'`.
-- We compare **characters**: `'0'` and `'9'` stand in apostrophes. Without apostrophes, `0` and `9` would be `int` numbers, which is something else.
+- We compare **characters**: `'0'` and `'9'` are written in apostrophes. Without apostrophes, `0` and `9` would be `int` numbers, which is something else.
 
 In ASCII text you recognise a capital letter of the English alphabet, from `'A'` to `'Z'`, and a lower-case one, from `'a'` to `'z'`, the same way: the letters in each of those ranges also follow one another in order. But capital and lower-case letters are **two separate ranges**. Every character that is neither a letter nor a digit is an "other" character: a space, a hyphen, an exclamation mark and every other punctuation mark.
 
@@ -307,7 +307,7 @@ Other: 5
 
 There are 8 letters: three in `Box` and five in `ready`. There's one digit, `7`. There are 5 other characters: three spaces, a hyphen and an exclamation mark.
 
-**This isn't the program from section 8 with different messages.** There, there was one counter and one condition. You have to decide on your own:
+**This isn't the program from section 8 with different messages.** That had one counter and one condition. You have to decide on your own:
 
 1. how to recognise a letter, given that capital and lower-case letters are two ranges;
 2. in what order to check the categories, so that no character increases two counters;
@@ -365,12 +365,12 @@ Remember lower-case and capital letters, and that each character should increase
 | F | ` -- ` (a space, two hyphens, a space) | 4 | 0 | 0 | 4 | spaces and punctuation |
 | G | `A0!` | 3 | 1 | 1 | 1 | one of each category |
 | H | `A1 B2` | 5 | 2 | 2 | 1 | mixed categories with a space |
-| I | `z_9` | 3 | 1 | 1 | 1 | `_` is an other character |
+| I | `z_9` | 3 | 1 | 1 | 1 | `_` counts as other |
 | J | `AbC` | 3 | 3 | 0 | 0 | capital and lower-case letters together (section 10) |
 
 In every row, the sum of letters, digits and others equals the number of all the elements.
 
-**Automatic tests and your own runs.** Every case is checked automatically by a check program. It has the same report as the reference solution, but it reads the message from the input as one line, with `std::getline` from lesson 2.7. An empty text is an empty line in it. It's only a checking tool, not part of the mission: in the mission the message is written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
+**Automatic tests and your own runs.** Every case is checked automatically by the check program. It has the same report as the reference solution, but it reads the message from the input as one line, with `std::getline` from lesson 2.7. An empty text is an empty line in it. It's only a checking tool, not part of the mission: in the mission the message is written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
 
 </details>
 
@@ -429,7 +429,7 @@ int main() {
 
 The program's output before the fix, and the fixed program, are in [Example solutions](#example-solutions).
 
-## 11. When something goes differently
+## 11. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|

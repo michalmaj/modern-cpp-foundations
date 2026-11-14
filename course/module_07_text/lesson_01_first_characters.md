@@ -317,7 +317,7 @@ Liter jest 8: trzy w `Box` i pięć w `ready`. Cyfra jest jedna, `7`. Innych zna
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: komunikat z wymagań, pusty tekst, same wielkie litery, same małe litery, same cyfry, same spacje i myślniki, po jednym znaku z każdej kategorii oraz znak spoza liter i cyfr, na przykład `_`. Przy każdym zapisz cztery liczby raportu.
 
-**Potem:** uruchom program dla komunikatu z wymagań, a następnie zmień komunikat na 3–4 przypadki z tabeli, na przykład pusty tekst, `AbC`, `019` i ` -- `. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, więc nie musisz wpisywać ich wszystkich.
+**Potem:** uruchom program dla komunikatu z wymagań, a następnie zmień komunikat na 3–4 przypadki z tabeli, na przykład pusty tekst, `AbC`, `019` i ` -- `. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie, więc nie musisz wpisywać ich wszystkich.
 
 ### Kryterium sukcesu
 
@@ -535,7 +535,7 @@ int main() {
 
 Kategorie można też sprawdzać w innej kolejności, na przykład najpierw cyfry, jeśli łańcuch `else if` zapewnia, że każdy znak trafia do jednej kategorii.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Pętla i raport są takie same jak wyżej, poza wcięciem. Różnica jest jedna: komunikat jest odczytywany z wejścia jako jedna linijka przez `std::getline` (lekcja 2.7), więc nie ma `const`.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Pętla i raport są takie same jak wyżej, poza wcięciem. Różnica jest jedna: komunikat jest odczytywany z wejścia jako jedna linijka przez `std::getline` (lekcja 2.7), więc nie ma `const`.
 
 <!-- example: message_report_check -->
 ```cpp
@@ -571,7 +571,7 @@ int main() {
 }
 ```
 
-Każdy przypadek to jedna linijka wejścia, w kolejności z listy kontrolnej, od A do J. Przypadek B to pusta linijka.
+Każdy przypadek to jedna linijka wejścia, w kolejności z listy przypadków kontrolnych, od A do J. Przypadek B to pusta linijka.
 
 <!-- input: message_report_check -->
 ```text
@@ -744,7 +744,7 @@ Other: 1
 - **Przyczyna:** warunek litery obejmuje tylko zakres `'A'`–`'Z'`.
 - **Poprawka:** `(symbol >= 'A' && symbol <= 'Z') || (symbol >= 'a' && symbol <= 'z')`.
 
-Poprawiony program to program kontrolny z punktu 9: różni się od programu z błędem tylko tym warunkiem. Dla obu tekstów daje wyniki z listy kontrolnej: przypadki C i J.
+Poprawiony program to program kontrolny z punktu 9: różni się od programu z błędem tylko tym warunkiem. Dla obu tekstów daje wyniki z listy przypadków kontrolnych: przypadki C i J.
 
 </details>
 

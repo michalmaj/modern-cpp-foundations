@@ -190,7 +190,7 @@ Initials: [AL]
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: dane z wymagań, dwa wyrazy oddzielone jedną i dwiema spacjami, spacje tylko na początku i tylko na końcu, jeden wyraz, jedna litera, pusty tekst, jedna spacja, same spacje, mieszana wielkość liter i trzy wyrazy z różną liczbą spacji. Przy każdym zapisz oczekiwany wynik.
 
-**Potem:** uruchom program dla danych z wymagań, a następnie zmień tekst na 3–4 przypadki z tabeli, na przykład `"Ada  Lovelace"`, `"Mary ann SMITH"`, `"   "` i pusty tekst. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, więc nie musisz wpisywać ich wszystkich.
+**Potem:** uruchom program dla danych z wymagań, a następnie zmień tekst na 3–4 przypadki z tabeli, na przykład `"Ada  Lovelace"`, `"Mary ann SMITH"`, `"   "` i pusty tekst. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie, więc nie musisz wpisywać ich wszystkich.
 
 ### Kryterium sukcesu
 
@@ -455,7 +455,7 @@ Initials: [AL]
 
 `after_space` mówi, czy poprzedni znak był spacją. Na początku ma wartość `true`, bo pierwszy znak tekstu też może zaczynać wyraz, tak jak znak po spacji. Po każdym znaku zmienna dostaje nową wartość: `true`, gdy ten znak był spacją, i `false` w przeciwnym razie. Ta wersja nie potrzebuje indeksów, więc nie ma też ryzyka odczytu przed pierwszym znakiem.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Funkcja jest taka sama jak w rozwiązaniu referencyjnym, a w `main` tekst jest odczytywany z wejścia jako jedna linijka przez `std::getline`, więc nie ma `const`. `std::getline` zachowuje spacje na początku i na końcu linijki.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Funkcja jest taka sama jak w rozwiązaniu referencyjnym, a w `main` tekst jest odczytywany z wejścia jako jedna linijka przez `std::getline`, więc nie ma `const`. `std::getline` zachowuje spacje na początku i na końcu linijki.
 
 <!-- example: initials_check -->
 ```cpp
@@ -492,7 +492,7 @@ int main() {
 }
 ```
 
-Każdy przypadek to jedna linijka wejścia, w kolejności z listy kontrolnej, od A do O. Przypadek H to pusta linijka, przypadek I to jedna spacja, a przypadek J to trzy spacje.
+Każdy przypadek to jedna linijka wejścia, w kolejności z listy przypadków kontrolnych, od A do O. Przypadek H to pusta linijka, przypadek I to jedna spacja, a przypadek J to trzy spacje.
 
 <!-- input: initials_check -->
 ```text
@@ -749,7 +749,7 @@ Initials: [A B  C]
 
 Odczytu spoza tekstu tu nie ma: dla indeksu 0 krótkie obliczanie `||` pomija `text[index - 1]`.
 
-Poprawiony program to program kontrolny z punktu 4: różni się od programu z błędem tylko tym warunkiem. Dla wszystkich sześciu tekstów daje wyniki z listy kontrolnej: przypadki B, C, D, J, F i M.
+Poprawiony program to program kontrolny z punktu 4: różni się od programu z błędem tylko tym warunkiem. Dla wszystkich sześciu tekstów daje wyniki z listy przypadków kontrolnych: przypadki B, C, D, J, F i M.
 
 </details>
 

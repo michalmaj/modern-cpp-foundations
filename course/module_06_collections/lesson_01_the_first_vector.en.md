@@ -23,7 +23,7 @@ The measurement station from lesson 4.7 read one temperature after another and u
 
 What if, after computing the summary, you want to go back to the earlier values? For example, to point out the temperatures above the average, or to check how many times the highest one occurred. The sum and the count alone can't tell you that: a sum of 15 from three measurements could be 3, 7 and 5, but also 5, 5 and 5.
 
-In this lesson you'll meet **`std::vector`**: a variable that stores many values of the same type in a fixed order, and a loop that goes through them one by one.
+In this lesson you'll meet **`std::vector`**: with it, one variable stores many values of the same type in a fixed order. You'll also meet a loop that goes through them one by one.
 
 After this lesson you will:
 
@@ -128,7 +128,7 @@ This is a **range-based `for` loop**. Read its header as "for each `measurement`
 | `measurements` | The vector whose elements you go through. |
 | the body in `{ }` | Runs once for each element. |
 
-In the loop from lesson 4.3 you had to write the counter's initial value, the condition and the update. Here there's none of those parts. The loop takes the elements in order by itself and ends after the last one, so there's no counter to increase and no condition to get wrong by one.
+In the loop from lesson 4.3 you had to write the counter's initial value, the condition and the update. Here there are none of those parts. The loop takes the elements in order by itself and ends after the last one, so there's no counter to increase and no condition to get wrong by one.
 
 Choose names that read well: the vector in the plural (`measurements`), the loop variable in the singular (`measurement`).
 
@@ -374,7 +374,7 @@ Days at highest rainfall: 2
 2. which variables hold the results and what values they start from;
 3. at which point of the program you know the final highest rainfall;
 4. whether one pass over the vector is enough, or whether you need another;
-5. how to count all the days with the highest rainfall, also when there are several.
+5. how to count all the days with the highest rainfall, including when there are several.
 
 **Before you write the program**, prepare a table of test cases. Each case is different values in the braces. Include: the data from the requirements, one day, every day with the same rainfall, all zeros, the highest rainfall only on the first day, and the highest rainfall only on the last day. For each case, write down the three numbers the program should print.
 
@@ -389,7 +389,7 @@ Days at highest rainfall: 2
 
 - The program builds as C++20 and, for the data from the requirements, prints exactly the three lines shown above.
 - For every case in the table it gives the correct total, highest rainfall and number of days with the highest rainfall, after changing only the values in the braces.
-- All the days with the highest rainfall are counted, also when there are several or when every day has the same rainfall.
+- All the days with the highest rainfall are counted, including when there are several or when every day has the same rainfall.
 - The program doesn't read data from the input and uses nothing beyond this lesson and the previous modules.
 - The table of cases was made before the program was run.
 - You can explain at which point your program knows the final highest rainfall.
@@ -484,7 +484,7 @@ int main() {
 
 The output before the fix, and the fixed versions, are in [Example solutions](#example-solutions).
 
-## 12. When something goes differently
+## 12. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -602,7 +602,7 @@ int main() {
 - **The second pass** counts the days equal to the highest rainfall. After the first loop, `highest` already has its final value, so every day is compared with the right number.
 - **A repeated highest rainfall** is the most important case: in data A it occurs twice, and in data B and D every day is equal. If a program always counted just one such day, cases C, E and F wouldn't reveal that mistake.
 - **Changing the number of elements** changes only the number of passes of both loops. The loop code stays the same.
-- Two passes are a readable strategy, but not the only one. A correct one-pass solution is with section 11.
+- Two passes are a readable strategy, but not the only one. You'll find a correct one-pass solution under section 11.
 
 </details>
 

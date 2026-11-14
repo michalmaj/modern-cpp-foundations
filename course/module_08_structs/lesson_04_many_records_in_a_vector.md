@@ -181,7 +181,7 @@ Total stock value: 70
 | `stock_value` | jeden rekord: `const Product&` | wartość zapasu jednego produktu |
 | `total_stock_value` | cały wektor: `const std::vector<Product>&` | sumę wartości zapasu wszystkich produktów |
 
-**Jedna funkcja zna regułę dla jednego elementu, a druga organizuje analizę całej kolekcji.** Gdyby wartość zapasu liczyło się inaczej, zmienisz tylko `stock_value`, a `total_stock_value` od razu skorzysta z nowej reguły.
+**Jedna funkcja zna regułę dla jednego elementu, a druga organizuje analizę całej kolekcji.** Gdyby wartość zapasu liczyło się inaczej, wystarczyłoby zmienić tylko `stock_value`, a `total_stock_value` od razu skorzystałaby z nowej reguły.
 
 ## 6. Pusty wektor i jeden rekord
 
@@ -312,7 +312,7 @@ Gotowe są `Core` i `Tools`. `Mobile` nie ma wszystkich kontroli, `Docs` jest za
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: pusty wektor, jedno gotowe wydanie, jedno zablokowane, jedno z niezakończonymi kontrolami, same gotowe, same niegotowe i dwa wydania z tymi samymi liczbami kontroli, ale różną blokadą. Przy każdym zapisz statusy wydań oraz `Ready` i `Not ready`.
 
-**Potem** uruchom program dla danych z wymagań i dla pustego wektora. Zmieniaj przy tym tylko zawartość klamer wektora. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+**Potem** uruchom program dla danych z wymagań i dla pustego wektora. Zmieniaj przy tym tylko zawartość klamer wektora. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 ### Kryterium sukcesu
 
@@ -604,7 +604,7 @@ int main() {
 
 **Inne poprawne rozwiązania:** przy danych zgodnych z regułami warunek `release.completed_checks >= release.required_checks` daje ten sam wynik co `==`. `main` może zapisać liczbę niegotowych w osobnej zmiennej `std::size_t`. Pola mogą mieć inne nazwy i inną kolejność, jeśli wartości w klamrach stoją w tej samej kolejności co pola.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Struktura i obie funkcje są takie same jak wyżej, a raport od obliczenia liczby wydań też, poza wcięciem. Różnica jest jedna: wektor nie jest zapisany w kodzie, tylko powstaje z wejścia. Program odczytuje liczbę wydań, a potem każde wydanie: nazwę, dwie liczby kontroli oraz `yes` albo `no` dla blokady, zamienione na `bool` porównaniem, jak w lekcji 3.4. Każde odczytane wydanie trafia na koniec wektora przez `push_back`, jak liczby w lekcji 6.2. Misja nie potrzebuje ani wejścia, ani `push_back`.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Struktura i obie funkcje są takie same jak wyżej, a raport od obliczenia liczby wydań też, poza wcięciem. Różnica jest jedna: wektor nie jest zapisany w kodzie, tylko powstaje z wejścia. Program odczytuje liczbę wydań, a potem każde wydanie: nazwę, dwie liczby kontroli oraz `yes` albo `no` dla blokady, zamienione na `bool` porównaniem, jak w lekcji 3.4. Każde odczytane wydanie trafia na koniec wektora przez `push_back`, jak liczby w lekcji 6.2. Misja nie potrzebuje ani wejścia, ani `push_back`.
 
 <!-- example: release_review_check -->
 ```cpp
@@ -679,7 +679,7 @@ int main() {
 }
 ```
 
-Każdy przypadek zaczyna się od liczby wydań. Potem każde wydanie zajmuje jedną linijkę: nazwa, liczba zakończonych kontroli, liczba wymaganych kontroli oraz `yes` albo `no` dla blokady. Przypadki stoją w kolejności z listy kontrolnej, od A do J.
+Każdy przypadek zaczyna się od liczby wydań. Potem każde wydanie zajmuje jedną linijkę: nazwa, liczba zakończonych kontroli, liczba wymaganych kontroli oraz `yes` albo `no` dla blokady. Przypadki stoją w kolejności z listy przypadków kontrolnych, od A do J.
 
 <!-- input: release_review_check -->
 ```text

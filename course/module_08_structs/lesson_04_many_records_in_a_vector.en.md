@@ -29,7 +29,7 @@ After this lesson you will:
 - explain why the loop variable doesn't copy the successive records;
 - write a function that gets a whole vector of records and uses a function for one record;
 - handle an empty vector and a vector with one record correctly;
-- choose data that reveal a disagreement between the assessment of records and the summary.
+- choose data that reveals a disagreement between the assessment of records and the summary.
 
 ## 1. Prepare the project
 
@@ -173,7 +173,7 @@ Total stock value: 70
 
 - **`total_stock_value` gets the whole vector** by `const std::vector<Product>&`, like `count_cold_days` in lesson 6.4. Only now the elements are records.
 - **`total`** is the accumulator from lesson 4.2: it starts at 0, and the loop adds the successive values to it.
-- **The loop takes the records by `const Product&` and calls `stock_value` for each:** 18, 32 and 20. The formula `stock * unit_price` stands in the program only once.
+- **The loop takes the records by `const Product&` and calls `stock_value` for each:** 18, 32 and 20. The formula `stock * unit_price` appears in the program only once.
 - **The function returns one number** and prints nothing. `main` prints the number of records straight from `size()`, and the function's result.
 
 | Function | Gets | Returns |
@@ -318,9 +318,9 @@ Not ready: 3
 
 - The program builds as C++20 and, for the data from the requirements, prints exactly the eight lines shown above.
 - There's one type with four fields, and one `const` vector with five records, initialised in the code.
-- Both functions get the data by `const&`, print nothing and change nothing, and the readiness rule stands in one place: the function for the vector and `main` use the function for one release.
+- Both functions get the data by `const&`, print nothing and change nothing, and the readiness rule is in one place: the function for the vector and `main` use the function for one release.
 - For an empty vector the program prints `Releases: 0`, `Ready: 0` and `Not ready: 0`, with no lines with names.
-- The statuses stand in the order of the vector, and each release appears exactly once.
+- The statuses come in the order of the vector, and each release appears exactly once.
 - The table of cases was made before the program was run.
 - You can point out which braces belong to the vector, and which to a record.
 
@@ -365,7 +365,7 @@ Don't duplicate the readiness condition in several places. In the loop over the 
 | I | the data from the requirements in reverse order | `Tools`, `Core` | 2 | 3 | the order of the report |
 | J | `Web` 3/3, `Site` 3/3 | `Web`, `Site` | 2 | 0 | the same numbers, different names |
 
-**Automatic tests and your own runs.** Every case is checked automatically by a check program. It has the same type, the same functions and the same report as the reference solution, but it reads the releases from the input. It's only a checking tool, not part of the mission: in the mission, the vector is written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
+**Automatic tests and your own runs.** Every case is checked automatically by the check program. It has the same type, the same functions and the same report as the reference solution, but it reads the releases from the input. It's only a checking tool, not part of the mission: in the mission, the vector is written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
 
 </details>
 
@@ -464,15 +464,15 @@ const Product copy{tea};                   // 3
 
 </details>
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
-| `no matching constructor for initialization of 'const std::vector<...>'` | A record's values stand in the vector's braces without their own braces, for example `{"Tea", 3, 8, 6}` instead of `{{"Tea", 3, 8, 6}}`. | Put each record in its own pair of braces inside the vector's braces. |
+| `no matching constructor for initialization of 'const std::vector<...>'` | A record's values are in the vector's braces without braces of their own, for example `{"Tea", 3, 8, 6}` instead of `{{"Tea", 3, 8, 6}}`. | Put each record in its own pair of braces inside the vector's braces. |
 | A number field has the value 0, and a `bool` field the value `false`, although you didn't give them | The inner braces hold fewer values than there are fields. The program builds, and the missing fields get 0, `false` or an empty text. | Give the value of every field in every record. |
 | `cannot assign to variable ... with const-qualified type` in a loop or in a function | The code changes a field through `const&`. | Functions and loops in this lesson only read records. |
 | `non-constant-expression cannot be narrowed` at the number of records | You store the result of `size()`, or a difference with it, in an `int` variable with `{}` (lesson 6.3). | Store numbers of records in `std::size_t`. |
-| `Not ready` is a huge number | The subtraction stands in the reverse order: you subtract the number of all releases from the number of ready ones. A `std::size_t` result can't be negative (lesson 6.3). | Subtract the number of ready releases from the number of all releases. |
+| `Not ready` is a huge number | The subtraction is in the reverse order: you subtract the number of all releases from the number of ready ones. A `std::size_t` result can't be negative (lesson 6.3). | Subtract the number of ready releases from the number of all releases. |
 | `Ready` doesn't agree with the statuses in the report | The counting function checks a different condition than the function for one release (section 8). | In the counting loop, use the function for one release. |
 | A blocked release has the status `ready` | The condition leaves out the block, or joins the conditions with `\|\|`. | A release is ready only when both conditions hold at once. |
 | The program works, although the loop variable has no `&` | The loop copies each record. It's valid C++, but for plain reading the copy is unnecessary (section 4). | To read the records, use a loop variable with `const&`. |
@@ -487,7 +487,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 4. What does a range-based loop do for an empty vector, and what does a summing or counting function return then?
 5. Why can a function get the whole vector by `const std::vector<Product>&`?
 6. When should a function analyse one record, and when the whole collection?
-7. Why should the readiness condition stand in one function?
+7. Why should the readiness condition be in one function?
 8. Does a correct summary count prove that every record was assessed correctly?
 9. When is a loop over indices useful instead of a range-based loop?
 
@@ -592,7 +592,7 @@ int main() {
 5. **No copy:** a record contains a text, and to read the name and the numbers a copy in every pass is unnecessary.
 6. **`bool` for one release,** because `is_ready` answers a yes-or-no question. `main` chooses the text `ready` or `not ready`.
 7. **`std::size_t` for the collection,** because `count_ready` returns a number of records, and numbers of elements have the type `std::size_t` in the course, like the result of `size()`. Thanks to that, `total - ready` doesn't mix types.
-8. **`count_ready` calls `is_ready`,** so the readiness rule stands in the program once. The statuses and the count can't drift apart.
+8. **`count_ready` calls `is_ready`,** so the readiness rule appears in the program once. The statuses and the count can't drift apart.
 9. **An empty vector gives zero:** the loop in `count_ready` makes no pass, so the counter stays 0. The loop in `main` doesn't print any name either.
 10. **Not ready is a difference,** because each release is either ready or not. There can't be more ready releases than all of them, so this difference is always correct. Subtracting the other way round would give a huge number, like `0 - 1` in lesson 6.3.
 11. **The data doesn't change:** the vector is `const`, and the functions and loops get the records by `const&`, so the compiler wouldn't let them change.
@@ -602,7 +602,7 @@ int main() {
 
 **Two passes over the vector:** `main` goes through the releases to print the statuses, and `count_ready` goes through them once more to count the ready ones. With a few records this doesn't matter, and thanks to it the counting function prints nothing, and `main` doesn't repeat the readiness rule.
 
-**Other correct solutions:** with data that follows the rules, the condition `release.completed_checks >= release.required_checks` gives the same result as `==`. `main` can store the number of releases that aren't ready in a separate `std::size_t` variable. The fields can have other names and another order, as long as the values in the braces stand in the same order as the fields.
+**Other correct solutions:** with data that follows the rules, the condition `release.completed_checks >= release.required_checks` gives the same result as `==`. `main` can store the number of releases that aren't ready in a separate `std::size_t` variable. The fields can have other names and another order, as long as the values in the braces are in the same order as the fields.
 
 **The check program** checks every case in the list of check cases. The struct and both functions are the same as above, and so is the report from the calculation of the number of releases on, apart from the indentation. There's one difference: the vector isn't written in the code, it's built from the input. The program reads the number of releases, then each release: the name, two numbers of checks, and `yes` or `no` for the block, turned into a `bool` with a comparison, as in lesson 3.4. Each release read goes to the end of the vector with `push_back`, like the numbers in lesson 6.2. The mission needs neither input nor `push_back`.
 
@@ -862,7 +862,7 @@ Ready: 1
 ```
 
 - **The result looks right.** `Web` is ready, and `Desktop` is blocked. The counting function checks only the block, so it counts `Web` and skips `Desktop`, which by chance gives the correct 1.
-- **Data that reveal the bug:** a release without a block, but with checks not completed. For example `{"Mobile", 4, 5, false}` from the mission. The correct report is `Mobile: not ready` and `Ready: 1`. The program with the bug prints:
+- **Data that reveals the bug:** a release without a block, but with checks not completed. For example `{"Mobile", 4, 5, false}` from the mission. The correct report is `Mobile: not ready` and `Ready: 1`. The program with the bug prints:
 
 <!-- example: ready_count_revealed -->
 ```cpp

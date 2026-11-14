@@ -339,7 +339,7 @@ Days recorded: 1
 Not enough days
 ```
 
-Przykłady B i C, jak wszystkie przypadki kontrolne, są sprawdzone automatycznie w pełnej liście kontrolnej poniżej.
+Przykłady B i C, jak wszystkie przypadki kontrolne, są sprawdzone automatycznie na pełnej liście przypadków kontrolnych poniżej.
 
 **To nie jest program z punktu 7 z innymi danymi.** Tam program tylko wypisywał zmiany. Musisz samodzielnie zdecydować:
 
@@ -601,7 +601,7 @@ int main() {
 
 To czytelne rozwiązanie, ale nie jedyne. Można na przykład zapamiętywać indeks dnia przed spadkiem zamiast po nim, jeśli numery dni są potem przeliczone poprawnie.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Część po odczycie danych jest taka sama jak w rozwiązaniu wyżej, poza wcięciem. Różni się tylko źródłem danych: wektor nie ma `const`, bo program dodaje do niego odczytane temperatury przez `push_back`, jak w lekcji 6.2.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Część po odczycie danych jest taka sama jak w rozwiązaniu wyżej, poza wcięciem. Różni się tylko źródłem danych: wektor nie ma `const`, bo program dodaje do niego odczytane temperatury przez `push_back`, jak w lekcji 6.2.
 
 <!-- example: largest_drop_check -->
 ```cpp
@@ -651,7 +651,7 @@ int main() {
 }
 ```
 
-Dane wejściowe to liczba dni, a po niej temperatury. Kolejność przypadków jest taka jak w liście kontrolnej.
+Dane wejściowe to liczba dni, a po niej temperatury. Kolejność przypadków jest taka jak na liście przypadków kontrolnych.
 
 <!-- input: largest_drop_check -->
 ```text
@@ -863,7 +863,7 @@ From day 3 to day 4
 - **Przyczyna:** warunek `drop >= largest_drop` zapisuje nowy wynik także wtedy, gdy spadek jest **równy** zapamiętanemu. Drugi spadek 6 zastępuje więc pierwszy.
 - **Poprawka:** zmień `>=` na `>`. Wtedy wynik zastępuje tylko spadek ściśle większy.
 
-Poprawiony program to program kontrolny z punktu 8: różni się od programu z błędem tylko tym jednym znakiem. Dla obu powyższych zestawów danych daje wyniki z listy kontrolnej: dla A dni 3–4, a dla `7`, `1`, `7`, `1` dni 1–2.
+Poprawiony program to program kontrolny z punktu 8: różni się od programu z błędem tylko tym jednym znakiem. Dla obu powyższych zestawów danych daje wyniki z listy przypadków kontrolnych: dla A dni 3–4, a dla `7`, `1`, `7`, `1` dni 1–2.
 
 </details>
 
