@@ -139,7 +139,7 @@ Nowe są tylko trzy linijki: `#include <fstream>`, utworzenie zmiennej `input` i
 
 - **`std::ifstream`** to skrót od *input file stream*, strumień wejściowy z pliku. `std::cin` jest strumieniem z klawiatury, a `input` strumieniem z pliku. Odczytujesz z obu tak samo: przez `>>`, a powodzenie sprawdzasz przez `fail()`.
 - **Nazwę zmiennej wybierasz samodzielnie.** `input` to zwykła nazwa zmiennej, jak `count` czy `total`.
-- **Plik zamyka się sam,** gdy kończy się zmienna `input`, tu razem z `main`. Nie musisz go zamykać ręcznie.
+- **Plik zamyka się sam,** gdy zmienna `input` przestaje istnieć, tu na końcu `main`. Nie musisz go zamykać ręcznie.
 
 **Kolejność sprawdzeń** jest ta sama dla każdej wymaganej liczby:
 
