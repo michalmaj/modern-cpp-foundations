@@ -18,7 +18,7 @@ This lesson assumes that you:
 
 ## The situation
 
-In lesson 10.3 the first line of the data announced the number of shipments, and all the reading was in `main`. Often, though, nobody counts the records in advance: the data simply end. The program then reads one record after another, until it meets an empty line or the end of the data where the next name would be. Along the way it tells three situations apart:
+In lesson 10.3 the first line of the data announced the number of shipments, and all the reading was in `main`. Often, though, nobody counts the records in advance: the data simply ends. The program then reads one record after another, until it meets an empty line or the end of the data where the next name would be. Along the way it tells three situations apart:
 
 1. **a valid record:** a non-empty name and valid numbers, so the record goes into the vector;
 2. **the ending of the data:** an empty line or the end of the data where a name would be, so the program prints the report;
@@ -32,7 +32,7 @@ After this lesson you will:
 - write a `bool` function that fills an existing record through `T&`, and leaves it unchanged on a refusal;
 - read records up to an empty line or to the end of the data, and tell the ending of the data from an incomplete record;
 - after a refusal, tell a failed read from a value that isn't allowed;
-- choose data that reveal a result assigned too early.
+- choose data that reveals a result assigned too early.
 
 ## 1. Prepare the project
 
@@ -42,7 +42,7 @@ The programs in this lesson print no questions. Type the data line by line, as i
 
 ## 2. A list of shipments with no announced count
 
-Each shipment takes two lines, as in lesson 10.3: the full name of the destination and the number of boxes, which can't be negative. Nobody announces the number of shipments. Data that follow the agreement contain at most 5 of them.
+Each shipment takes two lines, as in lesson 10.3: the full name of the destination and the number of boxes, which can't be negative. Nobody announces the number of shipments. Data that follows the agreement contains at most 5 of them.
 
 <!-- example: shipment_reader -->
 ```cpp
@@ -141,7 +141,7 @@ Total boxes: 11
 | `if (!accepted)` | after a refusal chooses the message and ends `main` (section 6) |
 | `std::getline(std::cin, rest);` | after an accepted record finishes its number line |
 
-- **`main` reads the names and decides about the ending of the data.** The function gets only a name that was read successfully and isn't empty.
+- **`main` reads the names and decides whether the data has ended.** The function gets only a name that was read successfully and isn't empty.
 - **The function reads and checks the number** of one record, and reports success with its `bool` result. It prints nothing.
 - **An empty line is no longer a record error.** In lesson 10.3 an empty name gave `Invalid shipments`, because the program was waiting for an announced record. Here an empty line where a name would be means the ending of the data.
 
@@ -156,7 +156,7 @@ bool read_shipment_values(std::istream& input, const std::string& destination, S
 
 - **`std::istream& input`:** `std::cin` is an existing object of type `std::istream`, that is, an input stream, available after `#include <iostream>`. A parameter with `&` is another name for the object passed (lesson 9.1), so `input >> boxes` reads from the same `std::cin`, from where `main` stopped. The function opens no new input. There's no `const`, because reading changes the stream: it takes characters out of it and can change its state.
 - **`const std::string& destination`:** `main` has already read the name, and the function only uses it, so it gets it through `const&`, like the text in lesson 7.3.
-- **`Shipment& result`:** the function fills an object prepared by `main`, instead of creating a new record and returning it by value, as in lesson 8.5. That agreement is good when there's one result. Here there are two: whether the read succeeded, and the complete record. `bool` tells about success, and the record goes into the caller's object.
+- **`Shipment& result`:** the function fills an object prepared by `main`, instead of creating a new record and returning it by value, as in lesson 8.5. That agreement is good when there's one result. Here there are two: whether the read succeeded, and the complete record. `bool` reports success, and the record goes into the caller's object.
 
 **`std::getline` works the same way.** Lesson 5.2 said that library functions don't always receive their data the way an `int` parameter does. `std::getline(std::cin, line)` gets the stream and the text through references without `const`: it reads from the stream and changes `line`. Our function has the same shape.
 
@@ -175,15 +175,15 @@ Every refusal is a `return false;` before step 5, so **after `false` the record 
 
 ## 4. Who recognises the ending of the data
 
-| Situation | What the data have where a record would be | Who recognises it | What next |
+| Situation | What's in the data where a record would be | Who recognises it | What next |
 |---|---|---|---|
 | a valid record | a non-empty name, followed by a valid number | `main` reads the name, and the function the number and returns `true` | `push_back` and the next name |
 | the ending of the data | an empty line or the end of the data | `main`, right after reading the name | the report |
 | a record error | a non-empty name, followed by a word, a number not allowed or the end of the data | the function, which returns `false` | a message and the end of the program |
 
-**Why does `main` read the name?** Because it's at the name that it's decided whether the data have ended. If the function read the name too, its result would have to express the three situations of the table, and `bool` has only two values. When `main` reads the name, the function is called only once a record has started. Its `true` then means "a complete, valid record is in `result`", and `false` means "there's no new record".
+**Why does `main` read the name?** Because it's at the name that it's decided whether the data has ended. If the function read the name too, its result would have to express the three situations of the table, and `bool` has only two values. When `main` reads the name, the function is called only once a record has started. Its `true` then means "a complete, valid record is in `result`", and `false` means "there's no new record".
 
-**An incomplete record is not the ending of the data.** When the data end right after a non-empty name, the record has already started, but its number is missing. The read in the function fails, and the program prints `Input error`, not the report.
+**An incomplete record is not the ending of the data.** When the data ends right after a non-empty name, the record has already started, but its number is missing. The read in the function fails, and the program prints `Input error`, not the report.
 
 ## 5. The loop in `main` and the last number
 
@@ -198,9 +198,9 @@ Trace the main data:
 
 **After an accepted record the program finishes its number line,** because another name may follow it. In lesson 10.3 there was no read after the last record, because the program knew the number of records. Here it learns that the record was the last only when it tries to read the next name.
 
-**The last number at the very end of the data.** When the data end right after `7`, with no end of line, `>>` reads 7 correctly, although the stream has already reached the end of the data (lesson 4.6), and the function returns `true`. Only `getline(rest)` fails. That's not an error of the last record: its number has been read and checked, and the record is in the vector. That's why `main` reads the next name only after finishing the line successfully, and `fail()` in the condition ends the loop. If the program printed `Input error` after a failed `getline(rest)`, it would reject valid data.
+**The last number at the very end of the data.** When the data ends right after `7`, with no end of line, `>>` reads 7 correctly, although the stream has already reached the end of the data (lesson 4.6), and the function returns `true`. Only `getline(rest)` fails. That's not an error of the last record: its number has been read and checked, and the record is in the vector. That's why `main` reads the next name only after finishing the line successfully, and `fail()` in the condition ends the loop. If the program printed `Input error` after a failed `getline(rest)`, it would reject valid data.
 
-| Where the data end | What fails | Result |
+| Where the data ends | What fails | Result |
 |---|---|---|
 | right after a name, before its number | `>>` in the function | `Input error` |
 | right after the last number, with no end of line | `getline(rest)` | the report |
@@ -209,9 +209,9 @@ Trace the main data:
 The course's automatic tests check the first and the last row of this table. They don't run the middle one, because in them every line has its end.
 
 <details>
-<summary>The data of the table and their results</summary>
+<summary>The data in the table and their results</summary>
 
-The data end right after the name of the second shipment:
+The data ends right after the name of the second shipment:
 
 <!-- input: shipment_reader -->
 ```text
@@ -225,7 +225,7 @@ South Depot
 Input error
 ```
 
-The data end after the end of the line with `7`, with no empty line:
+The data ends after the end of the line with `7`, with no empty line:
 
 <!-- input: shipment_reader -->
 ```text
@@ -273,7 +273,7 @@ Invalid shipments
 
 </details>
 
-A word stands instead of the number of boxes of the second shipment:
+There's a word instead of the number of boxes of the second shipment:
 
 <!-- input: shipment_reader -->
 ```text
@@ -284,7 +284,7 @@ seven
 ```
 
 <details>
-<summary>The standard output when a word stands instead of the number</summary>
+<summary>The standard output when there's a word instead of the number</summary>
 
 <!-- output: shipment_reader -->
 ```text
@@ -293,7 +293,7 @@ Input error
 
 </details>
 
-The data start with an empty line:
+The data starts with an empty line:
 
 <!-- input: shipment_reader -->
 ```text
@@ -318,7 +318,7 @@ Total boxes: 0
 |---|---|---|
 | a failed read of a number | `seven` instead of the number of boxes, the end of the data after a name | `Input error` |
 | a successful read, a value not allowed | `-2` boxes | `Invalid shipments` |
-| the ending of the data | an empty line or the end of the data where a name would be, also before the first shipment | the report |
+| the ending of the data | an empty line or the end of the data where a name would be, even before the first shipment | the report |
 
 <details>
 <summary>Other data and their results</summary>
@@ -387,18 +387,18 @@ Total boxes: 4
 
 ## 7. Mission: team results
 
-The program reads the results of the teams of a tournament one after another, until the data end, and prints all the teams and the total of the wins.
+The program reads the results of the teams of a tournament one after another, until the data ends, and prints all the teams and the total of the wins.
 
 **Input data:** each team takes two lines:
 
 1. the name of the team, which may contain spaces;
 2. two numbers separated by a space: the number of matches played and the number of matches won.
 
-Nobody announces the number of teams. After the last team there's an empty line, or the data end.
+Nobody announces the number of teams. After the last team there's an empty line, or the data ends.
 
 **Rules:**
 
-- The name of a team isn't empty, because an empty line ends the data. In data that follow the agreement it has no spaces at its start or end. Two teams may have the same name.
+- The name of a team isn't empty, because an empty line ends the data. In data that follows the agreement it has no spaces at its start or end. Two teams may have the same name.
 - The number of matches played can't be negative, and the number won can't be negative or greater than the number played. 0 played and 0 won is allowed.
 - There are at most 5 teams, and the numbers are small and fit in `int`, as does their total. Text after the numbers is outside the agreement, and the program doesn't check it.
 
@@ -412,7 +412,7 @@ Nobody announces the number of teams. After the last team there's an empty line,
 
 In `cpp-workspace`, create a folder `team_results`, copy `CMakeLists.txt` from the original `lesson_05_first_program` into it, create an empty `main.cpp` and write the program on your own.
 
-For data that end with an empty line:
+For data that ends with an empty line:
 
 <!-- input: teams -->
 ```text
@@ -433,7 +433,7 @@ River Foxes: played 3, won 3
 Wins total: 7
 ```
 
-The same data with no empty line, ended by the end of the data, give the same result:
+The same data with no empty line, ended by the end of the data, gives the same result:
 
 <!-- input: teams -->
 ```text
@@ -451,7 +451,7 @@ River Foxes: played 3, won 3
 Wins total: 7
 ```
 
-A word stands instead of the number of wins of the second team. The first may already be in the vector, but there's no report:
+There's a word instead of the number of wins of the second team. The first may already be in the vector, but there's no report:
 
 <!-- input: teams -->
 ```text
@@ -481,7 +481,7 @@ River Foxes
 Invalid teams
 ```
 
-The data start with an empty line:
+The data starts with an empty line:
 
 <!-- input: teams -->
 ```text
@@ -496,7 +496,7 @@ Wins total: 0
 
 When a number is missing after a non-empty name, the result is `Input error`, not the ending of the data.
 
-**This isn't the shipments with another name.** The number line has two numbers, and one of the rules joins them. You have to decide on your own:
+**These aren't the shipments under another name.** The number line has two numbers, and one of the rules joins them. You have to decide on your own:
 
 1. how to name the type, its fields, the vector, the function and its parameters;
 2. in which order the function reads the numbers and checks the read and the rules, and where it assigns the result record;
@@ -507,7 +507,7 @@ When a number is missing after a non-empty name, the result is `Input error`, no
 
 **Before you write the program**, prepare a table of cases with the expected results: an empty line at the start, one, two and five teams, both ways of ending, a repeated name, a team with no matches, only wins and only losses, negative numbers, more wins than matches played, a word instead of each of the numbers, no numbers after a name, the last number missing, and an error in a team after a valid one.
 
-**Then** run the program for the main data and for one of the two errors in the second team. The other cases of the full list of check cases are checked automatically, and analyse on paper the ones in which the data end with no empty line.
+**Then** run the program for the main data and for one of the two errors in the second team. The other cases on the full list of check cases are checked automatically. Analyse on paper the ones in which the data ends with no empty line.
 
 ### Success criteria
 
@@ -549,11 +549,11 @@ The lines of the data are separated by `/`. For valid data, the "Result" column 
 
 | | Data | Result | What it checks |
 |---|---|---|---|
-| A | `Maple Owls` / `6 4` / `River Foxes` / `3 3` / an empty line | 2 teams, total 7 | the data of the requirements: names with spaces, ending by an empty line |
-| B | `Maple Owls` / `6 4` / `River Foxes` / `3 3`, then the end of the data | 2 teams, total 7 | the end of the data after a complete team (the data of the requirements) |
-| C | `Maple Owls` / `6 4` / `River Foxes` / `3 won` | `Input error` | a word instead of the second number, after a valid team (the data of the requirements) |
-| D | `Maple Owls` / `6 4` / `River Foxes` / `3 4` | `Invalid teams` | more wins than matches played, after a valid team (the data of the requirements) |
-| E | an empty line | 0 teams, total 0 | an empty vector (the data of the requirements) |
+| A | `Maple Owls` / `6 4` / `River Foxes` / `3 3` / an empty line | 2 teams, total 7 | the data from the requirements: names with spaces, ending with an empty line |
+| B | `Maple Owls` / `6 4` / `River Foxes` / `3 3`, then the end of the data | 2 teams, total 7 | the end of the data after a complete team (the data from the requirements) |
+| C | `Maple Owls` / `6 4` / `River Foxes` / `3 won` | `Input error` | a word instead of the second number, after a valid team (the data from the requirements) |
+| D | `Maple Owls` / `6 4` / `River Foxes` / `3 4` | `Invalid teams` | more wins than matches played, after a valid team (the data from the requirements) |
+| E | an empty line | 0 teams, total 0 | an empty vector (the data from the requirements) |
 | F | `Lake Herons` / `5 2`, then the end of the data | 1 team, total 2 | one team |
 | G | `Maple Owls` / `6 4` / `River Foxes` / `3 3` / `Hill Bears` / `0 0` / `Maple Owls` / `2 0` / `Sea Gulls` / `4 1` / an empty line | 5 teams, total 8 | the largest number of teams, the same name twice, a team with no matches, only wins and only losses |
 | H | `Maple Owls` / `-1 0` | `Invalid teams` | a negative number played |
@@ -565,7 +565,7 @@ The lines of the data are separated by `/`. For valid data, the "Result" column 
 | N | `Maple Owls` / `6 4` / `River Foxes`, then the end of the data | `Input error` | the end of the data after the name of the second team: an incomplete record isn't the ending of the data |
 | O | `Maple Owls` / `6 4` / `River Foxes` / `-1 won` | `Input error` | a negative number played, then a word instead of the second number, after a valid team: a failed read takes precedence over a value that isn't allowed |
 
-**The automatic tests and your runs.** All the cases are checked automatically: the reference solution is run for each of them, and its whole standard output is compared with the expected one. The solution and its results are in [Example solutions](#example-solutions).
+**Automatic tests and your own runs.** All the cases are checked automatically: the reference solution is run for each of them, and its whole standard output is compared with the expected one. The solution and its results are in [Example solutions](#example-solutions).
 
 </details>
 
@@ -630,8 +630,8 @@ North Hub
 4
 ```
 
-1. **Predict** what this program prints for these data, and what it would print with the function of section 2.
-2. Run the program for these data and compare the result with your prediction.
+1. **Predict** what this program prints for this data, and what it would print with the function of section 2.
+2. Run the program for this data and compare the result with your prediction.
 3. Choose your own data for which the function of this program breaks its agreement.
 4. For your data, **predict** what the function returns and which values `result` has afterwards.
 5. Run the program for your data.
@@ -643,7 +643,7 @@ North Hub
 
 The results, example data and the fixed program are in [Example solutions](#example-solutions).
 
-## 9. When something goes differently
+## 9. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -665,8 +665,8 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 4. Why does the function read the number into a local variable and assign the whole record only at the end?
 5. Why does `main`, and not the function, read the name and recognise the ending of the data?
 6. What does the program do when the first line is empty? Why isn't that an error?
-7. The data end right after the name of the second shipment. Why is the result `Input error`, and not a report with one shipment?
-8. The data end right after the last number, with no end of line. Why does `getline(rest)` fail, and why does the program print the report anyway?
+7. The data ends right after the name of the second shipment. Why is the result `Input error`, and not a report with one shipment?
+8. The data ends right after the last number, with no end of line. Why does `getline(rest)` fail, and why does the program print the report anyway?
 9. The function returned `false`. How does `main` know whether to print `Input error` or `Invalid shipments`?
 10. The first team is valid, and the second has `3 4`. What's in the vector, and what does the program print? Why is `push_back` in `main`, and not in the function?
 
@@ -674,12 +674,12 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 <summary>Example answers</summary>
 
 1. It gets another name for the existing object `std::cin`, the input stream of type `std::istream`. It opens no new input: `input >> boxes` goes on reading the same data, from where `main` stopped.
-2. Because the function has two things to pass on: whether the read succeeded, and the complete record. `bool` tells about success, and the record goes into the object the caller prepared. Returning a new record by value (lesson 8.5) is good when there's one result.
+2. Because the function has two things to pass on: whether the read succeeded, and the complete record. `bool` reports success, and the record goes into the object the caller prepared. Returning a new record by value (lesson 8.5) is good when there's one result.
 3. `true`: the number was read and checked, and `result` holds a complete, valid record. `false`: there's no new record, and `result` is exactly as before the call.
 4. Because while reading, it isn't known yet whether the record will be valid. If the function changed `result` before the checks, a record that isn't allowed would stay in it after a refusal, and `return false;` doesn't undo that.
-5. Because it's at the name that it's decided whether the data have ended. If the function read the name too, its `bool` would have to express three situations: a record, the ending of the data and an error. When `main` recognises the ending, `true` and `false` have one meaning each.
+5. Because it's at the name that it's decided whether the data has ended. If the function read the name too, its `bool` would have to express three situations: a record, the ending of the data and an error. When `main` recognises the ending, `true` and `false` have one meaning each.
 6. Reading the name succeeds, but the name is empty, so the loop doesn't run even once, and the program prints a report with zero shipments. An empty line where a name would be is the agreed ending of the data, and an empty vector is a valid result.
-7. Because the record has already started: the name isn't empty, but its number is missing. The read in the function fails, so it's an incomplete record, not the ending of the data. A report with one shipment would suggest that the data were complete.
+7. Because the record has already started: the name isn't empty, but its number is missing. The read in the function fails, so it's an incomplete record, not the ending of the data. A report with one shipment would suggest that the data was complete.
 8. `>>` read 7 and reached the end of the data, so `getline(rest)` has nothing left to read. The number of the last record, though, has been read and checked, and the record is in the vector. A failed `getline(rest)` only means that there's no next name, so the loop ends normally.
 9. It checks `std::cin.fail()`. The function doesn't restore the stream with `clear()`, so after a failed read `fail()` still gives `true`, and after a number that was read but isn't allowed it gives `false`.
 10. The vector holds the first team, because it was added before the program read the second. The program prints only `Invalid teams`, with no report. `push_back` is in `main` because `main` builds the vector and decides what it holds, while the function only prepares one record.
@@ -779,16 +779,16 @@ int main() {
 }
 ```
 
-1. **`main` reads the name,** because it's at the name that it's decided whether the data have ended. The function gets a name that has already been read.
+1. **`main` reads the name,** because it's at the name that it's decided whether the data has ended. The function gets a name that has already been read.
 2. **`main` recognises the ending of the data:** an empty line and a failed read of the name. The function is called only once a record has started.
 3. **`std::istream&`,** because the function is to read from the existing stream `std::cin`, from where `main` stopped. Without `const`, because reading changes the stream.
-4. **`Team&` as the result parameter,** because the function has two results: `bool` tells about success, and the record goes into the caller's object.
+4. **`Team&` as the result parameter,** because the function has two results: `bool` reports success, and the record goes into the caller's object.
 5. **The result record unchanged on `false`:** every refusal is a `return false;` before the assignment, so the caller gets its record back unchanged (lesson 9.2).
 6. **The local variables `played` and `won`,** because while reading, it isn't known yet whether a valid record will come out. The fields of `result` wait for the end of the checks.
 7. **The read before the values:** after a failed read the content of a variable can't be relied on (lesson 4.6), so the rules make sense only for numbers that were really read.
 8. **The assignment after all the checks,** with one `result = Team{name, played, won};`, so the record changes all at once, and only when it's complete and valid.
 9. **`push_back` in `main`,** because `main` builds the vector, and the function is responsible for one record. `main` adds the record only after `true`.
-10. **The number of records isn't needed,** because the loop repeats the passes as long as a non-empty line, read successfully, stands where a name would be.
+10. **The number of records isn't needed,** because the loop repeats the passes as long as there's a non-empty line, read successfully, where a name would be.
 11. **An empty line ends the reading,** because it's a successful read of a text of length zero (lesson 7.4), and in the agreement on the data a team's name isn't empty.
 12. **The end of the data before the next name ends the reading,** because all the earlier records are complete, and no new one has started.
 13. **The end of the data inside a record is an error:** after a non-empty name the record has started, so a missing number is a failed read and `Input error`.
@@ -798,11 +798,11 @@ int main() {
 17. **Earlier teams may stay in the vector** after an error in a later one. The program doesn't remove them, because it stops right away.
 18. **Still, no partial report,** because the result is about all the data. A report of part of the teams would look complete.
 19. **No new result type,** because `main` itself recognises the ending of the data. The two values of `bool` are enough for the function, and the state of the stream gives the reason for a refusal.
-20. **No full check of the line,** because the agreement on the data says where the names and the numbers stand. `getline(rest)` finishes the number line, but doesn't check the text after the numbers (lesson 10.2).
+20. **No full check of the line,** because the agreement on the data says where the names and the numbers are. `getline(rest)` finishes the number line, but doesn't check the text after the numbers (lesson 10.2).
 
 **Other valid solutions:** instead of `return 0;` you can use a `bool` flag, as in lesson 7.4. The loop may also start each pass by reading the name, as in lesson 7.4: when `getline(rest)` fails, the next read of the name fails too (lesson 4.6), so the loop ends the same way. The function may assign the fields of `result` one by one instead of the whole record, as long as it does so only after all the checks. The function's result can also be checked directly in the `if` condition, without the variable `accepted`.
 
-Each case of the list of check cases is a separate run of this program. Cases A–E are the data of the mission text. The others are below, in the order of the list of check cases.
+Each case in the list of check cases is a separate run of this program. Cases A–E are the data from the mission text. The others are below, in the order of the list of check cases.
 
 <!-- input: teams -->
 ```text
@@ -1070,7 +1070,7 @@ Result: North Hub, 4
 ```
 
 - **This case masks the bug.** The function of section 2 would print the same: the number is read and allowed, so both versions assign the same record and return `true`.
-- **Data that reveal the bug:** any negative number of boxes, for example `-2`. The read succeeds, and the rules should reject it. The correct result is `Returned: false` and `Result: Old Place, 9`, but the buggy program prints:
+- **Data that reveals the bug:** any negative number of boxes, for example `-2`. The read succeeds, and the rules should reject it. The correct result is `Returned: false` and `Result: Old Place, 9`, but the buggy program prints:
 
 <!-- input: shipment_values_early_bug -->
 ```text
@@ -1084,7 +1084,7 @@ Returned: false
 Result: North Hub, -2
 ```
 
-- **Where the bug is:** `result = Shipment{destination, boxes};` stands between the check of the read and the check of the rules. For `-2` the assignment runs before the function knows that the number isn't allowed.
+- **Where the bug is:** `result = Shipment{destination, boxes};` comes between the check of the read and the check of the rules. For `-2` the assignment runs before the function knows that the number isn't allowed.
 - **Why `return false;` doesn't bring back `Old Place` and 9:** `return` ends the call, but doesn't undo earlier changes (lesson 9.2). Nobody kept the old values, and `result` is another name for the object in `main`, so the change is already in it. The function returns `false`, while the record holds a shipment that isn't allowed.
 - **A word instead of the number doesn't reveal the bug:** the function checks the read before the assignment, so for `seven` it returns `false` and changes nothing. Only a number that can be read but breaks the rules reveals the bug:
 
@@ -1100,7 +1100,7 @@ Returned: false
 Result: Old Place, 9
 ```
 
-- **In the program of section 2 this bug wouldn't change any result:** after `false` the program prints the message and stops, so nobody reads the changed record. The function would still break its agreement, and a program that goes on using the record after a refusal would get data that aren't allowed.
+- **In the program of section 2 this bug wouldn't change any result:** after `false` the program prints the message and stops, so nobody reads the changed record. The function would still break its agreement, and a program that goes on using the record after a refusal would get data that isn't allowed.
 - **The fix:** move the assignment after both checks. The fixed function is the function of section 2:
 
 <!-- example: shipment_values_early_fixed -->

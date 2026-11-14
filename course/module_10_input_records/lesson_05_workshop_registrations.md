@@ -20,7 +20,7 @@ Zajrzenie do części B, do wcześniejszych lekcji albo do notatek nie jest pora
 - **pierwsze:** analiza umowy danych, projekt typu i dwóch funkcji, pętla odczytu i raport dla danych z wymagań;
 - **drugie:** błędy i przypadki graniczne, pusty import, zadania 2 i 3, porównanie z rozwiązaniem i samoocena.
 
-**Możesz używać:** CLiona albo terminala, CMake i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przypadków i przebiegu oraz tymczasowych wydruków testowych. Debugger nie jest potrzebny. Nie musisz kończyć danych z klawiatury: wpisane dane kończysz pustą linią, a przypadki, w których dane kończą się bez pustej linii, analizujesz na papierze.
+**Możesz używać:** CLiona albo terminala, CMake'a i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przypadków i przebiegu oraz tymczasowych wydruków testowych. Debugger nie jest potrzebny. Nie musisz kończyć danych z klawiatury: wpisane dane kończysz pustą linią, a przypadki, w których dane kończą się bez pustej linii, analizujesz na papierze.
 
 ---
 
@@ -233,7 +233,7 @@ Proponowana kolejność to plan pracy, a nie dwanaście osobnych programów ani 
 
 **Zanim uruchomisz program**, przygotuj tabelę przypadków z oczekiwanymi wynikami: pusta linia na początku; jedno, dwa i pięć zgłoszeń; oba sposoby zakończenia; wszystkie zgłoszenia w grupie 1 i wszystkie w grupie 2; grupy w mieszanej kolejności; to samo imię i nazwisko dwa razy; grupa 0, 3 i ujemna; 0, 1, 6, 7 i ujemna liczba zajęć; słowo zamiast numeru grupy i zamiast liczby zajęć; koniec danych po imieniu i nazwisku oraz po pierwszej liczbie; błąd w zgłoszeniu po poprawnym. Przy każdym przypadku zapisz cały oczekiwany raport albo komunikat.
 
-**Uruchom program** dla przykładu A i dla jednego z błędów w drugim zgłoszeniu, z przykładu D albo E. Każdą linię kończ klawiszem **Enter**, a po ostatnim zgłoszeniu naciśnij **Enter** jeszcze raz, na pustej linii. Pozostałe przypadki przeanalizuj na papierze. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+**Uruchom program** dla przykładu A i dla jednego z błędów w drugim zgłoszeniu, z przykładu D albo E. Każdą linię kończ klawiszem **Enter**, a po ostatnim zgłoszeniu naciśnij **Enter** jeszcze raz, na pustej linii. Pozostałe przypadki przeanalizuj na papierze. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5. Przed commitem sprawdź `git status`: do historii trafiają tylko `main.cpp` i `CMakeLists.txt`.
 
@@ -248,7 +248,7 @@ Sprawdzian jest zaliczony, gdy spełniasz **wszystkie** kryteria. Możesz przy t
 - Żadna z dwóch funkcji niczego nie wypisuje. Zasady grupy i liczby zajęć stoją w programie w jednym miejscu.
 - `main` kończy odczyt po pustej linii i po końcu danych w miejscu imienia i nazwiska, a przy rozpoczętym, niekompletnym zgłoszeniu wypisuje `Input error`. `push_back` wykonuje się tylko po `true`, a przy błędzie nie ma żadnej części raportu.
 - Raport pochodzi z elementów wektora: liczba zgłoszeń z `size()`, liczby uczestników grup z funkcji liczącej, a suma zajęć oraz imiona i nazwiska z elementów.
-- Dla przykładu A i wybranego błędu w drugim zgłoszeniu program wypisuje dokładnie pokazane wyniki. Pozostałe przykłady i przypadki z Twojej tabeli zgadzają się z analizą na papierze i z pełną listą kontrolną.
+- Dla przykładu A i wybranego błędu w drugim zgłoszeniu program wypisuje dokładnie pokazane wyniki. Pozostałe przykłady i przypadki z Twojej tabeli zgadzają się z analizą na papierze i z pełną listą przypadków kontrolnych.
 - Tabela przypadków powstała przed uruchomieniem programu.
 - Błąd z diagnostyki A poprawiono i sprawdzono, a fragment z diagnostyki B przeanalizowano bez uruchamiania (zadanie 2 w części B).
 - Umiesz wyjaśnić każdą linijkę swojego programu i odpowiedzieć na pytania z zadania 3.
@@ -586,7 +586,7 @@ int main() {
 
 To nie jedyne poprawne rozwiązanie.
 
-Każdy przypadek z listy kontrolnej to osobne uruchomienie tego programu. Przypadki A–F to przykłady z części A. Pozostałe są poniżej, w kolejności z listy kontrolnej.
+Każdy przypadek z listy przypadków kontrolnych to osobne uruchomienie tego programu. Przypadki A–F to przykłady z części A. Pozostałe są poniżej, w kolejności z listy przypadków kontrolnych.
 
 <!-- input: workshop_registrations -->
 ```text

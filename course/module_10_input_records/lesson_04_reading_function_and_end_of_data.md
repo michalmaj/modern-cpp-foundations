@@ -507,7 +507,7 @@ Gdy po niepustej nazwie zabraknie którejś liczby, wynik to `Input error`, a ni
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków z oczekiwanymi wynikami: pusta linia na początku, jedna, dwie i pięć drużyn, oba sposoby zakończenia, powtórzona nazwa, drużyna bez spotkań, same wygrane i same porażki, ujemne liczby, więcej wygranych niż rozegranych, słowo zamiast każdej z liczb, brak liczb po nazwie, brak ostatniej liczby i błąd w drużynie po poprawnej.
 
-**Potem** uruchom program dla głównych danych i dla jednego z dwóch błędów w drugiej drużynie. Pozostałe przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, a te, w których dane kończą się bez pustej linii, przeanalizuj na papierze.
+**Potem** uruchom program dla głównych danych i dla jednego z dwóch błędów w drugiej drużynie. Pozostałe przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie, a te, w których dane kończą się bez pustej linii, przeanalizuj na papierze.
 
 ### Kryterium sukcesu
 
@@ -802,7 +802,7 @@ int main() {
 
 **Inne poprawne rozwiązania:** zamiast `return 0;` można użyć flagi `bool`, jak w lekcji 7.4. Pętla może też zaczynać każdy przebieg od odczytu nazwy, jak w lekcji 7.4: gdy `getline(rest)` się nie uda, następny odczyt nazwy też się nie uda (lekcja 4.6), więc pętla skończy się tak samo. Funkcja może przypisać pola `result` po kolei zamiast całego rekordu, jeśli robi to dopiero po wszystkich sprawdzeniach. Wynik funkcji można też sprawdzić bezpośrednio w warunku `if`, bez zmiennej `accepted`.
 
-Każdy przypadek z listy kontrolnej to osobne uruchomienie tego programu. Przypadki A–E to dane z treści misji. Pozostałe są poniżej, w kolejności z listy kontrolnej.
+Każdy przypadek z listy przypadków kontrolnych to osobne uruchomienie tego programu. Przypadki A–E to dane z treści misji. Pozostałe są poniżej, w kolejności z listy przypadków kontrolnych.
 
 <!-- input: teams -->
 ```text

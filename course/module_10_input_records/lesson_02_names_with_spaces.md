@@ -419,7 +419,7 @@ Dla jednego uruchomienia program wypisuje tylko jeden z tych trzech wyników.
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: tytuły ze spacjami i jednowyrazowe, książki przeczytane i nierozpoczęte, puste tytuły, niedozwolone liczby stron, słowo zamiast liczby, brak drugiej książki i brak ostatniej liczby. Przy każdym zapisz oczekiwany wynik.
 
-**Potem** uruchom program dla głównych danych i dla jednego z dwóch pozostałych przykładów. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, więc pozostałych nie musisz uruchamiać. Przypadki, w których dane się kończą, przeanalizuj na papierze, jak w punkcie 4.
+**Potem** uruchom program dla głównych danych i dla jednego z dwóch pozostałych przykładów. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie, więc pozostałych nie musisz uruchamiać. Przypadki, w których dane się kończą, przeanalizuj na papierze, jak w punkcie 4.
 
 ### Kryterium sukcesu
 
@@ -693,7 +693,7 @@ int main() {
 
 **Inne poprawne rozwiązania:** zasady obu książek mogą stać w jednym warunku albo każda w osobnym `else if`, z tym samym komunikatem. Sprawdzenie po pierwszej książce można też pominąć i zostawić tylko to na końcu: wyniki będą te same, bo po nieudanym odczycie kolejne też się nie udają (lekcja 4.6). Sprawdzenie po pierwszej książce pokazuje jednak wprost, że linię dokańczamy dopiero po udanym odczycie liczb. Pola mogą mieć inne nazwy, a sumę można obliczyć bezpośrednio w instrukcji wypisania.
 
-Każdy przypadek z listy kontrolnej to osobne uruchomienie tego programu. Przypadki A, G i Q to dane z treści misji. Pozostałe są poniżej, w kolejności z listy kontrolnej.
+Każdy przypadek z listy przypadków kontrolnych to osobne uruchomienie tego programu. Przypadki A, G i Q to dane z treści misji. Pozostałe są poniżej, w kolejności z listy przypadków kontrolnych.
 
 <!-- input: books -->
 ```text
