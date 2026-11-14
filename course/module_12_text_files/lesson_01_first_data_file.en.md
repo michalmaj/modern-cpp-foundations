@@ -18,9 +18,9 @@ This lesson assumes that you:
 
 ## The situation
 
-An app on your phone counts steps and records their number at the end of every day. You want to add up the steps of a few days. The programs of Module 10 got their data from the keyboard, so on every run you had to type them again in the **Run** window. When the data already exist somewhere, it's handier to keep them in a **text file**: you prepare it once, and the program reads it by itself on every run.
+An app on your phone counts steps and records their number at the end of every day. You want to add up the steps of a few days. The programs of Module 10 got their data from the keyboard, so on every run you had to type it again in the **Run** window. When the data already exists somewhere, it's handier to keep it in a **text file**: you prepare it once, and the program reads it by itself on every run.
 
-In this lesson the program will open the file `steps.txt` by itself and read numbers from it. You'll answer three questions: **how does a program open a file? Where does it look for it? What should it do when the file can't be opened, or when data are missing from it?**
+In this lesson the program will open the file `steps.txt` by itself and read numbers from it. You'll answer three questions: **how does a program open a file? Where does it look for it? What should it do when the file can't be opened, or when data is missing from it?**
 
 After this lesson you will:
 
@@ -33,7 +33,7 @@ After this lesson you will:
 
 ## 1. The data file and its contract
 
-`steps.txt` is an ordinary text file, like `list.txt` in lesson 0.1. The data of two days look like this in it:
+`steps.txt` is an ordinary text file, like `list.txt` in lesson 0.1. In it, the data for two days looks like this:
 
 <!-- run: steps -->
 
@@ -48,10 +48,10 @@ After this lesson you will:
 
 - the first number is the number of days, from 0 to 5;
 - it is followed by exactly as many numbers as there are days: the steps of the successive days, each number from 0 to 20000;
-- the numbers are separated by spaces or line ends. In the examples each one stands on its own line, because the file is easier to read that way, but `>>` skips spaces and line ends just as when reading from the keyboard (lesson 2.6). So line boundaries don't matter to the program;
+- the numbers are separated by spaces or line ends. In the examples each one is on its own line, because the file is easier to read that way, but `>>` skips spaces and line ends just as when reading from the keyboard (lesson 2.6). So line boundaries don't matter to the program;
 - the program reads only the numbers that the first number announces. Whether anything else follows them in the file isn't checked in this lesson.
 
-The largest possible total is 5 · 20000 = 100000, so for data that follow the contract the result safely fits in an `int`.
+The largest possible total is 5 · 20000 = 100000, so for data that follows the contract the result safely fits in an `int`.
 
 The program prints the report only when it has read and checked all the required numbers. Every other situation ends with one message, with no partial report:
 
@@ -139,7 +139,7 @@ Only three lines are new: `#include <fstream>`, the creation of the variable `in
 
 - **`std::ifstream`** is short for *input file stream*. `std::cin` is a stream from the keyboard, and `input` is a stream from a file. You read from both in the same way: with `>>`, and you check success with `fail()`.
 - **You choose the variable's name yourself.** `input` is an ordinary variable name, like `count` or `total`.
-- **The file closes by itself** when the variable `input` ends, here together with `main`. You don't have to close it by hand.
+- **The file closes by itself** when the variable `input` stops existing, here at the end of `main`. You don't have to close it by hand.
 
 **The order of the checks** is the same for every required number:
 
@@ -185,7 +185,7 @@ The working directory is **not** automatically:
 - the folder where the executable is, for example `cmake-build-debug`;
 - the folder `cpp-workspace`, or any other that seems to be the "main" one.
 
-The working directory is a setting of the **run**, not of the code. The same executable, run twice with different working directories, can find the file once and not find it the other time. The code doesn't change.
+The working directory is a setting of the **run**, not of the code. The same executable, run twice with different working directories, can find the file one time and not the next. The code doesn't change.
 
 **The working directory isn't the build folder either.** The build folder, for example `cmake-build-debug`, is where CMake and Ninja save the object files and the executable. Changing the working directory doesn't build anything and doesn't move the program. It only changes the place from which the program counts relative paths.
 
@@ -358,12 +358,12 @@ Days: 2
 Total steps: 11550
 ```
 
-The result is the same as in section 5. As in lesson 4.6, a read with `>>` can work even when the data end right after the number. What decides an error is `fail()`, not whether a line end came after the last number. You don't have to prepare such a file: this case is checked automatically.
+The result is the same as in section 5. As in lesson 4.6, a read with `>>` can work even when the data ends right after the number. What decides an error is `fail()`, not whether a line end came after the last number. You don't have to prepare such a file: this case is checked automatically.
 
 </details>
 
 <details>
-<summary>The other test cases: open after your predictions</summary>
+<summary>The other check cases: open after your predictions</summary>
 
 All these cases are checked automatically. The results follow from the contract of section 1.
 
@@ -587,7 +587,7 @@ The program prints `Cannot open steps.txt`. Now find the cause as if nobody had 
 - **The working directory is `cmake-build-debug`.** The program looks for `steps.txt` there, and the file isn't there. It's in `lesson_12_1`.
 - **The fix:** in the field **Working directory**, set the folder `lesson_12_1` back, as in section 4, and run the program again. It prints the report of section 5 again. You don't change `main.cpp`, and you don't build the program again: only the place where the program looks for the file changes.
 
-You could also copy the file into `cmake-build-debug`, but that's a worse fix. The build folder holds files generated by the tools, and the data belong to the project. Don't write an absolute path into the program either, for example with the name of your home folder: the program would then work only on your computer.
+You could also copy the file into `cmake-build-debug`, but that's a worse fix. The build folder holds files generated by the tools, and the data belongs to the project. Don't write an absolute path into the program either, for example with the name of your home folder: the program would then work only on your computer.
 
 The same cause comes in several forms. The program doesn't find the file when the working directory points somewhere else (this exercise), when the file was saved in another folder, for example in `cmake-build-debug`, and when the file has a different name from the one the program gives. In each of these cases the same question gives the answer: **what is the working directory, and is a file with exactly this name in it?**
 
@@ -597,7 +597,7 @@ Before you go on, make sure that **Working directory** points to `lesson_12_1` a
 
 ## 8. Mission: pages read in a session
 
-After every reading session you record how many pages were read. The program reads these data from the file `pages.txt` and gives the number of sessions and the total number of pages.
+After every reading session you record how many pages were read. The program reads this data from the file `pages.txt` and gives the number of sessions and the total number of pages.
 
 **The contract of the file `pages.txt`:**
 
@@ -742,7 +742,7 @@ Input error
 
 **Then run the program for A and for D.** Between the runs you change only the contents of `pages.txt`, not the code. Trace the other cases on paper, line by line through your program, and compare them with the results given above. If you have time, run C too: the simplest way is to rename the file for a while, for example to `pages_off.txt`, and then restore `pages.txt`. All of cases A–G are checked automatically in the reference solution.
 
-### Success criterion
+### Success criteria
 
 - The program builds as C++20 and prints exactly the result shown for A and D.
 - Your predictions for B, C, E, F and G agree with the results given above.
@@ -784,7 +784,7 @@ An example solution is in the section [Example solutions](#example-solutions).
 |---|---|---|
 | `Cannot open steps.txt`, although the file exists | The file isn't in the working directory, or it has a different name. | Follow the steps of section 7: the name, the case of letters, **Working directory**, the file's location. |
 | There's a file `steps.txt.txt` in the folder, or `steps.txt` has no `.txt` extension | The editor added an extension, or the file was saved under another name. Windows hides known extensions by default. | Check the name in the terminal with `ls` and change it to exactly `steps.txt`. |
-| `Input error` for data that look valid | The file was saved as a document, for example in RTF format, not as plain text, or a letter stands where a number should be, for example `O` instead of `0`. | Create the file in CLion (**New \| File**) or in an editor that saves plain text, and type the data again. |
+| `Input error` for data that looks valid | The file was saved as a document, for example in RTF format, not as plain text, or there's a letter where a number should be, for example `O` instead of `0`. | Create the file in CLion (**New \| File**) or in an editor that saves plain text, and type the data again. |
 | A report with other numbers than you expect | The program reads a different `steps.txt` from the one you're editing, for example a copy in another folder. | Check **Working directory** and open the file from precisely that folder. |
 | The program prints nothing and waits | The program reads from `std::cin` instead of the file stream. | Check that every read uses the file stream's variable, for example `input >> days;`. |
 
@@ -809,11 +809,11 @@ Answer in your own words, ideally in writing. Only then compare with the example
 1. `<fstream>` includes the file streams. The line creates a variable `input` of type `std::ifstream`, an input file stream, and at once tries to open the file `steps.txt` for reading. It doesn't read data yet: the later `input >> ...` do that.
 2. It's a relative path: just the file's name. The program looks for it in its working directory, the current folder of the running program.
 3. In CLion the working directory is set by the field **Working directory** of the run configuration. In the terminal it's the shell's current folder from which you start the program. The code itself doesn't set it.
-4. `Cannot open steps.txt`: the program couldn't open the file, for example because the file isn't in the working directory. `Input error`: the file opened, but a required number couldn't be read, for example because the file is empty or the word `seven` stands where a number should be.
+4. `Cannot open steps.txt`: the program couldn't open the file, for example because the file isn't in the working directory. `Input error`: the file opened, but a required number couldn't be read, for example because the file is empty or there's the word `seven` where a number should be.
 5. A file with `0` says that there were zero days, so the report `Days: 0` is valid. An empty file says nothing, so reading the number of days fails and the program prints `Input error`. Without the check of the read, `days` would stay 0, and the program would print the same report for an empty file as for a file with `0`, presenting missing data as a result.
 6. The program looks for the file in its working directory, and the file is somewhere else or has a slightly different name. First I check the name and the case of letters, then the field **Working directory**, and whether the file is precisely in that folder.
 7. No. `add_executable` lists the source files that the compiler translates into the program, and `steps.txt` holds data that the program reads while it runs. After changing `steps.txt` it's enough to run the program again. After changing `main.cpp` you have to build it again, which **Run** in CLion does by itself.
-8. No. If the last number is complete, `>>` reads it correctly, even when the data end right after it, and `fail()` gives `false`. An error appears when a required number is missing or isn't a number.
+8. No. If the last number is complete, `>>` reads it correctly, even when the data ends right after it, and `fail()` gives `false`. An error appears when a required number is missing or isn't a number.
 9. The build folder is where the tools save the built program. The working directory is the place from which the running program counts relative paths. Changing the working directory doesn't move or build the program, and the executable can be in a different folder from the one where it looks for data.
 10. The program doesn't check the file's lines, or the data after the required numbers. It prints a valid report, for example, for `2 4200 7350` on one line, for a file with empty lines between the numbers, and for a file in which one more number or a word follows the required numbers.
 
@@ -929,7 +929,7 @@ Total pages: 37
 | F | `2`, `15`, `seven` | `Input error` |
 | G | `2`, `15` | `Input error` |
 
-The other test cases, checked automatically:
+The other check cases, checked automatically:
 
 **H: one session.**
 

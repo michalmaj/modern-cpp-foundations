@@ -22,7 +22,7 @@ Zajrzenie do podpowiedzi albo do wcześniejszych lekcji nie jest porażką. Waż
 - **pierwsze:** specyfikacja, część A, projekt w CLionie, typ rekordu, funkcja odczytu i przypadek A;
 - **drugie:** pełna kontrola danych, numery linii, raport, przypadki kontrolne, część C i samoocena.
 
-**Możesz używać:** CLiona albo terminala, CMake i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; lekcji 12.1–12.3 jako przypomnienia; tabel przypadków. Debugger nie jest potrzebny. Wszystko, czego potrzebujesz, znasz z Modułów 1–12.
+**Możesz używać:** CLiona albo terminala, CMake'a i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; lekcji 12.1–12.3 jako przypomnienia; tabel przypadków. Debugger nie jest potrzebny. Wszystko, czego potrzebujesz, znasz z Modułów 1–12.
 
 Z programów z lekcji 12.1–12.3 możesz też świadomie przenieść fragmenty kodu. Celem sprawdzianu jest jednak samodzielnie przygotowany plan i program zaprojektowany według nowej specyfikacji, a nie sama zamiana nazw w kodzie z lekcji 12.3. Jeśli adaptujesz wcześniejszy kod, zanotuj w samoocenie, z którego programu korzystasz, co w nim zmieniasz i dlaczego.
 

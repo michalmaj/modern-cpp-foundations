@@ -19,11 +19,11 @@ This lesson assumes that you:
 
 In lesson 10.4 the program read the list of shipments from the keyboard, so on every run it had to be typed again. Now the same list is in a file, `shipments.txt`. The program should read it and print the same report as then.
 
-Is a new reading function needed, for example `read_shipment_from_file`? No. The function `read_shipment_values` of lesson 10.4 never mentions `std::cin`: it reads from its parameter `input`, that is, from the stream it's given in the call. **You'll change only the calling code: `main` decides where the data come from.** The function stays unchanged, character for character.
+Is a new reading function needed, for example `read_shipment_from_file`? No. The function `read_shipment_values` of lesson 10.4 never mentions `std::cin`: it reads from its parameter `input`, that is, from the stream it's given in the call. **You'll change only the calling code: `main` decides where the data comes from.** The function stays unchanged, character for character.
 
 After this lesson you will:
 
-- pass the same function with a `std::istream&` parameter `std::cin` once, and an open `std::ifstream` another time;
+- pass `std::cin` one time and an open `std::ifstream` another time to the same function with a `std::istream&` parameter;
 - split the responsibility: the calling code chooses and opens the data source, and the function reads from whatever stream it's given;
 - check that both sources give the same result for the same data;
 - state a program's data contract and point out its limits, for example an empty line in the middle of a file;
@@ -44,7 +44,7 @@ The body of this function has no `std::cin`, no file name and no `std::cout`. Th
 - it gets a ready, non-empty name and a record to fill;
 - it has to read one number, check it and, on success, fill the record.
 
-It doesn't know whether the data come from the keyboard or from a file, what that file is called, or who opened it. It doesn't need to: reading a number looks the same in both cases.
+It doesn't know whether the data comes from the keyboard or from a file, what that file is called, or who opened it. It doesn't need to: reading a number looks the same in both cases.
 
 **A reminder: `std::istream&`.** `std::istream` is the type of an input stream, and `std::cin` is an object of that type (lesson 10.4). `&` means that the parameter `input` is another name for the object passed in the call: the function gets no copy, it works on the caller's stream. `input >> boxes` takes characters from that same stream, so after the function returns, `main` reads on from where the function stopped. There's no `const`, because reading changes the stream: it moves the reading position and may change its state.
 
@@ -281,15 +281,15 @@ Total boxes: 11
 
 This is the second required run. The report is exactly the same as from the keyboard.
 
-**The same data, the same result.** From the keyboard the data were ended by an empty line, and in the file they're ended by the end of the file. According to lesson 10.4 both situations mean the ending of the data, so the report is the same. How do you check that the function works by the same agreement for both sources? Give both versions of the program the same data and compare their standard output. The course's automatic tests do it for several data sets (section 6).
+**The same data, the same result.** From the keyboard the data was ended by an empty line, and in the file it's ended by the end of the file. According to lesson 10.4 both situations mean the ending of the data, so the report is the same. How do you check that the function works by the same agreement for both sources? Give both versions of the program the same data and compare their standard output. The course's automatic tests do it for several data sets (section 6).
 
 ## 4. Who is responsible for what
 
 | The calling code (`main`) | The function `read_shipment_values` |
 |---|---|
 | chooses the data source: `std::cin` or a file | gets an existing stream |
-| opens the file, if the data are in a file, and checks the opening | doesn't know the file name and opens nothing |
-| reads the name and decides whether the data have ended | reads the number and checks that it's allowed |
+| opens the file, if the data is in a file, and checks the opening | doesn't know the file name and opens nothing |
+| reads the name and decides whether the data has ended | reads the number and checks that it's allowed |
 | calls the function and, after a refusal, chooses the message | fills the record only on success, and leaves it unchanged on a refusal |
 | builds the vector with `push_back` | reports its result through `bool` |
 | prints the report or a message | prints nothing |
@@ -306,7 +306,7 @@ This is the second required run. The report is exactly the same as from the keyb
 > - each shipment takes two lines: the destination's name and the number of boxes;
 > - the name isn't empty, may contain spaces and may repeat, and the number of boxes isn't negative;
 > - there are at most 5 shipments;
-> - the data are ended by the end of the file or by an empty line where the next name would be;
+> - the data is ended by the end of the file or by an empty line where the next name would be;
 > - there are no empty lines between shipments;
 > - the program doesn't check text after the number on its line.
 >
@@ -315,15 +315,15 @@ This is the second required run. The report is exactly the same as from the keyb
 | Situation | Standard output |
 |---|---|
 | the file couldn't be opened | `Cannot open shipments.txt` |
-| after a non-empty name the number couldn't be read, also when the file ends right after the name | `Input error` |
+| after a non-empty name the number couldn't be read, even when the file ends right after the name | `Input error` |
 | the number has been read, but it's negative | `Invalid shipments` |
-| the data have ended | `Shipments: N`, the shipments in the order of the file, and `Total boxes: T` |
+| the data has ended | `Shipments: N`, the shipments in the order of the file, and `Total boxes: T` |
 
 The error messages are the same as in lesson 10.4; only `Cannot open shipments.txt` is new. After a message there's no partial report, and the program ends with exit code 0.
 
 **Predict** the result of each case before you open the collapsed block. Running them is optional: you only change the contents or the name of `shipments.txt`, with no rebuilding.
 
-**B: an empty file.** `shipments.txt` exists, but has not a single character in it.
+**B: an empty file.** `shipments.txt` exists, but there isn't a single character in it.
 
 <!-- run: shipments_file -->
 
@@ -485,7 +485,7 @@ Total boxes: 11
 
 Where the data can end, and what the program prints then:
 
-| Where the data end | Case | Result |
+| Where the data ends | Case | Result |
 |---|---|---|
 | before the first name: an empty file | B | a report without shipments |
 | at an empty line where a name would be | C | the report |
@@ -522,14 +522,14 @@ Total boxes: 4
 
 </details>
 
-The program stops reading at the empty line, because the contract says so: an empty line where a name would be ends the data. `South Depot` and `7` stay unread in the file, and the report says nothing about them. **This is not a reading of both shipments.** The program has no bug here: it works correctly for data that follow the contract, and this file breaks the contract, because no empty line may be left between shipments. If the file was meant to hold two shipments, though, the report is incomplete, and nothing signals it.
+The program stops reading at the empty line, because the contract says so: an empty line where a name would be ends the data. `South Depot` and `7` stay unread in the file, and the report says nothing about them. **The program hasn't read both shipments.** The program has no bug here: it works correctly for data that follows the contract, and this file breaks the contract, because no empty line may be left between shipments. If the file was meant to hold two shipments, though, the report is incomplete, and nothing signals it.
 
 **Why is this a bigger problem in a file than at the keyboard?** When typing in the **Run** window, an empty line is a deliberate decision: you press **Enter** because the list has ended. In a file nobody types a separate "end" line, because the file ends by itself. An empty line in the middle of a file easily appears by accident, for example when adding or copying data, and the program silently skips everything after it.
 
 **A question for later.** What should the program do if an empty line appears between two shipments, and we want to read all the records, or at least learn that something is wrong with the file? Write down your answer. You'll come back to this question in the next lesson of Module 12.
 
 <details>
-<summary>The other control cases: open after your predictions</summary>
+<summary>The other check cases: open after your predictions</summary>
 
 All these cases are checked automatically. Their results follow from the contract of section 5.
 
@@ -614,7 +614,7 @@ four
 Input error
 ```
 
-**N: an empty line at the very start.** The file has one line, and it's empty, so the data end before the first shipment starts. The report is the same as for an empty file.
+**N: an empty line at the very start.** The file has one line, and it's empty, so the data ends before the first shipment starts. The report is the same as for an empty file.
 
 <!-- run: shipments_file -->
 
@@ -778,7 +778,7 @@ A school library records in a file how many copies of each title are on loan. Th
 - the same title may appear several times, and each occurrence is a separate entry;
 - the number of copies is a whole number from 0 to 12;
 - there are at most 5 entries, so the total is at most 5 · 12 = 60;
-- the data are ended by the end of the file or by an empty line where the next title would be, and there are no empty lines between entries;
+- the data is ended by the end of the file or by an empty line where the next title would be, and there are no empty lines between entries;
 - the program doesn't check text after the number on its line.
 
 **The messages:**
@@ -788,7 +788,7 @@ A school library records in a file how many copies of each title are on loan. Th
 | the file couldn't be opened | `Cannot open loans.txt` |
 | after a non-empty title the number couldn't be read | `Input error` |
 | the number has been read, but it's outside the range from 0 to 12 | `Invalid loans` |
-| the data have ended | `Loans: N`, each entry in the order of the file, for example `Science Atlas: 2`, and `Total copies: T` |
+| the data has ended | `Loans: N`, each entry in the order of the file, for example `Science Atlas: 2`, and `Total copies: T` |
 
 The program doesn't sort the entries and doesn't remove repeats. It prints the report only after processing all the entries, and after an error only one message, with no partial report. It asks no questions and ends with exit code 0.
 
@@ -1011,7 +1011,7 @@ When the result matches, you can save the project in Git, as in lesson 1.5: `mai
 <details>
 <summary>Hint 1: the shared parameter</summary>
 
-The function of section 1 doesn't know where the data come from, and that's why it fits any source. What parameter type lets your function read from an open file, and, if needed, from `std::cin` too? Who in your program should know the name `loans.txt`?
+The function of section 1 doesn't know where the data comes from, and that's why it fits any source. What parameter type lets your function read from an open file, and, if needed, from `std::cin` too? Who in your program should know the name `loans.txt`?
 
 </details>
 
@@ -1031,7 +1031,7 @@ Tell four situations apart: a file that couldn't be opened (check right after cr
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 9. When something goes differently
+## 9. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -1040,7 +1040,7 @@ An example solution is in [Example solutions](#example-solutions).
 | At `>>` the compiler reports `invalid operands to binary expression`, and the message contains `const std::istream` | The stream parameter has `const`, and reading changes the stream. | Remove `const` from the stream parameter. |
 | `Cannot open shipments.txt`, although the file exists | The file isn't in the working directory, or has another name. | Follow the steps of lesson 12.1, section 7: the name, the case of letters, **Working directory**, where the file is. |
 | The report has fewer shipments than the file, and there's no message | There's an empty line in the middle of the file, which ends the data (section 6). | Remove the empty line: the file breaks this lesson's contract. |
-| `Input error`, although the data look correct | Where a number should be, there's a letter, for example `O` instead of `0`, or the line with the number after the last name is missing. | Check the file line by line: every name must be followed by a line with a number. |
+| `Input error`, although the data looks correct | Where a number should be, there's a letter, for example `O` instead of `0`, or the line with the number after the last name is missing. | Check the file line by line: every name must be followed by a line with a number. |
 
 ## 10. Explain
 
@@ -1078,9 +1078,9 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 - A function with a `std::istream&` parameter reads from any input stream: from `std::cin` and from an open `std::ifstream`. To move from the keyboard to a file, you change only the calling code.
 - `main` chooses the source, opens the file and checks the opening, reads the names, recognises the ending of the data, builds the vector and prints the result. The function reads and checks the values of one record, opens nothing and prints nothing.
 - You pass a stream by a reference without `const`. A stream may not be copied (`call to deleted constructor of 'std::istream'`), and reading changes it.
-- The same data give the same result from the keyboard and from a file. In a file the data are usually ended by the end of the file, also when there's no line end after the last number.
+- The same data gives the same result from the keyboard and from a file. In a file the data is usually ended by the end of the file, even when there's no line end after the last number.
 - The contract defines for which data the program works correctly. It also decides what an empty file means: here, a list without shipments.
-- An empty line in the middle of a file silently ends the reading. That's a limit of the contract taken over from the keyboard, not a reading of all the records.
+- An empty line in the middle of a file silently ends the reading. That's a limit of the contract taken over from the keyboard, not a sign that all the records were read.
 
 ## What's next
 
@@ -1093,7 +1093,7 @@ The program of this lesson trusts the file's format: an empty line ends the read
 Look here **after your own attempt**. Your names may differ, as long as the standard output is as required.
 
 <details>
-<summary>Section 8: mission, school library loans</summary>
+<summary>Section 8: the mission, school library loans</summary>
 
 **`main.cpp`**:
 
@@ -1214,7 +1214,7 @@ Total copies: 5
 | I | the data A with no line end after `3` | 2 entries, `Total copies: 5` |
 | J | `Science Atlas`, `2`, `Science Atlas`, `4` | 2 entries, `Total copies: 6` |
 
-The other control cases, checked automatically:
+The other check cases, checked automatically:
 
 **K: one entry.**
 
@@ -1328,7 +1328,7 @@ Science Atlas
 Input error
 ```
 
-**The control program** checks the function's agreement on a refusal, which the report doesn't show, because after `false` the program ends. The type and the function are the same as above, but `main` reads from `std::cin`: the same function works unchanged with the keyboard. `main` prepares the record `Old Title` with the number 1, reads one title, calls the function and prints its result and the state of the record. Running it is optional. You can replace the type and the function with your own, if you also change the names in `main`.
+**The check program** checks the function's agreement on a refusal, which the report doesn't show, because after `false` the program ends. The type and the function are the same as above, but `main` reads from `std::cin`: the same function works unchanged with the keyboard. `main` prepares the record `Old Title` with the number 1, reads one title, calls the function and prints its result and the state of the record. Running it is optional. You can replace the type and the function with your own, if you also change the names in `main`.
 
 <!-- example: loan_values_check -->
 ```cpp
@@ -1387,7 +1387,7 @@ Returned: true
 Result: History Notes, 3
 ```
 
-After a refusal the record stays unchanged, also when the number was read but is outside the range:
+After a refusal the record stays unchanged, even when the number was read but is outside the range:
 
 <!-- input: loan_values_check -->
 ```text

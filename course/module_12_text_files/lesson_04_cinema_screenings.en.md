@@ -13,14 +13,14 @@ This lesson introduces nothing new. You check whether you can **design, write an
 The test has three parts and a review:
 
 - **Part A: the plan.** A short plan of the data, the reading and the responsibilities, before you write code.
-- **Part B: implementation and tests.** The program, written to the specification and checked with the control cases. This is the largest part of the work.
+- **Part B: implementation and tests.** The program, written to the specification and checked with the check cases. This is the largest part of the work.
 - **Part C: diagnostic and justification.** An error in line numbering, and questions about your decisions. Do it after Part B.
 - **Checking and review:** hints, the full list of cases, the reference solution, the diagnostic's explanation, answers and a self-assessment. Go there only after Parts A and B, or when you consciously give up further work on your own.
 
-Looking at a hint or at an earlier lesson isn't a failure. What matters is to **note honestly what was done independently and what with help**. A suggested split into two sessions:
+Looking at a hint or at an earlier lesson isn't a failure. What matters is to **note honestly what was done on your own and what was done with help**. A suggested split into two sessions:
 
 - **first:** the specification, Part A, the project in CLion, the record type, the reading function and case A;
-- **second:** the full check of the data, the line numbers, the report, the control cases, Part C and the self-assessment.
+- **second:** the full check of the data, the line numbers, the report, the check cases, Part C and the self-assessment.
 
 **You may use:** CLion or the terminal, CMake and Ninja, as before; `CMakeLists.txt` copied from the original `lesson_05_first_program`; lessons 12.1–12.3 as reminders; the case tables. You won't need the debugger. You know everything you need from Modules 1–12.
 
@@ -53,7 +53,7 @@ The file holds zero or more records. Each record takes exactly two physical line
 - A title isn't an empty line, may contain spaces and may repeat: each occurrence is a separate screening. The program keeps the title exactly, with all its characters, spaces at the start and at the end included. A line of spaces only isn't empty, so it's a valid title.
 - A status has exactly one of the three forms. The case of letters matters and there are no extra spaces: `Available`, `FULL`, `Canceled` and `available ` with a space at the end are invalid.
 - The number of screenings isn't limited. An empty file, that is, a file without any character, is valid and means zero screenings.
-- The data are ASCII text, and the character `\n` ends the lines.
+- The data is ASCII text, and the character `\n` ends the lines.
 
 ### The end of the data and errors
 
@@ -106,7 +106,7 @@ Cancelled total: C
 7. how it checks whether a status is allowed;
 8. where and how it computes the three totals;
 9. how it prevents a partial report;
-10. which data files it is tested with.
+10. which data files to test it with.
 
 Reminders are in lessons [12.1](lesson_01_first_data_file.en.md) (a data file, the working directory, a failed open), [12.2](lesson_02_records_from_a_file.en.md) (a reading function with `std::istream&`) and [12.3](lesson_03_end_of_data_and_errors.en.md) (the end of the file, empty lines, line numbers).
 
@@ -274,7 +274,7 @@ Invalid line 4
 
 The other cases, G and I–T, are in the full list in "Checking and review". They follow from the same specification: none of them has a new rule.
 
-**Run as required**, changing only the contents or the name of `screenings.txt`:
+**Required runs**, changing only the contents or the name of `screenings.txt`:
 
 1. A;
 2. C: rename the file, for example to `screenings_old.txt`, run the program, and restore the name;
@@ -374,7 +374,7 @@ The rubric is for self-assessment or for assessment by a teacher. The course has
 - **A good result for A with wrong numbers for F, G or O** doesn't give full points for numbering.
 - **Other names** and another, justified split into functions don't cost points. A split into several files earns no extra points, and a single `main.cpp` costs none.
 
-**What is checked automatically, and what isn't.** The course's tests check that the reference solution and the diagnostic's program build and give the shown results. Your runs of the control cases check how your program behaves for those data. **No automatic check looks at your code, your plan or your justification:** a person assesses them by reading the plan and the program.
+**What is checked automatically, and what isn't.** The course's tests check that the reference solution and the diagnostic's program build and give the shown results. Your runs of the check cases show how your program behaves with that data. **No automatic check looks at your code, your plan or your justification:** a person assesses them by reading the plan and the program.
 
 ---
 
@@ -401,11 +401,11 @@ Tell apart four situations: a failed read of a title; a successful read of an em
 <details>
 <summary>Hint 3: numbering and the report</summary>
 
-The line counter says how many lines have been read so far: it grows after every successful `std::getline`, also after a status, and doesn't grow after a failed one. The reading function can write the kind of error and the line number into variables passed by reference, as in lesson 12.3. Compute the totals and the report only when the function has ended with success.
+The line counter says how many lines have been read so far: it grows after every successful `std::getline`, including after a status, and doesn't grow after a failed one. The reading function can write the kind of error and the line number into variables passed by reference, as in lesson 12.3. Compute the totals and the report only when the function has ended with success.
 
 </details>
 
-## The full list of control cases
+## The full list of check cases
 
 <details>
 <summary>Cases G and I–T, checked automatically for the reference solution</summary>
@@ -485,7 +485,7 @@ full
 Invalid line 2
 ```
 
-**N: an empty line between screenings.** More data follow it, but the reading doesn't end after the first screening.
+**N: an empty line between screenings.** More data follows it, but the reading doesn't end after the first screening.
 
 <!-- run: screenings -->
 
@@ -825,7 +825,7 @@ Cancelled total: 1
 <details>
 <summary>Open after doing the diagnostic</summary>
 
-The whole program with the error is the reference solution with one line moved: `++line_number;` stands right after the status is read. Its results are checked automatically.
+The whole program with the error is the reference solution with one line moved: `++line_number;` comes right after the status is read. Its results are checked automatically.
 
 <!-- example: screenings_counter_bug -->
 ```cpp
@@ -1085,7 +1085,7 @@ After four lessons you can:
 - open a text file with `std::ifstream`, check the opening, and understand where the program looks for a file given by a relative path;
 - tell a failed open from a failed read, and an empty file from a missing one;
 - write a reading function with an `std::istream&` parameter that works with a file and with `std::cin`;
-- end the data only at the end of the file and tell it from an empty line, also with a last line without a line end;
+- end the data only at the end of the file and tell it from an empty line, even with a last line without a line end;
 - number physical lines and point to an empty line, a value that isn't allowed and an incomplete record;
 - print the report only after checking the whole file, with no partial report after an error.
 

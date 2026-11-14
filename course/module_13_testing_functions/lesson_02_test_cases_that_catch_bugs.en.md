@@ -68,7 +68,7 @@ struct LoanRequest {
 
 The function returns only a `bool`. It doesn't say **why** it refused.
 
-The correct function first rejects data that aren't allowed, and then checks the three conditions at once:
+The correct function first rejects data that isn't allowed, and then checks the three conditions at once:
 
 <!-- fragment -->
 ```cpp
@@ -249,7 +249,7 @@ A stronger suite comes from the contract, point by point. Every case has a reaso
 - A case of **invalid input**: values outside the allowed range. The contract says what to do then, so these are cases with an unambiguous expected result too.
 - A **test suite** is all the cases checked together by one test program.
 
-**K and L** show the boundary of the allowed data: 30 days are still valid data, 31 aren't. Both give `false`, though, each for a different reason: K because of the overdue, L because of invalid input. The function returns only a `bool`, so a test sees the result, not the reason. This boundary doesn't change the result of this function. **A boundary case is most valuable where the result should differ on the two sides of the boundary**, as with C and D.
+**K and L** show the boundary of the allowed data: 30 days is still valid data, 31 isn't. Both give `false`, though, each for a different reason: K because of the overdue, L because of invalid input. The function returns only a `bool`, so a test sees the result, not the reason. This boundary doesn't change the result of this function. **A boundary case is most valuable where the result should differ on the two sides of the boundary**, as with C and D.
 
 ## 7. A stronger test suite
 
@@ -459,7 +459,7 @@ Here are three more versions of `can_borrow`. Each differs from the correct func
 | a wrong overdue boundary | `days_overdue <= 1` instead of `days_overdue == 0` in the last line | one day overdue doesn't matter |
 | no check of a negative number | the first condition is only `request.borrowed_books > 5` | a negative number of books passes as valid |
 
-**For each version, choose from the table A–L a case that detects it**, and predict its `FAIL` line. Think also about why the weak suite A, B and J passes for each of them. Only then open the review.
+**For each version, choose from the table A–L a case that detects it**, and predict its `FAIL` line. Also think about why the weak suite A, B and J passes for each of them. Only then open the review.
 
 <details>
 <summary>Review: three versions and their results</summary>
@@ -744,7 +744,7 @@ Exit code: 1.
 | no check of a negative number | 0–6 books, the overdue, the block | PASS | G | `false` | `true` | J has no negative number of books |
 
 - Each bug is detected by a case in which **the only reason for refusing** is exactly the broken condition.
-- H and I detect none of these versions: 6 books and -1 day overdue are rejected not only by the range check but also by the last line of the function. They stay in the suite because they check what the contract says about invalid input, whatever way the function is written. If someone rewrote it without separate range checks, with the condition `borrowed_books != 5` instead of `< 5`, H would give `FAIL`.
+- H and I detect none of these versions: 6 books and -1 day overdue are rejected not only by the range check but also by the last line of the function. They stay in the suite because they check what the contract says about invalid input, however the function is written. If someone rewrote it without separate range checks, with the condition `borrowed_books != 5` instead of `< 5`, H would give `FAIL`.
 - **This isn't a formal testing method**, only a way of checking whether the cases can detect anything: you plant one bug on purpose and watch whether some test gives `FAIL`. A suite that detects these four bugs won't detect every possible mistake.
 
 </details>
@@ -1032,7 +1032,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 7. From the function's contract. They're worked out before the test runs, and never from what the function currently returns.
 8. No. `FAIL` only points to a mismatch between the actual and the expected result. The mistake may be in the function or in the test itself, for example in a wrongly worked-out expected result.
 9. Work out the result from the contract again. If the contract agrees with the function, the test is wrong. If it agrees with the expected result, the function is wrong.
-10. Plant on purpose the bug the test is meant for, run the test and check that it gives `FAIL`. Then restore the correct function and check that the test passes again.
+10. Deliberately plant the bug the test is meant for, run the test and check that it gives `FAIL`. Then restore the correct function and check that the test passes again.
 
 </details>
 
