@@ -19,14 +19,14 @@ The test has three parts and a review:
 - **Part C: a change of requirements.** A new named result, a sensor fault: first the tests of the new contract, which fail, then the change in the code and all the tests again.
 - **Checking and review:** hints, the full list of cases, the reference solution, explanations, answers and a self-assessment. Go there only after Parts A and B, or when you consciously give up further work on your own.
 
-Looking at a hint or at an earlier lesson isn't a failure. What matters is to **note honestly what was done independently and what with help**. A suggested split into two sessions:
+Looking at a hint or at an earlier lesson isn't a failure. What matters is to **note honestly what was done on your own and what was done with help**. A suggested split into two sessions:
 
 - **first, about 115 minutes:** the specification, Part A, the project in CLion, `collect_measurements`, the test program, detecting the bug and the fix, that is runs 1–3;
 - **second, about 55 minutes:** Part C with runs 4 and 5, the justification, the checklist and the self-assessment.
 
 Typically it takes about 170 minutes in total. The range in the header, 150–190 minutes, is an estimate, not a limit: finding your own mistakes in the code and in the tests can take longer.
 
-**You may use:** CLion or the terminal, CMake and Ninja, as before; `CMakeLists.txt` from the original `lesson_05_first_program` and the pattern of two targets from lesson 13.4; the check functions of lessons 13.1–13.3 and 14.3 (you get them in the test program's skeleton); `read_number` and `discard_rest_of_line` from lesson 14.4 (you get them in the starter code); your function `count_ratings` from the mission of lesson 14.4 as a starting point for `collect_measurements`; your earlier case tables. You won't need the debugger. You know everything you need from Modules 1–14.
+**You may use:** CLion or the terminal, CMake and Ninja, as before; `CMakeLists.txt` from the original `lesson_05_first_program` and the pattern of two targets from lesson 13.4; the checking functions of lessons 13.1–13.3 and 14.3 (you get them in the test program's skeleton); `read_number` and `discard_rest_of_line` from lesson 14.4 (you get them in the starter code); your function `count_ratings` from the mission of lesson 14.4 as a starting point for `collect_measurements`; your earlier case tables. You won't need the debugger. You know everything you need from Modules 1–14.
 
 Treat lessons 13.4 and 14.1–14.4 as reminders of the rules, not as a finished program to copy. You may carry over parts of code consciously, for example the loop of `count_ratings`, but prepare the plan, the cases, the expected results and the way of showing the bug on your own. If you adapt earlier code, note in the self-assessment where it comes from, what was carried over, what was changed and which decisions were made on your own.
 
@@ -41,7 +41,7 @@ A weather station collects temperature measurements and gives a report at the en
 - Each reading is one line that starts with a whole number: the temperature in degrees Celsius.
 - The simulator may add any text after the number, for example a unit: `19 C`.
 - Sometimes it sends an empty line. An empty line isn't a reading.
-- The data end when the simulator stops sending.
+- The data ends when the simulator stops sending.
 
 As in lesson 14.4, the text where an attempt to read starts, up to the end of its line, is called an **entry**.
 
@@ -111,10 +111,10 @@ StationReport collect_measurements(std::istream& input, int limit);
 **The contract:**
 
 - **Precondition:** `limit > 0`. The function doesn't check it.
-- It calls `read_measurement` until it has accepted `limit` measurements or until the data run out.
-- **Only accepted measurements count toward the limit.** Refusals, `out_of_range` and `invalid_entry`, are counted in their own fields and don't use up the limit.
+- It calls `read_measurement` until it has accepted `limit` measurements or until the data runs out.
+- **Only accepted measurements count towards the limit.** Refusals, `out_of_range` and `invalid_entry`, are counted in their own fields and don't use up the limit.
 - When it has accepted `limit` measurements, it stops at once: **the rest of the data stays unread in the stream**. The next call of `read_measurement` on the same stream reads the next entry.
-- When the data run out earlier, it returns a report of what it managed to read. The end of the data itself isn't counted.
+- When the data runs out earlier, it returns a report of what it managed to read. The end of the data itself isn't counted.
 - It prints nothing.
 
 | `StationReport` field | Meaning |
@@ -128,7 +128,7 @@ StationReport collect_measurements(std::istream& input, int limit);
 
 ### The application program
 
-You get `main.cpp` ready-made in Part B. The program calls `collect_measurements` for `std::cin` with the limit 6, that is it collects six measurements, and prints the report. For these data, typed in consecutive lines (the fourth line is empty):
+You get `main.cpp` ready-made in Part B. The program calls `collect_measurements` for `std::cin` with the limit 6, that is it collects six measurements, and prints the report. For this data, typed in consecutive lines (the fourth line is empty):
 
 ```text
 21
@@ -171,7 +171,7 @@ measuring_station/
 - **`rules.hpp`:** all the types and declarations, with `#pragma once`. You get it ready-made.
 - **`rules.cpp`:** the only definitions of the four functions: you get `discard_rest_of_line`, `read_number` and `read_measurement` ready-made, and you write `collect_measurements` on your own.
 - **`main.cpp`:** the application program. You get it ready-made; it includes `rules.hpp`.
-- **`function_tests.cpp`:** the test program. You get a skeleton with the check functions and two cases as a pattern, and you add the other cases of your plan. It includes `rules.hpp`, contains no definition of any of the four functions, and reads nothing from `std::cin`.
+- **`function_tests.cpp`:** the test program. You get a skeleton with the checking functions and two cases as a pattern, and you add the other cases of your plan. It includes `rules.hpp`, contains no definition of any of the four functions, and reads nothing from `std::cin`.
 - **`CMakeLists.txt`:** two targets, `first_program` and `function_tests`, both with `rules.cpp`, in the form of lesson 13.4. Nothing more.
 - **Each call of `read_measurement`** in the tests checks the result and `temperature`. **Each scenario of `collect_measurements`** checks each field of the report separately, with its own label. The test program prints `PASS` or `FAIL` with the expected and the actual result, the summary `Checks: N, failed: F`, and ends with exit code 0 or 1, depending on the failures.
 
@@ -478,7 +478,7 @@ int main() {
 }
 ```
 
-The skeleton has the check functions and two cases of the plan, D1 and C1, as a pattern:
+The skeleton has the checking functions and two cases of the plan, D1 and C1, as a pattern:
 
 - `reading_text` turns a result into text for the `FAIL` line, and `check_reading` compares the expected result with the actual one, as in lesson 14.3;
 - `check_report` checks each field of the report separately: `"C1"` gives the labels `C1 measured`, `C1 out_of_range`, `C1 invalid_entries`, `C1 lowest` and `C1 highest`;
@@ -495,14 +495,14 @@ Add the other cases of your plan before the summary line, in the same form.
 1. **The files.** Copy the starter code into your files. In `rules.cpp`, below `read_measurement`, write `collect_measurements` according to the contract. **Don't change `read_measurement`.**
 2. **The test program.** Add all the cases of your plan to the skeleton of `function_tests.cpp`, with the expected results of the plan.
 3. **Two targets.** Change `CMakeLists.txt` as in lesson 13.4. CMake looks for all the files of both lists as soon as it loads the project, so the files must exist beforehand. Reload the project and choose **Build | Build Project**.
-4. **This is the first mandatory run:** run `first_program` and type the data of the example in the specification in the **Run** window, each line ended with Enter; an empty line is Enter alone. After the line `-5` the program stops by itself and prints the report: it doesn't wait for `7`. Compare the report with the specification.
+4. **This is the first mandatory run:** run `first_program` and type the example data from the specification in the **Run** window, each line ended with Enter; an empty line is Enter alone. After the line `-5` the program stops by itself and prints the report: it doesn't wait for `7`. Compare the report with the specification.
 5. **This is the second mandatory run:** run `function_tests`. With the supplied code, at least one check should give `FAIL`, and the test program should end with exit code 1. Write down the `FAIL` lines, with the expected and the actual results, and the exit code. This is the proof that your test detects the bug.
 6. If all the checks gave `PASS`, your test set doesn't detect the bug. First check that your `collect_measurements` passes its scenarios. Then go back to the plan and to the table of pairs: does each rule have a case that decides it on its own? Complete the plan and the tests, and run them again. Don't change `read_measurement` yet.
 7. **Find the cause.** From the `FAIL` lines and the contract, point to the place in `read_measurement` that works differently from what the specification says. Write down whether the error is in the function or in the expected result, and how you know.
 8. **Fix only the cause in `read_measurement`.** Don't change the test data, the expected results, `main.cpp`, `CMakeLists.txt` or `collect_measurements`.
 9. **This is the third mandatory run:** choose **Build Project** and run `function_tests` again. All the checks should give `PASS`, and the exit code should be 0. Rebuilding alone, without running the tests, doesn't confirm the fix.
 
-You fix `FAIL` lines caused by your own `collect_measurements` in `collect_measurements`, still before step 5, if the expected result agrees with the contract. Such extra runs don't count toward the five mandatory ones.
+You fix `FAIL` lines caused by your own `collect_measurements` in `collect_measurements`, still before step 5, if the expected result agrees with the contract. Such extra runs don't count towards the five mandatory ones.
 
 ---
 
@@ -552,18 +552,18 @@ struct StationReport {
 3. **The labels.** In the `switch` in `collect_measurements`, add a label `sensor_fault` that increases `sensor_faults`, and in `reading_text` a label that returns `"sensor_fault"`. The field `sensor_faults` starts at 0, like the others.
 4. **The tests of the new contract.**
    - `check_report` has to check `sensor_faults` too, with a label like the other fields.
-   - Complete **every** expected `StationReport{…}` with an explicit sixth value, also in the old scenarios, where it's 0.
+   - Complete **every** expected `StationReport{…}` with an explicit sixth value, even in the old scenarios, where it's 0.
    - The new rule changes expectations only where the entry `-99` appears. If your plan has it in one direct case only, that's the only old expectation you change. Write down the reason for every such change.
    - Add a direct case with the entry `-98`, a neighbour of the fault code that the new rule doesn't concern.
-   - Add a scenario in which a fault stands between measurements and the limit is reached: check the report and the next call on the same stream.
+   - Add a scenario in which a fault comes between measurements and the limit is reached: check the report and the next call on the same stream.
    - Add a scenario with faults only.
 5. **This is the fourth mandatory run:** build the project and run `function_tests`. `read_measurement` doesn't recognise −99 yet, so the checks that describe the fault should give `FAIL`, and the exit code should be 1. Write down the `FAIL` lines. This `FAIL` is expected: the tests already describe the new contract, and the function doesn't yet.
 6. **The change of the function.** In `read_measurement`, add the check of the fault code, before the check of the station's range. In `main.cpp`, add the line `Sensor faults`.
-7. **This is the fifth mandatory run:** run `function_tests`. All the checks, old and new, should give `PASS`, and the exit code should be 0. If you like, also run `first_program` with data that contain `-99`.
+7. **This is the fifth mandatory run:** run `function_tests`. All the checks, old and new, should give `PASS`, and the exit code should be 0. If you like, also run `first_program` with data that contains `-99`.
 
 **The explicit sixth value is mandatory.** The compiler won't enforce it: with the project settings of lesson 0.5, `StationReport{3, 0, 0, 18, 25}` for a struct with six fields compiles without a warning, and the missing field silently gets 0. The test would look complete, while saying nothing about faults. The `-Wswitch` warning of lesson 14.2 can point to a `switch` without a `sensor_fault` label, but the tests decide what's correct, not warnings.
 
-## When something goes differently
+## When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -572,7 +572,7 @@ struct StationReport {
 | With the supplied code, all the checks give `PASS` | Some rule has no case that decides it on its own. | Go back to the table of pairs of Part A and to hint 3. |
 | `lowest` is 0, although all the measurements are positive | `lowest` and `highest` start at 0 instead of at the first accepted measurement. | The first accepted measurement sets both fields. |
 | After a zero as the first measurement, `lowest` or `highest` is wrong | 0 in `lowest` is treated as "nothing accepted yet". | `measured` decides whether anything was accepted, not the value in `lowest`. |
-| A scenario with refusals before the limit gives too few measurements | The limit counts all attempts, not accepted measurements. | Only `measured` counts toward the limit. |
+| A scenario with refusals before the limit gives too few measurements | The limit counts all attempts, not accepted measurements. | Only `measured` counts towards the limit. |
 | In Part C, a fault is counted in `out_of_range` | The check of the station's range comes before the check of the fault code. | Put the checks in the order of precedence. |
 | In Part C, an old scenario passes although it doesn't check faults | The expected `StationReport{…}` has five values, and the sixth field silently got 0. | Write an explicit sixth value in every expected report. |
 | `21.5` is accepted as 21 | That's how the numeric-prefix policy works. | It's intended. |
@@ -606,8 +606,8 @@ The test is passed when you meet **all** the items of this list. Your names of c
 - [ ] 7. Each call of `read_measurement` checks the result and `temperature`, and `temperature` starts from a value no case gives.
 - [ ] 8. Each scenario is checked by `check_report`: a separate check and a separate label for each field of the report.
 - [ ] 9. The cases cover `21.5`, a real 0, no data, a completely empty stream, entries without an accepted measurement, zero as the first measurement, the last valid and the last bad entry without a line end, an empty line, text after a number, refusals before the limit is reached, and the limit reached with the rest of the data unread, plus the other kinds of Part A: every point of the lists "The direct cases must cover" and "The scenarios must cover".
-- [ ] 10. `collect_measurements` counts only accepted measurements toward the limit, sets `lowest` and `highest` from the first accepted measurement, and with a refusal changes only the matching counter.
-- [ ] 11. `first_program` was run by hand with the data of the example in the specification and printed the report of the specification.
+- [ ] 10. `collect_measurements` counts only accepted measurements towards the limit, sets `lowest` and `highest` from the first accepted measurement, and with a refusal changes only the matching counter.
+- [ ] 11. `first_program` was run by hand with the example data from the specification and printed the report from the specification.
 - [ ] 12. With the supplied code, `function_tests` gave `FAIL` and ended with exit code 1. The `FAIL` lines, the exit code and the cause in `read_measurement` are written down.
 - [ ] 13. The fix changed only the cause in `read_measurement`; the same tests with the same expectations gave only `PASS` and exit code 0.
 - [ ] 14. Part C: `sensor_fault`, `sensor_faults` and the labels in `collect_measurements` and in `reading_text` are added; every expected `StationReport{…}` has an explicit sixth value; `check_report` checks `sensor_faults`; there are new cases: `-98`, a fault among measurements with the limit reached, and faults only.
@@ -662,7 +662,7 @@ Which rule gives which of the four results? Which two numbers lie outside the st
 <details>
 <summary>Hint 2: the report and the limit</summary>
 
-Which call sets `lowest` and `highest` for the first time? What counts toward the limit, and what doesn't? How will you show that the data after the limit are still in the stream: which call, on which stream, will check it?
+Which call sets `lowest` and `highest` for the first time? What counts towards the limit, and what doesn't? How will you show that the data after the limit is still in the stream: which call, on which stream, will check it?
 
 </details>
 
@@ -680,7 +680,7 @@ First the value, the field and the labels, then the tests: they should fail. Onl
 
 </details>
 
-## The full list of control cases
+## The full list of check cases
 
 <details>
 <summary>Cases D1–D13 and C1–C10, results from the contract</summary>
@@ -736,7 +736,7 @@ This is one of the correct solutions, not the only acceptable form.
 3. Both have `measured == 0` and the placeholders `lowest == 0`, `highest == 0`: C4 for the empty stream, C8 for entries without an accepted measurement. A report with a real 0, as in C7, has `measured > 0`, so its `lowest` is a measurement.
 4. The four functions are defined only in `rules.cpp`, and this file is on the lists of both targets. The bug in `read_measurement` changes the result of the tests, and the same function gives the application program its report.
 
-**`collect_measurements`:** the loop runs while `measured` is less than `limit` and the data haven't run out. Each result is handled by a separate `case` label, ended by `break`, as in `count_ratings` of lesson 14.4. The first accepted measurement sets `lowest` and `highest`, and each next one is compared with them. `end_of_data` sets the flag `input_ended` and counts nothing.
+**`collect_measurements`:** the loop runs while `measured` is less than `limit` and the data hasn't run out. Each result is handled by a separate `case` label, ended by `break`, as in `count_ratings` of lesson 14.4. The first accepted measurement sets `lowest` and `highest`, and each next one is compared with them. `end_of_data` sets the flag `input_ended` and counts nothing.
 
 **`main.cpp`**:
 
@@ -1169,7 +1169,7 @@ Exit code: 1. This is **a test that detects an error**: the test program works c
 - **Which cases:** D7 (`100`) and D9 (`-100`), the numbers just past the bounds of the protocol's range. Neither is a valid message of the simulator, so the contract requires `invalid_entry`, and the function returns `out_of_range`. `temperature` stays 777, so the checks of `temperature` pass.
 - **The cause:** in `read_measurement`, in the `switch` over the result of `read_number`, the label `ReadResult::out_of_range` returns `Reading::out_of_range`. Here `read_number` refuses because of the **protocol's** range, so by the contract it's a bad entry. The error is in the function, because the expected results agree with the table of results.
 - **Why the others pass:** numbers in the protocol's range, D6 (`99`) and D8 (`-99`) among them, get through `read_number` and get the right result from the check of the station's range. An entry with no number gives `invalid_input`, that is `invalid_entry`, regardless of the bug. That's why a test set that checks a bad entry only with `abc` won't detect this bug: it needs the pair 99 and 100.
-- **The application program** with the data of the example works correctly too: they contain no number outside the protocol's range.
+- **The application program** with the example data works correctly too: it contains no number outside the protocol's range.
 
 **The fix:** one change in `rules.cpp`. In the label `case ReadResult::out_of_range:`, it has to be `return Reading::invalid_entry;`. The test program, the expected results, `main.cpp` and `CMakeLists.txt` don't change.
 
@@ -1606,7 +1606,7 @@ PASS C8 highest
 Checks: 68, failed: 0
 ```
 
-Exit code: 0. All 68 checks pass: 12 direct cases with 2 checks each, 8 scenarios with 5 each, and 2 extra calls with 2 each. The application program with the data of the example prints the report of the specification.
+Exit code: 0. All 68 checks pass: 12 direct cases with 2 checks each, 8 scenarios with 5 each, and 2 extra calls with 2 each. The application program with the example data prints the report from the specification.
 
 </details>
 
@@ -2617,20 +2617,20 @@ PASS C10 sensor_faults
 Checks: 92, failed: 0
 ```
 
-Exit code: 0. All 92 checks pass: 13 direct cases with 2 checks each, 10 scenarios with 6 each, and 3 extra calls with 2 each. The application program with the data of the example prints the same report as in Part B, and `Sensor faults: 0` at the end.
+Exit code: 0. All 92 checks pass: 13 direct cases with 2 checks each, 10 scenarios with 6 each, and 3 extra calls with 2 each. The application program with the example data prints the same report as in Part B, and `Sensor faults: 0` at the end.
 
 </details>
 
 ## Answers to the questions of the justification
 
 <details>
-<summary>Sample answers, for the reference solution</summary>
+<summary>Example answers, for the reference solution</summary>
 
 1. Because the contract says what the program has to do. A result taken from what the program does would repeat its error: for `100`, `out_of_range` would be written down, and the bug would go unnoticed (lesson 13.1).
 2. Because both numbers lie outside the station's range and differ only in whether they fit in the protocol's range. A difference in their results can therefore come only from this rule. `abc` isn't enough: it gives `invalid_entry` another way, through a failed read, and passes with the bug too.
 3. `FAIL D7 result: expected invalid_entry, actual out_of_range` shows that for `100` the actual result differs from the expected one. It doesn't decide by itself whether the error is in the function or in the expectation: that's settled by going back to the table of results (lesson 13.2).
 4. Because with `measured == 0` no measurement was accepted, and `lowest` and `highest` only have placeholders. C4 and C8 check the report without measurements, and C7 and D11 check that a real 0 is a measurement.
-5. Because the contract talks about the number of measurements, not of attempts: the station has to collect six temperatures, even when bad entries come up on the way. C6 checks it: with the limit 2, two refusals before the measurements can't end the collecting.
+5. Because the contract talks about the number of measurements, not of attempts: the station has to collect six temperatures, even when bad entries come up along the way. C6 checks it: with the limit 2, two refusals before the measurements can't end the collection.
 6. In Part B the contract didn't change, so the expectations from the contract are still correct: you change the function, not the test. In Part C the contract changed for −99, so the expectation of D8 had to change. All the other old expectations stay, because the new rule doesn't concern them.
 7. Because −99 fits two rules, and the contract gives the fault code precedence. Checking the station's range before the fault code would give `out_of_range`. D8, C9 and C10 detect it.
 8. Because the tests have to check the same code that the application program uses: a fix in `rules.cpp` gets into both (lesson 13.4). You run all the tests after every change, because a change in one place can break something that worked before: that's the regression check.
