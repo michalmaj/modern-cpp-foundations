@@ -12,14 +12,14 @@ This lesson assumes that you:
 
 - write the test program of lessons 13.1 and 13.2: the expected result from the contract, `PASS` or `FAIL`, a failure counter, exit code 0 or 1, the functions `check_bool` and `bool_text`;
 - know the function `read_shipment_values` from lesson 10.4: it reads a number of boxes from a `std::istream&` stream and fills the result record only on success, and in lesson 12.2 the same function read from a file;
-- know the function `read_chores` from the mission of lesson 12.3 and the table in point 2 of that lesson, in which `\n` stood for the line end in a file;
+- know the function `read_chores` from the mission of lesson 12.3 and the table in section 2 of that lesson, in which `\n` stood for the line end in a file;
 - remember from lesson 4.6 that after a failed read `fail()` gives `true`, and that `clear()` creates no new data;
 - keep the size of a vector in the type `std::size_t` and don't mix it with `int` (lesson 6.3);
 - write a quotation mark inside a text as `\"` (lesson 1.6).
 
 ## The situation
 
-The function `read_shipment_values` has so far been checked in two ways: with data typed on the keyboard (lesson 10.4) and with the file `shipments.txt` (lesson 12.2). Both are good when the program is in use. For testing, though, they have a cost: the data has to be typed every time, or a file has to be prepared and kept in the working directory, it's easy to check, by accident, other file contents than the ones you meant, and a dozen variants of the data means a dozen files or a dozen rounds of typing.
+The function `read_shipment_values` has so far been checked in two ways: with data typed on the keyboard (lesson 10.4) and with the file `shipments.txt` (lesson 12.2). Both are good when the program is in use. For testing, though, they have a cost: the data has to be typed every time, or a file has to be prepared and kept in the working directory; it's easy to check, by accident, other file contents than the ones you meant; and a dozen variants of the data means a dozen files or a dozen rounds of typing.
 
 The test program of lesson 13.1 compares the results by itself. All it lacks is a source of data that needs neither the keyboard nor a file. **That source will be a text written in the test program itself.**
 
@@ -74,14 +74,14 @@ Boxes: 4
 | Code | What it does |
 |---|---|
 | `#include <sstream>` | makes `std::istringstream` available |
-| `std::istringstream input{"4\n"};` | creates an input stream whose data are the character `4` and a line end |
+| `std::istringstream input{"4\n"};` | creates an input stream whose data is the character `4` followed by a line end |
 | `input >> boxes;` | reads a number, just as from `std::cin` |
 | `input.fail()` | tells whether the read failed, just as in lesson 4.5 |
 
 - **The name:** *i* for *input*, *string* for text, *stream*, so an input stream over a text.
 - **No file is created.** There is no data file, no **Working directory** to set, and the program doesn't wait for the keyboard.
 - **The text in quotes is exactly the data.** `\n` is the same line end that stood for the end of a file line in the table of lesson 12.3. `""` is an empty file, `"\n"` is one empty line, and `"Clean tables\ndone"` is two lines without a line end after the last one. Some of this data is hard to type on the keyboard, and in an editor it's easy to change by accident, for example by adding a line end.
-- **Characters that have been read are gone from the stream,** just as with `std::cin`. After `input >> boxes`, only the line end is left in it. The stream doesn't go back to the start of the text by itself (point 9).
+- **Characters that have been read are gone from the stream,** just as with `std::cin`. After `input >> boxes`, only the line end is left in it. The stream doesn't go back to the start of the text by itself (section 9).
 
 In `cpp-workspace`, create a folder `lesson_13_3`, copy `main.cpp` and `CMakeLists.txt` from the original `lesson_05_first_program` into it, and open it in CLion. You can run this short program right away in `main.cpp`. This run is optional. You type the next programs of this lesson into the same `main.cpp`, and you leave `CMakeLists.txt` unchanged.
 
@@ -143,7 +143,7 @@ We don't change the function to make it easier to test. The test has to check ex
 | G | `"1250\n"` | `West End Depot` | `true` | `West End Depot`, 1250 | not checked |
 
 - **C, D and E differ in the stream state.** In C the number is read but negative, so `fail()` gives `false`. In D `seven` isn't a number, and in E there is no number at all, so `fail()` gives `true`. In all three the record stays unchanged.
-- **F, a number without a line end:** `>>` reached the end of the text, but the read succeeded (lesson 10.4, point 5), so the function returns `true`. A missing line end doesn't mean failure.
+- **F, a number without a line end:** `>>` reached the end of the text, but the read succeeded (lesson 10.4, section 5), so the function returns `true`. A missing line end doesn't mean failure.
 - **G:** the contract has no upper limit, and a name with spaces goes into the record whole.
 
 ## 4. One call, several checks
@@ -163,7 +163,7 @@ In lessons 13.1 and 13.2 the function had one result, so every case meant one co
 3. the number of boxes in the record is unchanged;
 4. `fail()` matches the reason for the refusal.
 
-`true` alone isn't enough: the function could return `true` and store the wrong number. `false` alone isn't enough either: it could refuse and still change the record (point 8).
+`true` alone isn't enough: the function could return `true` and store the wrong number. `false` alone isn't enough either: it could refuse and still change the record (section 8).
 
 In the accepted cases we don't check `fail()`: the function returns `true` only after a successful read. Nor `eof()`: in F the stream reached the end of the text, but the contract says nothing about it, and a test checks the contract.
 
@@ -354,7 +354,7 @@ CLion shows `Process finished with exit code 0`.
 
 ## 7. Tests of a refusal: the record unchanged
 
-**Add the cases C, D and E** from the table in point 3 to `main`, between B and F. Each one gets a new stream with its own text, the starting record `Old Destination`, 1, and the four checks of point 4. An unchanged record means that the expected name is `Old Destination` and the expected number of boxes is 1. The fourth check compares `fail()` of that case's stream, for example `input_c.fail()`, with the value in the table.
+**Add the cases C, D and E** from the table in section 3 to `main`, between B and F. Each one gets a new stream with its own text, the starting record `Old Destination`, 1, and the four checks of section 4. An unchanged record means that the expected name is `Old Destination` and the expected number of boxes is 1. The fourth check compares `fail()` of that case's stream, for example `input_c.fail()`, with the value in the table.
 
 **This is the second required run.** Run the program with seven cases. **Predict** the summary.
 
@@ -543,7 +543,7 @@ Here are two versions of `read_shipment_values` with one bug each. Both build, a
 | Version | Change in the function | Effect according to the contract |
 |---|---|---|
 | no check of a negative value | the check `if (boxes < 0)` removed together with its `return false;` | a negative number of boxes is accepted |
-| result assigned too early | `result = Shipment{destination, boxes};` stands before `if (boxes < 0)`, as in the program of lesson 10.4, point 8 | the function refuses but changes the record |
+| result assigned too early | `result = Shipment{destination, boxes};` comes before `if (boxes < 0)`, as in the program of lesson 10.4, section 8 | the function refuses but changes the record |
 
 **For each version, predict** which checks of the suite A–G will give `FAIL`, with which expected and actual value. In particular: will the check `C accepted` detect the second version? Running both versions is optional: it's enough to change the function in `main.cpp` and then restore it.
 
@@ -995,7 +995,7 @@ int main() {
 }
 ```
 
-**This is the third required run: one diagnostic task.** The type `Shipment`, the function `read_shipment_values` and the checking functions are the same as in point 7, so in `main.cpp` it's enough to replace `main`.
+**This is the third required run: one diagnostic task.** The type `Shipment`, the function `read_shipment_values` and the checking functions are the same as in section 7, so in `main.cpp` it's enough to replace `main`.
 
 1. **Predict** the result of the first call, for `North Hub`.
 2. **Predict** the result of the second call, for `South Depot`.
@@ -1162,7 +1162,7 @@ The chore log program of the lesson 12.3 mission reads the file `chores.txt` wit
 
 - the header: `bool read_chores(std::istream& input, std::vector<Chore>& chores, std::string& error, int& error_line)`, and `Chore` has the text fields `name` and `status`;
 - every record takes two physical lines: the name of the chore and the status `done` or `pending`, case-sensitive and without extra spaces;
-- the data ends only with the end of the data where another record would start, and the last line may have no line end;
+- only the end of the data ends the data, at the place where another record would start, and the last line may have no line end;
 - every empty line is an error `"empty"`, a non-empty status other than `done` and `pending` is an error `"invalid"`, and a missing status line after a name is `"incomplete"`;
 - on success the function returns `true`, and the vector holds the records in the order of the data;
 - at the first error the function returns `false`, and stores in `error` and `error_line` the error kind and the physical line number, counted from 1; for `"incomplete"` it's the number of the name's line.
@@ -1204,8 +1204,8 @@ You have to decide on your own:
 
 1. **Settle the expected results before you write code.** For each case, write down on paper: success or error; on success, the number of records and each record; on an error, the kind and the line number. The results have to come from the contract, not from running the function.
 2. Write the test program: the checking functions, for each case a separate stream, vector, `error` and `error_line`, then the checks, the summary and exit code 1 after a failure.
-3. **This is the fourth required run:** run the program with the correct function. Every check should give `PASS`, and the exit code should be 0. If any gives `FAIL`, first settle from the contract whether the expected result or the check is wrong (lesson 13.2, point 9).
-4. **A deliberate bug.** Put the old ending rule of lesson 12.3, point 7, into `read_chores`: the loop condition `while (!input.fail() && !name.empty())`, and no `if (name.empty())` check at the start of the loop. **Predict** which checks will give `FAIL`.
+3. **This is the fourth required run:** run the program with the correct function. Every check should give `PASS`, and the exit code should be 0. If any gives `FAIL`, first settle from the contract whether the expected result or the check is wrong (lesson 13.2, section 9).
+4. **A deliberate bug.** Put the old ending rule of lesson 12.3, section 7, into `read_chores`: the loop condition `while (!input.fail() && !name.empty())`, and no `if (name.empty())` check at the start of the loop. **Predict** which checks will give `FAIL`.
 5. **This is the fifth required run:** run the same test program with the buggy function. Write down which cases detected the bug and what the exit code was. If no check gave `FAIL`, add a case that tells the two versions apart. Then restore the correct function and run the tests once more.
 6. **Justify your choice.** For the cases C, D, H and J, write one sentence each on what mistake in the function it could detect.
 
@@ -1265,17 +1265,17 @@ What would the vector in case C hold if it were the same vector as in case B? Wh
 
 </details>
 
-An example solution is in the [Example solutions](#example-solutions) part.
+An example solution is in [Example solutions](#example-solutions).
 
 ## 11. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
 | The compiler reports an error at `std::istringstream`, for example `implicit instantiation of undefined template 'std::basic_istringstream<char>'` | `#include <sstream>` is missing. The standard doesn't guarantee that `<iostream>` includes it. | Always include `<sstream>` when you use `std::istringstream`. |
-| The first case passes, and the next one, with correct data, gives `actual false` | The next case reads from the stream of the previous one, which has no data left (point 9). | Create a new `std::istringstream` for every case. |
+| The first case passes, and the next one, with correct data, gives `actual false` | The next case reads from the stream of the previous one, which has no data left (section 9). | Create a new `std::istringstream` for every case. |
 | `size` gives more records than the text has | The case got the vector left by the previous case, and the function appends records to it with `push_back`. | Prepare a new, empty vector for every case. |
 | The program ends suddenly or prints random values while checking the records | A check reads an element that isn't in the vector: undefined behaviour (lesson 6.3). | Check the elements only when the size of the vector matches. |
-| `FAIL ... error_line` for an error in the second record, although the function is correct | The expected result gives the record number or doesn't count the status line. | Count the physical lines from 1, as in the tables of lesson 12.3, point 4. |
+| `FAIL ... error_line` for an error in the second record, although the function is correct | The expected result gives the record number or doesn't count the status line. | Count the physical lines from 1, as in the tables of lesson 12.3, section 4. |
 | `FAIL ... expected "empty", actual ""` | The function returned `true` and didn't store an error kind, so the variable stayed as it was prepared. The check of `complete` in the same case gives `FAIL` too. | Settle from the contract whether this text is an error. If it is, the bug is in the function. |
 
 ## 12. Explain
@@ -1305,7 +1305,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 7. Prepare a record with values the function wouldn't store for this data, such as `Old Destination` and 1, and after the refusal compare each field with those values.
 8. Prepare separate variables `error` and `error_line` for the case, and after the call compare `error` with the expected kind, such as `"empty"`, with `check_text`, and `error_line` with the physical line number with `check_int`.
 9. An empty stream has no line at all: the first read fails, so the data ends and the result is success with no records. The stream `"\n"` has one empty line: the read succeeds, and the empty name is an error `"empty"` on line 1.
-10. By checking, besides the return value, also the record, the vector or the data about the error. For example, a version that refuses but changes the record is detected by the checks of the record's fields, although the check of the `bool` result gives `PASS`.
+10. By checking not only the return value but also the record, the vector or the data about the error. For example, a version that refuses but changes the record is detected by the checks of the record's fields, although the check of the `bool` result gives `PASS`.
 
 </details>
 
@@ -1320,7 +1320,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-The test programs in this lesson contain a copy of the tested function. If someone changed the function in the chore log program, the copy in the test program would stay old. In [lesson 13.4: Tests next to the program](lesson_04_tests_next_to_the_program.en.md) you will build the program and its tests in one project, from one file with the tested function.
+The test programs in this lesson contain a copy of the tested function. If someone changed the function in the chore log program, the copy in the test program would stay out of date. In [lesson 13.4: Tests next to the program](lesson_04_tests_next_to_the_program.en.md) you will build the program and its tests in one project, from one file with the tested function.
 
 ---
 
@@ -1949,7 +1949,7 @@ Checks: 45, failed: 6
 
 Exit code: 1.
 
-**The counter raised before the status read is checked:** `++line_number;` stands right after `std::getline(input, status);`, before `if (input.fail())`. That's the mistake lesson 12.3, point 4, warned against.
+**The counter raised before the status read is checked:** `++line_number;` comes right after `std::getline(input, status);`, before `if (input.fail())`. That's the mistake lesson 12.3, section 4, warned against.
 
 <!-- example: chore_tests_counter_bug exit=1 -->
 ```cpp
@@ -2262,7 +2262,7 @@ Exit code: 1.
 | the old ending rule | D, H | `complete`, `error`, `error_line` in both | 6 | 1 |
 | the counter before the status read is checked | G, J | only `error_line` in both | 2 | 1 |
 
-- **The old rule** changes the result only when an empty line stands in place of a name: D at the start of the data, H after a complete record. E has an empty line in place of the status, and the function still detects that one.
+- **The old rule** changes the result only when there's an empty line in place of a name: D at the start of the data, H after a complete record. E has an empty line in place of the status, and the function still detects that one.
 - **The counter** changes the result only for an incomplete record, because only then does reading the status fail. In G and J, `complete` and `error` give `PASS`: only the check of the line number tells this version apart from the correct one. A test that didn't check `error_line` wouldn't detect this bug.
 - **A and D:** an empty text is a correct end of the data, and one empty line is an error. If the suite had only A, the old rule would pass.
 - Each program with a bug ends with code 1, because the failure counter is greater than zero, and with the correct function the same suite gives code 0.
