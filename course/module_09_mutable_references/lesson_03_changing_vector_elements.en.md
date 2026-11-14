@@ -10,7 +10,7 @@
 
 This lesson assumes that:
 
-- you go through a vector with a range loop (lesson 6.1) and pass it to a function through `const&` (lesson 6.4);
+- you go through a vector with a range-based loop (lesson 6.1) and pass it to a function through `const&` (lesson 6.4);
 - you go through a vector of records with the loop `for (const Product& product : products)` and count records in a `std::size_t` variable (lesson 8.4);
 - you write a function with a `Product&` parameter that changes the record it gets (lesson 9.1);
 - you know the function `issue_units` from lesson 9.2: it issues goods only when the conditions are met, and on a refusal it leaves the record unchanged and returns `false`.
@@ -28,7 +28,7 @@ After this lesson you'll:
 - tell the loop variables `const Product&`, `Product&` and `Product` apart;
 - split the work between a function for one record and a function for the whole collection;
 - count only the records that really changed;
-- choose data that reveal that a loop changes copies of the elements.
+- choose data that reveals that a loop changes copies of the elements.
 
 ## 1. Prepare the project
 
@@ -138,7 +138,7 @@ Pens: 6
 - **The `Product&` loop** visits the real elements of that vector.
 - **The division of work:** `issue_units` decides about one product, and `issue_from_each` organises the work on the collection. The issuing rule isn't in the second function.
 - **The counter grows only after an accepted issue.** A refusal changes nothing, so it isn't counted as a change. The result is a number of records, so its type is `std::size_t`, as in lesson 8.4.
-- **The call in the condition itself:** the result of `issue_units` is used only for the counter, so the call stands in the `if`. It runs once in each pass.
+- **The call in the condition itself:** the result of `issue_units` is used only for the counter, so the call goes in the `if`. It runs once in each pass.
 - **The function prints nothing,** and doesn't change the names or the number of records. The report in `main` only reads the elements, so it uses a `const Product&` loop.
 - **`products` in `main` has no `const`,** because its elements are meant to change.
 
@@ -212,7 +212,7 @@ A bike rental stores its city bikes in one vector. Each bike has an identifier, 
 
 **Rules:**
 
-- The numbers are non-negative and small. The data meet these assumptions, so the program doesn't check them.
+- The numbers are non-negative and small. The data meets these assumptions, so the program doesn't check them.
 - **Settling one bike:** if the number of pending rides is positive, it's added to the total number of rides, and the number of pending rides drops to 0. The record has been changed. If there are 0 pending rides, no field changes.
 - The identifier never changes. The same rides must not be added a second time by a later settlement.
 - **Settling the fleet** settles every bike and tells how many records really changed.
@@ -221,7 +221,7 @@ A bike rental stores its city bikes in one vector. Each bike has an identifier, 
 
 - The program defines its own type with three fields: an identifier (`std::string`), a total number of rides (`int`) and a number of pending rides (`int`). You choose the names of the type and the fields.
 - There's one vector of these records in `main`, initialised in the code in the order of the table. No separate variable for each bike, and no `push_back`.
-- **The function for one bike** gets one existing record, settles it according to the rules, and returns an answer whether it changed it.
+- **The function for one bike** gets one existing record, settles it according to the rules, and returns a yes-or-no answer: whether it changed the record.
 - **The function for the fleet** gets the existing vector, visits all its records, calls the function for one bike for each of them, and returns the number of changed records. It doesn't repeat the settling rule, and doesn't change the number or the order of the elements.
 - Neither of these functions prints anything or reads anything from the input. You choose their names and parameters.
 - `main` prints the number of bikes (from `size()`) and the state before the settlement, then **settles the same fleet twice**, prints both results and the state after both settlements, exactly as in the example below.
@@ -277,9 +277,9 @@ After:
 
 Check the table with a sum as well: the sum of the total rides after the settlement must equal the sum of the total rides before it plus all the pending rides. For the data from the requirements: 39 + 6 = 45. This relation checks your reasoning, but it doesn't replace checking each record.
 
-**Then** run the program for the data from the requirements and for an empty fleet. Change only the vector's initialisation while doing so. All the cases of the full check list are checked automatically.
+**Then** run the program for the data from the requirements and for an empty fleet. Change only the vector's initialisation while doing so. Every case in the full list of check cases is checked automatically.
 
-### Success criterion
+### Success criteria
 
 - The program builds as C++20 and, for both runs, prints exactly the lines shown above.
 - The function for one bike changes the record only when there are pending rides. The function for the fleet calls it for each element and counts only real changes.
@@ -287,7 +287,7 @@ Check the table with a sum as well: the sum of the total rides after the settlem
 - Both functions change the existing data from `main`, not copies of them. They print and read nothing.
 - Both settlements concern the same vector, and the second returns 0.
 - The table of cases was ready before you ran the program.
-- You can explain why `&` stands both in the vector parameter and in the loop variable.
+- You can explain why `&` appears both in the vector parameter and in the loop variable.
 
 When the result matches, you can save the project in Git, as in lesson 1.5.
 
@@ -332,7 +332,7 @@ Each bike is written as its identifier, its total rides and its pending rides.
 
 In every case the identifiers, the number of bikes and their order after the settlement are the same as before it.
 
-**Automatic tests and your own tries.** All the cases are checked automatically by a check program. It has the same type and the same functions as the reference solution, but it reads the fleet from the input. It's only a checking tool, not part of the mission: in the mission the data are written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
+**Automatic tests and your own runs.** All the cases are checked automatically by the check program. It has the same type and the same functions as the reference solution, but it reads the fleet from the input. It's only a checking tool, not part of the mission: in the mission the data is written in the code. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
 
 </details>
 
@@ -568,7 +568,7 @@ int main() {
 
 **Other correct solutions:**
 
-- the condition `bike.pending_rides == 0` instead of `<= 0`, because the data are non-negative;
+- the condition `bike.pending_rides == 0` instead of `<= 0`, because the data is non-negative;
 - the result of the function for one bike stored in a `const bool` variable before the `if`, as in lesson 9.2;
 - each settlement's result printed right after its call, as long as the order of the lines stays the same.
 
@@ -632,7 +632,7 @@ int main() {
 }
 ```
 
-**The check program** checks all the cases of the check list. The type and both functions are the same as above, and so is the report from printing the number of bikes on, apart from the indentation. There's one difference: the vector isn't written in the code, but is built from the input. The program reads the number of bikes, then each bike: its identifier and two numbers. Each bike read goes to the end of the vector with `push_back`, as in the check programs of lessons 8.4–8.6. The mission needs neither the input nor `push_back`.
+**The check program** checks every case in the list of check cases. The type and both functions are the same as above, and so is the report from printing the number of bikes on, apart from the indentation. There's one difference: the vector isn't written in the code, but is built from the input. The program reads the number of bikes, then each bike: its identifier and two numbers. Each bike read goes to the end of the vector with `push_back`, as in the check programs of lessons 8.4–8.6. The mission needs neither the input nor `push_back`.
 
 <!-- example: city_bikes_check -->
 ```cpp
@@ -712,7 +712,7 @@ int main() {
 }
 ```
 
-Each case starts with the number of bikes. Then each bike takes one line: its identifier, its total rides and its pending rides. The cases are in the order of the check list, from A to J.
+Each case starts with the number of bikes. Then each bike takes one line: its identifier, its total rides and its pending rides. The cases are in the order of the list of check cases, from A to J.
 
 <!-- input: city_bikes_check -->
 ```text
@@ -949,7 +949,7 @@ B-03: total 20, pending 0
 ```
 
 - **For such a fleet the result is correct,** because no bike needs settling. The correct version also returns 0 and changes nothing.
-- **Data that reveal the bug:** any fleet with at least one bike with a positive number of pending rides. For example `B-01` with 3 pending rides. The correct result is `Updated: 1`, `Updated again: 0` and `B-01: total 15, pending 0`. The buggy program prints:
+- **Data that reveals the bug:** any fleet with at least one bike with a positive number of pending rides. For example `B-01` with 3 pending rides. The correct result is `Updated: 1`, `Updated again: 0` and `B-01: total 15, pending 0`. The buggy program prints:
 
 <!-- example: fleet_copy_revealed -->
 ```cpp

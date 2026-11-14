@@ -15,7 +15,7 @@ The lesson has two parts:
 - **Part A: the test.** Task 1: requirements, data, the report and the criteria. No hints and no solution code. Everything you need is from Modules 1–9.
 - **Part B: checking and discussion.** Hints, the full list of check cases, task 2 (diagnostics) and task 3 (explanations), which you do after task 1, and then the reference solution, fixes, answers and the self-assessment. Go there only after doing Part A, or when you consciously decide to stop trying on your own.
 
-Looking at Part B, at earlier lessons or at your notes isn't a failure. What matters is that you **honestly note what you did on your own and what with help**. A suggested split into two sessions:
+Looking at Part B, at earlier lessons or at your notes isn't a failure. What matters is that you **honestly note what you did on your own and what you did with help**. A suggested split into two sessions:
 
 - **first:** analysing the rules, designing the type and the three functions, writing them, and the report for the data in the requirements;
 - **second:** the boundary cases, the empty-vector variant, tasks 2 and 3, comparing with the solution, and the self-assessment.
@@ -43,7 +43,7 @@ The program manages a simplified fleet of delivery drones. It isn't a simulator 
 
 ### Rules
 
-- The identifiers are non-empty, unique, and made of plain ASCII text. The battery has from 0 to 100 points, and the number of flights is non-negative. All the numbers are small. The data meet these assumptions, so the program doesn't check them.
+- The identifiers are non-empty, unique, and made of plain ASCII text. The battery has from 0 to 100 points, and the number of flights is non-negative. All the numbers are small. The data meets these assumptions, so the program doesn't check them.
 - **A flight** is allowed only when **all three** conditions are met:
   1. the cost of the flight is positive;
   2. the drone isn't grounded;
@@ -103,7 +103,7 @@ D-04: battery 100, flights 1, grounded no
 ```
 
 - `Drones` comes from `size()`, and `Before` and `After` show all the drones in the vector's order.
-- In the flight lines, the cost stands in brackets.
+- In the flight lines, the cost is in brackets.
 - `Charged` is the result of the function for charging the fleet.
 - The program prints no other messages and no blank lines.
 
@@ -120,7 +120,7 @@ Charged: 0
 
 1. **Design the type and the three functions before you start writing `main`.** For each function, write down in one sentence its job, its parameters and its result type.
 2. **Prepare a table of cases:** the data from the requirements; an empty vector; one drone; a cost of 0 and a negative cost; a flight that leaves exactly 20, and one that would leave 19; a cost larger than the battery; a grounded drone with a full and with a partly charged battery; an unknown identifier; a drone at the first, the middle and the last position; two flights of the same drone with a charge between them; charging when all the batteries are full, and when none is, twice in a row. For each operation, write down the result and the state of the drone it concerns. **Check the state after a refusal right after it**, not only at the end: a later charge can hide a battery changed by a refused flight.
-3. **Run the program** for the data from the requirements and for the empty-vector variant. Analyse the other cases on paper. All the cases of the full check list are checked automatically.
+3. **Run the program** for the data from the requirements and for the empty-vector variant. Analyse the other cases on paper. Every case in the full list of check cases is checked automatically.
 
 When the result matches, you can save the project in Git, as in lesson 1.5. Before committing, check `git status`: only `main.cpp` and `CMakeLists.txt` go into the history.
 
@@ -129,11 +129,11 @@ When the result matches, you can save the project in Git, as in lesson 1.5. Befo
 You pass the test when you meet **all** the criteria. You may use Part B while doing so, as long as you note it honestly in the self-assessment.
 
 - `drone_fleet/main.cpp` was written from an empty file, in valid C++20. The program builds without errors.
-- There's one drone type with four fields of the required types, and the drones stand in one vector, in the order of the table.
+- There's one drone type with four fields of the required types, and the drones are in one vector, in the order of the table.
 - The function for one drone's flight gets the record through `&` and the cost by value. It checks all three conditions before changing anything. On a refusal it changes no field, and on success it changes exactly the battery and the number of flights.
 - The function for a flight by identifier gets the vector through `&` and the identifier through `const std::string&`, changes the real element, uses the function for one drone's flight, and returns `false` only after checking all the drones.
 - The function for charging the fleet changes only the battery, doesn't lift the grounding, and counts only the drones whose battery really changed.
-- None of the three functions prints or reads anything. The rules of flying and charging stand in one place in the program.
+- None of the three functions prints or reads anything. The rules of flying and charging are in one place in the program.
 - The standard output for the data from the requirements and for the empty-vector variant matches the requirements. The other cases match your analysis on paper and the full list of check cases.
 - The bug from diagnostic A was fixed and checked, and the fragment from diagnostic B was analysed without running it (task 2 in Part B).
 - You can explain every line of your program and answer the questions of task 3.
@@ -150,7 +150,7 @@ Come here **only after doing Part A**, or when you consciously decide to stop tr
 
 - **Standard output:** compare the program's lines with the expected ones, character by character, including the costs in brackets and the order of the drones.
 - **The state after a refusal:** for each refused flight, check that all four fields of the drone are the same as before it, right after the refusal: a later charge can hide a changed battery, so the `Before` and `After` report alone doesn't prove it. Compare the states in your table of cases with the results of the check program next to the reference solution: it prints the state of the fleet after each operation.
-- **Functions:** does each one have a job that can be described in one sentence? Does the reserve or charging condition also stand in `main`?
+- **Functions:** does each one have a job that can be described in one sentence? Does the reserve or charging condition also appear in `main`?
 - **The result and the effect:** `accepted` says that the function reported a flight. Whether the real record changed is shown only by `After`.
 
 ## Hints
@@ -201,7 +201,7 @@ Each drone is written as its identifier, its battery, its number of flights and 
 
 In every case the identifiers, the number of drones and their order don't change. A refused flight changes no field, and charging changes only the battery.
 
-**Automatic tests and your own tries.** All the cases are checked automatically by a check program. It has the same type and the same three functions as the reference solution, but it reads the fleet and the operations from the input, and **prints the state of the whole fleet after each operation**. It's only a checking tool, not part of the test. The check program and its results are with the reference solution.
+**Automatic tests and your own runs.** All the cases are checked automatically by the check program. It has the same type and the same three functions as the reference solution, but it reads the fleet and the operations from the input, and **prints the state of the whole fleet after each operation**. It's only a checking tool, not part of the test. The check program and its results are with the reference solution.
 
 </details>
 
@@ -495,14 +495,14 @@ int main() {
 4. **The identifier through `const std::string&`,** because the function only reads and compares it.
 5. **`charge_fleet` uses a `Drone&` loop,** because it changes the batteries of the real elements. A loop without `&` would change copies.
 6. **`bool` means the flight's success, not finding the drone:** `false` means "the flight didn't happen", because the drone is missing or because of a refusal.
-7. **A cost of 0 and a negative cost are refused,** because a flight for 0 would add a flight without using the battery, and a negative cost would raise the battery. The check stands first, so the reserve is computed only for a positive cost.
+7. **A cost of 0 and a negative cost are refused,** because a flight for 0 would add a flight without using the battery, and a negative cost would raise the battery. The check comes first, so the reserve is computed only for a positive cost.
 8. **A grounded drone is refused** whatever its battery: that's the second condition of the same clause.
 9. **A battery of 20 after the flight is allowed,** because the reserve is "at least 20". The refusal condition is `drone.battery - cost < 20`, and 20 isn't less than 20.
 10. **19 means a refusal,** because 19 is less than 20.
-11. **On a refusal nothing changes,** because both guard clauses stand before the changes. The expression in the condition computes the planned battery, and the field changes only after the check.
+11. **On a refusal nothing changes,** because both guard clauses come before the changes. The expression in the condition computes the planned battery, and the field changes only after the check.
 12. **Charging doesn't change `grounded`,** because grounding is a separate decision, not a battery state. C-03 still can't fly after charging.
 13. **Charging doesn't increase `flights`,** because no flight happened.
-14. **A drone with a battery of 100 isn't counted,** because its battery doesn't change, and the result must tell about real changes.
+14. **A drone with a battery of 100 isn't counted,** because its battery doesn't change, and the result must report real changes.
 15. **Later calls use the state left by the earlier ones,** because all of them concern the same vector: the second flight of `B-02` sees a battery of 20, and the flight for 80 is possible only after charging.
 16. **A new collection isn't needed,** because the fleet represents the current state, and the state before the operations isn't needed in the report.
 17. **`accepted` doesn't prove that the original changed:** a function can correctly change a copy and report a flight (diagnostic A). Only the state in `After` proves it.
@@ -592,7 +592,7 @@ int main() {
 
 For an empty vector both loops make zero passes: `fly_by_id` reaches the `return false;` after the loop, and `charge_fleet` returns 0. No element is read.
 
-**The check program** checks all the cases of the check list. The type and the three functions are the same as above. The difference is in `main`: the program reads the number of drones, then each drone (its identifier, battery, number of flights, and `yes` or `no` for grounding), and then the number of operations. Each drone goes to the end of the vector with `push_back`, as in the check programs of lessons 8.4–9.4. It reads each operation, `fly` with an identifier and a cost, or `charge`, one at a time, only in the loop over the operations, and performs it at once. **After each operation it prints the state of the whole fleet**, so that the state after a refusal is visible at once. The printing is done by the function `print_fleet`, which only reads the vector.
+**The check program** checks every case in the list of check cases. The type and the three functions are the same as above. The difference is in `main`: the program reads the number of drones, then each drone (its identifier, battery, number of flights, and `yes` or `no` for grounding), and then the number of operations. Each drone goes to the end of the vector with `push_back`, as in the check programs of lessons 8.4–9.4. It reads each operation, `fly` with an identifier and a cost, or `charge`, one at a time, only in the loop over the operations, and performs it at once. **After each operation it prints the state of the whole fleet**, so that the state after a refusal is visible at once. The printing is done by the function `print_fleet`, which only reads the vector.
 
 <!-- example: drone_fleet_check -->
 ```cpp
@@ -718,7 +718,7 @@ int main() {
 }
 ```
 
-Each case starts with the number of drones. Then each drone takes one line: its identifier, battery, number of flights and grounding. Next come the number of operations and the operations, one per line. The cases are in the order of the check list, from A to M.
+Each case starts with the number of drones. Then each drone takes one line: its identifier, battery, number of flights and grounding. Next come the number of operations and the operations, one per line. The cases are in the order of the list of check cases, from A to M.
 
 <!-- input: drone_fleet_check -->
 ```text
@@ -1069,7 +1069,7 @@ B-02: battery 35, flights 0, grounded no
 ```
 
 - **For a cost of 0 the result is correct,** because the function for one drone's flight refuses such a request before changing anything. The correct version also returns `false` and changes nothing.
-- **Data that reveal the bug:** any flight that should be accepted. For example `B-02` with a cost of 15. The correct result is `accepted` and `B-02: battery 20, flights 1`. The buggy program prints:
+- **Data that reveals the bug:** any flight that should be accepted. For example `B-02` with a cost of 15. The correct result is `accepted` and `B-02: battery 20, flights 1`. The buggy program prints:
 
 <!-- example: fleet_copy_revealed -->
 ```cpp
@@ -1259,7 +1259,7 @@ For a cost of 0 the fixed program prints the same as before the fix. That's why 
 <summary>Diagnostic B: the battery changes before the reserve check</summary>
 
 1. **Correctly:** a refusal, because 25 − 10 = 15, which is less than the reserve 20. The drone stays unchanged: battery 25, 3 flights.
-2. **This version** returns `false`, but leaves a battery of 15. The number of flights stays 3, because `++drone.flights;` stands after the second check. The record is partly changed.
+2. **This version** returns `false`, but leaves a battery of 15. The number of flights stays 3, because `++drone.flights;` comes after the second check. The record is partly changed.
 3. **The reserve check comes too late.** The function changes the battery before it knows whether the flight is allowed. A refusal should leave all the fields unchanged, and here one field has already changed: that breaks the "all or nothing" rule from lesson 9.2.
 4. **`return false;` only ends the function** and passes on the result. It doesn't restore the earlier values of the fields: the change of the battery has already happened on the real record.
 5. **The fix:** check the reserve on the planned battery before you change the field, for example `if (drone.battery - cost < 20) { return false; }`, and make both changes only after all the checks, as in the reference solution.
@@ -1271,13 +1271,13 @@ Such a bug is easy to miss in the whole sequence: a later charge sets the batter
 ## Answers to task 3
 
 <details>
-<summary>Sample answers</summary>
+<summary>Example answers</summary>
 
 1. Because all three functions must change the existing data from `main`. The record through `&` gives access to the real drone, the vector through `&` to the real fleet, and the `&` loop variable to its real elements. Without any of them, a copy would change.
-2. That the flight didn't happen and nothing changed. You can't tell whether the drone was missing or the flight was refused: the result tells only about the operation's success, as in lesson 9.4.
-3. Because the reserve is "at least 20 after the flight", and the refusal condition is a battery after the flight less than 20. In the check list, case C leaves exactly 20 and is accepted, and case D would leave 19 and is refused.
+2. That the flight didn't happen and nothing changed. You can't tell whether the drone was missing or the flight was refused: the result tells only whether the operation succeeded, as in lesson 9.4.
+3. Because the reserve is "at least 20 after the flight", and the refusal condition is a battery after the flight less than 20. In the list of check cases, case C leaves exactly 20 and is accepted, and case D would leave 19 and is refused.
 4. Because the agreement says that a refusal changes nothing. If a refusal lowered the battery, this drone's later flights would see a battery that's too low and could be refused for no reason, and the report would show a state that doesn't exist.
-5. Because charging concerns only the battery: the grounding and the flights are different information, and no flight happened. A drone with a battery of 100 doesn't change, so it isn't counted: the result must tell about real changes.
+5. Because charging concerns only the battery: the grounding and the flights are different information, and no flight happened. A drone with a battery of 100 doesn't change, so it isn't counted: the result must report real changes.
 6. Because each operation must start from the state left by the earlier ones. The second flight of `B-02` for 1 is refused, because 20 is left; the flight for 80 is possible only after charging, and the last flight for 1 runs into the reserve again.
 7. No. A function can change a copy and report a flight, as in diagnostic A. I check it with the state of the fleet in `After`, and with the check cases, which show the state after each operation.
 8. Because the rule should be in one place, and changing it should require fixing one function. The function for a flight by identifier only finds the drone and passes it to the flight function. The charging function has its own, different rule, and doesn't need the rules of a flight.
@@ -1330,7 +1330,7 @@ After five lessons, you can:
 - change the elements of an existing vector in a function with a `std::vector<T>&` parameter and a `T&` loop, counting only real changes;
 - find a record by a unique identifier and change only that one, with `return` in the loop and `return false;` after it;
 - tell a function's result from its effect, and check the state of the data, not just the message;
-- choose data that reveal a change to a copy, a partial change, and a `return` that comes too early.
+- choose data that reveals a change to a copy, a partial change, and a `return` that comes too early.
 
 ## What's next
 

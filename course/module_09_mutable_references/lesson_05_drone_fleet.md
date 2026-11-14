@@ -20,7 +20,7 @@ Zajrzenie do części B, do wcześniejszych lekcji albo do notatek nie jest pora
 - **pierwsze:** analiza reguł, projekt typu i trzech funkcji, ich napisanie i raport dla danych z wymagań;
 - **drugie:** przypadki graniczne, wariant z pustym wektorem, zadania 2 i 3, porównanie z rozwiązaniem i samoocena.
 
-**Możesz używać:** CLiona albo terminala, CMake i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przypadków i przebiegu oraz tymczasowych wydruków testowych. Debugger nie jest potrzebny.
+**Możesz używać:** CLiona albo terminala, CMake'a i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; tabel przypadków i przebiegu oraz tymczasowych wydruków testowych. Debugger nie jest potrzebny.
 
 ---
 
@@ -120,7 +120,7 @@ Charged: 0
 
 1. **Zaprojektuj typ i trzy funkcje, zanim zaczniesz pisać `main`.** Przy każdej funkcji zapisz jednym zdaniem jej zadanie, parametry i typ wyniku.
 2. **Przygotuj tabelę przypadków:** dane z wymagań; pusty wektor; jeden dron; koszt 0 i koszt ujemny; lot, który zostawia dokładnie 20, i taki, który zostawiłby 19; koszt większy od baterii; uziemiony dron z pełną i z niepełną baterią; nieznany identyfikator; dron na pierwszej, środkowej i ostatniej pozycji; dwa loty tego samego drona z ładowaniem pomiędzy nimi; ładowanie, gdy wszystkie baterie są pełne, i gdy żadna nie jest, dwa razy z rzędu. Przy każdej operacji zapisz wynik i stan drona, którego dotyczy. **Stan po odmowie sprawdzaj od razu po niej**, a nie tylko na końcu: późniejsze ładowanie może ukryć baterię zmienioną przez odrzucony lot.
-3. **Uruchom program** dla danych z wymagań i dla wariantu z pustym wektorem. Pozostałe przypadki przeanalizuj na papierze. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+3. **Uruchom program** dla danych z wymagań i dla wariantu z pustym wektorem. Pozostałe przypadki przeanalizuj na papierze. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 Gdy wynik się zgadza, możesz zapisać projekt w Gicie, jak w lekcji 1.5. Przed commitem sprawdź `git status`: do historii trafiają tylko `main.cpp` i `CMakeLists.txt`.
 
@@ -134,7 +134,7 @@ Sprawdzian jest zaliczony, gdy spełniasz **wszystkie** kryteria. Możesz przy t
 - Funkcja lotu po identyfikatorze dostaje wektor przez `&`, a identyfikator przez `const std::string&`, zmienia prawdziwy element, korzysta z funkcji lotu jednego drona i zwraca `false` dopiero po przejrzeniu wszystkich dronów.
 - Funkcja ładowania floty zmienia tylko baterię, nie znosi uziemienia i liczy tylko drony, których bateria naprawdę się zmieniła.
 - Żadna z trzech funkcji niczego nie wypisuje ani nie odczytuje. Reguły lotu i ładowania stoją w programie w jednym miejscu.
-- Standardowe wyjście dla danych z wymagań i dla wariantu z pustym wektorem zgadza się z wymaganiami. Pozostałe przypadki zgadzają się z Twoją analizą na papierze i z pełną listą kontrolną.
+- Standardowe wyjście dla danych z wymagań i dla wariantu z pustym wektorem zgadza się z wymaganiami. Pozostałe przypadki zgadzają się z Twoją analizą na papierze i z pełną listą przypadków kontrolnych.
 - Błąd z diagnostyki A poprawiono i sprawdzono, a fragment z diagnostyki B przeanalizowano bez uruchamiania (zadanie 2 w części B).
 - Umiesz wyjaśnić każdą linijkę swojego programu i odpowiedzieć na pytania z zadania 3.
 
@@ -592,7 +592,7 @@ int main() {
 
 Dla pustego wektora obie pętle wykonują zero przebiegów: `fly_by_id` dochodzi do `return false;` za pętlą, a `charge_fleet` zwraca 0. Żaden element nie jest odczytywany.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Typ i trzy funkcje są takie same jak wyżej. Różnica jest w `main`: program odczytuje liczbę dronów, potem każdego drona (identyfikator, baterię, liczbę lotów i `yes` albo `no` dla uziemienia), a potem liczbę operacji. Każdy dron trafia na koniec wektora przez `push_back`, jak w programach kontrolnych lekcji 8.4–9.4. Operację, czyli `fly` z identyfikatorem i kosztem albo `charge`, odczytuje po jednej, dopiero w pętli operacji, i od razu ją wykonuje. **Po każdej operacji wypisuje stan całej floty**, żeby stan po odmowie był widoczny od razu. Do wypisywania służy funkcja `print_fleet`, która tylko odczytuje wektor.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Typ i trzy funkcje są takie same jak wyżej. Różnica jest w `main`: program odczytuje liczbę dronów, potem każdego drona (identyfikator, baterię, liczbę lotów i `yes` albo `no` dla uziemienia), a potem liczbę operacji. Każdy dron trafia na koniec wektora przez `push_back`, jak w programach kontrolnych lekcji 8.4–9.4. Operację, czyli `fly` z identyfikatorem i kosztem albo `charge`, odczytuje po jednej, dopiero w pętli operacji, i od razu ją wykonuje. **Po każdej operacji wypisuje stan całej floty**, żeby stan po odmowie był widoczny od razu. Do wypisywania służy funkcja `print_fleet`, która tylko odczytuje wektor.
 
 <!-- example: drone_fleet_check -->
 ```cpp
@@ -718,7 +718,7 @@ int main() {
 }
 ```
 
-Każdy przypadek zaczyna się od liczby dronów. Potem każdy dron zajmuje jedną linijkę: identyfikator, bateria, liczba lotów i uziemienie. Dalej stoi liczba operacji i operacje, po jednej w linijce. Przypadki stoją w kolejności z listy kontrolnej, od A do M.
+Każdy przypadek zaczyna się od liczby dronów. Potem każdy dron zajmuje jedną linijkę: identyfikator, bateria, liczba lotów i uziemienie. Dalej stoi liczba operacji i operacje, po jednej w linijce. Przypadki stoją w kolejności z listy przypadków kontrolnych, od A do M.
 
 <!-- input: drone_fleet_check -->
 ```text
@@ -1275,7 +1275,7 @@ Taki błąd łatwo przeoczyć w całej sekwencji: późniejsze ładowanie ustawi
 
 1. Bo wszystkie trzy funkcje mają zmieniać istniejące dane z `main`. Rekord przez `&` daje dostęp do prawdziwego drona, wektor przez `&` do prawdziwej floty, a zmienna pętli `&` do jej prawdziwych elementów. Bez któregokolwiek z nich zmieniałaby się kopia.
 2. Że lot się nie odbył i nic się nie zmieniło. Nie wiadomo, czy drona nie było, czy lot odrzucono: wynik mówi tylko o powodzeniu operacji, jak w lekcji 9.4.
-3. Bo rezerwa to „co najmniej 20 po locie”, a warunek odmowy to bateria po locie mniejsza od 20. W liście kontrolnej przypadek C zostawia dokładnie 20 i jest przyjęty, a przypadek D zostawiłby 19 i jest odrzucony.
+3. Bo rezerwa to „co najmniej 20 po locie”, a warunek odmowy to bateria po locie mniejsza od 20. Na liście przypadków kontrolnych przypadek C zostawia dokładnie 20 i jest przyjęty, a przypadek D zostawiłby 19 i jest odrzucony.
 4. Bo umowa mówi, że odmowa nic nie zmienia. Gdyby odmowa zmniejszała baterię, kolejne loty tego drona widziałyby za niską baterię i mogłyby zostać odrzucone bez powodu, a raport pokazywałby stan, którego nie ma.
 5. Bo ładowanie dotyczy tylko baterii: uziemienie i loty to inne informacje, a żaden lot się nie odbył. Dron z baterią 100 się nie zmienia, więc nie jest liczony: wynik ma mówić o rzeczywistych zmianach.
 6. Bo każda operacja ma zaczynać od stanu po poprzednich. Drugi lot `B-02` za 1 jest odrzucony, bo zostało 20; lot za 80 jest możliwy dopiero po ładowaniu, a ostatni lot za 1 znowu natrafia na rezerwę.

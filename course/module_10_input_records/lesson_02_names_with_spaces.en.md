@@ -30,8 +30,8 @@ After this lesson you will:
 - explain what stays in the input after a number is read;
 - finish a number line with `std::getline(std::cin, rest)` before you read the next name;
 - tell a correctly read empty name from a failed read;
-- create two records only after all the data have been checked;
-- choose data that reveal a wrong order of reads.
+- create two records only after all the data has been checked;
+- choose data that reveals a wrong order of reads.
 
 ## 1. Prepare the project
 
@@ -160,7 +160,7 @@ std::getline(std::cin, second_destination);
 
 Each of these three reads can fail, but the program in section 2 doesn't need a separate `if` after each. The check after the first number decides whether to read on. The check at the end covers the other reads: when one fails, the following ones fail too (lesson 4.6).
 
-**We don't finish the line after the last number,** because the program reads no next name. An extra `getline` would even do harm. When the data end right after `7`, with no end of line, for example in a file, reading `7` succeeds, although the stream has reached the end of the data (lesson 4.6). The next `getline` would have nothing to read and would fail, so the program would print `Input error` for valid data. The course's automatic tests don't run this case, because in them every line has its end.
+**We don't finish the line after the last number,** because the program reads no next name. An extra `getline` would even do harm. When the data ends right after `7`, with no end of line, for example in a file, reading `7` succeeds, although the stream has reached the end of the data (lesson 4.6). The next `getline` would have nothing to read and would fail, so the program would print `Input error` for valid data. The course's automatic tests don't run this case, because in them every line has its end.
 
 ## 4. An empty name versus missing data
 
@@ -191,7 +191,7 @@ Invalid shipment
 
 The empty line was read correctly, so the program checks the rules and rejects the empty name.
 
-**Predict** the result too when the data end right after `4`. You don't need to cause this case yourself: follow it on paper, and the tests check it automatically. **Enter** instead of the second name doesn't end the data: it gives an empty name, as in the example above.
+**Predict** the result too when the data ends right after `4`. You don't need to cause this case yourself: follow it on paper, and the tests check it automatically. **Enter** instead of the second name doesn't end the data: it gives an empty name, as in the example above.
 
 <!-- input: shipments -->
 ```text
@@ -200,7 +200,7 @@ North Hub
 ```
 
 <details>
-<summary>The standard output when the data end after 4</summary>
+<summary>The standard output when the data ends after 4</summary>
 
 <!-- output: shipments -->
 ```text
@@ -320,9 +320,9 @@ Total boxes: 11
 
 </details>
 
-`rest` gets ` extra`, with a space at the start, and the program doesn't judge this text. Such data are outside the agreement, because a valid number line contains only the number. The program reports no error, but it doesn't confirm that the line was valid either. Text after the last number stays unread, as in lesson 10.1.
+`rest` gets ` extra`, with a space at the start, and the program doesn't judge this text. Such data is outside the agreement, because a valid number line contains only the number. The program reports no error, but it doesn't confirm that the line was valid either. Text after the last number stays unread, as in lesson 10.1.
 
-**Names that aren't empty but aren't valid.** `empty()` rejects only a text of length zero. A name made only of spaces isn't empty (lesson 7.4), so it passes this check. In data that follow the agreement a name has no spaces at the start or the end, and the program neither removes nor detects such spaces. So `empty()` says only that the name isn't empty, not that it's valid.
+**Names that aren't empty but aren't valid.** `empty()` rejects only a text of length zero. A name made only of spaces isn't empty (lesson 7.4), so it passes this check. In data that follows the agreement a name has no spaces at the start or the end, and the program neither removes nor detects such spaces. So `empty()` says only that the name isn't empty, not that it's valid.
 
 ## 6. Mission: reading progress of two books
 
@@ -335,7 +335,7 @@ The program reads the data of two books and prints how many pages are left to re
 
 **Rules:**
 
-- The title can't be empty. In data that follow the agreement it has no spaces at the start or the end, and the program doesn't check them.
+- The title can't be empty. In data that follows the agreement it has no spaces at the start or the end, and the program doesn't check them.
 - The number of pages must be greater than zero.
 - The number of pages read must be non-negative and can't exceed the number of pages.
 - All numbers are small and fit in `int`, and so does their total.
@@ -345,7 +345,7 @@ The program reads the data of two books and prints how many pages are left to re
 
 - The program defines its own book type with three fields: the title (`std::string`), the number of pages (`int`) and the number of pages read (`int`). You choose the names of the type and the fields yourself.
 - The reading is in `main`, into local variables with starting values: the titles with `std::getline`, the numbers with `>>`. No questions, no asking again and no vector.
-- When the required data can't be read, including when the data end after the first book, the program prints exactly `Input error`.
+- When the required data can't be read, including when the data ends after the first book, the program prints exactly `Input error`.
 - When the read succeeded but a title is empty or the numbers break the rules, the program prints exactly `Invalid books`.
 - Only when everything is right does the program create two records with `{}` and print seven lines as in the example below, with the books in the order of the data. The total of unread pages comes from the fields of both records.
 
@@ -419,9 +419,9 @@ For one run the program prints only one of these three results.
 
 **Before you write the program**, prepare a table of cases: titles with spaces and one-word titles, books read through and books not started, empty titles, numbers of pages that aren't allowed, a word instead of a number, no second book, and a missing last number. For each, write down the expected result.
 
-**Then** run the program for the main data and for one of the two other examples. Every case in the full list of check cases is checked automatically, so you don't need to run the others. Analyse the cases in which the data end on paper, as in section 4.
+**Then** run the program for the main data and for one of the two other examples. Every case in the full list of check cases is checked automatically, so you don't need to run the others. Analyse on paper the cases in which the data ends, as in section 4.
 
-### Success criterion
+### Success criteria
 
 - The program builds as C++20 and, for the main data and the second example you chose, prints exactly the results shown.
 - The titles keep their inner spaces.
@@ -547,8 +547,8 @@ North Hub
 7
 ```
 
-1. **Predict** this program's result for these data. The program in section 2 prints `Invalid shipment` for them (section 4).
-2. Run the program for these data and compare the result with your prediction.
+1. **Predict** this program's result for this data. The program in section 2 prints `Invalid shipment` for it (section 4).
+2. Run the program for this data and compare the result with your prediction.
 3. Choose your own valid data, with a non-empty second name, for which this program prints a wrong result.
 4. For your data, **predict** what ends up in `second_destination`, and what in `rest`.
 5. Run the program for your data.
@@ -594,8 +594,8 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 3. `rest` takes the rest of the number line, and `getline` takes its end along with it. Thanks to that, the next `getline` starts at a new line. An empty `rest` is a successful read: there were no other characters in the line after the numbers. A failed read or the end of the data is shown by `std::cin.fail()`, not by the contents of `rest`.
 4. An empty title is an empty line: the read succeeds, and the text is empty. The program goes on to the rules and prints `Invalid books`. When there's no second book, `getline` supplies no line and fails. The program then prints `Input error`.
 5. Because after a failed read you can't rely on the variable's contents (lessons 4.6 and 7.4). An empty title means something only when it was really read. In the reverse order, missing data could be taken for an empty title.
-6. `Input error` means that the required data couldn't be read, for example `eighty 20` instead of the numbers, or the data end after the first book. `Invalid books` means that everything was read, but the values break the rules, for example an empty title or `80 81`.
-7. `>>` reads 120 and 50, and `getline(rest)` takes ` pages` along with the end of the line. The program doesn't check this text, so it prints the report (case T). That doesn't mean the line is valid: data with extra text are outside the agreement, and the program simply doesn't judge them.
+6. `Input error` means that the required data couldn't be read, for example `eighty 20` instead of the numbers, or the data ends after the first book. `Invalid books` means that everything was read, but the values break the rules, for example an empty title or `80 81`.
+7. `>>` reads 120 and 50, and `getline(rest)` takes ` pages` along with the end of the line. The program doesn't check this text, so it prints the report (case T). That doesn't mean the line is valid: data with extra text is outside the agreement, and the program simply doesn't judge it.
 8. Because after the last number the program reads no more titles. An extra `getline` would be unnecessary. If the data ended right after the last number, with no end of line, such a `getline` would fail and turn valid data into `Input error`.
 9. Here each book needs its own variables, its own reads and its own record. With ten books the code would be long and repetitive, and with an unknown number of books it couldn't be written this way at all. The records will have to be added to a vector, which is the topic of lesson 10.3.
 
@@ -608,7 +608,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 - `std::getline(std::cin, rest)` finishes the number line before the next name is read. An empty `rest` is a successful read, and the program doesn't check the contents of `rest`.
 - We don't finish the line after the last number, because an extra read could turn valid data into an error.
 - An empty name is a successful read and a value that isn't allowed, while a missing name is a failed read. That's why `std::cin.fail()` comes first, then `empty()`.
-- The records come into being only after all the data have been checked, and the result comes from their fields.
+- The records come into being only after all the data has been checked, and the result comes from their fields.
 
 ## What's next
 
@@ -680,18 +680,18 @@ int main() {
 2. **The numbers with `>>`,** because each is a single value, and `>>` skips the space between them.
 3. **Finishing the first number line,** because after `>>` the end of that line stays in the input. Without `getline(rest)` the second title would be empty, and the read of a number would run into the real title.
 4. **No finishing after the last number,** because the program reads no next title.
-5. **Checking `getline`:** reading a title can fail too, when there are no more data. Then you can't rely on the contents of the title's variable. So the check at the end also covers both `getline` reads after the first book.
+5. **Checking `getline`:** reading a title can fail too, when there's no more data. Then you can't rely on the contents of the title's variable. So the check at the end also covers both `getline` reads after the first book.
 6. **An empty title isn't a failed read.** An empty line is read correctly (lesson 7.4), so the program judges it together with the rules for the pages and prints `Invalid books`.
 7. **`fail()` doesn't know the book's rules:** 0 pages, or 81 pages read out of 80, are correctly read numbers. The rules are checked by separate conditions.
-8. **Text after the numbers is outside the checks.** `getline(rest)` takes the rest of the first number line, but the program doesn't judge it (case T). Text after the last number stays unread in the input (case U). Such data are outside the agreement.
+8. **Text after the numbers is outside the checks.** `getline(rest)` takes the rest of the first number line, but the program doesn't judge it (case T). Text after the last number stays unread in the input (case U). Such data is outside the agreement.
 9. **Starting values for the variables,** because after a failed read a variable can keep its previous value. Without a starting value, that would be an indeterminate value.
 10. **The records at the end,** because only then is it known that both books are complete and valid. With an error in the second book the first record isn't created either, so nothing is printed partly.
 11. **No vector,** because there are exactly two books, and each has its own variables and its own record. A vector of records is the topic of lesson 10.3.
 12. **No function that reads a record,** because the two reads fit readably in `main`, and the agreement doesn't require such a function.
-13. **The last number at the end of the data.** When the data end right after the last number, with no end of line, reading it still succeeds (lesson 4.6). The program does no further read after it, so it doesn't turn valid data into `Input error`. The course's automatic tests don't run this case.
+13. **The last number at the end of the data.** When the data ends right after the last number, with no end of line, reading it still succeeds (lesson 4.6). The program does no further read after it, so it doesn't turn valid data into `Input error`. The course's automatic tests don't run this case.
 14. **Preparing for lesson 10.3.** The pattern for one record is fixed: the name with `getline`, the numbers with `>>`, and finishing the line before the next name. With many records the same pattern will repeat for each of them, and the finished records will go into a vector.
 
-**Other valid solutions:** the rules for both books can stand in one condition, or each in its own `else if`, with the same message. The check after the first book can also be left out, keeping only the one at the end: the results are the same, because after a failed read the following reads fail too (lesson 4.6). The check after the first book, however, shows directly that the line is finished only after the numbers were read successfully. The fields can have other names, and the total can be calculated directly in the output statement.
+**Other valid solutions:** the rules for both books can be in one condition, or each in its own `else if`, with the same message. The check after the first book can also be left out, keeping only the one at the end: the results are the same, because after a failed read the following reads fail too (lesson 4.6). The check after the first book, however, shows directly that the line is finished only after the numbers were read successfully. The fields can have other names, and the total can be calculated directly in the output statement.
 
 Each case in the list of check cases is a separate run of this program. Cases A, G and Q are the data in the mission. The others are below, in the order of the list of check cases.
 
@@ -988,8 +988,8 @@ Before the fix, for the data with an empty second name:
 Invalid shipment
 ```
 
-- **This case masks the bug.** Both programs print `Invalid shipment`, but for different reasons. In the program in section 2, `second_destination` gets the empty line from the data. In the buggy program it gets the end of the line after `4`, that is an empty text, and the empty line from the data ends up in `rest`. The result is the same, so these data don't reveal the bug.
-- **Data that reveal the bug:** any valid data with a non-empty second name, for example the data in section 2. The correct result is the report of both shipments, and the buggy program prints:
+- **This case masks the bug.** Both programs print `Invalid shipment`, but for different reasons. In the program in section 2, `second_destination` gets the empty line from the data. In the buggy program it gets the end of the line after `4`, that is an empty text, and the empty line from the data ends up in `rest`. The result is the same, so this data doesn't reveal the bug.
+- **Data that reveals the bug:** any valid data with a non-empty second name, for example the data in section 2. The correct result is the report of both shipments, and the buggy program prints:
 
 <!-- input: shipments_order_bug -->
 ```text

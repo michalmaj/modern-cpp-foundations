@@ -10,7 +10,7 @@
 
 This lesson assumes that you:
 
-- build a program from two `.cpp` files: the function's declaration stands in `main.cpp`, the definition in a second file, and `add_executable` lists both files (lesson 11.1);
+- build a program from two `.cpp` files: the function's declaration is in `main.cpp`, the definition in a second file, and `add_executable` lists both files (lesson 11.1);
 - know that the preprocessor handles lines starting with `#`, and that `#include <iostream>` inserts declarations from the standard library (lesson 1.4);
 - check that a declaration matches its definition (lessons 5.6 and 11.1).
 
@@ -54,7 +54,7 @@ int calculate_points(int solved, int bonus);
 
 ## 3. `#pragma once`
 
-`#pragma once` stands on the first line of your own header. It tells the preprocessor: if this header has already been included in this translation unit (lesson 11.1, section 6), don't process it a second time. That can happen when a file includes the same header indirectly, through other headers.
+`#pragma once` goes on the first line of your own header. It tells the preprocessor: if this header has already been included in this translation unit (lesson 11.1, section 6), don't process it a second time. That can happen when a file includes the same header indirectly, through other headers.
 
 - **It works within one `.cpp` file,** not across the whole program. `main.cpp` and `points.cpp` are compiled separately, and each of them gets the declaration from the header.
 - **It doesn't replace the definition, and doesn't change linking.**
@@ -106,7 +106,7 @@ int calculate_points(int solved, int bonus) {
 | `#include <iostream>` | a header of the standard library | in the standard library's folders, which the compiler knows |
 | `#include "points.hpp"` | your own header from the project | in the same folder as the file that includes it |
 
-**Why both files.** `main.cpp` needs the declaration to compile the call. `points.cpp` includes it so that the declaration and the definition stand together in one translation unit. The declaration exists in one place: after a change to the function you fix the header and the definition, and every file that includes the header gets the new version.
+**Why both files.** `main.cpp` needs the declaration to compile the call. `points.cpp` includes it so that the declaration and the definition are together in one translation unit. The declaration exists in one place: after a change to the function you fix the header and the definition, and every file that includes the header gets the new version.
 
 **You still have to check that they match.** The header in `points.cpp` doesn't guarantee that the function defined below it is the declared one. A function with another name or other parameter types is simply another function to C++: the compiler won't report it. So compare the name, the result type and the parameter types, as in lesson 11.1. You'll see such a mistake in section 8.
 
@@ -178,7 +178,7 @@ Turn your `ticket_cost` project from lesson 11.1 into a project with its own hea
 **Requirements:**
 
 - The calculation doesn't change: a regular ticket costs 12 units, a reduced one 7, the function returns the total cost, and `main` reads both numbers and prints `Total cost: N`.
-- The function's declaration stands **only** in the header, with `#pragma once` on the first line.
+- The function's declaration is **only** in the header, with `#pragma once` on the first line.
 - The definition stays in the second `.cpp` file. The header contains no definition.
 - **Both `.cpp` files include the same header** with `#include "..."`.
 - `add_executable` still lists two `.cpp` files, without the header. The program has one `main`.
@@ -242,18 +242,18 @@ Total cost: 36
 
 1. what to call the header;
 2. what to write in it;
-3. where `#pragma once` stands;
-4. where the function's declaration stands;
+3. where `#pragma once` goes;
+4. where the function's declaration goes;
 5. what stays in `main.cpp`;
 6. what stays in the second `.cpp` file;
-7. where both `#include` lines with the header's name stand;
+7. where both `#include` lines with the header's name go;
 8. whether to keep the old declaration in `main.cpp`;
 9. which files `CMakeLists.txt` lists;
 10. how to show that the change of organisation didn't change the results.
 
 **Then** build the program and run it for data A and one boundary case: B or C. Compare the results with those of the `ticket_cost` project for the same data. Predict the other cases. All of them are checked automatically in the reference solution.
 
-### Success criterion
+### Success criteria
 
 - The program builds as C++20 and, for data A and for B or C, prints exactly the result shown, the same as the project from lesson 11.1.
 - The header starts with `#pragma once` and contains the function's declaration, with no definition.
@@ -409,7 +409,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 3. What does `#include "points.hpp"` do, and what doesn't it do? How does it differ from `#include <iostream>`?
 4. What does `#pragma once` do, and what doesn't it do?
 5. Is a header compiled or linked separately?
-6. Why doesn't `points.hpp` stand in `add_executable` in this course's project? Would CMake allow it?
+6. Why isn't `points.hpp` in `add_executable` in this course's project? Would CMake allow it?
 7. Does a header alone provide a function's definition?
 8. Does a link error always mean a `.cpp` file left out of `add_executable`?
 9. The program in lesson 10.5 had its own type, used by two functions and `main`. If you split it into files, what would every file that uses that type need to know about it?
@@ -418,9 +418,9 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 <summary>Example answers</summary>
 
 1. `points.hpp` has `#pragma once` and the declaration of `calculate_points`. `points.cpp` has `#include "points.hpp"` and the function's definition, that is, its body with the calculation.
-2. `main.cpp` needs the declaration to compile the call. `points.cpp` includes the same header so that the declaration and the definition stand in one translation unit, and the declaration exists in one place only. That doesn't guarantee that the definition matches, though: a function with another name or other parameter types would simply be another function.
+2. `main.cpp` needs the declaration to compile the call. `points.cpp` includes the same header so that the declaration and the definition are in one translation unit, and the declaration exists in one place only. That doesn't guarantee that the definition matches, though: a function with another name or other parameter types would simply be another function.
 3. It puts the header's content at the place of that line, before the file is compiled. It doesn't run code, and doesn't compile or link `points.cpp`. Quotes mean your own header from the project folder, and angle brackets a header of the standard library.
-4. It makes the header processed at most once in one translation unit, even if it's included several times. It doesn't limit including to one file in the whole program, doesn't provide a definition, and doesn't change linking.
+4. It makes sure that the header is processed at most once in one translation unit, even if it's included several times. It doesn't limit including to one file in the whole program, doesn't provide a definition, and doesn't change linking.
 5. No. Its content is compiled as part of every `.cpp` file that includes it. There's no separate object file.
 6. Because in this course `add_executable` lists the files that are compiled, and a header isn't one of them. CMake would allow adding the header, for example for the convenience of a development environment. Leaving it out is a rule of our simple project, not a CMake rule.
 7. No. It contains the declaration, and a `.cpp` file in `add_executable` must provide the definition. In section 8 the header was included, and still the definition was missing.
@@ -509,9 +509,9 @@ The results for data A–D: 45, 28, 0 and 36, the same as in lesson 11.1.
 
 1. **The declaration is in the header,** because two files need it, and it must exist in one place.
 2. **The definition stays in `tickets.cpp`,** because two `.cpp` files include the header. A definition in the header would get into the program twice.
-3. **Both `.cpp` files include the header:** `main.cpp` to compile the call, and `tickets.cpp` so that the declaration and the definition stand together.
+3. **Both `.cpp` files include the header:** `main.cpp` to compile the call, and `tickets.cpp` so that the declaration and the definition are together.
 4. **`main.cpp` has no second, hand-written declaration.** It would build, but after a change to the function it could stop matching the header.
-5. **`#pragma once`** makes the header processed at most once in one translation unit.
+5. **`#pragma once`** makes sure that the header is processed at most once in one translation unit.
 6. **It doesn't block including in different `.cpp` files:** `main.cpp` and `tickets.cpp` are compiled separately, and each gets the declaration.
 7. **`add_executable` lists two `.cpp` files,** because only they are compiled. The header is compiled as part of them.
 8. **A `.cpp` file isn't included in another `.cpp`:** the definition would get into the program twice, and the linker joins `.cpp` files.

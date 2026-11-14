@@ -27,12 +27,12 @@ The main rule of this lesson: **a valid, complete record is created first, and o
 
 After this lesson you will:
 
-- read the number of records, check its range, and read exactly as many records in a loop as the data announce;
+- read the number of records, check its range, and read exactly as many records in a loop as the data announces;
 - finish the previous number line at the start of each pass;
 - add only complete, checked records with `push_back`;
 - stop reading at the first error, with no partial report;
 - tell adding a new element from changing an existing one;
-- choose data that reveal a record added too early.
+- choose data that reveals a record added too early.
 
 ## 1. Prepare the project
 
@@ -131,7 +131,7 @@ Total boxes: 11
 | `return 0;` | ends `main` at once, after printing the message (section 3) |
 | `for (int index{0}; index < count; ++index)` | runs one pass for each announced shipment |
 | `std::getline(std::cin, rest);` | finishes the previous number line (section 4) |
-| `const Shipment shipment{destination, boxes};` | creates a complete record from data that were read and checked |
+| `const Shipment shipment{destination, boxes};` | creates a complete record from data that was read and checked |
 | `shipments.push_back(shipment);` | adds that record at the end of the vector |
 | `shipments.size()` | gives how many records are really in the vector |
 
@@ -171,7 +171,7 @@ Trace the main data:
 
 - **In the first pass** the previous line is the line with the number of shipments: after `>> count`, its end stayed in the input (lesson 10.2).
 - **In each later pass** it's the number line of the previous shipment.
-- **After the last shipment** there is no further pass, so the line with `7` stays unfinished, like the last line in lesson 10.2. Valid data that end right after `7`, with no end of line, would be turned into `Input error` by an extra `getline` after the loop. The course's automatic tests don't run this case, because in them every line has its end.
+- **After the last shipment** there is no further pass, so the line with `7` stays unfinished, like the last line in lesson 10.2. Valid data that ends right after `7`, with no end of line, would be turned into `Input error` by an extra `getline` after the loop. The course's automatic tests don't run this case, because in them every line has its end.
 
 Finishing at the start of the pass therefore covers the line with the number of records and never runs after the last number. `rest` still checks nothing (lesson 10.2).
 
@@ -389,7 +389,7 @@ A workshop takes several orders. The program reads their list, checks each order
 **Rules:**
 
 - There are from 0 to 5 orders.
-- The client's name can't be empty. Data that follow the agreement have no spaces at its start or end, and the program doesn't check for them. The same client may have several orders.
+- The client's name can't be empty. Data that follows the agreement has no spaces at its start or end, and the program doesn't check for them. The same client may have several orders.
 - The number of planned units must be greater than zero.
 - The number of completed units must not be negative and must not exceed the number of planned units.
 - All numbers are small and fit in an `int`, and so does their total.
@@ -501,9 +501,9 @@ A word instead of the number of orders, for example `three`, gives `Input error`
 
 **Before you write the program**, prepare a table of cases: zero, one, two and five orders, names with spaces, completed and unstarted orders, a number of orders that isn't allowed, an empty name, units that aren't allowed, a word instead of a number, an error in an order after a valid one, a missing announced order, and a missing last number. Write down the expected result for each.
 
-**Then** run the program for the main data and for one of two cases: zero orders or an error in the second order. All the cases in the full list of check cases are checked automatically, so you don't have to run the others. Analyse on paper the cases in which the data end.
+**Then** run the program for the main data and for one of two cases: zero orders or an error in the second order. All the cases in the full list of check cases are checked automatically, so you don't have to run the others. Analyse on paper the cases in which the data ends.
 
-### Success criterion
+### Success criteria
 
 - The program builds as C++20 and prints exactly the results shown for the main data and for the second case you chose, with the clients' names including their spaces.
 - The previous number line is finished at the start of the pass, and there is no read after the last number.
@@ -524,7 +524,7 @@ How do you create an initially empty collection of orders? What should happen af
 <details>
 <summary>Hint 2</summary>
 
-Each pass of the loop should prepare the local data of one order, check them, and only then add the complete record to the vector.
+Each pass of the loop should prepare the local data of one order, check it, and only then add the complete record to the vector.
 
 </details>
 
@@ -562,7 +562,7 @@ Successive lines of the data are separated by `/`. For valid data, the "Result" 
 | R | `2` / `North Library` / `12 5` / `City Archive` / `8`, then the end of the data | `Input error` | a missing last number |
 | S | `2` / `North Library` / `12 5` / `City Archive` / `0 done` | `Input error` | zero planned units, then a word instead of the second number, after a valid order: a failed read takes precedence over a value that isn't allowed |
 
-**The automatic tests and your runs.** All the cases are checked automatically: the reference solution is run for each of them, and its whole standard output is compared with the expected one. The solution and its results are in [Example solutions](#example-solutions).
+**Automatic tests and your own runs.** All the cases are checked automatically: the reference solution is run for each of them, and its whole standard output is compared with the expected one. The solution and its results are in [Example solutions](#example-solutions).
 
 </details>
 
@@ -648,8 +648,8 @@ South Depot
 0
 ```
 
-1. **Predict** the result of this program and of the program of section 2 for these data.
-2. Run the program for these data and compare the result with your prediction.
+1. **Predict** the result of this program and of the program of section 2 for this data.
+2. Run the program for this data and compare the result with your prediction.
 3. Choose your own valid data for which this program prints a wrong result.
 4. For your data, **predict** when each record is created and added to the vector, what number of boxes its field has at that moment, and what number `>>` reads later.
 5. Run the program for your data.
@@ -665,7 +665,7 @@ The results, example data and the fixed program are in [Example solutions](#exam
 
 | What you see | What it means | What to do |
 |---|---|---|
-| `Input error` for valid data | The line with the number of records isn't finished, because `getline(rest)` is missing or stands only at the end of the pass. The first name is empty, and the read of the number hits the real name. | Call `std::getline(std::cin, rest)` at the start of every pass. |
+| `Input error` for valid data | The line with the number of records isn't finished, because `getline(rest)` is missing or comes only at the end of the pass. The first name is empty, and the read of the number hits the real name. | Call `std::getline(std::cin, rest)` at the start of every pass. |
 | The report has zeros instead of the numbers that were read | The record is created and added to the vector before the program reads the numbers (section 9). | Create the record and call `push_back` after the read and both checks. |
 | After `Input error` or `Invalid orders` the program still prints a report | `return 0;` is missing after the message, so the loop and the report go on. | After an error message, end `main` with `return 0;`. |
 | The report contains an order with the number 0, although the data had a word | The `std::cin.fail()` check before `push_back` is missing. You can't rely on the contents of a variable after a failed read (lesson 4.6). | Check the read before the rules and before adding the record. |
@@ -681,7 +681,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 2. What does `shipments.push_back(shipment)` do? Where does the new element go, and how does `size()` change?
 3. Why is the record created and added to the vector only after the read and the rules are checked? Would `push_back` check whether it is valid?
 4. If the program changed the variable `boxes` after `push_back`, would the vector's element change? Why?
-5. Why does `getline(rest)` stand at the start of the pass and not after the loop? What does it finish in the first pass, and what in the second?
+5. Why does `getline(rest)` come at the start of the pass and not after the loop? What does it finish in the first pass, and what in the second?
 6. What does the program do for the data `0`? Why is that a valid result and not an error?
 7. The first order is valid and the second has `8 9`. What is in the vector then, and what does the program print? Why doesn't it print the first order?
 8. How does the announced number of orders differ from the vector's `size()`? Why does the report use `size()`?
@@ -794,7 +794,7 @@ int main() {
 3. **A check of its range** before the loop, because `-1` or `6` are values that were read correctly but aren't allowed. The program then reads no order.
 4. **For zero orders** the condition `index < count` is false at once, so the loop doesn't run and the vector stays empty.
 5. **Finishing at the start of the pass,** because an unfinished line comes before each name: in the first pass the line with the number of orders, in the later ones the number line of the previous order.
-6. **No finishing after the loop,** because the program reads no further name. An extra `getline` could turn valid data into `Input error` when they end without an end of line.
+6. **No finishing after the loop,** because the program reads no further name. An extra `getline` could turn valid data into `Input error` when it ends without an end of line.
 7. **Starting values of the local variables,** because after a failed read a variable may keep its earlier value. Each pass starts with its own, new variables.
 8. **The read before the values,** because you can't rely on the contents of variables after a failed read. The rules make sense only for numbers that were really read.
 9. **An order that isn't allowed doesn't go into the vector,** because `return 0;` ends `main` before the program reaches `push_back`.
@@ -802,14 +802,14 @@ int main() {
 11. **The vector stores its own element:** a copy of the record `order`, independent of it. The local record disappears at the end of the pass, and the element stays.
 12. **`size()` is the number of records added,** because each `push_back` call increases it by 1, and nothing else changes it.
 13. **Earlier valid orders may stay in the vector** after an error in a later one. The program doesn't remove them, because it stops right away.
-14. **Still no partial report,** because the result is about the whole list. A report of some of the orders would look complete, although the data were wrong.
+14. **Still no partial report,** because the result is about the whole list. A report of some of the orders would look complete, although the data was wrong.
 15. **Printing through `const Order&`,** because the loop only reads the elements and doesn't copy them in each pass (lesson 8.4).
 16. **No modifiable reference,** because the report changes nothing. `const` makes sure the compiler won't allow an accidental change.
 17. **Adding versus changing:** `push_back` adds a new element and increases `size()`, while a change through `Order&` would affect existing elements (lesson 9.3). The mission doesn't change the orders after reading them.
 18. **No function that reads a record,** because reading one order fits readably into the loop in `main`, and the agreement doesn't require such a function.
 19. **What is left for lesson 10.4:** a function that reads one record, and reading records up to the end of the data when their number isn't announced.
 
-**Other valid solutions:** instead of `return 0;` you can use a `bool` flag, as in lessons 4.5 and 7.4. The loop then runs while the flag is true and announced records remain, and after the loop the program chooses the message or the report. The rules can stand in several separate conditions with the same message. The total can be calculated in a separate loop over the vector, and the remaining units directly in the print statement.
+**Other valid solutions:** instead of `return 0;` you can use a `bool` flag, as in lessons 4.5 and 7.4. The loop then runs while the flag is true and announced records remain, and after the loop the program chooses the message or the report. The rules can be in several separate conditions with the same message. The total can be calculated in a separate loop over the vector, and the remaining units directly in the print statement.
 
 Each case in the list of check cases is a separate run of this program. Cases A, B, F, N and O are the data from the mission's text. The others are below, in the order of the list of check cases.
 
@@ -1025,8 +1025,8 @@ South Depot: 0
 Total boxes: 0
 ```
 
-- **This case masks the bug.** The program of section 2 prints the same for these data. The buggy program creates each record with 0 boxes, the starting value of the variable `boxes`, and the data have 0 too. The record in the vector matches the data by chance.
-- **Data that reveal the bug:** any valid data in which at least one shipment has a positive number of boxes, for example the data of section 2. The correct result is the report with the numbers 4 and 7 and the total 11, but the buggy program prints:
+- **This case masks the bug.** The program of section 2 prints the same for this data. The buggy program creates each record with 0 boxes, the starting value of the variable `boxes`, and the data has 0 too. The record in the vector matches the data by chance.
+- **Data that reveals the bug:** any valid data in which at least one shipment has a positive number of boxes, for example the data of section 2. The correct result is the report with the numbers 4 and 7 and the total 11, but the buggy program prints:
 
 <!-- input: shipment_list_early_bug -->
 ```text

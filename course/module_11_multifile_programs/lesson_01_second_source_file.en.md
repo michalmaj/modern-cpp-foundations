@@ -17,7 +17,7 @@ This lesson assumes that you:
 
 ## The situation
 
-The programs of the last modules have grown. The solution of the test in lesson 10.5 has a type, two functions and `main` in one file. The longer a file, the harder it is to find the function you need in it. That's why bigger programs consist of several source files. In this lesson you'll move one function into a second `.cpp` file and answer two questions: **what must `main.cpp` know about a function whose definition is in another file?** And **how do the tools know that the program consists of two files?**
+The programs of recent modules have grown. The solution of the test in lesson 10.5 has a type, two functions and `main` in one file. The longer a file, the harder it is to find the function you need in it. That's why bigger programs consist of several source files. In this lesson you'll move one function into a second `.cpp` file and answer two questions: **what must `main.cpp` know about a function whose definition is in another file?** And **how do the tools know that the program consists of two files?**
 
 After this lesson you will:
 
@@ -81,7 +81,7 @@ The same signature appears here in two roles:
 | `int calculate_points(int solved, int bonus);` | a **declaration**: the name, the result type and the parameter types, ending with a semicolon | tells the compiler that the function exists and how to call it, so the call in `main` compiles |
 | the same signature with a body in braces | a **definition** | provides the behaviour: the instructions that run at every call. The linker must find it |
 
-Thanks to the declaration, the compiler can compile the call before it sees the definition. That's why the definition can stand below `main`, and, in the next section, in another file.
+Thanks to the declaration, the compiler can compile the call before it sees the definition. That's why the definition can be below `main`, and, in the next section, in another file.
 
 ## 3. A second source file
 
@@ -154,7 +154,7 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 - **The only change** from the lesson 0.5 file: in the `add_executable` line, `main.cpp` is followed by a space and `points.cpp`. The other lines stay the same.
 - You add a **file name**, not a function name. CMake doesn't know which functions the files contain. It writes a plan: compile every listed file and join the results into the program `first_program`.
 - **The order of the names isn't the order of running.** `add_executable(first_program points.cpp main.cpp)` builds the same program. Running always starts from `main`.
-- If CLion added `points.cpp` itself, compare that line with the one shown above. In this lesson, all source files stand on one `add_executable` line, separated by spaces.
+- If CLion added `points.cpp` itself, compare that line with the one shown above. In this lesson, all the source files are on one `add_executable` line, separated by spaces.
 
 ## 5. Build and run the program of two files
 
@@ -260,7 +260,7 @@ A cinema's box office sells two kinds of tickets: a **regular** one for 12 units
 - The program reads two whole numbers separated by a space: first the number of regular tickets, then the number of reduced tickets. It prints no questions.
 - The total cost is the number of regular tickets times 12 plus the number of reduced tickets times 7.
 - The program prints exactly one line, `Total cost: N`, with no extra messages.
-- **The cost is calculated by your function, whose definition stands in a second `.cpp` file.** You choose the names of the function and its parameters yourself.
+- **The cost is calculated by your function, whose definition is in a second `.cpp` file.** You choose the names of the function and its parameters yourself.
 - `main.cpp` contains the function's declaration and `main`: reading, calling the function and printing the result. It doesn't contain the function's definition.
 - The second `.cpp` file contains only the function's definition: no `main`, no reading and no printing.
 - `CMakeLists.txt` is the lesson 0.5 file with the second file added on the `add_executable` line.
@@ -328,8 +328,8 @@ Total cost: 36
 2. what to call its parameters;
 3. how to write the declaration;
 4. how to write the definition, so that it matches the declaration;
-5. where the declaration stands;
-6. where the definition stands;
+5. where the declaration goes;
+6. where the definition goes;
 7. what `main()` contains;
 8. what to call the second `.cpp` file;
 9. which files to list in `add_executable`;
@@ -339,7 +339,7 @@ Total cost: 36
 
 **Then** run the program for data A and one boundary case: B or C. Compare the other cases with the results in your table. All cases A–D are checked automatically in the reference solution.
 
-### Success criterion
+### Success criteria
 
 - The program builds as C++20 from two `.cpp` files and, for data A and for B or C, prints exactly the result shown.
 - Your predictions for the other cases match the results given above.
@@ -472,7 +472,7 @@ The fixed project is in [Example solutions](#example-solutions).
 | `undefined reference`, `undefined symbol` or `referenced from` with your function's name, and `linker command failed` at the end | Compiling succeeded, but the linker doesn't find the definition: the second file isn't in `add_executable`, or the definition doesn't match the declaration. | Check the `add_executable` line. Then compare the declaration with the definition: the name, the result type, the number and the types of the parameters. |
 | At the first build, there's only one `Building CXX object` line, for `main.cpp`, or after a change to `CMakeLists.txt` CLion builds as if nothing had changed | The second file isn't built: it isn't in `add_executable`, or CLion hasn't reloaded the changed `CMakeLists.txt` yet. | Add the file to `add_executable`. In CLion, click the reload notice or choose **Tools \| CMake \| Reload CMake Project**. |
 | `CMake Error at CMakeLists.txt:4 (add_executable):` and `Cannot find source file:` | A name in `add_executable` doesn't match the file in the project folder: a typo, a different case, the file in another folder, or an extra extension added by the editor, for example `points.cpp.txt` (Windows hides known extensions by default). The compiler hasn't started yet (lesson 1.4). | Check the file's name in the terminal with `ls`, and compare it with the name in `add_executable`, letter by letter. |
-| `use of undeclared identifier` with the function's name, in `main.cpp` | `main.cpp` lacks the declaration, or it stands below the call. A definition in the second file isn't enough for the compiler. | Add the declaration before `main`. |
+| `use of undeclared identifier` with the function's name, in `main.cpp` | `main.cpp` lacks the declaration, or it's below the call. A definition in the second file isn't enough for the compiler. | Add the declaration before `main`. |
 | The linker reports that the function or `main` is defined more than once, for example `duplicate symbol` or `multiple definition` | The same definition is in two files: the definition was copied instead of moved, both files have a `main`, or `main.cpp` includes the second file with `#include`. | Keep the function's definition only in the second file, and `main` only in `main.cpp`. Don't include `.cpp` files with `#include`. |
 | A header file appeared next to `points.cpp`, and `points.cpp` has an `#include` line with its name | **Create an associated header** was selected in CLion's new-file window. | Delete that file, the `#include` line from `points.cpp`, and the header's name from `add_executable` if CLion added it there. You'll meet your own header files in the next lesson. |
 | The program prints nothing and waits | It's waiting for the second number. | Type both numbers and press **Enter**. |
@@ -504,14 +504,14 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 7. The compiler works twice, separately for each `.cpp` file, and creates two object files: `main.cpp.o` and `points.cpp.o` (`.obj` on Windows). The linker joins both, together with the library code and the startup code, into one program `first_program`. It matches the call of `calculate_points` in `main` with the definition in `points.cpp.o`.
 8. Compiling `main.cpp` succeeded: there's a `Building CXX object` line, and no message points to an error in a line of `main.cpp`. The output ends with `linker command failed` and a message with the name `calculate_points`. The C++ code was correct; only `points.cpp` was missing from the list of files to build. Once it was added, the definition got into the program.
 9. `#include` inserts the whole text of a file, so the definition would be compiled together with `main.cpp`. When `points.cpp` is also in `add_executable`, the definition would get into the program twice, and the linker would report that the function is defined more than once. Without `points.cpp` in `add_executable`, the program would in practice be one file again. The linker joins `.cpp` files, and `add_executable` lists them.
-10. Because `main` and the function contain the same instructions. Splitting into files changes how the code is organised and how it's built, not what the program calculates. A third file would need its own copy of the declaration, and every copy would have to be fixed at every change to the function. The next lesson answers this problem.
+10. Because `main` and the function contain the same instructions. Splitting into files changes how the code is organised and how it's built, not what the program calculates. A third file would need its own copy of the declaration, and every copy would have to be fixed at every change to the function. The next lesson deals with this problem.
 
 </details>
 
 ## Summary
 
 - One program can consist of several `.cpp` files. The program has one `main`.
-- In the file that calls a function, a declaration is enough. The definition can stand in another `.cpp` file.
+- In the file that calls a function, a declaration is enough. The definition can be in another `.cpp` file.
 - The declaration and the definition must match: the name, the result type, the number and types of parameters. The compiler won't compare them across files, so compare them yourself.
 - The tools build only the files listed in `add_executable`. You add every new `.cpp` file on that line. The order of the names doesn't change the order of running.
 - Every `.cpp` file is compiled separately, into its own object file. The linker joins the object files into one program.
@@ -520,7 +520,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## What's next
 
-In this lesson, the declaration of `calculate_points` stood in `main.cpp`. But what if different files are to use the same function? Each would then need its own copy of the declaration, and every change to the function would mean fixing all the copies. In the next lesson of Module 11, the declaration will go into one shared place: your own header file. Go on to [lesson 11.2: Your own header file](lesson_02_own_header_file.en.md).
+In this lesson, the declaration of `calculate_points` was in `main.cpp`. But what if different files are to use the same function? Each would then need its own copy of the declaration, and every change to the function would mean fixing all the copies. In the next lesson of Module 11, the declaration will go into one shared place: your own header file. Go on to [lesson 11.2: Your own header file](lesson_02_own_header_file.en.md).
 
 ---
 
@@ -582,7 +582,7 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 
 - **The organisation of the files:** `main.cpp` reads the data, calls the function and prints the result. `tickets.cpp` contains only the definition of `total_cost`. `CMakeLists.txt` lists both files on the `add_executable` line, and the other lines are as in lesson 0.5.
 - **The declaration and the definition:** the declaration at the start of `main.cpp` has the same name, result type and parameter types as the definition in `tickets.cpp`. Thanks to it, the call in `main` compiles.
-- **The prices are constants in the definition.** They belong to the rule for calculating the cost, so they stand in the function, not in `main`. When a price changes, you change only `tickets.cpp`.
+- **The prices are constants in the definition.** They belong to the rule for calculating the cost, so they're in the function, not in `main`. When a price changes, you change only `tickets.cpp`.
 - **Compiling and linking:** the compiler creates two object files, `main.cpp.o` and `tickets.cpp.o`. The linker joins them into one program and matches the call of `total_cost` with the definition.
 - **Other correct solutions:** other names for the function, the parameters and the file, for example `ticket_cost` and `prices.cpp`; the result stored first in a `const int` variable in `main`; a declaration without parameter names, `int total_cost(int, int);`; the files in `add_executable` in another order.
 

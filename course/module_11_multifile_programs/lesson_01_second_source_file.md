@@ -362,7 +362,7 @@ Co musi wiedzieć `main.cpp` o funkcji zdefiniowanej w innym pliku? Kompilator, 
 <details>
 <summary>Podpowiedź 2</summary>
 
-Dlaczego definicja powinna znajdować się w drugim `.cpp`, a plik musi zostać dodany do CMake? Definicja to funkcja z ciałem, czyli z obliczeniem. Plik, którego nie ma w `add_executable`, nie jest kompilowany, więc linker nie dostanie jego definicji.
+Dlaczego definicja powinna znajdować się w drugim `.cpp`, a plik musi zostać dodany do CMake'a? Definicja to funkcja z ciałem, czyli z obliczeniem. Plik, którego nie ma w `add_executable`, nie jest kompilowany, więc linker nie dostanie jego definicji.
 
 </details>
 
@@ -448,7 +448,7 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 2. **Linkowanie się nie udaje.** Linker dostaje tylko plik obiektowy `main.cpp`. Szuka definicji `calculate_points`, bo `main` ją wywołuje, i nie znajduje jej. Komunikat zależy od systemu: na Ubuntu ``undefined reference to `calculate_points(int, int)'``, na macOS `"calculate_points(int, int)", referenced from`, a na Windowsie `undefined symbol: int __cdecl calculate_points(int, int)`. Na końcu jest `linker command failed`.
 3. **Program nie powstaje.**
 
-To ten sam rodzaj błędu co w lekcji 5.6, punkt 7: wywołana funkcja nie ma w programie definicji. Różnica: tam definicji nie było nigdzie, a tu jest w pliku, którego narzędzia nie budują. Dla CMake plik na dysku nie jest jeszcze częścią programu. Częścią programu jest plik wymieniony w `add_executable`.
+To ten sam rodzaj błędu co w lekcji 5.6, punkt 7: wywołana funkcja nie ma w programie definicji. Różnica: tam definicji nie było nigdzie, a tu jest w pliku, którego narzędzia nie budują. Dla CMake'a plik na dysku nie jest jeszcze częścią programu. Częścią programu jest plik wymieniony w `add_executable`.
 
 Po dopisaniu `points.cpp` Ninja najpierw sam uruchamia CMake, a potem kompiluje `points.cpp` i linkuje program. `main.cpp` może nie być kompilowany ponownie: nie zmienił się, a jego plik obiektowy już istnieje. Program wypisuje `Points: 14`, tak jak w punkcie 5.
 

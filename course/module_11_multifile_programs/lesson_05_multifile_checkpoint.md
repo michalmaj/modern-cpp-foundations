@@ -22,7 +22,7 @@ Zajrzenie do podpowiedzi albo do wcześniejszych lekcji nie jest porażką. Waż
 - **pierwsze:** specyfikacja, część A i wspólny nagłówek;
 - **drugie:** pliki `.cpp`, `CMakeLists.txt`, przypadki kontrolne i część C.
 
-**Możesz używać:** CLiona albo terminala, CMake i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; lekcji 10.3 i 11.1–11.4 jako przypomnienia; tabel przypadków. Debugger nie jest potrzebny. Wszystko, czego potrzebujesz, znasz z Modułów 1–11.
+**Możesz używać:** CLiona albo terminala, CMake'a i Ninja, jak dotąd; `CMakeLists.txt` skopiowanego z oryginalnego `lesson_05_first_program`; lekcji 10.3 i 11.1–11.4 jako przypomnienia; tabel przypadków. Debugger nie jest potrzebny. Wszystko, czego potrzebujesz, znasz z Modułów 1–11.
 
 ---
 

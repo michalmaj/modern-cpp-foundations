@@ -17,7 +17,7 @@ The test has three parts and a discussion:
 - **Part C: diagnostics and justification.** A link error in a ready project, and questions about your decisions. Do it after Part B.
 - **Checking and discussion:** hints, the full list of cases, the diagnostic project, the reference solution, answers and a self-assessment. Go there only after Parts A and B, or when you consciously give up further attempts on your own.
 
-Looking at the hints or at earlier lessons isn't a failure. What matters is **to note honestly what was done on your own and what with help**. A suggested split into two sessions:
+Looking at the hints or at earlier lessons isn't a failure. What matters is **to note honestly what was done on your own and what was done with help**. A suggested split into two sessions:
 
 - **first:** the specification, Part A and the shared header;
 - **second:** the `.cpp` files, `CMakeLists.txt`, the check cases and Part C.
@@ -64,7 +64,7 @@ NAME: capacity CAPACITY, occupied OCCUPIED, free FREE
 Free seats total: TOTAL
 ```
 
-A room's free seats are its capacity minus its occupied seats, and the total is the sum of the free seats of all rooms. **The calculation of free seats stands in one place in the program.** The program doesn't sort the rooms or remove repeats.
+A room's free seats are its capacity minus its occupied seats, and the total is the sum of the free seats of all rooms. **The calculation of free seats is in one place in the program.** The program doesn't sort the rooms or remove repeats.
 
 ### The required structure
 
@@ -74,7 +74,7 @@ A room's free seats are its capacity minus its occupied seats, and the total is 
 - **A separate `.cpp` file with the report:** it prints the report and uses the calculation functions.
 - **`CMakeLists.txt`** from lesson 0.5, in which `add_executable(first_program ...)` lists all the `.cpp` files needed.
 
-Don't include `.cpp` files with `#include`, and don't copy function definitions between files. A program whose code all stands in `main.cpp` doesn't meet the requirements, even if it prints the right results.
+Don't include `.cpp` files with `#include`, and don't copy function definitions between files. A program with all its code in `main.cpp` doesn't meet the requirements, even if it prints the right results.
 
 **Decide yourself:**
 
@@ -273,7 +273,7 @@ East Wing: capacity 5, occupied 0, free 5
 Free seats total: 12
 ```
 
-**Run these, they're required:** A, B, and one of the cases C or D. Predict the others in your table, and compare them with the full list of cases in "Checking and discussion". All of them are checked automatically for the reference solution. Data that ends right after the last number, without a line end, gives the same result. The automated tests don't run that case, as in lesson 10.3.
+**Run these, they're required:** A, B, and one of the cases C or D. Predict the others in your table, and compare them with the full list of cases in "Checking and discussion". All of them are checked automatically for the reference solution. Data that ends right after the last number, without a line end, gives the same result. The automatic tests don't run that case, as in lesson 10.3.
 
 ---
 
@@ -298,13 +298,13 @@ The `rooms_link_check` project is in [Checking and discussion](#the-diagnostic-p
 
 Answer in your own words, referring to your project:
 
-1. What is the shared header in your project for, and what stands in it?
-2. How does a function's declaration differ from its definition? Where does each one stand?
+1. What is the shared header in your project for, and what's in it?
+2. How does a function's declaration differ from its definition? Where does each one go?
 3. Why does no file include a `.cpp` file?
 4. Must every one of your functions be declared in the shared header?
 5. Why must the `.cpp` files be listed in `add_executable`?
 6. How can you tell whether an error comes from compiling or from linking?
-7. Why do the calculations stand in a different file from the report?
+7. Why are the calculations in a different file from the report?
 8. What does passing the collection of rooms by `const&` give?
 9. What don't the check cases tell you about the program's structure? How do you check that a change of the split didn't change how it works?
 
@@ -317,7 +317,7 @@ The test is passed when **every** item of this list holds. Your split into funct
 - [ ] The plan of Part A was made before the code, and it matches the program.
 - [ ] The room type is defined once, in a shared header with `#pragma once`, which itself includes the standard headers it needs.
 - [ ] The header contains the type's definition and declarations, with no function definitions.
-- [ ] The calculations and the report stand in two separate `.cpp` files, and each function is defined exactly once.
+- [ ] The calculations and the report are in two separate `.cpp` files, and each function is defined exactly once.
 - [ ] One function calculates free seats, and the total and the report use it.
 - [ ] The calculation file reads and prints nothing.
 - [ ] The collection and the elements that are only read are passed by `const&`.
@@ -347,7 +347,7 @@ The rubric is for self-assessment, or for assessment by a teacher. The course ha
 - **A partial report after an error** breaks the agreement: it means no points for reading and checking the data in that area.
 - **Other names** of the type, fields, functions and files don't cost points. A different, justified split, for example two headers, is assessed by the same competences, not by matching the reference solution.
 
-**What is checked automatically, and what isn't.** The course's tests check that the reference solution builds and gives the results shown. Your runs of the check cases check how your program behaves for that data. **The quality of the split, independence and justification are checked by no automaton:** a person assesses them by reading the plan and the files.
+**What is checked automatically, and what isn't.** The course's tests check that the reference solution builds and gives the results shown. Your runs of the check cases check how your program behaves for that data. **No automatic check covers the quality of the split, working on your own, or the justification:** a person assesses them by reading the plan and the files.
 
 ---
 
@@ -815,7 +815,7 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 
 1. **`Room` is defined in `rooms.hpp`,** because all three `.cpp` files use it. The header itself includes `<string>` and `<vector>`, which its declarations need.
 2. **The header declares three functions,** because each is used by another file: `main.cpp` calls `print_rooms`, and `rooms_report.cpp` calls `free_seats` and `free_seats_total`.
-3. **The formula `room.capacity - room.occupied` stands once,** in `free_seats`. Both the total and the report's line use it.
+3. **The formula `room.capacity - room.occupied` appears once,** in `free_seats`. Both the total and the report's line use it.
 4. **`free_seats_total` adds up the results of `free_seats`,** instead of repeating the formula.
 5. **The collection and the elements are passed by `const&`,** because the functions only read them.
 6. **`rooms_analysis.cpp` reads and prints nothing,** and `rooms_report.cpp` calculates nothing itself.
@@ -824,7 +824,7 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 9. **A record is created and added to the vector only after both checks,** and the report describes the vector: the number of rooms comes from `size()`.
 10. **`add_executable` lists three `.cpp` files,** on one line, without the header.
 
-Other correct solutions: other names; the calculations and the report in files with other names; one header for the type and a second for the declarations, if the second includes the first itself; a single analysis function, if the formula still stands in one place.
+Other correct solutions: other names; the calculations and the report in files with other names; one header for the type and a second for the declarations, if the second includes the first itself; a single analysis function, if the formula is still in one place.
 
 </details>
 
@@ -834,7 +834,7 @@ Other correct solutions: other names; the calculations and the report in files w
 <summary>Open after doing the diagnostics</summary>
 
 1. **Two files compile:** `main.cpp` and `rooms_report.cpp`, because only they are in `add_executable`. Both are correct: they know `free_seats` and `free_seats_total` from the declarations in `rooms.hpp`.
-2. **Linking fails,** because `rooms_report.cpp` calls these functions, and their definitions stand in `rooms_analysis.cpp`, which nobody compiles. The message names the missing functions: on Ubuntu `undefined reference to`, on macOS `referenced from`, on Windows `undefined symbol:`, and at the end `linker command failed`. There's no program.
+2. **Linking fails,** because `rooms_report.cpp` calls these functions, and their definitions are in `rooms_analysis.cpp`, which nobody compiles. The message names the missing functions: on Ubuntu `undefined reference to`, on macOS `referenced from`, on Windows `undefined symbol:`, and at the end `linker command failed`. There's no program.
 3. **The declarations and the definitions are correct** and match each other. The problem is only in the list of files.
 4. **The fix:** add `rooms_analysis.cpp` to `add_executable`, that is, `add_executable(first_program main.cpp rooms_analysis.cpp rooms_report.cpp)`, and in CLion reload the CMake project (lesson 11.1). After building, the program prints the report of Part B for data A, because the files are the same as in the reference solution.
 5. **`#include "rooms_analysis.cpp"` isn't a fix.** It would put the definitions into the file that includes it: in this project the error would disappear, but when someone later adds `rooms_analysis.cpp` to `add_executable`, the same functions will be defined twice. The linker joins `.cpp` files, not `#include` (lesson 11.2).
@@ -849,7 +849,7 @@ Other correct solutions: other names; the calculations and the report in files w
 <summary>Example answers, for the reference solution</summary>
 
 1. So that the room type and the functions' declarations exist in one place. The header defines `Room` and declares the functions that other files use.
-2. A declaration gives the name, the result type and the parameters, with a semicolon: it stands in the header. A definition also contains the function's body: it stands in one `.cpp` file.
+2. A declaration gives the name, the result type and the parameters, with a semicolon: it goes in the header. A definition also contains the function's body: it goes in one `.cpp` file.
 3. Because an included `.cpp` file would put definitions into another translation unit, and the linker joins `.cpp` files. It would risk a double definition.
 4. No. The header declares the functions that other files need. A helper function used only in one `.cpp` file doesn't have to go there.
 5. Because CMake compiles and links only the files in this list. A file outside the list doesn't get into the program, so its definitions are missing when linking.

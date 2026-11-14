@@ -302,7 +302,7 @@ Druga próba jest odrzucona, bo po pierwszej zostało tylko 13 kredytów. Trzeci
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: dane z wymagań, cena 1, cena równa saldu, cena o 1 większa od salda, cena 0, cena ujemna, puste saldo, dwie przyjęte opłaty z rzędu, odmowa, a po niej przyjęta opłata. Przy każdej próbie zapisz wynik, saldo i liczbę przejazdów.
 
-**Potem** uruchom program dla danych z wymagań i dla jednego wariantu z dwiema odmowami na początku, na przykład: saldo 10, 0 przejazdów, ceny 0, 11 i 10. Zmieniaj przy tym tylko dane. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+**Potem** uruchom program dla danych z wymagań i dla jednego wariantu z dwiema odmowami na początku, na przykład: saldo 10, 0 przejazdów, ceny 0, 11 i 10. Zmieniaj przy tym tylko dane. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 ### Kryterium sukcesu
 
@@ -571,7 +571,7 @@ int main() {
 - ceny wpisane bezpośrednio w wywołaniach i w tekstach. Wtedy jednak każdą cenę trzeba zmieniać w dwóch miejscach;
 - wywołanie w samym warunku, `if (pay_fare(card, first_fare))`: funkcja też wykonuje się raz, ale zmiana karty jest wtedy ukryta w warunku. Zmienna z wynikiem pokazuje ją wyraźniej.
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Typ i funkcja są takie same jak wyżej. Różnica jest w `main`: program odczytuje nazwę, stan początkowy i ceny z wejścia, wywołuje funkcję dla każdej ceny na tym samym obiekcie, po każdej próbie wypisuje wynik i stan, a na końcu nazwę. Wejście odczytuje tak samo jak program kontrolny lekcji 9.1: nazwę przez `std::getline`, liczby przez `>>`, a ceny najpierw do wektora `int`, żeby sprawdzić odczyt, zanim cokolwiek się zmieni. Misja nie potrzebuje ani wejścia, ani wektora.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Typ i funkcja są takie same jak wyżej. Różnica jest w `main`: program odczytuje nazwę, stan początkowy i ceny z wejścia, wywołuje funkcję dla każdej ceny na tym samym obiekcie, po każdej próbie wypisuje wynik i stan, a na końcu nazwę. Wejście odczytuje tak samo jak program kontrolny lekcji 9.1: nazwę przez `std::getline`, liczby przez `>>`, a ceny najpierw do wektora `int`, żeby sprawdzić odczyt, zanim cokolwiek się zmieni. Misja nie potrzebuje ani wejścia, ani wektora.
 
 <!-- example: city_pass_check -->
 ```cpp
@@ -637,7 +637,7 @@ int main() {
 }
 ```
 
-Każdy przypadek to nazwa karty w pierwszej linijce, potem saldo, liczba przejazdów, liczba prób i ceny, w kolejności z listy kontrolnej, od A do H.
+Każdy przypadek to nazwa karty w pierwszej linijce, potem saldo, liczba przejazdów, liczba prób i ceny, w kolejności z listy przypadków kontrolnych, od A do H.
 
 <!-- input: city_pass_check -->
 ```text

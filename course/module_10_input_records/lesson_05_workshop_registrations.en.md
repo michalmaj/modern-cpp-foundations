@@ -15,12 +15,12 @@ The lesson has two parts:
 - **Part A: the test.** Task 1: requirements, the data format, the report, examples and the criteria. No hints and no solution code. Everything you need is from Modules 1–10.
 - **Part B: checking and discussion.** Hints, the full list of check cases, task 2 (diagnostics) and task 3 (explanations), which you do after task 1, and then the reference solution, fixes, answers and the self-assessment. Go there only after doing Part A, or when you consciously decide to stop trying on your own.
 
-Looking at Part B, at earlier lessons or at your notes isn't a failure. What matters is that you **honestly note what you did on your own and what with help**. A suggested split into two sessions:
+Looking at Part B, at earlier lessons or at your notes isn't a failure. What matters is that you **honestly note what you did on your own and what you did with help**. A suggested split into two sessions:
 
 - **first:** analysing the data agreement, designing the type and the two functions, the reading loop, and the report for the data in the requirements;
 - **second:** errors and boundary cases, the empty import, tasks 2 and 3, comparing with the solution, and the self-assessment.
 
-**You may use:** CLion or the terminal, CMake and Ninja, as before; a `CMakeLists.txt` copied from the original `lesson_05_first_program`; case and trace tables, and temporary test printouts. You won't need the debugger. You don't have to end the data from the keyboard: you end typed data with an empty line, and you analyse on paper the cases in which the data end with no empty line.
+**You may use:** CLion or the terminal, CMake and Ninja, as before; a `CMakeLists.txt` copied from the original `lesson_05_first_program`; case and trace tables, and temporary test printouts. You won't need the debugger. You don't have to end the data from the keyboard: you end typed data with an empty line, and you analyse on paper the cases in which the data ends with no empty line.
 
 ---
 
@@ -46,26 +46,26 @@ Ala Nowak
 1 2
 ```
 
-Nobody announces the number of registrations. The reading ends when there's an **empty line** where the next full name would be, or when **the data end**. An empty line isn't a registration.
+Nobody announces the number of registrations. The reading ends when there's an **empty line** where the next full name would be, or when **the data ends**. An empty line isn't a registration.
 
 ### Rules
 
-- The full name isn't empty, because an empty line ends the data. It may contain spaces between words, but in data that follow the agreement it has no spaces at its start or end. Two people may have the same full name: they're still two registrations.
+- The full name isn't empty, because an empty line ends the data. It may contain spaces between words, but in data that follows the agreement it has no spaces at its start or end. Two people may have the same full name: they're still two registrations.
 - The group number is exactly 1 or 2.
 - The number of sessions is from 1 to 6, inclusive.
-- All the data are ASCII text. The numbers are small and fit in `int`, as does their total. Data that follow the agreement have at most 5 registrations.
-- The program doesn't check text after the second number, spaces at the start or end of the full name, lines made only of spaces, repeated names, or the number of registrations. Such data are outside the agreement.
+- All the data is ASCII text. The numbers are small and fit in `int`, as does their total. Data that follows the agreement has at most 5 registrations.
+- The program doesn't check text after the second number, spaces at the start or end of the full name, lines made only of spaces, repeated names, or the number of registrations. Such data is outside the agreement.
 
 ### Errors
 
-- **`Input error`:** one of the two numbers of a registration couldn't be read. There's a word instead of the number, or the data end after a non-empty full name or after the first number. A started registration without a required number is an error, not the ending of the data.
+- **`Input error`:** one of the two numbers of a registration couldn't be read. There's a word instead of the number, or the data ends after a non-empty full name or after the first number. A started registration without a required number is an error, not the ending of the data.
 - **`Invalid registrations`:** both numbers were read, but the group number isn't 1 or 2, or the number of sessions is outside the range 1–6.
 - When one of the numbers couldn't be read, the result is `Input error`, even if the other number breaks the rules.
 - At the first error, the program prints exactly one of these messages and stops: it doesn't read any more data and prints no part of the report. Registrations accepted earlier may already be in the vector, and they don't have to be removed. The program doesn't correct the data and doesn't restore the stream.
 
 ### The type and the two functions
 
-- The program defines **one own type** of registration with three fields: the full name (`std::string`), the group number (`int`) and the number of sessions (`int`). No extra fields: neither the name of the group, which the number determines, nor the number of all registrations. You choose the names of the type and the fields yourself.
+- The program defines **one registration type of its own** with three fields: the full name (`std::string`), the group number (`int`) and the number of sessions (`int`). No extra fields: neither the name of the group, which the number determines, nor the number of all registrations. You choose the names of the type and the fields yourself.
 - **The function that reads the numbers of one registration** gets the input stream that `main` reads from, the full name already read by `main`, and an existing result record prepared by `main`. It goes on reading from the same stream, neither copies nor changes the full name, and stores the complete registration in the caller's record. It returns `true` or `false`. On `false`, no field of the result record changes, even when one number has already been read. It prints nothing and adds nothing to the vector.
 - **The function that counts the participants of a group** gets the finished collection of registrations and a group number. It goes through the whole collection without copying it and without being able to change its elements, and returns the number of registrations with that group number. It's a number of elements, as in lesson 8.4. It prints nothing, doesn't change the collection and doesn't create a new vector.
 - You choose the parameter types and how they're passed yourself, so that the functions keep these agreements. The two functions have different jobs: the first changes one object in a controlled way, the second only reads the whole collection. A third function isn't needed. You may add your own helper function, for example one that prints or adds up, as long as it uses only constructs you know and doesn't change the collection.
@@ -86,7 +86,7 @@ The number of registrations, the numbers of participants of the two groups, and 
 
 ### Examples
 
-**Example A:** the data of the requirements, ended by an empty line.
+**Example A:** the data from the requirements, ended by an empty line.
 
 <!-- input: workshop_registrations -->
 ```text
@@ -139,7 +139,7 @@ Jan Lis
 Olek Wrona
 ```
 
-**Example C:** the data start with an empty line. An empty vector is a valid result, not an error.
+**Example C:** the data starts with an empty line. An empty vector is a valid result, not an error.
 
 <!-- input: workshop_registrations -->
 ```text
@@ -210,7 +210,7 @@ Group 2 participants:
 (none)
 ```
 
-No registrations for group 2 isn't an error: that group is simply empty.
+Having no registrations for group 2 isn't an error: that group is simply empty.
 
 </details>
 
@@ -229,11 +229,11 @@ The suggested order is a work plan, not twelve separate programs or runs:
 9. Check the empty collection.
 10. Print the report from the whole vector.
 11. Check the counting of both groups and the total of sessions.
-12. Check that the full names of group 2 stand in the order of the data.
+12. Check that the full names of group 2 are in the order of the data.
 
 **Before you run the program**, prepare a table of cases with the expected results: an empty line at the start; one, two and five registrations; both ways of ending; all the registrations in group 1 and all in group 2; the groups in a mixed order; the same full name twice; group 0, 3 and a negative one; 0, 1, 6, 7 and a negative number of sessions; a word instead of the group number and instead of the number of sessions; the end of the data after a full name and after the first number; an error in a registration after a valid one. For each case, write down the whole expected report or message.
 
-**Run the program** for example A and for one of the errors in the second registration, from example D or E. End each line with **Enter**, and after the last registration press **Enter** once more, on an empty line. Analyse the other cases on paper. All the cases of the full check list are checked automatically.
+**Run the program** for example A and for one of the errors in the second registration, from example D or E. End each line with **Enter**, and after the last registration press **Enter** once more, on an empty line. Analyse the other cases on paper. All the cases on the full list of check cases are checked automatically.
 
 When the result matches, you can save the project in Git, as in lesson 1.5. Before committing, check `git status`: only `main.cpp` and `CMakeLists.txt` go into the history.
 
@@ -245,10 +245,10 @@ You pass the test when you meet **all** the criteria. You may use Part B while d
 - There's one registration type with three fields of the required types, and the registrations go into one vector, in the order of the data.
 - The reading function reads from the same stream as `main`, gets the full name without a copy and without being able to change it, and fills the record prepared by `main`. On a refusal it changes none of its fields, even when one number was read. It must check that both numbers were read before it checks the rules of the group and of the number of sessions, even if the program would print the same results without that check.
 - The counting function gets the collection without a copy and without being able to change it, goes through all the elements, and returns the number of registrations of the chosen group. Through its loop variable, too, it reads each element without a copy and without being able to change it: a loop that copies the elements would be correct C++ and give the same result, but this task requires reading without copies.
-- Neither of the two functions prints anything. The rules of the group and of the number of sessions stand in one place in the program.
+- Neither of the two functions prints anything. The rules of the group and of the number of sessions are in one place in the program.
 - `main` stops reading after an empty line and after the end of the data where a full name would be, and prints `Input error` for a started, incomplete registration. `push_back` runs only after `true`, and on an error there's no part of the report.
 - The report comes from the elements of the vector: the number of registrations from `size()`, the numbers of participants of the groups from the counting function, and the total of sessions and the full names from the elements.
-- For example A and the chosen error in the second registration, the program prints exactly the results shown. The other examples and the cases of your table match your analysis on paper and the full check list.
+- For example A and the chosen error in the second registration, the program prints exactly the results shown. The other examples and the cases of your table match your analysis on paper and the full list of check cases.
 - The table of cases was written before running the program.
 - The bug from diagnostic A was fixed and checked, and the fragment from diagnostic B was analysed without running it (task 2 in Part B).
 - You can explain every line of your program and answer the questions of task 3.
@@ -265,8 +265,8 @@ Come here **only after doing Part A**, or when you consciously decide to stop tr
 
 - **Standard output:** compare the program's lines with the expected ones, character by character, including the colons, the spaces and the order of the full names. For valid data, check the whole report, not only the numbers.
 - **The numbers of the report:** does the number of registrations equal the sum of the numbers of participants of the two groups? Does the total of sessions match the addition in your table? These numbers agreeing doesn't prove correctness, but their disagreeing always means a bug.
-- **The record after a refusal:** does the reading function leave the result record unchanged also when the first number was read? The report won't show it, because after an error the program stops. The check program next to the reference solution helps with that.
-- **Responsibilities:** does either of the functions print something? Do the rules of the group and of the number of sessions also stand in `main`? Could the counting function change the collection?
+- **The record after a refusal:** does the reading function leave the result record unchanged even when the first number was read? The report won't show it, because after an error the program stops. The check program next to the reference solution helps with that.
+- **Responsibilities:** does either of the functions print something? Are the rules of the group and of the number of sessions also in `main`? Could the counting function change the collection?
 
 ## Hints
 
@@ -300,7 +300,7 @@ The lines of the data are separated by `/`. For valid data, the "Result" column 
 
 | | Data | Result | What it checks |
 |---|---|---|---|
-| A | `Ala Nowak` / `1 2` / `Jan Lis` / `2 4` / `Maja Kot` / `1 1` / `Olek Wrona` / `2 3` / an empty line | 4; 2 and 2; 10; `Jan Lis`, `Olek Wrona` | the data of the requirements: the groups in a mixed order, ending by an empty line |
+| A | `Ala Nowak` / `1 2` / `Jan Lis` / `2 4` / `Maja Kot` / `1 1` / `Olek Wrona` / `2 3` / an empty line | 4; 2 and 2; 10; `Jan Lis`, `Olek Wrona` | the data from the requirements: the groups in a mixed order, ending with an empty line |
 | B | the same with no empty line, then the end of the data | as in A | the end of the data after a complete registration |
 | C | an empty line | 0; 0 and 0; 0; `(none)` | the empty import |
 | D | `Ala Nowak` / `1 2` / `Jan Lis` / `2 four` | `Input error` | a word instead of the number of sessions in the second registration; no partial report |
@@ -319,7 +319,7 @@ The lines of the data are separated by `/`. For valid data, the "Result" column 
 | Q | `Ala Nowak` / `3 four` | `Input error` | a failed read takes precedence over a group that isn't allowed |
 | R | `Ala Nowak` / `1 2` / an empty line / `Jan Lis` / `3 4` | 1; 1 and 0; 2; `(none)` | an empty line ends the data, so the program doesn't read the further lines |
 
-**The automatic tests and your runs.** All the cases are checked automatically: the reference solution is run for each of them, and its whole standard output is compared with the expected one. The solution and its results are in [The reference solution](#the-reference-solution).
+**Automatic tests and your own runs.** All the cases are checked automatically: the reference solution is run for each of them, and its whole standard output is compared with the expected one. The solution and its results are in [The reference solution](#the-reference-solution).
 
 </details>
 
@@ -421,7 +421,7 @@ Jan Lis
 2
 ```
 
-1. What does the program with this loop print for these data, and what's the correct result?
+1. What does the program with this loop print for this data, and what's the correct result?
 2. Why has the second registration already started?
 3. Why is the missing number of sessions a read error, not the ending of the data?
 4. Why mustn't every `false` be treated as the end of the data? What would this version print if the second registration had `3 4`?
@@ -436,7 +436,7 @@ The results, example data and fixes are in [Diagnostics: results and fixes](#dia
 
 Answer briefly, in writing, referring to your own program from task 1, before you open the reference solution:
 
-1. Why does reading the numbers of one registration stand in a separate function, and reading the full names and the whole loop in `main`?
+1. Why is reading the numbers of one registration in a separate function, and reading the full names and the whole loop in `main`?
 2. How does your reading function get the stream and the result record? Why are both parameters references without `const`?
 3. Why mustn't the function change the result record before checking all the rules, although `main` stops after a refusal anyway?
 4. When does `main` call `push_back`? What's in the vector after an error in the second registration, and why doesn't the program print part of the report?
@@ -556,12 +556,12 @@ int main() {
 }
 ```
 
-1. **`main` reads the full name,** because it's at that line that it's decided whether the data have ended. The reading function is called only once a registration has started.
+1. **`main` reads the full name,** because it's at that line that it's decided whether the data has ended. The reading function is called only once a registration has started.
 2. **The stream through `std::istream&`,** because the function should go on reading from the existing `std::cin`, from where `main` stopped. No `const`, because reading changes the stream.
-3. **The result record through `Registration&`,** because the function has two results: the `bool` tells about success, and the complete registration goes into the object prepared by `main`.
+3. **The result record through `Registration&`,** because the function has two results: the `bool` reports success, and the complete registration goes into the object prepared by `main`.
 4. **The read before the assignment:** both numbers first go into local variables, because during the reading it isn't known yet whether a valid registration will come out. After a failed read, the value of a variable can't be relied on (lesson 4.6), so the rules are checked only after `input.fail()`. In this task, a number that couldn't be read is left as 0 (lesson 10.1), and 0 breaks the rules of both fields, so a program without this check would print the same results. The check stays, because the function's agreement mustn't depend on what was left in a variable: with rules that allow 0, as in the mission of lesson 10.4, such a program would accept a number that wasn't in the data.
-5. **On `false` the record is unchanged,** because every `return false;` stands before `result = Registration{name, group, sessions};`. That's the "all or nothing" rule from lesson 9.2.
-6. **An empty line isn't the same as a failed read:** an empty line is a successful read of a text of length zero (lesson 7.4), and the agreement says it ends the data. A failed read of a full name means there are no data left. Both end the reading, and neither creates a registration.
+5. **On `false` the record is unchanged,** because every `return false;` comes before `result = Registration{name, group, sessions};`. That's the "all or nothing" rule from lesson 9.2.
+6. **An empty line isn't the same as a failed read:** an empty line is a successful read of a text of length zero (lesson 7.4), and the agreement says it ends the data. A failed read of a full name means there's no data left. Both end the reading, and neither creates a registration.
 7. **A missing number after a non-empty full name is an error,** because the registration has already started. The function returns `false`, and `std::cin.fail()` gives `true`, so the result is `Input error`, not a report.
 8. **`push_back` only after `true`,** because only complete, checked registrations should go into the vector (lesson 10.3).
 9. **The collection through `const std::vector<Registration>&`,** because the counting function should only read the finished vector from `main`: no copy and no way to change it (lesson 8.4).
@@ -569,10 +569,10 @@ int main() {
 11. **No copy of the vector:** through `const&` the function works on the vector from `main`. A copy wouldn't change the result, but it would give nothing, and for a large collection it would cost time and memory.
 12. **`std::size_t`,** because the function returns a number of elements, just like `size()` (lessons 6.3 and 8.4). That's why the program includes `<cstddef>`.
 13. **The number of registrations from `size()`,** because the vector holds exactly the accepted registrations. A separate counter in the reading loop would repeat this information and could drift away from it.
-14. **The total of sessions isn't a number of participants:** it adds up the fields `sessions`, rather than counting records. For the data of the requirements it's 10 with 4 registrations. The two numbers would be equal only if every registration had one session.
+14. **The total of sessions isn't a number of participants:** it adds up the fields `sessions`, rather than counting records. For the data from the requirements it's 10 with 4 registrations. The two numbers would be equal only if every registration had one session.
 15. **The report only after the reading has ended,** because each of its lines concerns all the data. On an error in a later registration, the program stops with `return 0;` before printing anything of the report.
 16. **`false` from the reading function doesn't mean the end of the data:** it means that the started registration is wrong and there's no new record. `main` recognises the ending of the data itself, before calling the function, and `std::cin.fail()` gives the cause of the refusal.
-17. **No group 2 isn't an error:** data that follow the agreement may have not a single registration for group 2. The function then returns 0, the loop of full names prints nothing, and `(none)` says that the list is empty.
+17. **An empty group 2 isn't an error:** data that follows the agreement may have no registration at all for group 2. The function then returns 0, the loop of full names prints nothing, and `(none)` says that the list is empty.
 18. **A function's result doesn't replace checking the collection:** `true` says only that one registration is valid, and the counting function may give a wrong number, as in diagnostic A. `Group 2` and the list under `Group 2 participants:` describe the same elements of the vector, so they must agree, and the check cases compare the whole report.
 
 **Other correct solutions:**
@@ -586,7 +586,7 @@ int main() {
 
 This isn't the only correct solution.
 
-Each case of the check list is a separate run of this program. Cases A–F are the examples of Part A. The others are below, in the order of the check list.
+Each case in the list of check cases is a separate run of this program. Cases A–F are the examples from Part A. The others are below, in the order of the list of check cases.
 
 <!-- input: workshop_registrations -->
 ```text
@@ -894,7 +894,7 @@ Group 2: 0
 
 - **This case masks the bug.** The correct function would print the same. The loop has only one pass, so the `return count;` in its body runs only after the only registration has been checked.
 - **An empty vector doesn't reveal the bug either:** the loop doesn't run even once, so both versions reach the `return count;` after the loop and return 0.
-- **Data that reveal the bug:** several registrations, among which a matching registration stands further than at the first position. For example, `Ala Nowak` in group 1, `Jan Lis` in group 2 and `Maja Kot` in group 1. The correct result is `Group 1: 2` and `Group 2: 1`. The program with the bug prints:
+- **Data that reveals the bug:** several registrations, among which a matching registration is at a later position than the first. For example, `Ala Nowak` in group 1, `Jan Lis` in group 2 and `Maja Kot` in group 1. The correct result is `Group 1: 2` and `Group 2: 1`. The program with the bug prints:
 
 <!-- example: group_count_revealed -->
 ```cpp
@@ -948,9 +948,9 @@ Group 2: 0
 | `count_group(registrations, 1)` | matches, `count` = 1, then `return count;` | don't run | 1 | 2 |
 | `count_group(registrations, 2)` | doesn't match, `count` = 0, then `return count;` | don't run | 0 | 1 |
 
-- **Where the bug is:** `return count;` stands in the body of the loop, after the `if`. It runs in the first pass, whether or not the registration matches.
+- **Where the bug is:** `return count;` is in the body of the loop, after the `if`. It runs in the first pass, whether or not the registration matches.
 - **`return` ends the whole function,** not one pass of the loop (lesson 9.4). After it the loop has no further passes, and the function returns its result after checking only the first element.
-- **A correct result for one registration proves nothing,** because with one element the first pass is also the last. Even two registrations, `Ala Nowak` in group 1 and `Jan Lis` in group 2, give a correct `Group 1: 1`, and the bug shows only in `Group 2: 0`. Only a matching registration at a further position reveals it. The data of the requirements of task 1 would reveal it too.
+- **A correct result for one registration proves nothing,** because with one element the first pass is also the last. Even two registrations, `Ala Nowak` in group 1 and `Jan Lis` in group 2, give a correct `Group 1: 1`, and the bug shows only in `Group 2: 0`. Only a matching registration at a later position reveals it. The data from the requirements of task 1 would reveal it too.
 - **The difference from lesson 9.4:** there the function looked for one record, so after finding it the job was done, and a `return` in the loop was intended. The bug was a `return false;` in the body of the loop, after a record that didn't match. Here the function counts all the matching registrations, so the result is known only after the last element, and there should be no `return` in the loop at all.
 - **The fix:** remove `return count;` from the body of the loop. Only the `return count;` after the loop stays. The compiler reports no error or warning here, because it's valid C++, just not what the function is for. The fixed function is the function of the reference solution:
 
@@ -1010,7 +1010,7 @@ Now `Group 1` and `Group 2` add up to 3, as many as `Registrations`. In the vers
 2. **The second registration has started,** because the read of the full name `Jan Lis` succeeded, and the line isn't empty. From that moment, the program must get both numbers of this registration.
 3. **It's a read error,** because the group number was read, but the number of sessions wasn't: the data ended. The function returns `false`, and `std::cin.fail()` gives `true`. The ending of the data would be an empty line, or the end of the data where a full name would be, not in the middle of a registration.
 4. **`false` says only that there's no new registration,** not why. The `else` branch sets `reading` to `false` just as an empty line does, so the program confuses an error with the ending. For `3 4`, this version would print the same report with one registration instead of `Invalid registrations`.
-5. **A report with one registration would look complete,** although the data were wrong. The organisers wouldn't know that one registration wasn't recorded.
+5. **A report with one registration would look complete,** although the data was wrong. The organisers wouldn't know that one registration wasn't recorded.
 6. **The ending of the data is recognised by the condition `std::cin.fail() || name.empty()` when the full name is read,** before the function is even called. After the call, `false` always means an error in the registration. So the `else` branch should choose the message through `std::cin.fail()` (`Input error` or `Invalid registrations`) and end `main` with `return 0;`, with no report, as in the reference solution.
 
 </details>
@@ -1020,7 +1020,7 @@ Now `Group 1` and `Group 2` add up to 3, as many as `Registrations`. In the vers
 <details>
 <summary>Example answers</summary>
 
-1. Because they're two different jobs. At the line of the full name it's decided whether the data have ended, so `main` handles that line and the loop. The function gets a registration that has already started and is responsible only for its numbers, so its `true` and `false` each have one meaning.
+1. Because they're two different jobs. At the line of the full name it's decided whether the data has ended, so `main` handles that line and the loop. The function gets a registration that has already started and is responsible only for its numbers, so its `true` and `false` each have one meaning.
 2. The stream through `std::istream&`, and the record through `Registration&`. The function should read from the existing `std::cin`, and reading changes the stream. It should also fill the object prepared by `main`. With `const` it could do neither, and without `&` it would work on a copy, or not compile at all.
 3. Because the agreement says that after `false` the record is unchanged, whatever the caller does. The check program, or another caller, may go on using the record. `return false;` doesn't undo an earlier assignment.
 4. Only after `true`. After an error in the second registration the vector holds the first registration, because it was added earlier. The program prints only a message, because the report should concern all the data, and with part of the registrations it would look complete.
@@ -1028,8 +1028,8 @@ Now `Group 1` and `Group 2` add up to 3, as many as `Registrations`. In the vers
 6. Because the function only reads the finished vector: `&` removes the copy, and `const` guarantees that it won't change it. A loop variable with `const&`, for the same reason, doesn't copy the registrations and can't change them.
 7. Because the number of matches is known only after checking the last element. The search in lesson 9.4 had to find one record and could end right after it. The counting function ends only after the loop.
 8. The number of registrations counts the records in the vector, the number of participants of a group counts the records with a given group number, and the total of sessions adds up the fields `sessions`. The numbers of participants of groups 1 and 2 always add up to the number of registrations, because each registration belongs to exactly one group. The total of sessions equals the number of registrations only when every registration has one session.
-9. Because the agreement allows nobody to sign up for group 2: those are valid data with an empty list. In the reference solution, `(none)` appears when the counting function returns 0 for group 2. Another correct solution is a flag set in the loop of full names.
-10. No. `true` tells about one registration, and the counting function may be wrong, as in diagnostic A. I check the whole report for the cases of my table: whether the numbers of the groups add up to the number of registrations, and whether the list of group 2 has as many full names as `Group 2` says.
+9. Because the agreement allows group 2 to have no registrations at all: that's valid data with an empty list. In the reference solution, `(none)` appears when the counting function returns 0 for group 2. Another correct solution is a flag set in the loop of full names.
+10. No. `true` is about one registration, and the counting function may be wrong, as in diagnostic A. I check the whole report for the cases of my table: whether the numbers of the groups add up to the number of registrations, and whether the list of group 2 has as many full names as `Group 2` says.
 
 </details>
 
@@ -1037,7 +1037,7 @@ Now `Group 1` and `Group 2` add up to 3, as many as `Registrations`. In the vers
 
 For each criterion, mark one answer:
 
-| Criterion | On my own | With a hint | After looking at the solution | To review |
+| Criterion | On my own | With a hint | After looking at the solution | To revise |
 |---|---|---|---|---|
 | The design of the registration type | | | | |
 | The reading function: its parameters and how they're passed | | | | |
@@ -1057,7 +1057,7 @@ For each criterion, mark one answer:
 
 Running the program correctly for the examples is only part of the evidence. Mastering Module 10 is also shown by the table of cases, both diagnostics and the explanations.
 
-If anything is marked in the "To review" column, go back to the matching lesson:
+If anything is marked in the "To revise" column, go back to the matching lesson:
 
 | Topic | Lesson |
 |---|---|

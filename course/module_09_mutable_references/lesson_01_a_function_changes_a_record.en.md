@@ -21,7 +21,7 @@ A warehouse stores the product `Tea` with a stock of 3 units. A delivery of 4 un
 
 What can you do already?
 
-- In lesson 8.2 the fields changed directly in `main`: `tea.stock += 4;`. That works, but then the delivery rule stands in every place that performs it.
+- In lesson 8.2 the fields changed directly in `main`: `tea.stock += 4;`. That works, but then the delivery rule appears in every place that performs it.
 - In lessons 8.3 and 8.4 functions got a record through `const&`. They could read it, but not change it.
 - In lesson 8.5 a function created a new record with a result and returned it. That's a good design when a separate result is needed. Here, though, the result is to be **the changed state of the existing product**.
 
@@ -35,7 +35,7 @@ After this lesson you'll:
 - predict the state of a record before a call and after successive calls;
 - explain why a `const` object can't go into a function with a `&` parameter;
 - choose `const&` when a function only reads, and `&` when its job is to change;
-- choose data that reveal that a function changes a copy instead of the original.
+- choose data that reveals that a function changes a copy instead of the original.
 
 ## 1. Prepare the project
 
@@ -182,7 +182,7 @@ The program stores one record with the study progress so far: the topic, the tot
 **Rules:**
 
 - The topic is a non-empty ASCII text. The total number of minutes and the number of sessions are non-negative whole numbers.
-- A new session lasts from 1 to 120 minutes. The data meet these assumptions, so the program doesn't check them.
+- A new session lasts from 1 to 120 minutes. The data meets these assumptions, so the program doesn't check them.
 - **Recording a session** adds its time to the total number of minutes and increases the number of sessions by 1. The topic doesn't change.
 
 **Requirements:**
@@ -191,7 +191,7 @@ The program stores one record with the study progress so far: the topic, the tot
 - `main` has **one** object of this type. The program creates no new objects for later states.
 - The program has one function of its own, which records one session: it gets the existing record and the session's length, changes the record and returns `void`. It prints nothing and reads nothing from the input. You choose the names of the function and the parameters on your own.
 - `main` calls this function **twice for the same object**: first for 35 minutes, then for 20.
-- The program prints exactly four lines, as in the example below: `Topic`, `Before` before the first call, `After first` after the first and `After second` after the second. The numbers come from the record's fields as read at that moment. The words `minutes` and `sessions` always stay in the same form, also for the number 1.
+- The program prints exactly four lines, as in the example below: `Topic`, `Before` before the first call, `After first` after the first and `After second` after the second. The numbers come from the record's fields as read at that moment. The words `minutes` and `sessions` always stay in the same form, even for the number 1.
 - The program reads nothing from the input.
 
 In `cpp-workspace`, create a folder `study_log`, copy `CMakeLists.txt` from the original `lesson_05_first_program` into it, create an empty `main.cpp` and write the program on your own.
@@ -223,7 +223,7 @@ The first session gives 90 + 35, that is 125 minutes, and the third session. The
 
 **Then** run the program for the data in the requirements and for one other case from the table, for example the zeros at the start. Change only the values in the braces and the session lengths. Every case in the full list of check cases is checked automatically.
 
-### Success criterion
+### Success criteria
 
 - The program builds as C++20 and, for the data in the requirements, prints exactly the four lines shown above.
 - There is one type with three fields and one modifiable object of that type.
@@ -273,7 +273,7 @@ The "After the sessions" column gives the state after each successive session: t
 
 In every case the topic after the sessions is the same as at the start.
 
-**Automatic tests and your own runs.** Every case is checked automatically by a check program. It has the same type and the same function as the reference solution, but it reads the starting state and the session lengths from the input, and prints the state after each session. It's only a checking tool, not part of the mission: in the mission, the data are written in the code, and there are exactly two sessions. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
+**Automatic tests and your own runs.** Every case is checked automatically by the check program. It has the same type and the same function as the reference solution, but it reads the starting state and the session lengths from the input, and prints the state after each session. It's only a checking tool, not part of the mission: in the mission, the data is written in the code, and there are exactly two sessions. The check program and its results are in [Example solutions](#example-solutions), because they contain the solution.
 
 </details>
 
@@ -436,7 +436,7 @@ int main() {
 10. **No new record,** because the log is meant to show the current progress, and the program doesn't have to store earlier states. Each line of the report is produced at the moment when the state is current.
 11. **When a new record would be better:** if the program had to compare the state before and after a session, or keep the original unchanged. Then the function could get `const&` and return a new record, as in lesson 8.5, or `main` could make a copy before the change, as in lesson 8.2.
 
-**Other correct solutions:** instead of `++progress.sessions;` you can write `progress.sessions += 1;`. The fields may have other names and another order, as long as the values in `{}` stand in the same order as the fields. The session lengths may stand in `const int` variables in `main`.
+**Other correct solutions:** instead of `++progress.sessions;` you can write `progress.sessions += 1;`. The fields may have other names and another order, as long as the values in `{}` are in the same order as the fields. The session lengths may be kept in `const int` variables in `main`.
 
 **The check program** checks every case in the list of check cases. The type and the function are the same as above. The difference is in `main`: the program reads the topic, the starting state and the session lengths from the input, calls the function for each session on the same object, prints the state after each, and finally prints the topic. The topic is read by `std::getline`, because it may contain a space, and the numbers by `>>`, only after it, as in the check program of lesson 8.2. The session lengths first go into an `int` vector with `push_back` (lesson 6.2), so that the program can check the reading before it changes anything. The mission needs neither input nor a vector.
 
@@ -651,7 +651,7 @@ After: 3
 
 - **The parameter by value:** `Product product`. At the call, a separate parameter object is created with the values of the fields of `tea`.
 - **For 0 the result looks right,** because a delivery of 0 units changes nothing: the correct function would also leave 3.
-- **Data that reveal the bug:** any positive delivery. For example 4: inside the function `product.stock` ends at 7, but `tea.stock` is still 3 after the return. The correct result is `After: 7`. The program with the bug prints:
+- **Data that reveals the bug:** any positive delivery. For example 4: inside the function `product.stock` ends at 7, but `tea.stock` is still 3 after the return. The correct result is `After: 7`. The program with the bug prints:
 
 <!-- example: delivery_copy_revealed -->
 ```cpp

@@ -501,7 +501,7 @@ Słowo zamiast liczby zleceń, na przykład `three`, daje `Input error`.
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: zero, jedno, dwa i pięć zleceń, nazwy ze spacjami, zlecenia ukończone i nierozpoczęte, niedozwolona liczba zleceń, pusta nazwa, niedozwolone jednostki, słowo zamiast liczby, błąd w zleceniu po poprawnym, brak zapowiedzianego zlecenia i brak ostatniej liczby. Przy każdym zapisz oczekiwany wynik.
 
-**Potem** uruchom program dla głównych danych i dla jednego z dwóch przypadków: zera zleceń albo błędu w drugim zleceniu. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, więc pozostałych nie musisz uruchamiać. Przypadki, w których dane się kończą, przeanalizuj na papierze.
+**Potem** uruchom program dla głównych danych i dla jednego z dwóch przypadków: zera zleceń albo błędu w drugim zleceniu. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie, więc pozostałych nie musisz uruchamiać. Przypadki, w których dane się kończą, przeanalizuj na papierze.
 
 ### Kryterium sukcesu
 
@@ -811,7 +811,7 @@ int main() {
 
 **Inne poprawne rozwiązania:** zamiast `return 0;` można użyć flagi `bool`, jak w lekcjach 4.5 i 7.4. Wtedy pętla działa, dopóki flaga jest prawdziwa i są jeszcze zapowiedziane rekordy, a po pętli program wybiera komunikat albo raport. Zasady mogą stać w kilku osobnych warunkach z tym samym komunikatem. Sumę można obliczyć w osobnej pętli po wektorze, a pozostałe jednostki bezpośrednio w instrukcji wypisania.
 
-Każdy przypadek z listy kontrolnej to osobne uruchomienie tego programu. Przypadki A, B, F, N i O to dane z treści misji. Pozostałe są poniżej, w kolejności z listy kontrolnej.
+Każdy przypadek z listy przypadków kontrolnych to osobne uruchomienie tego programu. Przypadki A, B, F, N i O to dane z treści misji. Pozostałe są poniżej, w kolejności z listy przypadków kontrolnych.
 
 <!-- input: orders -->
 ```text

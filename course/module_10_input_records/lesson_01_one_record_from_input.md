@@ -333,11 +333,11 @@ Dla jednego uruchomienia program wypisuje tylko jeden z tych trzech wyników.
 
 **Zanim napiszesz program**, przygotuj tabelę przypadków: poprawna sala, sala pusta i pełna, pojemność 1, zerowa i ujemna pojemność, ujemna liczba zajętych miejsc, więcej zajętych miejsc niż wszystkich, słowo zamiast pierwszej albo drugiej liczby, brak ostatniej wartości. Przy każdym zapisz oczekiwany wynik: cztery linie sali, `Input error` albo `Invalid room`.
 
-**Potem** uruchom program dla trzech danych pokazanych wyżej. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie, więc pozostałych nie musisz uruchamiać. Przypadki, w których brakuje wartości, przeanalizuj na papierze: końca danych nie musisz wywoływać samodzielnie, a samo **Enter** go nie wywoła, bo program czeka dalej (punkt 4).
+**Potem** uruchom program dla trzech zestawów danych pokazanych wyżej. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie, więc pozostałych nie musisz uruchamiać. Przypadki, w których brakuje wartości, przeanalizuj na papierze: końca danych nie musisz wywoływać samodzielnie, a samo **Enter** go nie wywoła, bo program czeka dalej (punkt 4).
 
 ### Kryterium sukcesu
 
-- Program buduje się jako C++20 i dla trzech danych pokazanych wyżej wypisuje dokładnie pokazane wyniki.
+- Program buduje się jako C++20 i dla trzech zestawów danych pokazanych wyżej wypisuje dokładnie pokazane wyniki.
 - Jest jeden typ z trzema polami, bez pola na wolne miejsca.
 - Zmienne do odczytu mają wartości początkowe, a rekord powstaje dopiero po sprawdzeniu odczytu i wszystkich zasad.
 - `std::cin.fail()` jest sprawdzane przed zasadami wartości.
@@ -574,7 +574,7 @@ int main() {
 
 **Inne poprawne rozwiązania:** każdą zasadę można sprawdzać w osobnym `else if`, z tym samym komunikatem. Pola mogą mieć inne nazwy i inną kolejność, jeśli wartości w `{}` stoją w tej samej kolejności co pola. Liczbę wolnych miejsc można zapisać w zmiennej `const int`, obliczonej z pól rekordu.
 
-Każdy przypadek z listy kontrolnej to osobne uruchomienie tego programu. Pierwsze trzy uruchomienia to dane z treści misji, w tym przypadek A. Dalej są przypadki od B do R, w kolejności z listy kontrolnej.
+Każdy przypadek z listy przypadków kontrolnych to osobne uruchomienie tego programu. Pierwsze trzy uruchomienia to dane z treści misji, w tym przypadek A. Dalej są przypadki od B do R, w kolejności z listy przypadków kontrolnych.
 
 <!-- input: room -->
 ```text

@@ -277,7 +277,7 @@ After:
 
 Sprawdź też tabelę rachunkiem: suma łącznych przejazdów po rozliczeniu musi być równa sumie łącznych przejazdów przed nim i wszystkich oczekujących. Dla danych z wymagań: 39 + 6 = 45. Ta zależność kontroluje rozumowanie, ale nie zastępuje sprawdzenia każdego rekordu.
 
-**Potem** uruchom program dla danych z wymagań i dla pustej floty. Zmieniaj przy tym tylko inicjalizację wektora. Wszystkie przypadki z pełnej listy kontrolnej są sprawdzone automatycznie.
+**Potem** uruchom program dla danych z wymagań i dla pustej floty. Zmieniaj przy tym tylko inicjalizację wektora. Wszystkie przypadki z pełnej listy przypadków kontrolnych są sprawdzone automatycznie.
 
 ### Kryterium sukcesu
 
@@ -632,7 +632,7 @@ int main() {
 }
 ```
 
-**Program kontrolny** sprawdza wszystkie przypadki z listy kontrolnej. Typ i obie funkcje są takie same jak wyżej, a raport od wypisania liczby rowerów też, poza wcięciem. Różnica jest jedna: wektor nie jest zapisany w kodzie, tylko powstaje z wejścia. Program odczytuje liczbę rowerów, a potem każdy rower: identyfikator i dwie liczby. Każdy odczytany rower trafia na koniec wektora przez `push_back`, jak w programach kontrolnych lekcji 8.4–8.6. Misja nie potrzebuje ani wejścia, ani `push_back`.
+**Program kontrolny** sprawdza wszystkie przypadki z listy przypadków kontrolnych. Typ i obie funkcje są takie same jak wyżej, a raport od wypisania liczby rowerów też, poza wcięciem. Różnica jest jedna: wektor nie jest zapisany w kodzie, tylko powstaje z wejścia. Program odczytuje liczbę rowerów, a potem każdy rower: identyfikator i dwie liczby. Każdy odczytany rower trafia na koniec wektora przez `push_back`, jak w programach kontrolnych lekcji 8.4–8.6. Misja nie potrzebuje ani wejścia, ani `push_back`.
 
 <!-- example: city_bikes_check -->
 ```cpp
@@ -712,7 +712,7 @@ int main() {
 }
 ```
 
-Każdy przypadek zaczyna się od liczby rowerów. Potem każdy rower zajmuje jedną linijkę: identyfikator, łączna liczba przejazdów i liczba oczekujących. Przypadki stoją w kolejności z listy kontrolnej, od A do J.
+Każdy przypadek zaczyna się od liczby rowerów. Potem każdy rower zajmuje jedną linijkę: identyfikator, łączna liczba przejazdów i liczba oczekujących. Przypadki stoją w kolejności z listy przypadków kontrolnych, od A do J.
 
 <!-- input: city_bikes_check -->
 ```text

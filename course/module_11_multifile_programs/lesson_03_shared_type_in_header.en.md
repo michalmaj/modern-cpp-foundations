@@ -11,12 +11,12 @@
 This lesson assumes that you:
 
 - define your own type with `struct`, create a record with values in `{}` and use its fields with the dot operator (lessons 8.1 and 8.2);
-- pass a record that a function only reads by `const&` (lesson 8.3);
+- pass by `const&` a record that a function only reads (lesson 8.3);
 - build a program from two `.cpp` files and your own header with `#pragma once` (lessons 11.1 and 11.2).
 
 ## The situation
 
-In lesson 11.2, the function `calculate_points` got two separate numbers. But the number of tasks and the bonus together describe one result, and in Module 8 we combined such data in a record. Only in Module 8 the type, the functions and `main` stood in one file. Now `main.cpp` creates the record and a function in `points.cpp` reads its fields, so **both files must know the same type**. In this lesson you'll put its definition in the shared header.
+In lesson 11.2, the function `calculate_points` got two separate numbers. But the number of tasks and the bonus together describe one result, and in Module 8 we combined such data in a record. In Module 8, though, the type, the functions and `main` were in one file. Now `main.cpp` creates the record and a function in `points.cpp` reads its fields, so **both files must know the same type**. In this lesson you'll put its definition in the shared header.
 
 After this lesson you will:
 
@@ -48,11 +48,11 @@ int calculate_points(const TaskResult& result);
 ```
 
 - **`TaskResult` is the name of a type,** defined like the types of Module 8. Every record of this type has two fields: the number of solved tasks and the bonus. The definition itself creates no record.
-- **The type's definition stands before the function's declaration,** because the function uses the type in its parameter, as in lesson 8.3.
+- **The type's definition comes before the function's declaration,** because the function uses the type in its parameter, as in lesson 8.3.
 - **`const TaskResult& result`:** the function reads an existing record, without a copy and without a way to change its fields (lesson 8.3).
 - **The header now contains a type's definition and a function's declaration.** Together they are the information shared by both `.cpp` files: what the record looks like, and how to call the function.
 
-Why does the header contain the type's full **definition**, not just a declaration as for the function? A file that creates a record or reads its fields must know which fields the record consists of. A call to a function from another file is joined by the linker (lesson 11.1), but no linker adds a type's fields: the compiler needs them in every `.cpp` file that uses them. That's why a type's definition may stand in a header included by several `.cpp` files. **An ordinary function's definition still stays in the `.cpp` file** (lesson 11.2, section 2).
+Why does the header contain the type's full **definition**, not just a declaration as for the function? A file that creates a record or reads its fields must know which fields the record consists of. A call to a function from another file is joined by the linker (lesson 11.1), but no linker adds a type's fields: the compiler needs them in every `.cpp` file that uses them. That's why a type's definition may go in a header included by several `.cpp` files. **An ordinary function's definition still stays in the `.cpp` file** (lesson 11.2, section 2).
 
 **A self-contained header** itself includes the headers that its declarations and type definitions need, instead of counting on a `.cpp` file to have included them earlier. `points.hpp` uses only `int`, so it needs no standard header. If it used `std::string` or `std::vector`, it would itself include `<string>` or `<vector>`. The same goes for your own headers (section 9).
 
@@ -102,7 +102,7 @@ int calculate_points(const TaskResult& result) {
 }
 ```
 
-- **`points.cpp` includes `points.hpp` too,** because to read `result.solved` it must know the fields of `TaskResult`. The function's declaration and definition stand together in one translation unit again.
+- **`points.cpp` includes `points.hpp` too,** because to read `result.solved` it must know the fields of `TaskResult`. The function's declaration and definition are together in one translation unit again.
 - **`points.cpp` has no second definition of `TaskResult`.** The type is defined only in the header.
 - **What's shared is the type's definition, not one object.** The record `result` is created in `main` and exists only there. `points.cpp` has no record of its own: through `const&`, the function reads the one it got in the call. If another file created its own `TaskResult` record, that would be a separate object, like `first` and `second` in lesson 8.1.
 
@@ -117,7 +117,7 @@ The structure itself works as in Module 8: the header changes only where it is d
 
 ## 4. One definition of the type, not two copies
 
-You could define the type separately in `main.cpp` and in `points.cpp`, copying the same lines. Then you'd have to make sure by hand that both copies always stay the same. Imagine that the record gets a third field, and someone adds it to only one copy. Each `.cpp` file is compiled separately, so the compiler of `main.cpp` doesn't see the copy in `points.cpp`, and isn't required to notice the difference. Such a project is easy to break.
+You could define the type separately in `main.cpp` and in `points.cpp`, copying the same lines. Then you'd have to make sure by hand that both copies always stay the same. Imagine that the record gets a third field, and someone adds it to only one copy. Each `.cpp` file is compiled separately, so when compiling `main.cpp` the compiler doesn't see the copy in `points.cpp`, and isn't required to notice the difference. Such a project is easy to break.
 
 A shared header removes this problem: **the type is defined in one place,** both `.cpp` files include that header, and each of them gets exactly the same definition. Changing the type means changing one file.
 
@@ -135,7 +135,7 @@ main.cpp:    #include "points.hpp"   ──►  without #pragma once TaskResult 
 
 - **Two `.cpp` files that each include `points.hpp` aren't a repeated definition.** Each `.cpp` file is prepared and compiled separately, so each gets the type once.
 - **The same header twice in one `.cpp` file** means two definitions in one translation unit. That can happen by accident, for example through a copied `#include` line, or through a header that itself includes `points.hpp` (section 9).
-- **`#pragma once` makes the second inclusion be skipped,** so the definition reaches the translation unit once. It has nothing to do with including the header in different `.cpp` files, and it doesn't replace linking.
+- **`#pragma once` makes sure that the second inclusion is skipped,** so the definition reaches the translation unit once. It has nothing to do with including the header in different `.cpp` files, and it doesn't replace linking.
 
 You'll see what this error looks like in section 8.
 
@@ -153,7 +153,7 @@ target_compile_features(first_program PRIVATE cxx_std_20)
 set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 ```
 
-A header, also one with a type's definition, is compiled as part of the `.cpp` files that include it, and no separate object file is created from it. That's why, in this course's project, `add_executable` still lists only `.cpp` files. It's a rule of our simple project, not a CMake rule (lesson 11.2, section 5).
+A header, even one with a type's definition, is compiled as part of the `.cpp` files that include it, and no separate object file is created from it. That's why, in this course's project, `add_executable` still lists only `.cpp` files. It's a rule of our simple project, not a CMake rule (lesson 11.2, section 5).
 
 Build and run the program as in lesson 11.1, section 5. For the data:
 
@@ -211,11 +211,11 @@ Design the data of the ticket program as a record. In `cpp-workspace`, create a 
 
 - A regular ticket costs 12 units, a reduced one 7. The program reads two numbers: the number of regular tickets and of reduced ones.
 - **Both numbers go into the fields of one record** of your own type, defined **only** in the header, with `#pragma once` on the first line.
-- The function gets this record by `const&` and returns the total cost. Its declaration stands in the header, and its definition in the second `.cpp` file.
+- The function gets this record by `const&` and returns the total cost. Its declaration is in the header, and its definition in the second `.cpp` file.
 - **Both `.cpp` files include the header.** No `.cpp` file defines the type a second time.
 - `main` creates the record, reads the data into its fields, calls the function and prints `Total cost: N`.
 - `add_executable` lists two `.cpp` files, and the rest of `CMakeLists.txt` doesn't change.
-- You can keep the file names from lesson 11.2. Name the type with a capital letter, and the fields and the function in `snake_case`, as so far in the course.
+- You can keep the file names from lesson 11.2. Name the type with a capital letter, and the fields and the function in `snake_case`, as in the course so far.
 - The data is non-negative and small. Don't add checks of the data or new kinds of tickets.
 
 The results must be the same as in lesson 11.2. **Data A:**
@@ -280,13 +280,13 @@ Total cost: 36
 5. what to call the function;
 6. how to write its declaration with `const&`;
 7. how to write its definition;
-8. where the `#include` lines with the header's name stand;
+8. where the `#include` lines with the header's name go;
 9. how to create the record in `main` and fill its fields;
 10. how to compare the results with the project from lesson 11.2.
 
 **Then** build the program and run it for data A and one boundary case: B or C. Compare the results with those of the `ticket_cost_header` project for the same data. Predict the other cases. All of them are checked automatically in the reference solution.
 
-### Success criterion
+### Success criteria
 
 - The program builds as C++20 and, for data A and for B or C, prints exactly the result shown, the same as the project from lesson 11.2.
 - The header starts with `#pragma once` and contains the type's definition and the function's declaration with a `const&` parameter.
@@ -401,7 +401,7 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 10. Explain why, in lesson 11.2, a repeated declaration of the function didn't give such an error.
 
 <details>
-<summary>What happens and why: open after building the broken project</summary>
+<summary>What happens, and why: open it after building the broken project</summary>
 
 1. **It's a compile error, not a link error.** Compiling `main.cpp` fails, so linking never starts. Changing `CMakeLists.txt` won't fix anything here: both `.cpp` files are in `add_executable`, and the error is in the content of one of them.
 2. **The message points to the header,** although `main.cpp` is being compiled. In the build output it looks roughly like this (paths shortened):
@@ -414,9 +414,9 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
    points.hpp:1:8: note: unguarded header; consider using #ifdef guards or #pragma once
    ```
 
-   The first line says **where the header came from**: line 4 of `main.cpp`. The second says **where the error is**: in `points.hpp`, on line 1, in column 8, at the name `TaskResult`. The lines with `note:` are hints: they show both `#include` lines and suggest protecting the header. They also mention include guards with `#ifdef`, and in this course we use `#pragma once`. On Windows and on other systems the paths look different, and the text of the error is the same.
+   The first line says **where the header came from**: line 4 of `main.cpp`. The second says **where the error is**: in `points.hpp`, on line 1, in column 8, at the name `TaskResult`. The lines with `note:` are hints: they show both `#include` lines and suggest protecting the header. They also mention include guards with `#ifdef`, and in this course we use `#pragma once`. On Windows and on other systems the paths look different, but the text of the error is the same.
 3. **Both definitions come from the same header, in one translation unit.** The two `#include` lines put the content of `points.hpp` into `main.cpp` twice, so the compiler sees `struct TaskResult` twice in one file. `points.cpp` includes the header once and is correct by itself.
-4. **The function's declaration also stands in the header twice, but here it does no harm:** a matching declaration may be repeated. Two definitions of a type in one translation unit may not. That's why there was no error in lesson 11.2.
+4. **The function's declaration from the header also appears twice, but here it does no harm:** a matching declaration may be repeated. Two definitions of a type in one translation unit may not. That's why there was no error in lesson 11.2.
 5. **After you add `#pragma once`,** the second inclusion is skipped, so the program builds even with two `#include` lines. It prints `Points: 14`, as in section 6: `#pragma once` doesn't change how the function works. Still, don't keep the repeated line in the code, because it only makes the code harder to read.
 
 </details>
@@ -461,7 +461,7 @@ int calculate_points(const TaskResult& result);
 - **Adding more `#include` lines to the `.cpp` files isn't a fix,** because `points.hpp` would still depend on what someone included before it.
 - **`main.cpp` now gets `task_result.hpp` twice:** directly and through `points.hpp`. Thanks to `#pragma once` in `task_result.hpp`, the type reaches this translation unit once. It's the same protection as in section 8.
 
-This rule is called a **self-contained header**: a header itself includes the headers it needs for its own declarations.
+A header that follows this rule is called **self-contained**: it itself includes the headers it needs for its own declarations.
 
 </details>
 
@@ -515,7 +515,7 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 
 The fixed project is in [Example solutions](#example-solutions).
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -532,7 +532,7 @@ The fixed project is in [Example solutions](#example-solutions).
 Answer in your own words, preferably in writing. Only then compare with the example answers.
 
 1. What is now in `points.hpp`, and what in `points.cpp`? Does `points.hpp` go into `add_executable`?
-2. Why does the definition of `TaskResult` stand in the header, and not in one of the `.cpp` files?
+2. Why is the definition of `TaskResult` in the header, and not in one of the `.cpp` files?
 3. Why don't we copy the type's definition into both `.cpp` files?
 4. What is `TaskResult`, and what is `result`? Does `points.cpp` have access to some shared, global record?
 5. What does the parameter `const TaskResult& result` give?
@@ -551,7 +551,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 4. `TaskResult` is a type, and `result` is an object of this type, one record. There is no shared record: only the type's definition is shared. `points.cpp` reads the record from `main` only through the function's parameter.
 5. The function reads an existing record, without creating a copy, and can't change its fields.
 6. `main.cpp` needs the type's definition and the function's declaration to create the record and call the function. `points.cpp` needs the type's definition to read the fields, and by including the header it has the function's declaration and definition in one translation unit.
-7. It makes the header be processed at most once within one translation unit. In lesson 11.2 the header contained only a function's declaration, which may be repeated. A type's definition may not be repeated within one translation unit, so without `#pragma once` a second inclusion gives an error.
+7. It makes sure that the header is processed at most once within one translation unit. In lesson 11.2 the header contained only a function's declaration, which may be repeated. A type's definition may not be repeated within one translation unit, so without `#pragma once` a second inclusion gives an error.
 8. No: each `.cpp` file is a separate translation unit, and each gets the type once. Two `#include` lines in one `.cpp` file put the definition into the same translation unit twice. Without `#pragma once`, that's a `redefinition` error.
 9. A compile error: compiling `main.cpp` fails, so linking doesn't start. In lesson 11.2, section 8, everything compiled, and the linker didn't find the function's definition.
 10. The header itself includes the headers it needs for its declarations, for example `points.hpp` includes `task_result.hpp`. Then it works in every file that includes it, whatever the order of the `#include` lines.
@@ -579,7 +579,7 @@ The program in this lesson has one type and one function. The larger programs of
 Look here **after your own attempt**. Your names may differ, as long as the standard output is as required.
 
 <details>
-<summary>Section 7: mission, a ticket order as a record</summary>
+<summary>Section 7: the mission, a ticket order as a record</summary>
 
 **`tickets.hpp`**:
 
@@ -644,7 +644,7 @@ This is one of the correct solutions:
 
 1. **`TicketOrder` is defined in `tickets.hpp`,** because both `.cpp` files use it: `main.cpp` creates the record, and `tickets.cpp` reads its fields.
 2. **The fields `regular_tickets` and `reduced_tickets`** have the type `int`, as the function's parameters had before. The type's name starts with a capital letter, and the fields are in `snake_case`.
-3. **The declaration `int total_cost(const TicketOrder& order);`** stands below the type's definition, because it uses the type.
+3. **The declaration `int total_cost(const TicketOrder& order);`** comes after the type's definition, because it uses the type.
 4. **The function's definition stays in `tickets.cpp`** and reads the fields through `order.`, without changing the record.
 5. **Both `.cpp` files include `tickets.hpp`.** Neither contains a copy of `TicketOrder`.
 6. **`TicketOrder order{0, 0};`** creates a record with initial values, and the two `>>` reads put the data into its fields. `order` has no `const`, because `>>` stores values in its fields.
