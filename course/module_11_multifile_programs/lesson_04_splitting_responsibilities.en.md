@@ -41,7 +41,7 @@ Before you create the files, decide who is responsible for what:
 |---|---|---|---|---|
 | reading, checking the data, building the list and controlling the program | standard input | `main.cpp` | `main` | a vector of valid shipments, or the message `Input error` or `Invalid shipments` |
 | the shared type and the declarations | — | `shipments.hpp` | `struct Shipment`, the declarations of two functions | an agreement that the other files use |
-| calculations | the vector of shipments | `shipments_analysis.cpp` | `total_boxes` | the number of boxes, an `int` |
+| calculations | the vector of shipments | `shipments_analysis.cpp` | `total_boxes` | the total number of boxes, an `int` |
 | the report | the vector of shipments | `shipments_report.cpp` | `print_shipments` | the report's lines on standard output |
 
 How the data and the calls flow:
@@ -56,13 +56,13 @@ total_boxes  ──returns the sum──►  print_shipments  ──►  the rep
 Why these boundaries:
 
 - **Reading and control stay in `main`,** because `main` decides whether the data is valid and whether a report is printed at all.
-- **The calculation stands apart,** because it doesn't depend on how the result is printed. Changing how the report looks then doesn't need a change to the sum.
-- **The report stands apart,** because it prints ready data and doesn't need to know how it was read.
+- **The calculation is kept apart,** because it doesn't depend on how the result is printed. Changing how the report looks then doesn't need a change to the sum.
+- **The report is kept apart,** because it prints ready data and doesn't need to know how it was read.
 - **The type and the declarations are shared,** so nobody copies them (lessons 11.2 and 11.3).
 
 It becomes easier to find the code responsible for a given problem, and the calculations don't mix with the output. Splitting into files doesn't change how the program works, nor does it make it faster. This is one sensible split, not the only architecture for every program. What this split does **not** mean:
 
-- **Not every function gets its own file.** Several related functions may stand in one `.cpp` file, as you'll see in the mission.
+- **Not every function gets its own file.** Several related functions may be in one `.cpp` file, as you'll see in the mission.
 - **The header declares what other files need,** not everything in the whole program. A helper function used only in one `.cpp` file doesn't have to go into the shared header.
 - **A file includes the headers it needs itself,** not every header of the project.
 - **The order of the files in `add_executable` doesn't set the order of execution.** The program always starts with `main`, and functions run when something calls them.
@@ -87,7 +87,7 @@ int total_boxes(const std::vector<Shipment>& shipments);
 void print_shipments(const std::vector<Shipment>& shipments);
 ```
 
-- **The header is an agreement.** It says what a shipment looks like and which functions can be called, not how they work. The implementation stands in the `.cpp` files, and `main.cpp` joins everything into the program's flow.
+- **The header is an agreement.** It says what a shipment looks like and which functions can be called, not how they work. The implementation is in the `.cpp` files, and `main.cpp` joins everything into the program's flow.
 - **`Shipment` is the same type as in lesson 10.3,** moved into the header like `TaskResult` in lesson 11.3.
 - **Two declarations,** because other files use these functions: `main.cpp` calls `print_shipments`, and `shipments_report.cpp` calls `total_boxes`.
 - **`void`,** because `print_shipments` returns nothing; it only prints (lesson 5.1).
@@ -402,7 +402,7 @@ Total boxes: 14
 
 </details>
 
-Data that ends right after the last number, without a line end, gives the same results. The automated tests don't run that case, as in lesson 10.3.
+Data that ends right after the last number, without a line end, gives the same results. The automatic tests don't run that case, as in lesson 10.3.
 
 ## 8. Mission: workshop orders, in several files
 
@@ -416,7 +416,7 @@ Split your `workshop_orders` program from [the mission of lesson 10.3](../module
 2. **`main.cpp`** reads and checks the data, creates the records, builds the vector, prints the error messages, and calls the report only after success.
 3. **A shared header** defines the order type and declares the functions that other files need, with `#pragma once`. It is self-contained.
 4. **An analysis file** contains two functions: the remaining units of one order, and the sum of the remaining units of the whole list. It neither reads nor prints.
-5. **A report file** prints the number of orders, each order and the total, and takes both values from the analysis functions. The formula for the remaining units stands in one place.
+5. **A report file** prints the number of orders, each order and the total, and takes both values from the analysis functions. The formula for the remaining units is in one place.
 6. **The collection and the elements that are only read** are passed by `const&`.
 7. **`add_executable`** lists all three `.cpp` files on one line, without the header.
 8. File names consist of lowercase English letters, digits and `_`, and end in `.cpp` or `.hpp`. The example solution uses `orders.hpp`, `orders_analysis.cpp` and `orders_report.cpp`.
@@ -529,7 +529,7 @@ E protects the order of lesson 10.3: a failed read takes precedence over checkin
 
 **Then** build the program and run it for data A and one of the cases B or C. Compare the results with those of the `workshop_orders` project for the same data. Predict the other cases. All 19 cases of lesson 10.3 are checked automatically in the reference solution.
 
-### Success criterion
+### Success criteria
 
 - The program builds as C++20 and, for data A and for B or C, prints exactly the result shown, the same as the project from lesson 10.3.
 - The plan was made before the files, and each file has one role, described in it.
@@ -538,7 +538,7 @@ E protects the order of lesson 10.3: a failed read takes precedence over checkin
 - Each function is defined exactly once, in its own `.cpp` file.
 - `add_executable` lists three `.cpp` files.
 
-Correct results prove the behaviour, not the organisation: a program with all its code in `main` would print them too. Where the calculations and the report stand, you check against the list above.
+Correct results prove the behaviour, not the organisation: a program with all its code in `main` would print them too. You check where the calculations and the report are against the list above.
 
 <details>
 <summary>Hint 1</summary>
@@ -557,7 +557,7 @@ Which data and declarations must be shared by several files? Think about who cre
 <details>
 <summary>Hint 3</summary>
 
-How do you organise the analysis file and the report file so that the formula for the remaining units stands in one place? A function for one order can serve both the sum and the report's lines.
+How do you organise the analysis file and the report file so that the formula for the remaining units is in one place? A function for one order can serve both the sum and the report's lines.
 
 </details>
 
@@ -716,11 +716,11 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 9. Explain why removing `shipments_analysis.cpp` from `add_executable` wouldn't be a fix.
 
 <details>
-<summary>What happens and why: open after building the broken project</summary>
+<summary>What happens, and why: open it after building the broken project</summary>
 
 1. **All three files compile:** there are three `Building CXX object` lines. Each file on its own is correct: `shipments_report.cpp` defines two functions, and `shipments_analysis.cpp` one.
 2. **Linking fails,** because the linker gets two definitions of the same ordinary function, from two object files, and doesn't know which one to use. The message names `total_boxes`: on Ubuntu `multiple definition of`, on macOS `duplicate symbol`, on Windows `duplicate symbol:`, and at the end `linker command failed`.
-3. **`#pragma once` doesn't help here.** It works within one translation unit (lesson 11.3), and these two definitions stand in two different `.cpp` files, which are compiled separately.
+3. **`#pragma once` doesn't help here.** It works within one translation unit (lesson 11.3), and these two definitions are in two different `.cpp` files, which are compiled separately.
 4. **A different error from the earlier ones:**
    - in lesson 11.1 a definition was missing, because its file wasn't built;
    - in lesson 11.2 the definition had another name;
@@ -730,7 +730,7 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 
 </details>
 
-## 10. When something goes differently
+## 10. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -738,7 +738,7 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 | `undefined reference`, `undefined symbol` or `referenced from` with `total_boxes` or `print_shipments` | The file with the definition isn't in `add_executable`, or the definition has another name or other parameters than the declaration (lessons 11.1 and 11.2). | Check `add_executable`, and compare the definition with the header. |
 | `use of undeclared identifier 'Shipment'` or `unknown type name 'Shipment'` | The file doesn't include `shipments.hpp`. | Add `#include "shipments.hpp"`. |
 | `no member named 'cout' in namespace 'std'` in the report file | The file prints, but doesn't include `<iostream>`. | Add `#include <iostream>` to that file. |
-| The report differs from lesson 10.3, for example the total stands before the shipments | A different order of statements in the report function. | Compare the order of the lines with the report of lesson 10.3. |
+| The report differs from lesson 10.3, for example the total comes before the shipments | A different order of statements in the report function. | Compare the order of the lines with the report of lesson 10.3. |
 | With invalid data, part of a report appears | The report is called before the reading ends, or despite an error. | Call the report function only after the loop, when all records are valid. |
 
 ## 11. Explain
@@ -746,7 +746,7 @@ set_target_properties(first_program PROPERTIES CXX_EXTENSIONS OFF)
 Answer in your own words, preferably in writing. Only then compare with the example answers.
 
 1. What is `main.cpp` responsible for, and what are the other `.cpp` files responsible for?
-2. Why does calculating the total stand in a different file from printing the report?
+2. Why is calculating the total in a different file from printing the report?
 3. Why is `Shipment` defined in the header?
 4. Why does the header declare exactly `total_boxes` and `print_shipments`?
 5. Which `#include` lines does `shipments_report.cpp` have, and why exactly those?
@@ -759,7 +759,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 <details>
 <summary>Example answers</summary>
 
-1. `main.cpp` reads and checks the data, builds the vector, prints the error messages and decides whether a report is printed. `shipments_analysis.cpp` calculates the number of boxes, and `shipments_report.cpp` prints the report.
+1. `main.cpp` reads and checks the data, builds the vector, prints the error messages and decides whether a report is printed. `shipments_analysis.cpp` calculates the total number of boxes, and `shipments_report.cpp` prints the report.
 2. Because the calculation doesn't depend on how the report looks. You can change the output format without changing the sum, and check the sum without reading output statements.
 3. Because all three `.cpp` files use it: `main.cpp` creates the records, and the others read their fields. A definition in one header isn't copied.
 4. Because other files use these functions: `main.cpp` calls `print_shipments`, and `shipments_report.cpp` calls `total_boxes`. The header declares what other files need.
@@ -768,7 +768,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 7. Because each of them contains a definition the program needs, and the linker joins only the files in `add_executable`. Their order in the list doesn't matter for how the program runs: it starts with `main`, and functions run when something calls them.
 8. Run the program for the same data as in lesson 10.3, invalid data included, and compare the full output. The comparison doesn't prove that the code is split well: a program with all its code in `main` would give the same results. You check the organisation by reading the files.
 9. Because each `.cpp` file on its own is correct, and the compiler compiles them separately. Only the linker sees two definitions of the same function. `#pragma once` works within one translation unit, so it won't remove definitions from two different files.
-10. No. Related functions may stand in one file, like the two functions in the analysis file of the mission. The header declares only what other files need.
+10. No. Related functions may be in one file, like the two functions in the analysis file of the mission. The header declares only what other files need.
 
 </details>
 
@@ -777,7 +777,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 - A larger program is split into files by responsibility: reading and control in `main.cpp`, calculations in one `.cpp` file, the report in another.
 - The shared header is an agreement: it defines the shared type and declares the functions that other files need. The `.cpp` files contain the implementation.
 - Functions from different `.cpp` files work together through the header's declarations, and the linker joins them. A `.cpp` file isn't included in another.
-- Each file includes the headers it needs itself. All `.cpp` files stand in `add_executable`, but their order doesn't set the order of execution.
+- Each file includes the headers it needs itself. All the `.cpp` files are in `add_executable`, but their order doesn't set the order of execution.
 - Splitting into files doesn't change how the program behaves: you compare the results on the same data, invalid data included.
 - The same ordinary function defined in two `.cpp` files is a link error. The fix is one definition in the right file, not `#pragma once`, and not removing files from `add_executable`.
 - Not every function needs its own file or a place in the shared header.
@@ -793,7 +793,7 @@ In lessons 11.1–11.4 the program went from one file to several `.cpp` files wi
 Look here **after your own attempt**. Your names may differ, as long as the standard output is as required.
 
 <details>
-<summary>Section 8: mission, workshop orders in several files</summary>
+<summary>Section 8: the mission, workshop orders in several files</summary>
 
 **The plan:**
 
@@ -935,8 +935,8 @@ This is one of the correct solutions:
 
 1. **`Order` is defined in `orders.hpp`,** because all three `.cpp` files use it. It's the same type as in lesson 10.3.
 2. **The header declares three functions,** because each is used by another file: `main.cpp` calls `print_orders`, and `orders_report.cpp` calls `remaining_units` and `remaining_total`.
-3. **`remaining_units` and `remaining_total` stand in one file,** because both belong to the calculations. Not every function needs its own file.
-4. **The formula `planned_units - completed_units` stands once,** in `remaining_units`. Both the total and the report's line use it.
+3. **`remaining_units` and `remaining_total` are in one file,** because both belong to the calculations. Not every function needs its own file.
+4. **The formula `planned_units - completed_units` appears once,** in `remaining_units`. Both the total and the report's line use it.
 5. **The vector and the elements are passed by `const&`,** because the functions only read them.
 6. **`orders_analysis.cpp` reads and prints nothing,** and `orders_report.cpp` calculates nothing itself.
 7. **`main.cpp` has the reading and checking of lesson 10.3 unchanged,** and instead of adding up and printing, one call `print_orders(orders);` after the loop.
@@ -949,7 +949,7 @@ Other correct solutions: other names of the files, the type and the functions; a
 </details>
 
 <details>
-<summary>Section 8: the full list of test cases of lesson 10.3</summary>
+<summary>Section 8: the full list of check cases of lesson 10.3</summary>
 
 The same cases as in the table of lesson 10.3, section 8, with the same results. All of them are checked automatically for the solution above.
 
