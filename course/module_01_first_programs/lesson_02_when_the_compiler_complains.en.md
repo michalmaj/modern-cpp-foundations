@@ -195,7 +195,7 @@ int main() {
 
 **Explanation.** The compiler reads the file from the top and must know every name you use. `std::cout` isn't built into the language: it's part of the **standard library**, and the compiler only learns about it from the line `#include <iostream>`.
 
-- Lines that start with `#` are **preprocessor directives**: instructions processed as part of preparing the code for compiling, before the actual compiling. **They are not statements of the program.** They don't run while the program runs, they aren't written inside `main`, and they don't end with a semicolon.
+- Lines that start with `#` are **preprocessor directives**: instructions processed by the preprocessor as part of preparing the code for compiling, before the actual compiling. **They are not statements of the program.** They don't run while the program runs, they aren't written inside `main`, and they don't end with a semicolon.
 - `#include <iostream>` means: “insert here the **declarations** from the part of the standard library called `iostream`”. A declaration tells the compiler that something with a given name exists and how to use it. One of these declarations is `std::cout`.
 - Without that line, the compiler knows neither `std` nor `std::cout`.
 
@@ -249,7 +249,7 @@ The message has two parts separated by a semicolon. The second one is the compil
 
 - **What the message says:** “the name `cout` was used, but the compiler doesn't know it; did you mean `std::cout`?”.
 - **The `note:` line** leads to the standard library's `iostream` file, to where `std::cout` is declared. Its path and line number depend on the system, because each one has a different standard library. It's not your file, and you don't change anything in it.
-- **Why:** the names of the standard library belong to a group of names called `std` (the technical term is *namespace*; you'll learn more about them later). `std::cout` is the full name: “`cout` from the group `std`”. Plain `cout` is a **different name** to the compiler, looked up outside that group. Nobody declared it, so the compiler doesn't know it. `#include <iostream>` is in place, so the compiler knows `std::cout`, and that's why it can suggest it.
+- **Why:** the names of the standard library belong to a group of names called `std` (the technical term is *namespace*). `std::cout` is the full name: “`cout` from the group `std`”. Plain `cout` is a **different name** to the compiler, looked up outside that group. Nobody declared it, so the compiler doesn't know it. `#include <iostream>` is in place, so the compiler knows `std::cout`, and that's why it can suggest it.
 - **The fix:** restore `std::` in line 5.
 - **The compiler's suggestion** was right here, but treat it as a hypothesis to check, not an order. Understand why it makes sense before you accept it.
 
