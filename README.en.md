@@ -50,17 +50,18 @@ From the first lesson we teach modern C++. We don't start with outdated habits t
 
 ## What you will learn
 
-By the end of the course you will be able to:
+By the end of Modules 0–14 you will be able to:
 
-- write, run and fix C++ programs on your own, from your first `Hello, World!` to small and medium-sized applications;
+- write, run and fix C++ programs on your own, from your first `Hello, World!` to small programs made of several files, with your own tests;
 - solve new problems step by step: understand the task, design a solution, check it and explain why it works;
 - read error messages and calmly track down their cause;
 - store and process data: numbers, text, lists and your own data types;
-- split a program into smaller, readable parts: functions, files, libraries and classes;
-- understand how a program uses memory, and write code that manages it safely;
+- split a program into smaller, readable parts: functions and separate source and header files;
 - explain what happens between writing code and running a program;
 - check that a program works correctly: write tests, use a debugger (a tool for following a program step by step) and act on warnings;
-- use the terminal, as well as Git and GitHub (tools for recording the history of your code and sharing it), the way professional programmers do.
+- use the terminal, as well as Git (a tool for recording the history of your code).
+
+The course is still being developed. Further modules are planned to cover topics such as classes, safe memory management, building your own libraries and working with GitHub.
 
 ## How you will learn
 
@@ -74,7 +75,7 @@ At first we guide you step by step. Over time you make more of the decisions you
 
 ## What you will work with
 
-**Operating systems:** Windows, Linux and macOS. All three are officially supported. You don't need special hardware: an ordinary computer running one of these systems is enough, plus internet access to install the tools.
+**Operating systems:** Windows, macOS and Linux. The installation instructions in the course cover Windows, macOS and Ubuntu 24.04 LTS, and the lesson programs are also checked automatically on these three systems. On other Linux distributions the installation commands may differ, and we haven't checked the course on them. You don't need special hardware: an ordinary computer running one of these systems is enough, plus internet access to install the tools.
 
 **Tools:**
 
@@ -85,7 +86,6 @@ At first we guide you step by step. Over time you make more of the decisions you
 | **C++20** | The version of the C++ language this course teaches. |
 | **CMake** | Describes which files make up a project and how to build a program from them. |
 | **Ninja** | Quickly carries out the build steps prepared by CMake. |
-| **CTest** | Runs tests that check whether a program works correctly. |
 
 You don't need to understand these names or install anything yet. The course explains every tool, and you will install them in [lesson 0.4](course/module_00_tooling/lesson_04_installing_the_tools.en.md). Some installation steps haven't been checked on every system yet.
 
