@@ -195,7 +195,7 @@ int main() {
 
 **Wyjaśnienie.** Kompilator czyta plik od góry i musi znać każdą użytą nazwę. `std::cout` nie jest wbudowane w język: to część **biblioteki standardowej**, a kompilator dowiaduje się o niej dopiero z linijki `#include <iostream>`.
 
-- Linijki zaczynające się od `#` to **dyrektywy preprocesora**: polecenia przetwarzane podczas przygotowania kodu do kompilacji, jeszcze przed właściwą kompilacją. **Nie są instrukcjami programu.** Nie wykonują się, gdy program działa, nie stoją w `main` i nie kończą się średnikiem.
+- Linijki zaczynające się od `#` to **dyrektywy preprocesora**: polecenia przetwarzane przez preprocesor podczas przygotowania kodu do kompilacji, jeszcze przed właściwą kompilacją. **Nie są instrukcjami programu.** Nie wykonują się, gdy program działa, nie stoją w `main` i nie kończą się średnikiem.
 - `#include <iostream>` znaczy: „wstaw w tym miejscu **deklaracje** z części biblioteki standardowej o nazwie `iostream`”. Deklaracja to informacja dla kompilatora, że coś o danej nazwie istnieje i jak tego używać. Jedną z tych deklaracji jest `std::cout`.
 - Bez tej linijki kompilator nie zna ani `std`, ani `std::cout`.
 
@@ -249,7 +249,7 @@ Komunikat ma dwie części oddzielone średnikiem. Druga to propozycja kompilato
 
 - **Co mówi komunikat:** „użyto nazwy `cout`, której kompilator nie zna; czy chodziło o `std::cout`?”.
 - **Linijka `note:`** prowadzi do pliku `iostream` biblioteki standardowej, tam gdzie zadeklarowano `std::cout`. Ścieżka i numer linijki zależą od systemu, bo każdy ma inną bibliotekę standardową. To nie Twój plik i niczego w nim nie zmieniasz.
-- **Dlaczego:** nazwy z biblioteki standardowej należą do grupy nazw o nazwie `std` (fachowo: *przestrzeni nazw*, ang. *namespace*; poznasz je dokładniej później). `std::cout` to pełna nazwa: „`cout` z grupy `std`”. Samo `cout` to dla kompilatora **inna nazwa**, szukana poza tą grupą. Nikt jej nie zadeklarował, więc kompilator jej nie zna. `#include <iostream>` jest na miejscu, więc kompilator zna `std::cout` i dlatego może ją podpowiedzieć.
+- **Dlaczego:** nazwy z biblioteki standardowej należą do grupy nazw o nazwie `std` (fachowo: *przestrzeni nazw*, ang. *namespace*). `std::cout` to pełna nazwa: „`cout` z grupy `std`”. Samo `cout` to dla kompilatora **inna nazwa**, szukana poza tą grupą. Nikt jej nie zadeklarował, więc kompilator jej nie zna. `#include <iostream>` jest na miejscu, więc kompilator zna `std::cout` i dlatego może ją podpowiedzieć.
 - **Poprawka:** przywróć `std::` w linijce 5.
 - **Propozycja kompilatora** była tu trafna, ale traktuj ją jak hipotezę do sprawdzenia, a nie polecenie. Zrozum, dlaczego ma sens, zanim ją przyjmiesz.
 
