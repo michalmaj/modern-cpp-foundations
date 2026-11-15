@@ -50,17 +50,18 @@ Od pierwszej lekcji uczymy współczesnego C++. Nie zaczynamy od przestarzałych
 
 ## Czego się nauczysz
 
-Po ukończeniu kursu będziesz umieć:
+Po ukończeniu Modułów 0–14 będziesz umieć:
 
-- samodzielnie pisać, uruchamiać i poprawiać programy w C++, od pierwszego `Hello, World!` po małe i średnie aplikacje;
+- samodzielnie pisać, uruchamiać i poprawiać programy w C++, od pierwszego `Hello, World!` po niewielkie programy złożone z kilku plików, z własnymi testami;
 - rozwiązywać nowe problemy krok po kroku: zrozumieć zadanie, zaprojektować rozwiązanie, sprawdzić je i wyjaśnić, dlaczego działa;
 - czytać komunikaty o błędach i spokojnie szukać ich przyczyny;
 - przechowywać i przetwarzać dane: liczby, teksty, listy i własne typy danych;
-- dzielić program na mniejsze, czytelne części: funkcje, pliki, biblioteki i klasy;
-- rozumieć, jak program korzysta z pamięci, i pisać kod, który bezpiecznie nią zarządza;
+- dzielić program na mniejsze, czytelne części: funkcje oraz osobne pliki źródłowe i nagłówkowe;
 - wyjaśnić, co dzieje się od napisania kodu do uruchomienia programu;
 - sprawdzać, czy program działa poprawnie: pisać testy, korzystać z debuggera (narzędzia do śledzenia programu krok po kroku) i reagować na ostrzeżenia;
-- korzystać z terminala oraz z Gita i GitHuba, czyli narzędzi do zapisywania historii zmian w kodzie i dzielenia się nim, tak jak w pracy zawodowej.
+- korzystać z terminala oraz z Gita, czyli narzędzia do zapisywania historii zmian w kodzie.
+
+Kurs jest wciąż rozwijany. Kolejne moduły mają objąć między innymi klasy, bezpieczne zarządzanie pamięcią, tworzenie własnych bibliotek i pracę z GitHubem.
 
 ## Jak wygląda nauka
 
@@ -74,7 +75,7 @@ Na początku prowadzimy Cię krok po kroku. Z czasem coraz więcej decyzji nale�
 
 ## Na czym będziesz pracować
 
-**Systemy operacyjne:** Windows, Linux i macOS. Wszystkie trzy są oficjalnie wspierane. Nie potrzebujesz specjalnego sprzętu: wystarczy zwykły komputer z jednym z tych systemów i dostęp do internetu, żeby zainstalować narzędzia.
+**Systemy operacyjne:** Windows, macOS i Linux. Instrukcje instalacji w kursie dotyczą Windowsa, macOS i Ubuntu 24.04 LTS. Na tych trzech systemach programy z lekcji są też automatycznie sprawdzane. Na innych dystrybucjach Linuksa polecenia instalacji mogą być inne, a kursu na nich nie sprawdzaliśmy. Nie potrzebujesz specjalnego sprzętu: wystarczy zwykły komputer z jednym z tych systemów i dostęp do internetu, żeby zainstalować narzędzia.
 
 **Narzędzia:**
 
@@ -85,7 +86,6 @@ Na początku prowadzimy Cię krok po kroku. Z czasem coraz więcej decyzji nale�
 | **C++20** | Wersja języka C++, której uczymy. |
 | **CMake** | Opisuje, z jakich plików składa się projekt i jak z nich zbudować program. |
 | **Ninja** | Szybko wykonuje kroki budowania przygotowane przez CMake. |
-| **CTest** | Uruchamia testy, które sprawdzają, czy program działa poprawnie. |
 
 Nie musisz teraz rozumieć tych nazw ani niczego instalować. Każde narzędzie wyjaśnimy w kursie, a zainstalujesz je w [lekcji 0.4](course/module_00_tooling/lesson_04_installing_the_tools.md). Części kroków instalacji nie sprawdziliśmy jeszcze na każdym systemie.
 
