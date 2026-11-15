@@ -4,7 +4,7 @@
 
 > **Module 12, lesson 4: the test** · about 100–120 minutes, in two sessions
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project.
-> **Pilot version.** The reference solution and the diagnostic's program are checked automatically on Windows, Ubuntu and macOS, with the given data files. Nothing grades your project automatically: you check it yourself, against the checklist. The steps in CLion (a new file, the **Working directory** field) are the same as in lessons 12.1–12.3: they are described according to the CLion 2026.3 documentation, without a manual check on every system.
+> **Alpha version.** The reference solution and the diagnostic's program are checked automatically on Windows, Ubuntu and macOS, with the given data files. Nothing grades your project automatically: you check it yourself, against the checklist. The steps in CLion (a new file, the **Working directory** field) are the same as in lessons 12.1–12.3: they are described according to the CLion 2026.3 documentation, without a manual check on every system.
 
 ## How this test works
 

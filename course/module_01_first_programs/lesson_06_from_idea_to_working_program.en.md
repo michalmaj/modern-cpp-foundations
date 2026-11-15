@@ -4,7 +4,7 @@
 
 > **Module 1, lesson 6: the module test** · about 90 minutes
 > **You need:** the `cpp-workspace` folder with the Git repository from [lesson 1.5](lesson_05_save_the_history_of_your_work.en.md), and the original `lesson_05_first_program` project.
-> **Pilot version.** The reference solutions and the commands in this lesson are checked automatically on Windows, Ubuntu and macOS. Nothing grades your work automatically: you check it yourself, against the criteria.
+> **Alpha version.** The reference solutions and the commands in this lesson are checked automatically on Windows, Ubuntu and macOS. Nothing grades your work automatically: you check it yourself, against the criteria.
 
 ## How this test works
 

@@ -4,7 +4,7 @@
 
 > **Module 11, lesson 2** · about 80–100 minutes; you can split it into two sessions: sections 1–6 and sections 7–10
 > **You need:** your `cpp-workspace` folder with the `lesson_11_1` and `ticket_cost` projects from [lesson 11.1](lesson_01_second_source_file.en.md). You won't need the debugger in this lesson.
-> **Pilot version.** The programs in this lesson, built from several files, are checked automatically on Windows, Ubuntu and macOS, with the given input data. The steps in CLion (a new header file, typing input in the **Run** window) are described according to the CLion 2026.2 documentation, without a manual check on every system.
+> **Alpha version.** The programs in this lesson, built from several files, are checked automatically on Windows, Ubuntu and macOS, with the given input data. The steps in CLion (a new header file, typing input in the **Run** window) are described according to the CLion 2026.2 documentation, without a manual check on every system.
 
 ## Before you start
 

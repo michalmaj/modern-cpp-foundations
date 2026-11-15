@@ -4,7 +4,7 @@
 
 > **Moduł 2, lekcja 3** · około 60 minut
 > **Potrzebujesz:** katalogu `cpp-workspace`, oryginalnego projektu `lesson_05_first_program` i CLiona z toolchainem `LLVM 22` z lekcji 0.5.
-> **Wersja pilotażowa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS. Kroki obsługi debuggera przygotowaliśmy według dokumentacji CLiona 2026.2, ale nie sprawdziliśmy ich jeszcze ręcznie we wszystkich konfiguracjach. Jeśli debugger nie działa w Twoim środowisku, prześledzisz wartości metodą z `std::cout` z punktu 8 i też ukończysz tę lekcję.
+> **Wersja alfa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS. Kroki obsługi debuggera przygotowaliśmy według dokumentacji CLiona 2026.2, ale nie sprawdziliśmy ich jeszcze ręcznie we wszystkich konfiguracjach. Jeśli debugger nie działa w Twoim środowisku, prześledzisz wartości metodą z `std::cout` z punktu 8 i też ukończysz tę lekcję.
 
 ## Zanim zaczniesz
 

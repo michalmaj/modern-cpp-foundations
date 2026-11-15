@@ -4,7 +4,7 @@
 
 > **Moduł 1, lekcja 4** · około 75 minut
 > **Potrzebujesz:** katalogu `cpp-workspace`, oryginalnego projektu `lesson_05_first_program` i poleceń terminala z [lekcji 0.6](../module_00_tooling/lesson_06_same_program_without_clion.md).
-> **Wersja pilotażowa:** polecenia terminala w tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS. Kroki w CLionie opisujemy według dokumentacji CLion 2026.2.
+> **Wersja alfa:** polecenia terminala w tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS. Kroki w CLionie opisujemy według dokumentacji CLion 2026.2.
 
 ## Zanim zaczniesz
 

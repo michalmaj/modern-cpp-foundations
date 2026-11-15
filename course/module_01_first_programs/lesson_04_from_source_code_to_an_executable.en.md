@@ -4,7 +4,7 @@
 
 > **Module 1, lesson 4** · about 75 minutes
 > **You need:** the `cpp-workspace` folder, the original `lesson_05_first_program` project and the terminal commands from [lesson 0.6](../module_00_tooling/lesson_06_same_program_without_clion.en.md).
-> **Pilot version:** the terminal commands in this lesson are checked automatically on Windows, Ubuntu and macOS. The CLion steps follow the CLion 2026.2 documentation.
+> **Alpha version:** the terminal commands in this lesson are checked automatically on Windows, Ubuntu and macOS. The CLion steps follow the CLion 2026.2 documentation.
 
 ## Before you start
 

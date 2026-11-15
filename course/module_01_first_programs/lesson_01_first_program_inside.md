@@ -4,7 +4,7 @@
 
 > **Moduł 1, lekcja 1** · około 60 minut
 > **Potrzebujesz:** projektu `lesson_05_first_program` z [lekcji 0.5](../module_00_tooling/lesson_05_first_program_in_clion.md) i CLiona z toolchainem `LLVM 22`, który utworzono w lekcji 0.5, punkt 4.
-> **Wersja pilotażowa:** kroki w CLionie opisujemy według dokumentacji CLion 2026.2. W Twojej wersji nazwy przycisków mogą się nieznacznie różnić.
+> **Wersja alfa:** kroki w CLionie opisujemy według dokumentacji CLion 2026.2. W Twojej wersji nazwy przycisków mogą się nieznacznie różnić.
 
 ## Zanim zaczniesz
 

@@ -4,7 +4,7 @@
 
 > **Module 1, lesson 5** · about 75 minutes
 > **You need:** the `cpp-workspace` folder with your projects from lessons 1.1–1.4, a terminal, and, on Windows and Ubuntu, administrator rights to install Git (as in [lesson 0.4](../module_00_tooling/lesson_04_installing_the_tools.en.md)).
-> **Pilot version:** the Git commands in this lesson are checked automatically in Windows PowerShell 5.1, PowerShell 7, bash on Ubuntu and zsh on macOS.
+> **Alpha version:** the Git commands in this lesson are checked automatically in Windows PowerShell 5.1, PowerShell 7, bash on Ubuntu and zsh on macOS.
 
 ## Before you start
 

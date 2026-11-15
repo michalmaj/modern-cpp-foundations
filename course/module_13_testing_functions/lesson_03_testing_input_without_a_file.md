@@ -4,7 +4,7 @@
 
 > **Moduł 13, lekcja 3** · około 85–105 minut, można ją podzielić na dwa podejścia
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`, jak dotąd. Przyda się też rozwiązanie misji z lekcji 12.3 z funkcją `read_chores`.
-> **Wersja pilotażowa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, razem z ich kodem zakończenia. Nie potrzebują plików danych, pola **Working directory** ani wpisywania danych.
+> **Wersja alfa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, razem z ich kodem zakończenia. Nie potrzebują plików danych, pola **Working directory** ani wpisywania danych.
 
 ## Zanim zaczniesz
 

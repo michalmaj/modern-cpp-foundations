@@ -4,7 +4,7 @@
 
 > **Moduł 13, lekcja 5: sprawdzian** · około 110–135 minut, w dwóch podejściach
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`. Przyda się projekt z lekcji 13.4 jako przypomnienie dwóch targetów.
-> **Wersja pilotażowa.** Rozwiązanie referencyjne i programy z diagnostyki sprawdzamy automatycznie na Windowsie, Ubuntu i macOS. Twojego projektu nic nie ocenia automatycznie: sprawdzasz go samodzielnie, według listy kontrolnej. Kroki w CLionie są takie jak w lekcji 13.4: opisujemy je według dokumentacji CLion 2026.3, bez ręcznego sprawdzenia na każdym systemie.
+> **Wersja alfa.** Rozwiązanie referencyjne i programy z diagnostyki sprawdzamy automatycznie na Windowsie, Ubuntu i macOS. Twojego projektu nic nie ocenia automatycznie: sprawdzasz go samodzielnie, według listy kontrolnej. Kroki w CLionie są takie jak w lekcji 13.4: opisujemy je według dokumentacji CLion 2026.3, bez ręcznego sprawdzenia na każdym systemie.
 
 ## Jak przebiega ten sprawdzian
 

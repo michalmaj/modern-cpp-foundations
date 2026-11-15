@@ -4,7 +4,7 @@
 
 > **Module 2, lesson 6** · about 75 minutes
 > **You need:** the `cpp-workspace` folder and the original `lesson_05_first_program` project, as before, and the terminal from lessons 0.5 and 0.6. You don't need the debugger in this lesson.
-> **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, including with the given input data. Typing input into CLion's **Run** window is described without a manual check on every system. If you can't type input into the **Run** window, run the programs in the terminal, as in section 3.
+> **Alpha version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, including with the given input data. Typing input into CLion's **Run** window is described without a manual check on every system. If you can't type input into the **Run** window, run the programs in the terminal, as in section 3.
 
 ## Before you start
 

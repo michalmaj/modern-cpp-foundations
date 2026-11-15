@@ -4,7 +4,7 @@
 
 > **Moduł 11, lekcja 3** · około 85–105 minut, możesz ją podzielić na dwa podejścia: punkty 1–6 i punkty 7–11
 > **Potrzebujesz:** katalogu `cpp-workspace` z projektami `lesson_11_2` i `ticket_cost_header` z [lekcji 11.2](lesson_02_own_header_file.md). Debugger nie jest w tej lekcji potrzebny.
-> **Wersja pilotażowa.** Programy z tej lekcji, zbudowane z kilku plików, sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, z podanymi danymi wejściowymi, razem z błędami kompilacji z punktów 8 i 9. Kroki w CLionie opisujemy według dokumentacji CLion 2026.2, bez ręcznego sprawdzenia na każdym systemie.
+> **Wersja alfa.** Programy z tej lekcji, zbudowane z kilku plików, sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, z podanymi danymi wejściowymi, razem z błędami kompilacji z punktów 8 i 9. Kroki w CLionie opisujemy według dokumentacji CLion 2026.2, bez ręcznego sprawdzenia na każdym systemie.
 
 ## Zanim zaczniesz
 

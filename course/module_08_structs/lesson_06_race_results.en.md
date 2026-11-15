@@ -4,7 +4,7 @@
 
 > **Module 8, lesson 6: the test** · about 105–125 minutes, in two sessions
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project.
-> **Pilot version.** The reference solutions in this lesson are checked automatically on Windows, Ubuntu and macOS. Nothing grades your own work automatically: you check it yourself, against the criteria. Your program asks for no data: all the values are written in the code. Only the check program in Part B reads data from the input.
+> **Alpha version.** The reference solutions in this lesson are checked automatically on Windows, Ubuntu and macOS. Nothing grades your own work automatically: you check it yourself, against the criteria. Your program asks for no data: all the values are written in the code. Only the check program in Part B reads data from the input.
 
 ## How this test works
 

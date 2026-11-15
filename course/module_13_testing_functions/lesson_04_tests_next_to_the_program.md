@@ -4,7 +4,7 @@
 
 > **Moduł 13, lekcja 4** · około 90–110 minut, można ją podzielić na dwa podejścia
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`, jak dotąd. Przyda się też Twoje rozwiązanie misji z lekcji 13.2 z funkcją `is_valid_slot`.
-> **Wersja pilotażowa.** Projekty z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS: budujemy w każdym oba programy i uruchamiamy program testowy, razem z jego kodem zakończenia. Kroki w CLionie (nowe pliki, ponowne wczytanie projektu CMake, wybór programu w pasku narzędzi, **Build Project**) opisujemy według dokumentacji CLion 2026.3, bez ręcznego sprawdzenia na każdym systemie.
+> **Wersja alfa.** Projekty z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS: budujemy w każdym oba programy i uruchamiamy program testowy, razem z jego kodem zakończenia. Kroki w CLionie (nowe pliki, ponowne wczytanie projektu CMake, wybór programu w pasku narzędzi, **Build Project**) opisujemy według dokumentacji CLion 2026.3, bez ręcznego sprawdzenia na każdym systemie.
 
 ## Zanim zaczniesz
 

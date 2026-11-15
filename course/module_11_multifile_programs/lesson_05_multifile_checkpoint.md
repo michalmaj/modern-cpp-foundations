@@ -4,7 +4,7 @@
 
 > **Moduł 11, lekcja 5: sprawdzian** · około 100–120 minut, w dwóch podejściach
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`.
-> **Wersja pilotażowa.** Rozwiązanie referencyjne i projekt z diagnostyki sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, z podanymi danymi wejściowymi. Twojego projektu nic nie ocenia automatycznie: sprawdzasz go samodzielnie, według kryteriów. Kroki w CLionie są takie jak w lekcjach 11.1–11.4 i nie zostały ręcznie sprawdzone na każdym systemie.
+> **Wersja alfa.** Rozwiązanie referencyjne i projekt z diagnostyki sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, z podanymi danymi wejściowymi. Twojego projektu nic nie ocenia automatycznie: sprawdzasz go samodzielnie, według kryteriów. Kroki w CLionie są takie jak w lekcjach 11.1–11.4 i nie zostały ręcznie sprawdzone na każdym systemie.
 
 ## Jak przebiega ten sprawdzian
 

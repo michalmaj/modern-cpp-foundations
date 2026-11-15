@@ -4,7 +4,7 @@
 
 > **Module 4, lesson 6** · about 90–105 minutes, can be split into two sessions (for example sections 1–8, then 9–13)
 > **You need:** the `cpp-workspace` folder and the original `lesson_05_first_program` project, as before. You don't need the debugger in this lesson.
-> **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, including with the given input data. Typing input into CLion's **Run** window is described without a manual check on every system.
+> **Alpha version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, including with the given input data. Typing input into CLion's **Run** window is described without a manual check on every system.
 
 ## Before you start
 

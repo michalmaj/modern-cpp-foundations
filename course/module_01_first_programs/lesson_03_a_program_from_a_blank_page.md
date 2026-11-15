@@ -4,7 +4,7 @@
 
 > **Moduł 1, lekcja 3** · około 75 minut
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program` z [lekcji 1.1](lesson_01_first_program_inside.md) oraz sposobu pracy z [lekcji 1.2](lesson_02_when_the_compiler_complains.md).
-> **Wersja pilotażowa:** kroki w CLionie opisujemy według dokumentacji CLion 2026.2. W Twojej wersji nazwy przycisków mogą się nieznacznie różnić.
+> **Wersja alfa:** kroki w CLionie opisujemy według dokumentacji CLion 2026.2. W Twojej wersji nazwy przycisków mogą się nieznacznie różnić.
 
 ## Zanim zaczniesz
 

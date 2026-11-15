@@ -4,7 +4,7 @@
 
 > **Module 4, lesson 7: the test** · about 100–120 minutes, can be split into two sessions
 > **You need:** the `cpp-workspace` folder and the original `lesson_05_first_program` project.
-> **Pilot version.** The reference solutions in this lesson are checked automatically on Windows, Ubuntu and macOS, with the given input data. Nothing grades your work automatically: you check it yourself, against the criteria.
+> **Alpha version.** The reference solutions in this lesson are checked automatically on Windows, Ubuntu and macOS, with the given input data. Nothing grades your work automatically: you check it yourself, against the criteria.
 
 ## How this test works
 

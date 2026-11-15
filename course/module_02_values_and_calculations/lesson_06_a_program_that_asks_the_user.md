@@ -4,7 +4,7 @@
 
 > **Moduł 2, lekcja 6** · około 75 minut
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`, jak dotąd, oraz terminala z lekcji 0.5 i 0.6. Debugger nie jest w tej lekcji potrzebny.
-> **Wersja pilotażowa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, także z podanymi danymi wejściowymi. Wpisywanie danych w oknie **Run** CLiona opisujemy bez ręcznego sprawdzenia na każdym systemie. Jeśli w oknie **Run** nie da się wpisać danych, uruchamiaj programy w terminalu, jak w punkcie 3.
+> **Wersja alfa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, także z podanymi danymi wejściowymi. Wpisywanie danych w oknie **Run** CLiona opisujemy bez ręcznego sprawdzenia na każdym systemie. Jeśli w oknie **Run** nie da się wpisać danych, uruchamiaj programy w terminalu, jak w punkcie 3.
 
 ## Zanim zaczniesz
 

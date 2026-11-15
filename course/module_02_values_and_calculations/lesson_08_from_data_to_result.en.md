@@ -4,7 +4,7 @@
 
 > **Module 2, lesson 8: the test** · about 90 minutes, which you can split into two sessions
 > **You need:** the `cpp-workspace` folder with the Git repository from lesson 1.5, and the original `lesson_05_first_program` project.
-> **Pilot version.** The reference solutions in this lesson are checked automatically on Windows, Ubuntu and macOS, with the given input data. Nothing grades your work automatically: you check it yourself, against the criteria.
+> **Alpha version.** The reference solutions in this lesson are checked automatically on Windows, Ubuntu and macOS, with the given input data. Nothing grades your work automatically: you check it yourself, against the criteria.
 
 ## How this test works
 

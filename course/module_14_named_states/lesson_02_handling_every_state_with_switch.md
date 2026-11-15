@@ -4,7 +4,7 @@
 
 > **Moduł 14, lekcja 2** · około 80–100 minut, można ją podzielić na dwa podejścia (punkty 1–7, potem misja)
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`, jak dotąd. Debugger nie jest w tej lekcji potrzebny.
-> **Wersja pilotażowa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, razem z ich kodem zakończenia. Program, który nie ma się zbudować, sprawdzamy razem z miejscem pierwszego błędu. Ostrzeżeń kompilatora nie sprawdzamy automatycznie.
+> **Wersja alfa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, razem z ich kodem zakończenia. Program, który nie ma się zbudować, sprawdzamy razem z miejscem pierwszego błędu. Ostrzeżeń kompilatora nie sprawdzamy automatycznie.
 
 ## Zanim zaczniesz
 

@@ -4,7 +4,7 @@
 
 > **Moduł 13, lekcja 2** · około 90–110 minut, można ją podzielić na dwa podejścia
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`, jak dotąd. Przyda się też Twój program testowy z misji lekcji 13.1.
-> **Wersja pilotażowa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, razem z ich kodem zakończenia.
+> **Wersja alfa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, razem z ich kodem zakończenia.
 
 ## Zanim zaczniesz
 

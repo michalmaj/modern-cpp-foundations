@@ -4,7 +4,7 @@
 
 > **Module 0, lesson 5** · about 45–60 minutes
 > **You need:** the tools installed in [lesson 0.4](lesson_04_installing_the_tools.en.md), and internet access to download the project.
-> **Pilot version:** the CLion steps follow the CLion 2026.2 documentation. Button names in your version may differ slightly.
+> **Alpha version:** the CLion steps follow the CLion 2026.2 documentation. Button names in your version may differ slightly.
 
 ## Before you start
 
@@ -115,7 +115,7 @@ Open the settings: on Windows and Ubuntu **File | Settings**, on macOS **CLion |
 6. **C++ Compiler:** `C:\Program Files\LLVM\bin\clang++.exe`
 7. Leave the CMake and Build Tool fields as they are: CLion will use its own built-in CMake and Ninja.
 
-> **Pilot version:** this configuration has not yet been checked in CLion on Windows. If CLion reports that the compiler doesn't match the Visual Studio toolchain, try **+ → System** instead, with the same compiler paths. That should be enough to build and run the program. The debugger, which we will cover later, may need different settings in that variant.
+> **Alpha version:** this configuration has not yet been checked in CLion on Windows. If CLion reports that the compiler doesn't match the Visual Studio toolchain, try **+ → System** instead, with the same compiler paths. That should be enough to build and run the program. The debugger, which we will cover later, may need different settings in that variant.
 
 ### macOS
 

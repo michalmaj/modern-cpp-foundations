@@ -4,7 +4,7 @@
 
 > **Module 3, lesson 1** · about 60 minutes
 > **You need:** the `cpp-workspace` folder and the original `lesson_05_first_program` project, as before. You don't need the debugger in this lesson.
-> **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, including with the given input data.
+> **Alpha version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, including with the given input data.
 
 ## Before you start
 
