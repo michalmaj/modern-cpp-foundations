@@ -11,6 +11,8 @@
 ![Languages: Polish and English](https://img.shields.io/badge/languages-PL%20%7C%20EN-blue)
 ![Status: alpha](https://img.shields.io/badge/status-alpha-orange)
 ![86 lessons, 476 checked examples](https://img.shields.io/badge/content-86%20lessons%20%C2%B7%20476%20checked%20examples-blue)
+[![Educational content: CC BY 4.0](https://img.shields.io/badge/educational%20content-CC%20BY%204.0-lightgrey)](LICENSES/CC-BY-4.0.txt)
+[![Code: MIT](https://img.shields.io/badge/code-MIT-yellow)](LICENSES/MIT.txt)
 
 A course that teaches programming from scratch in C++. You don't need any previous programming experience. Everyday computer skills are enough.
 
@@ -326,3 +328,12 @@ The forms are in English, but you can write your report in Polish or English, wh
 ## What comes next
 
 The natural next step will be **Advanced Modern C++ (B)**, a planned course that will build on what you learn here. If you become interested in image processing and artificial intelligence, you can later move on to **C++ Vision & AI Systems (C)**, also planned. It will officially support Ubuntu 24.04 LTS only.
+
+## Licences
+
+You can use, share and adapt the course under the terms of two licences:
+
+- We share the **educational materials** (lesson text, exercises, questions, solution descriptions and documentation, this README included) under [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSES/CC-BY-4.0.txt).
+- We share the **code** (C++ programs and examples, CMake files, tests and scripts) under the [MIT License](LICENSES/MIT.txt). This includes the code inside the lessons, such as example programs and solutions.
+
+[LICENSE.md](LICENSE.md) describes the exact split, gives examples and explains how to credit the author.
