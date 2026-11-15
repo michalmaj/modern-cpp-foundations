@@ -4,7 +4,7 @@
 
 > **Moduł 1, lekcja 5** · około 75 minut
 > **Potrzebujesz:** katalogu `cpp-workspace` z projektami z lekcji 1.1–1.4, terminala oraz, na Windowsie i Ubuntu, uprawnień administratora do instalacji Gita (jak w [lekcji 0.4](../module_00_tooling/lesson_04_installing_the_tools.md)).
-> **Wersja pilotażowa:** polecenia Gita z tej lekcji sprawdzamy automatycznie w Windows PowerShell 5.1, PowerShell 7, bashu na Ubuntu i zsh na macOS.
+> **Wersja alfa:** polecenia Gita z tej lekcji sprawdzamy automatycznie w Windows PowerShell 5.1, PowerShell 7, bashu na Ubuntu i zsh na macOS.
 
 ## Zanim zaczniesz
 

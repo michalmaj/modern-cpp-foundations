@@ -4,7 +4,7 @@
 
 > **Module 11, lesson 1** · about 80–100 minutes
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project, as before. You won't need the debugger in this lesson.
-> **Pilot version.** The programs in this lesson, including those built from two source files, are checked automatically on Windows, Ubuntu and macOS, with the given input data. The steps in CLion (a new file, reloading the CMake project, typing input in the **Run** window) are described according to the CLion 2026.2 documentation, without a manual check on every system.
+> **Alpha version.** The programs in this lesson, including those built from two source files, are checked automatically on Windows, Ubuntu and macOS, with the given input data. The steps in CLion (a new file, reloading the CMake project, typing input in the **Run** window) are described according to the CLion 2026.2 documentation, without a manual check on every system.
 
 ## Before you start
 

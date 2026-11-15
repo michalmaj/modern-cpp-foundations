@@ -4,7 +4,7 @@
 
 > **Moduł 14, lekcja 4** · około 95–120 minut, w dwóch podejściach: punkty 1–5 to mechanizm odczytu i odzyskiwania, punkty 6–10 to testy sekwencji i misja
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`, jak dotąd. Debugger nie jest w tej lekcji potrzebny.
-> **Wersja pilotażowa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, także z podanymi danymi wejściowymi i razem z ich kodem zakończenia. Wpisywanie danych w oknie **Run** CLiona opisujemy bez ręcznego sprawdzenia na każdym systemie.
+> **Wersja alfa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, także z podanymi danymi wejściowymi i razem z ich kodem zakończenia. Wpisywanie danych w oknie **Run** CLiona opisujemy bez ręcznego sprawdzenia na każdym systemie.
 
 ## Zanim zaczniesz
 

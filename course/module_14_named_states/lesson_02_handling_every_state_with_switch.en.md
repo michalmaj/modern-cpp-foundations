@@ -4,7 +4,7 @@
 
 > **Module 14, lesson 2** · about 80–100 minutes, can be split into two sessions (sections 1–7, then the mission)
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project, as before. You won't need the debugger in this lesson.
-> **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, together with their exit codes. The program that mustn't build is checked together with the place of its first error. Compiler warnings aren't checked automatically.
+> **Alpha version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, together with their exit codes. The program that mustn't build is checked together with the place of its first error. Compiler warnings aren't checked automatically.
 
 ## Before you start
 

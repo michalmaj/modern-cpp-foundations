@@ -4,7 +4,7 @@
 
 > **Module 13, lesson 2** · about 90–110 minutes, can be split into two sessions
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project, as before. Your test program from the mission of lesson 13.1 will be useful too.
-> **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, together with their exit codes.
+> **Alpha version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, together with their exit codes.
 
 ## Before you start
 

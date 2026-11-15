@@ -4,7 +4,7 @@
 
 > **Module 11, lesson 3** · about 85–105 minutes; you can split it into two sessions: sections 1–6 and sections 7–11
 > **You need:** your `cpp-workspace` folder with the `lesson_11_2` and `ticket_cost_header` projects from [lesson 11.2](lesson_02_own_header_file.en.md). You won't need the debugger in this lesson.
-> **Pilot version.** The programs in this lesson, built from several files, are checked automatically on Windows, Ubuntu and macOS, with the given input data, together with the compile errors of sections 8 and 9. The steps in CLion are described according to the CLion 2026.2 documentation, without a manual check on every system.
+> **Alpha version.** The programs in this lesson, built from several files, are checked automatically on Windows, Ubuntu and macOS, with the given input data, together with the compile errors of sections 8 and 9. The steps in CLion are described according to the CLion 2026.2 documentation, without a manual check on every system.
 
 ## Before you start
 

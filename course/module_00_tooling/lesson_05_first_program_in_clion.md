@@ -4,7 +4,7 @@
 
 > **Moduł 0, lekcja 5** · około 45–60 minut
 > **Potrzebujesz:** narzędzi zainstalowanych w [lekcji 0.4](lesson_04_installing_the_tools.md) i dostępu do internetu, żeby pobrać projekt.
-> **Wersja pilotażowa:** kroki w CLionie opisujemy według dokumentacji CLion 2026.2. W Twojej wersji nazwy przycisków mogą się nieznacznie różnić.
+> **Wersja alfa:** kroki w CLionie opisujemy według dokumentacji CLion 2026.2. W Twojej wersji nazwy przycisków mogą się nieznacznie różnić.
 
 ## Zanim zaczniesz
 
@@ -115,7 +115,7 @@ Otwórz ustawienia: na Windowsie i Ubuntu **File | Settings**, a na macOS **CLio
 6. **C++ Compiler:** `C:\Program Files\LLVM\bin\clang++.exe`
 7. Pól CMake i Build Tool nie zmieniaj: CLion użyje swoich wbudowanych wersji CMake'a i Ninja.
 
-> **Wersja pilotażowa:** tej konfiguracji nie sprawdziliśmy jeszcze w CLionie na Windowsie. Jeśli CLion zgłosi, że kompilator nie pasuje do toolchainu Visual Studio, wypróbuj zamiast niego **+ → System** z tymi samymi ścieżkami kompilatorów. Do budowania i uruchamiania programu powinno to wystarczyć. Debugger, którym zajmiemy się później, może w tym wariancie wymagać innych ustawień.
+> **Wersja alfa:** tej konfiguracji nie sprawdziliśmy jeszcze w CLionie na Windowsie. Jeśli CLion zgłosi, że kompilator nie pasuje do toolchainu Visual Studio, wypróbuj zamiast niego **+ → System** z tymi samymi ścieżkami kompilatorów. Do budowania i uruchamiania programu powinno to wystarczyć. Debugger, którym zajmiemy się później, może w tym wariancie wymagać innych ustawień.
 
 ### macOS
 

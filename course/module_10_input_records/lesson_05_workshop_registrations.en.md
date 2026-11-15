@@ -4,7 +4,7 @@
 
 > **Module 10, lesson 5: the test** · about 115–140 minutes, in two sessions
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project.
-> **Pilot version.** The reference solutions in this lesson are checked automatically on Windows, Ubuntu and macOS, with the given input data. Nothing grades your own work automatically: you check it yourself, against the criteria. Typing input in CLion's **Run** window is described without a manual check on every system.
+> **Alpha version.** The reference solutions in this lesson are checked automatically on Windows, Ubuntu and macOS, with the given input data. Nothing grades your own work automatically: you check it yourself, against the criteria. Typing input in CLion's **Run** window is described without a manual check on every system.
 
 ## How this test works
 

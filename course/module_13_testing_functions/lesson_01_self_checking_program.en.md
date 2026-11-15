@@ -4,7 +4,7 @@
 
 > **Module 13, lesson 1** · about 80–95 minutes, can be split into two sessions
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project, as before. You won't need the debugger in this lesson.
-> **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, together with their exit codes.
+> **Alpha version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, together with their exit codes.
 
 ## Before you start
 

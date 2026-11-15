@@ -4,7 +4,7 @@
 
 > **Module 1, lesson 1** · about 60 minutes
 > **You need:** the `lesson_05_first_program` project from [lesson 0.5](../module_00_tooling/lesson_05_first_program_in_clion.en.md) and CLion with the `LLVM 22` toolchain you created in lesson 0.5, section 4.
-> **Pilot version:** the CLion steps follow the CLion 2026.2 documentation. Button names in your version may differ slightly.
+> **Alpha version:** the CLion steps follow the CLion 2026.2 documentation. Button names in your version may differ slightly.
 
 ## Before you start
 

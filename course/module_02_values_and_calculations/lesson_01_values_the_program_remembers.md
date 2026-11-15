@@ -4,7 +4,7 @@
 
 > **Moduł 2, lekcja 1** · około 60 minut
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`, jak w Module 1.
-> **Wersja pilotażowa.** Przykłady z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS.
+> **Wersja alfa.** Przykłady z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS.
 
 ## Zanim zaczniesz
 

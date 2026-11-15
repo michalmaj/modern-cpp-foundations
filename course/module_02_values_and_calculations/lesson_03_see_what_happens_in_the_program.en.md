@@ -4,7 +4,7 @@
 
 > **Module 2, lesson 3** · about 60 minutes
 > **You need:** the `cpp-workspace` folder, the original `lesson_05_first_program` project and CLion with the `LLVM 22` toolchain from lesson 0.5.
-> **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS. The debugger steps were prepared from the CLion 2026.2 documentation, but they haven't yet been checked by hand on every configuration. If the debugger doesn't work in your environment, you can trace the values with the `std::cout` method from section 8 and still complete this lesson.
+> **Alpha version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS. The debugger steps were prepared from the CLion 2026.2 documentation, but they haven't yet been checked by hand on every configuration. If the debugger doesn't work in your environment, you can trace the values with the `std::cout` method from section 8 and still complete this lesson.
 
 ## Before you start
 

@@ -4,7 +4,7 @@
 
 > **Moduł 1, lekcja 6: sprawdzian** · około 90 minut
 > **Potrzebujesz:** katalogu `cpp-workspace` z repozytorium Gita z [lekcji 1.5](lesson_05_save_the_history_of_your_work.md) i oryginalnego projektu `lesson_05_first_program`.
-> **Wersja pilotażowa.** Rozwiązania referencyjne i polecenia z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS. Twojej pracy nic nie ocenia automatycznie: sprawdzasz ją samodzielnie, według kryteriów.
+> **Wersja alfa.** Rozwiązania referencyjne i polecenia z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS. Twojej pracy nic nie ocenia automatycznie: sprawdzasz ją samodzielnie, według kryteriów.
 
 ## Jak przebiega ten sprawdzian
 

@@ -4,7 +4,7 @@
 
 > **Module 11, lesson 4** · about 100–120 minutes; you can split it into two sessions: sections 1–7 and sections 8–11
 > **You need:** your `cpp-workspace` folder with the `workshop_orders` project from [lesson 10.3](../module_10_input_records/lesson_03_building_a_vector_of_records.en.md). You won't need the debugger in this lesson.
-> **Pilot version.** The programs in this lesson, built from several files, are checked automatically on Windows, Ubuntu and macOS, with the data of lesson 10.3, together with the link error of section 9. The steps in CLion are the same as in lessons 11.1–11.3, and haven't been checked by hand on every system.
+> **Alpha version.** The programs in this lesson, built from several files, are checked automatically on Windows, Ubuntu and macOS, with the data of lesson 10.3, together with the link error of section 9. The steps in CLion are the same as in lessons 11.1–11.3, and haven't been checked by hand on every system.
 
 ## Before you start
 

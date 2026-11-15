@@ -4,7 +4,7 @@
 
 > **Module 12, lesson 2** · about 90–110 minutes, can be split into two sessions
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project, as before. You won't need the debugger in this lesson.
-> **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, with the given data files and input data. The steps in CLion (a new file, the **Working directory** field) are the same as in lesson 12.1: they are described according to the CLion 2026.3 documentation, without a manual check on every system.
+> **Alpha version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, with the given data files and input data. The steps in CLion (a new file, the **Working directory** field) are the same as in lesson 12.1: they are described according to the CLion 2026.3 documentation, without a manual check on every system.
 
 ## Before you start
 

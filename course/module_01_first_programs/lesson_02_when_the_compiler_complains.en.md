@@ -4,7 +4,7 @@
 
 > **Module 1, lesson 2** · about 60–75 minutes
 > **You need:** the `cpp-workspace` folder and the original `lesson_05_first_program` project from [lesson 1.1](lesson_01_first_program_inside.en.md).
-> **Pilot version:** the CLion steps follow the CLion 2026.2 documentation. Button names in your version may differ slightly.
+> **Alpha version:** the CLion steps follow the CLion 2026.2 documentation. Button names in your version may differ slightly.
 
 ## Before you start
 

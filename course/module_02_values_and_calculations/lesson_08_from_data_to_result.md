@@ -4,7 +4,7 @@
 
 > **Moduł 2, lekcja 8: sprawdzian** · około 90 minut, można go podzielić na dwa podejścia
 > **Potrzebujesz:** katalogu `cpp-workspace` z repozytorium Gita z lekcji 1.5 i oryginalnego projektu `lesson_05_first_program`.
-> **Wersja pilotażowa.** Rozwiązania referencyjne z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, z podanymi danymi wejściowymi. Twojej pracy nic nie ocenia automatycznie: sprawdzasz ją samodzielnie, według kryteriów.
+> **Wersja alfa.** Rozwiązania referencyjne z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, z podanymi danymi wejściowymi. Twojej pracy nic nie ocenia automatycznie: sprawdzasz ją samodzielnie, według kryteriów.
 
 ## Jak przebiega ten sprawdzian
 

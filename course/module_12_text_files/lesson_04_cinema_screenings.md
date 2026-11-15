@@ -4,7 +4,7 @@
 
 > **Moduł 12, lekcja 4: sprawdzian** · około 100–120 minut, w dwóch podejściach
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`.
-> **Wersja pilotażowa.** Rozwiązanie referencyjne i program z diagnostyki sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, z podanymi plikami danych. Twojego projektu nic nie ocenia automatycznie: sprawdzasz go samodzielnie, według listy kontrolnej. Kroki w CLionie (nowy plik, pole **Working directory**) są takie jak w lekcjach 12.1–12.3: opisujemy je według dokumentacji CLion 2026.3, bez ręcznego sprawdzenia na każdym systemie.
+> **Wersja alfa.** Rozwiązanie referencyjne i program z diagnostyki sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, z podanymi plikami danych. Twojego projektu nic nie ocenia automatycznie: sprawdzasz go samodzielnie, według listy kontrolnej. Kroki w CLionie (nowy plik, pole **Working directory**) są takie jak w lekcjach 12.1–12.3: opisujemy je według dokumentacji CLion 2026.3, bez ręcznego sprawdzenia na każdym systemie.
 
 ## Jak przebiega ten sprawdzian
 

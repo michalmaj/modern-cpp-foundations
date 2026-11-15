@@ -4,7 +4,7 @@
 
 > **Moduł 12, lekcja 1** · około 90–110 minut, można ją podzielić na dwa podejścia
 > **Potrzebujesz:** katalogu `cpp-workspace` i oryginalnego projektu `lesson_05_first_program`, jak dotąd. Debugger nie jest w tej lekcji potrzebny.
-> **Wersja pilotażowa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, z podanymi plikami danych. Kroki w CLionie (nowy plik, pole **Working directory** w konfiguracji uruchomienia) opisujemy według dokumentacji CLion 2026.3, bez ręcznego sprawdzenia na każdym systemie.
+> **Wersja alfa.** Programy z tej lekcji sprawdzamy automatycznie na Windowsie, Ubuntu i macOS, z podanymi plikami danych. Kroki w CLionie (nowy plik, pole **Working directory** w konfiguracji uruchomienia) opisujemy według dokumentacji CLion 2026.3, bez ręcznego sprawdzenia na każdym systemie.
 
 ## Zanim zaczniesz
 

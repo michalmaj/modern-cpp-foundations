@@ -4,7 +4,7 @@
 
 > **Module 13, lesson 3** · about 85–105 minutes, can be split into two sessions
 > **You need:** your `cpp-workspace` folder and the original `lesson_05_first_program` project, as before. The solution of the lesson 12.3 mission, with the function `read_chores`, will be useful too.
-> **Pilot version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, together with their exit codes. They need no data files, no **Working directory** field and no typed input.
+> **Alpha version.** The programs in this lesson are checked automatically on Windows, Ubuntu and macOS, together with their exit codes. They need no data files, no **Working directory** field and no typed input.
 
 ## Before you start
 
