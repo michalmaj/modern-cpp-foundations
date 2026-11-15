@@ -74,7 +74,7 @@ A has 1 element
 ```
 
 - **`char`** is a type that stores **one character**. `'A'` is a letter, `'!'` is a punctuation mark.
-- **`'7'` is a character, not the number 7.** Compare `const int number{7};` and `const char digit{'7'};`. Both values print as `7`, but they serve different purposes: `int` for counting, `char` for writing a character in a text. We'll come back to turning a digit character into a number later in the course.
+- **`'7'` is a character, not the number 7.** Compare `const int number{7};` and `const char digit{'7'};`. Both values print as `7`, but they serve different purposes: `int` for counting, `char` for writing a character in a text.
 - `std::cout` prints a `char` as a character, just like text.
 
 ## 3. Apostrophes and quotation marks

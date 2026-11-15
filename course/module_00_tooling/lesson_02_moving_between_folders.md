@@ -163,7 +163,7 @@ Teraz spójrz na okno plików, które otworzyło się w punkcie 3. Czy coś się
 |---|---|
 | `ls ~` | `ls -F ~` |
 
-`plan-podrozy` wciąż leży w katalogu domowym. Nic się nie przesunęło: zmieniło się tylko miejsce, w którym „stoi” powłoka. Przenoszenie plików i katalogów to zupełnie inna operacja. Poznasz ją później.
+`plan-podrozy` wciąż leży w katalogu domowym. Nic się nie przesunęło: zmieniło się tylko miejsce, w którym „stoi” powłoka. Przenoszenie plików i katalogów to zupełnie inna operacja.
 
 ## 7. Zastosuj: ścieżka bezwzględna działa zewsząd
 

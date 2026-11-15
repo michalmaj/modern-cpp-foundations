@@ -129,7 +129,7 @@ The last line of the output is, for example:
 Initialized empty Git repository in /home/ola/cpp-workspace/.git/
 ```
 
-Before it, there may be lines starting with `hint:`, with a hint about a branch name. Skip them for now. You'll learn about branches later, and whether the name is `master` or `main` doesn't matter today.
+Before it, there may be lines starting with `hint:`, with a hint about a branch name. Skip them for now. Whether the name is `master` or `main` doesn't matter today.
 
 `git init` created a hidden folder **`.git`**. Git keeps the whole history there. Don't change anything in it by hand, and **never delete it**: deleting `.git` deletes the whole history. You can see it with `ls -Force` (Windows) or `ls -a` (macOS and Ubuntu).
 

@@ -131,7 +131,7 @@ Last reading: 19
 
 - Pierwszy element ma indeks 0, a ostatni `size() - 1`: tutaj 4 − 1, czyli 3.
 - **Najpierw `empty()`.** Pusty wektor nie ma pierwszego ani ostatniego elementu. Co więcej, `size()` jest wtedy 0, a wynik `size()` to liczba bez znaku, która nie może być ujemna: `0 - 1` nie daje tu −1, tylko ogromną liczbę dodatnią. **Nie odejmujemy 1 od rozmiaru pustego wektora, żeby wyznaczyć indeks.**
-- Wektor ma też funkcje `front()` i `back()`, które dają pierwszy i ostatni element. W tym kursie na razie z nich nie korzystamy.
+- Wektor ma też funkcje `front()` i `back()`, które dają pierwszy i ostatni element. W tym kursie z nich nie korzystamy.
 
 ## 5. Typ indeksu: `std::size_t`
 

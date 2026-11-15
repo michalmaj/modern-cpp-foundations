@@ -418,7 +418,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 7. Czy dwa obiekty typu `Book` mogą mieć różne wartości pól? Skąd program wie, której książki dotyczy `first.pages`?
 8. Dlaczego kompilator nie wykrył zamienionych wartości w programie o sali z punktu 8?
 9. Dlaczego obiekt produktu w misji może być `const`?
-10. Czy struktura z tej lekcji potrzebuje konstruktorów albo metod?
+10. Czy struktura z tej lekcji potrzebuje funkcji składowych do tworzenia obiektów i odczytywania ich pól?
 
 <details>
 <summary>Przykładowe odpowiedzi</summary>
@@ -432,7 +432,7 @@ Odpowiedz własnymi słowami, najlepiej na piśmie. Dopiero potem porównaj z pr
 7. Tak. Każdy obiekt przechowuje własne wartości pól. Nazwa przed kropką wskazuje obiekt: `first.pages` to strony pierwszej książki, a `second.pages` drugiej.
 8. Bo oba pola, `seats` i `people`, mają typ `int`, a obie zmienne też są typu `int`. Kompilator sprawdza typy, a nie znaczenie wartości, więc liczba osób może trafić do pola miejsc bez błędu. To błąd logiczny, nie błąd kompilacji.
 9. Bo program tylko odczytuje dane produktu i z nich liczy. Żadne pole obiektu się nie zmienia.
-10. Nie. Obiekt tworzymy, podając w `{}` wartości wszystkich pól, a pola odczytujemy przez kropkę. Konstruktory i metody nie są tu potrzebne.
+10. Nie. Obiekt tworzymy, podając w `{}` wartości wszystkich pól, a pola odczytujemy przez kropkę. Funkcje składowe nie są tu potrzebne.
 
 </details>
 

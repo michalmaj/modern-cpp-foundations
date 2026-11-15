@@ -102,7 +102,7 @@ int main() {
 - `3 / 5` gives 0: 5 doesn't fit into 3 even once. That the mathematical result is 0.6 changes nothing here.
 - The last line doesn't store the result in any variable, and it still prints 3. This confirms that the fractional part disappears in the division itself.
 
-For now, this course divides only **positive numbers**. For negative numbers the rules are precisely defined too. You'll learn them later.
+For now, this course divides only **positive numbers**. For negative numbers the rules are precisely defined too.
 
 ## 3. The remainder of a division: `%`
 
