@@ -131,7 +131,7 @@ Last reading: 19
 
 - The first element has the index 0, and the last one `size() - 1`: here 4 − 1, which is 3.
 - **`empty()` first.** An empty vector has no first or last element. What's more, `size()` is then 0, and the result of `size()` is an unsigned number, which can't be negative: `0 - 1` doesn't give −1 here, but a huge positive number. **We don't subtract 1 from the size of an empty vector to get an index.**
-- A vector also has the functions `front()` and `back()`, which give the first and last element. In this course we don't use them for now.
+- A vector also has the functions `front()` and `back()`, which give the first and last element. In this course we don't use them.
 
 ## 5. The index type: `std::size_t`
 

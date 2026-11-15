@@ -74,7 +74,7 @@ A has 1 element
 ```
 
 - **`char`** to typ, który przechowuje **jeden znak**. `'A'` to litera, `'!'` to znak interpunkcyjny.
-- **`'7'` to znak, a nie liczba 7.** Porównaj `const int number{7};` i `const char digit{'7'};`. Obie wartości wypiszą się jako `7`, ale służą do czegoś innego: `int` do liczenia, `char` do zapisu znaku w tekście. Do zamiany cyfry-znaku na liczbę wrócimy w dalszej części kursu.
+- **`'7'` to znak, a nie liczba 7.** Porównaj `const int number{7};` i `const char digit{'7'};`. Obie wartości wypiszą się jako `7`, ale służą do czegoś innego: `int` do liczenia, `char` do zapisu znaku w tekście.
 - `std::cout` wypisuje `char` jako znak, tak samo jak tekst.
 
 ## 3. Apostrof i cudzysłów

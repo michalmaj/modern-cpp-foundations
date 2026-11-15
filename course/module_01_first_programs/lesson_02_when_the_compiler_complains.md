@@ -195,7 +195,7 @@ int main() {
 
 **Wyjaśnienie.** Kompilator czyta plik od góry i musi znać każdą użytą nazwę. `std::cout` nie jest wbudowane w język: to część **biblioteki standardowej**, a kompilator dowiaduje się o niej dopiero z linijki `#include <iostream>`.
 
-- Linijki zaczynające się od `#` to **dyrektywy preprocesora**: polecenia dla narzędzi budowania, wykonywane jeszcze przed właściwą kompilacją. **Nie są instrukcjami programu.** Nie wykonują się, gdy program działa, nie stoją w `main` i nie kończą się średnikiem.
+- Linijki zaczynające się od `#` to **dyrektywy preprocesora**: polecenia przetwarzane podczas przygotowania kodu do kompilacji, jeszcze przed właściwą kompilacją. **Nie są instrukcjami programu.** Nie wykonują się, gdy program działa, nie stoją w `main` i nie kończą się średnikiem.
 - `#include <iostream>` znaczy: „wstaw w tym miejscu **deklaracje** z części biblioteki standardowej o nazwie `iostream`”. Deklaracja to informacja dla kompilatora, że coś o danej nazwie istnieje i jak tego używać. Jedną z tych deklaracji jest `std::cout`.
 - Bez tej linijki kompilator nie zna ani `std`, ani `std::cout`.
 

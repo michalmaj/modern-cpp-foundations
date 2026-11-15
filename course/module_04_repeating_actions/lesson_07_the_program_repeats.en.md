@@ -1160,7 +1160,7 @@ After seven lessons, you can:
 - end a program safely when the data runs out;
 - test loops for zero, one and many iterations.
 
-Your programs don't yet check whole lines of text, and don't store many values at once. Each program is also a single `main` function. Those things come in later modules.
+Your programs don't yet store many values at once. Each program is also a single `main` function. Those things come in later modules.
 
 ## What's next
 

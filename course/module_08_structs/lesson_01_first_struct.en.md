@@ -418,7 +418,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 7. Can two objects of the type `Book` have different field values? How does the program know which book `first.pages` refers to?
 8. Why didn't the compiler detect the swapped values in the room program from section 8?
 9. Why can the product object in the mission be `const`?
-10. Does the struct in this lesson need constructors or methods?
+10. Does the struct in this lesson need member functions for creating objects and reading their fields?
 
 <details>
 <summary>Example answers</summary>
@@ -432,7 +432,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 7. Yes. Each object stores its own field values. The name before the dot points to the object: `first.pages` is the first book's pages, and `second.pages` the second book's.
 8. Because both fields, `seats` and `people`, have the type `int`, and both variables are `int` too. The compiler checks types, not what the values mean, so the number of people can go into the seats field without an error. It's a logic error, not a compile error.
 9. Because the program only reads the product's data and computes from it. No field of the object changes.
-10. No. We create the object by giving the values of all the fields in `{}`, and read the fields through the dot. Constructors and methods aren't needed here.
+10. No. We create the object by giving the values of all the fields in `{}`, and read the fields through the dot. Member functions aren't needed here.
 
 </details>
 

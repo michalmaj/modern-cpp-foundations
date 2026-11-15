@@ -129,7 +129,7 @@ Ostatnia linijka wyniku to na przykład:
 Initialized empty Git repository in /home/ola/cpp-workspace/.git/
 ```
 
-Przed nią mogą pojawić się linijki zaczynające się od `hint:`, z podpowiedzią o nazwie gałęzi (*branch*). Na razie je pomiń. Gałęzie poznasz później, a nazwa `master` czy `main` nie ma dziś znaczenia.
+Przed nią mogą pojawić się linijki zaczynające się od `hint:`, z podpowiedzią o nazwie gałęzi (*branch*). Na razie je pomiń. Nazwa `master` czy `main` nie ma dziś znaczenia.
 
 `git init` utworzył ukryty katalog **`.git`**. Git przechowuje w nim całą historię. Nie zmieniaj w nim niczego ręcznie i **nigdy go nie usuwaj**: usunięcie `.git` usuwa całą historię. Możesz go zobaczyć poleceniem `ls -Force` (Windows) albo `ls -a` (macOS i Ubuntu).
 

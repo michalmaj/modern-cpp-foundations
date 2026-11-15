@@ -102,7 +102,7 @@ int main() {
 - `3 / 5` daje 0: 5 nie mieści się w 3 ani razu. To, że matematycznie wychodzi 0,6, nic tu nie zmienia.
 - Ostatnia linijka nie zapisuje wyniku w żadnej zmiennej, a i tak wypisuje 3. To potwierdza, że część ułamkowa znika w samym dzieleniu.
 
-W tym kursie dzielimy na razie tylko **liczby dodatnie**. Dla liczb ujemnych zasady też są dokładnie określone. Poznasz je później.
+W tym kursie dzielimy na razie tylko **liczby dodatnie**. Dla liczb ujemnych zasady też są dokładnie określone.
 
 ## 3. Reszta z dzielenia: `%`
 

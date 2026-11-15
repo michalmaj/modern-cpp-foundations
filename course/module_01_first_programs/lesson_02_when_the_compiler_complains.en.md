@@ -195,7 +195,7 @@ int main() {
 
 **Explanation.** The compiler reads the file from the top and must know every name you use. `std::cout` isn't built into the language: it's part of the **standard library**, and the compiler only learns about it from the line `#include <iostream>`.
 
-- Lines that start with `#` are **preprocessor directives**: instructions for the build tools, carried out before the actual compiling. **They are not statements of the program.** They don't run while the program runs, they aren't written inside `main`, and they don't end with a semicolon.
+- Lines that start with `#` are **preprocessor directives**: instructions processed as part of preparing the code for compiling, before the actual compiling. **They are not statements of the program.** They don't run while the program runs, they aren't written inside `main`, and they don't end with a semicolon.
 - `#include <iostream>` means: “insert here the **declarations** from the part of the standard library called `iostream`”. A declaration tells the compiler that something with a given name exists and how to use it. One of these declarations is `std::cout`.
 - Without that line, the compiler knows neither `std` nor `std::cout`.
 

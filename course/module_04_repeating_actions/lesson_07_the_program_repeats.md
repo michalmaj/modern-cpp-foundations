@@ -1160,7 +1160,7 @@ Po siedmiu lekcjach potrafisz:
 - kończyć program bezpiecznie, gdy dane się skończą;
 - testować pętle dla zera, jednego i wielu przebiegów.
 
-Twoje programy nie sprawdzają jeszcze całych linijek tekstu i nie przechowują wielu wartości naraz. Każdy program to też jedna funkcja `main`. To przyjdzie w dalszych modułach.
+Twoje programy nie przechowują jeszcze wielu wartości naraz. Każdy program to też jedna funkcja `main`. To przyjdzie w dalszych modułach.
 
 ## Co dalej
 

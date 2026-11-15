@@ -163,7 +163,7 @@ Now look at the file window you opened in section 3. Has anything changed in it?
 |---|---|
 | `ls ~` | `ls -F ~` |
 
-`trip-plan` is still in your home folder. Nothing has moved: only the place where the shell “stands” has changed. Moving files and folders is a completely different operation. You will learn it later.
+`trip-plan` is still in your home folder. Nothing has moved: only the place where the shell “stands” has changed. Moving files and folders is a completely different operation.
 
 ## 7. Apply it: an absolute path works from anywhere
 
