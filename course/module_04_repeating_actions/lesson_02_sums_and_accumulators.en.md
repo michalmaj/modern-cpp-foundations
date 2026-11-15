@@ -362,12 +362,12 @@ A warehouse is preparing parcels for shipping. The program asks for the number o
 **Requirements:**
 
 - The number of parcels is a whole number from 0 to 5.
-- A parcel's weight is a number with a fractional part, not less than zero.
+- A parcel's weight is a number with a fractional part.
 - The program reads each weight in a separate iteration of the loop, after the prompt `Enter parcel weight:`. The prompt appears once for each parcel.
 - The program doesn't need to remember all the weights at once. It's enough to build up their sum.
 - For 0 parcels the program asks for no weight and prints a sum of 0.
 - For a number of parcels outside the range, the program prints only `Invalid parcel count` and asks for no weight.
-- We assume the user types numbers and, for an acceptable number of parcels, gives all the weights. The program is **not** robust against other data, for example text instead of a number. That comes in later lessons.
+- We assume the user types numbers and, for an acceptable number of parcels, gives all the weights, none of them less than zero. The program is **not** robust against other data, for example text instead of a number. That comes in later lessons.
 
 In `cpp-workspace`, create a `parcel_weights` folder, copy `CMakeLists.txt` into it from the original `lesson_05_first_program`, create an empty `main.cpp` and write the program on your own.
 

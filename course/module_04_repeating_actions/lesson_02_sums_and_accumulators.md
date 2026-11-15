@@ -362,12 +362,12 @@ Magazyn przygotowuje paczki do wysyłki. Program pyta o liczbę paczek, a potem 
 **Wymagania:**
 
 - Liczba paczek to liczba całkowita od 0 do 5.
-- Waga paczki to liczba z częścią ułamkową, nie mniejsza od zera.
+- Waga paczki to liczba z częścią ułamkową.
 - Każdą wagę program odczytuje w osobnym przebiegu pętli, po prośbie `Enter parcel weight:`. Prośba pojawia się raz na każdą paczkę.
 - Program nie musi pamiętać wszystkich wag naraz. Wystarczy, że gromadzi ich sumę.
 - Dla 0 paczek program nie pyta o żadną wagę i wypisuje sumę 0.
 - Dla liczby paczek spoza zakresu program wypisuje tylko `Invalid parcel count` i nie pyta o żadną wagę.
-- Zakładamy, że użytkownik wpisuje liczby i że dla dopuszczalnej liczby paczek poda wszystkie wagi. Program **nie jest** odporny na inne dane, na przykład tekst zamiast liczby. To przyjdzie w dalszych lekcjach.
+- Zakładamy, że użytkownik wpisuje liczby i że dla dopuszczalnej liczby paczek poda wszystkie wagi, a żadna z nich nie będzie mniejsza od zera. Program **nie jest** odporny na inne dane, na przykład tekst zamiast liczby. To przyjdzie w dalszych lekcjach.
 
 W `cpp-workspace` utwórz katalog `parcel_weights`, skopiuj do niego `CMakeLists.txt` z oryginalnego `lesson_05_first_program`, utwórz pusty `main.cpp` i napisz program samodzielnie.
 
