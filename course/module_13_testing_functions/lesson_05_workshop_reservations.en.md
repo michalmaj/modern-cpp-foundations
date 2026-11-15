@@ -19,14 +19,14 @@ The test has three parts and a review:
 - **Part C: diagnostic and justification.** A test set that lets a contract violation through, and questions about your decisions. Do it after Part B.
 - **Checking and review:** hints, the full list of cases, the diagnostic's project, the reference solution, explanations, answers and a self-assessment. Go there only after Parts A and B, or when you consciously give up further work on your own.
 
-Looking at a hint or at an earlier lesson isn't a failure. What matters is to **note honestly what was done independently and what with help**. A suggested split into two sessions:
+Looking at a hint or at an earlier lesson isn't a failure. What matters is to **note honestly what was done on your own and what was done with help**. A suggested split into two sessions:
 
 - **first:** the specification, Part A, the project in CLion, the application program, the first version of the test program and detecting the bug;
 - **second:** completing the test set, the fix, the tests again, Part C, the checklist and the self-assessment.
 
-**You may use:** CLion or the terminal, CMake and Ninja, as before; `CMakeLists.txt` from the original `lesson_05_first_program` and the pattern of two targets from lesson 13.4; the check functions of lessons 13.1–13.3; the way of creating `std::istringstream` from lesson 13.3; the rules of splitting into files from Module 11; your earlier case tables. You won't need the debugger. You know everything you need from Modules 1–13.
+**You may use:** CLion or the terminal, CMake and Ninja, as before; `CMakeLists.txt` from the original `lesson_05_first_program` and the pattern of two targets from lesson 13.4; the checking functions of lessons 13.1–13.3; the way of creating `std::istringstream` from lesson 13.3; the rules of splitting into files from Module 11; your earlier case tables. You won't need the debugger. You know everything you need from Modules 1–13.
 
-Treat lessons 13.1–13.4 as reminders of the rules, not as a finished program to copy. You may carry over parts of code consciously, for example the check functions of lesson 13.3 or the `CMakeLists.txt` of lesson 13.4, but prepare the plan, the cases, the expected results and the way of showing the bug on your own. If you adapt earlier code, note in the self-assessment where it comes from, what was carried over, what was changed and which decisions were made on your own.
+Treat lessons 13.1–13.4 as reminders of the rules, not as a finished program to copy. You may carry over parts of code consciously, for example the checking functions of lesson 13.3 or the `CMakeLists.txt` of lesson 13.4, but prepare the plan, the cases, the expected results and the way of showing the bug on your own. If you adapt earlier code, note in the self-assessment where it comes from, what was carried over, what was changed and which decisions were made on your own.
 
 ---
 
@@ -53,7 +53,7 @@ bool read_workshop(std::istream& input, Workshop& result);
 - The function tries to read two `int` numbers from the stream `input` with the operator `>>`: first `capacity`, then `reserved`. The numbers are separated by ordinary whitespace, for example a space or a line end.
 - **Validity rules:** `1 <= capacity <= 30` and `0 <= reserved <= capacity`. So a room can have one seat or thirty, can have no reservation at all, and can be fully booked. The number of reservations can't exceed the capacity, and negative values aren't valid.
 - **Success:** when both numbers were read and meet the rules, the function stores them in `result` and returns `true`.
-- **Refusal:** when both numbers couldn't be read, or the data break the rules, the function returns `false` and **changes no field of `result`**. This guarantee is part of the contract.
+- **Refusal:** when either number couldn't be read, or the data breaks the rules, the function returns `false` and **changes no field of `result`**. This guarantee is part of the contract.
 - The last number doesn't need a line end after it: `"12 8"` and `"12 8\n"` are equally valid.
 - The function reads two numbers, not a whole document. The contract says nothing about characters after the second number or about the stream's state after a refusal. There are no line numbers and no separate parameter describing an error.
 
@@ -94,7 +94,7 @@ workshop_reservations/
 2. which results you expect in each of them;
 3. which record each case starts from, so that a change, or the lack of one, is visible;
 4. how you name the checks, so that a `FAIL` line says which case and which field failed;
-5. which check functions you use;
+5. which checking functions you use;
 6. how you show that your test detects the bug before you fix it;
 7. how you confirm that the fix broke nothing.
 
@@ -269,7 +269,7 @@ The test is passed when you meet **all** the items of this list. Your names, hel
 - [ ] The test program supplies the data through `std::istringstream`.
 - [ ] Each independent case has its own stream and its own record.
 - [ ] The tests check the `bool` result of each call.
-- [ ] The tests check both fields of `Workshop`, also after a refusal.
+- [ ] The tests check both fields of `Workshop`, even after a refusal.
 - [ ] The set covers the valid limits, a failed read and, for each of the four numeric rules, a refused case in which only that rule is broken.
 - [ ] The supplied function's bug was detected by a test before `rules.cpp` was fixed.
 - [ ] After `FAIL`, the test program really ended with exit code 1.
@@ -328,7 +328,7 @@ Where is the only definition of the function that both programs use? That is whe
 
 </details>
 
-## The full list of control cases
+## The full list of check cases
 
 <details>
 <summary>Cases A–N, results from the specification</summary>
@@ -1000,7 +1000,7 @@ set_target_properties(function_tests PROPERTIES CXX_EXTENSIONS OFF)
 
 </details>
 
-**The application program, checked separately.** In a project with two targets, the course's tests run only `function_tests`. That is why the results of the application program are checked separately: the same `main.cpp`, `rules.hpp` and fixed `rules.cpp`, built as one program and run with keyboard data. Here the keyboard text always ends with a line end, and the last data are one empty line.
+**The application program, checked separately.** In a project with two targets, the course's tests run only `function_tests`. That is why the results of the application program are checked separately: the same `main.cpp`, `rules.hpp` and fixed `rules.cpp`, built as one program and run with keyboard data. Here the keyboard text always ends with a line end, and the last input is one empty line.
 
 <details>
 <summary>The application program for six inputs</summary>
@@ -1377,7 +1377,7 @@ With M2, cases I and J pass: the read fails before the function gets to storing 
 4. `FAIL` says that the actual result differs from the expected one. It doesn't decide whether the mistake is in the function or in the expected result: that is settled by going back to the specification (lesson 13.2).
 5. Because the contract covers the record too: after a success both fields have the read values, and after a refusal they stay unchanged. Bug M2 gives a correct `bool` result and a wrong record.
 6. Because it gives the function a text written in the program: each case has its own data, nothing has to be typed and no file has to be prepared, and the result is the same every time.
-7. Because a stream remembers what has already been read. A case that read from the previous case's stream would start from other data than the ones in the table (lesson 13.3).
+7. Because a stream remembers what has already been read. A case that read from the previous case's stream would start from other data than the data in the table (lesson 13.3).
 8. Because the tests are to check the same function that the application program uses. A fix in `rules.cpp` then reaches both programs, while a test of a copy would check only the copy (lesson 13.4).
 9. Because the test program returns 1 when it detects a mismatch. Before the function is fixed, that is exactly the result you expect: the evidence that the test detects the bug.
 10. Both programs have to be built and the same tests run, without changing the expected results: all of them should give `PASS`, with exit code 0. That doesn't prove correctness for all data, only that the checked cases show no mismatch.

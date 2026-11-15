@@ -28,7 +28,7 @@ After this lesson you will:
 - end the handling of a state with `return` when the function should return its result right away, or with `break` when the function still has something to do after the `switch`;
 - recognise fallthrough to the next label when a `break` is missing, and catch it with a test;
 - decide deliberately whether a `switch` needs a `default` label;
-- tell a compile error, a compiler warning and a bug in behaviour, which only a test catches, apart.
+- tell apart a compile error, a compiler warning and a bug in behaviour, which only a test catches.
 
 ## 1. The same choice in one place: `switch`
 
@@ -76,7 +76,7 @@ std::string status_text(OrderStatus status) {
 - `switch (status)` starts the `switch` statement. The parentheses hold the value by which the program chooses what to do. Here it's the variable `status`. The program evaluates it once, at the start.
 - The braces after the parentheses enclose the whole body of the `switch`.
 - `case OrderStatus::received:` is a **`case` label**. It names one value and marks the place where the program starts when `status` has exactly that value. After the word `case` comes the name of the value together with the name of the type, as in lesson 14.1, and the label ends with a **colon**, not a semicolon.
-- Below the label stand the statements for this value. Here it's one statement, `return "received";`. As in lesson 5.4, `return` ends the whole function right away and hands over its result.
+- Below the label are the statements for this value. Here it's one statement, `return "received";`. As in lesson 5.4, `return` ends the whole function right away and hands over its result.
 - Each of the three states has a label of its own. We indent the labels one level deeper than `switch`, and the statements below them one level more, so you can see what belongs to which label.
 - **After the `switch` comes `return "unknown";`**, the same fallback as in lesson 14.1. Each of the three states has its label and ends the function earlier. The function still has a path on which no label matches, though: then the program skips the whole body of the `switch` and reaches this line. A function that promises a result must return one on every path (lesson 5.4), this one too.
 
@@ -154,7 +154,7 @@ For `status_text(OrderStatus::preparing)` the program evaluates `status`, finds 
 
 **A label isn't an `if`.** In a chain of `if`s each condition has its own block in braces. The program checks the conditions in turn and runs the block of the one that holds. In a `switch` the program only chooses **the place where it starts**. A `case` label has no braces of its own and closes nothing: it's a marker of a place in the code. Once execution has started, the program doesn't check the following labels. If it reaches the next label, it passes it and runs the statements below it.
 
-In `status_text` this causes no trouble, because below each label stands a `return`, which ends the whole function before the program reaches the next label. In section 3 you'll see a function where the labels must end differently.
+In `status_text` this causes no trouble, because below each label there's a `return`, which ends the whole function before the program reaches the next label. In section 3 you'll see a function where the labels must end differently.
 
 **The key rule of this lesson:** a `switch` chooses where to start. A `case` label doesn't end the handling of a state by itself. You write the end explicitly, for example with `return` or `break`.
 
@@ -194,10 +194,10 @@ std::string next_step(OrderStatus status) {
 ```
 
 - `std::string action{"unknown"};` creates a variable for the result. It starts from the fallback text, like `status_text`: if no label matched, the `switch` wouldn't change `action`, and the function would return `"unknown"`.
-- Below each label stand two statements: the assignment of a text and `break;`.
+- Below each label are two statements: the assignment of a text and `break;`.
 - **`break;` exits the `switch`.** The program leaves its body and goes to the first statement after the closing brace of the `switch`. Here that's `return action;`.
 - **`break` doesn't end the function.** It ends only the `switch`. Only `return action;` ends the function.
-- In this lesson `break` always stands inside a `switch`, and it ends that `switch`.
+- In this lesson `break` is always inside a `switch`, and it ends that `switch`.
 
 **What happens to `action` after `break`?** Nothing: the variable keeps the text that the label assigned. For `OrderStatus::preparing` the program assigns `"Pack order"`, `break` ends the `switch`, and `return action;` returns `"Pack order"`. `break` erases nothing and doesn't stop the program. It only changes the place where the program carries on.
 
@@ -431,7 +431,7 @@ It still has three labels and three assignments, and each line on its own looks 
 <details>
 <summary>What happens and how to fix it: open after steps 1–5</summary>
 
-**Stage:** the program's behaviour. The program builds: every line is valid C++. With the settings of lesson 0.5, Clang reports neither an error nor a warning. We check this program automatically with additional warnings too, treated as errors, and it still builds without a word. Some compilers can warn about fallthrough to the next label, but only with suitable settings. Don't rely on that: no warning doesn't mean that the function is correct.
+**Stage:** the program's behaviour. The program builds: every line is valid C++. With the settings of lesson 0.5, Clang reports neither an error nor a warning. We check this program automatically with additional warnings too, treated as errors, and it still builds without a word. Some compilers can warn about fallthrough to the next label, but only with suitable settings. Don't rely on that: the absence of a warning doesn't mean that the function is correct.
 
 **What happens for `OrderStatus::received`:**
 
@@ -456,7 +456,7 @@ This is **fallthrough** to the next label: without `break`, execution doesn't en
 | `next_step(OrderStatus::sent)` | `"Track delivery"` | `"Track delivery"` | `PASS` |
 | `status_text` for the three states | as in the table of section 4 | unchanged | `PASS` |
 
-For `preparing` and `sent` the program starts lower down, at their own labels, and reaches their own `break`s. The missing `break` stands higher up, so it doesn't affect these states. That's why the bug shows in one test only. A suite that checked `next_step` only for `preparing` and `sent` would pass completely (lesson 13.2).
+For `preparing` and `sent` the program starts lower down, at their own labels, and reaches their own `break`s. The missing `break` is higher up, so it doesn't affect these states. That's why the bug shows in one test only. A suite that checked `next_step` only for `preparing` and `sent` would pass completely (lesson 13.2).
 
 The test program with the `break` removed, and no other change:
 
@@ -591,7 +591,7 @@ Keep in mind, though:
 - it's a **warning**, not an error: the program builds and runs, and only returns the fallback text for `cancelled`;
 - whether such a warning appears, and how it's worded, depends on the compiler and its settings;
 - with a setting that treats warnings as errors, the build stops, and the message starts with `error:` instead of `warning:`;
-- **no warning doesn't prove that every state is handled correctly.** The compiler only checks that every value has a label, not that the label does the right thing.
+- **the absence of a warning doesn't prove that every state is handled correctly.** The compiler only checks that every value has a label, not that the label does the right thing.
 
 This warning isn't checked automatically, so this code is only for reading.
 
@@ -634,7 +634,7 @@ sent
 unknown
 ```
 
-- `default:` usually stands at the end of the `switch`. It handles **every value that has no `case` label of its own**.
+- `default:` usually comes at the end of the `switch`. It handles **every value that has no `case` label of its own**.
 - `default` is **optional**. The earlier functions of this lesson don't have one, and they work correctly.
 - Here the fallback has moved inside the `switch`. Every path through the `switch`, the one through `default` too, ends with a `return`, so there's no final `return` after the `switch` any more.
 - **The compiler stays silent.** `cancelled` has no label of its own, but it goes to `default`, so from the compiler's point of view every value is handled. The warning about an unhandled value doesn't appear, and the program builds and returns `unknown` for a cancelled order.
@@ -737,7 +737,7 @@ You don't have to run any other versions. If you like, also check what happens w
 
 - [ ] The program builds as C++20, and `CMakeLists.txt` is the one from lesson 0.5.
 - [ ] `ParkingSpace` is an `enum class` type with the four values of the contract.
-- [ ] `space_text` uses a `switch`: each label ends the function with `return`, and the fallback stands after the `switch`.
+- [ ] `space_text` uses a `switch`: each label ends the function with `return`, and the fallback comes after the `switch`.
 - [ ] `parking_instruction` uses a `switch`: each label assigns a text and exits the `switch` with `break`, and the function has one `return`, after the `switch`.
 - [ ] Both functions have a `case` label for each of the four values, no value is repeated, and the texts agree with the table letter for letter.
 - [ ] No label falls through to the next one by accident.
@@ -767,7 +767,7 @@ In `space_text` the result for a given state is known right away, below the labe
 <details>
 <summary>Hint 3: the diagnostic</summary>
 
-Suppose that below the label `reserved` the program has already assigned a text, but doesn't meet a `break`. Which statement stands lower down, below the next label? What happens to the text that's already in the variable, and what does the function return in the end? Which of your checks will notice it, and which will pass unchanged?
+Suppose that below the label `reserved` the program has already assigned a text, but doesn't meet a `break`. Which statement is lower down, below the next label? What happens to the text that's already in the variable, and what does the function return in the end? Which of your checks will notice it, and which will pass unchanged?
 
 </details>
 
@@ -776,7 +776,7 @@ Suppose that below the label `reserved` the program has already assigned a text,
 | What you see | What it means | What to do |
 |---|---|---|
 | An error with `expected ':' after 'case'` | The label ends with a semicolon instead of a colon. | End the label with a colon: `case ParkingSpace::reserved:`. |
-| An error with `use of undeclared identifier 'reserved'` | After `case` stands the name of a value without the name of the type. | Write `case ParkingSpace::reserved:`. |
+| An error with `use of undeclared identifier 'reserved'` | After `case` comes the name of a value without the name of the type. | Write `case ParkingSpace::reserved:`. |
 | An error with `duplicate case value` | Two labels have the same value, for example after copying (section 7). | Change the second one to the value that's missing. |
 | An error with `value of type 'OrderStatus' is not implicitly convertible to 'ParkingSpace'` | A label has a value of another type than the value in the parentheses of the `switch`, for example after copying from section 1. | Use a value of the type `ParkingSpace`. |
 | An error with `statement requires expression of integer type` at `switch` | The parentheses of the `switch` hold the text of a `std::string`. | `switch` works with whole numbers and enumeration types. Compare texts in a chain of `if`s, as in `parse_status` from lesson 14.1. |
@@ -789,7 +789,7 @@ Suppose that below the label `reserved` the program has already assigned a text,
 Answer in your own words, preferably in writing. Only then compare with the example answers.
 
 1. When is a `switch` more readable than several `if` conditions, and when do you stay with `if`?
-2. What stands in the parentheses of a `switch`, and what does the label `case OrderStatus::sent:` mean?
+2. What goes in the parentheses of a `switch`, and what does the label `case OrderStatus::sent:` mean?
 3. Does a `case` label end the execution of the statements below the previous label?
 4. What does `break` do, and what does `return` do? Where does the program carry on after each of them?
 5. What happens to the value of `action` in `next_step` after `break` runs?
@@ -955,8 +955,8 @@ Checks: 8, failed: 0
 
 Exit code: 0.
 
-- **`space_text`:** four labels, each ends the function with `return`, so none needs a `break`. The fallback stands after the `switch`.
-- **`parking_instruction`:** four labels, each assigns a text and exits the `switch` with `break`. The only `return` stands after the `switch` and returns what the label assigned.
+- **`space_text`:** four labels, each ends the function with `return`, so none needs a `break`. The fallback comes after the `switch`.
+- **`parking_instruction`:** four labels, each assigns a text and exits the `switch` with `break`. The only `return` comes after the `switch` and returns what the label assigned.
 - **The last `break`, below `closed`:** after it there's only the closing brace of the `switch`, so without it the result would be the same. It's still worth writing: if someone added another label below `closed`, the missing `break` would become a bug.
 - **Without `default`:** each of the four values has a label. If someone added a fifth state to the type, Clang could warn at both `switch`es. With `default` there'd be no warning, and the new state would quietly get the behaviour of `default`. In both versions, only a test of the new state reliably catches the oversight.
 
@@ -1062,7 +1062,7 @@ Exit code: 1.
 - **The compiler:** reports nothing. The program is valid C++.
 - **The run for `reserved`:** the label `reserved` assigns `"Reservation required"`, but has no `break`, so execution falls through to the label `occupied` and assigns `"Space occupied"`. Only the `break` below `occupied` ends the `switch`.
 - **The tests:** only `parking_instruction(reserved)` fails. `occupied` starts at its own label, and nothing changed in `space_text`.
-- **If your labels stand in another order,** the text of the label that stands below `reserved` in your code appears after `actual`. If `reserved` were the last one, removing its `break` wouldn't change anything: there's no statement after it.
+- **If your labels are in another order,** the text of the label that comes below `reserved` in your code appears after `actual`. If `reserved` were the last one, removing its `break` wouldn't change anything: there's no statement after it.
 
 **After the fix:** after restoring the `break`, the program is the same as the first version again. The same eight checks print `PASS` and `Checks: 8, failed: 0`, and the exit code is 0.
 

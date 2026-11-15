@@ -13,7 +13,7 @@ This lesson assumes that you:
 - read lines with `std::getline`, and know from lesson 7.4 that an empty line is a successful read with an empty text, while a failed read means that there was no line left;
 - remember from lessons 4.6 and 7.4 that reading the last line can succeed although the stream has already reached the end of the data, so `fail()` decides whether a read succeeded;
 - write a counter that starts at 0 and grows by 1 (lesson 4.2);
-- pass an existing object to a function by a reference without `const`, so that the function can change it, also a vector (lessons 9.1 and 9.3);
+- pass an existing object to a function by a reference without `const`, so that the function can change it, a vector included (lessons 9.1 and 9.3);
 - know the program of lesson 12.2, its data contract and case I, where an empty line between shipments ended the reading;
 - open a file with `std::ifstream`, check opening with `fail()`, create a data file in a project and check the **Working directory** field (lesson 12.1).
 
@@ -31,7 +31,7 @@ After this lesson you will:
 - report an empty line, an invalid status and an incomplete record with a line number, without a partial report;
 - read a last line without a line end correctly.
 
-## 1. The starting point: data that disappear
+## 1. The starting point: data that disappears
 
 In lesson 12.2, section 6, the shipments program got this file, `shipments.txt`:
 
@@ -54,7 +54,7 @@ Total boxes: 4
 There was no message, and `South Depot` didn't make it into the report. Answer on paper before you read on:
 
 1. Had the file ended when the program stopped reading?
-2. Were all the data read?
+2. Was all the data read?
 3. Why didn't the program report an error?
 4. How would the program know that the empty line means the end of the data, and not a mistake in the file?
 5. What should the program do if it has to process the whole file?
@@ -87,7 +87,7 @@ The program of lesson 12.2 wasn't wrong: it worked correctly for data that follo
 - **A last line without a line end (without a trailing newline) is a successful read too.** In the file `Basil\nwatered`, the second call delivers `watered` and reaches the end of the file: `eof()` already gives `true`, but `fail()` gives `false`. Only the third call fails. That's why the program doesn't ask, before reading, whether the file has ended. It tries to read a line first, and then checks `fail()`.
 - **We treat a failed read as the end of the file.** That's what it is in an ordinary text file that has been opened. Rare failures, such as a disk error, also give a failed read, but recognising them is beyond this lesson.
 
-**Why no numbers?** Before a number, `>>` skips whitespace, line ends included (lesson 2.6). If an empty line stood between a name and its number, `>>` would skip it without a trace: the program wouldn't notice the empty line, and would count the numbers of the following lines wrongly. To see every line, you have to read it whole with `std::getline`. A line holding a number would then have to be turned into a number, which we can't do yet. That's why both fields of a record are text in this lesson, and the program isn't a corrected version of the shipments program. We change the data format in order to improve the way the file is read and its structure is checked.
+**Why no numbers?** Before a number, `>>` skips whitespace, line ends included (lesson 2.6). If there were an empty line between a name and its number, `>>` would skip it without a trace: the program wouldn't notice the empty line, and would count the numbers of the following lines wrongly. To see every line, you have to read it whole with `std::getline`. A line holding a number would then have to be turned into a number, which we can't do yet. That's why both fields of a record are text in this lesson, and the program isn't a corrected version of the shipments program. We change the data format in order to improve the way the file is read and its structure is checked.
 
 ## 3. The new data contract
 
@@ -331,7 +331,7 @@ Basil
 Incomplete record on line 1
 ```
 
-These are the second steps of section 4: reading the status fails, and the counter stays at 1.
+This is the second set of steps in section 4: reading the status fails, and the counter stays at 1.
 
 </details>
 
@@ -436,7 +436,7 @@ Basil: watered
 Watered total: 1
 ```
 
-`std::getline` delivers `watered` and reaches the end of the file, but `fail()` gives `false`, so the record is complete. The next read of a name fails: that's a valid end of the data. The same file with a line end after `watered` gives exactly the same report (case K below). A file without a line end at the end happens easily, when you don't press **Enter** after the last word. You don't have to prepare such a file.
+`std::getline` delivers `watered` and reaches the end of the file, but `fail()` gives `false`, so the record is complete. The next read of a name fails: that's a valid end of the data. The same file with a line end after `watered` gives exactly the same report (case K below). A file without a line end at the end comes about easily when you don't press **Enter** after the last word. You don't have to prepare such a file.
 
 </details>
 
@@ -463,7 +463,7 @@ The first line end after `watered` ends line 2. The second creates line 3, an em
 
 </details>
 
-**J: an invalid status in the second record.** It's the file of the steps in section 4.
+**J: an invalid status in the second record.** It's the file traced in section 4.
 
 <!-- run: watering -->
 
@@ -498,7 +498,7 @@ Where the file can end, and what the program prints then:
 | after an empty line that follows a status | I | `Empty line 3` |
 
 <details>
-<summary>More control cases: open after your predictions</summary>
+<summary>The other check cases: open after your predictions</summary>
 
 All these cases are checked automatically. The results follow from the contract of section 3.
 
@@ -867,7 +867,7 @@ You decide on your own:
 7. in what order it checks for an empty line and for an allowed status;
 8. how to prevent a partial report;
 9. whether a last record without a line end needs code of its own;
-10. which files will test an empty file, a missing file and an error in a later record.
+10. with which files to check an empty file, a missing file and an error in a later record.
 
 **Cases A–J.** Each case is different contents of `chores.txt`, or no file.
 
@@ -1058,7 +1058,7 @@ After each `std::getline` there are two different questions. Did the read succee
 <details>
 <summary>Hint 2: the numbering</summary>
 
-The counter says how many lines have been read so far. Grow it after every successful `std::getline`, also after reading a status, not once per record. After a failed read, leave it unchanged: then it points to the last line that exists.
+The counter says how many lines have been read so far. Grow it after every successful `std::getline`, including after reading a status, not once per record. After a failed read, leave it unchanged: then it points to the last line that exists.
 
 </details>
 
@@ -1071,16 +1071,16 @@ A failed read of the status after a non-empty name is an incomplete record. Chec
 
 An example solution is in [Example solutions](#example-solutions).
 
-## 9. When something goes differently
+## 9. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
 | `Incomplete record on line 2` instead of `line 1` | The counter also grows after a failed read, for example right after `std::getline`, before `fail()` is checked. | Grow the counter only when you know that the read succeeded. |
-| `Invalid line 2` instead of `Invalid line 4` | The program counts records, not lines, or grows the counter once per record. | Grow the counter after every successful `std::getline`, also after reading a status. |
+| `Invalid line 2` instead of `Invalid line 4` | The program counts records, not lines, or grows the counter once per record. | Grow the counter after every successful `std::getline`, including after reading a status. |
 | An empty line gives a report instead of `Empty line N` | The loop condition still has `!name.empty()` from lesson 12.2 (section 7). | Only a failed read of a name ends the loop. Check for an empty name in the loop body. |
 | An empty status gives `Invalid line N` instead of `Empty line N` | The check of the allowed word comes before the check for an empty line. | Check `empty()` first, then the allowed word. |
 | The last record without a line end disappears or gives an error | The program checks `eof()` instead of whether the read succeeded. After a successful read of the last line, `eof()` may already give `true` (section 2). | `fail()` after a read decides whether a line has been read. |
-| `Invalid line N`, although the status looks right | The line has a character you can't see: a space at the end, a capital letter, or, in a file from Windows read on Linux or macOS, a `\r` character before the line end. | Correct that line. Create a file from another system again in CLion, and retype the data. |
+| `Invalid line N`, although the status looks right | The line has a character you can't see: a space at the end, a capital letter, or, in a file from Windows read on Linux or macOS, a `\r` character before the line end. | Correct that line. Recreate a file that comes from another system in CLion, and retype the data. |
 | Part of the report comes before the error message | The program prints records while reading. | Read the whole file first, and print the report only after `true`. |
 | `Cannot open chores.txt`, although the file exists | The file isn't in the working directory, or has another name. | Follow the steps of lesson 12.1, section 7: the name, the case of letters, **Working directory**, where the file is. |
 
@@ -1111,7 +1111,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 7. Because `std::getline` reads the characters up to the end of the file and gives `fail()` equal to `false`. A set `eof()` only means that the stream has reached the end of the file. Only the next read fails, where a name would be, and that's a valid end of the data.
 8. Because before a value `>>` skips whitespace, line ends included. It can skip an empty line without a trace, and the program doesn't know how many lines it has passed. That's why we read every line whole with `std::getline`.
 9. Because a partial report would look like a full one. Someone could use it, not knowing that part of the data wasn't checked or read. An error message says clearly: the file must be corrected.
-10. Because it knows only one format: two lines per record and two fixed status words. It stops at the first error and reads no further, doesn't trim spaces, and doesn't turn text into numbers. It works correctly for data that follow its contract, and a file with another structure would need other checks.
+10. Because it knows only one format: two lines per record and two fixed status words. It stops at the first error and reads no further, doesn't trim spaces, and doesn't turn text into numbers. It works correctly for data that follows its contract, and a file with another structure would need other checks.
 
 </details>
 
@@ -1135,7 +1135,7 @@ In [lesson 12.4: Cinema screenings (the Module 12 test)](lesson_04_cinema_screen
 Look here **after your own attempt**. Your names may differ, as long as the standard output is the required one.
 
 <details>
-<summary>Section 8: mission, a chore log</summary>
+<summary>Section 8: the mission, a chore log</summary>
 
 **`main.cpp`**:
 
@@ -1281,7 +1281,7 @@ Done total: 2
 | I | `Clean tables`, `done` without a line end | 1 chore, `Done total: 1` |
 | J | `Clean tables`, `done`, `Clean tables`, `pending` | 2 chores, `Done total: 1` |
 
-More control cases, checked automatically:
+The other check cases, checked automatically:
 
 **K: one chore,** with the status `pending`.
 
@@ -1393,7 +1393,7 @@ Fold laundry
 Incomplete record on line 7
 ```
 
-**Q: an empty line between chores.** More data follow it, but the result is the same as in H.
+**Q: an empty line between chores.** More data follows it, but the result is the same as in H.
 
 <!-- run: chores -->
 

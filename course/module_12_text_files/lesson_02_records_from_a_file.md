@@ -1025,7 +1025,7 @@ Najpierw odczytaj liczbę do zmiennej lokalnej i sprawdź `fail()`, potem zakres
 <details>
 <summary>Podpowiedź 3: koniec danych i plik</summary>
 
-Rozróżnij cztery sytuacje: plik, którego nie udało się otworzyć (sprawdź zaraz po utworzeniu strumienia); koniec pliku albo pusta linia w miejscu tytułu (koniec danych, raport); koniec pliku po niepustym tytule (`Input error`); poprawny wpis (`push_back`, dokończenie linii liczbowej i następny tytuł). Odczyt tytułu i warunek pętli są takie jak w `main` z punktu 3.
+Rozróżnij cztery sytuacje: plik, którego nie udało się otworzyć (sprawdź zaraz po utworzeniu strumienia); koniec pliku albo pusta linia w miejscu tytułu (zakończenie danych, raport); koniec pliku po niepustym tytule (`Input error`); poprawny wpis (`push_back`, dokończenie linii liczbowej i następny tytuł). Odczyt tytułu i warunek pętli są takie jak w `main` z punktu 3.
 
 </details>
 

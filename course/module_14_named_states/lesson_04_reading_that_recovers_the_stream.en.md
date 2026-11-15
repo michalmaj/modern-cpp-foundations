@@ -19,7 +19,7 @@ This lesson assumes that you:
 
 A ticket machine asks how many tickets someone wants: from 1 to 6. People make mistakes. Someone types `abc`, someone `9`, someone `3 tickets`, and someone presses Enter without typing anything. The program has to say what's wrong, let the person try again, and end by itself when there's no more data. It isn't a real sales system: you practise reading on this machine.
 
-In lesson 4.6 such a read stood in a loop in `main`. Here it goes into a function that returns a named result every time and prepares the stream for the next attempt by itself.
+In lesson 4.6 such a read was in a loop in `main`. Here it goes into a function that returns a named result every time and prepares the stream for the next attempt by itself.
 
 You'll answer the question: **how do you write a reading function that lets you try again after a bad entry, doesn't lose the last number, and doesn't loop forever when the data runs out?**
 
@@ -27,7 +27,7 @@ After this lesson you will:
 
 - tell apart four results of a read: `accepted`, `out_of_range`, `invalid_input` and `end_of_input`;
 - explain what `clear()` repairs and what `ignore` removes, and why a failed read needs both;
-- recognise the end of the data before you try to read the next number, also when the last number has no line end;
+- recognise the end of the data before you try to read the next number, even when the last number has no line end;
 - read into a local variable and leave the result parameter unchanged on a refusal;
 - handle the results with a `switch` statement and end the loop after `end_of_input`;
 - test whole sequences of reads on one stream.
@@ -223,7 +223,7 @@ One more small thing: when the accepted number was the last character of the dat
 
 ## 4. The function `read_number`
 
-The four possible endings of a read get their own names:
+The four possible outcomes of a read get their own names:
 
 <!-- fragment -->
 ```cpp
@@ -264,7 +264,7 @@ ReadResult read_number(std::istream& input, int minimum, int maximum, int& resul
 | `3` | `accepted`, value 3 | |
 | `3.5` | `accepted`, value 3 | `>>` reads 3 and stops at the dot; `.5` is discarded |
 | `3 tickets` | `accepted`, value 3 | ` tickets` is discarded |
-| `2 5` | `accepted`, value 2 | `5` stands on the same line, so it's discarded |
+| `2 5` | `accepted`, value 2 | `5` is on the same line, so it's discarded |
 | `12abc` | `out_of_range` | the read gives 12, and 12 is out of the range |
 | `abc` | `invalid_input` | there's no number at the start of the entry |
 
@@ -333,7 +333,7 @@ ReadResult read_number(std::istream& input, int minimum, int maximum, int& resul
 | 3 | `if (input.eof())` | there's no next entry: `end_of_input` |
 | 4 | `input >> value;` | the read into a local variable |
 | 5 | `if (input.fail())` | the read failed. `fail()` gives `true` for a failed source too, so `bad()` comes first: a failure ends reading without recovery. An ordinary bad entry: `clear()`, discarding the rest of the line, `invalid_input` |
-| 6 | `discard_rest_of_line(input);` after a successful read | the rest of the line is gone, also after a valid number |
+| 6 | `discard_rest_of_line(input);` after a successful read | the rest of the line is gone, even after a valid number |
 | 7 | the range check | a number out of the range: `out_of_range`, `result` unchanged |
 | 8 | `result = value;` | only now: `accepted` |
 
@@ -536,7 +536,7 @@ void check_read_result(const std::string& name, ReadResult expected, ReadResult 
 }
 ```
 
-The start of scenario S1. The call of `read_number` stands directly in the argument, like the call of the tested function in lesson 13.1. The check of `tickets` on the next line already sees the state after that call:
+The start of scenario S1. The call of `read_number` is directly in the argument, like the call of the tested function in lesson 13.1. The check of `tickets` on the next line already sees the state after that call:
 
 <!-- fragment -->
 ```cpp
@@ -1312,7 +1312,7 @@ Create a folder `survey_ratings` in `cpp-workspace`, copy `main.cpp` and `CMakeL
 4. **This is the fourth required run:** run the test program. Every check should print `PASS`, and the exit code should be 0.
 5. **A deliberate bug.** In `read_number`, write `input >> result;` instead of `int value{0};` and `input >> value;`, use `result` instead of `value` in the range check, and delete the line `result = value;`. Don't change the tests or the expected results. **This is the fifth required run:** run the tests, write down the `FAIL` lines, the summary and the exit code, and compare them with your prediction from step 1. Then restore the local variable and run the same tests again.
 
-If you want, also write a program that reads ratings from the keyboard with `count_ratings(std::cin)` and prints the counts. This step is optional, and an example is in the sample solution.
+If you want, also write a program that reads ratings from the keyboard with `count_ratings(std::cin)` and prints the counts. This step is optional, and an example is in the example solution.
 
 ### Success criteria
 
@@ -1354,7 +1354,7 @@ When should the loop in `count_ratings` end, and why isn't the end of the data a
 </details>
 
 <details>
-<summary>The full list of control scenarios: open after making your own table</summary>
+<summary>The full list of check scenarios: open after preparing your own table</summary>
 
 Reading scenarios, range 1–5, the rating −1 at the start:
 
@@ -1375,9 +1375,9 @@ Your table doesn't have to have exactly these scenarios. It must have every kind
 
 </details>
 
-The sample solution is in [Sample solutions](#sample-solutions).
+An example solution is in [Example solutions](#example-solutions).
 
-## 9. When something goes differently
+## 9. When something goes wrong
 
 | What you see | What it means | What to do |
 |---|---|---|
@@ -1385,7 +1385,7 @@ The sample solution is in [Sample solutions](#sample-solutions).
 | The mission's test program doesn't end | The loop in `count_ratings` waits for `end_of_input`, and for the same reason as above every attempt gives `invalid_input`. | Stop the program and check the recovery in `read_number`. |
 | The last number without a line end gives `end_of_input` instead of `accepted` | The function checks `eof()` after reading the number (section 7, the optional variant). | Check the end of the data before reading the number, after `input >> std::ws`. |
 | The last bad entry without a line end gives `end_of_input` instead of `invalid_input` | The function recognises the end of the data after a failed read (section 3). | As above: the end of the data before the read, and only `fail()` after it. |
-| After a refusal the result variable has another value, for example 0 | The read goes straight into `result`, or the assignment stands before the range check. | Read into a local variable and assign only on `accepted`. |
+| After a refusal the result variable has another value, for example 0 | The read goes straight into `result`, or the assignment comes before the range check. | Read into a local variable and assign only on `accepted`. |
 | `3 tickets` gives two results: `accepted` and `invalid_input` | After a successful read, discarding the rest of the line is missing, so ` tickets` goes into the next attempt. | Call `discard_rest_of_line(input);` after a successful read too. |
 | `abc` gives three `invalid_input` results | `ignore()` without arguments takes only one character. | Use the full form with `std::numeric_limits<std::streamsize>::max()` and `'\n'`. |
 | `3.5` is accepted as 3 | That's how this function works: it reads the number at the start of the entry and discards the rest of the line (section 4). | That's intended. A strict check of the whole entry isn't part of this lesson. |
@@ -1395,7 +1395,7 @@ The sample solution is in [Sample solutions](#sample-solutions).
 
 ## 10. Explain
 
-Answer in your own words, preferably in writing. Only then compare with the sample answers.
+Answer in your own words, preferably in writing. Only then compare with the example answers.
 
 1. What does `clear()` repair, and what doesn't it repair?
 2. Why does a failed read need both `clear()` and discarding the rest of the line? What happens when one of them is missing?
@@ -1411,12 +1411,12 @@ Answer in your own words, preferably in writing. Only then compare with the samp
 12. In the mission, reading straight into `result` didn't change any counter. Why didn't the counting tests detect it, and what did?
 
 <details>
-<summary>Sample answers</summary>
+<summary>Example answers</summary>
 
 1. It repairs the stream state: it removes the flag of a failed read, so further reads can succeed again. It removes no character, creates no data and changes no variable. The bad text still waits in the input.
 2. Because there are two obstacles: the error state and the bad text. Without `clear()` the stream stays in the error state, and `ignore` takes nothing, so every read fails at once. Without discarding the rest of the line the state is normal, but the next read meets the same text. In both cases a program with a loop would repeat the same message forever.
 3. It's the largest value of the type the library uses to count characters. For `ignore` this value means no limit, so `ignore` takes characters up to the end of the line or the end of the data. `ignore()` without arguments takes one character: after `abc`, `bc` is left, and the next attempts meet the next letters.
-4. `std::ws` removes only the whitespace before an entry, empty lines included, and stops at the first other character. Discarding the rest of the line removes all characters up to the end of the current line, bad text included. `std::ws` stands at the start of every attempt, and discarding the rest of the line after every attempt that found an entry.
+4. `std::ws` removes only the whitespace before an entry, empty lines included, and stops at the first other character. Discarding the rest of the line removes all characters up to the end of the current line, bad text included. `std::ws` comes at the start of every attempt, and discarding the rest of the line after every attempt that found an entry.
 5. Because after the read `eof()` doesn't say whether the read succeeded. A successful read of the last number without a line end also reaches the end of the data, and a failed read that reached the end looks the same as no data. Before the read, after `std::ws`, `eof()` answers one question: is there another entry?
 6. Because `>>` reads 4 and only then reaches the end of the data. `fail()` gives `false`, so the read succeeded, and `eof()` only says there's nothing after it. The first call returns `accepted` with the value 4, the next one `end_of_input`, and the one after that `end_of_input` again.
 7. Because `abc` is an entry, only a bad one. Reading the number stops at `a` and doesn't reach the end of the data, so the function recovers the stream and reports `invalid_input`. Only discarding the rest of the line reaches the end. If the function reported the end of the data straight away, the last bad entry would vanish and nobody would learn about it.
@@ -1443,9 +1443,9 @@ This was the last lesson of Module 14 with new skills. You will combine all of t
 
 ---
 
-## Sample solutions
+## Example solutions
 
-Look here **after your own attempt**. Your check names, variable names, choice of scenarios and their order may differ, as long as they meet the contract and the checklist.
+Look here **after your own attempt**. Your check names, variable names, choice of scenarios and their order may differ, as long as they meet the contract and the success criteria.
 
 <details>
 <summary>Section 8: the mission, survey ratings</summary>
@@ -2026,7 +2026,7 @@ Invalid entries: 1
 
 The empty line isn't counted, `abc` is a bad entry, and `9` is off the scale.
 
-**Self-assessment.** Compare your work with the checklist in section 8. In particular, check:
+**Self-assessment.** Compare your work with the success criteria in section 8. In particular, check:
 - whether your table was made before the code and has every required kind of scenario, including the last rating and the last bad entry without a line end;
 - whether every scenario has its own stream, and the successive calls within a scenario use the same one;
 - whether after every call of `read_number` you check both the result and the rating;

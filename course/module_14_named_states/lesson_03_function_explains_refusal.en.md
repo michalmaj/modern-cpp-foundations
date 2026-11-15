@@ -25,7 +25,7 @@ You'll answer the question: **how should a function say why it refused, and how 
 After this lesson you will:
 
 - recognise when `bool` isn't enough, because a refusal has several different reasons;
-- design an `enum class` type whose values name every possible ending of an operation, and return it from a function;
+- design an `enum class` type whose values name every possible outcome of an operation, and return it from a function;
 - handle each result separately in the calling code, with a `switch` statement;
 - keep the operation result apart from its effect, the change to the data passed by `&`, and make sure a refusal changes nothing;
 - check the named result and the state of the data after the call separately in tests;
@@ -69,7 +69,7 @@ if (!accepted) {
 }
 ```
 
-That works, but the rule now stands in two places: in the function and in `main`. If someone changes it in the function, for example to refuse requests of fewer than 2 units, and forgets `main`, the report for a request of 1 gives the wrong reason: `Not enough stock`, although there are enough goods. The function checks the conditions, so the function itself should know the reason for a refusal and report it.
+That works, but the rule is now in two places: in the function and in `main`. If someone changes it in the function, for example to refuse requests of fewer than 2 units, and forgets `main`, the report for a request of 1 gives the wrong reason: `Not enough stock`, although there are enough goods. The function checks the conditions, so the function itself should know the reason for a refusal and report it.
 
 ## 2. A named result and the contract
 
@@ -341,7 +341,7 @@ The text is only for printing. The program compares results as `IssueResult` val
 
 Each call to `issue_units` has two properties to check: **the named result** and **the state after the call**. You check them separately, because a function can get one wrong and the other right.
 
-Two check functions are needed. `check_int` from lesson 13.3 compares the stock. `check_issue_result` compares two `IssueResult` values with `==`, and turns them into text with `issue_result_text` for the `FAIL` line. It's built like `check_status` from lesson 14.1:
+Two checking functions are needed. `check_int` from lesson 13.3 compares the stock. `check_issue_result` compares two `IssueResult` values with `==`, and turns them into text with `issue_result_text` for the `FAIL` line. It's built like `check_status` from lesson 14.1:
 
 <!-- fragment -->
 ```cpp
@@ -949,7 +949,7 @@ So for an inactive card and an amount of 0, the result is `inactive_card`, not `
 - Each check appears in the function once.
 - The test program compares the result as a `TopUpResult` value, not as text. The text of the result is only for the `FAIL` lines. It comes from the function `std::string top_up_result_text(TopUpResult result)`, written with a `switch` with a `case` label for each of the four values and the fallback `"unknown"`. Check it for each value, like `issue_result_text` in section 6. The texts are the names of the values: `"added"`, `"inactive_card"`, `"invalid_amount"`, `"limit_exceeded"`.
 - Each case has its own `Card` object with the starting state from your table.
-- For each case you check three things: the result, the balance after the call and the field `active` after the call. For the result, write a check function for `TopUpResult`, like `check_issue_result`. You can copy `check_int`, `check_bool` and `check_text` from lesson 13.3.
+- For each case you check three things: the result, the balance after the call and the field `active` after the call. For the result, write a checking function for `TopUpResult`, like `check_issue_result`. You can copy `check_int`, `check_bool` and `check_text` from lesson 13.3.
 
 In `cpp-workspace`, create a folder `card_top_up`, copy `main.cpp` and `CMakeLists.txt` from the original `lesson_05_first_program` into it, and open it in CLion. Write everything in the one file `main.cpp`. Leave `CMakeLists.txt` unchanged.
 
@@ -964,11 +964,11 @@ In `cpp-workspace`, create a folder `card_top_up`, copy `main.cpp` and `CMakeLis
    - two cases in which two reasons for refusal apply at once: an inactive card with an invalid amount, and an active card with an invalid amount for which the balance after the top-up would also exceed the limit;
    - the balance and `active` after the call for each case.
 
-   Under the table, write a prediction: which checks will fail, and what will they print after `actual`, when the function starts refusing a top-up also when the balance after it would be exactly 100?
+   Under the table, write a prediction: which checks will fail, and what will they print after `actual`, when the function starts refusing a top-up even when the balance after it would be exactly 100?
 2. Define `TopUpResult` and `Card`, and write `top_up` and `top_up_result_text`.
-3. Write the test program: the check functions, the checks from your table, and at the end the summary and the exit code as in section 6.
+3. Write the test program: the checking functions, the checks from your table, and at the end the summary and the exit code as in section 6.
 4. **This is the fourth required run:** run the test program with the correct function. Every check should print `PASS`, and the exit code should be 0.
-5. **A deliberate bug.** In the limit condition in `top_up`, change `>` to `>=`, so that the function refuses a top-up also when the balance after it would be exactly 100. If your condition has another form, make a bug with the same meaning. Don't change the tests or the expected results. **This is the fifth required run:** run the tests, note the `FAIL` lines, the summary and the exit code, and compare them with your prediction from step 1. Then restore the correct condition and run the same tests again.
+5. **A deliberate bug.** In the limit condition in `top_up`, change `>` to `>=`, so that the function refuses a top-up even when the balance after it would be exactly 100. If your condition has another form, make a bug with the same meaning. Don't change the tests or the expected results. **This is the fifth required run:** run the tests, note the `FAIL` lines, the summary and the exit code, and compare them with your prediction from step 1. Then restore the correct condition and run the same tests again.
 
 You don't have to run any other versions. If you like, also check what happens when you swap the check of the card and the check of the amount in `top_up`: which of your cases will notice? It's discussed in the example solution.
 
@@ -993,7 +993,7 @@ When the output matches, you can save the project in Git, as in lesson 1.5: `mai
 <details>
 <summary>Hint 1: the kinds of result</summary>
 
-Which `TopUpResult` values describe every possible ending of the operation? For each of them, find the rule in the contract that gives it, and write at least one case with that result. Does each of the four values appear as an expected result in your table?
+Which `TopUpResult` values describe every possible outcome of the operation? For each of them, find the rule in the contract that gives it, and write at least one case with that result. Does each of the four values appear as an expected result in your table?
 
 </details>
 
@@ -1041,7 +1041,7 @@ An example solution is in [Example solutions](#example-solutions).
 
 | What you see | What it means | What to do |
 |---|---|---|
-| An error with `value of type 'TopUpResult' is not contextually convertible to 'bool'` | The call to `top_up` stands in an `if` condition, like a function returning `bool` (section 4). | Keep the result in a variable and compare it with a `TopUpResult` value, or handle it with a `switch`. |
+| An error with `value of type 'TopUpResult' is not contextually convertible to 'bool'` | The call to `top_up` is in an `if` condition, like a function returning `bool` (section 4). | Keep the result in a variable and compare it with a `TopUpResult` value, or handle it with a `switch`. |
 | An error with `invalid operands to binary expression` at `==` | The result is compared with text in quotes (section 4). | Compare it with a value, for example `TopUpResult::added`. |
 | A `FAIL` of the result with `expected inactive_card, actual invalid_amount` for an inactive card with an invalid amount | The function checks the amount before the card. | Put the checks in the order of the refusal precedence. |
 | A `FAIL` of the result with `expected invalid_amount, actual limit_exceeded` for an amount that's too large | The function checks the limit before the amount. | Check the limit only after the amount, following the refusal precedence. |
@@ -1059,7 +1059,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 1. How does a `bool` result differ from a named result? When does `bool` stop being enough?
 2. Why does an `enum class` describe several reasons for refusal better than text or a number?
 3. What does the parameter `int& stock` mean? Does returning a named result change the data by itself?
-4. Why must the data stay exactly as they were before the call after a refusal?
+4. After a refusal, why must the data stay exactly as it was before the call?
 5. Does a right named result guarantee a right state of the data? Give an example from this lesson.
 6. Why does the test compare with the exact result from the contract, and why isn't it enough to check that the result isn't `issued`?
 7. What does a `FAIL` of the check of the balance mean when the check of the result gives `PASS`?
@@ -1071,10 +1071,10 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 <details>
 <summary>Example answers</summary>
 
-1. A `bool` has two values, so it only answers whether the operation succeeded. A named result has as many values as there are different endings of the operation, and names each of them. `bool` stops being enough when the caller must react differently to different reasons for refusal, for example say whether the amount was wrong or the goods ran short.
+1. A `bool` has two values, so it only answers whether the operation succeeded. A named result has as many values as there are different outcomes of the operation, and names each of them. `bool` stops being enough when the caller must react differently to different reasons for refusal, for example say whether the amount was wrong or the goods ran short.
 2. Because the set of values is closed and known to the compiler. A typo in a value's name is a compile error (lesson 14.1), the result can't be mixed up with text or a number, and a `switch` can handle each value separately. The text `"insuficient"` with a typo or the number `2` doesn't say what it means, and the compiler can't check it.
 3. That the function gets access to the caller's variable, not a copy of it, so it can change that variable (lesson 9.1). Returning the result changes nothing: `return` only passes the `IssueResult` value. The stock is changed by a separate statement, `stock -= requested;`, which runs only on success.
-4. Because a refusal result means "the operation didn't happen". The caller then assumes the data are as they were before the call and, for example, reports the amount available in stock. If a refusal changed the data, that report and later operations would be wrong.
+4. Because a refusal result means "the operation didn't happen". The caller then assumes the data is as it was before the call and, for example, reports the amount available in stock. If a refusal changed the data, that report and later operations would be wrong.
 5. No. In the variant with `stock = 0;` the function returns the right `insufficient_stock`, but the stock drops from 7 to 0. That's why you check the result and the state separately.
 6. Because `invalid_amount` and `insufficient_stock` are different results, and the contract says which one must come back. A check "not `issued`" passes for both refusals, so it wouldn't catch the mistake from section 7.
 7. That the function ended with the right result but changed the data against the contract: it refused and changed the balance anyway, or changed it by the wrong amount on success. It's a bug in the effect, not in the result.
@@ -1087,8 +1087,8 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## Summary
 
-- `bool` only says whether an operation succeeded. When a refusal has several reasons and the caller must react to each differently, the function returns a **named result**: a value of an `enum class` type that names every possible ending of the operation.
-- **The result and the effect are two different things.** The result comes back through `return`. The effect is a change to the data passed by `&`, made only on success. After a refusal the data are exactly as they were before the call.
+- `bool` only says whether an operation succeeded. When a refusal has several reasons and the caller must react to each differently, the function returns a **named result**: a value of an `enum class` type that names every possible outcome of the operation.
+- **The result and the effect are two different things.** The result comes back through `return`. The effect is a change to the data passed by `&`, made only on success. After a refusal the data is exactly as it was before the call.
 - The calling code keeps the result in a variable and handles each value separately, for example with a `switch` statement. The result isn't compared with text or used as a `bool`.
 - A test checks the named result and the state of the data after the call separately, and compares the result with the exact value from the contract. You test the function that turns the result into text too.
 - When several reasons for refusal can apply at once, the contract sets the **refusal precedence**, and the function checks the conditions in that order. Only a case in which two reasons apply at once catches a wrong order.
@@ -1102,7 +1102,7 @@ In this lesson a function that changes data says with a named result why it refu
 
 ## Example solutions
 
-Look here **after your own attempt**. Your names of checks, names of variables, choice of cases and order of checks in the test program may differ, as long as they meet the contract and the checklist.
+Look here **after your own attempt**. Your names of checks, names of variables, choice of cases and order of checks in the test program may differ, as long as they meet the contract and the success criteria.
 
 <details>
 <summary>Section 8: the mission, topping up a card</summary>
@@ -1746,7 +1746,7 @@ Exit code: 1.
 - **G checks another pair of reasons:** the amount 51 is invalid, and the balance would go over the limit. This case doesn't catch a swap of the card check and the amount check, but it would catch a swap of the amount check and the limit check: the function would then return `limit_exceeded`.
 - **If your case with two reasons is another pair,** for example an inactive card with a full balance and an amount of 1, the swap of the card and the amount doesn't affect it, because the amount 1 is valid. Such a case catches a swap of the card check and the limit check instead. Each pair of reasons that can apply at once needs its own case.
 
-**Self-assessment.** Compare your work with the checklist in section 8. In particular, check:
+**Self-assessment.** Compare your work with the success criteria in section 8. In particular, check:
 - whether your table was made before the code and has all the required kinds of case, including a balance of exactly 100 and two reasons for refusal at once;
 - whether each case has its own `Card` object, and whether you check its result, balance and `active`;
 - whether you compare the result as a `TopUpResult` value, with the text used only for the `FAIL` line;

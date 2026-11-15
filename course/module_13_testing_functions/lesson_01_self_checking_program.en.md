@@ -11,7 +11,7 @@
 This lesson assumes that you:
 
 - know that `main` passes an exit code to the system, and that `0` conventionally means "everything is fine" (lesson 1.3);
-- write functions with parameters and a result, also functions with several `return` statements (lessons 5.2–5.4);
+- write functions with parameters and a result, including functions with several `return` statements (lessons 5.2–5.4);
 - know the test printouts of lesson 5.5: a few calls of a function with chosen arguments, and a comparison of the results with what you expected;
 - prepare a table of cases with expected results before you run a program (since Module 3);
 - pass text with `const std::string&` (lesson 7.3), and a variable to be changed by reference, like `int& error_line` in lesson 12.3 (lesson 9.1).
@@ -134,7 +134,7 @@ int main() {
 PASS
 ```
 
-The expected result `11` now stands in the code, and the program does the comparison. A person only reads the verdict:
+The expected result `11` is now in the code, and the program does the comparison. A person only reads the verdict:
 
 - **`PASS`** (a *passing test*): the actual result equals the expected one. For this case the function works according to the contract;
 - **`FAIL`** (a *failing test*): the results differ. The bug is in the function or in the test itself, for example in a wrongly worked-out expected result. The program doesn't know which. You find out by going back to the contract.
@@ -810,7 +810,7 @@ Exit code: 1. This is **a test detecting a bug**: the test program works correct
 - **Which test, and why:** only `print_cost(4)`. For 4 pages the buggy function calculates `2 * 4`, that is 8, while the contract gives 3 · 2 + 1 = 7.
 - **Why the others pass:** for 0–3 pages both versions take the same branch. For 5 and 10 pages the condition `pages <= 4` is false, so the same formula runs as in the correct function.
 - **Code 1:** `failed` is 1, so `main` returns 1.
-- **A lesson for later:** only the test for 4 pages detects this bug, that is, exactly at the boundary between the two prices. Without that test, all the others would pass. How to foresee such places, you'll see in the next lesson.
+- **A lesson for later:** only the test for 4 pages detects this bug, that is, exactly at the boundary between the two prices. Without that test, all the others would pass. You'll see how to foresee such places in the next lesson.
 
 </details>
 

@@ -24,7 +24,7 @@ Zajrzenie do podpowiedzi albo do wcześniejszych lekcji nie jest porażką. Waż
 - **pierwsze:** specyfikacja, część A, projekt w CLionie, program właściwy, pierwsza wersja programu testowego i wykrycie usterki;
 - **drugie:** uzupełnienie zestawu, poprawka, ponowne testy, część C, lista kontrolna i samoocena.
 
-**Możesz używać:** CLiona albo terminala, CMake i Ninja, jak dotąd; `CMakeLists.txt` z oryginalnego `lesson_05_first_program` i wzoru dwóch targetów z lekcji 13.4; funkcji sprawdzających z lekcji 13.1–13.3; sposobu tworzenia `std::istringstream` z lekcji 13.3; zasad podziału na pliki z Modułu 11; swoich wcześniejszych tabel przypadków. Debugger nie jest potrzebny. Wszystko, czego potrzebujesz, znasz z Modułów 1–13.
+**Możesz używać:** CLiona albo terminala, CMake'a i Ninja, jak dotąd; `CMakeLists.txt` z oryginalnego `lesson_05_first_program` i wzoru dwóch targetów z lekcji 13.4; funkcji sprawdzających z lekcji 13.1–13.3; sposobu tworzenia `std::istringstream` z lekcji 13.3; zasad podziału na pliki z Modułu 11; swoich wcześniejszych tabel przypadków. Debugger nie jest potrzebny. Wszystko, czego potrzebujesz, znasz z Modułów 1–13.
 
 Lekcje 13.1–13.4 traktuj jako przypomnienie zasad, a nie jako gotowy program do przepisania. Możesz świadomie przenieść fragmenty kodu, na przykład funkcje sprawdzające z lekcji 13.3 albo `CMakeLists.txt` z lekcji 13.4, ale plan, przypadki, wyniki oczekiwane i sposób wykazania błędu przygotuj samodzielnie. Jeśli adaptujesz wcześniejszy kod, zanotuj w samoocenie, skąd pochodzi, co przeniesiono, co zmieniono i jakie decyzje podjęto samodzielnie.
 

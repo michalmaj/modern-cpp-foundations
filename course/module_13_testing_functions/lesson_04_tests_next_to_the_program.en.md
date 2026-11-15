@@ -10,7 +10,7 @@
 
 This lesson assumes that:
 
-- you write a test program as in lessons 13.1–13.3: the expected result from the contract, a check function such as `check_int` or `check_bool`, counters of checks and failures, the summary `Checks: N, failed: F` and exit code 0 or 1;
+- you write a test program as in lessons 13.1–13.3: the expected result from the contract, a checking function such as `check_int` or `check_bool`, counters of checks and failures, the summary `Checks: N, failed: F` and exit code 0 or 1;
 - you build a program from several files: declarations in a `.hpp` header with `#pragma once`, definitions in a `.cpp` file that includes this header, and every `.cpp` file listed in `add_executable` (lessons 11.1–11.4);
 - you tell a compile error from a link error, and you know that two definitions of the same function in two `.cpp` files are reported by the linker (lesson 11.4);
 - after changing `CMakeLists.txt`, you reload the CMake project in CLion (lesson 11.1);
@@ -189,7 +189,7 @@ int main() {
 - **This file has no definition of `parking_fee`.** Every call `parking_fee(...)` goes to the function in `rules.cpp`, the same one that `main.cpp` uses.
 - The expected results are numbers from the contract of lesson 13.1, not calls of the function and not a copy of its formula (lesson 13.1, section 9):
 
-| Case | `hours` | Expected result | Why |
+| Case | `hours` | Expected result | Where it comes from |
 |---|---:|---:|---|
 | A | 0 | 0 | no parking |
 | B | 1 | 5 | the first hour |
@@ -229,9 +229,9 @@ set_target_properties(function_tests PROPERTIES CXX_EXTENSIONS OFF)
 - **`rules.cpp` is on both lists.** It is one file in the project folder, with no copying. CMake compiles it separately for each program, so there will be two object files from the same source. A change in `rules.cpp` reaches both programs as soon as you rebuild them.
 - **`rules.hpp` is on no list**, like every header (lesson 11.2). It is included by `main.cpp`, `function_tests.cpp` and `rules.cpp`.
 - **You repeat the two property lines for `function_tests`.** The settings belong to a target, so without them the test program could be compiled under another C++ standard than the application program.
-- The other lines of the lesson 0.5 file stay unchanged. In this course, all source files of a target stand on one `add_executable` line, and an empty line separates the two lists.
+- The other lines of the lesson 0.5 file stay unchanged. In this course, all source files of a target are on one `add_executable` line, and an empty line separates the two lists.
 
-`function_tests.cpp` **doesn't go** on the list of `first_program`, and `main.cpp` doesn't go on the list of `function_tests`. What happens when someone mixes them up, you will see in section 8.
+`function_tests.cpp` **doesn't go** on the list of `first_program`, and `main.cpp` doesn't go on the list of `function_tests`. You will see in section 8 what happens when someone mixes them up.
 
 ## 5. Build and run both programs
 
@@ -468,10 +468,10 @@ Six times `PASS` means that the function agrees with the contract in the six che
 
 Two targets, `rules.cpp` on both lists, a shared header and two built programs are **necessary conditions**. By themselves they don't guarantee that every check in `function_tests.cpp` calls the function from `rules.cpp`. Each of these projects builds without errors, and its tests don't check the right function:
 
-- `function_tests.cpp` contains a formula copied by hand, for example in the check function;
+- `function_tests.cpp` contains a formula copied by hand, for example in the checking function;
 - the tests call a second function under another name, for example `parking_fee_copy`, defined in the tests' file;
 - the expected results are computed by calling the same function, so the tests repeat its bug (lesson 13.1, section 9);
-- the check function prints `PASS` without comparing the results.
+- the checking function prints `PASS` without comparing the results.
 
 A copy with **the same** name as the function in `rules.cpp` doesn't build: the linker reports two definitions, as in lesson 11.4. A copy under another name passes without any message.
 
@@ -598,14 +598,14 @@ int main() {
 8. Choose **Build Project** and confirm that both programs were created. Run `function_tests`: six times `PASS` and exit code 0.
 
 <details>
-<summary>What happens and why: open after building the faulty project</summary>
+<summary>What happens, and why: open it after building the faulty project</summary>
 
 1. **Configuration and compilation succeed.** CMake doesn't know which file contains `main`: the list is correct for it, because all the files exist and each is on it once. Each of the three `.cpp` files is correct code, so the compiler compiles all three: there are three `Building CXX object` lines.
 2. **Linking fails.** The linker combines three object files into one program and gets two definitions of `main`: from `main.cpp` and from `function_tests.cpp`. The message names `main`: on Ubuntu `multiple definition of`, on macOS `duplicate symbol '_main'`, on Windows `duplicate symbol: main`, and at the end `linker command failed`. The exact text depends on the system, so look for the function's name and the words about a repeated definition.
 3. **Two `main` functions can be in one project, but not in one program.** A program has one starting point. Each `main` needs its own target.
 4. **This is not a `FAIL`.** The test program wasn't created at all, so nothing ran. A `FAIL` appears when the test program was built, ran and found a mismatch with the contract. Here the mistake is in the list of files, not in the tests or in the function.
-5. **The fix is a separate target**, not removing one of the `main` functions. Back with the file of section 4, the project builds two programs, and `function_tests` gives the same result as in section 5.
-6. **Two different ways of detecting this mistake.** On your computer it is reported by the linker, because CMake and CLion don't look into the content of the files. For projects with two targets, the course's automatic check also refuses, before building, a list that contains the `main` file of the other program. That is the checker's own check of the structure, not something CMake does.
+5. **The fix is a separate target**, not removing one of the `main` functions. With the file of section 4 back in place, the project builds two programs, and `function_tests` gives the same result as in section 5.
+6. **Two different ways of detecting this mistake.** On your computer it is reported by the linker, because CMake and CLion don't look into the content of the files. For projects with two targets, the course's automatic check also refuses, before building, a list that contains the `main` file of the other program. That is its own check of the structure, not something CMake does.
 
 </details>
 
@@ -655,7 +655,7 @@ lesson_13_4_mission/
 
 Eight cases from the table of lesson 13.2, with new letters: the slot 17–20 was case I there.
 
-| Case | `start_hour` | `end_hour` | Expected result | Why |
+| Case | `start_hour` | `end_hour` | Expected result | Where it comes from |
 |---|---:|---:|---|---|
 | A | 8 | 9 | `true` | starts exactly at 8 |
 | B | 8 | 11 | `true` | exactly three hours |

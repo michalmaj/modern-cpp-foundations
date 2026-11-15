@@ -83,9 +83,9 @@ enum class OrderStatus {
 
 - `enum class` is two keywords that together start the definition of an **enumeration type**. Such a type lists all of its allowed values.
 - `OrderStatus` is the **name of the type**. We write it like the names of the structs in Module 8, with a capital letter at the start of each word.
-- `received`, `preparing` and `sent` are the **names of the values** of that type: its **enumerators** (*wartości wyliczenia*). Commas separate them. The type has no other values.
+- `received`, `preparing` and `sent` are the **names of the values** of that type: its **enumerators**. Commas separate them. The type has no other values.
 - A semicolon follows the closing brace, as after a `struct` definition.
-- The definition stands above the functions that use the type, like a struct definition.
+- The definition comes before the functions that use the type, like a struct definition.
 
 **These aren't strings.** `received` has no quotation marks, because it isn't text. It's the name of a value, just as `count` is the name of a variable. Each order state is now **a value of the type `OrderStatus`**, not an agreed-upon word.
 
@@ -303,7 +303,7 @@ It compares the states with `==`. To print the `FAIL` line, though, it needs tex
 | D | `"preparring"` | `preparing` | `false` | `preparing`, unchanged | a typo in the name |
 | E | `""` | `received` | `false` | `received`, unchanged | empty text |
 
-**Why does `result` start from another state than the expected one?** In case A the expected result is `received`, so `result` starts from `sent`. If it started from `received`, the test would also pass for a faulty function that never assigns the result. In cases D and E it's the other way round: you check that the state from before the call stays.
+**Why does `result` start from a state other than the expected one?** In case A the expected result is `received`, so `result` starts from `sent`. If it started from `received`, the test would also pass for a faulty function that never assigns the result. In cases D and E it's the other way round: you check that the state from before the call stays.
 
 Each case has its own result variable, just as each case in lesson 13.3 had its own stream and record. You check the functions `was_sent` and `status_text` for each of the three states.
 
@@ -616,7 +616,7 @@ You don't have to run any other versions. If you like, also check what happens a
 - [ ] `report_status_text` returns the text from the table for each state and has an explicit fallback at the end.
 - [ ] `parse_report_status` recognises the three known names, refuses every other text, and doesn't change `result` when it refuses.
 - [ ] The table of cases contains `"unknown"`, `"Closed"` and at least one wrong text of your own, with a reason.
-- [ ] In the cases of known names, `result` starts from another state than the expected one; in the refused cases, the test checks that the state from before the call stays.
+- [ ] In the cases of known names, `result` starts from a state other than the expected one; in the refused cases, the test checks that the state from before the call stays.
 - [ ] The expected results in the tests come from the contract, not from calls of the functions under test.
 - [ ] With the correct functions, every check passes and the exit code is 0.
 - [ ] With the deliberate typo in a text, the program builds, the test of that state's text prints `FAIL`, and the exit code is 1.
@@ -627,7 +627,7 @@ When the result matches, you can save the project in Git, as in lesson 1.5: `mai
 <details>
 <summary>Hint 1: defining the state</summary>
 
-The set of states is closed: a report can be in only one of the three states of the contract. Which keywords start the definition of such a type, where do you write the names of its values, and what separates them? Where in the file must this definition stand so that the functions can use it? Compare with section 2.
+The set of states is closed: a report can be in only one of the three states of the contract. Which keywords start the definition of such a type, where do you write the names of its values, and what separates them? Where in the file must this definition go so that the functions can use it? Compare with section 2.
 
 </details>
 
@@ -654,7 +654,7 @@ When may the parsing function assign something to `result`? Only when it knows w
 | An error with `invalid operands to binary expression` at `<<` | The program tries to print a state directly with `std::cout` (section 5). | Print the state's text: `report_status_text(status)`. |
 | An error when initialising or assigning a string, for example with `cannot initialize a variable of type 'ReportStatus'` | Text goes into a state variable, for example `"opened"`. | A state is a value of the type: `ReportStatus::opened`. Turn text into a state with the parsing function. |
 | A warning or an error that the function doesn't return a value on all paths | The text conversion function lacks the fallback at its end (section 5). | Add a final `return` with a fallback text. |
-| A test of a known name passes although the parsing function assigns nothing | `result` starts from the state that is the expected result (section 7). | Start from another state than the expected one. |
+| A test of a known name passes although the parsing function assigns nothing | `result` starts from the state that is the expected result (section 7). | Start from a state other than the expected one. |
 | A `FAIL` line shows the same text after `expected` and after `actual` | The checking function prints the states with `report_status_text`, and it returns the same text for two different states. | Look at the tests of `report_status_text`: one of them points to the wrong text. |
 
 ## 11. Explain
@@ -675,7 +675,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 <details>
 <summary>Example answers</summary>
 
-1. A variable of the type `OrderStatus` can have only one of the three values defined in the type, and the compiler checks that. A variable of the type `std::string` can hold any string, a typo too, and the compiler has no way of checking it.
+1. A variable of the type `OrderStatus` can have only one of the three values defined in the type, and the compiler checks that. A variable of the type `std::string` can hold any string, even one with a typo, and the compiler has no way of checking it.
 2. All the allowed values are listed in the type's definition. There are no others, and you can't add one elsewhere in the program just by using a new name.
 3. The value `sent` of the type `OrderStatus`. `OrderStatus` is the name of the type, `::` means "a name from inside", as in `std::cout`, and `sent` is the name of the value.
 4. `==` gives `true` when `status` has the value `OrderStatus::sent`. `!=` gives `true` when `status` has any other value, that is `received` or `preparing`.
@@ -690,7 +690,7 @@ Answer in your own words, preferably in writing. Only then compare with the exam
 
 ## Summary
 
-- A state stored as text accepts every string, a typo too. The compiler has nothing to report, and the bug shows up only when the program runs, or in a test.
+- A state stored as text accepts every string, even one with a typo. The compiler has nothing to report, and the bug shows up only when the program runs, or in a test.
 - `enum class` defines an **enumeration type** with a closed set of named values. A state is a value of that type, not an agreed-upon string.
 - You name one particular value with `Type::value`, for example `OrderStatus::sent`. The compiler checks the names of the type and of its values: an unknown name is a compile error.
 - You compare states with `==` and `!=`, pass them to functions and return them from functions like other small values.
@@ -720,9 +720,9 @@ Look here **after your own attempt**. Your case names, your own wrong texts and 
 | C | `"closed"` | `opened` | `true` | `closed` | a known name |
 | D | `"unknown"` | `investigating` | `false` | `investigating`, unchanged | an unknown word |
 | E | `"Closed"` | `opened` | `false` | `opened`, unchanged | a capital letter: the contract tells cases apart |
-| F | `"open"` | `investigating` | `false` | `investigating`, unchanged | an own case: the start of a known name isn't a name yet |
+| F | `"open"` | `investigating` | `false` | `investigating`, unchanged | a case of your own: the start of a known name isn't a name yet |
 
-Other good own cases: `""`, `" closed"` with a space at the start, `"closed "` with a space at the end, `"CLOSED"`. Each must be refused, because it isn't exactly one of the three names.
+Other good cases of your own: `""`, `" closed"` with a space at the start, `"closed "` with a space at the end, `"CLOSED"`. Each must be refused, because it isn't exactly one of the three names.
 
 **`main.cpp`:**
 
@@ -1076,7 +1076,7 @@ Exit code: 1.
 **Self-assessment.** Compare your work with the success criteria in section 9. Check in particular:
 - that no state is stored as a string in the program, except the texts in the two conversion functions;
 - that your own wrong text has a written reason, and that the test then also checks the state of `result`;
-- that in the cases of known names `result` starts from another state than the expected one;
+- that in the cases of known names `result` starts from a state other than the expected one;
 - that you can point to one mistake the compiler reports and one that only a test catches.
 
 If the answer to one of these is "no", go back to the corresponding section of the lesson before moving on.
