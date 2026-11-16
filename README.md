@@ -11,6 +11,8 @@
 ![Languages: Polish and English](https://img.shields.io/badge/languages-PL%20%7C%20EN-blue)
 ![Status: alpha](https://img.shields.io/badge/status-alpha-orange)
 ![86 lessons, 476 checked examples](https://img.shields.io/badge/content-86%20lessons%20%C2%B7%20476%20checked%20examples-blue)
+[![Educational content: CC BY 4.0](https://img.shields.io/badge/educational%20content-CC%20BY%204.0-lightgrey)](LICENSES/CC-BY-4.0.txt)
+[![Code: MIT](https://img.shields.io/badge/code-MIT-yellow)](LICENSES/MIT.txt)
 
 Kurs programowania od zera w języku C++. Nie musisz wcześniej programować. Wystarczy, że radzisz sobie z komputerem na co dzień.
 
@@ -326,3 +328,12 @@ Formularze są po angielsku, ale zgłoszenie możesz napisać po polsku albo po 
 ## Co dalej po tym kursie
 
 Naturalnym kolejnym krokiem będzie planowany kurs **Advanced Modern C++ (B)**, który pogłębi to, czego nauczysz się tutaj. Jeśli zainteresuje Cię przetwarzanie obrazu i sztuczna inteligencja, później możesz przejść do planowanego kursu **C++ Vision & AI Systems (C)**. Będzie on oficjalnie wspierał tylko system Ubuntu 24.04 LTS.
+
+## Licencje
+
+Kurs możesz wykorzystywać, udostępniać i przerabiać na warunkach dwóch licencji:
+
+- **Materiały edukacyjne** (tekst lekcji, ćwiczenia, pytania, opisy rozwiązań i dokumentację, w tym to README) udostępniamy na licencji [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSES/CC-BY-4.0.txt).
+- **Kod** (programy i przykłady w C++, pliki CMake, testy i skrypty) udostępniamy na [licencji MIT](LICENSES/MIT.txt). Dotyczy to także kodu w samych lekcjach, np. przykładowych programów i rozwiązań.
+
+Dokładny podział, przykłady i sposób podawania autora opisuje plik [LICENSE.md](LICENSE.md).
