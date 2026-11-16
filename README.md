@@ -10,6 +10,7 @@
 ![Tested on Windows, macOS and Ubuntu](https://img.shields.io/badge/tested%20on-Windows%20%7C%20macOS%20%7C%20Ubuntu-informational)
 ![Languages: Polish and English](https://img.shields.io/badge/languages-PL%20%7C%20EN-blue)
 ![Status: alpha](https://img.shields.io/badge/status-alpha-orange)
+[![Release](https://img.shields.io/github/v/release/michalmaj/modern-cpp-foundations?include_prereleases&label=release)](https://github.com/michalmaj/modern-cpp-foundations/releases)
 ![86 lessons, 476 checked examples](https://img.shields.io/badge/content-86%20lessons%20%C2%B7%20476%20checked%20examples-blue)
 [![Educational content: CC BY 4.0](https://img.shields.io/badge/educational%20content-CC%20BY%204.0-lightgrey)](LICENSES/CC-BY-4.0.txt)
 [![Code: MIT](https://img.shields.io/badge/code-MIT-yellow)](LICENSES/MIT.txt)
